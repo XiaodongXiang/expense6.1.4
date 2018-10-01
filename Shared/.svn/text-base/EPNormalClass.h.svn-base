@@ -1,0 +1,53 @@
+//
+//  EPNormalClass.h
+//  PocketExpense
+//
+//  Created by MV on 11-11-30.
+//  Copyright (c) 2011年 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface EPNormalClass : NSObject
+{
+    NSString *currenyStr;
+    NSNumberFormatter *numberFmt;
+    NSString *dbVersionStr;
+
+}
+@property (nonatomic, retain) NSString *dbVersionStr;
+
+@property (nonatomic, retain) NSString *currenyStr;
+@property (nonatomic, retain) NSNumberFormatter *numberFmt;
+
+- (UIColor *)getExpColor:(int)colorId;
+- (UIColor *)getIncColor:(int)colorId;
+
+-(void)       setCurrenyStrBySettings;
+-(void)setDBVerString;
+-(NSString *) formatterString:(double)doubleContext;
+-(BOOL)       dateIsToday:(NSDate *)cmpDate;
+
+-(int)        dateCompare:(NSDate *)dt1 withDate:(NSDate *)dt2;
+-(NSDate *)   getStartDate:(NSString *)dateRangeString;
+-(NSDate *)   getEndDate:(NSDate *)startDate withDateString:(NSString *)dateRangeString;
+
+-(NSDate *)   getStartDate:(NSString *)dateCycleString beforCycleCount:(NSInteger )i withDate:(NSDate *)startDate;
+
+-(NSDate *)   getStartDate:(NSString *)dateCycleString beforCycleCount:(NSInteger )i;
+-(NSDate *)   getEndDate:(NSDate *)startDate dateCycleString:(NSString *)dateRangeString ;
+
+-(NSDate *)getPerDate:(NSDate *)start byCycleType:(NSString *)cycleType;
+-(NSDate *)getNextDate:(NSDate *)start byCycleType:(NSString *)cycleType;
+
+-(NSDate *)   getDate:(NSDate *)start byCycleType:(NSString *)cycleType;
+-(int)        getCountOfInsert:(NSDate *)start repeatEnd:(NSDate *)end typeOfRecurring:(NSString *)cycle;
+
+-(NSDate *)   getFirstSecByDate:(NSDate *)date;
+-(NSDate *)   getLastSecByDate:(NSDate *)date;
+-(NSDate *)   getCycleStartDateByMinDate:(NSDate *)minDate withCycleStartDate:(NSDate*)cycleStart withCycleType:(NSString *)cycleType isRule:(BOOL)rule;
+
+- (NSDate *) getStartDateWithDateType:(NSInteger)dateType;
+- (NSDate *) getEndDateDateType:(NSInteger)dateType withStartDate:(NSDate *)startDate;
+-(void)addNotification:(NSDate*)dateTime withAmount:(double)amount withCategoryName:(NSString *)cateString;
+@end

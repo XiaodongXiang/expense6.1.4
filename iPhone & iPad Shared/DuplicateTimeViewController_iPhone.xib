@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Medium</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DuplicateTimeViewController">
+            <connections>
+                <outlet property="datePickerView" destination="RRX-bi-hmQ" id="hwH-x2-Yfn"/>
+                <outlet property="dateSelectedView" destination="Q3n-3q-JaE" id="bx8-s4-mzQ"/>
+                <outlet property="dateSelectedViewCancleBtn" destination="TfF-c8-xYT" id="Rbv-NW-jM6"/>
+                <outlet property="dateSelectedViewDoneBtn" destination="nrp-Xg-2hU" id="aJT-b1-NRi"/>
+                <outlet property="titleLabelText" destination="Wds-Cz-P0d" id="Rca-Ng-THI"/>
+                <outlet property="view" destination="opl-IZ-Ggl" id="tYO-Ez-Tyg"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="opl-IZ-Ggl">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W2B-F2-p2m">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </imageView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q3n-3q-JaE">
+                    <rect key="frame" x="27" y="139" width="267" height="291"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="bar_267_40.png" translatesAutoresizingMaskIntoConstraints="NO" id="tC8-9q-fYX">
+                            <rect key="frame" x="0.0" y="0.0" width="267" height="41"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Duplicate To Date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wds-Cz-P0d">
+                            <rect key="frame" x="0.0" y="0.0" width="267" height="41"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
+                            <color key="textColor" red="0.21176470588235294" green="0.21568627450980393" blue="0.23529411764705882" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="RRX-bi-hmQ">
+                            <rect key="frame" x="0.0" y="59" width="267" height="162"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <date key="date" timeIntervalSinceReferenceDate="408857276.71045297">
+                                <!--2013-12-16 03:27:56 +0000-->
+                            </date>
+                        </datePicker>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TfF-c8-xYT">
+                            <rect key="frame" x="0.0" y="251" width="133" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="btn_cancel_133_40.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrp-Xg-2hU">
+                            <rect key="frame" x="133" y="251" width="134" height="40"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" backgroundImage="btn_done_134_40.png">
+                                <color key="titleShadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="291" id="MtB-9h-bKU"/>
+                        <constraint firstAttribute="width" constant="267" id="pdt-Z4-69z"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="W2B-F2-p2m" firstAttribute="top" secondItem="opl-IZ-Ggl" secondAttribute="top" id="A6A-6C-VgD"/>
+                <constraint firstAttribute="bottom" secondItem="W2B-F2-p2m" secondAttribute="bottom" id="MXD-ZR-9Vd"/>
+                <constraint firstItem="W2B-F2-p2m" firstAttribute="leading" secondItem="opl-IZ-Ggl" secondAttribute="leading" id="rAm-Ty-Xzl"/>
+                <constraint firstAttribute="centerX" secondItem="Q3n-3q-JaE" secondAttribute="centerX" id="sz5-to-BBg"/>
+                <constraint firstAttribute="centerY" secondItem="Q3n-3q-JaE" secondAttribute="centerY" id="t3v-1Z-cmd"/>
+                <constraint firstAttribute="trailing" secondItem="W2B-F2-p2m" secondAttribute="trailing" id="wbH-GL-Fl5"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="bar_267_40.png" width="267" height="40"/>
+        <image name="btn_cancel_133_40.png" width="133" height="40"/>
+        <image name="btn_done_134_40.png" width="134" height="40"/>
+    </resources>
+</document>

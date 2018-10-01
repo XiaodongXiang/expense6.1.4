@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDTermsOfUseViewController">
+            <connections>
+                <outlet property="textView" destination="TEC-fh-32f" id="vUK-33-XmB"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dE8-LL-E1x">
+                    <rect key="frame" x="5" y="25" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="EOD-Ne-HW9"/>
+                        <constraint firstAttribute="width" constant="44" id="PeB-ce-1Rb"/>
+                    </constraints>
+                    <state key="normal" image="pur-Cancel"/>
+                    <connections>
+                        <action selector="cancelClick:" destination="-1" eventType="touchUpInside" id="k8d-67-t6h"/>
+                    </connections>
+                </button>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TEC-fh-32f">
+                    <rect key="frame" x="15" y="69" width="345" height="588"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                </textView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="TEC-fh-32f" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="OLQ-Ad-gNs"/>
+                <constraint firstItem="TEC-fh-32f" firstAttribute="top" secondItem="dE8-LL-E1x" secondAttribute="bottom" id="QI0-Oy-Tle"/>
+                <constraint firstAttribute="bottom" secondItem="TEC-fh-32f" secondAttribute="bottom" constant="10" id="Ruq-mn-HIp"/>
+                <constraint firstItem="dE8-LL-E1x" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="25" id="dn9-Js-yVv"/>
+                <constraint firstItem="dE8-LL-E1x" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="nP3-Oi-Ry2"/>
+                <constraint firstAttribute="trailing" secondItem="TEC-fh-32f" secondAttribute="trailing" constant="15" id="raz-1v-yDG"/>
+            </constraints>
+        </view>
+    </objects>
+    <resources>
+        <image name="pur-Cancel" width="44" height="44"/>
+    </resources>
+</document>

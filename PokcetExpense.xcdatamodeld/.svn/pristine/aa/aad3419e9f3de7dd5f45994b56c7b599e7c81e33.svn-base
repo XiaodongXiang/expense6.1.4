@@ -1,0 +1,27 @@
+//
+//  BudgetTemplate.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "BudgetTemplate.h"
+#import "BudgetItem.h"
+#import "BudgetReports.h"
+#import "Category.h"
+
+
+@implementation BudgetTemplate
+
+@dynamic amount;
+@dynamic startDate;
+@dynamic orderIndex;
+@dynamic isRollover;
+@dynamic cycleType;
+@dynamic startDateHasChange;
+@dynamic category;
+@dynamic budgetItems;
+@dynamic budgetRep;
+@dynamic isNew;
+@end

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDAccountDetailViewController">
+            <connections>
+                <outlet property="bottomConstraint" destination="IEw-9I-GUf" id="zeJ-B8-Gs3"/>
+                <outlet property="bottomView" destination="Kg7-52-0iW" id="FWm-w1-aJG"/>
+                <outlet property="hideCleardBtn" destination="YE3-g1-Ja7" id="Dsi-sb-QBJ"/>
+                <outlet property="reconcileBtn" destination="KWf-UA-nec" id="2Y4-hP-8GP"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kg7-52-0iW">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YE3-g1-Ja7">
+                            <rect key="frame" x="187" y="0.0" width="187.5" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="k2t-uU-73s"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <state key="normal" title="Hide Cleared">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </state>
+                            <connections>
+                                <action selector="hideClearedBtnClick:" destination="-1" eventType="touchUpInside" id="mZn-H2-YA7"/>
+                            </connections>
+                        </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zVG-V0-svI">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="0.5" id="KMe-SW-AAF"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-mn-pxr">
+                            <rect key="frame" x="187" y="0.0" width="0.5" height="50"/>
+                            <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="0.5" id="lIG-Rt-VPt"/>
+                            </constraints>
+                        </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KWf-UA-nec">
+                            <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="50" id="8ae-PK-Z8l"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <state key="normal" title="Reconcile On">
+                                <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="reconcileBtnClick:" destination="-1" eventType="touchUpInside" id="9HJ-Cb-Pgf"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="hMQ-mn-pxr" firstAttribute="top" secondItem="Kg7-52-0iW" secondAttribute="top" id="4Ne-4X-cOw"/>
+                        <constraint firstAttribute="bottom" secondItem="hMQ-mn-pxr" secondAttribute="bottom" id="6ba-72-k3L"/>
+                        <constraint firstItem="KWf-UA-nec" firstAttribute="leading" secondItem="Kg7-52-0iW" secondAttribute="leading" id="8MP-3B-n2S"/>
+                        <constraint firstAttribute="trailing" secondItem="zVG-V0-svI" secondAttribute="trailing" id="9Z4-pe-X8I"/>
+                        <constraint firstItem="zVG-V0-svI" firstAttribute="top" secondItem="Kg7-52-0iW" secondAttribute="top" constant="-0.5" id="Aaf-kU-PDI"/>
+                        <constraint firstAttribute="trailing" secondItem="KWf-UA-nec" secondAttribute="trailing" constant="187.5" id="Jmh-re-WsI"/>
+                        <constraint firstAttribute="bottom" secondItem="KWf-UA-nec" secondAttribute="bottom" id="Pkx-Gb-Qrg"/>
+                        <constraint firstItem="KWf-UA-nec" firstAttribute="top" secondItem="Kg7-52-0iW" secondAttribute="top" id="UHH-X0-zLU"/>
+                        <constraint firstItem="YE3-g1-Ja7" firstAttribute="leading" secondItem="Kg7-52-0iW" secondAttribute="leading" constant="187" id="bgt-yv-VIv"/>
+                        <constraint firstAttribute="bottom" secondItem="YE3-g1-Ja7" secondAttribute="bottom" id="egY-bR-4pE"/>
+                        <constraint firstItem="hMQ-mn-pxr" firstAttribute="centerX" secondItem="Kg7-52-0iW" secondAttribute="centerX" id="ei8-k3-8zb"/>
+                        <constraint firstItem="YE3-g1-Ja7" firstAttribute="width" secondItem="KWf-UA-nec" secondAttribute="width" id="hT4-XN-cIM"/>
+                        <constraint firstItem="zVG-V0-svI" firstAttribute="leading" secondItem="Kg7-52-0iW" secondAttribute="leading" id="l5k-Xw-CR2"/>
+                        <constraint firstAttribute="trailing" secondItem="YE3-g1-Ja7" secondAttribute="trailing" constant="0.5" id="n6c-3V-xab"/>
+                        <constraint firstItem="YE3-g1-Ja7" firstAttribute="top" secondItem="Kg7-52-0iW" secondAttribute="top" id="uBe-q0-bTO"/>
+                        <constraint firstAttribute="height" constant="50" id="xbh-cM-yl7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Kg7-52-0iW" secondAttribute="bottom" id="IEw-9I-GUf"/>
+                <constraint firstAttribute="trailing" secondItem="Kg7-52-0iW" secondAttribute="trailing" id="ZWv-aY-35e"/>
+                <constraint firstItem="Kg7-52-0iW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yTw-G7-tia"/>
+            </constraints>
+            <point key="canvasLocation" x="-61.5" y="-28.5"/>
+        </view>
+    </objects>
+</document>

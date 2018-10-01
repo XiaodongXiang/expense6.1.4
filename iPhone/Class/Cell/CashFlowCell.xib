@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6250" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="CashFlowCell" id="iN0-l3-epB" customClass="CashFlowCell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Rs-AV-ZTf">
+                    <rect key="frame" x="111.5" y="0.0" width="97" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="5kU-qZ-o46"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jP2-aE-7aL">
+                    <rect key="frame" x="15" y="43" width="290" height="1"/>
+                    <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="srK-le-CwD"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MPT-et-qu4">
+                    <rect key="frame" x="15" y="0.0" width="96.5" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Psu-ps-gE5"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G9K-5H-ban">
+                    <rect key="frame" x="208" y="0.0" width="96.5" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="ggB-pk-ikD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="6Rs-AV-ZTf" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="0hF-GW-aav"/>
+                <constraint firstItem="6Rs-AV-ZTf" firstAttribute="leading" secondItem="MPT-et-qu4" secondAttribute="trailing" id="2nO-qF-2Ak"/>
+                <constraint firstItem="G9K-5H-ban" firstAttribute="width" secondItem="6Rs-AV-ZTf" secondAttribute="width" id="2pR-XX-Jec"/>
+                <constraint firstItem="MPT-et-qu4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="8YY-db-wlf"/>
+                <constraint firstAttribute="trailing" secondItem="jP2-aE-7aL" secondAttribute="trailing" constant="15" id="CGn-Xa-kvy"/>
+                <constraint firstItem="G9K-5H-ban" firstAttribute="width" secondItem="MPT-et-qu4" secondAttribute="width" id="JBN-Jo-HDZ"/>
+                <constraint firstItem="MPT-et-qu4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="JyH-hM-Cpg"/>
+                <constraint firstItem="G9K-5H-ban" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="OHB-tb-KNm"/>
+                <constraint firstItem="jP2-aE-7aL" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="WMj-Ra-qje"/>
+                <constraint firstItem="G9K-5H-ban" firstAttribute="leading" secondItem="6Rs-AV-ZTf" secondAttribute="trailing" id="bvN-Sz-4rT"/>
+                <constraint firstAttribute="centerX" secondItem="6Rs-AV-ZTf" secondAttribute="centerX" id="c0W-YM-nK9"/>
+                <constraint firstAttribute="trailing" secondItem="G9K-5H-ban" secondAttribute="trailing" constant="15" id="cJy-ux-qNL"/>
+                <constraint firstAttribute="bottom" secondItem="jP2-aE-7aL" secondAttribute="bottom" id="v4U-dD-1N1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="dateLabel" destination="MPT-et-qu4" id="Ok5-4R-rbv"/>
+                <outlet property="inAmountLabel" destination="6Rs-AV-ZTf" id="8TF-nm-HKU"/>
+                <outlet property="lineH" destination="srK-le-CwD" id="8Gx-qk-yoZ"/>
+                <outlet property="outamountLabel" destination="G9K-5H-ban" id="coQ-qu-8NH"/>
+            </connections>
+        </view>
+    </objects>
+</document>

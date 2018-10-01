@@ -1,0 +1,35 @@
+//
+//  BudgetTemplate.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class BudgetItem, BudgetReports, Category;
+
+@interface BudgetTemplate : NSManagedObject
+
+@property (nonatomic, retain) NSNumber * amount;
+@property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSNumber * orderIndex;
+@property (nonatomic, retain) NSNumber * isRollover;
+@property (nonatomic, retain) NSString * cycleType;
+@property (nonatomic, retain) NSNumber * startDateHasChange;
+@property (nonatomic, retain) Category *category;
+@property (nonatomic, retain) NSSet *budgetItems;
+@property (nonatomic, retain) BudgetReports *budgetRep;
+@property (nonatomic, retain) NSNumber * isNew;
+
+@end
+
+@interface BudgetTemplate (CoreDataGeneratedAccessors)
+
+- (void)addBudgetItemsObject:(BudgetItem *)value;
+- (void)removeBudgetItemsObject:(BudgetItem *)value;
+- (void)addBudgetItems:(NSSet *)values;
+- (void)removeBudgetItems:(NSSet *)values;
+@end

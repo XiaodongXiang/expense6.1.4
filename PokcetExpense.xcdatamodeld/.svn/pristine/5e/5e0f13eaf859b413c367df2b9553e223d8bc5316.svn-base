@@ -1,0 +1,21 @@
+//
+//  CashFlowReports.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+
+@interface CashFlowReports : NSManagedObject
+
+@property (nonatomic, retain) NSDate * genDateTime;
+@property (nonatomic, retain) NSDate * endDate;
+@property (nonatomic, retain) NSString * reportName;
+@property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSString * columnString;
+
+@end

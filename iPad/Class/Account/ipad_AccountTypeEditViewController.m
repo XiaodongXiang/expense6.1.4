@@ -1,0 +1,348 @@
+//
+//  NewGroupViewController.m
+//  Expense 5
+//
+//  Created by BHI_James on 4/15/10.
+//  Copyright 2010 BHI. All rights reserved.
+//
+
+#import "ipad_AccountTypeEditViewController.h"
+#import "AccountType.h"
+#import "ColorLabelView.h"
+ #import "PokcetExpenseAppDelegate.h"
+#import "AppDelegate_iPad.h"
+#import "ipad_AccountEditViewController.h"
+
+#import <Parse/Parse.h>
+#import "ParseDBManager.h"
+
+@implementation ipad_AccountTypeEditViewController
+
+- (void)viewDidLoad 
+{
+    [super viewDidLoad];
+
+    if( [[[[UIDevice currentDevice] systemVersion] substringToIndex:1] isEqualToString:@"7"])
+        self.edgesForExtendedLayout = UIRectEdgeNone;
+    
+ 	[self initPoint];
+    [self initNavStyle];
+    [self initControlsStyle];
+ 	self.nameText.delegate = self;
+ 	[self.nameText becomeFirstResponder];
+}
+
+-(void)initPoint{
+    _nameLabelText.text = NSLocalizedString(@"VC_Name", nil);
+    _iconLabelText.text = NSLocalizedString(@"VC_Icon", nil);
+    iconNameArray =  [NSMutableArray arrayWithObjects:
+                       @"asset.png",@"cash.png",
+                       @"checking.png",@"credit-card.png",@"Debt.png",@"investing.png",@"loan.png",@"Saving.png",@"icon_other.png",
+                       nil] ;
+    
+    _nameCell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad_cell_b2_add_transactions.png"]];
+    _iconCell.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad_cell_b3_add_transactions.png"]];
+    
+    
+    
+}
+
+-(void)initNavStyle{
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+
+    [self.navigationController.navigationBar  setBackgroundImage:[UIImage imageNamed: @"ipad_nav_480_44.png"] forBarMetrics:UIBarMetricsDefault];
+    UIImage *image = [[UIImage alloc]init];
+    self.navigationController.navigationBar.shadowImage = image;
+    
+    UIBarButtonItem *flexible = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil] ;
+    flexible.width = -11.f;
+    
+    UIBarButtonItem *flexible2 =[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil] ;
+    flexible2.width = -2.f;
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 100, 44)];
+    [titleLabel  setTextAlignment:NSTextAlignmentCenter];
+    [titleLabel setTextColor:[appDelegate.epnc getiPadNavigationBarTiltleTeextColor]];
+    
+    [titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:17.0]];
+    titleLabel.backgroundColor = [UIColor clearColor];
+    if ([self.editModule isEqualToString:@"EDIT"])
+	{
+		
+		titleLabel.text = NSLocalizedString(@"VC_EditType", nil);
+		self.navigationItem.titleView = 	titleLabel;
+		
+ 		self.navigationItem.rightBarButtonItem.enabled = TRUE;
+        if( [_accountType.iconName isEqualToString: @"01.png"]||
+           [_accountType.iconName isEqualToString: @"02.png"]||
+           [_accountType.iconName isEqualToString: @"03.png"]||
+           [_accountType.iconName isEqualToString: @"04.png"]||
+           [_accountType.iconName isEqualToString: @"05.png"]||
+           [_accountType.iconName isEqualToString: @"06.png"]
+           )
+        {
+            self.iconView.image = [UIImage imageNamed:@"asset.png"];
+            selectIndex = 0;
+            
+        }
+        else
+        {
+            self.iconView.image = [UIImage imageNamed:_accountType.iconName];
+            selectIndex = [iconNameArray indexOfObject:  _accountType.iconName];
+        }
+ 	}
+	else
+	{
+		titleLabel.text = NSLocalizedString(@"VC_NewType", nil);
+		self.navigationItem.titleView = 	titleLabel;
+		
+ 		self.navigationItem.rightBarButtonItem.enabled = FALSE;
+ 		self.iconView.image = [UIImage imageNamed:@"asset.png"];
+		selectIndex = 0;
+        
+		UIButton *customerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        customerButton.frame = CGRectMake(0, 0, 30,30);
+        [customerButton setImage: [UIImage imageNamed:@"ipad_icon_back_30_30.png"] forState:UIControlStateNormal];
+		
+		[customerButton addTarget:self action:@selector(cancel:) forControlEvents:UIControlEventTouchUpInside];
+		UIBarButtonItem *leftButton =[[UIBarButtonItem alloc] initWithCustomView:customerButton];
+		
+		self.navigationItem.leftBarButtonItems = @[flexible,leftButton];
+        
+	}
+	self.nameText.text = _accountType.typeName;
+  	
+ 	UIButton *customerButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    customerButton.frame = CGRectMake(0, 0, 90,30);
+    [customerButton setTitle:NSLocalizedString(@"VC_Save", nil) forState:UIControlStateNormal];
+    [customerButton.titleLabel setFont:[UIFont fontWithName:@"HelveticaNeue-Medium" size:17]];
+    customerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [customerButton.titleLabel setMinimumScaleFactor:0];
+    [customerButton setTitleColor:[appDelegate.epnc getNavigationBarGray_Highlighted ] forState:UIControlStateHighlighted];
+    [customerButton setContentHorizontalAlignment:UIControlContentHorizontalAlignmentRight];
+    [customerButton setTitleColor:[appDelegate.epnc getiPADNavigationBarBtnColor] forState:UIControlStateNormal];
+	[customerButton addTarget:self action:@selector(save:) forControlEvents:UIControlEventTouchUpInside];
+	UIBarButtonItem *rightButton =[[UIBarButtonItem alloc] initWithCustomView:customerButton];
+	
+	self.navigationItem.rightBarButtonItems = @[flexible2,rightButton];
+}
+
+-(void)initControlsStyle
+{
+    NSInteger startPX = 46.f;
+	NSInteger startPY = 150.f;
+	NSInteger line =0;
+    NSInteger count =0;
+    for (int i=0; i<[iconNameArray count]; i++){
+  		count = i- i/9*9;
+		line =i/9;
+	 	UIButton *tmpBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+		tmpBtn.frame =CGRectMake(startPX+count*50.f,startPY+ line *50.0, 50.0, 50.0);
+		tmpBtn.tag =i;
+		[tmpBtn setImage:[UIImage imageNamed:[iconNameArray objectAtIndex:i]] forState:UIControlStateNormal];
+        tmpBtn.backgroundColor  = [UIColor clearColor];
+ 		[tmpBtn addTarget:self action:@selector(iPad_aevc_selectBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+		[self.view addSubview:tmpBtn];
+    }
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
+    // Return YES for supported orientations.
+	return TRUE;
+}
+
+-(void)iPad_aevc_selectBtnAction:(id)sender{
+	UIButton *tmpBtn =(UIButton *)sender;
+	_iconView.image = [UIImage imageNamed:[iconNameArray objectAtIndex:tmpBtn.tag]];
+  	selectIndex = tmpBtn.tag;
+    [_nameText resignFirstResponder];
+}
+- (void) cancel:(id)sender
+{
+	
+	[[self navigationController] popViewControllerAnimated:YES];
+
+}
+
+- (void) save:(id)sender
+{
+	NSError *error =nil;
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
+    
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"AccountType" inManagedObjectContext:appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+    
+    NSPredicate * predicate =[NSPredicate predicateWithFormat:@"state contains[c] %@",@"1"];
+    [fetchRequest setPredicate:predicate];
+    
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"typeName" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	[fetchRequest setSortDescriptors:sortDescriptors];
+    
+ 	NSArray* objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	
+	NSMutableArray	*accountTypeList =	[[NSMutableArray alloc] initWithArray:objects];
+
+    AppDelegate_iPad *appDelegate_iPhone = (AppDelegate_iPad *)[[UIApplication sharedApplication]delegate];
+    
+    //检测目前正在编辑的accountType是不是被删除了，被删除了保存的时候就直接跳出当前这个页面
+    if (self.accountType != nil)
+    {
+        BOOL hasFound = NO;
+        for (int i=0; i<[accountTypeList count]; i++)
+        {
+            AccountType *oneAccountType = [accountTypeList objectAtIndex:i];
+            if (oneAccountType == self.accountType)
+            {
+                hasFound = YES;
+                break;
+            }
+        }
+        if (!hasFound)
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+            return;
+        }
+    }
+	if([_nameText.text length] == 0)
+	{
+ 		UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+														message:[NSString stringWithFormat:NSLocalizedString(@"VC_Type name is needed.", nil)]
+													   delegate:self
+											  cancelButtonTitle:NSLocalizedString(@"VC_OK", nil)
+											  otherButtonTitles:nil];
+		[alert show];
+        appDelegate_iPhone.appAlertView = alert;
+		return;
+	}
+	
+    
+	for (AccountType *tmpType in accountTypeList)
+	{
+		if([tmpType.typeName isEqualToString:self.nameText.text])
+		{
+			UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil
+															message:NSLocalizedString(@"VC_The type was exist.", nil)
+														   delegate:self
+												  cancelButtonTitle:NSLocalizedString(@"VC_OK", nil)
+												  otherButtonTitles:nil];
+			[alert show];
+            appDelegate_iPhone.appAlertView = alert;
+			return;
+		}
+	}
+    
+	if(_accountType == nil)
+  	{
+		_accountType = [NSEntityDescription insertNewObjectForEntityForName:@"AccountType" inManagedObjectContext:appDelegate.managedObjectContext];
+		_accountType.isDefault = [NSNumber numberWithBool:FALSE];
+        _accountType.uuid = [EPNormalClass GetUUID];
+	}
+	_accountType.typeName = self.nameText.text;
+	_accountType.iconName = [iconNameArray objectAtIndex:selectIndex];
+    
+    _accountType.dateTime = [NSDate date];
+    _accountType.state = @"1";
+    
+   	if(![appDelegate.managedObjectContext save:&error])
+	{
+		NSLog(@"Unresolved error %@, %@",error, [error userInfo]);
+	}
+	
+ 	//sync
+//    if ([appDelegate.dropbox drop_account] != nil) {
+//        AppDelegate_iPad*appDelegate_iPhone = (AppDelegate_iPad *)[[UIApplication sharedApplication]delegate];
+//        [appDelegate_iPhone.dropbox updateEveryAccountTypeDataFromLocal:self.accountType];
+//    }
+    if ([PFUser currentUser])
+    {
+        [[ParseDBManager sharedManager]updateAccountTypeFromLocal:self.accountType];
+    }
+    
+    if ([_editModule isEqualToString:@"ADD"] && _iAccountTypeViewController != nil)
+    {
+        _iAccountTypeViewController.accEditView.accountType = _accountType;
+        _iAccountTypeViewController.accEditView.typeLabel.text = _accountType.typeName;
+
+    }
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+
+
+#pragma mark Table view methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+	return 1;
+}
+
+
+// Customize the number of rows in the table view.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+ 
+	return 2;
+}
+
+//--------在IOS7中 cell的背景颜色会被默认成白色，用这个代理来去掉白色背景
+//- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [cell setBackgroundColor:[UIColor clearColor]];
+//}
+
+// Customize the appearance of table view cells.
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if(indexPath.row == 0)
+	{
+		return _nameCell;
+	}
+	else
+	{
+		if(indexPath.row == 1)
+		{
+			return _iconCell;
+		}
+	}
+	return nil;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	if(indexPath.row == 0)
+	{
+		[self.nameText becomeFirstResponder];
+ 	}
+	else
+	{
+		if(indexPath.row == 1)
+		{
+			[self.nameText resignFirstResponder];
+	 	}
+        
+        [_mytableView reloadData];
+	}
+}	
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return 44.0;
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+
+
+
+@end

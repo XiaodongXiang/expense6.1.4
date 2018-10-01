@@ -1,0 +1,699 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ipad_TranscactionQuickEditViewController">
+            <connections>
+                <outlet property="ClearedLabelText" destination="MAg-El-YHe" id="kdT-Zp-yvQ"/>
+                <outlet property="accountCell" destination="JWy-VB-frg" id="XmG-hy-oas"/>
+                <outlet property="accountLabel" destination="yFy-PA-Zfc" id="AmQ-Or-E3M"/>
+                <outlet property="accountLabelText" destination="ddl-0Z-QkE" id="l4S-S6-5pq"/>
+                <outlet property="amountCell" destination="C9X-CM-TtT" id="WTD-HQ-QWm"/>
+                <outlet property="cagetoryLabelText" destination="WrX-0e-KEf" id="h2z-6b-Man"/>
+                <outlet property="calculateView" destination="nMg-A2-L9L" id="pCF-Eg-ah9"/>
+                <outlet property="categoryCell" destination="sQh-sy-uTv" id="d45-Lj-gXc"/>
+                <outlet property="categoryLabel" destination="v3j-5E-9Zw" id="voB-Gi-edx"/>
+                <outlet property="clearCell" destination="cre-IK-CkB" id="1XX-pv-2j1"/>
+                <outlet property="clearedSwitch" destination="jfw-bF-Xaq" id="9Ey-iK-XO4"/>
+                <outlet property="dateCell" destination="h05-TO-Qg8" id="t7u-Cy-VbI"/>
+                <outlet property="dateLabel" destination="btp-ZU-3E7" id="fA8-VY-Dhw"/>
+                <outlet property="dateLabelText" destination="1OV-CQ-JQO" id="0ae-nU-Z6g"/>
+                <outlet property="datePicker" destination="EMV-88-0H3" id="O2c-pF-J6O"/>
+                <outlet property="datePickerCell" destination="06x-LD-hp5" id="YMM-78-wfz"/>
+                <outlet property="display" destination="7B1-dc-jnP" id="awv-M8-dps"/>
+                <outlet property="expenseBtn" destination="xrU-rY-dHN" id="AWZ-Sd-jBQ"/>
+                <outlet property="fromAccountCell" destination="Czq-KC-z09" id="db3-g3-5m6"/>
+                <outlet property="fromAccountLabel" destination="2dI-uN-4NA" id="gZh-fB-f39"/>
+                <outlet property="fromAccountLabelText" destination="p6J-fT-F6Q" id="xfz-Em-tlI"/>
+                <outlet property="imageCell" destination="Fev-9K-yBn" id="5eA-zP-3Fa"/>
+                <outlet property="incomeBtn" destination="Rtz-xA-bII" id="9L4-vH-RCe"/>
+                <outlet property="memoLabel" destination="cNg-KV-WAd" id="OZ8-pt-kQf"/>
+                <outlet property="memoTextView" destination="GUH-8p-2VJ" id="MqG-id-78K"/>
+                <outlet property="noteCell" destination="FLa-RR-PtU" id="4lh-mU-R43"/>
+                <outlet property="payeText" destination="vGY-mZ-fbU" id="5UK-jL-7xK"/>
+                <outlet property="payeeCell" destination="eeq-1F-CaH" id="J9r-DY-9pR"/>
+                <outlet property="payeeSearchTable" destination="BTF-iu-VTe" id="kSh-Jv-FUG"/>
+                <outlet property="payeeSearchView" destination="8BH-hW-t5c" id="tbF-e7-JKO"/>
+                <outlet property="phontoImageView" destination="IG3-fy-x3R" id="oXb-v0-rf1"/>
+                <outlet property="photoLabelText" destination="J8s-7t-ekq" id="KLr-CV-TCn"/>
+                <outlet property="recurringCell" destination="vWJ-Gz-GY8" id="jZw-jg-KcE"/>
+                <outlet property="recurringLabel" destination="hUI-l8-acc" id="um4-YU-5zf"/>
+                <outlet property="repeatLabelText" destination="BUy-0X-9e4" id="rY9-NM-TKw"/>
+                <outlet property="showCellTable" destination="SJd-zR-Bp4" id="vrq-ZZ-vh1"/>
+                <outlet property="showFoperator" destination="ecb-CH-gBh" id="J7b-p1-qdJ"/>
+                <outlet property="showMoreDetailsCell" destination="7TS-b0-HQs" id="2Pa-md-oWi"/>
+                <outlet property="showMoreLabelText" destination="mnI-cV-zqF" id="ZkS-gJ-8eE"/>
+                <outlet property="toAccountCell" destination="L1Y-I6-kLy" id="v6f-y4-eWv"/>
+                <outlet property="toAccountLabel" destination="beP-fT-dtx" id="488-ft-Wfo"/>
+                <outlet property="toAccountLabelText" destination="LK3-uj-8t1" id="YQ0-1S-e0k"/>
+                <outlet property="transferBtn" destination="MUH-UB-TMU" id="lpt-px-VZ9"/>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="SJd-zR-Bp4">
+                    <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="2xR-0p-1b1"/>
+                        <outlet property="delegate" destination="-1" id="2wr-1Q-CJH"/>
+                    </connections>
+                </tableView>
+                <view hidden="YES" contentMode="scaleToFill" id="8BH-hW-t5c">
+                    <rect key="frame" x="0.0" y="78" width="540" height="118"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ipad_list_480_130.png" id="R73-6A-Wkn">
+                            <rect key="frame" x="0.0" y="0.0" width="540" height="130"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        </imageView>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="BTF-iu-VTe">
+                            <rect key="frame" x="0.0" y="0.0" width="540" height="117"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="KD1-1y-PWC"/>
+                                <outlet property="delegate" destination="-1" id="MJg-jH-JLL"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <view contentMode="scaleToFill" id="nMg-A2-L9L">
+                    <rect key="frame" x="0.0" y="412" width="540" height="208"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <subviews>
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Uga-IQ-sbl" userLabel="Button - 1">
+                            <rect key="frame" x="108" y="0.0" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="1" image="ipad_btn_1.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_1_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="lNS-4G-0Fo"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="6I6-cI-EGf" userLabel="Button - 1">
+                            <rect key="frame" x="216" y="0.0" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="2" image="ipad_btn_2.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="2" image="ipad_btn_2_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="kkv-BO-7ae"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eoS-wK-h5g" userLabel="Button - 1">
+                            <rect key="frame" x="324" y="0.0" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="3" image="ipad_btn_3.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="3" image="ipad_btn_3_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="BRb-wq-KyD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="HdQ-HT-TNE" userLabel="Button - 1">
+                            <rect key="frame" x="108" y="52" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="4" image="ipad_btn_4.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="4" image="ipad_btn_4_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="8bw-e6-xp9"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1GB-ll-Q5b" userLabel="Button - 1">
+                            <rect key="frame" x="216" y="52" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="5" image="ipad_btn_5.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="5" image="ipad_btn_5_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="yGt-3c-TzA"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gYe-SH-Wh9" userLabel="Button - 1">
+                            <rect key="frame" x="324" y="52" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="6" image="ipad_btn_6.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="6" image="ipad_btn_6_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="yH4-bs-CUJ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="7" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="359-AP-6yV" userLabel="Button - 1">
+                            <rect key="frame" x="108" y="104" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="7" image="ipad_btn_7.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="7" image="ipad_btn_7_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="SGI-WS-DRd"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9AA-x6-6zr" userLabel="Button - 1">
+                            <rect key="frame" x="216" y="104" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="8" image="ipad_btn_8.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="8" image="ipad_btn_8_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="h6B-gP-f7j"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Seh-7I-oyX" userLabel="Button - 1">
+                            <rect key="frame" x="324" y="104" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="9" image="ipad_btn_9.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="9" image="ipad_btn_9_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="CdX-cv-anJ"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="WmG-hN-HQg" userLabel="Button - 1">
+                            <rect key="frame" x="108" y="156" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" image="ipad_btn_point.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_point_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="xYk-DX-UhD"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Yso-bF-i4h" userLabel="Button - 1">
+                            <rect key="frame" x="216" y="156" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="0" image="ipad_btn_0.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" title="0" image="ipad_btn_0_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="PBh-Zp-Kst"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="17" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3ov-VM-H3a" userLabel="Button - 1">
+                            <rect key="frame" x="324" y="156" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" image="ipad_btn_revocation.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_revocation_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="a5P-6x-wUc"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="15" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Qtd-Qy-Jrc" userLabel="Button - 1">
+                            <rect key="frame" x="432" y="0.0" width="108" height="104"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="+" image="ipad_btn_plus.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_plus_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="5D3-jT-HOi"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="mXB-do-rqq" userLabel="Button - 1">
+                            <rect key="frame" x="432" y="104" width="108" height="104"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" image="ipad_btn_equal_sign.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_equal_sign_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="Px3-aY-WHO"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="13" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="YK6-kk-5xK" userLabel="Button - x">
+                            <rect key="frame" x="0.0" y="52" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="x" image="ipad_btn_multiply.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_multiply_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="7qY-to-vg6"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="5m1-Mt-Oen" userLabel="Button- /">
+                            <rect key="frame" x="0.0" y="104" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="÷" image="ipad_btn_sign_of_division.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_sign_of_division_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="63c-xI-RYM"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="2HC-s4-8AQ" userLabel="Button - c">
+                            <rect key="frame" x="0.0" y="156" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" image="ipad_btn_empty.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_empty_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="jRR-8s-xb9"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ecb-CH-gBh">
+                            <rect key="frame" x="500" y="400" width="42" height="21"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MIZ-yI-DOd" userLabel="Button - -">
+                            <rect key="frame" x="0.0" y="0.0" width="108" height="52"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <state key="normal" title="-" image="ipad_btn_minus.png">
+                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <state key="selected" image="ipad_btn_minus_sel.png"/>
+                            <connections>
+                                <action selector="calculateBtnPressed:" destination="-1" eventType="touchUpInside" id="VSd-Ja-hXc"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="JWy-VB-frg" userLabel="Table View Cell-account">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="JWy-VB-frg" id="aow-iw-ckE">
+                <rect key="frame" x="0.0" y="0.0" width="502" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Account" lineBreakMode="tailTruncation" minimumFontSize="10" id="ddl-0Z-QkE">
+                        <rect key="frame" x="15" y="0.0" width="100" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="None" textAlignment="right" minimumFontSize="17" id="yFy-PA-Zfc">
+                        <rect key="frame" x="277" y="7" width="225" height="30"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <color key="textColor" red="0.6588235294117647" green="0.6588235294117647" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="cre-IK-CkB" userLabel="Table View Cell-cleared">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cre-IK-CkB" id="pyc-Sc-zCc">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Cleared" lineBreakMode="tailTruncation" minimumFontSize="10" id="MAg-El-YHe">
+                        <rect key="frame" x="15" y="0.0" width="100" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" id="jfw-bF-Xaq">
+                        <rect key="frame" x="474" y="6" width="51" height="31"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    </switch>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Fev-9K-yBn" userLabel="Table View Cell-photo">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fev-9K-yBn" id="abU-OQ-4V5">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Photo" lineBreakMode="tailTruncation" minimumFontSize="10" id="J8s-7t-ekq">
+                        <rect key="frame" x="15" y="0.0" width="100" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" id="IG3-fy-x3R">
+                        <rect key="frame" x="485" y="3" width="40" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                    </imageView>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="vWJ-Gz-GY8" userLabel="Table View Cell-repeat">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="vWJ-Gz-GY8" id="Y0z-4g-4vG">
+                <rect key="frame" x="0.0" y="0.0" width="502" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Recurring" lineBreakMode="tailTruncation" minimumFontSize="10" id="BUy-0X-9e4">
+                        <rect key="frame" x="15" y="0.0" width="100" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="hUI-l8-acc">
+                        <rect key="frame" x="297" y="0.0" width="205" height="43"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.6588235294" green="0.6588235294" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="FLa-RR-PtU" userLabel="Table View Cell-memo">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="183"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FLa-RR-PtU" id="Rpj-xk-0ZQ">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="182.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="GUH-8p-2VJ">
+                        <rect key="frame" x="10" y="0.0" width="520" height="184"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="0.38823529410000002" green="0.79607843140000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" red="0.38823529410000002" green="0.79607843140000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Memo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="cNg-KV-WAd">
+                        <rect key="frame" x="16" y="6" width="74" height="21"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.6588235294" green="0.6588235294" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="C9X-CM-TtT" userLabel="Table View Cell-amount">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="C9X-CM-TtT" id="Whn-lz-ua9">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7B1-dc-jnP">
+                        <rect key="frame" x="400" y="0.0" width="125" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Rtz-xA-bII">
+                        <rect key="frame" x="15" y="7" width="52" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" image="btn_income.png">
+                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" image="btn_income_sel.png"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="xrU-rY-dHN">
+                        <rect key="frame" x="67" y="7" width="52" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" image="btn_expense.png">
+                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" image="btn_expense_sel.png"/>
+                    </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="MUH-UB-TMU">
+                        <rect key="frame" x="119" y="7" width="52" height="29"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                        <state key="normal" title="transfer" image="btn_transfer.png">
+                            <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        </state>
+                        <state key="selected" image="btn_transfer_sel.png"/>
+                    </button>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="h05-TO-Qg8" userLabel="Table View Cell-date">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="h05-TO-Qg8" id="Xos-nl-lDF">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Date" lineBreakMode="tailTruncation" minimumFontSize="10" id="1OV-CQ-JQO">
+                        <rect key="frame" x="15" y="0.0" width="100" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="btp-ZU-3E7">
+                        <rect key="frame" x="315" y="0.0" width="210" height="43"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="sQh-sy-uTv" userLabel="Table View Cell-category">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="sQh-sy-uTv" id="PQO-Pd-jPD">
+                <rect key="frame" x="0.0" y="0.0" width="502" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Category" lineBreakMode="tailTruncation" minimumFontSize="10" id="WrX-0e-KEf">
+                        <rect key="frame" x="15" y="0.0" width="100" height="43"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" textAlignment="right" lineBreakMode="tailTruncation" minimumFontSize="10" id="v3j-5E-9Zw">
+                        <rect key="frame" x="297" y="0.0" width="205" height="43"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.6588235294" green="0.6588235294" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="eeq-1F-CaH" userLabel="Table View Cell-payee">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eeq-1F-CaH" id="55g-xt-CKv">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Payee" minimumFontSize="17" id="vGY-mZ-fbU">
+                        <rect key="frame" x="15" y="0.0" width="510" height="43"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <color key="tintColor" red="0.38823529410000002" green="0.79607843140000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <action selector="TextDidEnd:" destination="-1" eventType="editingChanged" id="rmB-a3-hU5"/>
+                            <action selector="TextFieldDidBeginEditing:" destination="-1" eventType="editingDidBegin" id="bJ0-ty-O3g"/>
+                            <action selector="payeeTextEditChange:" destination="-1" eventType="editingChanged" id="d2Q-I4-cIT"/>
+                        </connections>
+                    </textField>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="Czq-KC-z09" userLabel="Table View Cell-from account" customClass="HMJTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Czq-KC-z09" id="jqQ-fZ-CrL">
+                <rect key="frame" x="0.0" y="0.0" width="502" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="From Account" lineBreakMode="tailTruncation" minimumFontSize="10" id="p6J-fT-F6Q">
+                        <rect key="frame" x="15" y="0.0" width="100" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="None" textAlignment="right" minimumFontSize="17" id="2dI-uN-4NA">
+                        <rect key="frame" x="297" y="7" width="205" height="30"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <color key="textColor" red="0.6588235294" green="0.6588235294" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.91372549020000005" green="0.92941176469999998" blue="0.94901960780000005" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="L1Y-I6-kLy" userLabel="Table View Cell-to account" customClass="HMJTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="L1Y-I6-kLy" id="cz5-1c-PvC">
+                <rect key="frame" x="0.0" y="0.0" width="502" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="To Account" lineBreakMode="tailTruncation" minimumFontSize="10" id="LK3-uj-8t1">
+                        <rect key="frame" x="15" y="0.0" width="100" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </label>
+                    <textField opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="None" textAlignment="right" minimumFontSize="17" id="beP-fT-dtx">
+                        <rect key="frame" x="297" y="7" width="205" height="30"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <color key="textColor" red="0.6588235294" green="0.6588235294" blue="0.6588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <textInputTraits key="textInputTraits"/>
+                    </textField>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="0.91372549020000005" green="0.92941176469999998" blue="0.94901960780000005" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="7TS-b0-HQs" userLabel="Table View Cell-show more details" customClass="HMJTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7TS-b0-HQs" id="Mwc-LW-7cu">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show More Details" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="mnI-cV-zqF">
+                        <rect key="frame" x="46" y="0.0" width="450" height="44"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" red="0.38823529410000002" green="0.79607843140000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="06x-LD-hp5" userLabel="Table View Cell-datePickerCell" customClass="HMJTableViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="216"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="06x-LD-hp5" id="2GJ-QV-VuZ">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="215.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" id="EMV-88-0H3">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="216"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <date key="date" timeIntervalSinceReferenceDate="432093810.50431699">
+                            <!--2014-09-11 02:03:30 +0000-->
+                        </date>
+                    </datePicker>
+                </subviews>
+            </tableViewCellContentView>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="btn_expense.png" width="60" height="30"/>
+        <image name="btn_expense_sel.png" width="60" height="30"/>
+        <image name="btn_income.png" width="60" height="30"/>
+        <image name="btn_income_sel.png" width="60" height="30"/>
+        <image name="btn_transfer.png" width="60" height="30"/>
+        <image name="btn_transfer_sel.png" width="60" height="30"/>
+        <image name="ipad_btn_0.png" width="108" height="52"/>
+        <image name="ipad_btn_0_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_1.png" width="108" height="52"/>
+        <image name="ipad_btn_1_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_2.png" width="108" height="52"/>
+        <image name="ipad_btn_2_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_3.png" width="108" height="52"/>
+        <image name="ipad_btn_3_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_4.png" width="108" height="52"/>
+        <image name="ipad_btn_4_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_5.png" width="108" height="52"/>
+        <image name="ipad_btn_5_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_6.png" width="108" height="52"/>
+        <image name="ipad_btn_6_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_7.png" width="108" height="52"/>
+        <image name="ipad_btn_7_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_8.png" width="108" height="52"/>
+        <image name="ipad_btn_8_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_9.png" width="108" height="52"/>
+        <image name="ipad_btn_9_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_empty.png" width="108" height="52"/>
+        <image name="ipad_btn_empty_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_equal_sign.png" width="108" height="104"/>
+        <image name="ipad_btn_equal_sign_sel.png" width="108" height="104"/>
+        <image name="ipad_btn_minus.png" width="108" height="52"/>
+        <image name="ipad_btn_minus_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_multiply.png" width="108" height="52"/>
+        <image name="ipad_btn_multiply_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_plus.png" width="108" height="104"/>
+        <image name="ipad_btn_plus_sel.png" width="108" height="104"/>
+        <image name="ipad_btn_point.png" width="108" height="52"/>
+        <image name="ipad_btn_point_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_revocation.png" width="108" height="52"/>
+        <image name="ipad_btn_revocation_sel.png" width="108" height="52"/>
+        <image name="ipad_btn_sign_of_division.png" width="108" height="52"/>
+        <image name="ipad_btn_sign_of_division_sel.png" width="108" height="52"/>
+        <image name="ipad_list_480_130.png" width="480" height="130"/>
+    </resources>
+</document>

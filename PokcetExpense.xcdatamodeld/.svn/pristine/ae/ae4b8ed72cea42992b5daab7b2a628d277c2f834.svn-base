@@ -1,0 +1,45 @@
+//
+//  BillRule.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "BillRule.h"
+#import "Accounts.h"
+#import "BillRule.h"
+#import "Category.h"
+#import "Payee.h"
+#import "Transaction.h"
+
+
+@implementation BillRule
+
+@dynamic isRule;
+@dynamic status;
+@dynamic dayInWeek;
+@dynamic amountDue;
+@dynamic paidDate;
+@dynamic weekInMonth;
+@dynamic cycle;
+@dynamic name;
+@dynamic monthInYear;
+@dynamic endDate;
+@dynamic hasPaid;
+@dynamic remind;
+@dynamic recordDate;
+@dynamic startDate;
+@dynamic notes;
+@dynamic amountPaid;
+@dynamic billType;
+@dynamic dayInMonth;
+@dynamic fromAccount;
+@dynamic toAccount;
+@dynamic transaction;
+@dynamic parentBillRule;
+@dynamic childBillRule;
+@dynamic category;
+@dynamic payees;
+
+@end

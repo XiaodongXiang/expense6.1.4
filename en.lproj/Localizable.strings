@@ -1,0 +1,623 @@
+/*
+ Localizable.strings
+ PocketExpense
+ 
+ Created by humingjing on 14-7-15.
+ 
+ */
+
+
+/*iphone Main VC */
+"VC_January" = "January";
+"VC_February" = "February";
+"VC_March" = "March";
+"VC_April" = "April";
+"VC_May" = "May";
+"VC_June" = "June";
+"VC_July" = "July";
+"VC_Auguest" = "Auguest";
+"VC_September" = "September";
+"VC_October" = "October";
+"VC_November" = "November";
+"VC_December" = "December";
+
+"VC_Sunday" = "Sunday";
+"VC_Monday" = "Monday";
+"VC_Tuesday" = "Tuesday";
+"VC_Wednesday" = "Wednesday";
+"VC_Friday" = "Friday";
+"VC_Saturday" = "Saturday";
+
+"VC_LEFT" = "LEFT";
+"VC_SPENT" = "SPENT";
+"VC_NETWORTH" = "NET WORTH";
+"VC_NetWorth" = "Net Worth";
+
+//"VC_Main_NoTransaction" = "No transactions in this day.";//重新修改
+
+/*iphone Main Month VC*/
+"VC_Today" = "Today";
+"VC_EXPENSE" = "EXPENSE";
+"VC_INCOME" = "INCOME";
+"VC_BALANCE" = "BALANCE";
+
+/*budget VC*/
+"VC_Budget" = "Budget";
+"VC_Adjust" = "Adjust";
+"VC_Total" = "Total";
+
+/*budget Introduce*/
+"VC_SetupBudget" = "Setup Budget";
+"VC_SelectBudgetNotes" = "Select categories you want to set as monthly budgets, and set the amount for them.";
+"VC_SelectCategory" = "Select Category";
+
+
+/*budget list VC*/
+"VC_BudgetList" = "Budget";
+"VC_ITEMS" = "ITEMS";
+
+/*budget select category*/
+"VC_SelectCategories" = "Select Categories";
+"VC_SELECTCATEGORIESFORMONITOR" = "SELECT CATEGORIES FOR MONITOR";
+
+/*budget detail*/
+"VC_BudgetDetailNotes" = "This budget has not been used yet.";
+
+"VC_Auto" = "Auto";
+"VC_AutoGas" = "Auto: Gas";
+"VC_AutoRegistration" = "Auto: Registration";
+"VC_AutoService" = "Auto: Service";
+"VC_BankCharge" = "Bank Charge";
+"VC_Bonus" = "Bonus";
+"VC_Cash" = "Cash";
+"VC_Charity" = "Charity";
+"VC_Childcate" = "Childcare";
+"VC_Clothing" = "Clothing";
+
+"VC_CreditCardPayment" = "Credit Card Payment";
+"VC_EatingOut" = "Eating Out";
+"VC_Education" = "Education";
+"VC_Entertainment" = "Entertainment";
+"VC_Gifts" = "Gifts";
+"VC_Groceries" = "Groceries";
+"VC_HealthFitness" = "Health & Fitness";
+"VC_HomeRepair" = "Home Repair";
+"VC_Household" = "Household";
+"VC_Insurance" = "Insurance";
+
+"VC_Interest Exp" = "Interest Exp";
+"VC_Loan" = "Loan";
+"VC_Medical" = "Medical";
+"VC_Misc" = "Misc";
+"VC_MortgagePayment" = "Mortgage Payment";
+"VC_Pets" = "Pets";
+"VC_Others" = "Others";
+
+"VC_Rent" = "Rent";
+"VC_Salary" = "Salary";
+"VC_SavingsDeposit" = "Savings Deposit";
+"VC_Tax" = "Tax";
+"VC_TaxFed" = "Tax: Fed";
+"VC_TaxMedicare" = "Tax: Medicare";
+"VC_TaxOther" = "Tax: Other";
+"VC_TaxProperty" = "Tax: Property";
+"VC_TaxSDI" = "Tax: SDI";
+"VC_TaxSocSec" = "Tax: Soc Sec";
+"VC_TaxState" = "Tax: State";
+
+"VC_Travel" = "Travel";
+"VC_Utilities" = "Utilities";
+"VC_UtilitiesCableTV" = "Utilities: Cable TV";
+"VC_UtilitiesGarbageRecycling" = "Utilities: Garbage & Recycling";
+"VC_UtilitiesGasElectric" = "Utilities: Gas& Electric";
+"VC_UtilitiesInternet" = "Utilities: Internet";
+"VC_UtilitiesTelephone" = "Utilities: Telephone";
+"VC_UtilitiesWater" = "Utilities: Water";
+"VC_Transport" = "Transport";
+"VC_TaxRefund" = "Tax Refund";
+
+
+/*budget Transfer*/
+"VC_BudgetTransfer" = "Transfer";
+"VC_FromBudget" = "From Budget";
+"VC_ToBudget" = "To Budget";
+"VC_SelectTargetBudget" = "Select Target Budget";
+
+/*edit category*/
+"VC_NewCategory" = "New Category";
+"VC_EditCategory" = "Edit Category";
+"VC_Name" = "Name";
+"VC_Type" = "Type";
+"VC_SubCategory" = "Sub-Category";
+"VC_None" = "None";
+"VC_Unnamed" = "Unnamed";
+"VC_CategoryEdit_NewCategory" = "New Category";
+
+/*parent category*/
+"VC_Parent Category" = "Parent Category";
+
+/*edit transaction*/
+"VC_NewTransaction" = "New Trans";
+"VC_NewTransaction_iPad" = "New Transaction";
+
+"VC_EditTransaction" = "Edit Trans";
+"VC_Payee" = "Payee";
+"VC_Amount" = "Amount";
+"VC_FromAccount" = "From Account";
+"VC_ToAccount" = "To Account";
+"VC_Category" = "Category";
+"VC_Account" = "Accounts";
+"VC_Date" = "Date";
+"VC_Repeat" = "Repeat";
+"VC_Cleared" = "Cleared";
+"VC_Photo" = "Photo";
+"VC_Memo" = "Memo";
+
+/*account select*/
+"VC_SelectAccount" = "Select Account";
+
+/*edit account*/
+"VC_NewAccount" = "New Account";
+"VC_EditAccount" = "Edit Account";
+"VC_AccountName" = "Account Name";
+"VC_StartBalance" = "Start Balance";
+"VC_OpenDate" = "Open Date";
+"VC_AutoClear" = "Auto-clear";
+
+/*select accounttype*/
+"VC_SelectType" = "Select Type";
+"VC_Asset" = "Asset";
+"VC_Cash" = "Cash";
+"VC_Checking" = "Checking";
+"VC_CreditCard" = "Credit Card";
+"VC_DebitCard" = "Debit Card";
+"VC_Investing/Retirement" = "Investing/Retirement";
+"VC_Loan" = "Loan";
+"VC_Savings" = "Savings";
+"VC_Others" = "Others";
+
+/*edit accounttype*/
+"VC_NewType" = "New Type";
+"VC_EditType" = "Edit Type";
+/*repeat*/
+"VC_Never" = "Never";
+"VC_Daily" = "Daily";
+"VC_Weekly" = "Weekly";
+"VC_Every2Weeks" = "Every 2 Weeks";
+"VC_Every3Weeks" = "Every 3 Weeks";
+"VC_Every4Weeks" = "Every 4 Weeks";
+"VC_Semimonthly" = "Semimonthly";
+"VC_Monthly" = "Monthly";
+"VC_Every2Months" = "Every 2 Months";
+"VC_Every3Months" = "Every 3 Months";
+"VC_Every4Months" = "Every 4 Months";
+"VC_Every5Months" = "Every 5 Months";
+"VC_Every6Months" = "Every 6 Months";
+"VC_EveryYear" = "Every Year";
+
+/*account*/
+"VC_Accounts" = "Accounts";
+"VC_ACCOUNTS" = "ACCOUNTS";
+"VC_Uncleared" = "Uncleared";
+"VC_UNCLEARED" = "UNCLEARED";
+"VC_Account" = "Account";
+
+/*all transaction list*/
+"VC_AllTransactions" = "All Transactions";
+
+/*search*/
+"VC_Search" = "Search";
+
+/*bill*/
+"VC_Overdue" = "Overdue";
+"VC_DueWithin7Days" = "Due Within 7 Days";
+"VC_DueWithin30Days" = "Due Within 30 Days";
+"VC_NoBills" = "No recent bills. You can create them by tapping the \"+\" button.";
+
+
+
+/*edit bill*/
+"VC_NewBill" = "New Bill";
+"VC_EditBill" = "Edit Bill";
+"VC_DueDate" = "Due Date";
+"VC_Alert" = "Alert";
+
+/*bill repeat*/
+"VC_SetRecurring" = "Set Recurring";
+"VC_TwoWeeks" = "Two Weeks";
+
+/*reminder*/
+"VC_Reminder" = "Reminder";
+"VC_Remind Me" = "Remind Me";
+"VC_1daybefore" = "1 day before";
+"VC_2daysbefore" = "2 days before";
+"VC_3daysbefore" = "3 days before";
+"VC_1weekbefore" = "1 week before";
+"VC_2weeksbefore" = "2 weeks before";
+"VC_ondateofevent" = "on date of event";
+
+/*bill Detail*/
+"VC_Due" = "Due";
+"VC_Paid" = "Paid";
+"VC_PayBill" = "Pay Bill";
+"VC_AddPayment" = "Add Payment";
+"VC_PaymentHistory" = "Payment History";
+
+/*bill payment*/
+"VC_Pay" = "Pay";
+"VC_PaymentDate" = "Payment Date";
+
+/*report*/
+"VC_Report" = "Report";
+"VC_Range" = "Range";
+"VC_CASHFLOW" = "CASH FLOW";
+
+/*date range*/
+"VC_DateRange" = "Range";
+"VC_ThisMonth" = "This Month";
+"VC_LastMonth" = "Last Month";
+"VC_ThisQuarter" = "This Quarter";
+"VC_LastQuarter" = "Last Quarter";
+"VC_ThisYear" = "This Year";
+"VC_LastYear" = "Last Year";
+"VC_CustomRange" = "Custom";
+
+/*custom range*/
+"VC_StartDate" = "Start Date";
+"VC_EndDate" = "End Date";
+
+/*setting*/
+"VC_Passcode" = "Passcode";
+"VC_OFF" = "OFF";
+"VC_ON" = "ON";
+"VC_Currency" = "Currency";
+"VC_Budget" = "Budgets";
+"VC_FAQ" = "FAQ";
+"VC_Sync" = "Sync";
+"VC_Export Report" = "Export Report";
+"VC_Backup_Restore" = "Backup & Restore";
+"VC_AppVersion" = "About";
+"VC_SendFeedback" = "Send Feedback";
+"VC_WriteReview" = "Write Review";
+
+/*passcode*/
+"VC_EnterPasscode" = "Enter Passcode";
+"VC_Enteryourpasscode" = "Enter your passcode";
+"VC_Re_enteryourpasscode" = "Re-enter your passcode";
+
+"VC_PasscodeSetting" = "Passcode Setting";
+"VC_TurnPasscodeOff" = "Turn Passcode Off";
+"VC_ChangePasscode" = "Change Passcode";
+"VC_Re_enteryournewpasscode" = "Re-enter your new passcode";
+
+"VC_PasscodeFailedAttempts" = "Passcode Failed Attempts";
+//"VC_Passcodedidnotmatch_Tryagain" = "Passcode does not match.Try again.";
+
+/*faq*/
+"VC_faqList1" = "How to edit or delete transaction";
+"VC_faqList2" = "How to add or edit account";
+"VC_faqList3" = "How to check my accounts";
+"VC_faqList4" = "How to setup budget";
+"VC_faqList5" = "How to transfer amount between two budgets";
+"VC_faqList6" = "How to change month in Homepage";
+"VC_faqList7" = "How to search related transactions";
+"VC_faqList8" = "How to send photo added in transactions";
+"VC_faqList9" = "What's Cleared/Uncleared and how to reconcile account";
+"VC_faqList10" = "How to add, edit or delete payee";
+"VC_faqList11" = "How to add, edit or delete category";
+"VC_faqList12" = "What do the colors for circles mean in Bill page";
+"VC_faqList13" = "How to export report";
+"VC_faqList14" = "How to transfer amount between accounts";
+"VC_faqList15" = "How to sync";
+
+
+
+
+
+
+/*payee*/
+"VC_PayeeNoReminder" = "You have not setup any payees yet. You can add them by tapping the \"+\" button.";
+/*edit payee*/
+"VC_NewPayee" = "New Payee";
+"VC_EditPayee" = "Edit Payee";
+
+
+/*sync*/
+//其他语种未翻译
+"VC_Dropbox" = "Sync with Dropbox";//其他语种未翻译
+//"VC_LinkyourDropbox" = "Link your Dropbox account,all data will be synced automatically.";
+
+/*export report*/
+"VC_Transaction" = "Transaction";
+"VC_Flow" = "Flow";
+
+
+/*backup & restore*/
+"VC_WebServerAddress" = "Web Server Address";
+"VC_BackNotes1" = "1. Launch your computer's web browser.";
+"VC_BackNotes2" = "2. Enter the address shown above.";
+"VC_BackNotes3" = "3. Follow the instructions to backup or restore your database.";
+"VC_BackNotes4" = "Warning:When your app version is 5.0 or later, please make sure the ZIP is from 4.5 or later. ";
+"VC_BackNotes5" = "Never exit this screen or close Expense 5 if you are uploading or downloading data.";
+
+
+/*ipad_overview*/
+"VC_ipadNoRecords" = "No Records";
+/*ipad_budget*/
+"VC_ipadBudgetNoRecords" = "You have no budgets setup. You can create them by tapping the \"Adjust\" button.";
+"VC_ipadBudgetDetailNotes" = "No transactions in the selected date range.";
+/*ipad_report*/
+"VC_ipadAllDates" = "All Dates";
+"VC_ipadBiweekly" = "Biweekly";
+"VC_ipadQuarterly" = "Quarterly";
+"VC_ipadYearly" = "Yearly";
+
+
+/*btn*/
+"VC_Save" = "Save";
+"VC_Cancel" = "Cancel";
+"VC_Edit" = "Edit";
+"VC_Done" = "Done";
+"VC_Split" = "Split";
+
+/*ads*/
+"VC_iphone_ads" = "No Ads. More Features.";
+"VC_Pro" = "Pro";
+"VC_FullVersion" = "Full Version";
+"VC_Upgrade Now" = "Upgrade Now";
+"VC_Syncbetweendevices" = "Sync between devices";
+"VC_Exportdataandreports" = "Export data and reports";
+
+
+/* New Add */
+"VC_Thursday" = "Thursday";
+"VC_ReconcileOff" = "Reconcile Off";
+"VC_ReconcileOn" = "Reconcile On";
+"VC_ShowCleared" = "Show Cleared";
+"VC_HideCleared" = "Hide Cleared";
+"VC_Icon" = "Icon";
+"VC_ReminderAt" = "Remind At";
+"VC_Expense" = "Expense";
+"VC_Income" = "Income";
+"VC_CashFlow" = "Cash Flow";
+"VC_RestorePurchased" = "Restore Purchased";
+"VC_MigrateData" = "Migrate Data to Full Version";
+"VC_Setting" = "Settings";
+"VC_Enable Passcode" = "Enable Passcode";
+"VC_Enter your old passcode" = "Enter your old passcode";
+"VC_PasscodeFailedAttempt" = "Passcode Failed Attempt";
+"VC_No Full Version was found on this device!" = "No Full Version was found on this device!";
+"VC_Would you like to get the Full Version and then transfer data to it?" = "Would you like to get the Full Version and then transfer data to it?";
+"VC_Data Transfer" = "Data Transfer";
+//"VC_Please make sure that both the latest free and full version are on your device. Warning: This will replace all data in the Full Version!" = "Please make sure that both the latest free and full versions are on your device. Warning: This operation will replace all data in the Full Version!";
+"VC_Transfer" = "Transfer";
+"VC_No, thanks" = "No, thanks";
+"VC_OK" = "OK";
+"VC_No Mail Accounts" = "No Mail Accounts";
+"VC_Please set up a mail account in order to send mail." = "Please set up a mail account in order to send mail.";
+"VC_Enter your new passcode" = "Enter your new passcode";
+"VC_Next" = "Next";
+"VC_Account name is needed." = "Account name is required.";
+//"VC_Account Name already exists." = "Account Name has already existed.";
+"VC_From Account is required." = "From Account is required.";
+"VC_To Account is required." = "To Account is required.";//这两句合并成一句 "'From Account' and 'To Account' are required." 其中任意一项没填写都弹出alert
+"VC_Amount is required." = "Amount is required.";
+"VC_Type name is needed." = "Type name is required.";
+//"VC_The type was exist." = "The type has already existed.";
+//"VC_Expense 5 data restore complete" = "Expense 5 data restores complete.";
+"VC_You must now quit Pocket Expense and re-launch for the new changes to take effect." = "Please quit Expense 5 and re-launch to take effect.";
+"VC_Restore Cancelled" = "Restore Cancelled";
+"VC_The current database and the backup should be the same file. Modifying data is always risky so the restore process has been cancelled as a safety measure." =
+"The Current database and the backup should be the same file. Modifying data is risky so the restore has been cancelled as a safety measure.";
+"VC_End Date must be earlier than Due Date." = "End Date must be earlier than Due Date.";
+//"VC_Start date should be earlier than end date." = "Start date should be earlier than End Date";
+"VC_Account is needed." = "Account is needed.";
+"VC_This is a part of a transaction split, and it can not be edited alone." = "This is a part of a transaction split, and it can not be edited alone.";
+"VC_Category Name is required." = "Category Name is required.";
+"VC_Category Icon is required." = "Category Icon is required.";
+"VC_Category already exists." = "Category already exists.";
+//"VC_Old data needs to be processed. Select 'replace' and data on this device will replace data on cloud server, select 'merge' and data will be merged with data on cloud server." = "Old data needs to be processed. Select 'replace' then data on this device will replace data on cloud server, select 'merge' then data will be merged with data on cloud server.";
+"VC_Replace" = "Replace";
+"VC_Merge" = "Merge";
+//"VC_Dropbox sync successed." = "Dropbox syncs successfully.";
+"VC_Please select at least one account." = "Please select at least one account.";
+"VC_Please select at least one category." = "Please select at least one category.";
+"VC_Restore purchase successfully!" = "Restore purchase successfully!";
+"VC_Thank You!" = "Thank You!";
+//"VC_Your purhase was successful!" = "Your purchase was successful!";
+"VC_Restore Error" = "Restore Error";
+"VC_A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored." = "Please purchase the application first. Paid customers will not be charged again.";//这一句改动了
+"VC_Purchase Stopped" = "Purchase Stopped";
+"VC_Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." = "Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance.";
+"VC_Restore Stopped" = "Restore Stopped";
+"VC_Note" = "Note";
+"VC_You must have at least one account to add a transaction. You can create accounts in the \"Account\" module." = "You must have at least one account to add a transaction. You can create accounts in the \"Account\" module.";
+"VC_Name is required." = "Name is required.";
+"VC_Amount is needed." = "Amount is needed.";
+"VC_Warning" = "Warning";
+"VC_Can't send email, please check the email config." = "Can't send email, please check the email config.";
+"VC_'Remind At' is required." = "'Remind At' is required.";
+"VC_Category is required." = "Category is required.";
+//"VC_Payee with this category already exists." = "Payee with this category has already existed.";
+"VC_Remove" = "Remove";
+//"VC_Accounts can not be same." = "Accounts can not be the same.";
+"VC_From Budget is required." = "From Budget is required.";
+"VC_To Budget is required." = "To Budget is required.";
+"VC_Confirm restore" = "Confirm restore";
+"VC_Do you want to restore Pocket Expense with the uploaded backup? All current data will be ERASED and REPLACED with the backup, this cannot be undone." = "Do you want to restore Expense 5 with the uploaded backup? All current data will be ERASED and REPLACED with the backup, this cannot be undone.";
+"VC_RestorePurchased" = "Restore Purchased";
+"VC_Pocket Expense data restore complete" = "Expense 5 data restore complete";
+"VC_Thanks for using our Full Version! Please restart the Full Version to complete the transfer." = "Thanks for using our Full Version! Please restart the Full Version to complete the transfer.";
+"VC_Pocket Expense data transfer success" = "Expense 5 data transfer success";
+"VC_Thanks for using our Full Version! Please restart the Full Version to complete the migration." = "Thanks for using our Full Version! Please restart the Full Version to complete the migration.";
+//"VC_PocketExpense data transfer failed" = "PocketExpense data transferred failed";
+"VC_Please restart the Lite Version to try again." = "Please restart the Lite Version to try again.";
+"VC_Account is required." = "Account is required.";
+"VC_Forever" = "Forever";
+"VC_Transaction(CSV)" = "Transactions (CSV)";
+"VC_Transaction(PDF)" = "Transaction Report";
+"VC_Flow(PDF)" = "Cash Flow Report";
+"VC_Group By" = "Group";
+"VC_Start From" = "Start From";
+"VC_End To" = "End To";
+"VC_Sequence" = "Sequence";
+"VC_Send" = "Send";
+"VC_Export Transactions" = "Export";
+"VC_Select All" = "Select All";
+"VC_Item(s)" = "Item(s)";
+"VC_Mutiple Accounts" = "Mutiple Accounts";
+"VC_All" = "All";
+"VC_Sort By" = "Sort By";
+"VC_Last 12 Months" = "Last 12 Months";
+"VC_Custom Filter" = "Custom Filter";
+"VC_Select Date" = "Select Date";
+"VC_Custom Date" = "Custom Date";
+"VC_Column" = "Column";
+"VC_Week" = "Week";
+"VC_Month" = "Month";
+
+
+
+"VC_You have no budgets setup. You can create them by tapping the \"Adjust\" button." = "You have no budgets setup. You can tap the top right corner to create one. ";
+"VC_Bills" = "Bills";
+"VC_BILLS" = "BILLS";
+"VC_Last 30 days" = "Last 30 days";
+"VC_Last 60 days" = "Last 60 days";
+"VC_Last 90 days" = "Last 90 days";
+"VC_Mutiple Categories" = "Mutiple Categories";
+"VC_Left" = "Left";
+"VC_Spent" = "Spent";
+"VC_Ascending" = "Ascending";
+"VC_Descending" = "Descending";
+"VC_Run Report" = "Run Report";
+"VC_Out Flow" = "Out Flow";
+"VC_In Flow" = "In Flow";
+"VC_Purchase" = "Purchase";
+
+
+"VC_Overview" = "Overview";
+"VC_Show More Details" = "Show More Details";
+"VC_Balance" = "Balance";
+"VC_Add" = "Add";
+"VC_Last 12 Months" = "Last 12 Months";
+"VC_Custom" = "Custom";
+"VC_Reconcile" = "Reconcile";
+"VC_Upcoming" = "Upcoming";
+
+
+"VC_Related" = "Related";
+"VC_Month View" = "Month View";
+"VC_Bill" = "Bill";
+"VC_Swip to Change Week" = "Swipe to Change Week";
+"VC_Budget" = "Budget";
+"VC_BUDGET" = "BUDGETS";
+"VC_Budget Process" = "Budget Process";
+
+/* New Add */
+"VC_Duplicate To Date" = "Duplicate To Date";
+"VC_Just This Bill" = "Just This Bill";
+"VC_All Future Bills" = "All Future Bills";
+"VC_View Photo" = "View Photo";
+"VC_Change" = "Change";
+"VC_Main_NoTransaction" = "No transactions in this day.";//重新修改，添加了s
+"VC_You need to create at least one account before starting using this app. You can create them by tap the \"Add\" button." = "You need to create at least one account before starting using this app. You can create them by tap the \"Add\" button.";//这句去掉，这种情况不要弹出弹框了
+
+//actionsheet
+"VC_This is a repeating transaction, delete it will also delete its all future repeats. Are you sure to delete?" = "This is a repeating transaction, delete it will also delete its all future repeats. Are you sure to delete?";
+"VC_Delete" = "Delete";
+"VC_Delete %@ will cause to also delete its transactions. Are you sure want to delete it?" = "Warning: Delete %@ will cause to also delete its transactions.";
+"VC_Photo from Camera" = "Photo from Camera";
+"VC_Photo from Library" = "Photo from Library";
+"VC_This is a repeating bill. Do you want to change this bill, or all future bills for name'%@'?" = "This is a repeating bill. Do you want to change this bill, or all future bills for name'%@'?";
+"VC_This is a repeating bill. Do you want to delete this bill, or all future bills for name'%@'?" = "This is a repeating bill. Do you want to delete this bill, or all future bills for name'%@'?";
+"VC_Delete %@ will cause to also delete all its transactions, sub-categories ,related bills and budgets." = "Warning: Delete %@ will also delete all its transactions, sub-categories ,related bills and budgets.";
+"VC_Delete %@ will cause to also delete all its transactions, related bills and budgets." = "Warning: Delete %@ will cause to also delete all its transactions, related bills and budgets.";
+"VC_XFER To" = "XFER To";
+"VC_XFER From" = "XFER From";
+"VC_Sub-category Of" = "Sub-category Of";
+"VC_Year %@" = "Year %@";
+
+//上面翻译过，重新修改的
+"VC_Payee with this category already exists." = "Payee with this category has already existed.";
+"VC_Accounts can not be same." = "Accounts can not be the same.";
+"VC_Passcodedidnotmatch_Tryagain" = "Passcode does not match.Try again.";
+"VC_LinkyourDropbox" = "Link your Dropbox account, all data will be synced automatically.";
+"VC_Please make sure that both the latest free and full version are on your device. Warning: This will replace all data in the Full Version!" = "Please make sure both the latest Free and Full versions are on your device. Warning: Operation will replace all data in the Full version!";
+"VC_Account Name already exists." = "Account Name has already existed.";
+"VC_The type was exist." = "The type has already existed.";
+"VC_Expense 5 data restore complete" = "Expense 5 data restores complete.";
+//"VC_Start date should be earlier than End Date." = "Start date should be earlier than End Date";
+"VC_Old data needs to be processed. Select 'replace' and data on this device will replace data on cloud server, select 'merge' and data will be merged with data on cloud server." = "Old data needs to be processed. Select 'replace' then data on this device will replace data on cloud server, select 'merge' then data will be merged with data on cloud server.";
+"VC_Dropbox sync successed." = "Dropbox syncs successfully.";
+"VC_Your purhase was successful!" = "Your purchase was successful!";
+"VC_PocketExpense data transfer failed" = "PocketExpense data transferred failed";
+"VC_Restore" = "Restore";
+
+"VC_Categories" = "Categories";
+"VC_Payee & Category" = "Payee & Category";
+
+//5.3.1版本新添加其他语种没翻译
+"VC_Start From" = "Start From";
+"VC_General" = "General";
+"VC_GENERAL" = "GENERAL";
+"VC_Default Account" = "Default Account";
+"VC_Default Category" = "Default Category";
+"VC_Week Starts From" = "Week Starts From";
+"VC_Notification" = "Notification";
+
+//5.5版本
+"VC_Last12Months" = "Last 12 Months";
+"VC_This is a parent category, and it can not be selected to other parent categories." = "This is a parent category, and it can not be selected to other parent categories.";
+
+
+//V6版本
+"VC_SIGN IN"="SIGN IN";
+"VC_Sign Up"="Sign Up";
+
+"VC_Password"="Password";
+"VC_Email address or password is missing"="Email address or password is missing.";
+"VC_Email or passcode error"="Email or passcode error.";
+"VC_The email address has been used by someone else."="The email address has been used by someone else.";
+"VC_Please use email address as your account."="Please use email address as your account.";
+"VC_No network connection is established."="No network connection is established.";
+
+"VC_We have sent an email to <email address>. Please follow the directions in the email to reset password"="We have sent an email to %@. Please follow the directions in the email to reset password.";
+
+
+"VC_It is highly recommended that transfer your data from Dropbox to new Expense if you have your latest data synced by Dropbox before."="It is highly recommended that transfer your data from Dropbox to new Expense if you have your latest data synced by Dropbox before.";
+"VC_Transfer"="Transfer";
+
+"VC_An email for password reset will be sent to your address."="An email for password reset will be sent to your address.";
+
+"VC_Auto Sync"="Auto Sync";
+"VC_Sync Now"="Sync Now";
+"VC_Start"="START";
+
+//V6
+"VC_OVER"="OVER";
+"VC_Calendar"="Calendar";
+"VC_Chart"="Chart";
+"VC_Summary"="Summary";
+"VC_Top Spent"="Top Spent";//which category spent most
+"VC_Top Left"="Top Left";//which category left most
+"VC_Unpaid"="Unpaid";
+"VC_Left"="Left";//budget left
+"VC_Over"="Over";
+"VC_DIFFERENCE"="DIFFERENCE";//amount difference between this month and last month
+"VC_PERCENT"="PERCENT";
+"VC_LOG OUT"="LOG OUT";
+"VC_Share To Others"="Share To Others";
+"VC_Update History"="Update History";
+"VC_Disclaimer"="Disclaimer";
+"VC_Privacy Policy"="Privacy Policy";
+"VC_If you like this app, please rate and review."="If you like this app, please rate and review.";
+"VC_Send us some questions and suggestions."="Send us some questions and suggestions.";
+"VC_Send this app to your family, and friends."="Send this app to your family, and friends.";
+"VC_Sign in with facebook"="Sign in with facebook";
+"VC_About"="About";
+
+"VC_OpenTouchID"="Open Touch ID";
+"VC_CloseTouchID"="Close Touch ID";
+
+"VC_OpenFaceID"="Open Face ID";
+"VC_CloseFaceID"="Close Face ID";

@@ -1,0 +1,41 @@
+//
+//  Payee.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class BillRule, Category, Transaction;
+
+@interface Payee : NSManagedObject
+
+@property (nonatomic, retain) NSString * phone;
+@property (nonatomic, retain) NSString * others;
+@property (nonatomic, retain) NSString * website;
+@property (nonatomic, retain) NSString * memo;
+@property (nonatomic, retain) NSNumber * orderIndex;
+@property (nonatomic, retain) NSString * name;
+@property (nonatomic, retain) NSNumber * tranAmount;
+@property (nonatomic, retain) NSNumber * tranCleared;
+@property (nonatomic, retain) NSString * tranType;
+@property (nonatomic, retain) NSString * tranMemo;
+@property (nonatomic, retain) NSSet *transaction;
+@property (nonatomic, retain) NSSet *billItem;
+@property (nonatomic, retain) Category *category;
+@end
+
+@interface Payee (CoreDataGeneratedAccessors)
+
+- (void)addTransactionObject:(Transaction *)value;
+- (void)removeTransactionObject:(Transaction *)value;
+- (void)addTransaction:(NSSet *)values;
+- (void)removeTransaction:(NSSet *)values;
+- (void)addBillItemObject:(BillRule *)value;
+- (void)removeBillItemObject:(BillRule *)value;
+- (void)addBillItem:(NSSet *)values;
+- (void)removeBillItem:(NSSet *)values;
+@end

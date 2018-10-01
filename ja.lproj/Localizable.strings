@@ -1,0 +1,601 @@
+/*
+ Localizable.strings
+ PocketExpense
+ 
+ Created by humingjing on 14-7-15.
+ 
+ */
+
+
+/*iphone Main VC */
+"VC_January" = "1月";
+"VC_February" = "2月";
+"VC_March" = "3月";
+"VC_April" = "4月";
+"VC_May" = "5月";
+"VC_June" = "6月";
+"VC_July" = "7月";
+"VC_Auguest" = "8月";
+"VC_September" = "9月";
+"VC_October" = "10月";
+"VC_November" = "11月";
+"VC_December" = "12月";
+
+"VC_Sunday" = "日曜日";
+"VC_Monday" = "月曜日";
+"VC_Tuesday" = "火曜日";
+"VC_Wednesday" = "水曜日";
+"VC_Friday" = "金曜日";
+"VC_Sunday" = "日曜日";
+"VC_Saturday" = "土曜日";
+
+"VC_LEFT" = "残金";
+"VC_SPENT" = "費用";
+"VC_NETWORTH" = "純資産";
+"VC_NetWorth" = "純資産";
+
+//"VC_Main_NoTransaction" = "この日の取引はありません。";
+
+/*iphone Main Month VC*/
+"VC_Today" = "今日";
+"VC_EXPENSE" = "出費";
+"VC_INCOME" = "収入";
+"VC_BALANCE" = "残高";
+
+/*budget VC*/
+"VC_Budget" = "予算";
+"VC_Adjust" = "調整する";
+"VC_Total" = "合計";
+
+/*budget Introduce*/
+"VC_SetupBudget" = "設定予算";
+"VC_SelectBudgetNotes" = "月次予算として設定するカテゴリーを選択し、そのカテゴリーに対する金額を設定します。";
+"VC_SelectCategory" = "カテゴリーを選択";
+
+
+/*budget list VC*/
+"VC_BudgetList" = "予算";
+"VC_ITEMS" = "項目";
+
+/*budget select category*/
+"VC_SelectCategories" = "カテゴリーを選択";
+"VC_SELECTCATEGORIESFORMONITOR" = "モニターするカテゴリーを選択";
+
+/*budget detail*/
+"VC_BudgetDetailNotes" = "予算は未だ使用されていません。";
+
+"VC_Auto" = "乗用車";
+"VC_AutoGas" = "乗用車：ガソリン";
+"VC_AutoRegistration" = "乗用車：登録";
+"VC_AutoService" = "乗用車：点検";
+"VC_BankCharge" = "銀行手数料";
+"VC_Bonus" = "賞与";
+"VC_Cash" = "現金";
+"VC_Charity" = "義援金";
+"VC_Childcate" = "保育料";
+"VC_Clothing" = "衣料";
+
+"VC_CreditCardPayment" = "クレジットカードの支払い";
+"VC_EatingOut" = "外食";
+"VC_Education" = "教育";
+"VC_Entertainment" = "娯楽";
+"VC_Gifts" = "贈り物";
+"VC_Groceries" = "食料と雑貨";
+"VC_HealthFitness" = "健康とフィットネス";
+"VC_HomeRepair" = "家の修繕";
+"VC_Household" = "日用品";
+"VC_Insurance" = "保険";
+
+"VC_Interest Exp" = "金利支出";
+"VC_Loan" = "ローン";
+"VC_Medical" = "医療";
+"VC_Misc" = "諸経費";
+"VC_MortgagePayment" = "住宅ローンの支払い";
+"VC_Pets" = "ペット";
+"VC_Others" = "その他";
+
+"VC_Rent" = "家賃";
+"VC_Salary" = "給料";
+"VC_SavingsDeposit" = "貯蓄預金";
+"VC_Tax" = "税金";
+"VC_TaxFed" = "税金：連邦政府";
+"VC_TaxMedicare" = "税金：メディケア";
+"VC_TaxOther" = "税金：その他";
+"VC_TaxProperty" = "税金：固定資産";
+"VC_TaxSDI" = "税金：身体障害保険";
+"VC_TaxSocSec" = "税金：社会保障制度";
+"VC_TaxState" = "税金：州政府";
+
+"VC_Travel" = "旅行";
+"VC_Utilities" = "公共料金";
+"VC_UtilitiesCableTV" = "公共料金：ケーブルテレビ";
+"VC_UtilitiesGarbageRecycling" = "公共料金：ゴミとリサイクル";
+"VC_UtilitiesGasElectric" = "公共料金：ガスと電気";
+"VC_UtilitiesInternet" = "公共料金：インターネット";
+"VC_UtilitiesTelephone" = "公共料金：電話";
+"VC_UtilitiesWater" = "公共料金：水道";
+"VC_Transport" = "交通";
+"VC_TaxRefund" = "税金還付";
+
+
+/*budget Transfer*/
+"VC_BudgetTransfer" = "転送";
+"VC_FromBudget" = "予算から";
+"VC_ToBudget" = "予算へ";
+"VC_SelectTargetBudget" = "対象予算を選択";
+
+/*edit category*/
+"VC_NewCategory" = "追加";
+"VC_EditCategory" = "編集";
+"VC_Name" = "名前";
+"VC_Type" = "種類";
+"VC_SubCategory" = "サブカテゴリー";
+"VC_None" = "なし";
+"VC_Unnamed" = "無題";
+"VC_CategoryEdit_NewCategory" = "新規カテゴリー";
+
+/*parent category*/
+"VC_Parent Category" = "親カテゴリー";
+
+/*edit transaction*/
+"VC_NewTransaction" = "追加";
+"VC_NewTransaction_iPad" = "追加";
+
+"VC_EditTransaction" = "編集";
+"VC_Payee" = "支払先";
+"VC_Amount" = "金額";
+"VC_FromAccount" = "アカウントから";
+"VC_ToAccount" = "アカウントへ";
+"VC_Category" = "カテゴリー";
+"VC_Account" = "アカウント";
+"VC_Date" = "日付";
+"VC_Repeat" = "リピート";
+"VC_Cleared" = "クリア済み";
+"VC_Photo" = "写真";
+"VC_Memo" = "メモ";
+
+/*account select*/
+"VC_SelectAccount" = "アカウントを選択";
+
+/*edit account*/
+"VC_NewAccount" = "追加";
+"VC_EditAccount" = "編集";
+"VC_AccountName" = "アカウント名";
+"VC_StartBalance" = "開始残高";
+"VC_OpenDate" = "開始日";
+"VC_AutoClear" = "自動クリア";
+
+/*select accounttype*/
+"VC_SelectType" = "種類を選択";
+"VC_Asset" = "資産";
+"VC_Cash" = "現金";
+"VC_Checking" = "当座預金";
+"VC_CreditCard" = "クレジットカード";
+"VC_DebitCard" = "デビットカード";
+"VC_Investing/Retirement" = "投資/年金";
+"VC_Loan" = "ローン";
+"VC_Savings" = "普通預金";
+"VC_Others" = "その他";
+
+/*edit accounttype*/
+"VC_NewType" = "追加";
+"VC_EditType" = "編集";
+/*repeat*/
+"VC_Never" = "しない";
+"VC_Daily" = "毎日";
+"VC_Weekly" = "毎週";
+"VC_Every2Weeks" = "隔週";
+"VC_Every3Weeks" = "3週間に1回";
+"VC_Every4Weeks" = "4週間に1回";
+"VC_Semimonthly" = "月2回";
+"VC_Monthly" = "毎月";
+"VC_Every2Months" = "隔月";
+"VC_Every3Months" = "3ヶ月に1回";
+"VC_Every4Months" = "4ヶ月に1回";
+"VC_Every5Months" = "5ヶ月に1回";
+"VC_Every6Months" = "6ヶ月に1回";
+"VC_EveryYear" = "毎年";
+
+/*account*/
+"VC_Accounts" = "アカウント";
+"VC_ACCOUNTS" = "アカウント";
+
+"VC_Uncleared" = "アンクリア済み";
+"VC_UNCLEARED" = "アンクリア済み";
+
+"VC_Account" = "アカウント";
+
+/*all transaction list*/
+"VC_AllTransactions" = "すべての取引";
+
+/*search*/
+"VC_Search" = "検索";
+
+/*bill*/
+"VC_Overdue" = "期限切れ";
+"VC_DueWithin7Days" = "支払期日 7 日以内";
+"VC_DueWithin30Days" = "支払期日 30 日以内";
+"VC_NoBills" = "今月は請求書がありません。「+」ボタンをタップして、請求書を作成することが可能です。";
+
+/*edit bill*/
+"VC_NewBill" = "追加";
+"VC_EditBill" = "編集";
+"VC_DueDate" = "期日";
+"VC_Alert" = "アラート";
+
+/*bill repeat*/
+"VC_SetRecurring" = "自動処理を設定";
+"VC_TwoWeeks" = "2週間";
+
+/*reminder*/
+"VC_Reminder" = "リマインダー";
+"VC_Remind Me" = "リマインドする";
+"VC_1daybefore" = "1 日前";
+"VC_2daysbefore" = "2 日前";
+"VC_3daysbefore" = "3日前";
+"VC_1weekbefore" = "1週間前";
+"VC_2weeksbefore" = "2週間前";
+"VC_ondateofevent" = "イベント日に設定";
+
+/*bill Detail*/
+"VC_Due" = "期限";
+"VC_Paid" = "支払済み";
+"VC_PayBill" = "請求書の支払";
+"VC_AddPayment" = "支払を追加";
+"VC_PaymentHistory" = "支払歴";
+
+/*bill payment*/
+"VC_Pay" = "支払";
+"VC_PaymentDate" = "支払期日";
+
+/*report*/
+"VC_Report" = "レポート";
+"VC_Range" = "範囲";
+"VC_CASHFLOW" = "キャッシュフロー";
+
+/*date range*/
+"VC_DateRange" = "範囲";
+"VC_ThisMonth" = "今月";
+"VC_LastMonth" = "先月";
+"VC_ThisQuarter" = "当四半期";
+"VC_LastQuarter" = "前四半期";
+"VC_ThisYear" = "今年";
+"VC_LastYear" = "昨年";
+"VC_CustomRange" = "カスタマイズ";
+
+/*custom range*/
+"VC_StartDate" = "開始日";
+"VC_EndDate" = "終了日";
+
+/*setting*/
+"VC_Passcode" = "パスコード";
+"VC_OFF" = "オフ";
+"VC_ON" = "オン";
+"VC_Currency" = "通貨";
+"VC_Budget" = "予算";
+"VC_BUDGET" = "予算";
+"VC_FAQ" = "ＦＡＱ";
+"VC_Sync" = "同期";
+"VC_Export Report" = "レポートをエクスポート";
+"VC_Backup_Restore" = "バックアップとリストア";
+"VC_AppVersion" = "アプリのバージョン";
+"VC_SendFeedback" = "フィードバック送信";
+"VC_WriteReview" = "レビューを書く";
+
+/*passcode*/
+"VC_EnterPasscode" = "パスコードを入力";
+"VC_Enteryourpasscode" = "パスコードを入力";
+"VC_Re_enteryourpasscode" = "パスコードを再入力";
+
+"VC_PasscodeSetting" = "パスコード設定";
+"VC_TurnPasscodeOff" = "パスコードをオフにする";
+"VC_ChangePasscode" = "パスコード変更";
+"VC_Re_enteryournewpasscode" = "新しいパスコードを再入力";
+
+"VC_PasscodeFailedAttempts" = "パスコード試行失敗回数";
+"VC_Passcodedidnotmatch_Tryagain" = "パスコードが一致しませんでした。再試行してください。";
+
+/*faq*/
+"VC_faqList1" = "取引を編集または削除する方法";
+"VC_faqList2" = "アカウントを追加または編集する方法";
+"VC_faqList3" = "アカウントを確認する方法";
+"VC_faqList4" = "予算を設定する方法";
+"VC_faqList5" = "2 つの予算の間で金額を移転する方法";
+"VC_faqList6" = "ホームページで月を変更する方法";
+"VC_faqList7" = "取引に関連する検索の方法";
+"VC_faqList8" = "取引に写真を追加して送信する方法";
+"VC_faqList9" = "クリア･アンクリアとは何か、アカウントの調整方法";
+"VC_faqList10" = "支払先の追加、編集または削除の方法";
+"VC_faqList11" = "カテゴリーの追加、編集または削除の方法";
+"VC_faqList12" = "請求書ページの丸印の色が持つ意味";
+"VC_faqList13" = "レポートをエクスポートする方法";
+"VC_faqList14" = "アカウント間で金額を移転する方法";
+"VC_faqList15" = "同期の方法";
+
+
+
+/*payee*/
+"VC_PayeeNoReminder" = "支払先を未だ設定していません。「+」ボタンをタップして支払先を追加することが可能です。";
+/*edit payee*/
+"VC_NewPayee" = "追加";
+"VC_EditPayee" = "編集";
+
+
+/*sync*/
+"VC_Dropbox" = "Dropbox";
+"VC_LinkyourDropbox" = "Dropbox アカウントをリンクすると、すべてのデータは自動的に同期されます。";
+
+/*export report*/
+"VC_Transaction" = "取引";
+"VC_Flow" = "手順";
+
+
+/*backup & restore*/
+"VC_WebServerAddress" = "ウェブサーバーアドレス";
+"VC_BackNotes1" = "ご使用のコンピューターのウェブブラウザーを起動します。";
+"VC_BackNotes2" = "上に表示されているアドレスを入力します。";
+"VC_BackNotes3" = "データベースのバックアップおよびリストアの指示に従います。";
+"VC_BackNotes4" = "ご注意：ご使用のアプリのバージョンが 4.5 以降の場合、ZIP が 4.5 以降であることを確認してください。";
+"VC_BackNotes5" = "データをアップロードまたはダウンロード中である場合、この画面やExpense 5 を決して終了しないでください。";
+
+
+/*ipad_overview*/
+"VC_ipadNoRecords" = "レコードがありません。";
+/*ipad_budget*/
+"VC_ipadBudgetNoRecords" = "予算が設定されていません。「調整」ボタンをタップして予算を作成することが可能です。";
+"VC_ipadBudgetDetailNotes" = "選択された日付範囲に取引はありません。";
+/*ipad_report*/
+"VC_ipadAllDates" = "すべての日付";
+"VC_ipadBiweekly" = "隔週";
+"VC_ipadQuarterly" = "四半期ごと";
+"VC_ipadYearly" = "毎年";
+
+
+/*btn*/
+"VC_Save" = "保存";
+"VC_Cancel" = "キャンセル";
+"VC_Edit" = "編集";
+"VC_Done" = "完了";
+"VC_Split" = "分割";
+
+/*ads*/
+"VC_iphone_ads" = "広告なし、より多くの機能。";
+"VC_Pro" = "プロ";
+"VC_FullVersion" = "フルバージョン";
+"VC_Upgrade Now" = "今すぐアップグレード";
+"VC_Syncbetweendevices" = "デバイス間で同期";
+"VC_Exportdataandreports" = "データとレポートをエクスポート";
+
+/* New Add */
+"VC_Related" = "関連";
+"VC_Month View" = "月表示";
+"VC_Bill" = "請求書";
+"VC_Swip to Change Week" = "スワイプして週を変更";
+"VC_Budget" = "予算";
+"VC_Budget Process" = "予算処理";
+"VC_Thursday" = "木曜日";
+"VC_ReconcileOff" = "照合オフ";
+"VC_ReconcileOn" = "照合オン";
+"VC_ShowCleared" = "消去済みを表示";
+"VC_HideCleared" = "消去済みを非表示";
+"VC_Icon" = "アイコン";
+"VC_ReminderAt" = "リマインダー通知日";
+"VC_Expense" = "支出";
+"VC_Income" = "収入";
+"VC_CashFlow" = "キャッシュフロー";
+"VC_RestorePurchased" = "購入履歴をリストア";
+"VC_MigrateData" = "フルバージョンへデータを移行";
+"VC_Setting" = "設定";
+"VC_Enable Passcode" = "パスコードを利用";
+"VC_Enter your old passcode" = "古いパスコードを入力";
+"VC_PasscodeFailedAttempt" = "パスコード照合の失敗回数";
+"VC_No Full Version was found on this device!" = "このデバイス内にはフルバージョンがありません！";
+"VC_Would you like to get the Full Version and then transfer data to it?" = "フルバージョンを入手して、データ移行してもよろしいですか？";
+"VC_Data Transfer" = "データ移行";
+"VC_Please make sure that both the latest free and full version are on your device. Warning: This will replace all data in the Full Version!" = "最新の無料ならびにフルバージョンがインストールされていることを確認してください。警告： 実行すると、フルバージョンのデータがすべて上書きされます！";
+"VC_Transfer" = "転送";
+"VC_No, thanks" = "いいえ、しません";
+"VC_OK" = "ＯＫ";
+"VC_No Mail Accounts" = "メールアカウントがありません";
+"VC_Please set up a mail account in order to send mail." = "メールを送信するには、メールアカウントを設定してください。";
+"VC_Enter your new passcode" = "新しいパスコードを入力";
+"VC_Next" = "次へ";
+"VC_Account name is needed." = "アカウント名を入力してください。";
+"VC_Account Name already exists." = "アカウント名は既に存在しています。";
+"VC_From Account is required." = "転送元アカウントを入力してください。";
+"VC_To Account is required." = "転送先アカウントを入力してください。";
+"VC_Amount is required." = "合計額を入力してください。";
+"VC_Type name is needed." = "タイプ名を入力してください。";
+"VC_The type was exist." = "そのタイプ名は既に存在しています。";
+"VC_Expense 5 data restore complete" = "5 つの支出データをリストアしました";
+"VC_You must now quit Pocket Expense and re-launch for the new changes to take effect." = "Expense 5 を終了後再起動し、新しい変更点を適用してください。";
+"VC_Restore Cancelled" = "リストアがキャンセルされました";
+"VC_The current database and the backup should be the same file. Modifying data is always risky so the restore process has been cancelled as a safety measure." =
+"現在のデータベースとバックアップは同じファイルにしてください。データ修正にはリスクがあるため、安全面の理由により、リストア処理がキャンセルされました。";
+"VC_End Date must be earlier than Due Date." = "終了日を（支払）期日より前にしてください。";
+"VC_Start date should be earlier than end date." = "開始日を終了日より前にしてください。";
+"VC_Account is needed." = "アカウントが必要です。";
+"VC_This is a part of a transaction split, and it can not be edited alone." = "分割した取引の一部なので、単独では編集できません。";
+"VC_Category Name is required." = "カテゴリ名が必要です。";
+"VC_Category Icon is required." = "カテゴリアイコンが必要です。";
+"VC_Category already exists." = "カテゴリは既に存在します。";
+"VC_Old data needs to be processed. Select 'replace' and data on this device will replace data on cloud server, select 'merge' and data will be merged with data on cloud server." = "旧データを処理してください。「上書き」を選択すると、このデバイスにあるデータはクラウドサーバーにあるデータで上書きされます。「マージ」を選択すると、クラウドサーバーのデータとマージされます。";
+"VC_Replace" = "上書き";
+"VC_Merge" = "マージ";
+"VC_Dropbox sync successed." = "Dropbox と正常に同期しました。";
+"VC_Please select at least one account." = "少なくとも 1 つのアカウントを選択してください。";
+"VC_Please select at least one category." = "少なくとも 1 つのカテゴリを選択してください。";
+"VC_Restore purchase successfully!" = "購入履歴のリストアが完了しました！";
+"VC_Thank You!" = "ありがとうございます！";
+"VC_Your purhase was successful!" = "正常に購入できました！";
+"VC_Restore Error" = "リストア時のエラー";
+"VC_A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored." = "以前購入した取引履歴がみつかりませんでした。製品購入をリストアするには［購入］ボタンをタップしてください。購入済みのお客様に再課金されることなく、購入履歴がリストアされます。";
+"VC_Purchase Stopped" = "購入処理が中止されました";
+"VC_Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." = "リクエストをキャンセルした場合や、Apple 社から取引エラーの報告を受けた場合、しばらく時間をおいて再度お試しいただくか、弊社カスタマーサポートにご連絡ください。";
+"VC_Restore Stopped" = "リストアが中止されました";
+"VC_Note" = "メモ";
+"VC_You must have at least one account to add a transaction. You can create accounts in the \"Account\" module." = "取引を追加するには少なくとも 1 つアカウントが必要です。「アカウント」メニューで作成してください。";
+"VC_Name is required." = "名前を入力してください。";
+"VC_Amount is needed." = "額を入力してください。";
+"VC_Warning" = "警告";
+"VC_Can't send email, please check the email config." = "メールが送信できません。メール設定をご確認ください。";
+"VC_'Remind At' is required." = "「リマインダー通知日」を入力してください。";
+"VC_Category is required." = "カテゴリを入力してください。";
+"VC_Payee with this category already exists." = "このカテゴリの支払先は既に存在します。";
+"VC_Remove" = "削除";
+"VC_Accounts can not be same." = "同じアカウントは使用できません。";
+"VC_From Budget is required." = "転送元予算を入力してください。";
+"VC_To Budget is required." = "転送先予算を入力してください。";
+"VC_Confirm restore" = "リストアの確認";
+"VC_Do you want to restore Pocket Expense with the uploaded backup? All current data will be ERASED and REPLACED with the backup, this cannot be undone." = "アップロードされているデータで Expense 5 をリストアしますか？　既存のデータは全て「消去」され、バックアップで「上書き」されます。実行すると取り消しできません。";
+"VC_Pocket Expense data restore complete" = "Expense 5 データをリストアしました";
+"VC_Thanks for using our Full Version! Please restart the Full Version to complete the transfer." = "フルバージョンのご利用ありがとうございます！　アプリを再起動し、データ移行を完了してください。";
+"VC_Pocket Expense data transfer success" = "Expense 5 データを正常に移行しました";
+"VC_Thanks for using our Full Version! Please restart the Full Version to complete the migration." = "フルバージョンのご利用ありがとうございます！　アプリを再起動し、データ移行を完了してください。";
+"VC_PocketExpense data transfer failed" = "PocketExpense データを移行できませんでした";
+"VC_Please restart the Lite Version to try again." = "無料版を再起動し、再度お試しください。";
+"VC_Account is required." = "アカウントが必要です。";
+"VC_Forever" = "永遠に繰り返し";
+"VC_Transaction(CSV)" = "取引データ（CSV）";
+"VC_Transaction(PDF)" = "取引データ（PDF）";
+"VC_Flow(PDF)" = "キャッシュフローデータ（PDF）";
+"VC_Group By" = "グループ";
+"VC_Start From" = "開始";
+"VC_End To" = "終了";
+"VC_Sequence" = "表示順";
+"VC_Send" = "送信";
+"VC_Export Transactions" = "エクスポート";
+"VC_Select All" = "すべて選択";
+"VC_Item(s)" = "アイテム";
+"VC_Mutiple Accounts" = "複数のアカウント";
+"VC_All" = "すべて";
+"VC_Sort By" = "ソート順";
+"VC_Last 12 Months" = "過去 12 ケ月";
+"VC_Custom Filter" = "フィルターのカスタマイズ";
+"VC_Select Date" = "日付選択";
+"VC_Custom Date" = "日付のカスタマイズ";
+"VC_Column" = "列";
+"VC_Week" = "週";
+"VC_Month" = "月";
+
+
+"VC_You have no budgets setup. You can create them by tapping the \"Adjust\" button." = "予算が設定されていません。「調整」ボタンをタップして予算を作成することが可能です。";
+"VC_Bills" = "請求書";
+"VC_BILLS" = "請求書";
+
+"VC_Last 30 days" = "過去 30 日";
+"VC_Last 60 days" = "過去 60 日";
+"VC_Last 90 days" = "過去 90 日";
+"VC_Mutiple Categories" = "複数のカテゴリ";
+"VC_Left" = "残金";
+"VC_Spent" = "支払い済み";
+"VC_Ascending" = "昇順";
+"VC_Descending" = "降順";
+"VC_Run Report" = "レポートを運用";
+"VC_Out Flow" = "支出";
+"VC_In Flow" = "収入";
+"VC_Purchase" = "購入";
+
+
+"VC_Overview" = "概要";
+"VC_Show More Details" = "さらに詳細を表示";
+"VC_Balance" = "残高";
+"VC_Add" = "追加";
+"VC_Last 12 Months" = "過去 12 ケ月";
+"VC_Custom" = "カスタマイズ";
+"VC_Reconcile" = "照合";
+"VC_Upcoming" = "期日間近";
+
+/* New Add 2*/
+"VC_Duplicate To Date" = "別の日付でコピー";
+"VC_Just This Bill" = "この請求書のみ";
+"VC_All Future Bills" = "未決済の請求書すべて";
+"VC_View Photo" = "写真を表示";
+"VC_Change" = "変更";
+"VC_Main_NoTransaction" = "この日は取引がありません。";
+"VC_You need to create at least one account before starting using this app. You can create them by tap the \"Add\" button." = "アプリを使い始める前に、少なくとも 1 つアカウントを作成してください。［追加］ボタンをタップすれば、アカウントを作成できます。";
+
+//actionsheet
+"VC_This is a repeating transaction, delete it will also delete its all future repeats. Are you sure to delete?" = "これは繰り返し取引なので、削除すると今後の繰り返し取引も削除されてしまいます。削除してもよろしいですか？";
+"VC_Delete" = "削除";
+"VC_Delete %@ will cause to also delete its transactions. Are you sure want to delete it?" = " %@ を削除すると関連取引も削除されてしまいます。削除してもよろしいですか？";
+"VC_Photo from Camera" = "カメラの写真";
+"VC_Photo from Library" = "ライブラリの写真";
+"VC_This is a repeating bill. Do you want to change this bill, or all future bills for name'%@'?" = "これは繰り返し請求書です。この請求書、あるいは今後すべての「%@」請求書を変更しますか？";
+"VC_This is a repeating bill. Do you want to delete this bill, or all future bills for name'%@'?" = "これは繰り返し請求書です。この請求書、あるいは今後すべての「%@」請求書を削除しますか？";
+"VC_Delete %@ will cause to also delete all its transactions, sub-categories ,related bills and budgets." = "%@ を削除すると関連取引、サブカテゴリ、関連請求書、予算も同様に削除されてしまいます。";
+"VC_Delete %@ will cause to also delete all its transactions, related bills and budgets." = "%@ を削除すると関連取引、関連請求書、予算も同様に削除されてしまいます。";
+"VC_XFER To" = "予算振り替え先： ";
+"VC_XFER From" = "予算振り出し元： ";
+"VC_Sub-category Of" = "以下のサブカテゴリ： ";
+"VC_Year %@" = "%@ 年";
+"VC_Restore" = "リストア";
+
+"VC_Categories" = "カテゴリ";
+"VC_Payee & Category" = "受取人 ＆ カテゴリー";
+
+//4.3.1版本新添加其他语种没翻译
+"VC_General" = "一般";
+"VC_GENERAL" = "一般";
+
+"VC_Default Account" = "既定のアカウント";
+"VC_Default Category" = "既定のカテゴリ";
+"VC_Week Starts From" = "週を開始します";
+"VC_Notification" = "通知";
+
+//5.5版本
+"VC_Last12Months" = "過去 12 ヶ月";
+"VC_This is a parent category, and it can not be selected to other parent categories." = "This is a parent category, and it can not be selected to other parent categories.";
+
+//V6版本
+"VC_SIGN IN"="サインイン";
+"VC_Sign Up"="サインアップ";
+
+"VC_Password"="パスワード";
+"VC_Email address or password is missing"="メールアドレスかパスワードが入力されていません。";
+"VC_Email or passcode error"="メールアドレスとパスワードが一致していません。";
+"VC_The email address has been used by someone else."="このメールアドレスは既に他のユーザーに使用されています。";
+"VC_Please use email address as your account."="有効なメールアドレスを入力してください。";
+"VC_No network connection is established."="ネットワーク接続が構成されていません。";
+
+"VC_We have sent an email to <email address>. Please follow the directions in the email to reset password"="%@ へメールを送信しました。メールに記載された指示に従い、パスワードをリセットしてください。";
+
+
+"VC_It is highly recommended that transfer your data from Dropbox to new Expense if you have your latest data synced by Dropbox before."="最新データを Dropbox と同期させた方は、Dropbox から新しい  Expense にデータを転送することを強くお勧めします。";
+"VC_Transfer"="転送";
+
+"VC_An email for password reset will be sent to your address."="登録されているメールアドレスへ、パスワードリセット用メールを送信します。";
+
+
+"VC_Auto Sync"="自動同期";
+"VC_Sync Now"="今すぐ同期";
+"VC_Start"="スタート";
+
+//V6
+"VC_OVER"="超えます";
+"VC_Calendar"="カレンダー";
+"VC_Chart"="グラフ";
+"VC_Summary"="概要";
+"VC_Top Spent"="トップ消費";//which category spent most
+"VC_Top Left"="トップ残金";//which category left most
+"VC_Unpaid"="未払い";
+"VC_Left"="残金";//budget left
+"VC_Over"="予算超過";
+"VC_DIFFERENCE"="差額";//amount difference between this month and last month
+"VC_PERCENT"="パーセント";
+"VC_LOG OUT"="ログアウト";
+"VC_Share To Others"="他の人とシェア";
+"VC_Update History"="履歴をアップデート";
+"VC_Disclaimer"="免責事項";
+"VC_Privacy Policy"="プライバシーポリシー";
+"VC_If you like this app, please rate and review."="アプリを気に入っていただけましたら、評価とレビューをお願いいたします。";
+"VC_Send us some questions and suggestions."="弊社へご質問やご意見を送信してください。";
+"VC_Send this app to your family, and friends."="家族や友達にアプリのリンクを送信してあげましょう。";
+"VC_Sign in with facebook"="Facebook でサインイン";
+"VC_About"="情報";
+
+"VC_OpenTouchID"="オープン Touch ID";
+"VC_CloseTouchID"="クローズ Touch ID";
+
+"VC_OpenFaceID"="オープン Face ID";
+"VC_CloseFaceID"="クローズ Face ID";

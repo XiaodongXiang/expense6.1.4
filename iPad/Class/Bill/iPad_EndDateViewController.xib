@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="iPad_EndDateViewController">
+            <connections>
+                <outlet property="datePickerCell" destination="3tr-65-V5O" id="vhP-nv-UeV"/>
+                <outlet property="endDateCell" destination="tvc-G2-HsR" id="vpe-Sa-RUr"/>
+                <outlet property="endDatePicker" destination="uCz-PR-N36" id="g6W-Hf-iXz"/>
+                <outlet property="forverCell" destination="eCU-3d-rPl" id="3JG-cl-zrN"/>
+                <outlet property="mytableView" destination="j0a-AN-ljo" id="Aj1-6d-oLR"/>
+                <outlet property="view" destination="X7Z-h9-sKC" id="x5D-cK-l1J"/>
+            </connections>
+        </placeholder>
+        <view contentMode="scaleToFill" id="X7Z-h9-sKC">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="j0a-AN-ljo">
+                    <rect key="frame" x="0.0" y="0.0" width="540" height="620"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="AQz-5k-APA"/>
+                        <outlet property="delegate" destination="-1" id="8i3-9d-Ank"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="eCU-3d-rPl" userLabel="Table View Cell-forver">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eCU-3d-rPl" id="1NL-YE-bAD">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="Repeat Forver" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="PcM-9X-43Q">
+                        <rect key="frame" x="15" y="0.0" width="102" height="40"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="3tr-65-V5O" userLabel="Table View Cell-datePicker cell">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="216"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3tr-65-V5O" id="1kR-bF-pR7">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="215.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="uCz-PR-N36">
+                        <rect key="frame" x="0.0" y="0.0" width="540" height="216"/>
+                        <date key="date" timeIntervalSinceReferenceDate="430302685.732885">
+                            <!--2014-08-21 08:31:25 +0000-->
+                        </date>
+                    </datePicker>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="line_320_1.png" translatesAutoresizingMaskIntoConstraints="NO" id="ErE-tT-4qk">
+                        <rect key="frame" x="0.0" y="214" width="620" height="1"/>
+                    </imageView>
+                </subviews>
+            </tableViewCellContentView>
+        </tableViewCell>
+        <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="tvc-G2-HsR" userLabel="Table View Cell-end cell">
+            <rect key="frame" x="0.0" y="0.0" width="540" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tvc-G2-HsR" id="RyC-yc-Ftz">
+                <rect key="frame" x="0.0" y="0.0" width="540" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" text="End Repeat On" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="sGQ-En-USB">
+                        <rect key="frame" x="15" y="0.0" width="110" height="40"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <nil key="highlightedColor"/>
+                        <color key="shadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <size key="shadowOffset" width="0.0" height="0.0"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="line_320_1.png" width="320" height="1"/>
+    </resources>
+</document>

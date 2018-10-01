@@ -1,0 +1,52 @@
+//
+//  EPDataBaseModifyClass.h
+//  PocketExpense
+//
+//  Created by MV on 11-11-30.
+//  Copyright (c) 2011年 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "BudgetTemplate.h"
+#import "Transaction.h"
+#import "Accounts.h"
+#import "BudgetTransfer.h"
+@interface EPDataBaseModifyClass : NSObject
+{
+
+}
+-(void)initializeAccountType;
+-(void)initializeCategory;
+-(void)initializeCategory_IPAD;
+
+-(void)CheckCategoryErrorIcon;
+-(void)CheckAccountTypeErrorName;
+-(void)AddCategory_V100ToV101;
+-(void)autoReCountBudgetRollover_V101ToV102;
+-(void)autoGenCategoryDataRelationShip;
+-(void)CheckErrorCategoryBudgetRelation;
+-(void)CheckErrorBudget;
+
+-(void)ReCountBudgetRollover:(BudgetTemplate *)b;
+-(void)ClearBudget:(BudgetTemplate *)b;
+-(void)autoGenCycleBudgetItem:(BudgetTemplate *)b withEndDate:(NSDate *)cycleEndDate isIpad:(BOOL)isIpad;
+-(void)insertBudgetItem:(BudgetTemplate *)b withStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate;
+- (void) autoInsertTransaction:(Transaction *)repeatTransactionRule ;
+
+-(void)AutoFillBudgetData:(BOOL)isIpad;
+-(void)AutoFillTransactionData;
+-(BOOL)canBeAddTranscation;
+-(NSInteger)getNeedRemindCount;
+
+-(void)deleteTransactionRel:(Transaction *)t;
+-(void)deleteChildTransactionRel:(Transaction *)t;
+
+-(void)deleteTransferRel:(BudgetTransfer *)t;
+
+-(void)deleteAccountRel:(Accounts * )a;
+-(void)deleteCategoryRel:(Category * )c;
+-(void)deleteCategoryAndDeleteRel:(Category * )c;
+
+-(void)deleteBudgetRel:(BudgetTemplate * )b;
+
+@end

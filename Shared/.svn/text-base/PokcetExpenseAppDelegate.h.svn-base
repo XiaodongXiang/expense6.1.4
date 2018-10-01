@@ -1,0 +1,116 @@
+//
+//  PokcetExpenseAppDelegate.h
+//  PokcetExpense
+//
+//  Created by ZQ on 9/6/10.
+//  Copyright __MyCompanyName__ 2010. All rights reserved.
+//
+
+
+#import <UIKit/UIKit.h>
+#import <CoreData/CoreData.h>
+#import "Setting.h"
+#import "Appirater.h"
+
+#import "AccountType.h"
+#import "Category.h"
+#import "BudgetTemplate.h"
+#import "BudgetItem.h"
+#import "DetailPayeeViewController.h"
+#import "ipad_PasscodeEnterViewController.h"
+#import "EPNormalClass.h"
+#import "EPDataBaseModifyClass.h"
+
+typedef enum {
+	nonePopup =0,
+	dateRangePopup =1,
+    accountListPopup =2,
+    categoryPayeeTranList =3,
+    categoryDateTranList =4,
+    budgetListPopup=5,
+    budgetTransactionListPopup=6,
+    budgetTransferPopup_H=7,
+    budgetTransferPopup_V=8,
+
+    dateBillListPopup=9,
+    reportControlPanel=10,
+    
+}PopupViewType;
+
+#define MY_BANNER_UNITID_IPHONE  @"a14ecdf7dd013fd"
+#define MY_BANNER_UNITID_IPAD  @"a14ed497638900b"
+
+
+@interface PokcetExpenseAppDelegate : NSObject <UIApplicationDelegate> {
+    
+    UIWindow *window;
+	
+    NSManagedObjectContext *managedObjectContext;
+    NSManagedObjectModel *managedObjectModel;
+    NSPersistentStoreCoordinator *persistentStoreCoordinator;
+	EPNormalClass *epnc;
+    EPDataBaseModifyClass *epdc;
+	Setting														     	*settings;
+	NSInteger															remindCount;
+	BOOL																isShowRemind;
+    BOOL																hasPWDView;
+    BOOL																hasRemindView;
+
+	NSDateFormatter														*dayFormatter;
+	NSMutableArray														*backupList;
+	
+//	UINavigationController												*navigationController;
+	
+  	DetailPayeeViewController                                           *detailPayeeViewController;
+ 	//NSMutableDictionary *plistDictionary;
+   // NSMutableDictionary *tranDRplistDictionary;
+
+	BOOL rotateFlag;
+	UIPopoverController *AddPopoverController;
+	UIPopoverController *AddSubPopoverController;
+ 	UIPopoverController *AddThirdPopoverController;
+	
+	ipad_PasscodeEnterViewController *iPasscodeEnterViewController;
+	PopupViewType pvt;
+	NSURL									* url;
+	BOOL isRestore ;
+
+}
+@property (nonatomic, assign) BOOL isRestore ;
+@property (nonatomic, assign) BOOL	 hasPWDView;
+@property (nonatomic, assign) BOOL	 hasRemindView;
+ 
+//@property (nonatomic, retain)  NSMutableDictionary *plistDictionary;
+//@property (nonatomic, retain)   NSMutableDictionary *tranDRplistDictionary;
+
+@property (nonatomic, retain) IBOutlet UIWindow *window;
+
+@property (nonatomic, retain, readonly) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, retain, readonly) NSManagedObjectModel *managedObjectModel;
+@property (nonatomic, retain, readonly) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonatomic, retain) IBOutlet UITabBarController* tabBarController;
+@property (nonatomic, retain) EPNormalClass *epnc;
+@property (nonatomic, retain) EPDataBaseModifyClass *epdc;
+
+@property (nonatomic, retain) Setting									*settings;
+@property (nonatomic, assign) NSInteger									remindCount;
+@property (nonatomic, assign) BOOL										isShowRemind;
+@property (nonatomic, retain) NSDateFormatter							*dayFormatter;
+@property (nonatomic, retain) NSMutableArray							*backupList;
+//@property (nonatomic, retain) UINavigationController *navigationController;
+
+@property (nonatomic, retain) DetailPayeeViewController                 *detailPayeeViewController;
+@property (nonatomic) BOOL	  rotateFlag;
+@property (nonatomic, retain) UIPopoverController *AddPopoverController;
+@property (nonatomic, retain) UIPopoverController *AddSubPopoverController;
+@property (nonatomic, retain) UIPopoverController *AddThirdPopoverController;
+@property (nonatomic, retain) ipad_PasscodeEnterViewController *iPasscodeEnterViewController;
+@property (nonatomic, assign) PopupViewType pvt;
+@property (nonatomic, retain) NSURL									* url;
+
+-(NSString *)applicationDocumentsDirectory;
+-(void)updateScheduleBadge;
+-(void)setScheduleBadge:(NSString*)value;
+-(void)saveTranscationDRConfig;
+-(void)saveTranscationConfig;
+@end

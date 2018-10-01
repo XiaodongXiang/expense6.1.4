@@ -1,0 +1,260 @@
+//
+//  AppDelegate_Shared.m
+//  PocketExpense
+//
+//  Created by Tommy on 3/8/11.
+//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//
+ 
+#import "PokcetExpenseAppDelegate.h"
+#import "BillsViewController.h"
+#import "ApplicationDBVersion.h"
+#import "GTMBase64.h"
+#import "BudgetTransfer.h"
+
+@implementation PokcetExpenseAppDelegate
+
+@synthesize window;
+@synthesize tabBarController;
+@synthesize remindCount, isShowRemind,hasRemindView;
+@synthesize settings;
+@synthesize dayFormatter;
+@synthesize backupList;
+@synthesize detailPayeeViewController;
+
+@synthesize AddPopoverController,AddSubPopoverController,AddThirdPopoverController;
+//@synthesize navigationController;
+//@synthesize plistDictionary; 
+@synthesize rotateFlag;
+@synthesize iPasscodeEnterViewController;
+@synthesize pvt;
+@synthesize url;
+@synthesize isRestore,hasPWDView;
+@synthesize epdc,epnc;
+#pragma mark -
+#pragma mark DisposeData
+-(void)DisposeData:(id)sender
+{
+	if([@"/importDatabase" isEqualToString:[url path]]) 
+	{
+		
+		NSString *query = [url query];
+		NSData *importUrlData = [GTMBase64 webSafeDecodeString:query];
+		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+		NSString *documentsDirectory = [paths objectAtIndex:0];
+		NSString * litePath  = [NSString stringWithFormat:@"%@/%@",documentsDirectory, @"PocketExpenseLite.sqlite"];
+		NSString *curPath = [documentsDirectory stringByAppendingPathComponent:@"PocketExpense1.0.0.sqlite"];
+		NSFileManager *fileManager = [NSFileManager defaultManager];
+		[importUrlData writeToFile:litePath atomically:YES];
+		NSError * error;
+		[fileManager removeItemAtPath:curPath error:&error];
+		[fileManager copyItemAtPath:litePath toPath:curPath error:NULL];
+		
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"PocketExpense data transfer success"
+															message:@"Thanks for using our Full Version! Please restart the Full Version to complete the transfer." 
+														   delegate:self 
+												  cancelButtonTitle:nil
+												  otherButtonTitles:@"OK",nil];
+		alertView.tag = 10;
+		[alertView show];
+		[alertView release];
+		[fileManager removeItemAtPath:litePath error:&error];
+		
+	}
+}
+
+
+- (DetailPayeeViewController*)detailPayeeViewController
+{
+    if (detailPayeeViewController == nil) 
+	{
+		detailPayeeViewController = [[DetailPayeeViewController alloc] initWithNibName:@"DetailPayeeViewController" bundle:nil];
+	}
+	return detailPayeeViewController;
+}
+#pragma mark -
+#pragma mark Application lifecycle
+
+-(void)saveTranscationConfig
+{
+//	NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"transacationConfig.plist"];
+// 	
+//	[plistDictionary writeToFile:storePath atomically: YES];
+// 	
+}
+
+-(void)saveTranscationDRConfig
+{
+	//NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"transacationDRSelConfig.plist"];
+ 	
+	//[tranDRplistDictionary writeToFile:storePath atomically: YES];
+ 	
+}
+
+
+
+
+
+#pragma mark -
+#pragma mark Core Data stack
+
+/**
+ Returns the managed object context for the application.
+ If the context doesn't already exist, it is created and bound to the persistent store coordinator for the application.
+ */
+- (NSManagedObjectContext *) managedObjectContext {
+	
+    if (managedObjectContext != nil) {
+        return managedObjectContext;
+    }
+	
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (coordinator != nil) {
+        managedObjectContext = [[NSManagedObjectContext alloc] init];
+        [managedObjectContext setPersistentStoreCoordinator: coordinator];
+    }
+    return managedObjectContext;
+}
+
+
+/**
+ Returns the managed object model for the application.
+ If the model doesn't already exist, it is created by merging all of the models found in the application bundle.
+ */
+- (NSManagedObjectModel *)managedObjectModel {
+	
+    if (managedObjectModel != nil) {
+        return managedObjectModel;
+    }
+	//NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"PokcetExpense" withExtension:@"momd"];
+	NSString *path = [[NSBundle mainBundle] pathForResource:@"PokcetExpense" ofType:@"momd"];
+	NSURL *momURL = [NSURL fileURLWithPath:path];
+
+    managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:momURL];    
+     return managedObjectModel;
+}
+
+
+/**
+ Returns the persistent store coordinator for the application.
+ If the coordinator doesn't already exist, it is created and the application's store added to it.
+ */
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator 
+{
+	if (persistentStoreCoordinator != nil) 
+	{
+        return persistentStoreCoordinator;
+    }
+	NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"PocketExpense1.0.0.sqlite"];
+	
+	NSFileManager *fileManager = [NSFileManager defaultManager];
+	// If the expected store doesn't exist, copy the default store.
+	if (![fileManager fileExistsAtPath:storePath]) 
+	{
+		NSString *defaultStorePath = [[NSBundle mainBundle] pathForResource:@"PocketExpense1.0.0" ofType:@"sqlite"];
+		if (defaultStorePath) 
+		{
+			[fileManager copyItemAtPath:defaultStorePath toPath:storePath error:NULL];
+		}
+	}
+	NSURL *storeUrl = [NSURL fileURLWithPath:storePath];
+	NSError *error = nil;
+    NSDictionary *options = [NSDictionary dictionaryWithObjectsAndKeys:
+							 [NSNumber numberWithBool:YES], NSMigratePersistentStoresAutomaticallyOption,
+							 [NSNumber numberWithBool:YES], NSInferMappingModelAutomaticallyOption, nil];
+    
+    persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+    if (![persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeUrl options:options error:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 Typical reasons for an error here include:
+		 * The persistent store is not accessible
+		 * The schema for the persistent store is incompatible with current managed object model
+		 Check the error message to determine what the actual problem was.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+    }    
+    return persistentStoreCoordinator;
+}
+
+-(void)updateScheduleBadge
+{
+	if (remindCount > 0)
+	{
+		[self setScheduleBadge:[NSString stringWithFormat:@"%d", remindCount]];
+	}
+	else 
+	{
+		[self setScheduleBadge:nil];
+	}
+}
+
+-(void)setScheduleBadge:(NSString*)value
+{
+ 	[[UIApplication sharedApplication] setApplicationIconBadgeNumber:[value intValue]];
+}
+
+#pragma mark -
+#pragma mark Application's Documents directory
+/**
+ Returns the path to the application's Documents directory.
+ */
+- (NSString *)applicationDocumentsDirectory 
+{
+	return [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+}
+ 
+
+#pragma mark -
+#pragma mark Memory management
+- (void)applicationDidReceiveMemoryWarning:(UIApplication *)application 
+{
+    /*
+     Free up as much memory as possible by purging cached data objects that can be recreated (or reloaded from disk) later.
+     */
+}
+- (void)dealloc 
+{
+//	[navigationController release];
+  	[detailPayeeViewController release];
+
+    [managedObjectContext release];
+    [managedObjectModel release];
+    [persistentStoreCoordinator release];
+    [iPasscodeEnterViewController release];
+	[AddPopoverController release];
+	[AddSubPopoverController release];
+	[AddThirdPopoverController release];
+ 
+	[window release];
+
+    [super dealloc];
+}
+@end
+
+ 
+
+@implementation UIViewController (Custom)
+
+- (void)didReceiveMemoryWarning {
+    // Releases the view if it doesn't have a superview.
+	//	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Alert"
+	//														message:@"Low Memory." 
+	//													   delegate:self 
+	//											  cancelButtonTitle:@"OK" 
+	//											  otherButtonTitles:nil];
+	//	[alertView show];
+	//	[alertView retain];
+	//	return;
+	
+	NSLog(@"================>Low memory \r\n");    
+    // Release any cached data, images, etc that aren't in use.
+}
+
+
+@end
+
+

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CashDetailTransactionViewController">
+            <connections>
+                <outlet property="ctvc_tableView" destination="Miu-8O-KYy" id="kSQ-wb-2RU"/>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="Miu-8O-KYy">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="LST-AT-81a"/>
+                        <outlet property="delegate" destination="-1" id="uVP-69-IzA"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.9882352941176471" green="0.9882352941176471" blue="0.9882352941176471" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="Miu-8O-KYy" firstAttribute="top" secondItem="1" secondAttribute="top" id="KpH-xN-Njt"/>
+                <constraint firstItem="Miu-8O-KYy" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="RF3-LG-wmi"/>
+                <constraint firstAttribute="trailing" secondItem="Miu-8O-KYy" secondAttribute="trailing" id="hOa-Zb-eJQ"/>
+                <constraint firstAttribute="bottom" secondItem="Miu-8O-KYy" secondAttribute="bottom" id="nDS-Xh-Glh"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

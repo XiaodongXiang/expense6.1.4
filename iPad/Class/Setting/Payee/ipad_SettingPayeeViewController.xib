@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch.iPad" propertyAccessControl="none">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ipad_SettingPayeeViewController">
+            <connections>
+                <outlet property="mytableview" destination="ETd-8Q-Wfw" id="pMn-LX-yiO"/>
+                <outlet property="noRecordView" destination="HGh-UF-bTS" id="wGu-92-Rwd"/>
+                <outlet property="reminderLabelText" destination="sEa-bd-Y2H" id="Uoa-tI-hnw"/>
+                <outlet property="view" destination="PRZ-4r-H9O" id="ggd-34-G4P"/>
+            </connections>
+        </placeholder>
+        <view contentMode="scaleToFill" id="PRZ-4r-H9O">
+            <rect key="frame" x="0.0" y="0.0" width="480" height="490"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ETd-8Q-Wfw">
+                    <rect key="frame" x="0.0" y="0.0" width="480" height="490"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="tintColor" red="0.38823529410000002" green="0.79607843140000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="aeU-1L-lfj"/>
+                        <outlet property="delegate" destination="-1" id="Acv-Hy-kFj"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" id="HGh-UF-bTS">
+                    <rect key="frame" x="116" y="109" width="248" height="109"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="You have not setup any payees yet. You can add them by tapping the &quot;+&quot; button." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" minimumFontSize="10" id="sEa-bd-Y2H">
+                            <rect key="frame" x="10" y="15" width="228" height="80"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                            <color key="textColor" red="0.21176470589999999" green="0.2156862745" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="highlightedColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.95686274510000002" green="0.95686274510000002" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+    </objects>
+</document>

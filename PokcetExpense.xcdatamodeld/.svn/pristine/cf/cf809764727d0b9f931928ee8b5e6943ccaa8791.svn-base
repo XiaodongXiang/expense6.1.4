@@ -1,0 +1,28 @@
+//
+//  TransactionReports.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "TransactionReports.h"
+#import "Accounts.h"
+#import "Category.h"
+
+
+@implementation TransactionReports
+
+@dynamic transactionRepType;
+@dynamic sortByAccOrCate;
+@dynamic endDate;
+@dynamic reportName;
+@dynamic startDate;
+@dynamic sortByAsc;
+@dynamic accsIncOrExc;
+@dynamic catesIncOrExc;
+@dynamic genDateTime;
+@dynamic selCategories;
+@dynamic selAccounts;
+
+@end

@@ -1,0 +1,158 @@
+<html>
+	<head>
+		<title>Backup & Restore</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+			<title>Backup & Restore</title>
+			<style type="text/css">
+				</style>
+			<script type="text/javascript">
+				
+				function uploadCheck() 
+				{
+					if (document.getElementById('file').value=="") 
+					{
+						alert('Please select the Expense5Bak.zip file.');
+						return false;
+					} 
+					else if (!document.getElementById('file').value.match("\.zip$")) 
+					{
+						alert('This is not the correct backup file, please select the Expense5Bak.zip file.');
+						return false;
+					} 
+					else 
+					{ 
+						document.getElementById("submit").style.display='none';
+						return true;
+					}
+				}
+				function downloadBackup(ele) 
+				{ 
+					var ua = navigator.userAgent.toLowerCase();
+					if (ua.indexOf('safari') != -1) 
+					{
+						alert('Safari may unZIP the downloaded Backup and move the necessary ZIP archive to the "Trash".\n\nTo restore with this backup, you must first move the file out of the "Trash".');
+					}
+				}
+				</script>
+	</head>
+<body width="880px">
+<div style="margin:0 auto;width:880px;">
+			<table>
+				<tr height = "40px">
+					<td><strong><font size="6" face="Arial Black" color="#007c9b">Expense 5</font></strong>
+					</td>
+				</tr>
+				<tr height = "15px">
+					<td><strong><font size="2" face="Arial" color="#7b7b7b">Expense 5 is a perfect personal application</font></strong>
+					</td>
+				</tr>
+				<tr height = "20px">
+					<td>
+					</td>
+				</tr>
+			</table>
+			
+			<table height = "40px">
+				<tr>
+					<td>
+						<strong><font size="5" face="Trebuchet MS" color="#333333">Backup your data</font></strong>
+					</td>
+				</tr>
+			</table>
+			<div style= "background-color:#ebebeb">
+				<table>
+					<p>
+					<tr>
+						<td style="padding-left:10px"><b><font face="Helvetica Neue" color="#333333" text-indent="10" size="3">Click on the link below to backup all Expense 5 data and photos as a single ZIP archive to your computer.</font></b>
+						</td>
+					</tr>
+					<br />
+					<tr></tr>
+					<tr></tr>
+					<tr>
+						<td  style="padding-left:10px">
+							<strong>
+								<font size="3px" face="Helvetica Neue" color="#666666">Note: You are welcome to UnZIP the archive and get to the photos, but remember you must upload the single ZIP archive for the Restore.</font>
+							</strong>
+						</td>
+					</tr>
+					<tr align="right">
+						<td  style="padding-left:10px"><a href="Expense5Bak.zip" class="actionLink" onclick="downloadBackup(this)"><img src="./btn_backup.png" alt="Backup" border="0" /></a>
+						</td>
+					</tr>
+					</P>
+				</table>
+			</div>
+			<br />
+			<br />
+			<table>
+				<tr>
+					<td  style="padding-left:10px">
+						<strong>
+							<font size="5" face="Trebuchet MS" color="#333333">Restore your data
+							</font>
+						</strong>
+					</td>
+				</tr>
+			</table>
+			<div style= "background-color:#ebebeb">
+				<table>
+					<p>
+					<tr>
+						<td style="padding-left:10px">
+							<strong>
+								<font face="Helvetica Neue" color="#333333" size="3">After you backup the data as a single ZIP archive using the link above, you can restore this data back to the same iPhone or another iPhone.
+								</font>
+							</strong>
+						</td>
+					</tr>
+					<br />
+					<tr></tr>
+					<tr></tr>
+					<tr>
+						<td style="padding-left:10px">
+							<strong>
+								<font size="3px" face="Helvetica Neue" color="#666666">Note: This method is not the same as syncing.Restoring an iPhone using this method will <font color="#d32e1d">ERASE ALL</font> data and Replace with the upload backup.
+                                        When your app version is 4.5 or later, please make sure the ZIP is from 4.5 or later.
+                                </font>
+							</strong>
+						</td>
+					</tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr></tr>
+					<tr>
+						<td style="padding-left:10px">
+							<form action="" onsubmit="return uploadCheck()" method="post" enctype="multipart/form-data" name="form1" id="form1">
+								<table  width="100%">
+									<tr>
+										<td colspan="2">
+											<strong><font face="Helvetica Neue" color="#333333" size="3">Choose the Expense5Bak.zip file and upload to the iPhone:</font>
+											</strong>
+										</td>
+									</tr>
+									<tr>
+										<td width="80%">
+											<input type="file" name="file" id="file" style="background-color:#efefef;"/>
+										</td>
+										<td width="20%" align="right">
+											<input type="image" name="submit" id="submit" src="./btn_restore.png" alt="Restore" border="0" type="submit"/>
+										</td>
+									</tr>
+								</table>
+							</form>	
+						</td>
+					</tr>
+					</p>
+				</table>
+			</div>
+</body>
+</html>

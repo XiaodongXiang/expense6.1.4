@@ -1,0 +1,44 @@
+//
+//  Transaction.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class Accounts, BillRule, Category, Payee, Transaction, TransactionRule;
+
+@interface Transaction : NSManagedObject
+
+@property (nonatomic, retain) NSString * groupByDate;
+@property (nonatomic, retain) NSString * others;
+@property (nonatomic, retain) NSNumber * amount;
+@property (nonatomic, retain) NSNumber * type;
+@property (nonatomic, retain) NSNumber * isClear;
+@property (nonatomic, retain) NSString * notes;
+@property (nonatomic, retain) NSNumber * orderIndex;
+@property (nonatomic, retain) NSDate * dateTime;
+@property (nonatomic, retain) NSString * transactionType;
+@property (nonatomic, retain) NSString * photoName;
+@property (nonatomic, retain) Category *category;
+@property (nonatomic, retain) Payee *payee;
+@property (nonatomic, retain) Accounts *incomeAccount;
+@property (nonatomic, retain) Accounts *expenseAccount;
+@property (nonatomic, retain) BillRule *billItem;
+@property (nonatomic, retain) TransactionRule *transactionRule;
+@property (nonatomic, retain) Transaction *parTransaction;
+@property (nonatomic, retain) NSSet *childTransactions;
+@property (nonatomic, retain) NSString * groupByDateString;
+
+@end
+
+@interface Transaction (CoreDataGeneratedAccessors)
+
+- (void)addChildTransactionsObject:(Transaction *)value;
+- (void)removeChildTransactionsObject:(Transaction *)value;
+- (void)addChildTransactions:(NSSet *)values;
+- (void)removeChildTransactions:(NSSet *)values;
+@end

@@ -1,0 +1,81 @@
+//
+//  Setting.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "Setting.h"
+
+
+@implementation Setting
+
+@dynamic expenseLastView;
+@dynamic others;
+@dynamic sortType;
+@dynamic expDRString;
+@dynamic cateDRendDate;
+@dynamic cateDRstartDate;
+@dynamic playorder;
+@dynamic passcode;
+@dynamic accDRstring;
+@dynamic isBefore;
+@dynamic accDRendDate;
+@dynamic cateDRstring;
+@dynamic currency;
+@dynamic weekstartday;
+@dynamic accDRstartDate;
+@dynamic payeeCfged;
+@dynamic payeeCategory;
+@dynamic payeeMemo;
+@dynamic payeeName;
+@dynamic payeeTranAmount;
+@dynamic payeeTranClear;
+@dynamic payeeTranMemo;
+@dynamic payeeTranType;
+@dynamic budgetNewStyle;
+@dynamic budgetNewStyleCycle;
+@dynamic others1;
+@dynamic others2;
+@dynamic others3;
+@dynamic others4;
+@dynamic others5;
+@dynamic others6;
+@dynamic others7;
+@dynamic others8;
+@dynamic others9;
+@dynamic others10;
+@dynamic others11;
+@dynamic others12;
+@dynamic others13;
+@dynamic others14;
+@dynamic others15;
+@dynamic others16;
+@dynamic others17;
+@dynamic others18;
+@dynamic others19;
+@dynamic others20;
+@dynamic otherBool;
+@dynamic otherBool1;
+@dynamic otherBool2;
+@dynamic otherBool3;
+@dynamic otherBool4;
+@dynamic otherBool5;
+@dynamic otherBool6;
+@dynamic otherBool7;
+@dynamic otherBool8;
+@dynamic otherBool9;
+@dynamic otherBool10;
+@dynamic otherBool11;
+@dynamic otherBool12;
+@dynamic otherBool13;
+@dynamic otherBool14;
+@dynamic otherBool15;
+@dynamic otherBool16;
+@dynamic otherBool17;
+@dynamic otherBool18;
+@dynamic otherBool19;
+@dynamic otherBool20;
+
+@end

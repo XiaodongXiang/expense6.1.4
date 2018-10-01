@@ -1,0 +1,1327 @@
+//
+//  EPNormalClass.m
+//  PocketExpense
+//
+//  Created by MV on 11-11-30.
+//  Copyright (c) 2011年 __MyCompanyName__. All rights reserved.
+//
+
+#import "EPNormalClass.h"
+#import "PokcetExpenseAppDelegate.h"
+#import "BudgetTemplate.h"
+#import "BudgetTransfer.h"
+#import "ApplicationDBVersion.h"
+@implementation EPNormalClass
+@synthesize currenyStr,numberFmt,dbVersionStr;
+- (id)init{
+    if (self = [super init]) 
+	{
+        currenyStr = @"$";
+        numberFmt =[[NSNumberFormatter alloc] init]; 
+
+   	}
+    return self;
+}
+-(void)dealloc
+{
+    [super dealloc];
+}
+#pragma mark
+#pragma mark getColor
+- (UIColor *)getExpColor:(int)colorId
+{
+	if(colorId == 0)return [UIColor colorWithRed:0.0/255.0 green:115.0/255.0 blue:120.0/255.0 alpha:1.f];
+    
+	else if(colorId == 1) return [UIColor colorWithRed:152.0/255.0 green:200.0/255.0 blue:153.0/255.0 alpha:1.f];
+    
+	else if(colorId == 2) return [UIColor colorWithRed:255.0/255.0 green:228.0/255.0 blue:136.0/255.0 alpha:1.f];
+    
+	else if(colorId == 3) return [UIColor colorWithRed:60.0/255.0 green:62.0/255.0 blue:88.0/255.0 alpha:1.f];
+    
+	else if(colorId == 4) return [UIColor colorWithRed:224.0/255.0 green:129.0/255.0 blue:101.0/255.0 alpha:1.f];
+    
+	else if(colorId == 5) return [UIColor colorWithRed:151.0/255.0 green:128.0/255.0 blue:121.0/255.0 alpha:1.f];
+    
+	else if(colorId == 6) return [UIColor colorWithRed:181.0/255.0 green:177.0/255.0 blue:162.0/255.0 alpha:1.f];
+    
+	else if(colorId == 7) return [UIColor colorWithRed:197.0/255.0 green:205.0/255.0 blue:63.0/255.0 alpha:1.f];
+    
+	else if(colorId == 8) return [UIColor colorWithRed:55.0/255.0 green:65.0/255.0 blue:113.0/255.0 alpha:1.f];
+    
+	else if(colorId == 9) return [UIColor colorWithRed:187.0/255.0 green:214.0/255.0 blue:216.0/255.0 alpha:1.f];
+ 	return [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.f];
+}
+
+- (UIColor *)getIncColor:(int)colorId
+{
+	if(colorId == 0)return [UIColor colorWithRed:191.0/255.0 green:173.0/255.0 blue:108.0/255.0 alpha:1.f];
+    
+	else if(colorId == 1) return [UIColor colorWithRed:250.0/255.0 green:166.0/255.0 blue:98.0/255.0 alpha:1.f];
+    
+	else if(colorId == 2) return [UIColor colorWithRed:94.0/255.0 green:71.0/255.0 blue:96.0/255.0 alpha:1.f];
+    
+	else if(colorId == 3) return [UIColor colorWithRed:138.0/255.0 green:151.0/255.0 blue:129.0/255.0 alpha:1.f];
+    
+	else if(colorId == 4) return [UIColor colorWithRed:133.0/255.0 green:85.0/255.0 blue:137.0/255.0 alpha:1.f];
+    
+	else if(colorId == 5) return [UIColor colorWithRed:217.0/255.0 green:216.0/255.0 blue:222.0/255.0 alpha:1.f];
+    
+	else if(colorId == 6) return [UIColor colorWithRed:67.0/255.0 green:131.0/255.0 blue:95.0/255.0 alpha:1.f];
+    
+	else if(colorId == 7) return [UIColor colorWithRed:231.0/255.0 green:210.0/255.0 blue:172.0/255.0 alpha:1.f];
+    
+	else if(colorId == 8) return [UIColor colorWithRed:93.0/255.0 green:99.0/255.0 blue:92.0/255.0 alpha:1.f];
+    
+	else if(colorId == 9) return [UIColor colorWithRed:14.0/255.0 green:147.0/255.0 blue:153.0/255.0 alpha:1.f];
+ 	return [UIColor colorWithRed:150.0/255.0 green:150.0/255.0 blue:150.0/255.0 alpha:1.f];
+}
+
+#pragma mark Formatter String
+-(void)setCurrenyStrBySettings;
+{
+	PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    if(appDelegate.settings == nil)         currenyStr = @"$";
+    else
+    {
+         NSString *typeOfDollar = appDelegate.settings.currency;
+        
+        NSArray *dollorArray = [typeOfDollar componentsSeparatedByString:@"-"];
+        
+        currenyStr = [[[dollorArray objectAtIndex:0] substringToIndex:[[dollorArray objectAtIndex:0] length]-1] copy];
+         [numberFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
+        [numberFmt setCurrencySymbol:currenyStr];
+        [numberFmt setMaximumFractionDigits:2];
+
+    }
+}
+
+-(void)setDBVerString
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+	NSManagedObjectContext* context = appDelegate.managedObjectContext;
+	NSError* errors = nil;
+	//get unit from database's Setting 
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"ApplicationDBVersion"
+												  inManagedObjectContext:context];
+	[request setEntity:entityDesc];
+	NSArray *objects = [context executeFetchRequest:request error:&errors];
+	NSMutableArray *mutableObjects = [[NSMutableArray alloc] initWithArray:objects];
+	int count = [mutableObjects count];
+	if(count != 1) 
+	{
+		dbVersionStr=@"1.0.2";
+	}
+	ApplicationDBVersion *adbv  = [mutableObjects lastObject];
+	 
+	dbVersionStr =adbv.versionNumber;
+ 
+}
+
+-(NSString *)formatterString:(double)doubleContext
+{
+    if(doubleContext < 0)
+    {
+        
+        return  [NSString stringWithFormat:@"- %@", [numberFmt stringFromNumber:[NSNumber numberWithDouble:fabs(doubleContext)]]];
+    }
+    
+    return [NSString stringWithFormat:@"%@", [numberFmt stringFromNumber:[NSNumber numberWithDouble:doubleContext]]];
+}
+
+#pragma mark 
+#pragma mark date is today
+
+-(BOOL)dateIsToday:(NSDate *)cmpDate
+{
+	
+	NSDateComponents *otherDay = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:cmpDate];
+	NSDateComponents *today = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:[NSDate date]];
+	if([today day] == [otherDay day] &&
+	   [today month] == [otherDay month] &&
+	   [today year] == [otherDay year]) {
+		return TRUE;
+	}
+	
+	return FALSE;
+}
+#pragma mark 
+#pragma mark date compare
+-(int)dateCompare:(NSDate *)dt1 withDate:(NSDate *)dt2  //0 dt1=dt2 -1 dt1<dt2 1 dt1>dt2
+{
+	if(dt1==nil&&dt2 == nil) return 0;
+	if(dt1==nil) return 1;
+	
+	if(dt2==nil) return -1;
+	NSDateComponents *cmpday1 = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:dt1];
+	NSDateComponents *cmpday2 = [[NSCalendar currentCalendar] components:NSYearCalendarUnit|NSMonthCalendarUnit|NSDayCalendarUnit fromDate:dt2];
+	if([cmpday1 day] == [cmpday2 day] &&
+	   [cmpday1 month] == [cmpday2 month] &&
+	   [cmpday1 year] == [cmpday2 year]) {
+		return 0;
+	}
+	
+	if([cmpday1 year] > [cmpday2 year]) return 1;
+	if([cmpday1 year] == [cmpday2 year]&&[cmpday1 month] > [cmpday2 month]) return 1;
+	if([cmpday1 year] == [cmpday2 year]&&[cmpday1 month] ==[cmpday2 month]&&[cmpday1 day] > [cmpday2 day]) return 1;
+	
+	return -1;
+	
+}
+
+#pragma mark 
+-(NSDate *)getFirstDateFromWeekByDate:(NSDate *)tmpDate
+{
+    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit |kCFCalendarUnitWeekday;
+
+    NSDateComponents*  parts = [[NSCalendar currentCalendar] components:flags fromDate:tmpDate];
+    NSInteger weekIndex = parts.weekday;
+
+    parts.day -= (weekIndex-1) ;
+    [parts setHour:0];
+    [parts setSecond:0];
+    [parts setMinute:0];
+    return  [[NSCalendar currentCalendar] dateFromComponents:parts];
+
+}
+
+#pragma mark date sec
+-(NSDate *)getFirstSecByDate:(NSDate *)date
+{
+    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents*  parts = [[NSCalendar currentCalendar] components:flags fromDate:date];
+    [parts setHour:0];
+    [parts setMinute:0];
+    [parts setSecond:0];
+    return  [[NSCalendar currentCalendar] dateFromComponents:parts];
+
+}
+-(NSDate *)getLastSecByDate:(NSDate *)date
+{
+    unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSDateComponents*  parts = [[NSCalendar currentCalendar] components:flags fromDate:date];
+    [parts setHour:23];
+    [parts setMinute:59];
+    [parts setSecond:59];
+    return  [[NSCalendar currentCalendar] dateFromComponents:parts];
+
+}
+
+- (NSDate *) getStartDate:(NSString *)dateRangeString;
+{
+	NSDate *nowTime = [NSDate date];
+	NSCalendar *cal = [NSCalendar currentCalendar];
+  	NSDateComponents *components = [cal components:( NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit|NSWeekCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:nowTime];
+	NSDateComponents *comp  = [[[NSDateComponents alloc] init] autorelease] ;
+      if([dateRangeString isEqualToString: @"Weekly"] )
+	{
+		[comp setDay:-[components weekday]+1];
+		
+	}									
+    else if([dateRangeString isEqualToString: @"Biweekly"] )
+	{
+		[comp setWeek:-1];
+        [comp setDay:-[components weekday]+1];
+
+		
+	}									
+
+	else if([dateRangeString isEqualToString: @"This Month"] || [dateRangeString isEqualToString: @"Month to date"] || [[dateRangeString uppercaseString] isEqualToString: @"MONTHLY"] )
+	{
+ 		[comp setDay:-[components day]+1];
+		
+	}
+	else if([dateRangeString isEqualToString: @"Last Month"])
+	{
+		[comp setDay:-[components day]+1];
+		[comp setMonth:-1];
+		
+	}
+    else if([dateRangeString isEqualToString: @"Next Month"])
+	{
+		[comp setDay:-[components day]+1];
+		[comp setMonth:1];
+		
+	}
+
+	else if([dateRangeString isEqualToString: @"This Quarter"]|| [dateRangeString isEqualToString: @"Quarter to date"] || [[dateRangeString uppercaseString] isEqualToString: @"QUARTER"] )
+	{
+        [comp setDay:-[components day]+1];
+        
+        NSInteger i = [components month]%3;
+        if( i== 0)
+        {
+            [comp setMonth:-2];
+
+        }
+        else {
+             [comp setMonth:1+3*i- [components month]];
+
+        }
+ 	}
+	
+	else if([dateRangeString isEqualToString: @"Last Quarter"])
+	{
+        [comp setDay:-[components day]+1];
+        
+        NSInteger i = [components month]%3;
+        if( i== 0)
+        {
+            [comp setMonth:-5];
+            
+        }
+        else {
+            [comp setMonth:1+3*(i-1)- [components month]];
+            
+        }
+	
+	}
+	
+	else if([dateRangeString isEqualToString: @"This Year"]|| [dateRangeString isEqualToString: @"Year to date"] || [[dateRangeString uppercaseString] isEqualToString: @"YEARLY"] )
+	{
+		[comp setMonth:-[components month]+1];
+		[comp setDay:-[components day]+1];
+	}
+   	else if([dateRangeString isEqualToString: @"Last Year"] )
+	{
+        [comp setYear:-1];
+		[comp setMonth:-[components month]+1];
+		[comp setDay:-[components day]+1];
+	}
+
+	else if([dateRangeString isEqualToString: @"Last 30 days"])
+	{
+		[comp setDay:-29];
+		
+	}
+	
+	else if([dateRangeString isEqualToString: @"Last 60 days"])
+	{
+		[comp setDay:-59];
+		
+	}
+	
+	else if([dateRangeString isEqualToString: @"Last 90 days"])
+	{
+		[comp setDay:-89];
+		
+	}								
+	
+	else if([dateRangeString isEqualToString: @"Last 12 Months"] )
+	{
+		[comp setMonth:-12];
+		
+	}									
+	else 
+    {
+        [comp setYear:-100];
+
+    }
+  	
+    [comp setHour:-[components hour]];
+	[comp setMinute:-[components minute]];
+	[comp setSecond:-[components second]];
+	return [[cal dateByAddingComponents:comp toDate:nowTime options:0] retain];
+}
+
+
+- (NSDate *) getEndDate:(NSDate *)startDate withDateString:(NSString *)dateRangeString
+{
+	NSCalendar *cal = [NSCalendar currentCalendar];
+ 	NSDateComponents *comp  = [[[NSDateComponents alloc] init] autorelease] ;
+    if([dateRangeString isEqualToString: @"Year to date"]|| [dateRangeString isEqualToString: @"Month to date"]| [dateRangeString isEqualToString: @"Quarter to date"])
+	{
+	 	 
+        return [self getLastSecByDate:[NSDate date]];
+	
+	}
+
+    if([dateRangeString isEqualToString: @"Weekly"] )
+	{
+		[comp setWeek:1];
+        [comp setDay:- 1];
+
+	}									
+    else if([dateRangeString isEqualToString: @"Biweekly"] )
+	{
+		[comp setWeek: 2];
+        [comp setDay:- 1];
+
+	}									
+
+	else if([dateRangeString isEqualToString: @"This Month"]|| [dateRangeString isEqualToString: @"Month to date"] || [[dateRangeString uppercaseString] isEqualToString: @"MONTHLY"])
+	{
+		[comp setMonth:1];
+		[comp setDay:- 1];
+		
+	}
+	else if([dateRangeString isEqualToString: @"Last Month"])
+	{
+		[comp setMonth:1];
+		[comp setDay:- 1];
+		
+	}
+	
+	else if([dateRangeString isEqualToString: @"This Quarter"]|| [dateRangeString isEqualToString: @"Quarter to date"]|| [[dateRangeString uppercaseString] isEqualToString: @"QUARTERLY"])
+	{
+		[comp setMonth:3];
+		[comp setDay:- 1];
+	}
+	
+	else if([dateRangeString isEqualToString: @"Last Quarter"])
+	{
+		[comp setMonth:3];
+		[comp setDay:- 1];
+		
+	}
+	
+	else if([dateRangeString isEqualToString: @"This Year"]|| [dateRangeString isEqualToString: @"Year to date"]|| [[dateRangeString uppercaseString] isEqualToString: @"YEARLY"])
+	{
+		[comp setYear:1];
+		[comp setDay:-1];
+	}
+    else if([dateRangeString isEqualToString: @"Last Year"] )
+	{
+        [comp setYear:1];
+ 		[comp setDay:-1];
+	}
+
+	else if([dateRangeString isEqualToString: @"Last 30 days"])
+	{
+		[comp setDay:29];
+		
+	}
+	
+	else if([dateRangeString isEqualToString: @"Last 60 days"])
+	{
+		[comp setDay:59];
+		
+	}
+	
+	else if([dateRangeString isEqualToString: @"Last 90 days"])
+	{
+		[comp setDay:89];
+		
+	}								
+	
+	else if([dateRangeString isEqualToString: @"Last 12 Months"] )
+	{
+		[comp setMonth:12];
+		
+	}
+    else
+    {
+        [comp setYear:200];
+
+    }
+	
+ 	[comp  setHour:23];
+	[comp setMinute:59];
+	[comp setSecond:59];
+	return [[cal dateByAddingComponents:comp toDate:startDate options:0] retain];
+}
+-(NSDate *)   getStartDate:(NSString *)dateCycleString beforCycleCount:(NSInteger )i withDate:(NSDate *)startDate;
+{
+  	NSCalendar *cal = [NSCalendar currentCalendar];
+  	NSDateComponents *components = [cal components:( NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit|NSWeekCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:startDate];
+	NSDateComponents *comp  = [[[NSDateComponents alloc] init] autorelease] ;
+    if([[dateCycleString uppercaseString] isEqualToString: @"WEEKLY"] )
+	{
+         [comp setWeek:-i];
+  	}
+    else if([[dateCycleString uppercaseString] isEqualToString: @"BIWEEKLY"] )
+	{
+        [comp setWeek:-i*2];
+  	}
+
+	else if([[dateCycleString uppercaseString] isEqualToString: @"MONTHLY"] ||[[dateCycleString uppercaseString] isEqualToString: @"MONTH TO DATE"])
+	{
+ 		[comp setDay:-[components day]+1];
+        [comp setMonth:-i];
+        
+		
+	}
+ 	else  if([[dateCycleString uppercaseString] isEqualToString: @"QUARTERLY"]||[[dateCycleString uppercaseString] isEqualToString: @"QUARTER TO DATE"])
+	{
+		NSInteger j= [components month] -3*([components month]/3);
+		[comp setDay:-[components day]+1];
+		[comp setMonth:-j-3*i+1];
+		
+    }
+	
+	else  if([[dateCycleString uppercaseString] isEqualToString: @"YEARLY"]||[[dateCycleString uppercaseString] isEqualToString: @"YEAR TO DATE"])
+	{
+		[comp setMonth:-[components month]+1 ];
+		[comp setDay:-[components day]+1];
+        [comp setYear:- i];
+        
+	}
+ 	
+  	[comp setHour:-[components hour]];
+	[comp setMinute:-[components minute]];
+	[comp setSecond:-[components second]];
+	return [[cal dateByAddingComponents:comp toDate:startDate options:0] retain];
+
+}
+
+-(NSDate *)   getStartDate:(NSString *)dateCycleString beforCycleCount:(NSInteger )i;
+{
+	NSDate *nowTime = [NSDate date];
+	NSCalendar *cal = [NSCalendar currentCalendar];
+  	NSDateComponents *components = [cal components:( NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit|NSWeekCalendarUnit|NSWeekdayCalendarUnit|NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:nowTime];
+	NSDateComponents *comp  = [[[NSDateComponents alloc] init] autorelease] ;
+    if([[dateCycleString uppercaseString] isEqualToString: @"WEEKLY"] )
+	{
+        [comp setWeek:-i];
+  	}
+    else if([[dateCycleString uppercaseString] isEqualToString: @"BIWEEKLY"] )
+	{
+        [comp setWeek:-i*2];
+  	}
+
+	else if([[dateCycleString uppercaseString] isEqualToString: @"MONTHLY"])
+	{
+ 		[comp setDay:-[components day]+1];
+        [comp setMonth:-i];
+
+		
+	}
+ 	else  if([[dateCycleString uppercaseString] isEqualToString: @"QUARTERLY"])
+	{
+		NSInteger j= [components month] -3*([components month]/3);
+		[comp setDay:-[components day]+1];
+		[comp setMonth:-j-3*i+1];
+		
+    }
+	
+	else  if([[dateCycleString uppercaseString] isEqualToString: @"YEARLY"])
+	{
+		[comp setMonth:-[components month]+1 ];
+		[comp setDay:-[components day]+1];
+        [comp setYear:- i];
+
+	}
+ 	
+  	[comp setHour:-[components hour]];
+	[comp setMinute:-[components minute]];
+	[comp setSecond:-[components second]];
+	return [[cal dateByAddingComponents:comp toDate:nowTime options:0] retain];
+}
+
+-(NSDate *)   getEndDate:(NSDate *)startDate dateCycleString:(NSString *)dateCycleString ;
+{
+	NSCalendar *cal = [NSCalendar currentCalendar];
+ 	NSDateComponents *comp  = [[[NSDateComponents alloc] init] autorelease] ;
+    if([[dateCycleString uppercaseString] isEqualToString: @"WEEKLY"] )
+	{
+		[comp setDay:6];
+  	}
+    else if([[dateCycleString uppercaseString] isEqualToString: @"BIWEEKLY"] )
+	{
+        [comp setWeek:1];
+		[comp setDay:6];
+  	}
+
+	else if([[dateCycleString uppercaseString] isEqualToString: @"MONTHLY"] )
+        
+	{
+		[comp setMonth:1];
+		[comp setDay:- 1];
+		
+	}
+ 	else if([[dateCycleString uppercaseString] isEqualToString: @"QUARTERLY"])
+	{
+		[comp setMonth:3];
+		[comp setDay:- 1];
+	}
+	
+	else if([[dateCycleString uppercaseString] isEqualToString: @"YEARLY"])
+	{
+		[comp setYear:1];
+        [comp setDay:-1];
+ 	}
+	
+	 	
+  	[comp  setHour:23];
+    [comp setMinute:59];
+	[comp setSecond:59];
+	return [[cal dateByAddingComponents:comp toDate:startDate options:0] retain];
+}
+#pragma mark 
+#pragma mark get date by cycle
+-(NSDate *)getDate:(NSDate *)startDate byCycleType:(NSString *)cycleType
+{
+	NSDate* dt = nil;
+   // NSDateFormatter *dayFormatter = [[[NSDateFormatter alloc] init] autorelease];
+   // [dayFormatter setDateFormat:@"dd"];
+
+	if([cycleType isEqualToString:@"Semimonthly"]||[cycleType isEqualToString:@"Half Month"])
+	{
+		NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+         NSDateComponents *components = [gregorian components:(NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit ) fromDate:startDate];
+    	int dayIndex = [components day];
+		if(dayIndex <15)
+		{
+			[components setDay:15];
+ 		}
+		else 
+		{
+			[components setMonth:[components month]+1];
+			[components setDay:1];
+ 			
+		}
+		dt = [gregorian dateFromComponents:components];
+	}
+    else if([cycleType isEqualToString:@"No Cycle"])
+	{
+		NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+		NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+		[dc1 setYear: 99];
+		dt = [gregorian dateByAddingComponents:dc1 toDate:startDate options:0];
+		
+	}
+
+	else
+	{
+        NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+        NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+        
+        
+		if([cycleType isEqualToString:@"Daily"])
+		{
+   			[dc1 setDay: 1];
+		}
+		else if([cycleType isEqualToString:@"Weekly"]||[cycleType isEqualToString:@"Week"])
+		{
+	 		[dc1 setDay: 7];
+ 		}
+		else if([cycleType isEqualToString:@"Every 2 Weeks"]||[cycleType isEqualToString:@"2 Weeks"]||[cycleType isEqualToString:@"Two Weeks"])
+		{
+            [dc1 setDay: 14];
+            //[dc1 setWeek:2];
+ 		}
+		else if([cycleType isEqualToString:@"Every 4 Weeks"])
+		{
+ 			[dc1 setDay: 28];
+ 		}
+		else if([cycleType isEqualToString:@"Monthly"]||[cycleType isEqualToString:@"Month"])
+		{
+		 	[dc1 setMonth:1];
+	 	}
+		else if([cycleType isEqualToString:@"Every 2 Months"])
+		{
+            [dc1 setMonth:2];
+        }
+		else if([cycleType isEqualToString:@"Every 3 Months"]||[cycleType isEqualToString:@"Tire Months"]||[cycleType isEqualToString:@"3 Months"]||[cycleType isEqualToString:@"Quarter"])
+		{
+            [dc1 setMonth:3];
+		}
+		else if([cycleType isEqualToString:@"Every 6 Months"])
+		{
+			[dc1 setMonth:6];
+		}
+		else if([cycleType isEqualToString:@"Every Year"]||[cycleType isEqualToString:@"Year"])
+		{
+            [dc1 setYear:1];
+		}
+        dt = [gregorian dateByAddingComponents:dc1 toDate:startDate options:0];
+        
+	}
+	return dt;
+}
+
+-(NSDate *)getNextDate:(NSDate *)start byCycleType:(NSString *)cycleType
+{
+	NSDate* dt;
+    if([cycleType isEqualToString:@"Only Once"])
+    {
+        return start;
+    }
+	else if([cycleType isEqualToString:@"Semimonthly"])
+	{
+		NSCalendar *gregorian = [[NSCalendar alloc]
+								 initWithCalendarIdentifier:NSGregorianCalendar];
+		NSDateComponents *componentsStart = [gregorian components:(NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit ) 
+														 fromDate:start];
+ 		if(componentsStart.day >=1&&componentsStart.day <15)
+		{
+			[componentsStart setDay:15];
+ 		}
+		else 
+		{
+			[componentsStart setMonth:[componentsStart month]+1];
+			[componentsStart setDay:1];
+ 		}
+		dt = [gregorian dateFromComponents:componentsStart];
+	}
+	else
+	{
+		int typedays = 0;
+		if([cycleType isEqualToString:@"Daily"])
+		{
+			typedays = 1;
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay: typedays];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Weekly"])
+		{
+			typedays = 7;
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay: typedays];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 2 Weeks"]||[cycleType isEqualToString:@"Two Weeks"]||[cycleType isEqualToString:@"2 Weeks"])
+		{
+			typedays = 14;
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay: typedays];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 4 Weeks"])
+		{
+			typedays = 28;
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay: typedays];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Monthly"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setMonth:1];
+			
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 2 Months"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+ 			[dc1 setMonth:2];
+			
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 3 Months"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+ 			[dc1 setMonth:3];
+			
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 6 Months"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+ 			[dc1 setMonth:6];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every Year"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+ 			[dc1 setYear:1];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+	}
+	return dt;
+}
+
+-(NSDate *)getPerDate:(NSDate *)start byCycleType:(NSString *)cycleType
+{
+	NSDate* dt;
+    if([cycleType isEqualToString:@"Only Once"])
+    {
+        return start;
+    }
+	else if([cycleType isEqualToString:@"Semimonthly"])
+	{
+		NSCalendar *gregorian = [[NSCalendar alloc]
+								 initWithCalendarIdentifier:NSGregorianCalendar];
+		NSDateComponents *componentsStart = [gregorian components:(NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit ) 
+														 fromDate:start];
+ 		if(componentsStart.day >=1&&componentsStart.day <15)
+		{
+			[componentsStart setMonth:[componentsStart month]-1];
+			[componentsStart setDay:1];
+			
+ 		}
+		else 
+		{
+			[componentsStart setDay:15];
+			
+		}
+		dt = [gregorian dateFromComponents:componentsStart];
+	}
+	else
+	{
+		int typedays = 0;
+		if([cycleType isEqualToString:@"Daily"])
+		{
+			typedays = -1;
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay: typedays];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Weekly"])
+		{
+			typedays = -7;
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay: typedays];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 2 Weeks"]||[cycleType isEqualToString:@"Two Weeks"])
+		{
+			typedays = -14;
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay: typedays];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 4 Weeks"])
+		{
+			typedays = -28;
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay: typedays];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Monthly"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setMonth:-1];
+			
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 2 Months"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+ 			[dc1 setMonth:-2];
+			
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 3 Months"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+ 			[dc1 setMonth:-3];
+			
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every 6 Months"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+ 			[dc1 setMonth:-6];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+		else if([cycleType isEqualToString:@"Every Year"])
+		{
+			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+ 			[dc1 setYear:-1];
+			dt = [gregorian dateByAddingComponents:dc1 toDate:start options:0];
+		}
+	}
+	return dt;
+}
+
+#pragma mark -
+#pragma mark get start date by cycle
+
+-(NSDate *)getCycleStartDateByMinDate:(NSDate *)minDate withCycleStartDate:(NSDate*)cycleStart withCycleType:(NSString *)cycleType isRule:(BOOL)rule
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	if([cycleType isEqualToString:@"Only Once"]||!rule) return cycleStart;
+ 	if([appDelegate.epnc dateCompare:minDate withDate:cycleStart]<=0 ) return cycleStart;
+	
+	NSDate* dt;
+	
+	NSCalendar *gregorian = [[NSCalendar alloc]
+							 initWithCalendarIdentifier:NSGregorianCalendar];
+	unsigned int unitFlags = NSDayCalendarUnit;
+	NSDateComponents *components = [gregorian components:unitFlags
+												fromDate:cycleStart
+												  toDate:minDate options:0];
+	NSInteger days = [components day]+1;
+	
+	unitFlags = NSWeekCalendarUnit;
+    
+    NSDate *tmpCycleStart=[self getFirstDateFromWeekByDate:cycleStart];
+    NSDate *tmpminDate=[self getFirstDateFromWeekByDate:minDate];
+
+	components = [gregorian components:unitFlags
+							  fromDate:tmpCycleStart
+								toDate:tmpminDate options:0];
+	
+	
+	NSInteger weeks = [components week];
+	
+	unitFlags = NSMonthCalendarUnit;
+	components = [gregorian components:unitFlags
+							  fromDate:cycleStart
+								toDate:minDate options:0];
+	
+	NSInteger months = [components month]+1;
+	unitFlags = NSYearCalendarUnit;
+	components = [gregorian components:unitFlags
+							  fromDate:cycleStart
+								toDate:minDate options:0];
+	
+	NSInteger year = [components year]+1;
+	if([cycleType isEqualToString:@"Semimonthly"])
+	{
+		
+		dt = minDate;
+		
+	}
+	else 
+        if([cycleType isEqualToString:@"Daily"])
+        {
+            NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+            [dc1 setDay: days];
+            dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+        }
+        else if([cycleType isEqualToString:@"Weekly"])
+        {
+            NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+            [dc1 setWeek:weeks];
+            dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+            
+            if([self dateCompare:dt withDate:minDate] <0)
+            {
+                [dc1 setWeek:weeks +1];
+                dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+
+            }
+            
+        }
+        else if([cycleType isEqualToString:@"Two Weeks"]||[cycleType isEqualToString:@"2 Weeks"]||[cycleType isEqualToString:@"Every 2 Weeks"])
+        {
+            NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+            
+            if(weeks%2 == 0)
+            {
+                [dc1 setWeek: weeks ];
+                
+                
+            }
+            else {
+                [dc1 setWeek:(weeks/2+1)*2];
+                
+            }
+            dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+
+            if([self dateCompare:dt withDate:minDate] <0)
+            {
+                [dc1 setWeek:[dc1 week]+2];
+                dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+                
+            }
+            
+        }
+        else if([cycleType isEqualToString:@"Every 4 Weeks"])
+        {
+            NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+            
+            if(weeks%4 == 0)
+            {
+                [dc1 setWeek: weeks ];
+                
+                
+            }
+            else {
+                [dc1 setWeek:(weeks/4+1)*4];
+                
+            }
+            
+            dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+
+            
+            if([self dateCompare:dt withDate:minDate] <0)
+            {
+                [dc1 setWeek:[dc1 week]+4];
+                dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+                
+            }
+        }
+    
+        else if([cycleType isEqualToString:@"Monthly"])
+        {
+            NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+            [dc1 setMonth:months];
+            
+            dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+        }
+        else if([cycleType isEqualToString:@"Every 2 Months"])
+        {
+            NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+            if(months%2 == 0)
+            {
+                [dc1 setMonth:(months/2)*2];
+                
+                
+            }
+            else {
+                [dc1 setMonth:(months/2+1)*2];
+                
+            }
+            
+            dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+        }
+    
+    
+        else if([cycleType isEqualToString:@"Every 3 Months"])
+        {
+            NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+            if(months%3 == 0)
+            {
+                [dc1 setMonth:(months/3)*3];
+                
+                
+            }
+            else {
+                [dc1 setMonth:(months/3+1)*3];
+                
+            }
+            
+            dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+        }
+	
+        else if([cycleType isEqualToString:@"Every Year"])
+        {
+            NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+            NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+            [dc1 setYear:year];
+            dt = [gregorian dateByAddingComponents:dc1 toDate:cycleStart options:0];
+        }
+	return dt;
+}
+
+
+#pragma mark 
+#pragma mark get count by from date and cycle
+-(int)getCycleCountByDay:(NSDate *)start dateEnd:(NSDate *)end durationDay:(int)typeCount
+{
+    NSInteger insertCount =0;
+ 	NSCalendar *cal = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSDayCalendarUnit;
+    NSDateComponents *components = [cal components:unitFlags
+                                          fromDate:start
+                                            toDate:end options:0];
+    
+    int totalDays = [components day];
+    
+    
+    insertCount = totalDays/typeCount;
+    return insertCount;
+}
+
+- (int)getCycleCountByMonth:(NSDate *)start dateEnd:(NSDate *)end durationMonth:(int)typeCount
+{
+	int insertCount = 0;
+	NSCalendar *cal = [NSCalendar currentCalendar];
+    unsigned int unitFlags = NSMonthCalendarUnit;
+    NSDateComponents *components = [cal components:unitFlags
+                                          fromDate:start
+                                            toDate:end options:0];
+    
+    NSInteger months = [components month];
+    
+	if(typeCount != -1)
+	{
+        insertCount =months/typeCount;
+    }
+	else
+	{
+        unitFlags = NSYearCalendarUnit;
+        components = [cal components:unitFlags
+                            fromDate:start
+                              toDate:end options:0];
+		insertCount =  [components year];;
+	}
+	
+	return insertCount;
+}
+
+
+-(int) getCountOfInsert:(NSDate *)start repeatEnd:(NSDate *)end typeOfRecurring:(NSString *)cycle
+{
+	int insertCount = 0;
+	if([cycle isEqualToString:@"Semimonthly"]||[cycle isEqualToString:@"Half Month"])
+	{
+		NSCalendar *gregorian = [[NSCalendar alloc]
+								 initWithCalendarIdentifier:NSGregorianCalendar];
+        
+         NSDateComponents *componentTmpStart = [gregorian components:(NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit ) fromDate:start];
+    
+        [componentTmpStart setDay:1];
+        [componentTmpStart setHour:0];
+        [componentTmpStart setMinute:0];
+        [componentTmpStart setSecond:0];
+
+		NSDate *tmpStart = [gregorian dateFromComponents:componentTmpStart];
+        
+        NSDateComponents *componentTmpEnd = [gregorian components:(NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit ) fromDate:end];
+        
+        [componentTmpEnd setDay:1];
+        [componentTmpEnd setHour:0];
+        [componentTmpEnd setMinute:0];
+        [componentTmpEnd setSecond:0];
+        
+		NSDate *tmpEnd= [gregorian dateFromComponents:componentTmpEnd];
+        
+		NSDateComponents *components = [gregorian components:NSMonthCalendarUnit
+													fromDate:tmpStart
+													  toDate:tmpEnd options:0];
+        
+        
+ 		NSDateComponents *componentsStart = [gregorian components:(NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit ) 
+														 fromDate:start];
+        NSDateComponents *componentsEnd = [gregorian components:(NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit ) 
+														 fromDate:end];
+        
+        NSInteger starDay = [componentsStart day];
+        NSInteger endDay = [componentsEnd day];
+
+        
+        if([components month] ==0)
+        {
+            if (endDay>=15) {
+                insertCount++;
+                if(starDay ==1)
+                    insertCount++;
+
+            }
+        }
+        else  {
+            insertCount = ([components month]-1)*2;
+
+            if(starDay<=15)
+            {
+                insertCount++;
+                if(starDay==1)
+                    insertCount++;
+
+            }
+            if (endDay>=1) {
+                insertCount++;
+                if(endDay>=15)
+                    insertCount++;
+
+            }
+        }
+ 	}
+	else
+	{
+		if([cycle isEqualToString:@"Daily"])
+		{
+            insertCount = [self getCycleCountByDay:start dateEnd:end durationDay:1];
+		}
+		else if([cycle isEqualToString:@"Weekly"]||[cycle isEqualToString:@"Week"])
+		{
+            insertCount = [self getCycleCountByDay:start dateEnd:end durationDay:7] ;
+		}
+		else if([cycle isEqualToString:@"2 Weeks"]||[cycle isEqualToString:@"Two Weeks"]||[cycle isEqualToString:@"Every 2 Weeks"]||[cycle isEqualToString:@"Every Two Weeks"])
+		{
+            insertCount = [self getCycleCountByDay:start dateEnd:end durationDay:14];
+		}
+		else if([cycle isEqualToString:@"4 Weeks"]||[cycle isEqualToString:@"Every 4 Weeks"])
+		{
+            insertCount = [self getCycleCountByDay:start dateEnd:end durationDay:28];
+		}
+		else if([cycle isEqualToString:@"Monthly"]||[cycle isEqualToString:@"Every Month"]||[cycle isEqualToString:@"Month"])
+		{
+			insertCount = [self getCycleCountByMonth:start dateEnd:end durationMonth:1];
+		}
+		else if([cycle isEqualToString:@"Every 2 Months"]||[cycle isEqualToString:@"2 Months"])
+		{
+			insertCount = [self getCycleCountByMonth:start dateEnd:end durationMonth:2];
+		}
+		else if([cycle isEqualToString:@"Every 3 Months"]||[cycle isEqualToString:@"3 Months"]||[cycle isEqualToString:@"Quarter"])
+		{
+			insertCount = [self  getCycleCountByMonth:start dateEnd:end durationMonth:3];
+		}
+		else if([cycle isEqualToString:@"Every 6 Months"]||[cycle isEqualToString:@"6 Months"])
+		{
+			insertCount = [self  getCycleCountByMonth:start dateEnd:end durationMonth:6];
+		}
+		else if([cycle isEqualToString:@"Every Year"]||[cycle isEqualToString:@"Yearly"]||[cycle isEqualToString:@"Year"])
+		{
+			insertCount = [self  getCycleCountByMonth:start dateEnd:end durationMonth:-1];
+		}
+	}
+ 	return insertCount;
+}
+
+
+#pragma mark start date
+-(int)returnDayNum:(NSString *)weekDay
+{
+	if([weekDay isEqualToString:@"Sunday"])
+		return 7;
+	if ([weekDay isEqualToString:@"Saturday"]) 
+		return 6;
+	if ([weekDay isEqualToString:@"Monday"]) 
+	    return 1;
+	if ([weekDay isEqualToString:@"Tuesday"])
+	    return 2;
+	if ([weekDay isEqualToString:@"Wednesday"])
+	    return 3;
+	if ([weekDay isEqualToString:@"Thursday"])
+	    return 4;
+	if ([weekDay isEqualToString:@"Friday"])
+	    return 5;
+	return 0;
+}
+- (NSDate *) getStartDateWithDateType:(NSInteger)dateType //dateType 0-day 1-week 2-month 3-year
+{
+ 	NSString *start = @"Sunday";
+    
+	NSDate *nowTime = [NSDate date];
+	NSCalendar *cal = [NSCalendar currentCalendar];
+	NSDateComponents *components = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:nowTime];//?????????
+	if(dateType==0)
+	{
+		[components setDay:0];
+	}
+	else if(dateType == 1)
+	{
+		NSDateFormatter *weekFormatter1 = [[NSDateFormatter alloc] init];
+		[weekFormatter1 setDateFormat:@"EEEE"];
+		NSString *nowWeek = [weekFormatter1 stringFromDate:nowTime];
+		int daycount = 0;
+		if ([self returnDayNum:start] == [self returnDayNum:nowWeek]) 
+		{
+			daycount = 0;
+		}
+		if ([self returnDayNum:start] > [self returnDayNum:nowWeek])
+		{
+			if (([self returnDayNum:start] - [self returnDayNum:nowWeek]) == 1) 
+			{
+				daycount = -6;
+			}
+			if (([self returnDayNum:start] - [self returnDayNum:nowWeek]) == 2) 
+			{
+				daycount = -5;
+			}
+			if (([self returnDayNum:start] - [self returnDayNum:nowWeek]) == 3) 
+			{
+				daycount = -4;
+			}
+			if (([self returnDayNum:start] - [self returnDayNum:nowWeek]) == 4) 
+			{
+				daycount = -3;
+			}
+			if (([self returnDayNum:start] - [self returnDayNum:nowWeek]) == 5) 
+			{
+				daycount = -2;
+			}
+		}
+		else if([self returnDayNum:start] < [self returnDayNum:nowWeek])
+		{
+			daycount = [self returnDayNum:start] - [self returnDayNum:nowWeek];
+		}
+        [components setDay:daycount];
+		[weekFormatter1 release];
+	}
+	else if (dateType == 2)
+	{
+		NSDateFormatter *dayFormatter1 = [[NSDateFormatter alloc] init];
+		[dayFormatter1 setDateFormat:@"dd"];
+		int days = [[dayFormatter1 stringFromDate:nowTime] intValue];
+		[components setDay:-days+1];
+		[dayFormatter1 release];
+	}
+	else
+	{
+		NSDateFormatter *monthFormatter1 = [[NSDateFormatter alloc] init];
+		[monthFormatter1 setDateFormat:@"MM"];
+		int months = [[monthFormatter1 stringFromDate:nowTime] intValue];
+		NSDateFormatter *dayFormatter1 = [[NSDateFormatter alloc] init];
+		[dayFormatter1 setDateFormat:@"dd"];
+		int days = [[dayFormatter1 stringFromDate:nowTime] intValue];
+		[components setMonth:-months+1];
+		[components setDay:-days+1];
+		[monthFormatter1 release];
+		[dayFormatter1 release];
+	}
+	[components setHour:-[components hour]];
+	[components setMinute:-[components minute]];
+	[components setSecond:-[components second]];
+	return [cal dateByAddingComponents:components toDate:nowTime options:0];
+}
+- (NSDate *) getEndDateDateType:(NSInteger)dateType withStartDate:(NSDate *)startDate //dateType 0-day 1-week 2-month 3-year
+{
+	NSCalendar *cal = [NSCalendar currentCalendar];
+	NSDateComponents *component = [cal components:( NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit ) fromDate:startDate];
+	if (dateType == 0) 
+	{
+		[component setDay:0];
+	}
+	if(dateType==1)
+	{
+		[component setDay:6];
+	}
+	else if(dateType==2)
+	{
+		[component setMonth:1];
+		[component setDay:-1];
+	}
+	else if(dateType==3)
+	{
+		[component setYear:1];
+		[component setDay:-1];
+	}
+	[component setHour:23];
+	[component setMinute:59];
+	[component setSecond:59];
+	return [cal dateByAddingComponents:component toDate:startDate options:0];
+}
+
+-(void)addNotification:(NSDate*)dateTime withAmount:(double)amount withCategoryName:(NSString *)cateString
+{
+    
+ 	Class localNotificationC = NSClassFromString(@"UILocalNotification");
+	if (localNotificationC) {
+		UILocalNotification* localNotif = [[localNotificationC alloc] init];
+		localNotif.fireDate = dateTime;
+		if(cateString == nil||[cateString length] == 0)cateString =@"Not Sure";
+         
+ 		NSString *bodyString  = [NSString stringWithFormat:@"New expense log of %@ has been added to %@.",[self formatterString:amount] ,cateString];
+ 		
+		// Notification details
+		localNotif.alertBody =bodyString;
+		// Set the action button
+		localNotif.alertAction = @"View";
+		
+		localNotif.soundName = UILocalNotificationDefaultSoundName;
+		//localNotif.applicationIconBadgeNumber = 1;
+		
+		// Specify custom data for the notification
+		NSDictionary *infoDict = [NSDictionary dictionaryWithObject:@"someValue" forKey:@"someKey"];
+		localNotif.userInfo = infoDict;
+		
+		// Schedule the notification
+		[[UIApplication sharedApplication] scheduleLocalNotification:localNotif];
+		[localNotif release];
+	}	
+}
+@end

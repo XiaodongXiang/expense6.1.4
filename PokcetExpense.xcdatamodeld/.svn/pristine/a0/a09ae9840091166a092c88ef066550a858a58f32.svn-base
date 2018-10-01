@@ -1,0 +1,25 @@
+//
+//  BillReports.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "BillReports.h"
+#import "Category.h"
+
+
+@implementation BillReports
+
+@dynamic billRepType;
+@dynamic endDate;
+@dynamic sortByType;
+@dynamic reportName;
+@dynamic startDate;
+@dynamic catesIncOrExc;
+@dynamic sortByAsc;
+@dynamic genDateTime;
+@dynamic selCategories;
+
+@end

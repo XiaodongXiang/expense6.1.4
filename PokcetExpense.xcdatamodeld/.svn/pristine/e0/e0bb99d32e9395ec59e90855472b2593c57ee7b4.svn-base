@@ -1,0 +1,46 @@
+//
+//  Category.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "Category.h"
+#import "BillReports.h"
+#import "BillRule.h"
+#import "BudgetTemplate.h"
+#import "Payee.h"
+#import "Transaction.h"
+#import "TransactionReports.h"
+
+
+@implementation Category
+
+@dynamic categoryName;
+@dynamic others;
+@dynamic colorName;
+@dynamic isDefault;
+@dynamic recordIndex;
+@dynamic hasBudget;
+@dynamic isSystemRecord;
+@dynamic iconName;
+@dynamic categoryType;
+@dynamic billRep;
+@dynamic transactionRep;
+@dynamic budgetTemplate;
+@dynamic transactions;
+@dynamic billItem;
+@dynamic payee;
+@dynamic groupName;
+-(NSString *)groupName
+{
+	[self willAccessValueForKey:@"groupName"];
+	
+	NSString *stringToReturn = [self.categoryName substringToIndex:1];
+ 	
+	[self didAccessValueForKey:@"groupName"];
+	return stringToReturn;	
+}
+
+@end

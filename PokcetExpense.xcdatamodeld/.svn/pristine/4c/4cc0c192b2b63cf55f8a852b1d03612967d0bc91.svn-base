@@ -1,0 +1,17 @@
+//
+//  ApplicationDBVersion.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+
+@interface ApplicationDBVersion : NSManagedObject
+
+@property (nonatomic, retain) NSString * versionNumber;
+
+@end

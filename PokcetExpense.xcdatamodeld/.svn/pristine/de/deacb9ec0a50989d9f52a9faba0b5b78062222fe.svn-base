@@ -1,0 +1,38 @@
+//
+//  BudgetItem.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class BudgetTemplate, BudgetTransfer;
+
+@interface BudgetItem : NSManagedObject
+
+@property (nonatomic, retain) NSNumber * amount;
+@property (nonatomic, retain) NSDate * endDate;
+@property (nonatomic, retain) NSDate * startDate;
+@property (nonatomic, retain) NSNumber * orderIndex;
+@property (nonatomic, retain) NSNumber * isRollover;
+@property (nonatomic, retain) NSNumber * rolloverAmount;
+@property (nonatomic, retain) NSNumber * isCurrent;
+@property (nonatomic, retain) NSSet *toTransfer;
+@property (nonatomic, retain) NSSet *fromTransfer;
+@property (nonatomic, retain) BudgetTemplate *budgetTemplate;
+@end
+
+@interface BudgetItem (CoreDataGeneratedAccessors)
+
+- (void)addToTransferObject:(BudgetTransfer *)value;
+- (void)removeToTransferObject:(BudgetTransfer *)value;
+- (void)addToTransfer:(NSSet *)values;
+- (void)removeToTransfer:(NSSet *)values;
+- (void)addFromTransferObject:(BudgetTransfer *)value;
+- (void)removeFromTransferObject:(BudgetTransfer *)value;
+- (void)addFromTransfer:(NSSet *)values;
+- (void)removeFromTransfer:(NSSet *)values;
+@end

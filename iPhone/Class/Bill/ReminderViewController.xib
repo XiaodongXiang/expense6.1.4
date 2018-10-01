@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReminderViewController">
+            <connections>
+                <outlet property="datePicker" destination="j4H-x4-4CI" id="QE5-k0-Hyo"/>
+                <outlet property="datePickerCell" destination="cCS-fQ-Xjr" id="oVN-8N-fBO"/>
+                <outlet property="datePickerLineH" destination="OVL-Fr-Hh7" id="nby-HJ-AN8"/>
+                <outlet property="myTableView" destination="sof-z5-fz4" id="GcF-pv-h4t"/>
+                <outlet property="picker" destination="h3B-7V-l7V" id="grA-1u-0Pf"/>
+                <outlet property="pickerCell" destination="u2V-Pd-IQc" id="vYF-GU-PL9"/>
+                <outlet property="pickerLineH" destination="dOa-ms-fSO" id="XfE-Ir-Eu5"/>
+                <outlet property="reminderAtLineH" destination="jmH-ZC-5yQ" id="MGH-GC-7p6"/>
+                <outlet property="reminderDateCellL" destination="tSI-aw-4Qu" id="1Rr-C2-arE"/>
+                <outlet property="reminderDateCellLineH" destination="lDz-dp-cg2" id="LGU-Cb-kjR"/>
+                <outlet property="reminderLabelText" destination="mmO-50-DcH" id="r1i-VC-RIi"/>
+                <outlet property="reminderTimeCell" destination="Chf-7z-kjg" id="8yZ-ai-Ud4"/>
+                <outlet property="reminderTimeLabel" destination="gOc-v8-iOR" id="nXg-Sg-eXE"/>
+                <outlet property="reminderTimeLabelText" destination="dMs-Wf-91l" id="fhc-sD-Lmf"/>
+                <outlet property="reminederDateCell" destination="zFv-V7-qsb" id="vou-Ls-i5d"/>
+                <outlet property="reminederDateLabel" destination="2I1-sh-Sc1" id="8Gu-a4-aQt"/>
+                <outlet property="view" destination="1" id="3"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="1">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sof-z5-fz4">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <color key="backgroundColor" red="0.97254901959999995" green="0.97254901959999995" blue="0.97254901959999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="FjB-nK-iMv"/>
+                        <outlet property="delegate" destination="-1" id="upZ-yh-4EX"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="sof-z5-fz4" secondAttribute="bottom" id="AAm-ba-GtP"/>
+                <constraint firstItem="sof-z5-fz4" firstAttribute="top" secondItem="1" secondAttribute="top" id="eL2-iP-Nwb"/>
+                <constraint firstItem="sof-z5-fz4" firstAttribute="leading" secondItem="1" secondAttribute="leading" id="py4-vR-CHG"/>
+                <constraint firstAttribute="trailing" secondItem="sof-z5-fz4" secondAttribute="trailing" id="sJg-Ub-cbf"/>
+            </constraints>
+        </view>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="zFv-V7-qsb" userLabel="Table View Cell－reminder me">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zFv-V7-qsb" id="lp8-ix-PwG">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Me le rappeler" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmO-50-DcH">
+                        <rect key="frame" x="15" y="0.0" width="110" height="43"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="43" id="7pN-Tm-BwQ"/>
+                            <constraint firstAttribute="width" constant="110" id="uMR-wj-rpg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2I1-sh-Sc1">
+                        <rect key="frame" x="127" y="0.0" width="178" height="43"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="43" id="2O5-hj-Va3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mTU-wL-iqp" userLabel="View-line2">
+                        <rect key="frame" x="0.0" y="42" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="lDz-dp-cg2"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="2I1-sh-Sc1" firstAttribute="top" secondItem="lp8-ix-PwG" secondAttribute="top" id="3aE-qT-trP"/>
+                    <constraint firstAttribute="trailing" secondItem="mTU-wL-iqp" secondAttribute="trailing" id="8SV-e5-AhN"/>
+                    <constraint firstAttribute="trailing" secondItem="2I1-sh-Sc1" secondAttribute="trailing" constant="15" id="b1N-ya-wDq"/>
+                    <constraint firstItem="2I1-sh-Sc1" firstAttribute="leading" secondItem="lp8-ix-PwG" secondAttribute="leading" constant="127" id="gW7-wl-iNZ"/>
+                    <constraint firstItem="mmO-50-DcH" firstAttribute="top" secondItem="lp8-ix-PwG" secondAttribute="top" id="kl3-kN-Pam"/>
+                    <constraint firstAttribute="bottom" secondItem="mTU-wL-iqp" secondAttribute="bottom" id="sDx-P0-OLg"/>
+                    <constraint firstItem="mTU-wL-iqp" firstAttribute="leading" secondItem="lp8-ix-PwG" secondAttribute="leading" id="tSI-aw-4Qu"/>
+                    <constraint firstItem="mmO-50-DcH" firstAttribute="leading" secondItem="lp8-ix-PwG" secondAttribute="leading" constant="15" id="xgB-QL-f3o"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="Chf-7z-kjg" userLabel="Table View Cell-reminder at">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Chf-7z-kjg" id="Xoc-Aa-5MD">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remind At" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMs-Wf-91l">
+                        <rect key="frame" x="15" y="2" width="105" height="41"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="41" id="NZ7-Jb-gkm"/>
+                            <constraint firstAttribute="width" constant="105" id="xy4-tT-Uj3"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOc-v8-iOR">
+                        <rect key="frame" x="137" y="0.0" width="168" height="41"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="41" id="jSa-Km-N7B"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745099999999" green="0.36862745099999999" blue="0.36862745099999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dE9-w2-jmj" userLabel="View-line2">
+                        <rect key="frame" x="0.0" y="42" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="jmH-ZC-5yQ"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="dE9-w2-jmj" secondAttribute="bottom" id="6hY-YU-Zzp"/>
+                    <constraint firstItem="gOc-v8-iOR" firstAttribute="top" secondItem="Xoc-Aa-5MD" secondAttribute="top" id="COt-nt-bDH"/>
+                    <constraint firstItem="dMs-Wf-91l" firstAttribute="leading" secondItem="Xoc-Aa-5MD" secondAttribute="leading" constant="15" id="F5S-Ii-PFj"/>
+                    <constraint firstItem="dE9-w2-jmj" firstAttribute="leading" secondItem="Xoc-Aa-5MD" secondAttribute="leading" id="RDK-tX-h6a"/>
+                    <constraint firstAttribute="trailing" secondItem="dE9-w2-jmj" secondAttribute="trailing" id="bhU-AB-AFo"/>
+                    <constraint firstItem="gOc-v8-iOR" firstAttribute="leading" secondItem="Xoc-Aa-5MD" secondAttribute="leading" constant="137" id="hPZ-ih-WUC"/>
+                    <constraint firstAttribute="trailing" secondItem="gOc-v8-iOR" secondAttribute="trailing" constant="15" id="k0B-I7-aDe"/>
+                    <constraint firstItem="dMs-Wf-91l" firstAttribute="top" secondItem="Xoc-Aa-5MD" secondAttribute="top" constant="2" id="uqw-2k-9vy"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cCS-fQ-Xjr" userLabel="Table View Cell-datepicker cell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cCS-fQ-Xjr" id="8WS-KO-h5P">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="215"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="j4H-x4-4CI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                        <date key="date" timeIntervalSinceReferenceDate="430312688.10480201">
+                            <!--2014-08-21 11:18:08 +0000-->
+                        </date>
+                    </datePicker>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vio-8D-JqH" userLabel="View-line2">
+                        <rect key="frame" x="0.0" y="214" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="OVL-Fr-Hh7"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="vio-8D-JqH" firstAttribute="leading" secondItem="8WS-KO-h5P" secondAttribute="leading" id="8x5-2G-PNC"/>
+                    <constraint firstItem="j4H-x4-4CI" firstAttribute="top" secondItem="8WS-KO-h5P" secondAttribute="top" id="HWc-lk-eek"/>
+                    <constraint firstAttribute="trailing" secondItem="j4H-x4-4CI" secondAttribute="trailing" id="TwE-yh-6na"/>
+                    <constraint firstAttribute="bottom" secondItem="vio-8D-JqH" secondAttribute="bottom" id="beQ-6R-VVl"/>
+                    <constraint firstAttribute="bottom" secondItem="j4H-x4-4CI" secondAttribute="bottom" constant="-0.5" id="c7f-jJ-sb6"/>
+                    <constraint firstAttribute="trailing" secondItem="vio-8D-JqH" secondAttribute="trailing" id="kRF-yc-rIv"/>
+                    <constraint firstItem="j4H-x4-4CI" firstAttribute="leading" secondItem="8WS-KO-h5P" secondAttribute="leading" id="zD9-bK-7H3"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="u2V-Pd-IQc" userLabel="Table View Cell-picker cell">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="u2V-Pd-IQc" id="Qq9-Vp-QcV">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="215"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h3B-7V-l7V">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="216"/>
+                        <connections>
+                            <outlet property="dataSource" destination="-1" id="kNE-sn-b7i"/>
+                            <outlet property="delegate" destination="-1" id="Zo2-BV-pFu"/>
+                        </connections>
+                    </pickerView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wY2-Fv-Ueh" userLabel="View-line2">
+                        <rect key="frame" x="0.0" y="214" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="dOa-ms-fSO"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="wY2-Fv-Ueh" secondAttribute="trailing" id="165-Da-yba"/>
+                    <constraint firstAttribute="trailing" secondItem="h3B-7V-l7V" secondAttribute="trailing" id="Byk-UD-DZQ"/>
+                    <constraint firstItem="h3B-7V-l7V" firstAttribute="top" secondItem="Qq9-Vp-QcV" secondAttribute="top" id="Dlo-Vg-Yiy"/>
+                    <constraint firstItem="h3B-7V-l7V" firstAttribute="leading" secondItem="Qq9-Vp-QcV" secondAttribute="leading" id="JQU-ex-nM7"/>
+                    <constraint firstItem="wY2-Fv-Ueh" firstAttribute="leading" secondItem="Qq9-Vp-QcV" secondAttribute="leading" id="XqT-YB-KFn"/>
+                    <constraint firstAttribute="bottom" secondItem="h3B-7V-l7V" secondAttribute="bottom" constant="-0.5" id="rXC-d4-v0D"/>
+                    <constraint firstAttribute="bottom" secondItem="wY2-Fv-Ueh" secondAttribute="bottom" id="z7S-Zz-oQV"/>
+                </constraints>
+            </tableViewCellContentView>
+        </tableViewCell>
+    </objects>
+</document>

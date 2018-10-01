@@ -1,0 +1,22 @@
+//
+//  AccountType.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "AccountType.h"
+#import "Accounts.h"
+
+
+@implementation AccountType
+
+@dynamic others;
+@dynamic ordexIndex;
+@dynamic typeName;
+@dynamic iconName;
+@dynamic isDefault;
+@dynamic accounts;
+
+@end

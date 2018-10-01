@@ -1,0 +1,25 @@
+//
+//  ZTwitter.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+
+@interface ZTwitter : NSManagedObject
+
+@property (nonatomic, retain) NSString * userID;
+@property (nonatomic, retain) NSNumber * twitterAnnouncementsType;
+@property (nonatomic, retain) NSString * screenName;
+@property (nonatomic, retain) NSString * requestToken;
+@property (nonatomic, retain) NSString * accessTokenSecret;
+@property (nonatomic, retain) NSString * requestTokenSecret;
+@property (nonatomic, retain) NSString * accessToken;
+@property (nonatomic, retain) NSString * userWhiteList;
+@property (nonatomic, retain) NSNumber * twitterEnabled;
+
+@end

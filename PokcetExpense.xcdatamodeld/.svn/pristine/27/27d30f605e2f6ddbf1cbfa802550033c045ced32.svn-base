@@ -1,0 +1,19 @@
+//
+//  TransactionRule.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "TransactionRule.h"
+#import "Transaction.h"
+
+
+@implementation TransactionRule
+
+@dynamic cycleType;
+@dynamic recordDate;
+@dynamic transactions;
+
+@end

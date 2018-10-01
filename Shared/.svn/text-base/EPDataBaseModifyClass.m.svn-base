@@ -1,0 +1,1859 @@
+//
+//  EPDataBaseModifyClass.m
+//  PocketExpense
+//
+//  Created by MV on 11-11-30.
+//  Copyright (c) 2011年 __MyCompanyName__. All rights reserved.
+//
+
+#import "EPDataBaseModifyClass.h"
+#import "PokcetExpenseAppDelegate.h"
+#import "BudgetTemplate.h"
+#import "BudgetTransfer.h"
+#import "AccountType.h"
+#import "Category.h"
+#import "ApplicationDBVersion.h"
+#import "EPNormalClass.h"
+
+@implementation EPDataBaseModifyClass
+#pragma mark - init Class
+- (id)init{
+    if (self = [super init]) 
+	{
+   	}
+    return self;
+}
+#pragma mark - init DataBase
+-(void)initializeAccountType
+{
+	PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+    //Account type
+    NSMutableArray *accountTypeNameArray =  [[NSMutableArray arrayWithObjects:
+                                              @"Asset",@"Cash", @"Checking", @"Credit Card",@"Debit Card",@"Investing/Retirement",@"Loan",@"Savings",nil] retain];
+    NSMutableArray *accountTypeIconArray =  [[NSMutableArray arrayWithObjects:
+                                              @"asset.png",@"cash.png", @"checking.png", @"credit-card.png",@"Debt.png",@"investing.png",@"loan.png",@"Saving.png",nil] retain];
+    for (int i=0; i<[accountTypeNameArray count]; i++) 
+    {
+        AccountType *newAccountType = [NSEntityDescription insertNewObjectForEntityForName:@"AccountType"
+                                                                    inManagedObjectContext:appDelegate.managedObjectContext];
+        newAccountType.typeName = [accountTypeNameArray objectAtIndex:i];
+        newAccountType.iconName = [accountTypeIconArray objectAtIndex:i];
+        newAccountType.isDefault = [NSNumber numberWithBool:YES];
+        NSError *errors=nil;
+        if(![appDelegate.managedObjectContext save:&errors])
+        {
+            NSLog(@"Unresolved error %@, %@",errors, [errors userInfo]);
+        }
+    }
+    [accountTypeNameArray release];
+    [accountTypeIconArray release];
+
+}
+
+-(void)initializeCategory;
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+    //Catagories
+    NSMutableArray *categoryNameArray = [[NSMutableArray arrayWithObjects:
+                                          @"Auto",@"Auto: Gas",@"Auto: Registration",@"Auto: Service",@"Bank Charge",@"Bonus",@"Cash",@"Charity",
+                                          @"Childcare",@"Clothing",@"Credit Card Payment",@"Dining",@"Education",@"Entertainment",@"Gifts",@"Groceries",
+                                          @"Health & Fitness",@"Home Repair",@"House Hold",@"Insurance",@"Interest Exp",@"IRA Contrib",@"Loan",@"Medical",@"Misc", @"Mortgage Payment",@"Kids",
+                                          @"Pets",@"Not Sure",@"Rent",@"Salary",@"Savings Deposit",@"Tax",@"Tax: Fed",@"Tax: Medicare",
+                                          @"Tax: Other",@"Tax: Property",@"Tax: SDI",@"Tax: Soc Sec",@"Tax: State",@"Travel",@"Utilities",@"Utilities: Cable TV",
+                                          @"Utilities: Garbage & Recycling",@"Utilities: Gas& Electric",@"Utilities: Internet",@"Utilities: Telephone",@"Utilities: Water",
+                                          nil] retain];
+    
+    NSMutableArray *categoryTypeArray = [[NSMutableArray arrayWithObjects:
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"INCOME",@"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE", @"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"",@"EXPENSE",@"INCOME",@"INCOME",@"EXPENSE",@"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",
+                                          nil] retain];
+
+    NSMutableArray *categoryIconArray = [[NSMutableArray arrayWithObjects:
+                                          @"auto.png",@"auto_gas.png",@"auto_resiger.png",@"auto_service.png",@"bank_charge.png",@"bonus.png",@"category_cash.png",@"charity.png",
+                                          @"childcare.png",@"clothing.png",@"credit_card-payment.png",@"dinning.png",@"education.png",@"entertainment.png",@"gifts.png",@"groceries.png",
+                                          @"health_fitness.png",@"homerepair.png",@"house_hold.png",@"insurance.png",@"interent.png",@"IRA-trib.png",@"category_loan.png",@"medical.png",@"misc.png",@"mortgage.png",@"my_kids.png",
+                                          @"my_pets.png",@"uncategorized.png",@"rent.png",@"salary.png",@"savings-deposit.png",@"tax-fed.png",@"tax-fed.png",@"medicare.png",
+                                          @"tax-other.png",@"tax-property.png",@"SDI.png",@"soc-sec.png",@"tax-state.png",@"travel.png",@"utilities.png",@"cable-TV.png",
+                                          @"Garbage-&-Recycling.png",@"utility_gas.png",@"interent.png",@"telephone.png",@"water.png",
+                                          nil] retain];//childcare,Credit Card Payment,loan,misc,savings deposit,tax,tax:fed,Tax:Other,Tax:Property",
+    for (int j=0; j<[categoryNameArray count]; j++)//Utilities: Garbage & Recycling,Utilities: Internet,Utilities:Telephone,Utilities: Water
+    {
+        Category  *categories = [NSEntityDescription insertNewObjectForEntityForName:@"Category"
+                                                              inManagedObjectContext:appDelegate.managedObjectContext];
+        categories.categoryName = [categoryNameArray objectAtIndex:j];
+        categories.categoryType = [categoryTypeArray objectAtIndex:j];
+
+        categories.iconName = [categoryIconArray objectAtIndex:j];
+        categories.hasBudget = [NSNumber numberWithBool:FALSE];
+        categories.isSystemRecord = [NSNumber numberWithBool:TRUE];
+        if([categories.categoryName compare:@"Not Sure"] == NSOrderedSame)
+        {
+            categories.isDefault = [NSNumber numberWithBool:YES];
+            
+        }
+        else {
+            categories.isDefault = [NSNumber numberWithBool:FALSE];
+            
+        }
+        
+        NSError *errors=nil;
+        if(![appDelegate.managedObjectContext save:&errors])
+        {
+            NSLog(@"Unresolved error %@, %@",errors, [errors userInfo]);
+        }
+    }
+
+}
+
+-(void)initializeCategory_IPAD;
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    //Catagories
+    NSMutableArray *categoryNameArray = [[NSMutableArray arrayWithObjects:
+                                          @"Auto",@"Auto: Gas",@"Auto: Registration",@"Auto: Service",@"Bank Charge",@"Bonus",@"Cash",@"Charity",
+                                          @"Childcare",@"Clothing",@"Credit Card Payment",@"Dining",@"Education",@"Entertainment",@"Gifts",@"Groceries",
+                                          @"Health & Fitness",@"Home Repair",@"House Hold",@"Insurance",@"Interest Exp",@"IRA Contrib",@"Loan",@"Medical",@"Misc", @"Mortgage Payment",@"Kids",
+                                          @"Pets",@"Not Sure",@"Rent",@"Salary",@"Savings Deposit",@"Tax",@"Tax: Fed",@"Tax: Medicare",
+                                          @"Tax: Other",@"Tax: Property",@"Tax: SDI",@"Tax: Soc Sec",@"Tax: State",@"Travel",@"Utilities",@"Utilities: Cable TV",
+                                          @"Utilities: Garbage & Recycling",@"Utilities: Gas& Electric",@"Utilities: Internet",@"Utilities: Telephone",@"Utilities: Water",
+                                          nil] retain];
+    
+    NSMutableArray *categoryTypeArray = [[NSMutableArray arrayWithObjects:
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"INCOME",@"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE", @"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"",@"EXPENSE",@"INCOME",@"INCOME",@"EXPENSE",@"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",
+                                          @"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",@"EXPENSE",
+                                          nil] retain];
+
+    NSMutableArray *categoryIconArray = [[NSMutableArray arrayWithObjects:
+                                          @"auto.png",@"auto_gas.png",@"auto_resiger.png",@"auto_service.png",@"bank_charge.png",@"bonus.png",@"category_cash.png",@"charity.png",
+                                          @"childcare.png",@"clothing.png",@"credit_card-payment.png",@"dinning.png",@"education.png",@"entertainment.png",@"gifts.png",@"groceries.png",
+                                          @"health_fitness.png",@"homerepair.png",@"house_hold.png",@"insurance.png",@"interent.png",@"IRA-trib.png",@"category_loan.png",@"medical.png",@"misc.png",@"mortgage.png",@"my_kids.png",
+                                          @"my_pets.png",@"uncategorized.png",@"rent.png",@"salary.png",@"savings-deposit.png",@"tax-fed.png",@"tax-fed.png",@"medicare.png",
+                                          @"tax-other.png",@"tax-property.png",@"SDI.png",@"soc-sec.png",@"tax-state.png",@"travel.png",@"utilities.png",@"cable-TV.png",
+                                          @"Garbage-&-Recycling.png",@"utility_gas.png",@"interent.png",@"telephone.png",@"water.png",
+                                          nil] retain];//childcare,Credit Card Payment,loan,misc,savings deposit,tax,tax:fed,Tax:Other,Tax:Property",
+    for (int j=0; j<[categoryNameArray count]; j++)//Utilities: Garbage & Recycling,Utilities: Internet,Utilities:Telephone,Utilities: Water
+    {
+        Category  *categories = [NSEntityDescription insertNewObjectForEntityForName:@"Category"
+                                                              inManagedObjectContext:appDelegate.managedObjectContext];
+        categories.categoryName = [categoryNameArray objectAtIndex:j];
+        categories.categoryType = [categoryTypeArray objectAtIndex:j];
+
+        categories.iconName = [categoryIconArray objectAtIndex:j];
+        categories.hasBudget = [NSNumber numberWithBool:FALSE];
+        categories.isSystemRecord = [NSNumber numberWithBool:TRUE];
+        if([categories.categoryName compare:@"Not Sure"] == NSOrderedSame)
+        {
+            categories.isDefault = [NSNumber numberWithBool:YES];
+            categories.categoryType = nil;
+            
+        }
+        else {
+            categories.isDefault = [NSNumber numberWithBool:FALSE];
+            
+        }
+        
+        NSError *errors=nil;
+        if(![appDelegate.managedObjectContext save:&errors])
+        {
+            NSLog(@"Unresolved error %@, %@",errors, [errors userInfo]);
+        }
+    }
+    
+}
+#pragma mark - check history error data and auto fix
+-(void)CheckCategoryErrorIcon
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:  nil];
+	
+	NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchErrorRecord_Cash" substitutionVariables:subs];		// Edit the entity name as appropriate.
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryName" ascending:YES ]; // generate a description that describe which field you want to sort by
+	NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	NSError *error=nil;
+	NSArray* objects1= [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:objects1];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	if([tmpArray count]==1)
+	{
+		Category *c = [tmpArray lastObject];
+		c.iconName = @"category_cash.png";
+	}
+	
+	
+	if (  ![appDelegate.managedObjectContext save:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	} 
+	
+	[tmpArray release];
+	fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchErrorRecord_Loan" substitutionVariables:subs];		// Edit the entity name as appropriate.
+	
+	// Edit the sort key as appropriate.
+	sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryName" ascending:YES ]; // generate a description that describe which field you want to sort by
+	sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+ 	NSArray* objects2= [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	NSMutableArray *tmpArray1 = [[NSMutableArray alloc] initWithArray:objects2];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	if([tmpArray1 count]==1)
+	{
+		Category *c = [tmpArray1 lastObject];
+		c.iconName = @"category_loan.png";
+	}
+	
+	
+	if (  ![appDelegate.managedObjectContext save:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	} 
+	
+}
+
+-(void)CheckAccountTypeErrorName
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:  nil];
+	
+	NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchErrorRecord_Name" substitutionVariables:subs];		// Edit the entity name as appropriate.
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"typeName" ascending:YES ]; // generate a description that describe which field you want to sort by
+	NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	NSError *error=nil;
+	NSArray* objects1= [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:objects1];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+	if([tmpArray count]==1)
+	{
+		AccountType *at = [tmpArray lastObject];
+		at.typeName = @"Debit Card";
+	}
+	
+	
+	if (  ![appDelegate.managedObjectContext save:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	} 
+	
+	[tmpArray release];
+}
+
+-(void)AddCategory_V100ToV101
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	NSManagedObjectContext* context = appDelegate.managedObjectContext;
+	NSError* errors = nil;
+	//get unit from database's Setting 
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"ApplicationDBVersion"
+												  inManagedObjectContext:context];
+	[request setEntity:entityDesc];
+	NSArray *objects = [context executeFetchRequest:request error:&errors];
+	NSMutableArray *mutableObjects = [[NSMutableArray alloc] initWithArray:objects];
+	int count = [mutableObjects count];
+	if(count != 1) 
+	{
+		[mutableObjects release];
+		return;
+	}
+	ApplicationDBVersion *adbv  = [mutableObjects lastObject];
+	if([adbv.versionNumber isEqualToString:@"1.0.1"] || [adbv.versionNumber isEqualToString:@"1.0.2"])
+	{
+		[mutableObjects release];
+        
+		return ;
+	}
+	adbv.versionNumber =@"1.0.1";
+	
+	Category  *categories = [NSEntityDescription insertNewObjectForEntityForName:@"Category"
+														  inManagedObjectContext:context];
+	categories.categoryName = @"House Hold";
+	categories.iconName = @"house_hold.png";
+	categories.hasBudget = [NSNumber numberWithBool:FALSE];
+	categories.isSystemRecord = [NSNumber numberWithBool:TRUE];
+	categories.isDefault = [NSNumber numberWithBool:FALSE];
+    
+	Category  *categories1 = [NSEntityDescription insertNewObjectForEntityForName:@"Category"
+                                                           inManagedObjectContext:context];
+	categories1.categoryName = @"Utilities: Gas& Electric";
+	categories1.iconName = @"utility_gas.png";
+	categories1.hasBudget = [NSNumber numberWithBool:FALSE];
+	categories1.isSystemRecord = [NSNumber numberWithBool:TRUE];
+	categories1.isDefault = [NSNumber numberWithBool:FALSE];
+	
+	if (![context save:&errors])
+	{
+		NSLog(@"Unresolved error %@,%@",errors,[errors userInfo]);
+	}
+	
+}
+
+-(void)CheckErrorCategoryBudgetRelation
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+    NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:  nil];
+	
+	NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchErrorRecord_Category" substitutionVariables:subs];		// Edit the entity name as appropriate.
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryName" ascending:YES ]; // generate a description that describe which field you want to sort by
+	NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	NSError *error=nil;
+	NSArray* objects1= [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:objects1];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+    for (int i= 0; i<[tmpArray count]; i++) {
+        Category *c =[tmpArray objectAtIndex:i];
+        c.hasBudget = [NSNumber numberWithBool:FALSE];
+    }
+ 	
+	if (  ![appDelegate.managedObjectContext save:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	} 
+	
+	[tmpArray release];
+    
+    
+}
+
+-(void)CheckErrorBudget
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+    NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:  nil];
+	
+	NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchErrorRecord_Budget" substitutionVariables:subs];		// Edit the entity name as appropriate.
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES ]; // generate a description that describe which field you want to sort by
+	NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	NSError *error=nil;
+	NSArray* objects1= [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:objects1];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	
+    for (int i= 0; i<[tmpArray count]; i++) {
+        BudgetTemplate *b =[tmpArray objectAtIndex:i];
+        if(b.category == nil)
+            [appDelegate.managedObjectContext deleteObject:b];
+        
+    }
+ 	
+	if (  ![appDelegate.managedObjectContext save:&error]) {
+		/*
+		 Replace this implementation with code to handle the error appropriately.
+		 
+		 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+		 */
+		NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+		abort();
+	} 
+	
+	[tmpArray release];
+    
+    
+}
+
+-(void)autoGenCategoryDataRelationShip
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:  nil];
+	
+	NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchChildCategoy" substitutionVariables:subs];		// Edit the entity name as appropriate.
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryName" ascending:YES ]; // generate a description that describe which field you want to sort by
+	NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	NSError *error=nil;
+	NSArray* objects1= [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+	NSMutableArray *categoryArray = [[NSMutableArray alloc] initWithArray:objects1];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	NSMutableArray *addCategoryArray = [[NSMutableArray alloc] init];
+	NSString *lastParName =nil;
+	for (int i=0; i<[categoryArray count]; i++) {
+		Category *c = [categoryArray objectAtIndex:i];
+		NSArray * seprateSrray = [c.categoryName componentsSeparatedByString:@":"];
+		NSString *parName = [seprateSrray objectAtIndex:0];
+		
+		if(![ parName isEqualToString: lastParName])
+		{
+			NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:parName,@"cName",  nil];
+			
+			NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchCategoryByName" substitutionVariables:subs];		// Edit the entity name as appropriate.
+			
+			// Edit the sort key as appropriate.
+			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryName" ascending:YES ]; // generate a description that describe which field you want to sort by
+			NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+			
+			[fetchRequest setSortDescriptors:sortDescriptors];
+			NSError *error=nil;
+			NSInteger count = [appDelegate.managedObjectContext countForFetchRequest:fetchRequest error:&error];
+			
+			[sortDescriptor release];
+			[sortDescriptors release];
+			if(count  ==0)
+			{
+				BOOL isFound = FALSE;
+                
+				for (int j=0; j<[addCategoryArray count]; j++) 
+				{
+					if([ parName isEqualToString: [addCategoryArray objectAtIndex:j]])
+					{
+						isFound = TRUE;
+						break;
+					}
+				}
+				
+				if(!isFound)
+				{
+					[addCategoryArray addObject:parName];
+				}
+			}
+		}
+		if(lastParName==nil) lastParName = [parName copy];
+	}
+  	
+	for (int i=0; i<[addCategoryArray count]; i++) {
+		Category  *categories = [NSEntityDescription insertNewObjectForEntityForName:@"Category"
+															  inManagedObjectContext:appDelegate.managedObjectContext];
+		categories.categoryName = [addCategoryArray objectAtIndex:i];
+		categories.hasBudget = [NSNumber numberWithBool:FALSE];
+		if([categories.categoryName isEqualToString:@"Tax"]||[categories.categoryName isEqualToString:@"Utilities"])
+		{
+			categories.isSystemRecord = [NSNumber numberWithBool:TRUE];
+            
+		}
+		else {
+			categories.isSystemRecord = [NSNumber numberWithBool:FALSE];
+            
+		}
+		
+		if([categories.categoryName isEqualToString:@"Tax"])
+		{
+			categories.iconName = @"tax-fed.png";
+            
+		}
+		else if([categories.categoryName isEqualToString:@"Utilities"])
+		{
+			categories.iconName = @"utilities.png";
+			
+		}
+		else {
+			categories.iconName = @"uncategorized.png";
+            
+		}
+        
+ 		categories.isDefault = [NSNumber numberWithBool:FALSE];
+		if (![appDelegate.managedObjectContext save:&error])
+		{
+			NSLog(@"Unresolved error %@,%@",error,[error userInfo]);
+		}
+	}		
+}
+
+-(void)autoReCountBudgetRollover_V101ToV102
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+	NSManagedObjectContext* context = appDelegate.managedObjectContext;
+	NSError* errors = nil;
+	//get unit from database's Setting 
+	NSFetchRequest *request = [[NSFetchRequest alloc] init];
+	NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"ApplicationDBVersion"
+												  inManagedObjectContext:context];
+	[request setEntity:entityDesc];
+	NSArray *objects = [context executeFetchRequest:request error:&errors];
+	NSMutableArray *mutableObjects = [[NSMutableArray alloc] initWithArray:objects];
+	int count = [mutableObjects count];
+	if(count != 1) 
+	{
+		[mutableObjects release];
+		return;
+	}
+	ApplicationDBVersion *adbv  = [mutableObjects lastObject];
+	if([adbv.versionNumber isEqualToString:@"1.0.2"])
+	{
+		[mutableObjects release];
+        
+		return ;
+	}
+	adbv.versionNumber =@"1.0.2";
+	if (![context save:&errors])
+	{
+		NSLog(@"Unresolved error %@,%@",errors,[errors userInfo]);
+	}
+
+   
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+	
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"BudgetTemplate" inManagedObjectContext:appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"category.categoryName" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+ 	NSArray* objectsTmp = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&errors];
+ 	NSMutableArray *allBudgetArray  = [[NSMutableArray alloc] initWithArray:objectsTmp];
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
+    for (int i =0; i<[allBudgetArray count]; i++) {
+        BudgetTemplate *b = [allBudgetArray objectAtIndex:i];
+         [self ReCountBudgetRollover:b ];
+    }
+    [allBudgetArray release];
+    [appDelegate.epnc setDBVerString];
+	if (![context save:&errors])
+	{
+		NSLog(@"Unresolved error %@,%@",errors,[errors userInfo]);
+	}
+
+}
+
+
+#pragma mark Recount Budget Rollover
+-(void)ReCountBudgetRollover:(BudgetTemplate *)b
+{
+    if(b==nil || ![b.isRollover boolValue] || [b.budgetItems count]==0) return ;
+//    if(b==nil ||  [b.budgetItems count]==0) return ;
+ 
+//    if(![b.isRollover boolValue]&&[b.budgetItems count]==1)
+//    {
+//        PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+//        NSError *error=nil;
+//        
+//        double oneExpense=0;
+//		double oneIncome=0;
+//		
+//        BudgetItem *tmpbi = [[b.budgetItems allObjects] lastObject];
+//        
+//		NSDictionary *subs = [NSDictionary dictionaryWithObjectsAndKeys:b.category,@"iCategory",tmpbi.startDate,@"startDate",tmpbi.endDate,@"endDate", nil];
+//		NSFetchRequest *fetchRequest = [appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchBudgetTrsaction" substitutionVariables:subs];
+//		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTime" ascending:NO];
+//		NSMutableArray   *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; 
+//		[fetchRequest setSortDescriptors:sortDescriptors];
+//		NSArray *objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+//		NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:objects];
+//		
+//		for (int j=0; j<[tmpArray count]; j++) 
+//		{
+//			Transaction *tmpLog = (Transaction *)[tmpArray objectAtIndex:j];
+//			if([tmpLog.transactionType isEqualToString:@"expense"])
+//			{
+//				oneExpense += [tmpLog.amount doubleValue];
+//				
+//			}
+//			else if([tmpLog.transactionType isEqualToString:@"income"])
+//				oneIncome += [tmpLog.amount doubleValue];
+//		}
+//		
+//		[tmpArray release];
+//		
+//		NSMutableArray *tmpArray1 = [[NSMutableArray alloc] initWithArray:[tmpbi.fromTransfer allObjects]];
+//		
+//		for (int j = 0;j<[tmpArray1 count];j++) {
+//			BudgetTransfer *bttmp = [tmpArray1 objectAtIndex:j];
+// 			oneExpense +=[bttmp.amount doubleValue];
+//			
+//		}
+//		[tmpArray1 release];
+//		
+//		NSMutableArray *tmpArray2 = [[NSMutableArray alloc] initWithArray:[tmpbi.toTransfer allObjects]];
+//		
+//		for (int j = 0; j<[tmpArray2 count];j++) {
+//			BudgetTransfer *bttmp = [tmpArray2 objectAtIndex:j];
+// 			oneIncome +=[bttmp.amount doubleValue];
+//			
+//		}
+//		[tmpArray2 release];
+//        ////////////////////get All child category
+//        NSString *searchForMe = @":";
+//        NSRange range = [b.category.categoryName rangeOfString : searchForMe];
+//        
+//        if (range.location == NSNotFound) {
+//            NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:b.category.categoryName,@"cName",  nil];
+//            
+//            NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchAllChildCategoyByName" substitutionVariables:subs];		// Edit the entity name as appropriate.
+//            
+//            // Edit the sort key as appropriate.
+//            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryName" ascending:YES ]; // generate a description that describe which field you want to sort by
+//            NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+//            
+//            [fetchRequest setSortDescriptors:sortDescriptors];
+//            NSArray *objects1 = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+//            
+//            NSMutableArray *tmpChildCategoryArray  = [[NSMutableArray alloc] initWithArray:objects1];
+//            
+//            [sortDescriptor release];
+//            [sortDescriptors release];
+//            for(int k=0 ;k<[tmpChildCategoryArray count];k++)
+//            {
+//                Category *tmpCate = [tmpChildCategoryArray objectAtIndex:k];
+//                if(tmpCate !=b.category)
+//                {
+//                    subs = [NSDictionary dictionaryWithObjectsAndKeys:tmpCate,@"iCategory",tmpbi.startDate,@"startDate",tmpbi.endDate,@"endDate", nil];
+//                    NSFetchRequest *fetchRequest = [appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchBudgetTrsaction" substitutionVariables:subs];
+//                    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTime" ascending:NO];
+//                    NSMutableArray   *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; 
+//                    [fetchRequest setSortDescriptors:sortDescriptors];
+//                    NSArray *objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+//                    NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:objects];
+//                    
+//                    for (int l = 0;l<[tmpArray count];l++) {
+//                        Transaction *t = [tmpArray objectAtIndex:l];
+//                        if([t.transactionType isEqualToString:@"expense"])
+//                        {
+//                            oneExpense +=[t.amount doubleValue];
+//                        }
+//                        else if([t.transactionType isEqualToString:@"income"]){
+//                            oneIncome +=[t.amount doubleValue];
+//                        }
+//                        
+//                    }
+//                    [tmpArray release];
+//                 }
+//            }
+//            
+//            [tmpChildCategoryArray release];
+//        }
+//        
+//        
+//        tmpbi.rolloverAmount = [NSNumber  numberWithDouble: [tmpbi.amount doubleValue] +oneIncome-oneExpense]  ;  
+//        return;
+//    }
+    
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSError *error=nil;
+    NSMutableArray *tmpArrayItem  =[[NSMutableArray alloc] initWithArray:[b.budgetItems allObjects]];
+    NSSortDescriptor *sort= [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES];
+    
+    NSArray *sorts = [[NSArray alloc] initWithObjects:&sort count:1];
+    
+    [tmpArrayItem sortUsingDescriptors:sorts];
+    [sort release];
+    [sorts release];
+    double lastRellover=0.0;
+    
+    for (int i=0; i<[tmpArrayItem count];i++)  
+    {
+		double oneExpense=0;
+		double oneIncome=0;
+		
+        BudgetItem *tmpbi = [tmpArrayItem objectAtIndex:i];
+        
+		NSDictionary *subs = [NSDictionary dictionaryWithObjectsAndKeys:b.category,@"iCategory",tmpbi.startDate,@"startDate",tmpbi.endDate,@"endDate", nil];
+		NSFetchRequest *fetchRequest = [appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchBudgetTrsaction" substitutionVariables:subs];
+		NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTime" ascending:NO];
+		NSMutableArray   *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; 
+		[fetchRequest setSortDescriptors:sortDescriptors];
+		NSArray *objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+		NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:objects];
+		
+		for (int j=0; j<[tmpArray count]; j++) 
+		{
+			Transaction *tmpLog = (Transaction *)[tmpArray objectAtIndex:j];
+			if([tmpLog.transactionType isEqualToString:@"expense"])
+			{
+				oneExpense += [tmpLog.amount doubleValue];
+				
+			}
+			else if([tmpLog.transactionType isEqualToString:@"income"])
+				oneIncome += [tmpLog.amount doubleValue];
+		}
+		
+		[tmpArray release];
+		
+		NSMutableArray *tmpArray1 = [[NSMutableArray alloc] initWithArray:[tmpbi.fromTransfer allObjects]];
+		
+		for (int j = 0;j<[tmpArray1 count];j++) {
+			BudgetTransfer *bttmp = [tmpArray1 objectAtIndex:j];
+ 			oneExpense +=[bttmp.amount doubleValue];
+			
+		}
+		[tmpArray1 release];
+		
+		NSMutableArray *tmpArray2 = [[NSMutableArray alloc] initWithArray:[tmpbi.toTransfer allObjects]];
+		
+		for (int j = 0; j<[tmpArray2 count];j++) {
+			BudgetTransfer *bttmp = [tmpArray2 objectAtIndex:j];
+ 			oneIncome +=[bttmp.amount doubleValue];
+			
+		}
+		[tmpArray2 release];
+        ////////////////////get All child category
+        NSString *searchForMe = @":";
+        NSRange range = [b.category.categoryName rangeOfString : searchForMe];
+        
+        if (range.location == NSNotFound) {
+            NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:b.category.categoryName,@"cName",  nil];
+            
+            NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchAllChildCategoyByName" substitutionVariables:subs];		// Edit the entity name as appropriate.
+            
+            // Edit the sort key as appropriate.
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryName" ascending:YES ]; // generate a description that describe which field you want to sort by
+            NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+            
+            [fetchRequest setSortDescriptors:sortDescriptors];
+            NSArray *objects1 = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            
+            NSMutableArray *tmpChildCategoryArray  = [[NSMutableArray alloc] initWithArray:objects1];
+            
+            [sortDescriptor release];
+            [sortDescriptors release];
+            for(int k=0 ;k<[tmpChildCategoryArray count];k++)
+            {
+                Category *tmpCate = [tmpChildCategoryArray objectAtIndex:k];
+                if(tmpCate !=b.category)
+                {
+                    subs = [NSDictionary dictionaryWithObjectsAndKeys:tmpCate,@"iCategory",tmpbi.startDate,@"startDate",tmpbi.endDate,@"endDate", nil];
+                    NSFetchRequest *fetchRequest = [appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchBudgetTrsaction" substitutionVariables:subs];
+                    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTime" ascending:NO];
+                    NSMutableArray   *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; 
+                    [fetchRequest setSortDescriptors:sortDescriptors];
+                    NSArray *objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+                    NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:objects];
+                    
+                    for (int l = 0;l<[tmpArray count];l++) {
+                        Transaction *t = [tmpArray objectAtIndex:l];
+                        if([t.transactionType isEqualToString:@"expense"])
+                        {
+                             oneExpense +=[t.amount doubleValue];
+                        }
+                        else if([t.transactionType isEqualToString:@"income"]){
+                             oneIncome +=[t.amount doubleValue];
+                        }
+                        
+                    }
+                    [tmpArray release];
+                    
+                    
+                    
+                }
+            }
+            
+            [tmpChildCategoryArray release];
+        }
+        
+        
+        //tmpbi.rolloverAmount = [NSNumber  numberWithDouble:lastRellover+ [tmpbi.amount doubleValue] +oneIncome-oneExpense]  ;  
+       // lastRellover = [tmpbi.rolloverAmount doubleValue];
+         tmpbi.rolloverAmount =[NSNumber  numberWithDouble:lastRellover ];  
+
+        lastRellover =    [tmpbi.rolloverAmount doubleValue]+[tmpbi.amount doubleValue] +oneIncome-oneExpense ;
+    }
+    [tmpArrayItem release];
+}
+
+#pragma mark Clear Budget Rollover
+
+-(void)ClearBudget:(BudgetTemplate *)b
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate]; 
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSMutableArray *budgetItemArray = [[NSMutableArray alloc] initWithArray:[b.budgetItems allObjects]];
+    
+    for (int i=0; i<[budgetItemArray count]; i++) 
+    {
+        BudgetItem *object = (BudgetItem *)[budgetItemArray objectAtIndex:i];
+        
+        NSMutableArray *fromTransferArray = [[NSMutableArray alloc] initWithArray:[object.fromTransfer allObjects]];
+        for (int j=0; j<[fromTransferArray count]; j++) 
+        {	
+            BudgetTransfer  *fromT = (BudgetTransfer *)[fromTransferArray objectAtIndex:j];
+            [fromT.toBudget removeFromTransferObject:fromT];
+            [context deleteObject:fromT];
+            
+        }
+        [fromTransferArray release];
+        
+        NSMutableArray *toTransferArray = [[NSMutableArray alloc] initWithArray:[object.toTransfer allObjects]];
+        for (int j=0; j<[toTransferArray count]; j++) 
+        {	
+            BudgetTransfer  *toT = (BudgetTransfer *)[toTransferArray objectAtIndex:j];
+            [toT.fromBudget removeToTransferObject:toT];
+            [context deleteObject:toT];
+            
+        }
+        [toTransferArray release];
+        
+        [context deleteObject:object];
+    }
+    
+    
+    [budgetItemArray release];
+    
+    NSError *error;
+    if (![context save:&error]) 
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    
+}
+#pragma mark - Fill budget data when enter app
+-(void)insertBudgetItem:(BudgetTemplate *)b withStartDate:(NSDate *)startDate EndDate:(NSDate *)endDate
+{
+    BudgetItem *newBudget = [NSEntityDescription insertNewObjectForEntityForName:@"BudgetItem" inManagedObjectContext:b.managedObjectContext];
+    newBudget.amount = b.amount;
+    newBudget.isRollover = b.isRollover;
+    
+    newBudget.startDate = startDate;
+    newBudget.endDate =endDate;
+    
+    [b addBudgetItemsObject:newBudget];
+    NSError *errors=nil;
+    if (![b.managedObjectContext save:&errors]) 
+    {
+        NSLog(@"Unresolved error %@, %@", errors, [errors userInfo]);
+        abort();
+    }
+    
+}
+
+
+-(void)autoGenCycleBudgetItem:(BudgetTemplate *)b withEndDate:(NSDate *)cycleEndDate  isIpad:(BOOL)isIpad
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    
+    int	count =[appDelegate.epnc getCountOfInsert:b.startDate repeatEnd:cycleEndDate typeOfRecurring:b.cycleType]+1;
+    if(isIpad)
+    {
+        count++;
+    }
+    
+    if (count!=0) {
+        
+        NSDate *startDate = [appDelegate.epnc getFirstSecByDate:b.startDate];
+        NSDate *tmpDate2 =[appDelegate.epnc getDate: startDate byCycleType:b.cycleType];
+        NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+        NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+        [dc1 setDay:-1];
+        
+        NSDate *endDate =[appDelegate.epnc getLastSecByDate:[gregorian dateByAddingComponents:dc1 toDate:tmpDate2 options:0]];
+        
+        [self insertBudgetItem:b withStartDate:startDate EndDate:endDate];
+        
+        
+        
+        NSDate * lastBudgetDate=b.startDate;
+        
+        
+ 		for (int k=0 ; k<count; k++) 
+		{		
+			NSDate *tmpDate=  [appDelegate.epnc getDate:lastBudgetDate byCycleType:b.cycleType];
+            
+			NSDate *startDate = [appDelegate.epnc getFirstSecByDate:tmpDate];
+			
+			NSDate *tmpDate2 =[appDelegate.epnc getDate: startDate byCycleType:b.cycleType];
+ 			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay:-1];
+			
+			NSDate *endDate =[appDelegate.epnc getLastSecByDate:[gregorian dateByAddingComponents:dc1 toDate:tmpDate2 options:0]];
+            
+           	
+            [self insertBudgetItem:b  withStartDate: startDate EndDate: endDate];
+			
+			lastBudgetDate = startDate;
+ 		}	
+        [appDelegate.epdc ReCountBudgetRollover:b];
+        
+    }
+    
+}
+
+- (void) autoInsertBudgets:(BudgetTemplate *)repeatBudget 
+{
+	if([repeatBudget.cycleType isEqualToString:@"No Cycle"]||repeatBudget.cycleType==nil) return;
+	NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:[repeatBudget.budgetItems allObjects]];
+	NSSortDescriptor *sort= [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES];
+	
+	NSArray *sorts = [[NSArray alloc] initWithObjects:&sort count:1];
+	
+	[tmpArray sortUsingDescriptors:sorts];
+	[sort release];
+	[sorts release];
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	int	count = [appDelegate.epnc getCountOfInsert:repeatBudget.startDate repeatEnd:[NSDate date] typeOfRecurring:repeatBudget.cycleType];
+	NSDate *lastBudgetDate;
+	NSError *error;
+	if([tmpArray count]>0)
+	{
+		if (count==0) {
+			return;
+		}
+		BudgetItem *tmpbi = [tmpArray lastObject];
+		
+		if([appDelegate.epnc dateCompare:tmpbi.startDate withDate:[NSDate date]]>=0) return ;
+		
+		tmpbi.isCurrent = [NSNumber numberWithBool:FALSE];
+		if (![tmpbi.managedObjectContext save:&error]) 
+		{
+ 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			abort();
+		}
+         lastBudgetDate=tmpbi.startDate;
+        
+        
+ 		for (int k=0 ; k<count; k++) 
+		{		
+			NSDate *tmpDate=  [appDelegate.epnc getDate:lastBudgetDate byCycleType:repeatBudget.cycleType];
+ 
+			NSDate *startDate = [appDelegate.epnc getFirstSecByDate:tmpDate];
+			
+			NSDate *tmpDate2 =[appDelegate.epnc getDate: startDate byCycleType:repeatBudget.cycleType];
+ 			NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+			NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+			[dc1 setDay:-1];
+			
+			NSDate *endDate =[appDelegate.epnc getLastSecByDate:[gregorian dateByAddingComponents:dc1 toDate:tmpDate2 options:0]];
+            
+           	
+            [self insertBudgetItem:repeatBudget  withStartDate: startDate EndDate: endDate];
+			
+			lastBudgetDate = startDate;
+ 		}	
+        [appDelegate.epdc ReCountBudgetRollover:repeatBudget];
+        
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Note" 
+															message:[NSString stringWithFormat:@"New cycle of budget \"%@\" started.",repeatBudget.category.categoryName]
+														   delegate:self cancelButtonTitle:@"OK" 
+												  otherButtonTitles:nil];
+		[alertView show];
+        [alertView release];
+
+		
+	}
+	else if([tmpArray count] == 0 &&[appDelegate.epnc dateCompare:repeatBudget.startDate withDate:[NSDate date]] ==0){
+        
+ 
+        NSDate *startDate = [appDelegate.epnc getFirstSecByDate:[NSDate date]];
+        NSDate *tmpDate2 =[appDelegate.epnc getDate: startDate byCycleType:repeatBudget.cycleType];
+        NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+        NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+        [dc1 setDay:-1];
+        
+        NSDate *endDate =[appDelegate.epnc getLastSecByDate:[gregorian dateByAddingComponents:dc1 toDate:tmpDate2 options:0]];
+  		
+        [self insertBudgetItem:repeatBudget  withStartDate: startDate EndDate: endDate];
+        [appDelegate.epdc ReCountBudgetRollover:repeatBudget];
+        
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Note" 
+															message:[NSString stringWithFormat:@"New cycle of budget \"%@\" started.",repeatBudget.category.categoryName]
+														   delegate:self cancelButtonTitle:@"OK" 
+												  otherButtonTitles:nil];
+		[alertView show];
+        [alertView release];
+
+	}
+}
+
+- (void) autoInsertBudgets_ipad:(BudgetTemplate *)repeatBudget 
+{
+	if([repeatBudget.cycleType isEqualToString:@"No Cycle"]||repeatBudget.cycleType==nil) return;
+ 	NSError *error;
+    
+	NSMutableArray *tmpArray = [[NSMutableArray alloc] initWithArray:[repeatBudget.budgetItems allObjects]];
+	NSSortDescriptor *sort= [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES];
+	
+	NSArray *sorts = [[NSArray alloc] initWithObjects:&sort count:1];
+	
+	[tmpArray sortUsingDescriptors:sorts];
+	[sort release];
+	[sorts release];
+	
+	if([tmpArray count]==0)
+	{
+		[tmpArray release];
+		return;
+	}
+	
+	BudgetItem *tmpbi = [tmpArray lastObject];
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+    if([appDelegate.epnc dateCompare:tmpbi.startDate withDate:[NSDate date]]>=0) return ;
+    
+	if([appDelegate.epnc dateCompare:[NSDate date] withDate:tmpbi.startDate ]>=0&&[appDelegate.epnc dateCompare:[NSDate date] withDate:tmpbi.endDate ]<=0)
+	{
+		tmpbi.isCurrent = [NSNumber numberWithBool:FALSE];
+		if (![tmpbi.managedObjectContext save:&error]) 
+		{
+ 			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			abort();
+		}
+ 		
+ 		
+		NSDate *tmpDate=  [appDelegate.epnc getDate:tmpbi.startDate  byCycleType:repeatBudget.cycleType];
+		
+        NSDate *startDate = [appDelegate.epnc getFirstSecByDate:tmpDate];
+		
+        NSDate *tmpDate2 =[appDelegate.epnc getDate: startDate byCycleType:repeatBudget.cycleType];
+        NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+        NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+        [dc1 setDay:-1];
+        
+        NSDate *endDate =[appDelegate.epnc getLastSecByDate:[gregorian dateByAddingComponents:dc1 toDate:tmpDate2 options:0]];
+	 	
+ 		[self insertBudgetItem:repeatBudget  withStartDate: startDate EndDate: endDate];
+        [appDelegate.epdc ReCountBudgetRollover:repeatBudget];
+        
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Note" 
+															message:[NSString stringWithFormat:@"New cycle of budget %@ started.",repeatBudget.category.categoryName]
+														   delegate:self cancelButtonTitle:@"OK" 
+												  otherButtonTitles:nil];
+		[alertView show];
+        [alertView release];
+
+		return;	
+		
+	}
+    
+	int	count = [appDelegate.epnc getCountOfInsert:repeatBudget.startDate repeatEnd:[NSDate date] typeOfRecurring:repeatBudget.cycleType]+1;
+	if (count==0) {
+		return;
+	}
+	
+	NSDate * lastBudgetDate=tmpbi.startDate;
+    
+	tmpbi.isCurrent = [NSNumber numberWithBool:FALSE];
+	if (![tmpbi.managedObjectContext save:&error]) 
+	{
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+	}
+    
+    for (int k=0 ; k<count; k++) 
+    {		
+        NSDate *tmpDate=  [appDelegate.epnc getDate:lastBudgetDate byCycleType:repeatBudget.cycleType];
+        NSDate *startDate = [appDelegate.epnc getFirstSecByDate:tmpDate];
+        NSDate *tmpDate2 =[appDelegate.epnc getDate: startDate byCycleType:repeatBudget.cycleType];
+        NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+        NSDateComponents* dc1 = [[[NSDateComponents alloc] init] autorelease];
+        [dc1 setDay:-1];
+        
+        NSDate *endDate =[appDelegate.epnc getLastSecByDate:[gregorian dateByAddingComponents:dc1 toDate:tmpDate2 options:0]];
+        
+        [self insertBudgetItem:repeatBudget  withStartDate: startDate EndDate: endDate];
+        
+        lastBudgetDate =  startDate;
+    }	
+    
+	[appDelegate.epdc ReCountBudgetRollover:repeatBudget];
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Note" 
+														message:[NSString stringWithFormat:@"New cycle of budget \"%@\" started.",repeatBudget.category.categoryName]
+													   delegate:self cancelButtonTitle:@"OK" 
+											  otherButtonTitles:nil];
+	[alertView show];
+	
+    [alertView release];
+
+	
+}
+
+-(void)AutoFillBudgetData:(BOOL)isIpad;
+{
+    NSError *error =nil;
+    
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"BudgetTemplate" inManagedObjectContext:appDelegate.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    NSArray* objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSMutableArray * budgetArray =[[NSMutableArray alloc] initWithArray:objects];
+    
+    for (int i=0 ; i<[budgetArray count]; i++) 
+    {
+        if(!isIpad)
+             [self autoInsertBudgets:[budgetArray objectAtIndex:i]];
+        else
+           [self autoInsertBudgets_ipad:[budgetArray objectAtIndex:i]];
+
+    }
+    [fetchRequest release];
+    [sortDescriptor release];
+    [sortDescriptors release];
+
+}
+
+#pragma mark - Fill Transaction data when enter app
+- (void) autoInsertTransaction:(Transaction *)repeatTransactionRule 
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	if([repeatTransactionRule.type integerValue]==0||repeatTransactionRule.type==nil) return;
+	if(repeatTransactionRule.dateTime!=nil)
+	{
+		if([appDelegate.epnc dateCompare:repeatTransactionRule.dateTime withDate:[NSDate date]]>0) 
+		{
+   			return;
+		}
+     }
+	NSString *recurringType =@"No Recurring";
+	if ([repeatTransactionRule.type integerValue]==1) recurringType = @"Daily";
+	else if ([repeatTransactionRule.type integerValue]==2) recurringType = @"Weekly";
+	
+	else if ([repeatTransactionRule.type integerValue]==3) recurringType = @"Every 2 Weeks";
+ 	
+	else if ([repeatTransactionRule.type integerValue]==4) recurringType = @"Semimonthly";
+	
+	else if ([repeatTransactionRule.type integerValue]==5) recurringType = @"Monthly";
+	
+	else if ([repeatTransactionRule.type integerValue]==6) recurringType = @"Every 3 Months";
+	
+	else if ([repeatTransactionRule.type integerValue]==7) recurringType = @"Every 6 Months";
+	
+	else if ([repeatTransactionRule.type integerValue]==8) recurringType = @"Every Year";
+    if([appDelegate.epnc dateCompare:repeatTransactionRule.dateTime withDate:[NSDate date]]==0&&
+        [appDelegate.settings.isBefore boolValue])
+    {
+        NSDate *nextDate =[appDelegate.epnc getDate:repeatTransactionRule.dateTime byCycleType:recurringType];
+           [appDelegate.epnc addNotification:nextDate withAmount:[repeatTransactionRule.amount doubleValue] withCategoryName:repeatTransactionRule.category.categoryName];
+            return;
+         
+    }
+
+	int	cycleCount = [appDelegate.epnc getCountOfInsert:repeatTransactionRule.dateTime repeatEnd:[NSDate date] typeOfRecurring:recurringType];
+    NSDate *lastTranscationDate;
+     if ([repeatTransactionRule.type integerValue]!=4)
+     {
+        cycleCount=cycleCount+1;
+         lastTranscationDate=repeatTransactionRule.dateTime;
+
+     }
+     else {
+         
+         NSCalendar *gregorian = [[[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar] autorelease];
+         NSDateComponents *components = [gregorian components:(NSYearCalendarUnit |NSMonthCalendarUnit |NSDayCalendarUnit ) fromDate:repeatTransactionRule.dateTime];
+         int dayIndex = [components day];
+         if(dayIndex ==15||dayIndex ==1)
+         {
+             lastTranscationDate=repeatTransactionRule.dateTime;
+         }
+         else 
+         {
+             if(dayIndex<15)
+             {
+                 [components setDay:15];
+             }
+             else if(dayIndex>15)
+             {
+             [components setMonth:[components month]+1];
+             [components setDay:1];
+             }
+             lastTranscationDate = [gregorian dateFromComponents:components];
+
+         }
+
+ 
+     }
+
+	NSError *error;
+ 
+	for (int k=0 ; k<cycleCount; k++) 
+	{		
+		if(k==cycleCount-1)
+		{
+			repeatTransactionRule.dateTime  =  lastTranscationDate;
+            NSDate *nextDate =[appDelegate.epnc getDate:lastTranscationDate byCycleType:recurringType];
+            if( [appDelegate.settings.isBefore boolValue]&&[appDelegate.epnc dateCompare:nextDate withDate:[NSDate date]]==1)
+            {
+                [appDelegate.epnc addNotification:nextDate withAmount:[repeatTransactionRule.amount doubleValue] withCategoryName:repeatTransactionRule.category.categoryName];
+                
+            }
+            
+            
+		}
+		else {
+			NSDate *tmpDate=  lastTranscationDate;
+			
+			Transaction *newTransaction = [NSEntityDescription insertNewObjectForEntityForName:@"Transaction" inManagedObjectContext:appDelegate.managedObjectContext];
+			newTransaction.dateTime = tmpDate;
+ 			newTransaction.amount = repeatTransactionRule.amount;
+			newTransaction.notes = repeatTransactionRule.notes;
+ 			newTransaction.transactionType = repeatTransactionRule.transactionType;
+			newTransaction.type =[NSNumber numberWithInteger:0];
+			newTransaction.isClear = [NSNumber numberWithBool:[repeatTransactionRule.isClear boolValue]];
+			newTransaction.incomeAccount = repeatTransactionRule.incomeAccount;
+			newTransaction.expenseAccount = repeatTransactionRule.expenseAccount;
+			
+ 			lastTranscationDate =[appDelegate.epnc getDate:lastTranscationDate byCycleType:recurringType];
+			
+			[repeatTransactionRule.category addTransactionsObject:newTransaction];
+            repeatTransactionRule.dateTime  =  lastTranscationDate;
+
+		}
+		
+		if (![appDelegate.managedObjectContext save:&error]) 
+		{
+			NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+			abort();
+		}
+ 	}
+}
+
+-(void)AutoFillTransactionData
+{
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+    NSError *error=nil;
+    NSFetchRequest *fetchRequest = [[appDelegate.managedObjectModel fetchRequestTemplateForName:@"getAllRuleTransactions"] copy];
+    
+      
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTime" ascending:YES];
+    NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    NSArray* objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    NSMutableArray * transactionRuleArray =[[NSMutableArray alloc] initWithArray:objects];
+    
+    for (int i=0 ; i<[transactionRuleArray count]; i++) 
+    {
+        [self autoInsertTransaction:[transactionRuleArray objectAtIndex:i]];
+    }
+    
+    [sortDescriptor release];
+    [sortDescriptors release];
+
+}
+
+#pragma mark - get Remind count Number
+-(NSInteger)getNeedRemindCount
+{
+	NSMutableArray *billsList = [[NSMutableArray alloc] init];
+	NSInteger count=0;
+ 	NSError *error =nil;
+	
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"BillRule" inManagedObjectContext:appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Edit the sort key as appropriate.
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"startDate" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+ 	NSArray* objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+ 	[billsList setArray:objects];
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
+ 	NSDate *cmpDate;
+   	for (int i =0; i<[billsList count];i++) {
+		BillRule *br = [billsList objectAtIndex:i];
+ 		if([br.remind compare: @"No Reminder"] != NSOrderedSame&&[br.amountPaid doubleValue]<[br.amountDue doubleValue] )
+		{
+			NSDate *ruleStartDate = [appDelegate.epnc getCycleStartDateByMinDate:br.startDate withCycleStartDate:br.startDate withCycleType:br.cycle isRule:[br.isRule boolValue]];
+            NSDateComponents *parts = [[[NSDateComponents alloc] init] autorelease] ;
+            
+			if([br.remind compare: @"1 day before"] == NSOrderedSame)
+			{
+				parts.day = -1;
+			}
+			else if([br.remind compare: @"2 days before"] == NSOrderedSame)
+			{
+				parts.day = -2;
+			}
+			else if([br.remind compare: @"3 days before"] == NSOrderedSame)
+			{
+				parts.day = -3;
+			}
+			else if([br.remind compare: @"1 week before"] == NSOrderedSame)
+			{
+				parts.day = -7;
+			}
+			else if([br.remind compare: @"2 weeks before"] == NSOrderedSame)
+			{
+				parts.day = -14;
+			}
+			else if([br.remind compare: @"on date of event"] == NSOrderedSame)
+			{
+				parts.day = 0;
+				
+			}
+			
+		 	cmpDate = [ [NSCalendar currentCalendar] dateByAddingComponents:parts toDate:ruleStartDate options:0] ;
+			if([appDelegate.epnc dateCompare:cmpDate withDate:[NSDate date]] <= 0)
+			{
+				count++;
+			}			
+		}
+	}	
+	return count;
+}
+
+#pragma mark - Check Transaction Number
+-(BOOL)canBeAddTranscation
+{
+	NSInteger countNum;
+	NSError *error =nil;
+    PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+	NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+	// Edit the entity name as appropriate.
+ 	
+	NSEntityDescription *entity = [NSEntityDescription entityForName:@"Transaction" inManagedObjectContext:appDelegate.managedObjectContext];
+	[fetchRequest setEntity:entity];
+	
+	// Edit the sort key as appropriate.
+ 	
+	NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"dateTime" ascending:YES];
+	NSArray *sortDescriptors = [[NSArray alloc] initWithObjects:sortDescriptor, nil];
+	
+	[fetchRequest setSortDescriptors:sortDescriptors];
+	NSArray* objects = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+ 	countNum = [objects count];
+	[fetchRequest release];
+	[sortDescriptor release];
+	[sortDescriptors release];
+	if(countNum>=15) return FALSE;
+	
+	return TRUE;
+ 	
+}
+
+#pragma mark - Delete RelatonShip Data
+
+-(void)deleteTransactionRel:(Transaction *)t;
+{
+    
+    NSError *error;
+    NSManagedObjectContext *context = [t managedObjectContext];
+    if ([[t.childTransactions allObjects] count]>0) {
+         NSMutableArray *childArray = [[NSMutableArray alloc] initWithArray:[t.childTransactions allObjects]];
+        for (int i=0; i<[childArray count];i++) {
+            Transaction *ct = [childArray objectAtIndex:i];
+            [self deleteTransactionRel:ct];
+        
+        }
+        [childArray release];
+
+    }
+
+    if(t.billItem != nil)
+    {
+        if([t.billItem.transaction count]==1)
+        {
+            t.billItem.hasPaid = [NSNumber numberWithBool:NO]; 
+            t.billItem.amountPaid =0;
+            
+        }
+        else {
+            t.billItem.amountPaid = [NSNumber numberWithDouble:[t.billItem.amountPaid  doubleValue] -[t.amount doubleValue]];
+            
+            if([t.billItem.amountPaid doubleValue]>0)
+                t.billItem.hasPaid = [NSNumber numberWithBool:YES]; 
+            else {
+                t.billItem.hasPaid = [NSNumber numberWithBool:NO]; 
+                
+            }
+            
+        }
+        
+        
+    }
+    [context deleteObject:t];
+    
+    //if(t.category!=nil&&[t.category.budgetTemplate.isRollover boolValue])
+     if(t.category!=nil )
+    {
+        PokcetExpenseAppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+
+        NSString *searchForMe = @":";
+		NSRange range = [t.category.categoryName rangeOfString : searchForMe];
+		NSError *error=nil;
+		if (range.location != NSNotFound) {
+			NSArray * seprateSrray = [t.category.categoryName componentsSeparatedByString:@":"];
+			NSString *parName = [seprateSrray objectAtIndex:0];
+			
+			NSDictionary *subs= [NSDictionary dictionaryWithObjectsAndKeys:parName,@"cName",  nil];
+			
+			NSFetchRequest *fetchRequest=	[appDelegate.managedObjectModel fetchRequestFromTemplateWithName:@"fetchCategoryByName" substitutionVariables:subs];		// Edit the entity name as appropriate.
+			
+			// Edit the sort key as appropriate.
+			NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"categoryName" ascending:YES ]; // generate a description that describe which field you want to sort by
+			NSMutableArray *sortDescriptors = [[NSMutableArray alloc] initWithObjects:&sortDescriptor count:1]; // you can add more than one sort description
+			
+			[fetchRequest setSortDescriptors:sortDescriptors];
+			NSArray *objects1 = [appDelegate.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+            
+ 			NSMutableArray *tmpParCategoryArray  = [[NSMutableArray alloc] initWithArray:objects1];
+			
+			[sortDescriptor release];
+			[sortDescriptors release];
+            Category *pc =  [tmpParCategoryArray lastObject];
+            [appDelegate.epdc ReCountBudgetRollover:pc.budgetTemplate];
+            [tmpParCategoryArray release];
+            
+        }
+
+        [appDelegate.epdc ReCountBudgetRollover:t.category.budgetTemplate];
+          
+    }
+    // Save the context.
+    if (![context save:&error]) 
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+
+}
+
+
+-(void)deleteChildTransactionRel:(Transaction *)t;
+{
+    
+    NSError *error;
+    NSManagedObjectContext *context = [t managedObjectContext];
+    if ([[t.childTransactions allObjects] count]>0) {
+        NSMutableArray *childArray = [[NSMutableArray alloc] initWithArray:[t.childTransactions allObjects]];
+        for (int i=0; i<[childArray count];i++) {
+            Transaction *ct = [childArray objectAtIndex:i];
+            [self deleteTransactionRel:ct];
+            
+        }
+        [childArray release];
+        
+    }
+     // Save the context.
+    if (![context save:&error]) 
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    
+}
+
+-(void)deleteTransferRel:(BudgetTransfer *)t;
+{
+    NSError *error;
+    NSManagedObjectContext *context = [t managedObjectContext];
+    BudgetTemplate *tmpTobt;
+    BudgetTemplate *tmpFromobt;
+
+
+    [context deleteObject:t];
+    [t.fromBudget removeFromTransferObject:t ];
+    [t.toBudget removeToTransferObject:t];
+    tmpTobt =t.toBudget.budgetTemplate;
+    tmpFromobt = t.fromBudget.budgetTemplate;
+    
+    [context deleteObject:t];
+    // Save the context.
+    if (![context save:&error]) 
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+    
+    [self ReCountBudgetRollover:tmpTobt];
+    [self ReCountBudgetRollover:tmpFromobt];
+    
+
+}
+
+-(void)deleteAccountRel:(Accounts * )a;
+{
+    NSManagedObjectContext *context = [a managedObjectContext];
+    NSError *error;
+    NSMutableArray *tmptransactionArray = [[NSMutableArray alloc] initWithArray:[a.expenseTransactions allObjects]];
+    [tmptransactionArray addObjectsFromArray:[a.incomeTransactions allObjects]];
+    NSMutableArray *budgetArray = [[NSMutableArray alloc] init ];
+    
+    if(tmptransactionArray.count > 0)
+    {
+        for (int i=0; i<[tmptransactionArray count]; i++) 
+        {
+            Transaction *deleteLog = (Transaction *)[tmptransactionArray objectAtIndex:i];
+            BOOL found = FALSE;
+            for (int j=0; j<[budgetArray count]; j++) {
+                BudgetTemplate *b=[budgetArray objectAtIndex:j];
+                if(b ==deleteLog.category.budgetTemplate )
+                {
+                    found = TRUE;
+                    break;
+                }
+            }
+            
+            if(!found)
+            {
+                if(deleteLog.category!=nil &&deleteLog.category.budgetTemplate !=nil)
+                    [budgetArray addObject:deleteLog.category.budgetTemplate ];
+            }
+            
+            
+            if([deleteLog.transactionType isEqualToString:@"expense"])
+            {
+                Accounts *accounts = deleteLog.expenseAccount;
+                Category *categories = deleteLog.category;
+                [accounts removeExpenseTransactionsObject:deleteLog];
+                [categories removeTransactionsObject:deleteLog];
+                if(deleteLog.billItem != nil)
+                {
+                    BillRule *bills = deleteLog.billItem;
+                    
+                    [bills removeTransactionObject:deleteLog];
+                    if([bills.transaction count]==0)
+                    {
+                        bills.hasPaid = [NSNumber numberWithBool:NO];
+                        bills.paidDate = nil;
+                        
+                    }
+                }
+                
+            }
+            else if([deleteLog.transactionType isEqualToString:@"income"])
+            {
+                Accounts *accounts = deleteLog.incomeAccount;
+                Category *categories = deleteLog.category;
+                [accounts removeIncomeTransactionsObject:deleteLog];
+                [categories removeTransactionsObject:deleteLog];
+            }
+            [context deleteObject:deleteLog];
+            if (![context save:&error]) 
+            {
+                /*
+                 Replace this implementation with code to handle the error appropriately.
+                 
+                 abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+                 */
+                NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+                abort();
+            }
+        }
+    }
+    
+    [tmptransactionArray release];
+    
+    NSMutableArray *billArray = [[NSMutableArray alloc] initWithArray:[a.fromBill allObjects]];
+    for (int i=0; i<[billArray count];i++) {
+        BillRule *bills = [billArray objectAtIndex:i];
+        [context deleteObject:bills];
+        
+    }
+    [billArray release];
+    [context deleteObject:a];
+    if (![context save:&error]) 
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    for (int i=0;i<[budgetArray count];i++) {
+        BudgetTemplate *b=[budgetArray objectAtIndex:i];
+        [self ReCountBudgetRollover:b];
+    }
+    [budgetArray release];
+
+}
+-(void)deleteCategoryAndDeleteRel:(Category * )c;
+{
+	NSMutableArray *tmpTransactionArray = [[NSMutableArray alloc] initWithArray:[c.transactions allObjects]];
+	
+	for (int i=0; i<[tmpTransactionArray count]; i++) 
+	{
+		Transaction *deleteLog = (Transaction *)[tmpTransactionArray objectAtIndex:i];
+		[c.managedObjectContext deleteObject:deleteLog];
+	}
+	[tmpTransactionArray release];
+	
+	if(c.budgetTemplate!=nil)
+		[c.managedObjectContext deleteObject:c.budgetTemplate];
+	
+	
+	
+	NSMutableArray *billArray = [[NSMutableArray alloc] initWithArray:[c.billItem allObjects]];
+	for (int i=0; i<[billArray count]; i++) 
+	{
+		BillRule *deleteLog = (BillRule *)[billArray objectAtIndex:i];
+		[c.managedObjectContext deleteObject:deleteLog];
+	}
+	[billArray release];
+	
+	
+	BudgetTemplate *tmpBudget = c.budgetTemplate;	
+	if(tmpBudget!=nil)
+	{
+		NSMutableArray *budgetItemArray = [[NSMutableArray alloc] initWithArray:[tmpBudget.budgetItems allObjects]];
+		if(budgetItemArray.count > 0)
+		{
+			for (int i=0; i<[budgetItemArray count]; i++) 
+			{
+				BudgetItem *object = (BudgetItem *)[budgetItemArray objectAtIndex:i];
+				
+				NSMutableArray *fromTransferArray = [[NSMutableArray alloc] initWithArray:[object.fromTransfer allObjects]];
+				for (int j=0; j<[fromTransferArray count]; j++) 
+				{	
+					BudgetTransfer  *fromT = (BudgetTransfer *)[fromTransferArray objectAtIndex:j];
+					[fromT.toBudget removeFromTransferObject:fromT];
+					[c.managedObjectContext deleteObject:fromT];
+					
+				}
+				[fromTransferArray release];
+				
+				NSMutableArray *toTransferArray = [[NSMutableArray alloc] initWithArray:[object.toTransfer allObjects]];
+				for (int j=0; j<[toTransferArray count]; j++) 
+				{	
+					BudgetTransfer  *toT = (BudgetTransfer *)[toTransferArray objectAtIndex:j];
+					[toT.fromBudget removeToTransferObject:toT];
+					[c.managedObjectContext deleteObject:toT];
+					
+				}
+				[toTransferArray release];
+				
+				[c.managedObjectContext deleteObject:object];
+			}
+		}
+		[budgetItemArray release];
+		[c.managedObjectContext deleteObject:tmpBudget];
+	}
+	
+     [c.managedObjectContext deleteObject:c];
+    
+    NSManagedObjectContext *context = [c managedObjectContext];
+    NSError *error=nil;
+    if (![context save:&error]) 
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+}	
+-(void)deleteCategoryRel:(Category * )c;
+{
+	NSMutableArray *tmpTransactionArray = [[NSMutableArray alloc] initWithArray:[c.transactions allObjects]];
+	
+	for (int i=0; i<[tmpTransactionArray count]; i++) 
+	{
+		Transaction *deleteLog = (Transaction *)[tmpTransactionArray objectAtIndex:i];
+		[c.managedObjectContext deleteObject:deleteLog];
+	}
+	[tmpTransactionArray release];
+	
+	if(c.budgetTemplate!=nil)
+		[c.managedObjectContext deleteObject:c.budgetTemplate];
+	
+	
+	
+	NSMutableArray *billArray = [[NSMutableArray alloc] initWithArray:[c.billItem allObjects]];
+	for (int i=0; i<[billArray count]; i++) 
+	{
+		BillRule *deleteLog = (BillRule *)[billArray objectAtIndex:i];
+		[c.managedObjectContext deleteObject:deleteLog];
+	}
+	[billArray release];
+	
+	
+	BudgetTemplate *tmpBudget = c.budgetTemplate;	
+	if(tmpBudget!=nil)
+	{
+		NSMutableArray *budgetItemArray = [[NSMutableArray alloc] initWithArray:[tmpBudget.budgetItems allObjects]];
+		if(budgetItemArray.count > 0)
+		{
+			for (int i=0; i<[budgetItemArray count]; i++) 
+			{
+				BudgetItem *object = (BudgetItem *)[budgetItemArray objectAtIndex:i];
+				
+				NSMutableArray *fromTransferArray = [[NSMutableArray alloc] initWithArray:[object.fromTransfer allObjects]];
+				for (int j=0; j<[fromTransferArray count]; j++) 
+				{	
+					BudgetTransfer  *fromT = (BudgetTransfer *)[fromTransferArray objectAtIndex:j];
+					[fromT.toBudget removeFromTransferObject:fromT];
+					[c.managedObjectContext deleteObject:fromT];
+					
+				}
+				[fromTransferArray release];
+				
+				NSMutableArray *toTransferArray = [[NSMutableArray alloc] initWithArray:[object.toTransfer allObjects]];
+				for (int j=0; j<[toTransferArray count]; j++) 
+				{	
+					BudgetTransfer  *toT = (BudgetTransfer *)[toTransferArray objectAtIndex:j];
+					[toT.fromBudget removeToTransferObject:toT];
+					[c.managedObjectContext deleteObject:toT];
+					
+				}
+				[toTransferArray release];
+				
+				[c.managedObjectContext deleteObject:object];
+			}
+		}
+		[budgetItemArray release];
+		[c.managedObjectContext deleteObject:tmpBudget];
+	}
+	
+	c.hasBudget = [NSNumber numberWithBool:FALSE];
+	
+	c.others = @"";
+   // [deleteCategory.managedObjectContext deleteObject:deleteCategory];
+
+    NSManagedObjectContext *context = [c managedObjectContext];
+    NSError *error=nil;
+    if (![context save:&error]) 
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+    
+}	
+
+-(void)deleteBudgetRel:(BudgetTemplate * )b;
+{
+    NSManagedObjectContext *context = [b managedObjectContext];
+    NSError *error;
+    
+    NSMutableArray *budgetItemArray = [[NSMutableArray alloc] initWithArray:[b.budgetItems allObjects]];
+    if(budgetItemArray.count > 0)
+    {
+        for (int i=0; i<[budgetItemArray count]; i++) 
+        {
+            BudgetItem *object = (BudgetItem *)[budgetItemArray objectAtIndex:i];
+            
+            
+            NSMutableArray *fromTransferArray = [[NSMutableArray alloc] initWithArray:[object.fromTransfer allObjects]];
+            for (int j=0; j<[fromTransferArray count]; j++) 
+            {	
+                BudgetTransfer  *fromT = (BudgetTransfer *)[fromTransferArray objectAtIndex:j];
+                [fromT.toBudget removeFromTransferObject:fromT];
+                [context deleteObject:fromT];
+                
+            }
+            [fromTransferArray release];
+            
+            NSMutableArray *toTransferArray = [[NSMutableArray alloc] initWithArray:[object.toTransfer allObjects]];
+            for (int j=0; j<[toTransferArray count]; j++) 
+            {	
+                BudgetTransfer  *toT = (BudgetTransfer *)[toTransferArray objectAtIndex:j];
+                [toT.fromBudget removeToTransferObject:toT];
+                [context deleteObject:toT];
+                
+            }
+            [toTransferArray release];
+            
+            [context deleteObject:object];
+        }
+    }
+    [budgetItemArray release];
+    b.category.hasBudget = [NSNumber numberWithBool:FALSE];
+    [context deleteObject:b];
+    if (![context save:&error]) 
+    {
+        /*
+         Replace this implementation with code to handle the error appropriately.
+         abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. If it is not possible to recover from the error, display an alert panel that instructs the user to quit the application by pressing the Home button.
+         */
+        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+        abort();
+    }
+
+}
+@end

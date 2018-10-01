@@ -1,0 +1,24 @@
+//
+//  ZTwitter.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "ZTwitter.h"
+
+
+@implementation ZTwitter
+
+@dynamic userID;
+@dynamic twitterAnnouncementsType;
+@dynamic screenName;
+@dynamic requestToken;
+@dynamic accessTokenSecret;
+@dynamic requestTokenSecret;
+@dynamic accessToken;
+@dynamic userWhiteList;
+@dynamic twitterEnabled;
+
+@end

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AccountDRType</key>
+	<string>Last 12 Months</string>
+	<key>AccountDRCusStartDate</key>
+	<date>2001-01-01T00:00:00Z</date>
+	<key>AccountDRCusEndDate</key>
+	<date>2001-01-01T00:00:00Z</date>
+	<key>CategoryDRType</key>
+	<string>Last 12 Months</string>
+	<key>CategoryDRCusStartDate</key>
+	<date>2001-01-01T00:00:00Z</date>
+	<key>CategoryDRCusEndDate</key>
+	<date>2001-01-01T00:00:00Z</date>
+</dict>
+</plist>

@@ -1,0 +1,20 @@
+//
+//  BudgetTransfer.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "BudgetTransfer.h"
+#import "BudgetItem.h"
+
+
+@implementation BudgetTransfer
+
+@dynamic amount;
+@dynamic dateTime;
+@dynamic fromBudget;
+@dynamic toBudget;
+
+@end

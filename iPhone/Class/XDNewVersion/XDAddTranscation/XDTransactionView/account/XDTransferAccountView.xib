@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="neq-Hw-ANE" customClass="XDTransferAccountView">
+            <rect key="frame" x="0.0" y="0.0" width="179" height="115"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eX7-9M-TXl">
+                    <rect key="frame" x="67.5" y="15" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Vfh-e9-sAs"/>
+                        <constraint firstAttribute="width" constant="44" id="phn-AK-4wp"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Asset" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="ioU-i6-PT8">
+                    <rect key="frame" x="5" y="61" width="169" height="21"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="RPX-uh-sOV">
+                    <rect key="frame" x="5" y="84" width="169" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="rQm-3w-0S1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="15"/>
+                    <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Account" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="Kkn-hd-JX2">
+                    <rect key="frame" x="5" y="67" width="169" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="WVa-4W-fQ1"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="17"/>
+                    <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ioU-i6-PT8" secondAttribute="trailing" constant="5" id="2DK-gJ-XAm"/>
+                <constraint firstItem="RPX-uh-sOV" firstAttribute="top" secondItem="ioU-i6-PT8" secondAttribute="bottom" constant="2" id="2zW-YM-vpB"/>
+                <constraint firstItem="ioU-i6-PT8" firstAttribute="top" secondItem="eX7-9M-TXl" secondAttribute="bottom" constant="2" id="3V0-Xt-cRr"/>
+                <constraint firstItem="Kkn-hd-JX2" firstAttribute="leading" secondItem="neq-Hw-ANE" secondAttribute="leading" constant="5" id="8uX-Wq-Tv9"/>
+                <constraint firstAttribute="bottom" secondItem="RPX-uh-sOV" secondAttribute="bottom" constant="13" id="F6S-zL-r6A"/>
+                <constraint firstItem="Kkn-hd-JX2" firstAttribute="top" secondItem="eX7-9M-TXl" secondAttribute="bottom" constant="8" id="Fhd-aB-FUT"/>
+                <constraint firstAttribute="trailing" secondItem="Kkn-hd-JX2" secondAttribute="trailing" constant="5" id="VYS-gA-xKb"/>
+                <constraint firstItem="eX7-9M-TXl" firstAttribute="centerX" secondItem="neq-Hw-ANE" secondAttribute="centerX" id="WP5-la-qZY"/>
+                <constraint firstItem="RPX-uh-sOV" firstAttribute="leading" secondItem="neq-Hw-ANE" secondAttribute="leading" constant="5" id="YDi-Af-BHg"/>
+                <constraint firstItem="ioU-i6-PT8" firstAttribute="leading" secondItem="neq-Hw-ANE" secondAttribute="leading" constant="5" id="ah9-bI-pjx"/>
+                <constraint firstAttribute="trailing" secondItem="RPX-uh-sOV" secondAttribute="trailing" constant="5" id="rjN-X1-3X4"/>
+                <constraint firstItem="eX7-9M-TXl" firstAttribute="top" secondItem="neq-Hw-ANE" secondAttribute="top" constant="15" id="vdH-Uo-DzX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="accountBigLbl" destination="Kkn-hd-JX2" id="9LM-3C-tb8"/>
+                <outlet property="accountIcon" destination="eX7-9M-TXl" id="Gfp-Lo-Nav"/>
+                <outlet property="accountLbl" destination="RPX-uh-sOV" id="eqy-Ie-5LC"/>
+                <outlet property="accountName" destination="ioU-i6-PT8" id="STu-JM-4VL"/>
+            </connections>
+            <point key="canvasLocation" x="-192.5" y="-74.5"/>
+        </view>
+    </objects>
+</document>

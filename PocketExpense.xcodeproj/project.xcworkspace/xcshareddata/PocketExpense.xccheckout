@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>C0443918-2A05-492D-AE6E-7DBA8C0F1C62</string>
+	<key>IDESourceControlProjectName</key>
+	<string>.</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>285b225f-a06f-ce48-9e49-beb358702b80++1189</key>
+		<string>https://172.16.128.6/svn/BHI_Repositories_2011_S1/iOS%252525252520Project/BTGS_001_PocketExpense/PocketExpense/PocketExpense.xcodeproj</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>.</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>285b225f-a06f-ce48-9e49-beb358702b80++1189</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectRepositoryRootDictionary</key>
+	<dict>
+		<key>285b225f-a06f-ce48-9e49-beb358702b80++1189</key>
+		<string>https://172.16.128.6/svn/BHI_Repositories_2011_S1</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://172.16.128.6/svn/BHI_Repositories_2011_S1/iOS%252525252520Project/BTGS_001_PocketExpense/PocketExpense/PocketExpense.xcodeproj/.</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>285b225f-a06f-ce48-9e49-beb358702b80++1189</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.subversion</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>285b225f-a06f-ce48-9e49-beb358702b80++1189</string>
+			<key>IDESourceControlWCCName</key>
+			<string>PocketExpense.xcodeproj</string>
+		</dict>
+	</array>
+</dict>
+</plist>

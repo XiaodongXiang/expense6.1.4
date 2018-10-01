@@ -1,0 +1,20 @@
+//
+//  CashFlowReports.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "CashFlowReports.h"
+
+
+@implementation CashFlowReports
+
+@dynamic genDateTime;
+@dynamic endDate;
+@dynamic reportName;
+@dynamic startDate;
+@dynamic columnString;
+
+@end

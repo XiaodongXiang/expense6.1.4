@@ -1,0 +1,21 @@
+//
+//  BudgetTransfer.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class BudgetItem;
+
+@interface BudgetTransfer : NSManagedObject
+
+@property (nonatomic, retain) NSNumber * amount;
+@property (nonatomic, retain) NSDate * dateTime;
+@property (nonatomic, retain) BudgetItem *fromBudget;
+@property (nonatomic, retain) BudgetItem *toBudget;
+
+@end

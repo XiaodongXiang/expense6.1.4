@@ -1,0 +1,599 @@
+/*
+ Localizable.strings
+ PocketExpense
+ 
+ Created by humingjing on 14-7-15.
+ 
+ */
+
+
+/*iphone Main VC */
+"VC_January" = "Январь";
+"VC_February" = "Февраль";
+"VC_March" = "Март";
+"VC_April" = "Апрель";
+"VC_May" = "Май";
+"VC_June" = "Июнь";
+"VC_July" = "Июль";
+"VC_Auguest" = "Август";
+"VC_September" = "Сентябрь";
+"VC_October" = "Октябрь";
+"VC_November" = "Ноябрь";
+"VC_December" = "Декабрь";
+
+"VC_Sunday" = "Воскресенье";
+"VC_Monday" = "Понедельник";
+"VC_Tuesday" = "Вторник";
+"VC_Wednesday" = "Среда";
+"VC_Friday" = "Пятница";
+"VC_Sunday" = "Воскресенье";
+"VC_Saturday" = "Суббота";
+
+"VC_LEFT" = "ОСТАТОК";
+"VC_SPENT" = "ПОТРАЧЕНО";
+"VC_NETWORTH" = "ЧИСТЫЕ АКТИВЫ";
+"VC_NetWorth" = "ЧИСТЫЕ АКТИВЫ";
+
+//"VC_Main_NoTransaction" = "Транзакций за этот день не найдено.";
+
+/*iphone Main Month VC*/
+"VC_Today" = "Сегодня";
+"VC_EXPENSE" = "РАСХОДЫ";
+"VC_INCOME" = "ДОХОДЫ";
+"VC_BALANCE" = "БАЛАНС";
+
+/*budget VC*/
+"VC_Budget" = "Бюджет";
+"VC_Adjust" = "Настроить";
+"VC_Total" = "Итого";
+
+/*budget Introduce*/
+"VC_SetupBudget" = "Задать бюджет";
+"VC_SelectBudgetNotes" = "Выберите категории, которые вы хотите задать в качестве ежемесячных бюджетов, и задайте суммы для них.";
+"VC_SelectCategory" = "Выбрать категорию";
+
+
+/*budget list VC*/
+"VC_BudgetList" = "Бюджет";
+"VC_ITEMS" = "ПРЕДМЕТЫ";
+
+/*budget select category*/
+"VC_SelectCategories" = "Выбрать категории";
+"VC_SELECTCATEGORIESFORMONITOR" = "ВЫБОР КАТЕГОРИЙ ДЛЯ ОТСЛЕЖИВАНИЯ";
+
+/*budget detail*/
+"VC_BudgetDetailNotes" = "Этот бюджет еще не использовался.";
+
+"VC_Auto" = "Авто";
+"VC_AutoGas" = "Авто: топливо";
+"VC_AutoRegistration" = "Авто: регистрация";
+"VC_AutoService" = "Авто: обслуживание";
+"VC_BankCharge" = "Банковские сборы";
+"VC_Bonus" = "Бонус";
+"VC_Cash" = "Наличные";
+"VC_Charity" = "Благотворительность";
+"VC_Childcate" = "Уход за детьми";
+"VC_Clothing" = "Одежда";
+
+"VC_CreditCardPayment" = "Оплата кредитной картой";
+"VC_EatingOut" = "Кафе и рестораны";
+"VC_Education" = "Образование";
+"VC_Entertainment" = "Развлечения";
+"VC_Gifts" = "Подарки";
+"VC_Groceries" = "Продукты";
+"VC_HealthFitness" = "Здоровье и фитнес";
+"VC_HomeRepair" = "Ремонт";
+"VC_Household" = "Товары для дома";
+"VC_Insurance" = "Страхование";
+
+"VC_Interest Exp" = "Расход по процентам";
+"VC_Loan" = "Кредиты";
+"VC_Medical" = "Мед. обслуживание";
+"VC_Misc" = "Прочее";
+"VC_MortgagePayment" = "Ипотечные платежи";
+"VC_Pets" = "Питомцы";
+"VC_Others" = "Другое";
+
+"VC_Rent" = "Аренда";
+"VC_Salary" = "Зарплата";
+"VC_SavingsDeposit" = "Сберегательный вклад";
+"VC_Tax" = "Налоги";
+"VC_TaxFed" = "Налоги: региональные";
+"VC_TaxMedicare" = "Налоги: медицина";
+"VC_TaxOther" = "Налоги: прочее";
+"VC_TaxProperty" = "Налоги: имущество";
+"VC_TaxSDI" = "Налоги: нетрудоспособность";
+"VC_TaxSocSec" = "Налоги: соц. защита";
+"VC_TaxState" = "Налоги: местные";
+
+"VC_Travel" = "Путешествия";
+"VC_Utilities" = "Комм. услуги";
+"VC_UtilitiesCableTV" = "Комм. услуги: ТВ";
+"VC_UtilitiesGarbageRecycling" = "Комм. услуги: утилизация отходов";
+"VC_UtilitiesGasElectric" = "Комм. услуги: газ и свет";
+"VC_UtilitiesInternet" = "Комм. услуги: Интернет";
+"VC_UtilitiesTelephone" = "Комм. услуги: телефон";
+"VC_UtilitiesWater" = "Комм. услуги: вода";
+"VC_Transport" = "Транспорт";
+"VC_TaxRefund" = "Возврат налога";
+
+
+/*budget Transfer*/
+"VC_BudgetTransfer" = "Передать";
+"VC_FromBudget" = "Из бюджета";
+"VC_ToBudget" = "В бюджет";
+"VC_SelectTargetBudget" = "Выбрать целевой бюджет";
+
+/*edit category*/
+"VC_NewCategory" = "Добавить";
+"VC_EditCategory" = "Изменить";
+"VC_Name" = "Имя";
+"VC_Type" = "Тип";
+"VC_SubCategory" = "Подкатегория";
+"VC_None" = "Нет";
+"VC_Unnamed" = "Без названия";
+"VC_CategoryEdit_NewCategory" = "Добавить";
+
+/*parent category*/
+"VC_Parent Category" = "Исходная категория";
+
+/*edit transaction*/
+"VC_NewTransaction" = "Добавить";
+"VC_NewTransaction_iPad" = "Добавить";
+
+"VC_EditTransaction" = "Изменить";
+"VC_Payee" = "Получатель";
+"VC_Amount" = "Сумма";
+"VC_FromAccount" = "Со счета";
+"VC_ToAccount" = "На счет";
+"VC_Category" = "Категория";
+"VC_Account" = "Уч. запись";
+"VC_Date" = "Дата";
+"VC_Repeat" = "Повтор";
+"VC_Cleared" = "Завершено";
+"VC_Photo" = "Фото";
+"VC_Memo" = "Напоминание";
+
+/*account select*/
+"VC_SelectAccount" = "Выберите счет";
+
+/*edit account*/
+"VC_NewAccount" = "Добавить";
+"VC_EditAccount" = "Изменить";
+"VC_AccountName" = "Название счета";
+"VC_StartBalance" = "Начальный баланс";
+"VC_OpenDate" = "Дата открытия";
+"VC_AutoClear" = "Автопогашение";
+
+/*select accounttype*/
+"VC_SelectType" = "Выберите тип";
+"VC_Asset" = "Активы";
+"VC_Cash" = "Наличные";
+"VC_Checking" = "Расчетный";
+"VC_CreditCard" = "Кредитная карта";
+"VC_DebitCard" = "Дебетовая карта";
+"VC_Investing/Retirement" = "Вклады и пособия";
+"VC_Loan" = "Кредиты";
+"VC_Savings" = "Сбережения";
+"VC_Others" = "Другое";
+
+/*edit accounttype*/
+"VC_NewType" = "Добавить";
+"VC_EditType" = "Изменить";
+/*repeat*/
+"VC_Never" = "Никогда";
+"VC_Daily" = "Ежедневно";
+"VC_Weekly" = "Еженедельно";
+"VC_Every2Weeks" = "Каждые 2 недели";
+"VC_Every3Weeks" = "Каждые 3 недели";
+"VC_Every4Weeks" = "Каждые 4 недели";
+"VC_Semimonthly" = "Раз в две недели";
+"VC_Monthly" = "Ежемесячно";
+"VC_Every2Months" = "Каждые 2 месяца";
+"VC_Every3Months" = "Каждые 3 месяца";
+"VC_Every4Months" = "Каждые 4 месяца";
+"VC_Every5Months" = "Каждые 5 месяцев";
+"VC_Every6Months" = "Каждые полгода";
+"VC_EveryYear" = "Каждый год";
+
+/*account*/
+"VC_Accounts" = "Счета";
+"VC_ACCOUNTS" = "Счета";
+
+"VC_Uncleared" = "Не завершено";
+"VC_UNCLEARED" = "Не завершено";
+
+"VC_Account" = "Уч. запись";
+
+/*all transaction list*/
+"VC_AllTransactions" = "Все транзакции";
+
+/*search*/
+"VC_Search" = "Поиск";
+
+/*bill*/
+"VC_Overdue" = "Просрочено";
+"VC_DueWithin7Days" = "В течение 7 дн.";
+"VC_DueWithin30Days" = "В течение 30 дн.";
+"VC_NoBills" = "Счетов на оплату в этом месяце не найдено. Можно создать их, нажав значок «+».";
+
+/*edit bill*/
+"VC_NewBill" = "Добавить";
+"VC_EditBill" = "Изменить";
+"VC_DueDate" = "Квыполнению";
+"VC_Alert" = "Оповещение";
+
+/*bill repeat*/
+"VC_SetRecurring" = "Добавить в шаблоны";
+"VC_TwoWeeks" = "2 недели";
+
+/*reminder*/
+"VC_Reminder" = "Напоминание";
+"VC_Remind Me" = "Напомнить мне";
+"VC_1daybefore" = "За 1 день";
+"VC_2daysbefore" = "За 2 дня";
+"VC_3daysbefore" = "За 3 дня";
+"VC_1weekbefore" = "За 1 неделю";
+"VC_2weeksbefore" = "За 2 недели";
+"VC_ondateofevent" = "В день события";
+
+/*bill Detail*/
+"VC_Due" = "К выполнению";
+"VC_Paid" = "Оплачено";
+"VC_PayBill" = "Оплатить";
+"VC_AddPayment" = "Добавить платеж";
+"VC_PaymentHistory" = "История платежей";
+
+/*bill payment*/
+"VC_Pay" = "Платеж";
+"VC_PaymentDate" = "Дата оплаты";
+
+/*report*/
+"VC_Report" = "Отчет";
+"VC_Range" = "Диапазон";
+"VC_CASHFLOW" = "ОБОРОТ";
+
+/*date range*/
+"VC_DateRange" = "Диапазон";
+"VC_ThisMonth" = "За текущий месяц";
+"VC_LastMonth" = "За последний месяц";
+"VC_ThisQuarter" = "За текущий квартал";
+"VC_LastQuarter" = "За последний квартал";
+"VC_ThisYear" = "За текущий год";
+"VC_LastYear" = "За последний год";
+"VC_CustomRange" = "Диапазон дат";
+
+/*custom range*/
+"VC_StartDate" = "Дата начала";
+"VC_EndDate" = "Дата окончания";
+
+/*setting*/
+"VC_Passcode" = "Пароль";
+"VC_OFF" = "ВЫКЛ.";
+"VC_ON" = "ВКЛ.";
+"VC_Currency" = "Валюта";
+"VC_Budget" = "Бюджет";
+"VC_BUDGET" = "Бюджет";
+"VC_FAQ" = "FAQ";
+"VC_Sync" = "Синхр.";
+"VC_Export Report" = "Экспорт отчета";
+"VC_Backup_Restore" = "Резервное копирование и восстановление";
+"VC_AppVersion" = "Версия приложения";
+"VC_SendFeedback" = "Отправить отзыв";
+"VC_WriteReview" = "Написать отзыв";
+
+/*passcode*/
+"VC_EnterPasscode" = "Ввести пароль";
+"VC_Enteryourpasscode" = "Введите пароль";
+"VC_Re_enteryourpasscode" = "Снова введите пароль";
+
+"VC_PasscodeSetting" = "Настройка пароля";
+"VC_TurnPasscodeOff" = "Выкл. пароль";
+"VC_ChangePasscode" = "Сменить пароль";
+"VC_Re_enteryournewpasscode" = "Снова введите новый пароль";
+
+"VC_PasscodeFailedAttempts" = "Неудачные попытки ввода пароля";
+"VC_Passcodedidnotmatch_Tryagain" = "Пароль не подходит. Повторите попытку.";
+
+/*faq*/
+"VC_faqList1" = "Как изменить или удалить транзакцию";
+"VC_faqList2" = "Как добавить или изменить счет";
+"VC_faqList3" = "Как проверить счета";
+"VC_faqList4" = "Как задать бюджет";
+"VC_faqList5" = "Как перевести средства между бюджетами";
+"VC_faqList6" = "Как изменить месяц на главной странице";
+"VC_faqList7" = "Как найти нужную транзакцию";
+"VC_faqList8" = "Как отправить фотографию, добавленную в транзакцию";
+"VC_faqList9" = "Что такое «Завершено» и «Не завершено», и как выверить счет";
+"VC_faqList10" = "Как добавить, изменить или удалить получателя платежа";
+"VC_faqList11" = "Как добавить, изменить или удалить категорию";
+"VC_faqList12" = "Что означают цвета значков на странице счетов";
+"VC_faqList13" = "Как экспортировать отчет";
+"VC_faqList14" = "Как перевести средства между счетами";
+"VC_faqList15" = "Как выполнить синхронизацию";
+
+
+
+/*payee*/
+"VC_PayeeNoReminder" = "Получатели платежа пока не заданы. Их можно добавить, нажав значок «+».";
+/*edit payee*/
+"VC_NewPayee" = "Добавить";
+"VC_EditPayee" = "Изменить";
+
+
+/*sync*/
+"VC_Dropbox" = "Dropbox";
+"VC_LinkyourDropbox" = "Добавьте аккаунт Dropbox — все данные будут синхронизированы автоматически.";
+
+/*export report*/
+"VC_Transaction" = "Транзакция";
+"VC_Flow" = "Оборот";
+
+
+/*backup & restore*/
+"VC_WebServerAddress" = "Адрес веб-сервера";
+"VC_BackNotes1" = "1. Откройте веб-браузер на компьютере.";
+"VC_BackNotes2" = "2. Введите указанный выше адрес.";
+"VC_BackNotes3" = "3. Следуйте инструкциям по резервному копированию и восстановлению базы данных.";
+"VC_BackNotes4" = "Предупреждение: если версия вашего приложения 4.5 или более поздняя, убедитесь, что архивация выполняется, начиная с версии 4.5 или более поздней.";
+"VC_BackNotes5" = "Не сворачивайте и не закрывайте Expense 5 при загрузке или скачивании данных.";
+
+
+/*ipad_overview*/
+"VC_ipadNoRecords" = "Ничего не найдено";
+/*ipad_budget*/
+"VC_ipadBudgetNoRecords" = "Заданных бюджетов не найдено. Их можно создать, нажав кнопку «Настроить».";
+"VC_ipadBudgetDetailNotes" = "Транзакций в выбранном диапазоне дат не найдено.";
+/*ipad_report*/
+"VC_ipadAllDates" = "Все даты";
+"VC_ipadBiweekly" = "Каждые 2 недели";
+"VC_ipadQuarterly" = "Ежеквартально";
+"VC_ipadYearly" = "Ежегодно";
+
+
+/*btn*/
+"VC_Save" = "Сохранить";
+"VC_Cancel" = "Отмена";
+"VC_Edit" = "Редактировать";
+"VC_Done" = "Готово";
+"VC_Split" = "Разбивка";
+
+/*ads*/
+"VC_iphone_ads" = "Без рекламы. Больше возможностей.";
+"VC_Pro" = "Профи";
+"VC_FullVersion" = "Полная версия";
+"VC_Upgrade Now" = "Обновите сейчас";
+"VC_Syncbetweendevices" = "Синхронизировать";
+"VC_Exportdataandreports" = "Экспортировать данные и отчеты";
+
+/* New Add */
+"VC_Related" = "Подобные";
+"VC_Month View" = "«Месяц»";
+"VC_Bill" = "Счет на оплату";
+"VC_Swip to Change Week" = "Для смены недели проведите пальцем";
+"VC_Budget" = "Бюджет";
+"VC_Budget Process" = "Составление бюджета";
+"VC_Thursday" = "Четверг";
+"VC_ReconcileOff" = "Выкл. выверение счета";
+"VC_ReconcileOn" = "Вкл. выверение счета";
+"VC_ShowCleared" = "Показать завершенные";
+"VC_HideCleared" = "Скрыть завершеные";
+"VC_Icon" = "Значок";
+"VC_ReminderAt" = "Напомнить";
+"VC_Expense" = "Расходы";
+"VC_Income" = "Доходы";
+"VC_CashFlow" = "Оборот";
+"VC_RestorePurchased" = "Восстановить покупки";
+"VC_MigrateData" = "Перенести данные в полную версию";
+"VC_Setting" = "Настройки";
+"VC_Enable Passcode" = "Включить пароль";
+"VC_Enter your old passcode" = "Введите свой старый пароль";
+"VC_PasscodeFailedAttempt" = "Введен неверный пароль";
+"VC_No Full Version was found on this device!" = "Не удалось найти полную версию на этом устройстве.";
+"VC_Would you like to get the Full Version and then transfer data to it?" = "Хотите приобрести полную версию приложения и перенести туда данные?";
+"VC_Data Transfer" = "Передача данных";
+"VC_Please make sure that both the latest free and full version are on your device. Warning: This will replace all data in the Full Version!" = "Убедитесь, что на вашем устройстве установлены самые поздние бесплатная и полная версии. Внимание! Все данные в полной версии будут заменены.";
+"VC_Transfer" = "Передать";
+"VC_No, thanks" = "Нет, спасибо";
+"VC_OK" = "ОК";
+"VC_No Mail Accounts" = "Нет учетных записей эл. почты";
+"VC_Please set up a mail account in order to send mail." = "Для отправки почты настройте учетную запись.";
+"VC_Enter your new passcode" = "Введите свой новый пароль";
+"VC_Next" = "Далее";
+"VC_Account name is needed." = "Укажите название счета.";
+"VC_Account Name already exists." = "Такое название уже существует.";
+"VC_From Account is required." = "Заполните поле «Со счета».";
+"VC_To Account is required." = "Заполните поле «На счет».";
+"VC_Amount is required." = "Укажите сумму.";
+"VC_Type name is needed." = "Укажите тип счета.";
+"VC_The type was exist." = "Такой тип уже существует.";
+"VC_Expense 5 data restore complete" = "Восстановление данных Expense 5 завершено";
+"VC_You must now quit Pocket Expense and re-launch for the new changes to take effect." = "Чтобы изменения вступили в силу, нужно перезапустить приложение Expense 5.";
+"VC_Restore Cancelled" = "Восстановление отменено";
+"VC_The current database and the backup should be the same file. Modifying data is always risky so the restore process has been cancelled as a safety measure." =
+"Текущая база данных и резервная копия должны быть в одном файле. Изменять данные всегда рискованно, поэтому в целях безопасности восстановление может быть отменено.";
+"VC_End Date must be earlier than Due Date." = "Дата окончания должна быть раньше срока выполнения.";
+"VC_Start date should be earlier than end date." = "Дата начала должна быть раньше даты окончания.";
+"VC_Account is needed." = "Укажите счет.";
+"VC_This is a part of a transaction split, and it can not be edited alone." = "Это одна из частей разделения транзакций, и изменить ее отдельно от остальных нельзя.";
+"VC_Category Name is required." = "Укажите название категории.";
+"VC_Category Icon is required." = "Выберите значок категории.";
+"VC_Category already exists." = "Такая категория уже существует.";
+"VC_Old data needs to be processed. Select 'replace' and data on this device will replace data on cloud server, select 'merge' and data will be merged with data on cloud server." = "Необходимо обработать старые данные. Нажмите «Заменить», и данные на этом устройстве заменят данные в облаке. Нажмите «Объединить», и данные на этом устройстве будут объединены с данными в облаке.";
+"VC_Replace" = "Заменить";
+"VC_Merge" = "Объединить";
+"VC_Dropbox sync successed." = "Синхронизация с Dropbox завершена.";
+"VC_Please select at least one account." = "Выберите хотя бы один счет.";
+"VC_Please select at least one category." = "Выберите хотя бы одну категорию.";
+"VC_Restore purchase successfully!" = "Покупка возвращена!";
+"VC_Thank You!" = "Спасибо!";
+"VC_Your purhase was successful!" = "Покупка завершена!";
+"VC_Restore Error" = "Ошибка восстановления";
+"VC_A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored." = "Не удалось найти предыдущую транзакцию. Чтобы вернуть приобретенный продукт, нажмите кнопку «Купить». Если вы уже оплатили его, то с вас не будет взята плата снова, однако покупка будет возвращена.";
+"VC_Purchase Stopped" = "Приобретение прекращено";
+"VC_Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." = "Либо вы отменили запрос, либо произошла ошибка транзакции. Повторите попытку позже или обратитесь в службу поддержкой приложения.";
+"VC_Restore Stopped" = "Восстановление прекращено";
+"VC_Note" = "Заметка";
+"VC_You must have at least one account to add a transaction. You can create accounts in the \"Account\" module." = "Для добавления транзакции требуется хотя бы один счет. Его можно создать в разделе счетов.";
+"VC_Name is required." = "Укажите имя.";
+"VC_Amount is needed." = "Укажите сумму.";
+"VC_Warning" = "Внимание!";
+"VC_Can't send email, please check the email config." = "Не удалось отправить сообщение. Проверьте настройки эл. почты.";
+"VC_'Remind At' is required." = "Заполните поле «Напомнить».";
+"VC_Category is required." = "Выберите категорию.";
+"VC_Payee with this category already exists." = "Получатель платежа с такой категорией уже существует.";
+"VC_Remove" = "Удалить";
+"VC_Accounts can not be same." = "Счета должны быть разными.";
+"VC_From Budget is required." = "Заполните поле «Из бюджета».";
+"VC_To Budget is required." = "Заполните поле «В бюджет».";
+"VC_Confirm restore" = "Подтвердить";
+"VC_Do you want to restore Pocket Expense with the uploaded backup? All current data will be ERASED and REPLACED with the backup, this cannot be undone." = "Хотите восстановить Expense 5 с помощью загруженной резервной копии? Все текущие данные будут УДАЛЕНЫ и ЗАМЕНЕНЫ данными резервной копии. Это действие необратимо.";
+"VC_Pocket Expense data restore complete" = "Восстановление данных Expense 5 завершено.";
+"VC_Thanks for using our Full Version! Please restart the Full Version to complete the transfer." = "Благодарим за использование полной версии! Чтобы завершить передачу данных, перезапустите приложение.";
+"VC_Pocket Expense data transfer success" = "Передача данных Expense 5 завершена";
+"VC_Thanks for using our Full Version! Please restart the Full Version to complete the migration." = "Благодарим за использование полной версии! Чтобы завершить перенос данных, перезапустите приложение.";
+"VC_PocketExpense data transfer failed" = "Сбой передачи данных Expense 5";
+"VC_Please restart the Lite Version to try again." = "Чтобы повторить попытку, перезапустите бесплатную версию.";
+"VC_Account is required." = "Укажите счет.";
+"VC_Forever" = "Всегда";
+"VC_Transaction(CSV)" = "Транзакция (CSV)";
+"VC_Transaction(PDF)" = "Транзакция (PDF)";
+"VC_Flow(PDF)" = "Оборот (PDF)";
+"VC_Group By" = "Группировка";
+"VC_Start From" = "С";
+"VC_End To" = "по";
+"VC_Sequence" = "Последовательность";
+"VC_Send" = "Отправить";
+"VC_Export Transactions" = "Экспорт";
+"VC_Select All" = "Выбрать все";
+"VC_Item(s)" = "Предметы";
+"VC_Mutiple Accounts" = "Несколько счетов";
+"VC_All" = "Все ";
+"VC_Sort By" = "Сортировка";
+"VC_Last 12 Months" = "Последние 12 месяцев";
+"VC_Custom Filter" = "Пользов. фильтр";
+"VC_Select Date" = "Выберите дату";
+"VC_Custom Date" = "Произвольная дата";
+"VC_Column" = "Столбец";
+"VC_Week" = "Неделя";
+"VC_Month" = "Месяц";
+
+
+"VC_You have no budgets setup. You can create them by tapping the \"Adjust\" button." = "Заданных бюджетов не найдено. Их можно создать, нажав кнопку «Настроить».";
+"VC_Bills" = "Счета на оплату";
+"VC_BILLS" = "Счета на оплату";
+
+"VC_Last 30 days" = "За последние 30 дней";
+"VC_Last 60 days" = "За последние 60 дней";
+"VC_Last 90 days" = "За последние 90 дней";
+"VC_Mutiple Categories" = "Несколько категорий";
+"VC_Left" = "Остаток";
+"VC_Spent" = "Потрачено";
+"VC_Ascending" = "По возрастанию";
+"VC_Descending" = "По убыванию";
+"VC_Run Report" = "Сформировать отчет";
+"VC_Out Flow" = "Расходы";
+"VC_In Flow" = "Доходы";
+"VC_Purchase" = "Покупка";
+
+
+"VC_Overview" = "Описание";
+"VC_Show More Details" = "Подробнее";
+"VC_Balance" = "Баланс ";
+"VC_Add" = "Добавить";
+"VC_Last 12 Months" = "Последние 12 месяцев";
+"VC_Custom" = "Диапазон дат";
+"VC_Reconcile" = "Выверить";
+"VC_Upcoming" = "Предстоящие";
+
+/* New Add 2*/
+"VC_Duplicate To Date" = "Продублировать на дату";
+"VC_Just This Bill" = "Только этот счет на оплату";
+"VC_All Future Bills" = "Все последующие счета на оплату";
+"VC_View Photo" = "Просмотр";
+"VC_Change" = "Изменить";
+"VC_Main_NoTransaction" = "Транзакций не найдено.";
+"VC_You need to create at least one account before starting using this app. You can create them by tap the \"Add\" button." = "Прежде чем начать пользоваться приложением, создайте хотя бы один счет. Для этого нажмите кнопку «Добавить».";
+
+//actionsheet
+"VC_This is a repeating transaction, delete it will also delete its all future repeats. Are you sure to delete?" = "Это повторяющаяся транзакция. Если ее удалить, она больше не будет повторяться. Продолжить?";
+"VC_Delete" = "Удалить";
+"VC_Delete %@ will cause to also delete its transactions. Are you sure want to delete it?" = "Если удалить счет %@, будут также удалены связанные с ним транзакции. Продолжить?";
+"VC_Photo from Camera" = "Фото с камеры";
+"VC_Photo from Library" = "Фото из галереи";
+"VC_This is a repeating bill. Do you want to change this bill, or all future bills for name'%@'?" = "Это повторяющийся счет на оплату. Хотите изменить его или все последующие счета для «%@»?";
+"VC_This is a repeating bill. Do you want to delete this bill, or all future bills for name'%@'?" = "Это повторяющийся счет на оплату. Хотите удалить его или все последующие счета для «%@»?";
+"VC_Delete %@ will cause to also delete all its transactions, sub-categories ,related bills and budgets." = "Если удалить категорию «%@», будут удалены все связанные с ней транзакции, подкатегории, счета на оплату и бюджеты.";
+"VC_Delete %@ will cause to also delete all its transactions, related bills and budgets." = "Если удалить категорию «%@», будут удалены все связанные с ней транзакции, счета на оплату и бюджеты.";
+"VC_XFER To" = "Перенос в";
+"VC_XFER From" = "Перенос из";
+"VC_Sub-category Of" = "Подкатегория";
+"VC_Year %@" = "%@ год";
+"VC_Restore" = "Восстановление";
+
+"VC_Categories" = "Kатегории";
+"VC_Payee & Category" = "Получателя и Категория";
+
+//4.3.1版本新添加其他语种没翻译
+"VC_General" = "общий";
+"VC_GENERAL" = "общий";
+"VC_Default Account" = "Учетная запись по умолчанию";
+"VC_Default Category" = "Категория по умолчанию";
+"VC_Week Starts From" = "Неделя начать с";
+"VC_Notification" = "уведомление";
+
+//5.5版本
+"VC_Last12Months" = "последние 12 месяцев";
+"VC_This is a parent category, and it can not be selected to other parent categories." = "This is a parent category, and it can not be selected to other parent categories.";
+
+//V6版本
+"VC_SIGN IN"="ВОЙТИ";
+"VC_Sign Up"="Зарегистр.";
+
+"VC_Password"="Пароль";
+"VC_Email address or password is missing"="Не указан электронный адрес или пароль.";
+"VC_Email or passcode error"="Электронный адрес и пароль не совпадают.";
+"VC_The email address has been used by someone else."="Этот электронный адрес уже занят.";
+"VC_Please use email address as your account."="Введите действительный электронный адрес.";
+"VC_No network connection is established."="Нет сетевых подключений.";
+
+"VC_We have sent an email to <email address>. Please follow the directions in the email to reset password"="Мы отправили сообщение на адрес %@. Выполните указанные в нем действия, чтобы сбросить пароль.";
+
+
+"VC_It is highly recommended that transfer your data from Dropbox to new Expense if you have your latest data synced by Dropbox before."="Настоятельно рекомендуем перенести последние синхронизированные данные из Dropbox в новую версию Expense.";
+"VC_Transfer"="Передать";
+
+"VC_An email for password reset will be sent to your address."="Сообщение для сброса пароля будет отправлено на ваш эл. адрес.";
+
+"VC_Auto Sync"="Автосинхронизация";
+"VC_Sync Now"="Синхронизировать";
+"VC_Start"="начинать";
+
+//V6
+"VC_OVER"="Над";
+"VC_Calendar"="Календарь";
+"VC_Chart"="График";
+"VC_Summary"="Сводка";
+"VC_Top Spent"="Потрачено больше всего";//which category spent most
+"VC_Top Left"="Сэкономлено больше всего";//which category left most
+"VC_Unpaid"="Неоплачено";
+"VC_Left"="Остаток";//budget left
+"VC_Over"="Свыше";
+"VC_DIFFERENCE"="РАЗНИЦА";//amount difference between this month and last month
+"VC_PERCENT"="РАЗНИЦА (%)";
+"VC_LOG OUT"="ВЫХОД";
+"VC_Share To Others"="Поделиться";
+"VC_Update History"="Обновить историю";
+"VC_Disclaimer"="Отказ от ответственности";
+"VC_Privacy Policy"="Политика конфиденциальности";
+"VC_If you like this app, please rate and review."="Если вам нравится это приложение, оцените его и оставьте отзыв.";
+"VC_Send us some questions and suggestions."="Отправляйте нам вопросы и предложения.";
+"VC_Send this app to your family, and friends."="Расскажите об этом приложении семье и друзьям.";
+"VC_Sign in with facebook"="Войти через Facebook";
+"VC_About"="О приложении";
+
+"VC_OpenTouchID"="Открыть Touch ID";
+"VC_CloseTouchID"="Закрыть Touch ID";
+
+"VC_OpenFaceID"="Открыть Face ID";
+"VC_CloseFaceID"="Закрыть Face ID";

@@ -1,0 +1,22 @@
+//
+//  BudgetReports.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "BudgetReports.h"
+#import "BudgetTemplate.h"
+
+
+@implementation BudgetReports
+
+@dynamic incHistory;
+@dynamic genDateTime;
+@dynamic reportName;
+@dynamic budgetsIncOrExc;
+@dynamic incTransaction;
+@dynamic selBudgets;
+
+@end

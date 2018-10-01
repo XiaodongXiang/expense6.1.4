@@ -1,0 +1,52 @@
+//
+//  Transaction.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "Transaction.h"
+#import "Accounts.h"
+#import "BillRule.h"
+#import "Category.h"
+#import "Payee.h"
+#import "Transaction.h"
+#import "TransactionRule.h"
+
+
+@implementation Transaction
+
+@dynamic groupByDate;
+@dynamic others;
+@dynamic amount;
+@dynamic type;
+@dynamic isClear;
+@dynamic notes;
+@dynamic orderIndex;
+@dynamic dateTime;
+@dynamic transactionType;
+@dynamic photoName;
+@dynamic category;
+@dynamic payee;
+@dynamic incomeAccount;
+@dynamic expenseAccount;
+@dynamic billItem;
+@dynamic transactionRule;
+@dynamic parTransaction;
+@dynamic childTransactions;
+@dynamic groupByDateString;
+
+-(NSString *)groupByDateString
+{
+	[self willAccessValueForKey:@"groupByDateString"];
+	
+	NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+	[dateFormatter setDateFormat:@"MMM yyyy"];
+	NSString *stringToReturn =[NSString stringWithString:[dateFormatter stringFromDate:self.dateTime]];
+ 	[dateFormatter release];
+	[self didAccessValueForKey:@"groupByDateString"];
+	return stringToReturn;	
+}
+
+@end

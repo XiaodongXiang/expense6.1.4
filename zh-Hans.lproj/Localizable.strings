@@ -1,0 +1,602 @@
+/*
+ Localizable.strings
+ PocketExpense
+ 
+ Created by humingjing on 14-7-15.
+ 
+ */
+
+
+/*iphone Main VC */
+"VC_January" = "一月";
+"VC_February" = "二月";
+"VC_March" = "三月";
+"VC_April" = "四月";
+"VC_May" = "五月";
+"VC_June" = "六月";
+"VC_July" = "七月";
+"VC_Auguest" = "八月";
+"VC_September" = "九月";
+"VC_October" = "十月";
+"VC_November" = "十一月";
+"VC_December" = "十二月";
+
+"VC_Sunday" = "星期日";
+"VC_Monday" = "星期一";
+"VC_Tuesday" = "星期二";
+"VC_Wednesday" = "星期三";
+"VC_Friday" = "星期五";
+"VC_Thursday" = "星期四";
+"VC_Saturday" = "星期六";
+
+"VC_LEFT" = "剩余预算";
+"VC_SPENT" = "已用预算";
+"VC_NETWORTH" = "净资产";
+"VC_NetWorth" = "净资产";
+
+
+"VC_Main_NoTransaction" = "该天没有交易";
+
+/*iphone Main Month VC*/
+"VC_Today" = "今天";
+"VC_EXPENSE" = "支出";
+"VC_INCOME" = "收入";
+"VC_BALANCE" = "结余";
+
+/*budget VC*/
+"VC_Budget" = "预算";
+"VC_Adjust" = "调整";
+"VC_Total" = "合计";
+
+/*budget Introduce*/
+"VC_SetupBudget" = "设置预算";
+"VC_SelectBudgetNotes" = "选择您想设置为月预算的类别，并设置金额。";
+"VC_SelectCategory" = "选择类别";
+
+
+/*budget list VC*/
+"VC_BudgetList" = "预算";
+"VC_ITEMS" = "项";
+
+/*budget select category*/
+"VC_SelectCategories" = "选择类别";
+"VC_SELECTCATEGORIESFORMONITOR" = "选择要设置为预算的类别";
+
+/*budget detail*/
+"VC_BudgetDetailNotes" = "该预算还未被使用";
+
+"VC_Auto" = "汽车";
+"VC_AutoGas" = "汽车: 汽油";
+"VC_AutoRegistration" = "汽车: 注册";
+"VC_AutoService" = "汽车: 维修保养";
+"VC_BankCharge" = "银行手续费";
+"VC_Bonus" = "奖金";
+"VC_Cash" = "现金";
+"VC_Charity" = "慈善";
+"VC_Childcate" = "幼托";
+"VC_Clothing" = "衣服";
+
+"VC_CreditCardPayment" = "信用卡支付";
+"VC_EatingOut" = "外出用餐";
+"VC_Education" = "教育";
+"VC_Entertainment" = "娱乐";
+"VC_Gifts" = "礼物";
+"VC_Groceries" = "食品杂货";
+"VC_HealthFitness" = "健康与健身";
+"VC_HomeRepair" = "家庭维修";
+"VC_Household" = "家庭";
+"VC_Insurance" = "保险";
+
+"VC_Interest Exp" = "利息支出";
+"VC_Loan" = "贷款";
+"VC_Medical" = "医疗";
+"VC_Misc" = "杂项";
+"VC_MortgagePayment" = "抵押贷款";
+"VC_Pets" = "宠物";
+"VC_Others" = "其他";
+
+"VC_Rent" = "租金";
+"VC_Salary" = "工资";
+"VC_SavingsDeposit" = "储蓄存款";
+"VC_Tax" = "税金";
+"VC_TaxFed" = "税金: 联邦财产税";
+"VC_TaxMedicare" = "税金: 医疗保险税";
+"VC_TaxOther" = "税金: 其他";
+"VC_TaxProperty" = "税金: 财产税";
+"VC_TaxSDI" = "税金: SDI";
+"VC_TaxSocSec" = "税金: 社会保障税";
+"VC_TaxState" = "税金: 国税";
+
+"VC_Travel" = "旅行";
+"VC_Utilities" = "公用事业";
+"VC_UtilitiesCableTV" = "公用事业: 有线电视";
+"VC_UtilitiesGarbageRecycling" = "公用事业: 垃圾回收废";
+"VC_UtilitiesGasElectric" = "公用事业: 电力燃气费";
+"VC_UtilitiesInternet" = "公用事业: 上网费";
+"VC_UtilitiesTelephone" = "公用事业: 电话费";
+"VC_UtilitiesWater" = "公用事业: 水费";
+"VC_Transport" = "交通";
+"VC_TaxRefund" = "退税";
+
+
+/*budget Transfer*/
+"VC_BudgetTransfer" = "转移";
+"VC_FromBudget" = "来自预算";
+"VC_ToBudget" = "目的预算";
+"VC_SelectTargetBudget" = "选择目的预算";
+
+/*edit category*/
+"VC_NewCategory" = "新类别";
+"VC_EditCategory" = "编辑类别";
+"VC_Name" = "名称";
+"VC_Type" = "类型";
+"VC_Sub-category Of" = "子类别";
+"VC_None" = "空";
+"VC_Unnamed" = "未命名";
+"VC_CategoryEdit_NewCategory" = "新类别";
+
+/*parent category*/
+"VC_Parent Category" = "父类别";
+
+/*edit transaction*/
+"VC_NewTransaction" = "新交易";
+"VC_NewTransaction_iPad" = "新交易";
+
+"VC_EditTransaction" = "编辑交易";
+"VC_Payee" = "收款方";
+"VC_Amount" = "金额";
+"VC_FromAccount" = "来自账户";
+"VC_ToAccount" = "目的账户";
+"VC_Category" = "类别";
+"VC_Account" = "账户";
+"VC_Date" = "日期";
+"VC_Repeat" = "循环";
+"VC_Cleared" = "已确认";
+"VC_Photo" = "照片";
+"VC_Memo" = "备忘";
+
+/*account select*/
+"VC_SelectAccount" = "选择账户";
+
+/*edit account*/
+"VC_NewAccount" = "新账户";
+"VC_EditAccount" = "编辑账户";
+"VC_AccountName" = "账户名称";
+"VC_StartBalance" = "起始余额";
+"VC_OpenDate" = "开户日期";
+"VC_AutoClear" = "自动确认";
+
+/*select accounttype*/
+"VC_SelectType" = "选择类型";
+"VC_Asset" = "资产";
+"VC_Cash" = "现金";
+"VC_Checking" = "活期账户";
+"VC_CreditCard" = "信用卡";
+"VC_DebitCard" = "借记卡";
+"VC_Investing/Retirement" = "投资/养老金";
+"VC_Loan" = "贷款";
+"VC_Savings" = "储蓄";
+"VC_Others" = "其他";
+
+/*edit accounttype*/
+"VC_NewType" = "新类型";
+"VC_EditType" = "编辑类型";
+/*repeat*/
+"VC_Never" = "从不";
+"VC_Daily" = "每天";
+"VC_Weekly" = "每周";
+"VC_Every2Weeks" = "每两周";
+"VC_Every3Weeks" = "每三周";
+"VC_Every4Weeks" = "每四周";
+"VC_Semimonthly" = "每半个月";
+"VC_Monthly" = "每月";
+"VC_Every2Months" = "每两个月";
+"VC_Every3Months" = "每三个月";
+"VC_Every4Months" = "每四个月";
+"VC_Every5Months" = "每五个月";
+"VC_Every6Months" = "每六个月";
+"VC_EveryYear" = "每年";
+
+/*account*/
+"VC_Accounts" = "账户";
+"VC_ACCOUNTS" = "账户";
+
+"VC_Uncleared" = "待定";
+"VC_UNCLEARED" = "待定";
+
+"VC_Account" = "账户";
+
+/*all transaction list*/
+"VC_AllTransactions" = "所有交易";
+
+/*search*/
+"VC_Search" = "搜索";
+
+/*bill*/
+"VC_Overdue" = "过期";
+"VC_DueWithin7Days" = "7天内应支付";
+"VC_DueWithin30Days" = "30天内应支付";
+"VC_NoBills" = "近期无账单， 点击 \"+\" 按钮创建新账单";
+
+/*edit bill*/
+"VC_NewBill" = "新账单";
+"VC_EditBill" = "编辑账单";
+"VC_DueDate" = "应付日期";
+"VC_Alert" = "提醒";
+
+/*bill repeat*/
+"VC_SetRecurring" = "设置循环";
+"VC_TwoWeeks" = "两周";
+
+/*reminder*/
+"VC_Reminder" = "提醒";
+"VC_Remind Me" = "提醒我";
+"VC_1daybefore" = "一天前";
+"VC_2daysbefore" = "两天前";
+"VC_3daysbefore" = "三天前";
+"VC_1weekbefore" = "一周前";
+"VC_2weeksbefore" = "两周前";
+"VC_ondateofevent" = "事件当天";
+
+/*bill Detail*/
+"VC_Due" = "应支付";
+"VC_Paid" = "已支付";
+"VC_PayBill" = "支付账单";
+"VC_AddPayment" = "添加支付";
+"VC_PaymentHistory" = "支付记录";
+
+/*bill payment*/
+"VC_Pay" = "支付";
+"VC_PaymentDate" = "支付日期";
+
+/*report*/
+"VC_Report" = "报表";
+"VC_Range" = "范围";
+"VC_CASHFLOW" = "现金流量";
+
+/*date range*/
+"VC_DateRange" = "范围";
+"VC_ThisMonth" = "本月";
+"VC_LastMonth" = "上个月";
+"VC_ThisQuarter" = "本季度";
+"VC_LastQuarter" = "上个季度";
+"VC_ThisYear" = "今年";
+"VC_LastYear" = "去年";
+"VC_CustomRange" = "自定义";
+
+/*custom range*/
+"VC_StartDate" = "开始日期";
+"VC_EndDate" = "结束日期";
+
+/*setting*/
+"VC_Passcode" = "密码";
+"VC_OFF" = "关";
+"VC_ON" = "开";
+"VC_Currency" = "货币";
+"VC_Budget" = "预算";
+"VC_BUDGET" = "预算";
+"VC_FAQ" = "FAQ";
+"VC_Sync" = "同步";
+"VC_Export Report" = "导出报表";
+"VC_Backup_Restore" = "备份与还原";
+"VC_AppVersion" = "应用版本";
+"VC_SendFeedback" = "意见反馈";
+"VC_WriteReview" = "评价应用";
+
+/*passcode*/
+"VC_EnterPasscode" = "输入密码";
+"VC_Enteryourpasscode" = "输入您的密码";
+"VC_Re_enteryourpasscode" = "再次输入密码";
+
+"VC_PasscodeSetting" = "密码设置";
+"VC_TurnPasscodeOff" = "关闭密码";
+"VC_ChangePasscode" = "更换密码";
+"VC_Re_enteryournewpasscode" = "重新输入您的新密码";
+
+"VC_PasscodeFailedAttempts" = "尝试密码失败次数";
+"VC_Passcodedidnotmatch_Tryagain" = "密码不匹配，请再次尝试。";
+
+/*faq*/
+"VC_faqList1" = "如何编辑或删除交易";
+"VC_faqList2" = "如何添加或编辑账户";
+"VC_faqList3" = "如何查看账户";
+"VC_faqList4" = "如何设置预算";
+"VC_faqList5" = "如何在两个预算间转移金额";
+"VC_faqList6" = "如何在主页切换月份";
+"VC_faqList7" = "如何搜索相关交易";
+"VC_faqList8" = "如何发送交易中的照片";
+"VC_faqList9" = "什么是已确认/待定以及如何对账";
+"VC_faqList10" = "如何添加，编辑或删除收款方";
+"VC_faqList11" = "如何添加，编辑或删除类别";
+"VC_faqList12" = "账单页面中，圆圈的颜色含义";
+"VC_faqList13" = "如何导出报告";
+"VC_faqList14" = "如何账户之间转移金额";
+"VC_faqList15" = "如何同步";
+
+
+
+/*payee*/
+"VC_PayeeNoReminder" = "未设置任何收款方，点击 \"+\" 按钮创建新收款方。";
+/*edit payee*/
+"VC_NewPayee" = "新收款方";
+"VC_EditPayee" = "编辑收款方";
+
+
+/*sync*/
+"VC_Dropbox" = "使用Dropbox同步";
+"VC_LinkyourDropbox" = "链接您的dropbox账号，所有数据将被自动同步。";
+
+/*export report*/
+"VC_Transaction" = "交易";
+"VC_Flow" = "资金流动";
+
+
+/*backup & restore*/
+"VC_WebServerAddress" = "Web服务地址";
+"VC_BackNotes1" = "1. 在电脑上运行浏览器";
+"VC_BackNotes2" = "2. 输入上方显示的地址";
+"VC_BackNotes3" = "3. 跟从提示来备份或还原您的数据";
+"VC_BackNotes4" = "警告：当您需要还原的应用版本为4.5或4.5以后，请确认备份包同样来自应用版本4.5或4.5以后。 ";
+"VC_BackNotes5" = "当您正在上传或下载数据时，请勿退出当前页面或关闭应用。";
+
+
+/*ipad_overview*/
+"VC_ipadNoRecords" = "暂无记录";
+/*ipad_budget*/
+"VC_ipadBudgetNoRecords" = "未设置预算。点击“调整”按钮来创建新预算。";
+"VC_ipadBudgetDetailNotes" = "在该时间段内暂无数据。";
+/*ipad_report*/
+"VC_ipadAllDates" = "所有";
+"VC_ipadBiweekly" = "每两周";
+"VC_ipadQuarterly" = "每季度";
+"VC_ipadYearly" = "每年";
+
+
+/*btn*/
+"VC_Save" = "保存";
+"VC_Cancel" = "取消";
+"VC_Edit" = "编辑";
+"VC_Done" = "完成";
+"VC_Split" = "分支";
+
+/*ads*/
+"VC_iphone_ads" = "去除广告，更多功能。";
+"VC_Pro" = "正式版";
+"VC_FullVersion" = "正式版";
+"VC_Upgrade Now" = "立即升级";
+"VC_Syncbetweendevices" = "设备之间同步";
+"VC_Exportdataandreports" = "导出数据和报表";
+
+//新添加
+"VC_Thursday" = "星期四";
+"VC_ReconcileOff" = "关闭对账";
+"VC_ReconcileOn" = "对账";
+"VC_ShowCleared" = "显示已确认";
+"VC_HideCleared" = "隐藏已确认";
+"VC_Icon" = "图标";
+"VC_ReminderAt" = "提醒时间";
+"VC_Expense" = "支出";
+"VC_Income" = "收入";
+"VC_CashFlow" = "现金流量";
+"VC_RestorePurchased" = "恢复购买";
+"VC_MigrateData" = "转移数据到正式版";
+"VC_Setting" = "设置";
+"VC_Enable Passcode" = "输入密码";
+"VC_Enter your old passcode" = "输入旧的密码";
+"VC_PasscodeFailedAttempt" = "密码尝试失败次数";
+"VC_No Full Version was found on this device!" = "在此设备中总未找到正式版";
+"VC_Would you like to get the Full Version and then transfer data to it?" = "是否要获得正式版，并转移当前数据到正式版？";
+"VC_Data Transfer" = "数据转移";
+"VC_Please make sure that both the latest free and full version are on your device. Warning: This will replace all data in the Full Version!" = "请确认最新的免费版和正式版都在此设备上。警告：此操作将替换正式版的所有数据！";
+"VC_Transfer" = "转移";
+"VC_No, thanks" = "不，谢谢";
+"VC_OK" = "确定";
+"VC_No Mail Accounts" = "未找到邮件账户";
+"VC_Please set up a mail account in order to send mail." = "请设置一个邮件账户来发送邮件。";
+"VC_Enter your new passcode" = "输入新的密码";
+"VC_Next" = "下一步";
+"VC_Account name is needed." = "账户名称不能为空";
+"VC_Account Name already exists." = "账户名称已存在";
+"VC_From Account is required." = "“来自账户”不能为空";
+"VC_To Account is required." = "“目的账户”不能为空";//这两句整合为一句"“来自账户”与“目的账户”不能为空" 其中任意一项没填写都弹出alert
+"VC_Amount is required." = "金额不能为空";
+"VC_Type name is needed." = "类型名称不能为空";
+"VC_The type was exist." = "类型已存在";
+"VC_Expense 5 data restore complete" = "数据恢复已完成";
+"VC_You must now quit Pocket Expense and re-launch for the new changes to take effect." = "请退出Expense 5并且重新运行使其生效。";
+"VC_Restore Cancelled" = "恢复已取消";
+"VC_The current database and the backup should be the same file. Modifying data is always risky so the restore process has been cancelled as a safety measure." =
+"当前数据库与备份包文件不匹配。修改数据或文件名是危险的，为安全起见恢复操作已被取消。";
+"VC_End Date must be earlier than Due Date." = "开始日期必须早于支付日期。";
+"VC_Start date should be earlier than End Date." = "开始日期必须早于结束日期。";
+"VC_Account is needed." = "账户不能为空";
+"VC_This is a part of a transaction split, and it can not be edited alone." = "这是交易的一部分分支，不能被单独编辑。";
+"VC_Category Name is required." = "类别名称不能为空";
+"VC_Category Icon is required." = "请选择类别图标";
+"VC_Category already exists." = "类别已存在";
+"VC_Old data needs to be processed. Select 'replace' and data on this device will replace data on cloud server, select 'merge' and data will be merged with data on cloud server." = "旧的数据需要处理。选择 “替换” 则此设备上的数据将替换云端数据。选择 “合并” 则此设备上的数据将与云端数据合并。";
+"VC_Replace" = "替换";
+"VC_Merge" = "合并";
+"VC_Dropbox sync successed." = "Dropbox同步成功";
+"VC_Please select at least one account." = "请至少选择一个账户";
+"VC_Please select at least one category." = "请至少选择一个类别";
+"VC_Restore purchase successfully!" = "恢复购买成功！";
+"VC_Thank You!" = "谢谢！";
+"VC_Your purhase was successful!" = "购买成功！";
+"VC_Restore Error" = "恢复错误";
+"VC_A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored." = "未找到之前的购买记录。点击购买按钮来恢复购买项目。已购买过的账户不会被再次扣款，只是购买内容将被恢复。";
+"VC_Purchase Stopped" = "购买终止";
+"VC_Either you cancelled the request or Apple reported a transaction error. Please try again later, or contact the app's customer support for assistance." = "您已取消请求或苹果官方报告了一个交易错误信息。请稍后重试，或联系苹果客服中心求助。";
+"VC_Restore Stopped" = "恢复终止";
+"VC_Note" = "备注";
+"VC_You must have at least one account to add a transaction. You can create accounts in the \"Account\" module." = "您必须有至少一个账户来添加交易。您可在\"账户\"模块中创建账户。";
+"VC_Name is required." = "名称不能为空";
+"VC_Amount is needed." = "金额不能为空";
+"VC_Warning" = "警告";
+"VC_Can't send email, please check the email config." = "无法发送邮件，请检查邮箱配置";
+"VC_'Remind At' is required." = "“提醒时间”不能为空";
+"VC_Category is required." = "类别不能为空";
+"VC_Payee with this category already exists." = "该类别已存在相同的收款方";
+"VC_Remove" = "移除";
+"VC_Accounts can not be same." = "账户不能重复";
+"VC_From Budget is required." = "“来自预算”不能为空";
+"VC_To Budget is required." = "“目的预算”不能为空";
+"VC_Confirm restore" = "确认恢复";
+"VC_Do you want to restore Pocket Expense with the uploaded backup? All current data will be ERASED and REPLACED with the backup, this cannot be undone." = "您想用上传的备份文件来恢复Expense 5的数据吗？所有当前的数据将被备份包中的数据清除和替换，操作将不可撤销。";
+"VC_RestorePurchased" = "恢复购买";
+"VC_Pocket Expense data restore complete" = "Expense 5数据恢复完成";
+"VC_Thanks for using our Full Version! Please restart the Full Version to complete the transfer." = "感谢您使用正式版！重启正式版来完成数据转移。";
+"VC_Pocket Expense data transfer success" = "Expense 5数据转移成功";
+"VC_Thanks for using our Full Version! Please restart the Full Version to complete the migration." = "感谢您使用正式版！重启正式版来完成数据转移。";
+"VC_PocketExpense data transfer failed" = "PocketExpense数据转移失败";
+"VC_Please restart the Lite Version to try again." = "请重新打开免费版再次尝试。";
+"VC_Account is required." = "账户不能为空";
+"VC_Forever" = "永远";
+"VC_Transaction(CSV)" = "交易(CSV)";
+"VC_Transaction(PDF)" = "交易(PDF)";
+"VC_Flow(PDF)" = "资金流动(PDF)";
+"VC_Group By" = "分组";
+"VC_Start From" = "开始时间";
+"VC_End To" = "结束时间";
+"VC_Sequence" = "排序";
+"VC_Send" = "发送";
+"VC_Export Transactions" = "导出交易";
+"VC_Select All" = "全选";
+"VC_Item(s)" = "项";
+"VC_Mutiple Accounts" = "多个账户";
+"VC_All" = "所有";
+"VC_Sort By" = "排序";
+"VC_Last 12 Months" = "最近12个月";
+"VC_Custom Filter" = "自定义筛选";
+"VC_Select Date" = "选择日期";
+"VC_Custom Date" = "自定义日期";
+"VC_Column" = "列";
+"VC_Week" = "周";
+"VC_Month" = "月";
+
+"VC_You have no budgets setup. You can create them by tapping the \"Adjust\" button." = "还未设置预算。请点击\"调整\"按钮来设置。";
+"VC_Bills" = "账单";
+"VC_BILLS"="账单";
+"VC_Last 30 days" = "最近30天";
+"VC_Last 60 days" = "最近60天";
+"VC_Last 90 days" = "最近90天";
+"VC_Mutiple Categories" = "多个类别";
+"VC_Left" = "剩余预算";
+"VC_Spent" = "已用预算";
+"VC_Ascending" = "升序";
+"VC_Descending" = "降序";
+"VC_Run Report" = "生成报告";
+"VC_Out Flow" = "资金流出";
+"VC_In Flow" = "资金流入";
+"VC_Purchase" = "购买";
+
+"VC_Overview" = "概览";
+
+"VC_Show More Details" = "显示更多细节";
+"VC_Balance" = "结余";
+"VC_Add" = "添加";
+"VC_Last 12 Months" = "最近12个月";
+"VC_Custom" = "自定义";
+"VC_Reconcile" = "对账";
+
+"VC_Upcoming" = "即将到来";
+
+"VC_Related" = "相关";
+"VC_Month View" = "月份视图";
+"VC_Bill" = "账单";
+"VC_Swip to Change Week" = "滑动改变周视图";
+"VC_Budget" = "预算";
+"VC_Budget Process" = "预算进度";
+
+
+//第三次添加
+"VC_Duplicate To Date" = "复制到日期";
+"VC_Just This Bill" = "仅当前账单";
+"VC_All Future Bills" = "所有后续账单";
+"VC_View Photo" = "查看照片";
+"VC_Change" = "更换照片";
+"VC_Main_NoTransaction" = "该天暂无交易";//重新修改，添加了s
+"VC_You need to create at least one account before starting using this app. You can create them by tap the \"Add\" button." = "在开始使用前您需要创建至少一个账户。点击“添加”按钮来创建账户。"; //这句多余了去掉，这种情况不需要弹出弹框
+
+//actionsheet
+"VC_This is a repeating transaction, delete it will also delete its all future repeats. Are you sure to delete?" = "这是一个循环交易，删除它将同时删除所有后续循环。是否确认删除？";
+"VC_Delete" = "删除";
+"VC_Delete %@ will cause to also delete its transactions. Are you sure want to delete it?" = "删除 %@ 将导致其下的交易也被删除。确认删除？";
+"VC_Photo from Camera" = "拍照";
+"VC_Photo from Library" = "本地相册";
+"VC_This is a repeating bill. Do you want to change this bill, or all future bills for name'%@'?" = "这是一笔循环账单。是否仅修改当前账单，还是同时修改所有后续账单“%@”？";
+"VC_This is a repeating bill. Do you want to delete this bill, or all future bills for name'%@'?" = "这是一笔循环账单。是否仅删除当前这笔账单，还是删除所有后续账单“%@”？";
+"VC_Delete %@ will cause to also delete all its transactions, sub-categories ,related bills and budgets." = "删除 %@ 将同时删除其下所有交易，子类，以及账单和预算。确认删除？";
+"VC_Delete %@ will cause to also delete all its transactions, related bills and budgets." = "删除 %@ 将同时删除其下所有交易，账单以及预算。确认删除？";
+"VC_XFER To" = "转移至";
+"VC_XFER From" = "转移自";
+"VC_Year %@" = "%@年";
+"VC_Restore" = "恢复";
+
+"VC_Categories" = "类别";
+"VC_Payee & Category" = "收款方 & 类别";
+
+//4.3.1版本新添加其他语种没翻译
+"VC_General" = "通用";
+"VC_GENERAL" = "通用";
+
+"VC_Default Account" = "默认账户";
+"VC_Default Category" = "默认类别";
+"VC_Week Starts From" = "周起始于";
+"VC_Notification" = "通知";
+
+//5.5版本
+"VC_Last12Months" = "最近12个月";
+"VC_This is a parent category, and it can not be selected to other parent categories." = "这是一个父类类别，无法为其选择其他父类。";
+//V6版本
+"VC_SIGN IN"="登录";
+"VC_Sign Up"="注册";
+
+"VC_Password"="密码";
+"VC_Email address or password is missing"="请输入邮件地址或密码";
+"VC_Email or passcode error"="邮件地址或密码错误";
+"VC_The email address has been used by someone else."="邮件地址已被注册";
+"VC_Please use email address as your account."="邮件地址格式错误";
+"VC_No network connection is established."="网络未连接";
+
+"VC_We have sent an email to <email address>. Please follow the directions in the email to reset password"="重置邮件已发送至 %@，请根据邮件中的指示来重置密码。";
+
+
+"VC_It is highly recommended that transfer your data from Dropbox to new Expense if you have your latest data synced by Dropbox before."="若您曾经使用dropbox同步过最新数据，我们建议您将数据从dropbox上转移至新Expense。";
+"VC_Transfer"="转移数据";
+
+"VC_An email for password reset will be sent to your address."="我们将发送重置邮件至您的邮箱";
+
+"VC_Auto Sync"="自动同步";
+"VC_Sync Now"="立即同步";
+"VC_Start"="开始";
+
+//V6
+
+"VC_OVER"="超出";
+"VC_Calendar"="日历";
+"VC_Chart"="图表";
+"VC_Summary"="概要";
+"VC_Top Spent"="最高消费";
+"VC_Top Left"="最高剩余";
+"VC_Unpaid"="未完成";
+"VC_Left"="剩余";//剩余
+"VC_Over"="超出";
+"VC_DIFFERENCE"="差额";//差值
+"VC_PERCENT"="百分比";
+"VC_LOG OUT"="注销";
+"VC_Share To Others"="分享给他人";
+"VC_Update History"="更新记录";
+"VC_Disclaimer"="免责声明";
+"VC_Privacy Policy"="隐私政策";
+"VC_If you like this app, please rate and review."="如果您喜欢这款app，请给予评价";
+"VC_Send us some questions and suggestions."="给我们提一些意见或问题";
+"VC_Send this app to your family, and friends."="将这款app分享给家人朋友";
+"VC_Sign in with facebook"="Facebook登录";
+"VC_About"="关于";
+
+"VC_OpenTouchID"="启用Touch ID";
+"VC_CloseTouchID"="关闭Touch ID";
+
+"VC_OpenFaceID"="启用Face ID";
+"VC_CloseFaceID"="关闭Face ID";

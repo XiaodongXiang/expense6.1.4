@@ -1,0 +1,31 @@
+//
+//  Payee.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "Payee.h"
+#import "BillRule.h"
+#import "Category.h"
+#import "Transaction.h"
+
+
+@implementation Payee
+
+@dynamic phone;
+@dynamic others;
+@dynamic website;
+@dynamic memo;
+@dynamic orderIndex;
+@dynamic name;
+@dynamic tranAmount;
+@dynamic tranCleared;
+@dynamic tranType;
+@dynamic tranMemo;
+@dynamic transaction;
+@dynamic billItem;
+@dynamic category;
+
+@end

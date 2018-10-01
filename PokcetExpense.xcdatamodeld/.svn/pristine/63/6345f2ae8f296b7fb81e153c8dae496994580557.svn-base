@@ -1,0 +1,30 @@
+//
+//  AccountType.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class Accounts;
+
+@interface AccountType : NSManagedObject
+
+@property (nonatomic, retain) NSString * others;
+@property (nonatomic, retain) NSNumber * ordexIndex;
+@property (nonatomic, retain) NSString * typeName;
+@property (nonatomic, retain) NSString * iconName;
+@property (nonatomic, retain) NSNumber * isDefault;
+@property (nonatomic, retain) NSSet *accounts;
+@end
+
+@interface AccountType (CoreDataGeneratedAccessors)
+
+- (void)addAccountsObject:(Accounts *)value;
+- (void)removeAccountsObject:(Accounts *)value;
+- (void)addAccounts:(NSSet *)values;
+- (void)removeAccounts:(NSSet *)values;
+@end

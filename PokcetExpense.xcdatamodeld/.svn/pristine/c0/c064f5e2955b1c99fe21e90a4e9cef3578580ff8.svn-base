@@ -1,0 +1,51 @@
+//
+//  Category.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+@class BillReports, BillRule, BudgetTemplate, Payee, Transaction, TransactionReports;
+
+@interface Category : NSManagedObject
+
+@property (nonatomic, retain) NSString * categoryName;
+@property (nonatomic, retain) NSString * others;
+@property (nonatomic, retain) NSNumber * colorName;
+@property (nonatomic, retain) NSNumber * isDefault;
+@property (nonatomic, retain) NSNumber * recordIndex;
+@property (nonatomic, retain) NSNumber * hasBudget;
+@property (nonatomic, retain) NSNumber * isSystemRecord;
+@property (nonatomic, retain) NSString * iconName;
+@property (nonatomic, retain) NSString * categoryType;
+@property (nonatomic, retain) BillReports *billRep;
+@property (nonatomic, retain) TransactionReports *transactionRep;
+@property (nonatomic, retain) BudgetTemplate *budgetTemplate;
+@property (nonatomic, retain) NSSet *transactions;
+@property (nonatomic, retain) NSSet *billItem;
+@property (nonatomic, retain) NSSet *payee;
+@property (nonatomic, retain) NSString * groupName;
+
+@end
+
+@interface Category (CoreDataGeneratedAccessors)
+
+- (void)addTransactionsObject:(Transaction *)value;
+- (void)removeTransactionsObject:(Transaction *)value;
+- (void)addTransactions:(NSSet *)values;
+- (void)removeTransactions:(NSSet *)values;
+- (void)addBillItemObject:(BillRule *)value;
+- (void)removeBillItemObject:(BillRule *)value;
+- (void)addBillItem:(NSSet *)values;
+- (void)removeBillItem:(NSSet *)values;
+
+- (void)addPayeeObject:(Transaction *)value;
+- (void)removePayeesObject:(Transaction *)value;
+- (void)addPayee:(NSSet *)values;
+- (void)removePayee:(NSSet *)values;
+
+@end

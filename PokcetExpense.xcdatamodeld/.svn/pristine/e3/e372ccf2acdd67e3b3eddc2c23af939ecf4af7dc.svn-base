@@ -1,0 +1,36 @@
+//
+//  Accounts.m
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import "Accounts.h"
+#import "AccountType.h"
+#import "BillRule.h"
+#import "Transaction.h"
+#import "TransactionReports.h"
+
+
+@implementation Accounts
+
+@dynamic iconName;
+@dynamic others;
+@dynamic amount;
+@dynamic runningBalance;
+@dynamic autoClear;
+@dynamic reconcile;
+@dynamic orderIndex;
+@dynamic dateTime;
+@dynamic accName;
+@dynamic checkNumber;
+@dynamic dueDate;
+@dynamic transactionRep;
+@dynamic expenseTransactions;
+@dynamic accountType;
+@dynamic toBill;
+@dynamic fromBill;
+@dynamic incomeTransactions;
+@dynamic creditLimit;
+@end

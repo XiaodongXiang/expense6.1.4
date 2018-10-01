@@ -1,0 +1,83 @@
+//
+//  Setting.h
+//  PocketExpense
+//
+//  Created by MV on 3/8/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
+
+
+@interface Setting : NSManagedObject
+
+@property (nonatomic, retain) NSString * expenseLastView;
+@property (nonatomic, retain) NSString * sortType;
+@property (nonatomic, retain) NSString * expDRString;
+@property (nonatomic, retain) NSDate * cateDRendDate;
+@property (nonatomic, retain) NSDate * cateDRstartDate;
+@property (nonatomic, retain) NSNumber * playorder;
+@property (nonatomic, retain) NSString * passcode;
+@property (nonatomic, retain) NSString * accDRstring;
+@property (nonatomic, retain) NSNumber * isBefore;
+@property (nonatomic, retain) NSDate * accDRendDate;
+@property (nonatomic, retain) NSString * cateDRstring;
+@property (nonatomic, retain) NSString * currency;
+@property (nonatomic, retain) NSString * weekstartday;
+@property (nonatomic, retain) NSDate * accDRstartDate;
+
+@property (nonatomic, retain) NSNumber * payeeCfged;
+@property (nonatomic, retain) NSNumber * payeeCategory;
+@property (nonatomic, retain) NSNumber * payeeMemo;
+@property (nonatomic, retain) NSNumber * payeeName;
+@property (nonatomic, retain) NSNumber * payeeTranAmount;
+@property (nonatomic, retain) NSNumber * payeeTranClear;
+@property (nonatomic, retain) NSNumber * payeeTranMemo;
+@property (nonatomic, retain) NSNumber * payeeTranType;
+@property (nonatomic, retain) NSNumber * budgetNewStyle;
+@property (nonatomic, retain) NSString *budgetNewStyleCycle;
+@property (nonatomic, retain) NSString * others;
+@property (nonatomic, retain) NSString * others1;
+@property (nonatomic, retain) NSString * others2;
+@property (nonatomic, retain) NSString * others3;
+@property (nonatomic, retain) NSString * others4;
+@property (nonatomic, retain) NSString * others5;
+@property (nonatomic, retain) NSString * others6;
+@property (nonatomic, retain) NSString * others7;
+@property (nonatomic, retain) NSString * others8;
+@property (nonatomic, retain) NSString * others9;
+@property (nonatomic, retain) NSString * others10;
+@property (nonatomic, retain) NSString * others11;
+@property (nonatomic, retain) NSString * others12;
+@property (nonatomic, retain) NSString * others13;
+@property (nonatomic, retain) NSString * others14;
+@property (nonatomic, retain) NSString * others15;
+@property (nonatomic, retain) NSString * others16;
+@property (nonatomic, retain) NSString * others17;
+@property (nonatomic, retain) NSString * others18;
+@property (nonatomic, retain) NSString * others19;
+@property (nonatomic, retain) NSString * others20;
+@property (nonatomic, retain) NSNumber * otherBool;
+@property (nonatomic, retain) NSNumber * otherBool1;
+@property (nonatomic, retain) NSNumber * otherBool2;
+@property (nonatomic, retain) NSNumber * otherBool3;
+@property (nonatomic, retain) NSNumber * otherBool4;
+@property (nonatomic, retain) NSNumber * otherBool5;
+@property (nonatomic, retain) NSNumber * otherBool6;
+@property (nonatomic, retain) NSNumber * otherBool7;
+@property (nonatomic, retain) NSNumber * otherBool8;
+@property (nonatomic, retain) NSNumber * otherBool9;
+@property (nonatomic, retain) NSNumber * otherBool10;
+@property (nonatomic, retain) NSNumber * otherBool11;
+@property (nonatomic, retain) NSNumber * otherBool12;
+@property (nonatomic, retain) NSNumber * otherBool13;
+@property (nonatomic, retain) NSNumber * otherBool14;
+@property (nonatomic, retain) NSNumber * otherBool15;
+@property (nonatomic, retain) NSNumber * otherBool16;
+@property (nonatomic, retain) NSNumber * otherBool17;
+@property (nonatomic, retain) NSNumber * otherBool18;
+@property (nonatomic, retain) NSNumber * otherBool19;
+@property (nonatomic, retain) NSNumber * otherBool20;
+
+@end

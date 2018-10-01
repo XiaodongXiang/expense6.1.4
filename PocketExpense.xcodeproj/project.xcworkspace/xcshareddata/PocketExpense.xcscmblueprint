@@ -1,0 +1,92 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "285b225f-a06f-ce48-9e49-beb358702b80++3306+++5C60258",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "285b225f-a06f-ce48-9e49-beb358702b80++1189+++4490516" : {
+
+    },
+    "285b225f-a06f-ce48-9e49-beb358702b80++1189+++D979317" : {
+
+    },
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++01BC039" : {
+
+    },
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++24AB61E" : {
+
+    },
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++3D60E3D" : {
+
+    },
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++48B272F" : {
+
+    },
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++5C60258" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "285b225f-a06f-ce48-9e49-beb358702b80++1189+++4490516" : 0,
+    "285b225f-a06f-ce48-9e49-beb358702b80++1189+++D979317" : 0,
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++01BC039" : 0,
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++24AB61E" : 0,
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++3D60E3D" : 0,
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++48B272F" : 0,
+    "92F0FFAC6764737C245988948F2786AF0C006AF0+++155DF47" : 0,
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++5C60258" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C0443918-2A05-492D-AE6E-7DBA8C0F1C62",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "285b225f-a06f-ce48-9e49-beb358702b80++1189+++4490516" : "PocketExpense.xcodeproj",
+    "285b225f-a06f-ce48-9e49-beb358702b80++1189+++D979317" : "PocketExpense.xcodeproj",
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++01BC039" : "Shared1\/md5\/",
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++24AB61E" : "Shared1\/customer%20net&file\/",
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++3D60E3D" : "Shared1\/pdf%20class\/",
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++48B272F" : "Shared1\/GTM64\/",
+    "92F0FFAC6764737C245988948F2786AF0C006AF0+++155DF47" : "",
+    "285b225f-a06f-ce48-9e49-beb358702b80++3306+++5C60258" : "PokcetExpense.xcdatamodeld\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : ".",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : ".",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/172.16.128.6\/svn\/BHI_Repositories_2011_S1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "285b225f-a06f-ce48-9e49-beb358702b80++1189+++4490516"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/172.16.128.6\/svn\/BHI_Repositories_2011_S1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "285b225f-a06f-ce48-9e49-beb358702b80++1189+++D979317"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/172.16.128.6\/svn\/BHI_Repositories_2011_S1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "285b225f-a06f-ce48-9e49-beb358702b80++3306+++01BC039"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/172.16.128.6\/svn\/BHI_Repositories_2011_S1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "285b225f-a06f-ce48-9e49-beb358702b80++3306+++24AB61E"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/172.16.128.6\/svn\/BHI_Repositories_2011_S1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "285b225f-a06f-ce48-9e49-beb358702b80++3306+++3D60E3D"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/172.16.128.6\/svn\/BHI_Repositories_2011_S1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "285b225f-a06f-ce48-9e49-beb358702b80++3306+++48B272F"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/172.16.128.6\/svn\/BHI_Repositories_2011_S1",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "285b225f-a06f-ce48-9e49-beb358702b80++3306+++5C60258"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "http:\/\/github.com\/Appx\/PocketExpense.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "92F0FFAC6764737C245988948F2786AF0C006AF0+++155DF47"
+    }
+  ]
+}
