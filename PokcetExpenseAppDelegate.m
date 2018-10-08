@@ -25,6 +25,8 @@
 #import "Payee.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 
+#import "XDInAppPurchaseManager.h"
+
 
 #import "User.h"
 #import "ParseDBManager.h"
@@ -197,12 +199,15 @@
 
     self.isPurchased = NO;
     
-    inAppPM =  [[InAppPurchaseManager alloc]init];
-    inAppPM.delegate = self;
-    //免费版先获取商品信息
-    [inAppPM loadStore];
+//    inAppPM =  [[InAppPurchaseManager alloc]init];
+//    inAppPM.delegate = self;
+//    //免费版先获取商品信息
+//    [inAppPM loadStore];
 //    [inAppPM finishSomeUnfinishTransaction];
 //    [inAppPM addTransactionObserver];
+    
+    [[XDInAppPurchaseManager shareManager] getProductInfo];
+    [[XDInAppPurchaseManager shareManager] addTransactionObserver];
     
     //免费版，判断是否内购成功
     if (!self.isPurchased)
@@ -1201,6 +1206,10 @@
         [self.window bringSubviewToFront:self.hmjIndicator];
         self.window.userInteractionEnabled = NO;
         [self.hmjIndicator.indicator startAnimating];
+    });
+    
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self hideIndicator];
     });
 }
 

@@ -35,6 +35,8 @@ class expensePurchase: NSObject {
             if receipt != nil{
                 
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "returnReceipt"), object: receipt)
+            }else{
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "returnReceipt"), object: nil)
             }
 //            if receipt != nil {
 //                print("---------------------------------------------")
@@ -114,6 +116,12 @@ class expensePurchase: NSObject {
         indicateView.frame = CGRect.init(x:(UIScreen.main.bounds.size.width-100)/2, y: (UIScreen.main.bounds.size.height-100)/2, width: 100, height: 100)
         window.addSubview(indicateView)
 
+        DispatchQueue.global(qos: .default).asyncAfter(deadline: DispatchTime.now() + 10.0) {
+            DispatchQueue.main.async {
+                indicateView.isHidden = true
+                indicateView.stopAnimating()
+            }
+        }
         // Create the receipt verifier from the above values.
         guard let verifier = IAPReceiptVerifier(url: url, base64EncodedPublicKey: publicKey) else {
             DispatchQueue.main.async {
@@ -142,7 +150,7 @@ class expensePurchase: NSObject {
     }
     
     
-    @objc public func requestRefreshReceipt(){
+    @objc public func completeTransactionReceipt(){
         // Insert your Heroku app URL here.
         let url = URL(string: "https://appxy-iap-verification.herokuapp.com/verify")!
         
@@ -162,7 +170,7 @@ class expensePurchase: NSObject {
             //            print(receipt!)
             if receipt != nil{
                 
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue:"requestRefreshReceipt"), object: receipt)
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue:"completeTransactionReceipt"), object: receipt)
             }
         }
     }

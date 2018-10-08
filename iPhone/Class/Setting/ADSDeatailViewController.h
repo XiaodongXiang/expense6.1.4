@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#import "InAppPurchaseManager.h"
+//#import "InAppPurchaseManager.h"
 
 @interface ADSDeatailViewController : UIViewController<UIScrollViewDelegate>
 

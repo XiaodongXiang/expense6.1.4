@@ -299,6 +299,10 @@
 
 
 -(void)returnReceipt:(NSNotification*)notif{
+    if (notif == nil) {
+        [self noSubscription];
+        return;
+    }
     NSDictionary* dic = [notif object];
     NSArray* newarray = [dic objectForKey:@"latest_receipt_info"];
     NSArray* array = [newarray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"expires_date" ascending:YES]]];
@@ -419,53 +423,53 @@
     }
 }
 
-#pragma mark -  SKRequestDelegate
-- (void)requestDidFinish:(SKRequest *)request NS_AVAILABLE(10_7, 3_0){
-    NSData* receipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
-    if (receipt) {
-        expensePurchase* expense = [[expensePurchase alloc]init];
-        [expense requestRefreshReceipt];
-        
-    }else{
-        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
-        setting.purchasedProductID = nil;
-        setting.purchasedStartDate = nil;
-        setting.purchasedEndDate = nil;
-        setting.dateTime = [NSDate GMTTime];
-        setting.otherBool17 = @NO;
-        setting.purchasedIsSubscription = @NO;
-        setting.purchaseOriginalProductID = nil;
-
-        [[XDDataManager shareManager] saveContext];
-        
-        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
-        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-        appDelegate.isPurchased = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-        [appDelegate insertAdsMob];
-    }
-  
-}
-
-- (void)request:(SKRequest *)request didFailWithError:(NSError *)error NS_AVAILABLE(10_7, 3_0){
-//    [self noSubscription];
-    Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
-    setting.purchasedProductID = nil;
-    setting.purchasedStartDate = nil;
-    setting.purchasedEndDate = nil;
-    setting.dateTime = [NSDate GMTTime];
-    setting.otherBool17 = @NO;
-    setting.purchasedIsSubscription = @NO;
-    setting.purchaseOriginalProductID = nil;
-
-    [[XDDataManager shareManager] saveContext];
-    
-    [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-    appDelegate.isPurchased = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-    [appDelegate insertAdsMob];
-}
+//#pragma mark -  SKRequestDelegate
+//- (void)requestDidFinish:(SKRequest *)request NS_AVAILABLE(10_7, 3_0){
+//    NSData* receipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
+//    if (receipt) {
+//        expensePurchase* expense = [[expensePurchase alloc]init];
+//        [expense requestRefreshReceipt];
+//        
+//    }else{
+//        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
+//        setting.purchasedProductID = nil;
+//        setting.purchasedStartDate = nil;
+//        setting.purchasedEndDate = nil;
+//        setting.dateTime = [NSDate GMTTime];
+//        setting.otherBool17 = @NO;
+//        setting.purchasedIsSubscription = @NO;
+//        setting.purchaseOriginalProductID = nil;
+//
+//        [[XDDataManager shareManager] saveContext];
+//        
+//        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+//        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+//        appDelegate.isPurchased = NO;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+//        [appDelegate insertAdsMob];
+//    }
+//  
+//}
+//
+//- (void)request:(SKRequest *)request didFailWithError:(NSError *)error NS_AVAILABLE(10_7, 3_0){
+////    [self noSubscription];
+//    Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
+//    setting.purchasedProductID = nil;
+//    setting.purchasedStartDate = nil;
+//    setting.purchasedEndDate = nil;
+//    setting.dateTime = [NSDate GMTTime];
+//    setting.otherBool17 = @NO;
+//    setting.purchasedIsSubscription = @NO;
+//    setting.purchaseOriginalProductID = nil;
+//
+//    [[XDDataManager shareManager] saveContext];
+//    
+//    [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+//    appDelegate.isPurchased = NO;
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+//    [appDelegate insertAdsMob];
+//}
 
 
 

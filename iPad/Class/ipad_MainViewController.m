@@ -228,9 +228,27 @@
                         expensePurchase* expense = [[expensePurchase alloc]init];
                         [expense request];
                     }else{
-                        SKReceiptRefreshRequest* request = [[SKReceiptRefreshRequest alloc] init];
-                        request.delegate = self;
-                        [request start];
+//                        SKReceiptRefreshRequest* request = [[SKReceiptRefreshRequest alloc] init];
+//                        request.delegate = self;
+//                        [request start];
+                        
+                        
+                        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
+                        setting.purchasedProductID = nil;
+                        setting.purchasedStartDate = nil;
+                        setting.purchasedEndDate = nil;
+                        setting.purchaseOriginalProductID = nil;
+                        setting.dateTime = [NSDate GMTTime];
+                        setting.otherBool17 = @NO;
+                        setting.purchasedIsSubscription = @NO;
+                        
+                        [[XDDataManager shareManager] saveContext];
+                        
+                        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+                        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+                        appDelegate.isPurchased = NO;
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+                        [appDelegate insertAdsMob];
                     }
                 }
             }
@@ -240,51 +258,51 @@
     }
 }
 
-#pragma mark -  SKRequestDelegate
-- (void)requestDidFinish:(SKRequest *)request NS_AVAILABLE(10_7, 3_0){
-    NSData* receipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
-    if (receipt) {
-        expensePurchase* expense = [[expensePurchase alloc]init];
-        [expense requestRefreshReceipt];
-        
-    }else{
-        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
-        setting.purchasedProductID = nil;
-        setting.purchasedStartDate = nil;
-        setting.purchasedEndDate = nil;
-        setting.dateTime = [NSDate GMTTime];
-        setting.otherBool17 = @NO;
-        setting.purchasedIsSubscription = @NO;
-        
-        [[XDDataManager shareManager] saveContext];
-        
-        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
-        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-        appDelegate.isPurchased = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-        [appDelegate insertAdsMob];
-    }
-    
-}
-
-- (void)request:(SKRequest *)request didFailWithError:(NSError *)error NS_AVAILABLE(10_7, 3_0){
-    //    [self noSubscription];
-    Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
-    setting.purchasedProductID = nil;
-    setting.purchasedStartDate = nil;
-    setting.purchasedEndDate = nil;
-    setting.dateTime = [NSDate GMTTime];
-    setting.otherBool17 = @NO;
-    setting.purchasedIsSubscription = @NO;
-    
-    [[XDDataManager shareManager] saveContext];
-    
-    [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-    appDelegate.isPurchased = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-    [appDelegate insertAdsMob];
-}
+//#pragma mark -  SKRequestDelegate
+//- (void)requestDidFinish:(SKRequest *)request NS_AVAILABLE(10_7, 3_0){
+//    NSData* receipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
+//    if (receipt) {
+//        expensePurchase* expense = [[expensePurchase alloc]init];
+//        [expense requestRefreshReceipt];
+//        
+//    }else{
+//        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
+//        setting.purchasedProductID = nil;
+//        setting.purchasedStartDate = nil;
+//        setting.purchasedEndDate = nil;
+//        setting.dateTime = [NSDate GMTTime];
+//        setting.otherBool17 = @NO;
+//        setting.purchasedIsSubscription = @NO;
+//        
+//        [[XDDataManager shareManager] saveContext];
+//        
+//        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+//        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+//        appDelegate.isPurchased = NO;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+//        [appDelegate insertAdsMob];
+//    }
+//    
+//}
+//
+//- (void)request:(SKRequest *)request didFailWithError:(NSError *)error NS_AVAILABLE(10_7, 3_0){
+//    //    [self noSubscription];
+//    Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
+//    setting.purchasedProductID = nil;
+//    setting.purchasedStartDate = nil;
+//    setting.purchasedEndDate = nil;
+//    setting.dateTime = [NSDate GMTTime];
+//    setting.otherBool17 = @NO;
+//    setting.purchasedIsSubscription = @NO;
+//    
+//    [[XDDataManager shareManager] saveContext];
+//    
+//    [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+//    appDelegate.isPurchased = NO;
+//    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+//    [appDelegate insertAdsMob];
+//}
 
 -(void)refleshData
 {

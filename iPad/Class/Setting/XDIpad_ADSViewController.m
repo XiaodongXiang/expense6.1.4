@@ -7,6 +7,7 @@
 
 #import "XDIpad_ADSViewController.h"
 #import "PokcetExpenseAppDelegate.h"
+#import "XDInAppPurchaseManager.h"
 @interface XDIpad_ADSViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -150,10 +151,11 @@
 - (IBAction)monthBtnClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    if ([appDelegate.inAppPM canMakePurchases])
-    {
-        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
-    }
+//    if ([appDelegate.inAppPM canMakePurchases])
+//    {
+//        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
+//    }
+    [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdMonth];
     
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
     [appDelegate.epnc setFlurryEvent_WithIdentify:@"Purchase_month_subscribe"];
@@ -161,21 +163,23 @@
 - (IBAction)yearBtnClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    if ([appDelegate.inAppPM canMakePurchases])
-    {
-        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
-    }
-    
+//    if ([appDelegate.inAppPM canMakePurchases])
+//    {
+//        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
+//    }
+    [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdYear];
+
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
     [appDelegate.epnc setFlurryEvent_WithIdentify:@"Purchase_year_subscribe"];
 }
 - (IBAction)lifetimeBtnClick:(id)sender {
     
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    if ([appDelegate.inAppPM canMakePurchases])
-    {
-        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
-    }
+//    if ([appDelegate.inAppPM canMakePurchases])
+//    {
+//        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
+//    }
+    [[XDInAppPurchaseManager shareManager]purchaseUpgrade:kInAppPurchaseProductIdLifetime];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
 
 }

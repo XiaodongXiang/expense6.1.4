@@ -13,6 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(XDInAppPurchaseManager*)shareManager;
 
+-(void)getProductInfo;
+
+-(void)purchaseUpgrade:(NSString*)productID;
+
+-(void)restoreUpgrade;
+
+-(void)addTransactionObserver;
+
+-(void)removeTransactionObserver;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -8,6 +8,7 @@
 #import "XDUpgradeViewController.h"
 #import "PokcetExpenseAppDelegate.h"
 #import "XDTermsOfUseViewController.h"
+#import "XDInAppPurchaseManager.h"
 
 @interface XDUpgradeViewController ()<SKRequestDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -139,9 +140,9 @@
 }
 
 - (IBAction)restoreBtnClick:(id)sender {
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    [appDelegate.inAppPM restorePurchase];
-    
+//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+//    [appDelegate.inAppPM restorePurchase];
+    [[XDInAppPurchaseManager shareManager]restoreUpgrade];
 }
 
 -(void)settingReloadData{
@@ -201,10 +202,13 @@
         
         self.restoreBtn.hidden = YES;
         self.restoreBtnH.constant = 0;
+        
     }else{
         self.restoreBtn.hidden = NO;
         self.restoreBtnH.constant = 40;
     }
+    
+    [self.view layoutSubviews];
 }
 
 //获取保存在本地的商品价格，显示
@@ -236,12 +240,13 @@
 
 - (IBAction)monthBtnClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-
-    if ([appDelegate.inAppPM canMakePurchases])
-    {
-        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
-    }
-    
+//
+//    if ([appDelegate.inAppPM canMakePurchases])
+//    {
+//        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
+//    }
+//
+    [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdMonth];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
     [appDelegate.epnc setFlurryEvent_WithIdentify:@"Purchase_month_subscribe"];
 }
@@ -249,11 +254,12 @@
 - (IBAction)yearBtnClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    if ([appDelegate.inAppPM canMakePurchases])
-    {
-        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
-    }
-    
+//    if ([appDelegate.inAppPM canMakePurchases])
+//    {
+//        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
+//    }
+    [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdYear];
+
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
     [appDelegate.epnc setFlurryEvent_WithIdentify:@"Purchase_year_subscribe"];
 }
@@ -261,11 +267,12 @@
 - (IBAction)lifetimeClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    if ([appDelegate.inAppPM canMakePurchases])
-    {
-        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
-    }
-    
+//    if ([appDelegate.inAppPM canMakePurchases])
+//    {
+//        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
+//    }
+    [[XDInAppPurchaseManager shareManager] purchaseUpgrade:kInAppPurchaseProductIdLifetime];
+
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
     [appDelegate.epnc setFlurryEvent_WithIdentify:@"22_SETAD_BUY"];
 }

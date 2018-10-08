@@ -1413,7 +1413,6 @@
 		A256101319D3BB5C00A5A950 /* SubCateRect.m in Sources */ = {isa = PBXBuildFile; fileRef = A2560D0819D3BB5900A5A950 /* SubCateRect.m */; };
 		A256101419D3BB5C00A5A950 /* ADSDeatailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2560D0B19D3BB5900A5A950 /* ADSDeatailViewController.m */; };
 		A256101519D3BB5C00A5A950 /* ADSDeatailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A2560D0C19D3BB5900A5A950 /* ADSDeatailViewController.xib */; };
-		A256101619D3BB5C00A5A950 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = A2560D0F19D3BB5900A5A950 /* InAppPurchaseManager.m */; };
 		A256101719D3BB5C00A5A950 /* SKProduct+LocalizedPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = A2560D1119D3BB5900A5A950 /* SKProduct+LocalizedPrice.m */; };
 		A256101819D3BB5C00A5A950 /* CurrencyTypeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2560D1319D3BB5900A5A950 /* CurrencyTypeViewController.m */; };
 		A256101919D3BB5C00A5A950 /* RepCashflowFilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A2560D1719D3BB5900A5A950 /* RepCashflowFilterViewController.m */; };
@@ -2574,7 +2573,6 @@
 		BE0F433C214269DD008D7F07 /* RSAKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4339214269DC008D7F07 /* RSAKey.swift */; };
 		BE0F433D214269DD008D7F07 /* Data+IAPReceiptVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F433A214269DC008D7F07 /* Data+IAPReceiptVerifier.swift */; };
 		BE0F4341214275CB008D7F07 /* expensePurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4340214275CB008D7F07 /* expensePurchase.swift */; };
-		BE10C463215F5D420073C5B8 /* XDInAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE10C462215F5D420073C5B8 /* XDInAppPurchaseManager.m */; };
 		BE1928232134EBD800D5B3F7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE03A192211D6DEC00D976F1 /* NotificationCenter.framework */; };
 		BE1928272134EBD800D5B3F7 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1928262134EBD800D5B3F7 /* TodayViewController.m */; };
 		BE19282E2134EBD800D5B3F7 /* Pocket Expense.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE1928222134EBD800D5B3F7 /* Pocket Expense.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -2595,6 +2593,7 @@
 		BE3CCD14216057AF00F2EE4A /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E7BA86C2063512600D9299A /* SF-UI-Text-Regular.otf */; };
 		BE3CCD15216057B200F2EE4A /* SF-UI-Text-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E7BA86D2063512600D9299A /* SF-UI-Text-Light.otf */; };
 		BE3CCD16216057B400F2EE4A /* SF-UI-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E7BA86E2063512600D9299A /* SF-UI-Text-Medium.otf */; };
+		BE491B34216A371900FB5E40 /* XDInAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE491B33216A371800FB5E40 /* XDInAppPurchaseManager.m */; };
 		BE67B801215A39D100B2BB0B /* Setting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67B7FF215A39D100B2BB0B /* Setting+CoreDataClass.m */; };
 		BE67B802215A39D100B2BB0B /* Setting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67B800215A39D100B2BB0B /* Setting+CoreDataProperties.m */; };
 		BE67B803215B287800B2BB0B /* Setting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67B800215A39D100B2BB0B /* Setting+CoreDataProperties.m */; };
@@ -2605,6 +2604,7 @@
 		BEB696E1213D0FAD00CDE712 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696D8213D0FAD00CDE712 /* AFURLRequestSerialization.m */; };
 		BEB696E2213D0FAD00CDE712 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DA213D0FAD00CDE712 /* AFNetworkReachabilityManager.m */; };
 		BEB696E3213D0FAD00CDE712 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */; };
+		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -4349,8 +4349,6 @@
 		A2560D0A19D3BB5900A5A950 /* ADSDeatailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADSDeatailViewController.h; sourceTree = "<group>"; };
 		A2560D0B19D3BB5900A5A950 /* ADSDeatailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADSDeatailViewController.m; sourceTree = "<group>"; };
 		A2560D0C19D3BB5900A5A950 /* ADSDeatailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ADSDeatailViewController.xib; sourceTree = "<group>"; };
-		A2560D0E19D3BB5900A5A950 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
-		A2560D0F19D3BB5900A5A950 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
 		A2560D1019D3BB5900A5A950 /* SKProduct+LocalizedPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SKProduct+LocalizedPrice.h"; sourceTree = "<group>"; };
 		A2560D1119D3BB5900A5A950 /* SKProduct+LocalizedPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SKProduct+LocalizedPrice.m"; sourceTree = "<group>"; };
 		A2560D1219D3BB5900A5A950 /* CurrencyTypeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrencyTypeViewController.h; sourceTree = "<group>"; };
@@ -5747,8 +5745,6 @@
 		BE0F4339214269DC008D7F07 /* RSAKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSAKey.swift; sourceTree = "<group>"; };
 		BE0F433A214269DC008D7F07 /* Data+IAPReceiptVerifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+IAPReceiptVerifier.swift"; sourceTree = "<group>"; };
 		BE0F4340214275CB008D7F07 /* expensePurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expensePurchase.swift; sourceTree = "<group>"; };
-		BE10C461215F5D420073C5B8 /* XDInAppPurchaseManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDInAppPurchaseManager.h; sourceTree = "<group>"; };
-		BE10C462215F5D420073C5B8 /* XDInAppPurchaseManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDInAppPurchaseManager.m; sourceTree = "<group>"; };
 		BE1928222134EBD800D5B3F7 /* Pocket Expense.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pocket Expense.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1928252134EBD800D5B3F7 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		BE1928262134EBD800D5B3F7 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
@@ -5761,6 +5757,8 @@
 		BE3CBC742136894B0093B5A9 /* XDIpad_ADSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDIpad_ADSViewController.h; sourceTree = "<group>"; };
 		BE3CBC752136894B0093B5A9 /* XDIpad_ADSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDIpad_ADSViewController.m; sourceTree = "<group>"; };
 		BE3CBC762136894B0093B5A9 /* XDIpad_ADSViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDIpad_ADSViewController.xib; sourceTree = "<group>"; };
+		BE491B32216A371800FB5E40 /* XDInAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDInAppPurchaseManager.h; sourceTree = "<group>"; };
+		BE491B33216A371800FB5E40 /* XDInAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDInAppPurchaseManager.m; sourceTree = "<group>"; };
 		BE67B7FC215A32CA00B2BB0B /* PokcetExpense 12.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PokcetExpense 12.xcdatamodel"; sourceTree = "<group>"; };
 		BE67B7FD215A39D100B2BB0B /* Setting+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Setting+CoreDataProperties.h"; sourceTree = "<group>"; };
 		BE67B7FE215A39D100B2BB0B /* Setting+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Setting+CoreDataClass.h"; sourceTree = "<group>"; };
@@ -5780,6 +5778,8 @@
 		BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		BEB696DC213D0FAD00CDE712 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		BEB696DD213D0FAD00CDE712 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
+		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -8749,10 +8749,10 @@
 				BE0F4338214269DC008D7F07 /* IAPReceiptVerifier.swift */,
 				BE0F4339214269DC008D7F07 /* RSAKey.swift */,
 				BE0F4340214275CB008D7F07 /* expensePurchase.swift */,
-				A2560D0E19D3BB5900A5A950 /* InAppPurchaseManager.h */,
-				A2560D0F19D3BB5900A5A950 /* InAppPurchaseManager.m */,
-				BE10C461215F5D420073C5B8 /* XDInAppPurchaseManager.h */,
-				BE10C462215F5D420073C5B8 /* XDInAppPurchaseManager.m */,
+				BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */,
+				BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */,
+				BE491B32216A371800FB5E40 /* XDInAppPurchaseManager.h */,
+				BE491B33216A371800FB5E40 /* XDInAppPurchaseManager.m */,
 				A2560D1019D3BB5900A5A950 /* SKProduct+LocalizedPrice.h */,
 				A2560D1119D3BB5900A5A950 /* SKProduct+LocalizedPrice.m */,
 				BE0F4337214269DB008D7F07 /* PocketExpense-Bridging-Header.h */,
@@ -13190,6 +13190,7 @@
 				A2DE8ACC1A40331C004A654D /* UINavigationBar+Custom.m in Sources */,
 				A2561A6419D3BBD700A5A950 /* HTTPServer.m in Sources */,
 				60BE820B1C86E66400B871E2 /* Custom_iPad_BillsCell.m in Sources */,
+				BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */,
 				A2560FDD19D3BB5C00A5A950 /* TransferViewController_NS.m in Sources */,
 				A2560FFC19D3BB5C00A5A950 /* OverViewCell.m in Sources */,
 				A25616C219D3BB7F00A5A950 /* DropboxSyncTableDefine.m in Sources */,
@@ -13240,7 +13241,6 @@
 				4E7BA8DB2063512700D9299A /* XDEditBudgetViewController.m in Sources */,
 				3A8687C81BDA1A1600417115 /* headerView.m in Sources */,
 				A2560FA219D3BB5C00A5A950 /* AccountsViewController.m in Sources */,
-				A256101619D3BB5C00A5A950 /* InAppPurchaseManager.m in Sources */,
 				A256164D19D3BB7F00A5A950 /* ipad_AccountCategoryCell.m in Sources */,
 				A256167019D3BB7F00A5A950 /* ipad_BudgetListViewController.m in Sources */,
 				A2560FF219D3BB5C00A5A950 /* KalTileView_week.m in Sources */,
@@ -13390,7 +13390,7 @@
 				3AE69FB91C4CC53A005E211B /* secondView_iPad.m in Sources */,
 				A2560FFA19D3BB5C00A5A950 /* UIViewAdditions_week.m in Sources */,
 				3ADE89541B42B1B900552972 /* LogInViewController_ipad.m in Sources */,
-				BE10C463215F5D420073C5B8 /* XDInAppPurchaseManager.m in Sources */,
+				BE491B34216A371900FB5E40 /* XDInAppPurchaseManager.m in Sources */,
 				4E7BA92D20639E9A00D9299A /* XDPieChartModel.m in Sources */,
 				4E94DA61209AFCB0001E0CC6 /* UINavigationController+SXFixSpace.m in Sources */,
 				3ADF05E81C3B752000670206 /* touchIDView.m in Sources */,
