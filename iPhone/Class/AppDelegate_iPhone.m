@@ -60,6 +60,10 @@
 
 #import "XDUpgradeViewController.h"
 
+
+#import "XDLaunchFileViewController.h"
+
+
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 @interface AppDelegate_iPhone ()<PFLogInViewControllerDelegate,PFSignUpViewControllerDelegate,UIAlertViewDelegate>
@@ -397,6 +401,8 @@
 //        _drawerVC.maximumLeftDrawerWidth=MENU_WIDTH;
 //
 //        [_drawerVC setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+        
+        
         self.window.rootViewController=tabbarVc;
     }
     else

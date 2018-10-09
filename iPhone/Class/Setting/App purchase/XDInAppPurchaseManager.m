@@ -452,7 +452,7 @@
         //检测是否有未完成的交易
         for (SKPaymentTransaction *transaction in transactions)
         {
-            if (transaction.transactionState == SKPaymentTransactionStatePurchased || transaction.transactionState == SKPaymentTransactionStateRestored)
+            if (transaction.transactionState == SKPaymentTransactionStatePurchased || transaction.transactionState == SKPaymentTransactionStateRestored || transaction.transactionState == SKPaymentTransactionStateFailed)
             {
                 [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
             }

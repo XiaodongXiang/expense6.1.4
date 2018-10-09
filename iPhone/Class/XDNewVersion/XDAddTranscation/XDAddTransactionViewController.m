@@ -354,7 +354,7 @@
     [self.moneyTextField addTarget:self action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
     self.moneyTextField.inputView = self.keyboard;
     if (IS_IPHONE_X) {
-        self.moneyTextField.inputView.transform = CGAffineTransformMakeTranslation(0, -34);
+        self.moneyTextField.inputView.transform = CGAffineTransformMakeTranslation(0, -24);
     }
     [self.titleTextField addTarget:self action:@selector(titleValueChange) forControlEvents:UIControlEventEditingChanged];
     

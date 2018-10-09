@@ -182,6 +182,7 @@
 
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -336,13 +337,9 @@
     
     //续订了
     if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
-        
-        
         [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
         
-        
     }else{  //没续订
-        
         [self noSubscription];
         
     }

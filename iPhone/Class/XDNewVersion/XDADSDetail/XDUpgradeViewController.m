@@ -88,6 +88,11 @@
             self.yearView.userInteractionEnabled = NO;
             self.saleLbl.hidden = YES;
             
+            self.monthTimeLbl.textColor = [UIColor whiteColor];
+            self.monthPriceLbl.textColor = [UIColor whiteColor];
+            self.yearTimeLbl.textColor = [UIColor whiteColor];
+            self.yearPriceLbl.textColor = [UIColor whiteColor];
+            
         }else{
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
@@ -119,6 +124,10 @@
                     self.monthView.userInteractionEnabled = NO;
                     self.yearView.userInteractionEnabled = NO;
                     
+                    self.monthTimeLbl.textColor = [UIColor whiteColor];
+                    self.monthPriceLbl.textColor = [UIColor whiteColor];
+                    self.yearTimeLbl.textColor = [UIColor whiteColor];
+                    self.yearPriceLbl.textColor = [UIColor whiteColor];
                 }
             }
         }
@@ -158,6 +167,11 @@
             //            self.lifetimeBtn.enabled = NO;
             self.lifetimeDetailLbl.textColor = [UIColor colorWithRed:122/255. green:163/255. blue:239/255. alpha:0.5];
             
+            self.monthTimeLbl.textColor = [UIColor whiteColor];
+            self.monthPriceLbl.textColor = [UIColor whiteColor];
+            self.yearTimeLbl.textColor = [UIColor whiteColor];
+            self.yearPriceLbl.textColor = [UIColor whiteColor];
+            
             self.monthBg.image = [UIImage imageNamed:@"month-1"];
             self.yearBg.image = [UIImage imageNamed:@"month-1"];
             self.monthView.userInteractionEnabled = NO;
@@ -194,6 +208,11 @@
                     self.yearBg.image = [UIImage imageNamed:@"month-1"];
                     self.monthView.userInteractionEnabled = NO;
                     self.yearView.userInteractionEnabled = NO;
+                    
+                    self.monthTimeLbl.textColor = [UIColor whiteColor];
+                    self.monthPriceLbl.textColor = [UIColor whiteColor];
+                    self.yearTimeLbl.textColor = [UIColor whiteColor];
+                    self.yearPriceLbl.textColor = [UIColor whiteColor];
                     
                 }
             }

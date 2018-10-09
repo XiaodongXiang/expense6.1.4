@@ -2605,6 +2605,9 @@
 		BEB696E2213D0FAD00CDE712 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DA213D0FAD00CDE712 /* AFNetworkReachabilityManager.m */; };
 		BEB696E3213D0FAD00CDE712 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
+		BEF83329216B575800E71D61 /* launchFilm.mov in Resources */ = {isa = PBXBuildFile; fileRef = BEF83328216B575800E71D61 /* launchFilm.mov */; };
+		BEF83334216B5A3A00E71D61 /* XDLaunchFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83332216B5A3A00E71D61 /* XDLaunchFileViewController.m */; };
+		BEF83335216B5A3A00E71D61 /* XDLaunchFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF83333216B5A3A00E71D61 /* XDLaunchFileViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -5780,6 +5783,10 @@
 		BEB696DD213D0FAD00CDE712 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
+		BEF83328216B575800E71D61 /* launchFilm.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = launchFilm.mov; sourceTree = "<group>"; };
+		BEF83331216B5A3A00E71D61 /* XDLaunchFileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDLaunchFileViewController.h; sourceTree = "<group>"; };
+		BEF83332216B5A3A00E71D61 /* XDLaunchFileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDLaunchFileViewController.m; sourceTree = "<group>"; };
+		BEF83333216B5A3A00E71D61 /* XDLaunchFileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDLaunchFileViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -5863,8 +5870,12 @@
 			children = (
 				BE0EB63B2133F24200D8E063 /* Pocket Expense.entitlements */,
 				A2A440AC19F0FCFC00419103 /* Images.xcassets */,
+				BEF83328216B575800E71D61 /* launchFilm.mov */,
 				A2AD427C191B8A4D001A9AA0 /* PokcetExpenseAppDelegate.h */,
 				A2AD427D191B8A4D001A9AA0 /* PokcetExpenseAppDelegate.m */,
+				BEF83331216B5A3A00E71D61 /* XDLaunchFileViewController.h */,
+				BEF83332216B5A3A00E71D61 /* XDLaunchFileViewController.m */,
+				BEF83333216B5A3A00E71D61 /* XDLaunchFileViewController.xib */,
 				A2A7EB711975208100B48C0A /* Localizable.strings */,
 				A2560C1F19D3BB5900A5A950 /* iPhone */,
 				A256127319D3BB7400A5A950 /* iPad */,
@@ -12188,6 +12199,7 @@
 				3AE5E4AA1C22A5C80032F410 /* setting_back_up@3x.png in Resources */,
 				A256173619D3BB7F00A5A950 /* ipad_btn_8@2x.png in Resources */,
 				A25611DA19D3BB5C00A5A950 /* icon_edit1_30_30_sel.png in Resources */,
+				BEF83335216B5A3A00E71D61 /* XDLaunchFileViewController.xib in Resources */,
 				A25611D919D3BB5C00A5A950 /* icon_delete@2x.png in Resources */,
 				3AE2B0671C3A511A002CA41F /* setting_budget_left@3x.png in Resources */,
 				3AE2AA4A1C1FE1A100D6C552 /* iphone6_pilot_2_bg@2x.png in Resources */,
@@ -12805,6 +12817,7 @@
 				A256191019D3BB7F00A5A950 /* ipad_nav_480_44@2x.png in Resources */,
 				A256123C19D3BB5C00A5A950 /* none@2x.png in Resources */,
 				A25618FC19D3BB7F00A5A950 /* ipad_list_btn_120_30@2x.png in Resources */,
+				BEF83329216B575800E71D61 /* launchFilm.mov in Resources */,
 				A2211C891A39A7F3005E135F /* btn_plus@3x.png in Resources */,
 				A256106619D3BB5C00A5A950 /* detail_bg_ipad.png in Resources */,
 				3AE4DAC71BD0C540009668FE /* menuTableViewCell.xib in Resources */,
@@ -13497,6 +13510,7 @@
 				A256166719D3BB7F00A5A950 /* ipad_PaymentViewController.m in Sources */,
 				A2560FBB19D3BB5C00A5A950 /* BillEditViewController.m in Sources */,
 				A256169019D3BB7F00A5A950 /* ChildCategoryCount.m in Sources */,
+				BEF83334216B5A3A00E71D61 /* XDLaunchFileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13591,6 +13605,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Shared1/Flurry-iOS-6.2.0",
+					"$(PROJECT_DIR)/Shared1",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -13674,6 +13690,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Shared1/Flurry-iOS-6.2.0",
+					"$(PROJECT_DIR)/Shared1",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = PocketExpense_Prefix.pch;
