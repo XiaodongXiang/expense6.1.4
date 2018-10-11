@@ -467,6 +467,7 @@
     
     if ([self.delegate respondsToSelector:@selector(returnBillCompletion)]) {
         [self.delegate returnBillCompletion];
+        [self.delegate newBillSave];
     }
 }
 

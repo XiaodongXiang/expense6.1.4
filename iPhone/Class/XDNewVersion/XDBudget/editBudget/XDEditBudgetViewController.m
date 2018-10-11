@@ -47,6 +47,8 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomLeading;
 
+@property(nonatomic, strong)ADEngineController* interstitial;
+
 @end
 
 @implementation XDEditBudgetViewController
@@ -276,7 +278,27 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     
+    //插页广告
+    if ([PFUser currentUser]) {
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (!appDelegate.isPurchased) {
+            [self.interstitial showInterstitialAdWithTarget:self.navigationController];
+        }
+    }
 }
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        //插页广告
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1204 - iPhone - Interstitial - BudgetSave"];
+        }
+    }
+    return self;
+}
+
 
 -(void)backClick{
     

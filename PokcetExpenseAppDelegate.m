@@ -131,6 +131,8 @@
                              didFinishLaunchingWithOptions:launchOptions];
 
     
+    [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
+
     NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());
     application.applicationIconBadgeNumber = 0;
     NSError *error = nil;
@@ -247,10 +249,6 @@
     
     [self.epnc setFlurryEvent_withUpgrade:NO];
     
-//    [self checkShowWidget];
-    
-    if(!self.isPurchased && [self.settings.passcode length]<=0)
-        [self  insertAdsMob];
 
     return YES;
 }
@@ -262,12 +260,8 @@
 
 -(void)applicationWillEnterForeground:(UIApplication *)application
 {
-//    [[UIApplication sharedApplication]setStatusBarHidden:NO];
-    if(!self.isPurchased && [self.settings.passcode length] <= 0)
-    {
-        _applicationLaunchDate = [[NSDate alloc]initWithTimeIntervalSinceNow:0];
-        [self performSelector:@selector(insertAdsMob) withObject:nil afterDelay:0.3];
-    }
+
+    
 }
 
 
@@ -1208,7 +1202,7 @@
         [self.hmjIndicator.indicator startAnimating];
     });
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(20 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(30 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self hideIndicator];
     });
 }
@@ -1290,137 +1284,6 @@
 }
 
 #pragma mark GAD BANNER VIEW DELEGATE
--(void)insertAdsMob
-{
-    if (![PFUser currentUser]) {
-        return;
-    }
-
-    //广告-----------
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (!appDelegate.isPurchased)
-    {
-        if (![self networkConnected])
-        {
-            if (ISPAD)
-                [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1HD_CONN"];
-            else
-                [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1_CONN"];
-        }
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        long launchCount = [userDefaults integerForKey:kAppiraterLaunchCount];
-//        NSLog(@"launchCount==5:%d",launchCount==5);
-//        NSLog(@"launchCount>5:%d",launchCount>5);
-//        NSLog(@"launchCount2==0:%d",launchCount%2==0);
-        if (launchCount==5 || (launchCount>5 && launchCount%2==0))
-        {
-            NSString *unitID;
-            if (ISPAD)
-            {
-                unitID=@"ca-app-pub-2853676859073957/4477839025";
-            }
-            else
-            {
-                unitID=@"ca-app-pub-2853676859073957/3001105824";
-            }
-            splashInterstitial = [[GADInterstitial alloc] initWithAdUnitID:unitID];
-            splashInterstitial.delegate = self;
-            
-            
-            splashInterstitial.inAppPurchaseDelegate = (id<GADInAppPurchaseDelegate>)[[UIApplication sharedApplication] delegate];
-//             Note: Edit SampleConstants.h to update kSampleAdUnitId with your interstitial ad unit id.
-            if (ISPAD)
-                splashInterstitial.adUnitID = @"ca-app-pub-2853676859073957/4477839025";
-            else
-                splashInterstitial.adUnitID = @"ca-app-pub-2853676859073957/3001105824";
-            
-            [splashInterstitial loadRequest:[GADRequest request]];
-            
-            if (ISPAD)
-                [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1HD_REQ"];
-            else
-                [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1_REQ"];
-        }
-        else
-        {
-            if (ISPAD)
-                [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1HD_DROP"];
-            else
-                [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1_DROP"];
-        }
-        
-    }
-    //结束---------------------
-}
-
-
-
-
-//广告----------------------
-- (UIViewController*) topMostController
-{
-    UIViewController *topController = [[UIApplication sharedApplication] delegate].window.rootViewController;
-    while (topController.presentedViewController) {
-        topController = topController.presentedViewController;
-    }
-    return topController;
-}
-
-- (void)interstitialDidReceiveAd:(GADInterstitial *)interstitial
-{
-    adsReadyDate = [NSDate date];
-    unsigned int flags = NSSecondCalendarUnit;
-    NSDateComponents*  parts1 = [[NSCalendar currentCalendar]components:flags fromDate:_applicationLaunchDate toDate:adsReadyDate options:NSCalendarMatchStrictly];
-    NSLog(@"applicationLaunchDate:%@",_applicationLaunchDate);
-    NSLog(@"adsReadyDate:%@",adsReadyDate);
-    NSLog(@"part1.second:%ld",(long)parts1.second);
-    
-    if (parts1.second <= 5)
-    {
-        NSLog(@"show ads");
-        
-        [splashInterstitial presentFromRootViewController:[self topMostController]];
-
-        NSNotification *notification = [NSNotification notificationWithName:@"ADMOB_ADS_HIDE" object:nil];
-        [[NSNotificationCenter defaultCenter]postNotification:notification];
-    }
-    else
-    {
-        if (ISPAD)
-            [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1HD_TO"];
-        else
-            [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1_TO"];
-    }
-}
-- (void)interstitial:(GADInterstitial *)interstitial didFailToReceiveAdWithError:(GADRequestError *)error
-{
-    if(ISPAD)
-        [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1HD_DENY"];
-    else
-        [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1_DENY"];
-    
-//        [[UIApplication sharedApplication]setStatusBarHidden:NO];
-}
-- (void)interstitialWillLeaveApplication:(GADInterstitial *)interstitial
-{
-    if (ISPAD)
-        [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1HD_TOCH"];
-    
-    else
-        [self.epnc setFlurryEvent_WithIdentify:@"20_ADS_1_TOCH"];
-    
-}
-- (void)interstitialWillDismissScreen:(GADInterstitial *)ad
-{
-    NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
-    [notificationCenter postNotificationName:@"ADMOB_ADS_SHOW" object:nil];
-    
-//    [[UIApplication sharedApplication]setStatusBarHidden:NO];
-
-}
-//-------------------结束----------------------
-
-
 
 - (BOOL)networkConnected
 {

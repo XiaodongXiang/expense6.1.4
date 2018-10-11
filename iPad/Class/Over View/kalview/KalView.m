@@ -23,7 +23,7 @@ static const CGFloat kHeaderHeight = 69;
 static const    CGFloat kHeaderHeight_Bill = 69;
 
 @implementation KalView
-@synthesize kalheaderView;
+@synthesize kalheaderView,bottomView;
 @synthesize delegate, tableView;
 @synthesize gridView;
 @synthesize isBillShow;
@@ -450,7 +450,7 @@ static const    CGFloat kHeaderHeight_Bill = 69;
         [gridView sizeToFit];
         
         //添加addTransaction按钮
-        UIView *bottomView=[[UIView alloc]initWithFrame:CGRectMake(0, 533, 378, 72)];
+        bottomView=[[UIView alloc]initWithFrame:CGRectMake(0, 533, 378, 72)];
         bottomView.backgroundColor=[UIColor whiteColor];
         [contentView addSubview:bottomView];
         

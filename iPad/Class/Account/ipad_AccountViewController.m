@@ -43,11 +43,16 @@
  tag == 2	delete category
 */
 
-@interface ipad_AccountViewController ()
+@interface ipad_AccountViewController ()<ADEngineControllerBannerDelegate>
 {
     newAcountCell *selectedLeftCell;
     NSInteger firstInSel;
+    
+    BOOL _showBannerView;
 }
+@property (weak, nonatomic) IBOutlet UIView *adBannerView;
+@property(nonatomic, strong)ADEngineController* adBanner;
+
 @end
  
 @implementation ipad_AccountViewController
@@ -78,6 +83,45 @@
     self.iAccountEditViewController = nil;
     self.iTransactionQuickEditViewController = nil;
 	[self reFlashTableViewData];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    //    calendarContainView.height = 674;
+    _showBannerView = NO;
+    if (!appDelegate.isPurchased) {
+        self.adBannerView.hidden = NO;
+
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2102 - iPad - Banner - Accounts" delegate:self];
+            [self.adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        _showBannerView = NO;
+        self.adBannerView.hidden = YES;
+        self.leftTableView.height = _accountAndCategoryContainView.frame.size.height-60;
+        self.categoryTableView.height = _accountAndCategoryContainView.frame.size.height-60;
+    }
+}
+
+
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        _showBannerView = YES;
+        self.adBannerView.hidden = NO;
+        self.leftTableView.height = _accountAndCategoryContainView.frame.size.height-60 - 50;
+        self.categoryTableView.height = _accountAndCategoryContainView.frame.size.height-60 - 50;
+    }else{
+        _showBannerView = NO;
+        self.adBannerView.hidden = YES;
+        self.leftTableView.height = _accountAndCategoryContainView.frame.size.height-60;
+        self.categoryTableView.height = _accountAndCategoryContainView.frame.size.height-60;
+    }
 }
 
 -(void)refleshUI
@@ -1565,6 +1609,13 @@
     {
         PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
         [appDelegate.epnc setFlurryEvent_WithIdentify:@"08_ACC_REC"];
+    }else{
+        //插页广告
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (!appDelegate.isPurchased) {
+            ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
+            [interstitial showInterstitialAdWithTarget:self];
+        }
     }
 
 }
@@ -1713,13 +1764,13 @@
             _categoryBtn.selected = NO;
             [self reFleshTableViewData_withoutReset];
             
-            _leftTableView.frame = CGRectMake(-_accountAndCategoryContainView.frame.size.width, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height - 60);
+            _leftTableView.frame = CGRectMake(-_accountAndCategoryContainView.frame.size.width, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height - 60-(_showBannerView?51:0));
             _categoryTableView.frame = CGRectMake(0, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height);
             _leftBottomView.frame=CGRectMake(0, 600, 378, 60);
             [UIView beginAnimations:nil context:nil];
             [UIView setAnimationDuration:0.3];
             
-            _leftTableView.frame = CGRectMake(0, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height-60);
+            _leftTableView.frame = CGRectMake(0, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height-60-(_showBannerView?51:0));
             _categoryTableView.frame = CGRectMake(_accountAndCategoryContainView.frame.size.width, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height);
             _progressImageView.frame = CGRectMake(0, 44-2-EXPENSE_SCALE, _progressImageView.frame.size.width, _progressImageView.frame.size.height);
             
@@ -1744,12 +1795,12 @@
                 [self getCategoryTransactionDataSource];
             }
             
-            _leftTableView.frame = CGRectMake(0, 0, _accountAndCategoryContainView.frame.size.width, _leftTableView.frame.size.height-60);
+            _leftTableView.frame = CGRectMake(0, 0, _accountAndCategoryContainView.frame.size.width, _leftTableView.frame.size.height- 60 - (_showBannerView?51:0));
             _categoryTableView.frame = CGRectMake(_accountAndCategoryContainView.frame.size.width, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height);
             _leftBottomView.frame=CGRectMake(-_leftBottomView.frame.size.width, 600, 378, 60);
             [UIView beginAnimations:nil context:nil];
             [UIView setAnimationDuration:0.3];
-            _leftTableView.frame = CGRectMake(-_accountAndCategoryContainView.frame.size.width, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height-60);
+            _leftTableView.frame = CGRectMake(-_accountAndCategoryContainView.frame.size.width, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height-60-(_showBannerView?51:0));
             _categoryTableView.frame = CGRectMake(0, 0, _accountAndCategoryContainView.frame.size.width, _accountAndCategoryContainView.frame.size.height);
             _progressImageView.frame = CGRectMake(_progressImageView.frame.size.width, 44-2-EXPENSE_SCALE, _progressImageView.frame.size.width, _progressImageView.frame.size.height);
             

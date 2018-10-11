@@ -74,8 +74,6 @@
 
 - (void)saveContext;
 
--(void)hideAds:(id)sender;
-
 -(void)reflashUI;
 -(void)afterpassword;
 

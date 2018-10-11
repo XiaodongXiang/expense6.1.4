@@ -16,7 +16,7 @@
 #import "Payee.h"
 #import "SummaryTableViewCell_iPad.h"
 
-@interface summaryVC_iPad ()<UITableViewDataSource,UITableViewDelegate>
+@interface summaryVC_iPad ()<UITableViewDataSource,UITableViewDelegate,ADEngineControllerBannerDelegate>
 {
     BOOL hasBudget;
     BOOL hasUncleared;
@@ -69,11 +69,47 @@
     UILabel *billCover;
     UILabel *unclearedCover;
 }
+@property(nonatomic, strong)UIView* adBannerView;
+@property(nonatomic, strong)ADEngineController* adBanner;
 
 @end
 
 @implementation summaryVC_iPad
+-(UIView *)adBannerView{
+    if (!_adBannerView) {
+        _adBannerView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.height - 90, self.view.width, 90)];
+        _adBannerView.backgroundColor = [UIColor clearColor];
+        [self.view bringSubviewToFront:_adBannerView];
+        [self.view addSubview:_adBannerView];
+    }
+    
+    return _adBannerView;
+}
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2103 - iPad - Banner - AccountDetails" delegate:self];
+            [self.adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+       
+    }
+}
+
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+    }else{
+        self.adBannerView.hidden = YES;;
+    }
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     PokcetExpenseAppDelegate *appDelegate=(PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];

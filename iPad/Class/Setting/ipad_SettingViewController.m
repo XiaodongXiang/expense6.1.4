@@ -230,7 +230,7 @@
     
     _syncNowLabel.text=NSLocalizedString(@"VC_Sync Now", nil);
     
-    restoreLabelText.text = NSLocalizedString(@"VC_RestorePurchased", nil);
+//    restoreLabelText.text = NSLocalizedString(@"VC_RestorePurchased", nil);
     
     passcodeLabelText.text = NSLocalizedString(@"VC_Passcode", nil);
     currencyLabelText.text= NSLocalizedString(@"VC_Currency", nil);
@@ -640,10 +640,8 @@
     {
         if (indexPath.section==0 && indexPath.row==0)
         {
-            if (indexPath.section==0 && indexPath.row==0)
-            {
-                [appDelegate.inAppPM restorePurchase];
-            }
+            [self backWithPopAdasDetailViewController:indexPath.row];
+
         }
         //(1)passcode (2)currency (3)help
         else if(indexPath.section ==1)

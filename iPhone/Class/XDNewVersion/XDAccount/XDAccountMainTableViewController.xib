@@ -1,30 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDAccountMainTableViewController">
             <connections>
+                <outlet property="adBannerView" destination="L0Y-zC-drF" id="gUe-7U-utU"/>
                 <outlet property="addAccountCell" destination="Qzg-Ap-5lc" id="3v4-DU-RzI"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="bannerHeight" destination="VHE-U8-EMY" id="Osc-5i-Qh1"/>
+                <outlet property="tableView" destination="i5M-Pr-FkT" id="SDo-Y2-osQ"/>
+                <outlet property="view" destination="C9q-n5-s5l" id="xif-n4-Pvv"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <connections>
-                <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
-                <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
-            </connections>
-        </tableView>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="99" id="Qzg-Ap-5lc">
             <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
             <autoresizingMask key="autoresizingMask"/>
@@ -45,8 +39,40 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <inset key="separatorInset" minX="1000" minY="0.0" maxX="0.0" maxY="0.0"/>
-            <point key="canvasLocation" x="-422" y="353.5"/>
+            <point key="canvasLocation" x="-1602" y="421"/>
         </tableViewCell>
+        <view contentMode="scaleToFill" id="C9q-n5-s5l">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="iYk-vx-o2E"/>
+                        <outlet property="delegate" destination="-1" id="pDl-hp-Hi9"/>
+                    </connections>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L0Y-zC-drF">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="VHE-U8-EMY"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="i5M-Pr-FkT" firstAttribute="top" secondItem="C9q-n5-s5l" secondAttribute="top" id="AaO-h5-263"/>
+                <constraint firstItem="L0Y-zC-drF" firstAttribute="leading" secondItem="C9q-n5-s5l" secondAttribute="leading" id="BbS-sJ-NZw"/>
+                <constraint firstAttribute="trailing" secondItem="L0Y-zC-drF" secondAttribute="trailing" id="ESG-6c-p8U"/>
+                <constraint firstItem="i5M-Pr-FkT" firstAttribute="leading" secondItem="C9q-n5-s5l" secondAttribute="leading" id="hvi-3u-kpK"/>
+                <constraint firstAttribute="bottom" secondItem="L0Y-zC-drF" secondAttribute="bottom" id="roC-EG-zOg"/>
+                <constraint firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="xk5-WT-Lmy"/>
+                <constraint firstItem="L0Y-zC-drF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="zzU-ut-ItE"/>
+            </constraints>
+            <point key="canvasLocation" x="-671.20000000000005" y="118.29085457271366"/>
+        </view>
     </objects>
     <resources>
         <image name="add account" width="359" height="98"/>

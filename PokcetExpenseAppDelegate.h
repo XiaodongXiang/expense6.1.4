@@ -24,7 +24,7 @@
 #import "HMJActivityIndicator.h"
 #import "HMJSyncIndicatorView.h"
 //广告
-#import <GoogleMobileAds/GoogleMobileAds.h>
+//#import <GoogleMobileAds/GoogleMobileAds.h>
 //--------------定义一个弹出来的 pop 视图类型
 typedef enum {
 	nonePopup =0,
@@ -50,7 +50,7 @@ typedef enum {
 //@interface PokcetExpenseAppDelegate : NSObject <UIApplicationDelegate,PurchaseManagerDelegate,GADInterstitialDelegate>
 //无广告
 @class Reachability;
-@interface PokcetExpenseAppDelegate : NSObject <UIApplicationDelegate,PurchaseManagerDelegate,GADInterstitialDelegate,SKRequestDelegate>
+@interface PokcetExpenseAppDelegate : NSObject <UIApplicationDelegate,PurchaseManagerDelegate,SKRequestDelegate>
 
 {
     
@@ -93,7 +93,7 @@ typedef enum {
     InAppPurchaseManager *inAppPM;
     
     //广告
-    GADInterstitial *splashInterstitial;
+//    GADInterstitial *splashInterstitial;
     NSDate  *adsReadyDate;
     
     
@@ -166,8 +166,6 @@ typedef enum {
 -(void)hidePopView;
 -(void)showSyncIndicator;
 -(void)hideSyncIndicator;
-
--(void)insertAdsMob;
 
 - (BOOL)networkConnected;
 

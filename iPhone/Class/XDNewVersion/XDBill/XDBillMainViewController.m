@@ -13,7 +13,7 @@
 #import "BillsViewController.h"
 #import "XDAddPayViewController.h"
 #import "PokcetExpenseAppDelegate.h"
-@interface XDBillMainViewController ()<XDAddBillViewDelegate,BillsViewDelegate,XDBillCalendarViewDelegate>
+@interface XDBillMainViewController ()<XDAddBillViewDelegate,BillsViewDelegate,XDBillCalendarViewDelegate,ADEngineControllerBannerDelegate>
 @property(nonatomic, strong)UIScrollView *scrollView;
 
 @property(nonatomic, strong)XDBillCalendarViewController * calenVc;
@@ -22,9 +22,36 @@
 @property(nonatomic, strong)UILabel * titleLabel;
 @property(nonatomic, strong)NSDate * selectedDate;
 
+@property(nonatomic, strong)ADEngineController* adBanner;
+@property(nonatomic, strong)UIView* adBannerView;
+@property(nonatomic, strong)ADEngineController* interstitial;
+
 @end
 
 @implementation XDBillMainViewController
+
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        //插页广告
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1206 - iPhone - Interstitial - NewBillSave"];
+        }
+    }
+    return self;
+}
+
+
+-(UIView *)adBannerView{
+    if (!_adBannerView) {
+        _adBannerView = [[UIView alloc]initWithFrame:CGRectMake(0, self.scrollView.height - 50, SCREEN_WIDTH, 50)];
+        _adBannerView.backgroundColor = [UIColor clearColor];
+        [self.scrollView addSubview:_adBannerView];
+    }
+    return _adBannerView;
+}
 
 -(BillsViewController *)billVc{
     if (!_billVc) {
@@ -50,6 +77,36 @@
     [self returnBillCompletion];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"tabbarDismiss" object:@NO];
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1106 - iPhone - Banner - Bills" delegate:self];
+            [self.adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+      
+        self.billVc.view.height = self.scrollView.height;
+    }
+}
+
+
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+        self.billVc.view.height = self.scrollView.height - 50;
+        
+    }else{
+        self.adBannerView.hidden = YES;
+        self.billVc.view.height = self.scrollView.height;
+
+    }
 }
 
 
@@ -167,6 +224,15 @@
     [self.billVc refleshUI];
     
     [self.calenVc refreshCalendarAndBill];
+    
+}
+
+-(void)newBillSave{
+    //插页广告
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (!appDelegate.isPurchased) {
+        [self.interstitial showInterstitialAdWithTarget:self];
+    }
 }
 
 #pragma mark - BillsViewDelegate

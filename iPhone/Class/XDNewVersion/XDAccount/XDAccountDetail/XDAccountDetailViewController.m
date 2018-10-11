@@ -15,12 +15,14 @@
 #import "Category.h"
 #import "SearchRelatedViewController.h"
 #import "PokcetExpenseAppDelegate.h"
-@interface XDAccountDetailViewController ()<SCAdViewDelegate,XDAccountTableViewDelegate,XDAddTransactionViewDelegate>
+@interface XDAccountDetailViewController ()<SCAdViewDelegate,XDAccountTableViewDelegate,XDAddTransactionViewDelegate,ADEngineControllerBannerDelegate>
 {
     AccountCount* _currentAccount;
     SCAdView * _adView;
 
 }
+@property(nonatomic, strong)ADEngineController* interstitial;
+
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
 @property(nonatomic, strong)XDAccountTableView* tableView;
 @property (weak, nonatomic) IBOutlet UIButton *reconcileBtn;
@@ -30,6 +32,9 @@
 @property(nonatomic, strong)UIDatePicker * datePicker;
 @property(nonatomic, strong)Transaction * currentTransication;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstraint;
+@property (weak, nonatomic) IBOutlet UIView *adBannerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bannerViewHeight;
+@property(nonatomic, strong)ADEngineController* adBanner;
 
 @end
 
@@ -110,6 +115,34 @@
     [appDelegate.epdc duplicateTransaction:self.currentTransication withDate:self.datePicker.date];
     
     [self addTransactionCompletion];
+}
+
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1103 - iPhone - Banner - AccountDetails" delegate:self];
+            [_adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+    }
+}
+
+
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+        self.tableView.height = SCREEN_HEIGHT - CGRectGetMaxY(_adView.frame) - (IS_IPHONE_X?90:51) - 50;
+    }else{
+        self.adBannerView.hidden = YES;
+        self.tableView.height = SCREEN_HEIGHT - CGRectGetMaxY(_adView.frame) - (IS_IPHONE_X?90:51);
+    }
 }
 
 - (void)viewDidLoad {
@@ -362,6 +395,9 @@
 
     if (!self.reconcileBtn.selected) {
          [appDelegate.epnc setFlurryEvent_WithIdentify:@"08_ACC_REC"];
+        
+        [self.interstitial showInterstitialAdWithTarget:self];
+
     }
 }
 
@@ -375,5 +411,16 @@
     }
 }
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        //插页广告
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1203 - iPhone - Interstitial - ReconcileOFF"];
+        }
+    }
+    return self;
+}
 
 @end

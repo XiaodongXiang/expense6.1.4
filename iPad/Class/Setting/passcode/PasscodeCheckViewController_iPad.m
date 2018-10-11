@@ -138,7 +138,7 @@
             if (!appDelegate.isPurchased)
             {
                 appDelegate.applicationLaunchDate = [NSDate dateWithTimeIntervalSinceNow:0];
-                [appDelegate insertAdsMob];
+//                [appDelegate insertAdsMob];
             }
             [self.view removeFromSuperview];
             

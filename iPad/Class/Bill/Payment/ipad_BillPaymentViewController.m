@@ -580,6 +580,11 @@ dateTableViewCell,amountText,accountLabel,dateLabel,billFather,transaction,accou
     if ([self.typeoftodo isEqualToString:@"ADD"] || [self.typeoftodo isEqualToString:@"EDIT"]) {
         [self.navigationController popViewControllerAnimated:YES];
     }
+    
+    if (!appDelegate.isPurchased) {
+        ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
+        [interstitial showInterstitialAdWithTarget:self.navigationController];
+    }
         
 }
 

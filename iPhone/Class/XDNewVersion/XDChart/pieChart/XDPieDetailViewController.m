@@ -9,7 +9,9 @@
 #import "XDPiePageView.h"
 #import "XDChartDataClass.h"
 #import "XDPieSelectCategoryViewController.h"
-@interface XDPieDetailViewController ()<XDPiePageViewDelegate>
+#import "PokcetExpenseAppDelegate.h"
+
+@interface XDPieDetailViewController ()<XDPiePageViewDelegate,ADEngineControllerBannerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *dateScrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *pieScrollView;
 @property (weak, nonatomic) IBOutlet UIView *scrollBackView;
@@ -19,7 +21,11 @@
 @property(nonatomic, strong)XDPiePageView * nextPiePageView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dataScrollTopLeading;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewTopLeading;
+@property (weak, nonatomic) IBOutlet UIView *adBannerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *adBabberViewHeight;
+@property(nonatomic, strong)ADEngineController* adBanner;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *srcollViewBottomConstant;
 @end
 
 @implementation XDPieDetailViewController
@@ -73,6 +79,38 @@
     }
 
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1104 - iPhone - Banner - Category" delegate:self];
+            [_adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+        self.srcollViewBottomConstant.constant = 0;
+    }
+}
+
+
+#pragma mark -adBabberViewHeightlerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+        self.srcollViewBottomConstant.constant = 50;
+
+    }else{
+        self.adBannerView.hidden = YES;
+        self.srcollViewBottomConstant.constant = 0;
+
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];

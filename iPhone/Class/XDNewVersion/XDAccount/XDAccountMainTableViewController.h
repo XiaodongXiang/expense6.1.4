@@ -7,6 +7,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XDAccountMainTableViewController : UITableViewController
+@interface XDAccountMainTableViewController : UIViewController
 
 @end

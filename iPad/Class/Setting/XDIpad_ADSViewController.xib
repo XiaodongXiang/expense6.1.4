@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -34,6 +34,8 @@
                 <outlet property="monthTimeLbl" destination="EN6-Q6-F2c" id="iuL-9K-Z4i"/>
                 <outlet property="monthView" destination="Ef3-IQ-tOi" id="Wp6-69-dV1"/>
                 <outlet property="reportCell" destination="pFY-gi-TRo" id="fsU-5d-gTD"/>
+                <outlet property="restoreBtn" destination="l5m-ZK-Z8S" id="hUq-zu-Oib"/>
+                <outlet property="restoreBtnHeight" destination="ERN-NA-ijC" id="BYD-xQ-D1g"/>
                 <outlet property="saleLbl" destination="UIQ-kp-cbG" id="cTc-Jn-tAp"/>
                 <outlet property="scrollView" destination="78u-ZO-KEG" id="yyJ-rb-W4T"/>
                 <outlet property="syncCell" destination="j8s-CE-GGt" id="bdt-6J-f8z"/>
@@ -97,7 +99,7 @@ and future features</string>
                             </connections>
                         </scrollView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="I9x-Pd-lW3">
-                            <rect key="frame" x="0.0" y="317" width="375" height="303"/>
+                            <rect key="frame" x="0.0" y="367" width="375" height="253"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="8qg-Vc-Wh7"/>
@@ -105,12 +107,24 @@ and future features</string>
                             </connections>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rJA-Ds-lJD">
-                            <rect key="frame" x="15" y="306" width="345" height="1"/>
+                            <rect key="frame" x="15" y="356" width="345" height="1"/>
                             <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="dlP-X5-oEj"/>
                             </constraints>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l5m-ZK-Z8S">
+                            <rect key="frame" x="15" y="308" width="147" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="ERN-NA-ijC"/>
+                                <constraint firstAttribute="width" constant="147" id="Mdb-iw-OIf"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="16"/>
+                            <state key="normal" title="Restore Purchased"/>
+                            <connections>
+                                <action selector="restoreBtnClick:" destination="-1" eventType="touchUpInside" id="Uvv-tc-VGy"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
@@ -119,20 +133,22 @@ and future features</string>
                         <constraint firstAttribute="trailing" secondItem="78u-ZO-KEG" secondAttribute="trailing" id="3Go-Vi-rn2"/>
                         <constraint firstAttribute="trailing" secondItem="5Dl-bc-fiT" secondAttribute="trailing" constant="15" id="7M7-1T-nLr"/>
                         <constraint firstAttribute="trailing" secondItem="KCg-WW-1zp" secondAttribute="trailing" constant="15" id="DQS-Wb-Bva"/>
+                        <constraint firstItem="l5m-ZK-Z8S" firstAttribute="top" secondItem="78u-ZO-KEG" secondAttribute="bottom" constant="7" id="Ee5-XM-sVb"/>
                         <constraint firstItem="78u-ZO-KEG" firstAttribute="leading" secondItem="nxV-fS-s6y" secondAttribute="leading" id="Hty-sh-2gz"/>
                         <constraint firstItem="KCg-WW-1zp" firstAttribute="top" secondItem="5Dl-bc-fiT" secondAttribute="bottom" id="Id3-rr-hg2"/>
                         <constraint firstItem="9yM-c6-URa" firstAttribute="leading" secondItem="nxV-fS-s6y" secondAttribute="leading" constant="5" id="JJu-ce-gYt"/>
+                        <constraint firstItem="rJA-Ds-lJD" firstAttribute="top" secondItem="l5m-ZK-Z8S" secondAttribute="bottom" constant="8" id="JwV-Bn-hcQ"/>
                         <constraint firstItem="I9x-Pd-lW3" firstAttribute="top" secondItem="rJA-Ds-lJD" secondAttribute="bottom" constant="10" id="ODz-0j-a3d"/>
                         <constraint firstAttribute="bottom" secondItem="I9x-Pd-lW3" secondAttribute="bottom" id="OwS-BE-PfH"/>
                         <constraint firstItem="KCg-WW-1zp" firstAttribute="leading" secondItem="nxV-fS-s6y" secondAttribute="leading" constant="15" id="T69-Wd-67l"/>
                         <constraint firstItem="rJA-Ds-lJD" firstAttribute="leading" secondItem="nxV-fS-s6y" secondAttribute="leading" constant="15" id="ZB9-h0-E4C"/>
                         <constraint firstItem="I9x-Pd-lW3" firstAttribute="leading" secondItem="nxV-fS-s6y" secondAttribute="leading" id="awP-qI-nRd"/>
+                        <constraint firstItem="l5m-ZK-Z8S" firstAttribute="leading" secondItem="nxV-fS-s6y" secondAttribute="leading" constant="15" id="gGg-dR-6s0"/>
                         <constraint firstAttribute="trailing" secondItem="rJA-Ds-lJD" secondAttribute="trailing" constant="15" id="iDV-LK-M9d"/>
                         <constraint firstItem="5Dl-bc-fiT" firstAttribute="leading" secondItem="nxV-fS-s6y" secondAttribute="leading" constant="15" id="nCb-Tf-yZl"/>
                         <constraint firstItem="9yM-c6-URa" firstAttribute="top" secondItem="nxV-fS-s6y" secondAttribute="top" constant="10" id="qGT-FN-jbY"/>
                         <constraint firstItem="78u-ZO-KEG" firstAttribute="top" secondItem="KCg-WW-1zp" secondAttribute="bottom" constant="10" id="tv9-St-4xa"/>
                         <constraint firstItem="5Dl-bc-fiT" firstAttribute="top" secondItem="9yM-c6-URa" secondAttribute="bottom" id="x0K-3r-xrG"/>
-                        <constraint firstItem="rJA-Ds-lJD" firstAttribute="top" secondItem="78u-ZO-KEG" secondAttribute="bottom" constant="5" id="xZc-Jz-ghS"/>
                         <constraint firstAttribute="height" constant="620" id="zqL-ZQ-ODp"/>
                     </constraints>
                 </view>
@@ -354,7 +370,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ads free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXP-5C-aWe">
-                        <rect key="frame" x="79" y="18" width="65" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="65" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="rNb-We-Xs7"/>
                         </constraints>
@@ -387,7 +403,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Export data and reports" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IEl-mH-gsO">
-                        <rect key="frame" x="79" y="18" width="183.5" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="183.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="WRt-db-6GR"/>
                         </constraints>
@@ -420,7 +436,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Quick input in widget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kFe-jg-zUK">
-                        <rect key="frame" x="79" y="18" width="164" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="164" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="mf1-9k-vO2"/>
                         </constraints>
@@ -453,7 +469,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sync accross device" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bRK-Du-vDQ">
-                        <rect key="frame" x="79" y="18" width="158" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="158" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="3cr-Ok-Gee"/>
                         </constraints>
@@ -486,7 +502,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlimited number of Budget" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SkY-rY-KlU">
-                        <rect key="frame" x="79" y="18" width="219" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="219" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="6hv-nh-vSu"/>
                         </constraints>
@@ -519,7 +535,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlimited number of accounts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U8N-Es-hFr">
-                        <rect key="frame" x="79" y="18" width="233.5" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="233.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="A2H-5J-6fc"/>
                         </constraints>

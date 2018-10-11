@@ -18,7 +18,8 @@
 #import "BudgetTransfer.h"
 #import "XDBudgetDetailViewController.h"
 #import "SettingViewController.h"
-@interface XDBudgetMainViewController ()<UIScrollViewDelegate,XDEditBudgetViewDelegate,XDBudgetTableViewDelegate>
+#import "PokcetExpenseAppDelegate.h"
+@interface XDBudgetMainViewController ()<UIScrollViewDelegate,XDEditBudgetViewDelegate,XDBudgetTableViewDelegate,ADEngineControllerBannerDelegate>
 {
     __block NSInteger _index;
     
@@ -40,6 +41,10 @@
 @property(nonatomic, strong)XDDateSelectedView * dateSelectedView;
 @property(nonatomic, strong)UIScrollView * scrollView;
 
+
+@property(nonatomic, strong)ADEngineController* adBanner;
+@property(nonatomic, strong)UIView* adBannerView;
+
 @end
 
 @implementation XDBudgetMainViewController
@@ -57,6 +62,23 @@
     return _scrollView;
 }
 
+-(UIView *)adBannerView{
+    if (!_adBannerView) {
+        
+        if (IS_IPHONE_X) {
+            _adBannerView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.height - 133, SCREEN_WIDTH, 50)];
+
+        }else{
+            _adBannerView = [[UIView alloc]initWithFrame:CGRectMake(0, self.view.height - 99, SCREEN_WIDTH, 50)];
+        }
+        _adBannerView.backgroundColor = [UIColor clearColor];
+        [self.view bringSubviewToFront:_adBannerView];
+        [self.view addSubview:_adBannerView];
+    }
+    
+    return _adBannerView;
+}
+
 
 -(instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -66,6 +88,50 @@
 
     }
     return self;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1105 - iPhone - Banner - Budget" delegate:self];
+            [self.adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+       
+        
+        if (IS_IPHONE_X) {
+            self.scrollView.height = SCREEN_HEIGHT - CGRectGetMaxY(self.dateSelectedView.frame) - 83;
+        }else{
+            self.scrollView.height = SCREEN_HEIGHT - CGRectGetMaxY(self.dateSelectedView.frame) - 49;
+        }
+    }
+}
+
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+        
+        if (IS_IPHONE_X) {
+            self.scrollView.height = SCREEN_HEIGHT - CGRectGetMaxY(self.dateSelectedView.frame) - 83 - 50;
+        }else{
+            self.scrollView.height = SCREEN_HEIGHT - CGRectGetMaxY(self.dateSelectedView.frame) - 49 - 50;
+        }
+        
+    }else{
+        self.adBannerView.hidden = YES;
+        
+        if (IS_IPHONE_X) {
+            self.scrollView.height = SCREEN_HEIGHT - CGRectGetMaxY(self.dateSelectedView.frame) - 83;
+        }else{
+            self.scrollView.height = SCREEN_HEIGHT - CGRectGetMaxY(self.dateSelectedView.frame) - 49;
+        }
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated{

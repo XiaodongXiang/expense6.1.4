@@ -900,6 +900,12 @@ static int monthCount = 0;
     else
         [self.navigationController popViewControllerAnimated:YES];
     
+    
+    
+    if (!appDelegate.isPurchased) {
+        ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
+        [interstitial showInterstitialAdWithTarget:appDelegate_iPad.mainViewController];
+    }
 }
 
 -(void)changeBillPaymentPageBillFather

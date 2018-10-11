@@ -32,6 +32,13 @@
 #define OLDUSERDATA @"oldUserData"
 #define FIRSTLAUNCHSINCEBACKUPOLDUSERDATA @"FirstLanchSinceBackupOldUserData"
 
+@interface AppDelegate_iPad ()
+
+@property(nonatomic, strong)ADEngineController* interstitial;
+
+
+@end
+
 @implementation AppDelegate_iPad
 @synthesize mainViewController,passCodeCheckView;
 //@synthesize  dateSelectedViewController;
@@ -405,6 +412,16 @@
     app_reminderBill2Array = [[NSMutableArray alloc]init];
     app_reminderAllArray =[[NSMutableArray alloc]init];
     [self getRecentlyTwoMonthesand50NeedtoReminderBills];
+    
+    //插页广告
+    if ([PFUser currentUser]) {
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2201 - iPad - Interstitial - Launch"];
+            [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
+        }
+    }
+    
   	return YES;
 }
 
@@ -490,6 +507,11 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [super applicationDidBecomeActive:application];
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        [self.interstitial showInterstitialAdWithTarget:self.window.rootViewController];
+    }
     if (self.isSignUping==YES )
     {
         [self.transferAlertview show];

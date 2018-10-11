@@ -1544,6 +1544,13 @@
     }
     else
         [self.navigationController popViewControllerAnimated:YES];
+    
+    //插页广告
+//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
+        [interstitial showInterstitialAdWithTarget:appDelegate_iPhone.mainViewController];
+    }
 
 }
 

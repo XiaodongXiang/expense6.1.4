@@ -61,6 +61,7 @@
     UILabel     *fifthLabel;
     UILabel     *sixthiLabel;
     UILabel     *seventhLabel;
+    UIView *bottomView;
 }
 @property (nonatomic, strong)UIView *kalheaderView;
 @property (nonatomic, strong) id<KalViewDelegate> delegate;
@@ -70,6 +71,7 @@
 @property(nonatomic,assign) BOOL isBillShow;
 @property(nonatomic,strong)UILabel *headerTitleLabel;
 @property(nonatomic,strong) KalLogic *logic;
+@property(nonatomic, strong)UIView* bottomView;
 
 @property(nonatomic,strong)UIView      *balanceView;
 @property(nonatomic,strong)UILabel     *totalAmountLabel;

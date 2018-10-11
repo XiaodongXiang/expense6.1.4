@@ -15,6 +15,7 @@
 
 @interface ipad_ReportRootViewController ()
 
+
 @end
 
 @implementation ipad_ReportRootViewController

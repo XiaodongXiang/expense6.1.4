@@ -962,6 +962,7 @@
         if ([self.delegate respondsToSelector:@selector(addTransactionCompletion)]) {
             [self.delegate addTransactionCompletion];
         }
+     
     }];
 }
 

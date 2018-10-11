@@ -19,8 +19,10 @@
 #define TRANSACTIONHAS5Count @"transactionOver5Count"
 
 
-@interface iPad_OverViewViewController ()
+@interface iPad_OverViewViewController ()<ADEngineControllerBannerDelegate>
+@property (weak, nonatomic) IBOutlet UIView *adBannerView;
 
+@property(nonatomic, strong)ADEngineController* adBanner;
 @end
 
 @implementation iPad_OverViewViewController
@@ -61,6 +63,44 @@
     [self refleshData];
     
 }
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    kalViewController.view.height = calendarContainView.height;
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+//    calendarContainView.height = 674;
+    
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2101 - iPad - Banner - Calendar" delegate:self];
+            [self.adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+        kalViewController.kalView.bottomView.y = 533;
+
+    }
+    
+}
+
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+        kalViewController.kalView.bottomView.y = 533-60;
+        calendarContainView.height = 616;
+    }else{
+        self.adBannerView.hidden = YES;;
+        kalViewController.kalView.bottomView.y = 533;
+        calendarContainView.height = 674;
+
+    }
+}
+
 
 -(void)hideorShowAds{
      PokcetExpenseAppDelegate *appDelegate= (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
@@ -199,19 +239,33 @@
 -(IBAction)adsBtnPressed:(UIButton *)sender
 {
     AppDelegate_iPad * appDelegate1 = (AppDelegate_iPad *)[[UIApplication sharedApplication] delegate];
-
-    adsViewController = [[ipad_ADSDeatailViewController alloc]initWithNibName:@"ipad_ADSDeatailViewController" bundle:nil];
-    adsViewController.view.backgroundColor = [UIColor clearColor];
-    adsViewController.isComeFromSetting = NO;
-  	adsViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    adsViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-    appDelegate1.mainViewController.popViewController = adsViewController;
+//
+//    adsViewController = [[ipad_ADSDeatailViewController alloc]initWithNibName:@"ipad_ADSDeatailViewController" bundle:nil];
+//    adsViewController.view.backgroundColor = [UIColor clearColor];
+//    adsViewController.isComeFromSetting = NO;
+//      adsViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+//    adsViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+//    appDelegate1.mainViewController.popViewController = adsViewController;
+//
+//    [appDelegate1.mainViewController presentViewController:adsViewController animated:YES completion:nil];
+//    adsViewController.view.superview.autoresizingMask =
+//    UIViewAutoresizingFlexibleTopMargin |
+//    UIViewAutoresizingFlexibleBottomMargin;
+    XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
+    //        adsDetailViewController.isComeFromSetting = NO;
+    //        adsDetailViewController.pageNum = i;
+    //        adsDetailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    appDelegate1.mainViewController.popViewController = adsDetailViewController;
+    adsDetailViewController.preferredContentSize = CGSizeMake(390, 600);
+    [appDelegate1.mainViewController presentViewController:adsDetailViewController animated:YES completion:nil];
     
-    [appDelegate1.mainViewController presentViewController:adsViewController animated:YES completion:nil];
-	adsViewController.view.superview.autoresizingMask =
+    adsDetailViewController.view.superview.autoresizingMask =
     UIViewAutoresizingFlexibleTopMargin |
     UIViewAutoresizingFlexibleBottomMargin;
     
+    
+    adsDetailViewController.view.superview.backgroundColor = [UIColor clearColor];
     [appDelegate1.epnc setFlurryEvent_WithIdentify:@"22_AD_BANR"];
 }
 

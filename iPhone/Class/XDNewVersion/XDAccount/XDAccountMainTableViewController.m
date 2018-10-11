@@ -17,7 +17,7 @@
 #import "ParseDBManager.h"
 #import <Parse/Parse.h>
 
-@interface XDAccountMainTableViewController ()<XDAddAccountViewDelegate,UIActionSheetDelegate,XDAccountTableViewCellDelegate>
+@interface XDAccountMainTableViewController ()<XDAddAccountViewDelegate,UIActionSheetDelegate,XDAccountTableViewCellDelegate,UITableViewDelegate,UITableViewDataSource,ADEngineControllerBannerDelegate>
 {
     BOOL _isEdit;
     
@@ -29,7 +29,12 @@
 }
 @property(nonatomic, strong)NSMutableArray* dataMuArr;
 @property (strong, nonatomic) IBOutlet UITableViewCell *addAccountCell;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
+
+@property(nonatomic, strong)ADEngineController* adBanner;
+@property (weak, nonatomic) IBOutlet UIView *adBannerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bannerHeight;
 @end
 
 @implementation XDAccountMainTableViewController
@@ -183,6 +188,8 @@
     return filterAmount;
 }
 
+
+
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     
@@ -194,6 +201,29 @@
 
 }
 
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1102 - iPhone - Banner - Accounts" delegate:self];
+            [_adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+    }
+    
+}
+
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+    }else{
+        self.adBannerView.hidden = YES;
+    }
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

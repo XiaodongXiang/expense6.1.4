@@ -1,0 +1,6 @@
+framework module ADEngine {
+  umbrella header "ADEngine.h"
+
+  export *
+  module * { export * }
+}

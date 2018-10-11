@@ -45,6 +45,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *accountPick;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *navBackViewH;
+@property(nonatomic, strong)ADEngineController* interstitial;
 
 @end
 
@@ -62,10 +63,13 @@
     }
     return _keyboard;
 }
+
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     if (billFather) {
+        
         [self.icon setImage:[UIImage imageNamed:[NSString stringWithFormat:@"%@_white.png",[[billFather.bf_category.iconName componentsSeparatedByString:@"."]firstObject]]] forState:UIControlStateNormal];
         self.navBackView.backgroundColor = [UIColor mostColor:[UIImage imageNamed:billFather.bf_category.iconName]];
         self.nameLabel.text = billFather.bf_billName;
@@ -137,6 +141,11 @@
     self.amountTF.inputView = self.keyboard;
     self.tableView.separatorColor = RGBColor(226, 226, 226);
 
+    //插页广告
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (!appDelegate.isPurchased) {
+        [self.interstitial nowShowInterstitialAdWithTarget:self];
+    }
 }
 
 - (IBAction)cancelClick:(id)sender {
@@ -349,6 +358,19 @@
     
     return dateStr;
     
+}
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        //插页广告
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1205 - iPhone - Interstitial - BillAddPaid"];
+            
+        }
+    }
+    return self;
 }
 
 @end

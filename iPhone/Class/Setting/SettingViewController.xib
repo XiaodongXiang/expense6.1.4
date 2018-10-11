@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -118,7 +117,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-381" y="233.5"/>
+            <point key="canvasLocation" x="-609.60000000000002" y="210.04497751124438"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="51" id="11" userLabel="Table View Cell-passcode">
             <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
@@ -167,7 +166,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-182" y="-79"/>
+            <point key="canvasLocation" x="-291.19999999999999" y="-71.064467766116948"/>
         </tableViewCell>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="DEA-gN-Dee" userLabel="Table View Cell-currency">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -223,7 +222,7 @@
                     <constraint firstItem="lgn-Mu-4Pi" firstAttribute="top" secondItem="PmQ-oe-Zlj" secondAttribute="top" constant="7" id="sop-ou-2Pt"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="32" y="387"/>
+            <point key="canvasLocation" x="51.200000000000003" y="348.12593703148428"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="4C2-c4-M3t" userLabel="Table View Cell-general">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -258,7 +257,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="32" y="467"/>
+            <point key="canvasLocation" x="51.200000000000003" y="420.08995502248877"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="9" userLabel="Table View Cell-payee">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -346,7 +345,7 @@
                         </constraints>
                     </imageView>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Cpe-hz-f4r">
-                        <rect key="frame" x="246" y="6" width="51" height="31"/>
+                        <rect key="frame" x="246" y="6.5" width="51" height="31"/>
                     </switch>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Manual Sync" lineBreakMode="tailTruncation" minimumFontSize="17" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5EU-wc-3A3">
                         <rect key="frame" x="53" y="0.0" width="221" height="44"/>
@@ -369,7 +368,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-499" y="-137"/>
+            <point key="canvasLocation" x="-798.39999999999998" y="-123.23838080959521"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="62" userLabel="Table View Cell-back up">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -413,7 +412,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="375" y="21"/>
+            <point key="canvasLocation" x="600" y="18.890554722638683"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="RMV-Y1-01b" userLabel="Table View Cell-export">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -458,7 +457,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="274" y="-90"/>
+            <point key="canvasLocation" x="438.39999999999998" y="-80.959520239880064"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="54" userLabel="Table View Cell-data">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -482,7 +481,7 @@
                         </constraints>
                     </activityIndicatorView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Migration des données vers complète" lineBreakMode="tailTruncation" minimumFontSize="17" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="57">
-                        <rect key="frame" x="45" y="0.0" width="260" height="43"/>
+                        <rect key="frame" x="45" y="0.0" width="260" height="43.5"/>
                         <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
                         <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -536,7 +535,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-286" y="117"/>
+            <point key="canvasLocation" x="-457.60000000000002" y="105.24737631184409"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" id="8" userLabel="Table View Cell-send feedback">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -605,7 +604,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-1276" y="1265"/>
+            <point key="canvasLocation" x="-2041.5999999999999" y="1137.9310344827586"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cKk-WM-AgJ" userLabel="Table View Cell-logOut">
             <rect key="frame" x="0.0" y="0.0" width="347" height="44"/>
@@ -630,17 +629,17 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="965.5" y="589"/>
+            <point key="canvasLocation" x="1544.8" y="529.83508245877067"/>
         </tableViewCell>
         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" id="kdX-PV-4oH">
             <rect key="frame" x="0.0" y="0.0" width="37" height="37"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <point key="canvasLocation" x="662" y="447"/>
+            <point key="canvasLocation" x="1059.2" y="402.09895052473769"/>
         </activityIndicatorView>
         <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="SGe-qE-JEB">
             <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-            <point key="canvasLocation" x="769" y="479"/>
+            <point key="canvasLocation" x="1230.4000000000001" y="430.88455772113946"/>
         </activityIndicatorView>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="cwO-Pw-rnX" userLabel="Table View Cell-dropboxRestore">
             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -676,7 +675,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="476" y="197"/>
+            <point key="canvasLocation" x="761.60000000000002" y="177.21139430284859"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="90" id="dCU-a1-HX9">
             <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
@@ -686,7 +685,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6tc-KK-w52">
-                        <rect key="frame" x="53.5" y="26" width="305.5" height="21"/>
+                        <rect key="frame" x="53" y="26" width="306" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="4AR-wT-XY8"/>
                         </constraints>
@@ -695,7 +694,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a2n-Dp-Aso">
-                        <rect key="frame" x="53.5" y="48" width="305.5" height="21"/>
+                        <rect key="frame" x="53" y="48" width="306" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="571-RR-ob6"/>
                         </constraints>
@@ -704,7 +703,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L54-Gd-XVc">
-                        <rect key="frame" x="7" y="24" width="40" height="40"/>
+                        <rect key="frame" x="6.5" y="25" width="40" height="40"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="40" id="pUb-SZ-C3z"/>
                             <constraint firstAttribute="height" constant="40" id="xyl-73-z5K"/>
@@ -726,7 +725,7 @@
                     <constraint firstItem="a2n-Dp-Aso" firstAttribute="top" secondItem="6tc-KK-w52" secondAttribute="bottom" constant="1" id="tWZ-aH-qoi"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-1317.5" y="1427"/>
+            <point key="canvasLocation" x="-2108" y="1283.6581709145428"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" rowHeight="51" id="JPs-8z-jSg" userLabel="Table View Cell-upgrade to pro">
             <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
@@ -743,7 +742,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Upgrade to Premium" lineBreakMode="tailTruncation" minimumFontSize="17" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lR6-cx-jeR">
-                        <rect key="frame" x="53" y="0.0" width="226" height="51"/>
+                        <rect key="frame" x="53" y="0.0" width="226" height="50.5"/>
                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="17"/>
                         <color key="textColor" red="0.4431372549" green="0.63921568630000003" blue="0.96078431369999995" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
@@ -761,7 +760,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-1358" y="1539"/>
+            <point key="canvasLocation" x="-2172.8000000000002" y="1384.4077961019491"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="2rM-8U-tlG" userLabel="Table View Cell-syncNow">
             <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
@@ -782,7 +781,7 @@
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FFx-U1-HCJ">
-                        <rect key="frame" x="53" y="49.5" width="267" height="0.5"/>
+                        <rect key="frame" x="53" y="50" width="267" height="0.5"/>
                         <color key="backgroundColor" red="0.90196078431372551" green="0.90196078431372551" blue="0.90196078431372551" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="OuY-vI-r1K"/>
@@ -799,7 +798,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-381" y="383.5"/>
+            <point key="canvasLocation" x="-609.60000000000002" y="344.97751124437787"/>
         </tableViewCell>
         <tableViewCell clearsContextBeforeDrawing="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="51" id="QO9-xp-qPg" userLabel="Table View Cell-upgrade to pro">
             <rect key="frame" x="0.0" y="0.0" width="320" height="51"/>
@@ -846,7 +845,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <point key="canvasLocation" x="-1358" y="1651.5"/>
+            <point key="canvasLocation" x="-2172.8000000000002" y="1485.6071964017992"/>
         </tableViewCell>
     </objects>
     <resources>

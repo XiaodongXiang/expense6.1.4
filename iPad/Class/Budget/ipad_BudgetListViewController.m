@@ -280,6 +280,13 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 
+    //插页广告
+
+//    AppDelegate_iPad *appDelegate_ipad = (AppDelegate_iPad *)[[UIApplication sharedApplication]delegate];
+    if (!appDelegate.isPurchased) {
+        ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
+        [interstitial showInterstitialAdWithTarget:self.navigationController];
+    }
 }
 
 -(void)saveBudgetTemplate{

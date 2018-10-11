@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDAccountDetailViewController">
             <connections>
+                <outlet property="adBannerView" destination="hjL-op-sno" id="oP8-ko-BSy"/>
+                <outlet property="bannerViewHeight" destination="4K2-OM-8Yg" id="h1W-Sm-nuT"/>
                 <outlet property="bottomConstraint" destination="IEw-9I-GUf" id="zeJ-B8-Gs3"/>
                 <outlet property="bottomView" destination="Kg7-52-0iW" id="FWm-w1-aJG"/>
                 <outlet property="hideCleardBtn" destination="YE3-g1-Ja7" id="Dsi-sb-QBJ"/>
@@ -40,14 +42,14 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zVG-V0-svI">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.5"/>
+                            <rect key="frame" x="0.0" y="-0.5" width="375" height="0.5"/>
                             <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="0.5" id="KMe-SW-AAF"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hMQ-mn-pxr">
-                            <rect key="frame" x="187" y="0.0" width="0.5" height="50"/>
+                            <rect key="frame" x="187.5" y="0.0" width="0.5" height="50"/>
                             <color key="backgroundColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="0.5" id="lIG-Rt-VPt"/>
@@ -87,11 +89,21 @@
                         <constraint firstAttribute="height" constant="50" id="xbh-cM-yl7"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hjL-op-sno">
+                    <rect key="frame" x="0.0" y="567" width="375" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="4K2-OM-8Yg"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="hjL-op-sno" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2mK-5F-tlI"/>
                 <constraint firstAttribute="bottom" secondItem="Kg7-52-0iW" secondAttribute="bottom" id="IEw-9I-GUf"/>
                 <constraint firstAttribute="trailing" secondItem="Kg7-52-0iW" secondAttribute="trailing" id="ZWv-aY-35e"/>
+                <constraint firstItem="Kg7-52-0iW" firstAttribute="top" secondItem="hjL-op-sno" secondAttribute="bottom" id="d5x-6d-I2f"/>
+                <constraint firstAttribute="trailing" secondItem="hjL-op-sno" secondAttribute="trailing" id="jgr-Go-0kP"/>
                 <constraint firstItem="Kg7-52-0iW" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="yTw-G7-tia"/>
             </constraints>
             <point key="canvasLocation" x="-61.5" y="-28.5"/>

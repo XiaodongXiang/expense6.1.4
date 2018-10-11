@@ -61,15 +61,14 @@
 #import "XDUpgradeViewController.h"
 
 
-#import "XDLaunchFileViewController.h"
-
-
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
 @interface AppDelegate_iPhone ()<PFLogInViewControllerDelegate,PFSignUpViewControllerDelegate,UIAlertViewDelegate>
 {
     UIApplicationShortcutItem* _shortItem;
 }
+@property(nonatomic, strong) ADEngineController* interstitial;
+
 @end
 
 @implementation AppDelegate_iPhone
@@ -453,7 +452,7 @@
                         [_touchBack removeFromSuperview];
                     });
                 }else{
-                    NSLog(@"error = %@ ,, code == %ld",error,error.code);
+                    NSLog(@"error = %@ ,, code == %d",error,error.code);
                 }
                 if(error.code == LAErrorAuthenticationFailed){
                     NSLog(@"Authentication Failed");
@@ -486,15 +485,17 @@
     [notificationCenter addObserver:self selector:@selector(preVersionPrice:) name:GET_PRO_VERSION_PRICE_ACTION object:nil];
     [notificationCenter addObserver:self selector:@selector(hideCustomTabView) name:@"ADMOB_ADS_HIDE" object:nil];
     [notificationCenter addObserver:self selector:@selector(showCustomTabView) name:@"ADMOB_ADS_SHOW" object:nil];
-    
-    if ([PFUser currentUser])
-    {
-        [self showAds:nil];
-    }
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPFSettingSuccessful) name:@"getPFSettingSuccessful" object:nil];
     
-//    [self succededInSignUp];
+    //插页广告
+    if ([PFUser currentUser]) {
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
+            [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
+        }
+    }
     
     return YES;
 }
@@ -505,11 +506,11 @@
     if ([setting.purchasedIsSubscription boolValue]) {
         self.isPurchased = YES;
         [[XDDataManager shareManager]openWidgetInSettingWithBool14:YES];
-        [self hideAds:nil];
+//        [self hideAds:nil];
     }else{
         self.isPurchased = NO;
         [[XDDataManager shareManager]openWidgetInSettingWithBool14:NO];
-        [self showAds:nil];
+//        [self showAds:nil];
     }
     
 }
@@ -554,11 +555,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-    
-//    if ([PFUser currentUser])
-//    {
-//        [[ParseDBManager sharedManager]dataSyncWithServer];
-//    }
+
     
     if ([PFUser currentUser]) {
         
@@ -640,6 +637,9 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
+    
+    [[ADEngineManage adEngineManage] downloadConfigByAppName:@"PocketExpense"];
+
     
     [_touchBack removeFromSuperview];
     [self saveContext];
@@ -902,84 +902,7 @@
 }
 
 
-#pragma mark Ads Method
--(void)showAds:(id)sender
-{
-   
-    if(!self.isPurchased)
-    {
-        //获取laucn的次数
-        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-        
-        _adsImageView.image = [UIImage imageNamed:[NSString customImageName:@"banner_iphone.png"]];
-        
-        if (IS_IPHONE_6PLUS)
-        {
-            _priceL.constant = 213;
-            _priceW.constant = 68;
-            _noadsL.constant = 19;
 
-        }
-        else if (IS_IPHONE_6)
-        {
-            _priceL.constant = 196;
-            _priceW.constant = 63;
-            _noadsL.constant = 19;
-
-        }
-        else
-        {
-            _priceL.constant = 157;
-            _priceW.constant = 63;
-            _noadsL.constant = 9.5;
-
-        }
-        _priceLabel.text = NSLocalizedString(@"VC_Purchase", nil);
-        _noadsLabel.text = NSLocalizedString(@"VC_iphone_ads", nil);
-        _noadsLabel.adjustsFontSizeToFitWidth = YES;
-        [_noadsLabel setMinimumScaleFactor:0];
-        NSString *purchasePrice = [userDefaults stringForKey:PURCHASE_PRICE];
-        if ([purchasePrice length]>0)
-        {
-            self.priceLabel.text = purchasePrice;
-        }
-        else
-            self.priceLabel.text = nil;
-        
-        [_adsBtn addTarget:self action:@selector(adsBtnAction:) forControlEvents:UIControlEventTouchUpInside];
-        
-        [self.window bringSubviewToFront:_adsView];
-    }
-    else
-        [_adsView removeFromSuperview];
-}
--(void)hideAds:(id)sender
-{
-    [_adsView removeFromSuperview];
-    
-    if (self.calendarBtn.selected)
-    {
-        if (self.overViewController.settingViewController != nil)
-        {
-            [self.overViewController.settingViewController resetStyleWithAds];
-        }
-        [self.overViewController resetStyleWithAds];
-    }
-    else if (self.accountBtn.selected)
-    {
-        [self.accountsController resetStyleWithAds];
-    }
-    else if (self.budgetBtn.selected)
-    {
-        [self.budgetController resetStyleWithAds];
-    }
-    else if (self.reportBtn.selected)
-    {
-        [self.expenseViewController  resetStyleWithAds];
-    }
-
-
-}
 #pragma mark Btn Action
 
 //获取保存在本地的商品价格，显示
@@ -1182,13 +1105,13 @@
         if (buttonIndex==0)
         {
             [self afterDropbox];
-            [self showAds:nil];
+//            [self showAds:nil];
         }
         if (buttonIndex==1)
         {
             [self.dropbox.drop_accountManager linkFromController:(UIViewController *)self.window.rootViewController];
             self.isSignUping=YES;
-            [self showAds:nil];
+//            [self showAds:nil];
         }
     }
 }
@@ -1217,6 +1140,10 @@
             [[ParseDBManager sharedManager] getPFSetting];
         }
         
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (!appDelegate.isPurchased) {
+            [self.interstitial showInterstitialAdWithTarget:self.window.rootViewController];
+        }
     }
 }
 
@@ -1371,7 +1298,7 @@
     
     if (!self.isPurchased)
     {
-        [self showAds:nil];
+//        [self showAds:nil];
     }
     
 }
@@ -1490,7 +1417,7 @@
         
     if (!self.isPurchased)
     {
-        [self showAds:nil];
+//        [self showAds:nil];
     }
 }
 

@@ -153,7 +153,6 @@
             if (!appDelegate2.isPurchased)
             {
                 appDelegate2.applicationLaunchDate = [NSDate dateWithTimeIntervalSinceNow:0];
-                [appDelegate2 insertAdsMob];
             }
             [self.view removeFromSuperview];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockSuccess" object:nil];

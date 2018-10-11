@@ -130,6 +130,7 @@
     XDAddPayViewController* vc = [[XDAddPayViewController alloc]initWithNibName:@"XDAddPayViewController" bundle:nil];
     vc.billFather = billFather;
     [self presentViewController:vc animated:YES completion:nil];
+  
 }
 
 -(void)cancelClick{
@@ -225,6 +226,8 @@
 -(void)returnBillCompletion{
     
 }
+
+
 
 
 @end

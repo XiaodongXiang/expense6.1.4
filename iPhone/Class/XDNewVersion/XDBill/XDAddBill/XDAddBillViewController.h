@@ -11,6 +11,7 @@
 @class BillFather;
 @protocol XDAddBillViewDelegate <NSObject>
 -(void)returnBillCompletion;
+-(void)newBillSave;
 @end
 
 @interface XDAddBillViewController : UIViewController

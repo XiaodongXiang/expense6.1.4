@@ -9,8 +9,6 @@
 #import <StoreKit/StoreKit.h>
 #import "PokcetExpenseAppDelegate.h"
 
-#import "Pocket_Expense-Swift.h"
-
 #define LITE_UNLOCK_FLAG    @"isProUpgradePurchased"
 
 @interface XDInAppPurchaseManager ()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
@@ -286,8 +284,7 @@
 
         [appDelegate hideIndicator];
     }else{
-        expensePurchase* expense = [[expensePurchase alloc]init];
-        [expense requestRestore];
+        [self validateReceipt];
     }
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     [self finishSomeUnfinishTransaction];
@@ -305,15 +302,15 @@
 
 - (void)paymentQueueRestoreCompletedTransactionsFinished:(SKPaymentQueue *)queue{
     
-    NSMutableArray *purchasedItemIDs = [[NSMutableArray alloc] init];
-    NSLog(@"received restored transactions: %lu", (unsigned long)queue.transactions.count);
-    for (SKPaymentTransaction *transaction in queue.transactions)
-    {
-        NSString *productID = transaction.payment.productIdentifier;
-        [purchasedItemIDs addObject:productID];
-        NSLog(@"%@",purchasedItemIDs);
-    }
-    
+//    NSMutableArray *purchasedItemIDs = [[NSMutableArray alloc] init];
+//    NSLog(@"received restored transactions: %lu", (unsigned long)queue.transactions.count);
+//    for (SKPaymentTransaction *transaction in queue.transactions)
+//    {
+//        NSString *productID = transaction.payment.productIdentifier;
+//        [purchasedItemIDs addObject:productID];
+//        NSLog(@"%@",purchasedItemIDs);
+//    }
+//    
     [self finishSomeUnfinishTransaction];
 
     PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -326,40 +323,12 @@
 }
 
 #pragma mark - function
-//-(void)completeTransactionReceipt:(NSNotification*)notif{
-//    NSDictionary* dic = [notif object];
-//    NSArray* newArray = [dic objectForKey:@"latest_recript_info"];
-//    NSDictionary* lastReceipt = [newArray lastObject];
-//
-//    if (lastReceipt) {
-//        NSString* purchasedStr = [lastReceipt valueForKey:@"purchase_date"];
-//        NSString* productID = [lastReceipt valueForKey:@"product_id"];
-//        NSString* originalID = [lastReceipt valueForKey:@"original_transacation_id"];
-//
-//        if (![productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
-//            NSString* purchaseSubStr = [purchasedStr substringToIndex:purchasedStr.length - 7];
-//            NSDateFormatter* dateFormat = [[NSDateFormatter alloc]init];
-//            [dateFormat setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-//            [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//            NSDate* purchaseDate = [dateFormat dateFromString:purchaseSubStr];
-//
-//            [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
-//        }
-//    }
-//}
 
--(void)returnRestoreReceipt:(NSNotification *)notif{
+
+-(void)returnRestoreReceipt:(NSDictionary *)lastReceipt{
     
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
     [appDelegate hideIndicator];
-    
-    NSDictionary* dic = [notif object];
-    NSArray* newarray = [dic objectForKey:@"latest_receipt_info"];
-    
-    NSArray* array = [newarray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"expires_date" ascending:YES]]];
-    
-    //    NSLog(@"array == %@",array);
-    NSDictionary* lastReceipt = [array lastObject];
     
     if (!lastReceipt) {
         [[XDDataManager shareManager] removeSettingPurchase];
@@ -369,8 +338,8 @@
 
         [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
-        [appDelegate insertAdsMob];
-        
+        [self finishSomeUnfinishTransaction];
+
         return;
     }
     //    NSLog(@"lastReceipt = %@",[notif object]);
@@ -403,9 +372,7 @@
     
     NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
     NSDate* expireDate = [dateFormant dateFromString:expireSubStr];
-    
-    //    NSString* loclOriginalTransactionID = [[NSUserDefaults standardUserDefaults] stringForKey:@"originalTransactionID"];
-    
+        
     //续订了
     if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
         
@@ -426,8 +393,6 @@
         appDelegate.isPurchased = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
-
-        [appDelegate insertAdsMob];
         
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -473,5 +438,79 @@
     return [numberFmt stringFromNumber:[NSNumber numberWithDouble:price]];
 }
 
+-(void)validateReceipt
+{
+    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
+    [appDelegate showIndicator];
+    
+    NSURL* receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
+    
+    if (receiptData == nil) {
+        return;
+    }
+    NSString* urlStr = @"http://purchase-verification-service.us-east-1.elasticbeanstalk.com/v2/validate/ios/7/com.btgs.pocketexpenselite/Sub_PKEP_1M_T22";
+    
+    NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
+    NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
+    
+    NSDictionary* dic = @{@"receipt":encodeStr};
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    
+    NSMutableURLRequest* connectionRequest = [NSMutableURLRequest requestWithURL:sandBoxUrl];
+    connectionRequest.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+    connectionRequest.HTTPBody = jsonData;
+    connectionRequest.HTTPMethod = @"POST";
+    [connectionRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [connectionRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    // create a background session for connecting to the Receipt Verification service.
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *datatask = [session dataTaskWithRequest: connectionRequest
+                                                completionHandler: ^(NSData *apiData
+                                                                     , NSURLResponse *apiResponse
+                                                                     , NSError *conxErr)
+                                      {
+                                          // background datatask completion block
+                                          
+                                          [appDelegate hideIndicator];
+                                          if (apiData) {
+                                              
+                                              NSError *parseErr;
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData: apiData
+                                                                                                   options: 0
+                                                                                                     error: &parseErr];
+                                              // TODO: add error handling for conxErr, json parsing, and invalid http response statuscode
+                                              NSDictionary* recerptDic = json[@"receipt"];
+                                              
+                                              NSArray* lastReceiptArr = recerptDic[@"latest_receipt_info"];
+                                              NSDictionary* lastReceiptInfo = lastReceiptArr.lastObject;
+                                              
+                                              [self returnRestoreReceipt:lastReceiptInfo];
+                                              
+                                          }else{
+                                              [[XDDataManager shareManager] removeSettingPurchase];
+                                              [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+                                              PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
 
+                                              appDelegate.isPurchased = NO;
+                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+                                              
+                                              
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  UIAlertView *restoreAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_Restore Error", nil) message:NSLocalizedString(@"VC_A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
+                                                  [restoreAlert show];
+                                              });
+                                          }
+                                          
+                                          
+                                          /* TODO: Unlock the In App purchases ...
+                                           At this point the json dictionary will contain the verified receipt from Apple
+                                           and each purchased item will be in the array of lineitems.
+                                           */
+                                      }];
+    
+    [datatask resume];
+}
 @end

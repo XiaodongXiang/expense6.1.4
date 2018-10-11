@@ -66,7 +66,7 @@
     
     self.bvc_tableView.separatorColor = RGBColor(226, 226, 226);
     
-    self.emptyStateView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    self.emptyStateView.frame = CGRectMake(0, 0, SCREEN_WIDTH, self.bvc_tableView.height - 50);
 }
 
 

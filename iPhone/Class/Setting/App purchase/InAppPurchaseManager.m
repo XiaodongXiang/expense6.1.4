@@ -22,7 +22,6 @@
 #import "ipad_ADSDeatailViewController.h"
 #import "BudgetViewController.h"
 
-#import "Pocket_Expense-Swift.h"
 #import <Parse/Parse.h>
 
 @interface InAppPurchaseManager()
@@ -72,7 +71,6 @@
         
         appDelegate.isPurchased = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-        [appDelegate insertAdsMob];
         
         return;
     }
@@ -126,7 +124,6 @@
         
         appDelegate.isPurchased = NO;
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-        [appDelegate insertAdsMob];
         
        
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -423,7 +420,7 @@
         else
         {
             AppDelegate_iPhone *appdelegate_iPhone = (AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
-            [appdelegate_iPhone  hideAds:nil];
+//            [appdelegate_iPhone  hideAds:nil];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"DismissADSView" object:nil];
             //remove adsDetailView
@@ -641,8 +638,8 @@
                     if (![transaction.payment.productIdentifier isEqualToString:kInAppPurchaseProductIdLifetime]) {
                         dispatch_async(dispatch_get_main_queue(), ^{
                             
-                            expensePurchase* expense = [[expensePurchase alloc]init];
-                            [expense requestRestore];
+//                            expensePurchase* expense = [[expensePurchase alloc]init];
+//                            [expense requestRestore];
                         });
                     }else{
                         
@@ -692,10 +689,9 @@
                     break;
                 case SKPaymentTransactionStateRestored:
                 {
-                    NSLog(@"date == %@, id == %@",transaction.transactionDate,transaction.transactionIdentifier);
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        expensePurchase* expense = [[expensePurchase alloc]init];
-                        [expense requestRestore];
+//                        expensePurchase* expense = [[expensePurchase alloc]init];
+//                        [expense requestRestore];
                     });
                     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
 

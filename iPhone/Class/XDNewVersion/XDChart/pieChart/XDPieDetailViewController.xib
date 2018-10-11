@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDPieDetailViewController">
             <connections>
+                <outlet property="adBabberViewHeight" destination="5PT-Aw-DNs" id="cww-fA-fBd"/>
+                <outlet property="adBannerView" destination="hfc-dY-tkk" id="UHl-vj-8QS"/>
                 <outlet property="dataScrollTopLeading" destination="oU4-3j-23m" id="Lky-87-NgA"/>
                 <outlet property="dateScrollView" destination="WRy-WQ-fp5" id="Usq-Ak-BvF"/>
                 <outlet property="pieScrollView" destination="wFg-m1-v0O" id="peE-22-jm1"/>
                 <outlet property="scrollBackView" destination="mYE-ZQ-JZ4" id="8iT-PU-W7o"/>
                 <outlet property="scrollViewTopLeading" destination="JuF-hh-ioE" id="b51-5b-Ygp"/>
+                <outlet property="srcollViewBottomConstant" destination="HpC-W6-Xc6" id="iN7-Y9-r1w"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -46,21 +49,31 @@
                         <outlet property="delegate" destination="-1" id="YYA-PY-nPs"/>
                     </connections>
                 </scrollView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hfc-dY-tkk">
+                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="5PT-Aw-DNs"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="WRy-WQ-fp5" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1uA-da-Y0g"/>
                 <constraint firstItem="mYE-ZQ-JZ4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="3CO-uq-eP3"/>
+                <constraint firstItem="hfc-dY-tkk" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3lf-3t-f1o"/>
+                <constraint firstAttribute="trailing" secondItem="hfc-dY-tkk" secondAttribute="trailing" id="84Q-nN-vy9"/>
                 <constraint firstItem="mYE-ZQ-JZ4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Awc-uB-CaP"/>
                 <constraint firstAttribute="trailing" secondItem="wFg-m1-v0O" secondAttribute="trailing" id="E70-d7-Chz"/>
+                <constraint firstAttribute="bottom" secondItem="wFg-m1-v0O" secondAttribute="bottom" id="HpC-W6-Xc6"/>
                 <constraint firstItem="wFg-m1-v0O" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="88" id="JuF-hh-ioE"/>
-                <constraint firstAttribute="bottom" secondItem="wFg-m1-v0O" secondAttribute="bottom" id="Qhm-wi-wgQ"/>
+                <constraint firstAttribute="bottom" secondItem="hfc-dY-tkk" secondAttribute="bottom" id="UCW-U1-CaY"/>
                 <constraint firstAttribute="trailing" secondItem="mYE-ZQ-JZ4" secondAttribute="trailing" id="d9b-sQ-N9c"/>
                 <constraint firstItem="wFg-m1-v0O" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ddb-dh-LV8"/>
                 <constraint firstAttribute="trailing" secondItem="WRy-WQ-fp5" secondAttribute="trailing" id="mlr-aR-X6i"/>
                 <constraint firstItem="WRy-WQ-fp5" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="64" id="oU4-3j-23m"/>
             </constraints>
-            <point key="canvasLocation" x="-187.5" y="-35.5"/>
+            <point key="canvasLocation" x="-188" y="-35.532233883058474"/>
         </view>
     </objects>
 </document>

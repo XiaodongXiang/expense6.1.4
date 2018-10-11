@@ -1,0 +1,9 @@
+
+添加 AdSupport.framework
+
+pod 里添加以下代码
+use_frameworks!
+pod 'AWSDynamoDB'
+pod 'Google-Mobile-Ads-SDK'
+pod 'Masonry'
+

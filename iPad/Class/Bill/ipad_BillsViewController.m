@@ -35,7 +35,12 @@
 #import "Custom_iPad_BillsCell.h"
 
 
-@interface ipad_BillsViewController ()
+@interface ipad_BillsViewController ()<ADEngineControllerBannerDelegate>
+
+@property (weak, nonatomic) IBOutlet UIView *adBannerView;
+@property(nonatomic, strong)ADEngineController* adBanner;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarContainViewBottomConstant;
+
 @end
 
 @implementation BillCusBtn
@@ -57,7 +62,40 @@
 @synthesize needShowSelectedDateBillViewController;
 
 #pragma mark View Life Style
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2106 - iPad - Banner - Bills" delegate:self];
+            [self.adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+        self.calendarContainViewBottomConstant.constant = 0;
+        
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self refleshUI];
+        });
+    }
+}
 
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+        self.calendarContainViewBottomConstant.constant = 50;
+
+    }else{
+        self.adBannerView.hidden = YES;
+        self.calendarContainViewBottomConstant.constant = 0;
+    }
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self refleshUI];
+    });
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];

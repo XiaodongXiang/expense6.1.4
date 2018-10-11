@@ -24,6 +24,7 @@
 @property(nonatomic, strong)__block NSDate * date;
 @property(nonatomic, strong)XDTabbarView * tabbarView;
 @property(nonatomic, strong)XDChartMainViewController * chartViewController;
+@property(nonatomic, strong)ADEngineController* interstitial;
 
 
 
@@ -188,6 +189,22 @@
 #pragma mark - XDAddTransactionViewDelegate
 -(void)addTransactionCompletion{
     [self.overViewCalendarViewController reloadTableView];
+    
+    //插页广告
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        [self.interstitial showInterstitialAdWithTarget:self];
+    }
+}
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1202 - iPhone - Interstitial - NewTransactionSave"];
+
+    }
+    return self;
 }
 
 

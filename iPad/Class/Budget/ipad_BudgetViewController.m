@@ -35,11 +35,15 @@
 #define BUDGETBAR_HIGH  16
 #define SPENTIMAGE_WITH 534
 
-@interface ipad_BudgetViewController ()
+@interface ipad_BudgetViewController ()<ADEngineControllerBannerDelegate>
 {
     budgetBar_iPad *topBudgetBar;
     ipad_BudgetCell_New *formerCell;
 }
+@property (weak, nonatomic) IBOutlet UIView *adBannerView;
+@property(nonatomic, strong)ADEngineController* adBanner;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomConstant;
+
 @end
 
 @implementation BudgetHistoryCount
@@ -94,6 +98,39 @@
         UIViewAutoresizingFlexibleBottomMargin;
     }
     
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    //    calendarContainView.height = 674;
+    
+    if (!appDelegate.isPurchased) {
+        if(!_adBanner) {
+            
+            _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2105 - iPad - Banner - Budget" delegate:self];
+            [self.adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+        }
+    }else{
+        self.adBannerView.hidden = YES;
+        self.bottomConstant.constant = 0;
+    }
+    
+}
+
+#pragma mark - ADEngineControllerBannerDelegate
+- (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
+    if (result) {
+        self.adBannerView.hidden = NO;
+        self.bottomConstant.constant = 50;
+    }else{
+        self.adBannerView.hidden = YES;
+        self.bottomConstant.constant = 0;
+
+    }
 }
 
 -(void)refleshUI

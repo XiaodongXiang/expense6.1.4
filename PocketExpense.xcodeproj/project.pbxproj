@@ -686,6 +686,7 @@
 		3AF38F831B69EF6C00D55C8F /* next@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF38F771B69EF6C00D55C8F /* next@3x.png */; };
 		3AF38F841B69EF6C00D55C8F /* pocket_expense_a3@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF38F781B69EF6C00D55C8F /* pocket_expense_a3@2x.png */; };
 		3AF38F851B69EF6C00D55C8F /* pocket_expense_a3@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3AF38F791B69EF6C00D55C8F /* pocket_expense_a3@3x.png */; };
+		4520731D1A9A14D8DB040C34 /* Pods_PocketExpense.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 38E40CBD64CB4A8EE4461C41 /* Pods_PocketExpense.framework */; };
 		4E189BBE207350F6004A93FE /* TableViewAnimationKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E189BB8207350F6004A93FE /* TableViewAnimationKit.m */; };
 		4E189BBF207350F6004A93FE /* UITableView+XSAnimationKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E189BBD207350F6004A93FE /* UITableView+XSAnimationKit.m */; };
 		4E299BA920EC595600C55F5F /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E299BA720EC595500C55F5F /* MBProgressHUD.m */; };
@@ -800,7 +801,6 @@
 		4E88A6452064FC17000B95F2 /* XDPieChartBigView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E88A6442064FC17000B95F2 /* XDPieChartBigView.m */; };
 		4E8AFC0720BCE3A300A8BD67 /* XDPwKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E8AFC0620BCE3A300A8BD67 /* XDPwKeyboard.m */; };
 		4E8AFC0920BCE3C100A8BD67 /* XDPwKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E8AFC0820BCE3C100A8BD67 /* XDPwKeyboard.xib */; };
-		4E8B5EA220C5307A00C529A6 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8B5EA120C5307A00C529A6 /* GoogleMobileAds.framework */; };
 		4E8B5EA420C5343B00C529A6 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8B5EA320C5343A00C529A6 /* GLKit.framework */; };
 		4E8B5EA620C534BF00C529A6 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8B5EA520C534BE00C529A6 /* CoreMotion.framework */; };
 		4E933B75207B1A160083AA02 /* XDBillCalView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E933B74207B1A160083AA02 /* XDBillCalView.m */; };
@@ -829,7 +829,6 @@
 		6017DF291CC6156700A2AE09 /* cashflow_arrow_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 6017DF231CC6156700A2AE09 /* cashflow_arrow_green.png */; };
 		6017DF2A1CC6156700A2AE09 /* cashflow_arrow_green@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6017DF241CC6156700A2AE09 /* cashflow_arrow_green@2x.png */; };
 		6017DF2B1CC6156700A2AE09 /* cashflow_arrow_green@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6017DF251CC6156700A2AE09 /* cashflow_arrow_green@3x.png */; };
-		6017DF2C1CC6156700A2AE09 /* cashflow_arrow_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 6017DF261CC6156700A2AE09 /* cashflow_arrow_red.png */; };
 		6017DF2E1CC6156700A2AE09 /* cashflow_arrow_red@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6017DF281CC6156700A2AE09 /* cashflow_arrow_red@3x.png */; };
 		6017DF371CC63F9800A2AE09 /* ipad_btn_expense_sel.png in Resources */ = {isa = PBXBuildFile; fileRef = 6017DF2F1CC63F9800A2AE09 /* ipad_btn_expense_sel.png */; };
 		6017DF381CC63F9800A2AE09 /* ipad_btn_expense_sel@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6017DF301CC63F9800A2AE09 /* ipad_btn_expense_sel@2x.png */; };
@@ -1064,7 +1063,6 @@
 		6096B8071C72F78A00A21210 /* iPad_historyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6096B8051C72F78A00A21210 /* iPad_historyViewController.xib */; };
 		609C66021C7D5B9000DC284C /* payBill_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C66001C7D5B9000DC284C /* payBill_click.png */; };
 		609C66031C7D5B9000DC284C /* payBill.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C66011C7D5B9000DC284C /* payBill.png */; };
-		609C66091C7D6DA100DC284C /* navigation_add.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C66061C7D6DA100DC284C /* navigation_add.png */; };
 		609C660A1C7D6DA100DC284C /* navigation_edit.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C66071C7D6DA100DC284C /* navigation_edit.png */; };
 		609C660B1C7D6DA100DC284C /* chart_time.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C66081C7D6DA100DC284C /* chart_time.png */; };
 		609C660D1C7D71FC00DC284C /* billPaid.png in Resources */ = {isa = PBXBuildFile; fileRef = 609C660C1C7D71FC00DC284C /* billPaid.png */; };
@@ -1251,7 +1249,6 @@
 		A2211C261A3978F6005E135F /* bar_267_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211C231A3978F6005E135F /* bar_267_40@3x.png */; };
 		A2211C271A3978F6005E135F /* btn_cancel_133_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211C241A3978F6005E135F /* btn_cancel_133_40@3x.png */; };
 		A2211C281A3978F6005E135F /* btn_done_134_40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211C251A3978F6005E135F /* btn_done_134_40@3x.png */; };
-		A2211C2A1A397BB5005E135F /* password1@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211C291A397BB5005E135F /* password1@3x.png */; };
 		A2211C2C1A398EA3005E135F /* billdetail_bg@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211C2B1A398EA3005E135F /* billdetail_bg@3x.png */; };
 		A2211C801A39A7B6005E135F /* btn_point_sel@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211C7E1A39A7B6005E135F /* btn_point_sel@3x.png */; };
 		A2211C811A39A7B6005E135F /* btn_point@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = A2211C7F1A39A7B6005E135F /* btn_point@3x.png */; };
@@ -2569,10 +2566,6 @@
 		BE0A4C8F2140D5A100C22049 /* XDTermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0A4C8D2140D5A100C22049 /* XDTermsOfUseViewController.m */; };
 		BE0A4C902140D5A100C22049 /* XDTermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE0A4C8E2140D5A100C22049 /* XDTermsOfUseViewController.xib */; };
 		BE0A4C922140D75F00C22049 /* TermsOfUse_expense.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE0A4C912140D75E00C22049 /* TermsOfUse_expense.rtf */; };
-		BE0F433B214269DD008D7F07 /* IAPReceiptVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4338214269DC008D7F07 /* IAPReceiptVerifier.swift */; };
-		BE0F433C214269DD008D7F07 /* RSAKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4339214269DC008D7F07 /* RSAKey.swift */; };
-		BE0F433D214269DD008D7F07 /* Data+IAPReceiptVerifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F433A214269DC008D7F07 /* Data+IAPReceiptVerifier.swift */; };
-		BE0F4341214275CB008D7F07 /* expensePurchase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0F4340214275CB008D7F07 /* expensePurchase.swift */; };
 		BE1928232134EBD800D5B3F7 /* NotificationCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BE03A192211D6DEC00D976F1 /* NotificationCenter.framework */; };
 		BE1928272134EBD800D5B3F7 /* TodayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1928262134EBD800D5B3F7 /* TodayViewController.m */; };
 		BE19282E2134EBD800D5B3F7 /* Pocket Expense.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = BE1928222134EBD800D5B3F7 /* Pocket Expense.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
@@ -2605,9 +2598,8 @@
 		BEB696E2213D0FAD00CDE712 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DA213D0FAD00CDE712 /* AFNetworkReachabilityManager.m */; };
 		BEB696E3213D0FAD00CDE712 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
-		BEF83329216B575800E71D61 /* launchFilm.mov in Resources */ = {isa = PBXBuildFile; fileRef = BEF83328216B575800E71D61 /* launchFilm.mov */; };
-		BEF83334216B5A3A00E71D61 /* XDLaunchFileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83332216B5A3A00E71D61 /* XDLaunchFileViewController.m */; };
-		BEF83335216B5A3A00E71D61 /* XDLaunchFileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF83333216B5A3A00E71D61 /* XDLaunchFileViewController.xib */; };
+		BEFD68C0216C5E2900B86A64 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */; };
+		BEFD68C2216C6FA500B86A64 /* ADEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68C1216C6FA500B86A64 /* ADEngine.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -2638,6 +2630,7 @@
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		1D6058910D05DD3D006BFB54 /* Pocket Expense.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Pocket Expense.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		38E40CBD64CB4A8EE4461C41 /* Pods_PocketExpense.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PocketExpense.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1F02EE1C0ED08200D02C14 /* icon_check3_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check3_sel@2x.png"; sourceTree = "<group>"; };
 		3A1F02EF1C0ED08200D02C14 /* icon_check3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check3@2x.png"; sourceTree = "<group>"; };
 		3A1F02F61C0ED8DE00D02C14 /* icon_check3_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon_check3_sel@3x.png"; sourceTree = "<group>"; };
@@ -3399,6 +3392,7 @@
 		3AF38F771B69EF6C00D55C8F /* next@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "next@3x.png"; sourceTree = "<group>"; };
 		3AF38F781B69EF6C00D55C8F /* pocket_expense_a3@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pocket_expense_a3@2x.png"; sourceTree = "<group>"; };
 		3AF38F791B69EF6C00D55C8F /* pocket_expense_a3@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pocket_expense_a3@3x.png"; sourceTree = "<group>"; };
+		453051304D8FB981A24D8FC2 /* Pods-PocketExpense.release_lite.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PocketExpense.release_lite.xcconfig"; path = "Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense.release_lite.xcconfig"; sourceTree = "<group>"; };
 		4E189BB8207350F6004A93FE /* TableViewAnimationKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewAnimationKit.m; sourceTree = "<group>"; };
 		4E189BB9207350F6004A93FE /* TableViewAnimationKitHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TableViewAnimationKitHeaders.h; sourceTree = "<group>"; };
 		4E189BBA207350F6004A93FE /* UITableView+XSAnimationKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+XSAnimationKit.h"; sourceTree = "<group>"; };
@@ -3597,7 +3591,6 @@
 		4E8AFC0520BCE3A300A8BD67 /* XDPwKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPwKeyboard.h; sourceTree = "<group>"; };
 		4E8AFC0620BCE3A300A8BD67 /* XDPwKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPwKeyboard.m; sourceTree = "<group>"; };
 		4E8AFC0820BCE3C100A8BD67 /* XDPwKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDPwKeyboard.xib; sourceTree = "<group>"; };
-		4E8B5EA120C5307A00C529A6 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		4E8B5EA320C5343A00C529A6 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		4E8B5EA520C534BE00C529A6 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		4E933B73207B1A160083AA02 /* XDBillCalView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDBillCalView.h; sourceTree = "<group>"; };
@@ -3644,7 +3637,6 @@
 		6017DF231CC6156700A2AE09 /* cashflow_arrow_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cashflow_arrow_green.png; sourceTree = "<group>"; };
 		6017DF241CC6156700A2AE09 /* cashflow_arrow_green@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cashflow_arrow_green@2x.png"; sourceTree = "<group>"; };
 		6017DF251CC6156700A2AE09 /* cashflow_arrow_green@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cashflow_arrow_green@3x.png"; sourceTree = "<group>"; };
-		6017DF261CC6156700A2AE09 /* cashflow_arrow_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cashflow_arrow_red.png; sourceTree = "<group>"; };
 		6017DF281CC6156700A2AE09 /* cashflow_arrow_red@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cashflow_arrow_red@3x.png"; sourceTree = "<group>"; };
 		6017DF2F1CC63F9800A2AE09 /* ipad_btn_expense_sel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_btn_expense_sel.png; sourceTree = "<group>"; };
 		6017DF301CC63F9800A2AE09 /* ipad_btn_expense_sel@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad_btn_expense_sel@2x.png"; sourceTree = "<group>"; };
@@ -3892,7 +3884,6 @@
 		6096B8051C72F78A00A21210 /* iPad_historyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = iPad_historyViewController.xib; sourceTree = "<group>"; };
 		609C66001C7D5B9000DC284C /* payBill_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = payBill_click.png; path = ../../../iPad/Image/payBill_click.png; sourceTree = "<group>"; };
 		609C66011C7D5B9000DC284C /* payBill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = payBill.png; path = ../../../iPad/Image/payBill.png; sourceTree = "<group>"; };
-		609C66061C7D6DA100DC284C /* navigation_add.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation_add.png; sourceTree = "<group>"; };
 		609C66071C7D6DA100DC284C /* navigation_edit.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = navigation_edit.png; sourceTree = "<group>"; };
 		609C66081C7D6DA100DC284C /* chart_time.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chart_time.png; sourceTree = "<group>"; };
 		609C660C1C7D71FC00DC284C /* billPaid.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = billPaid.png; sourceTree = "<group>"; };
@@ -4097,7 +4088,6 @@
 		A2211C231A3978F6005E135F /* bar_267_40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bar_267_40@3x.png"; sourceTree = "<group>"; };
 		A2211C241A3978F6005E135F /* btn_cancel_133_40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_cancel_133_40@3x.png"; sourceTree = "<group>"; };
 		A2211C251A3978F6005E135F /* btn_done_134_40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_done_134_40@3x.png"; sourceTree = "<group>"; };
-		A2211C291A397BB5005E135F /* password1@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "password1@3x.png"; sourceTree = "<group>"; };
 		A2211C2B1A398EA3005E135F /* billdetail_bg@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "billdetail_bg@3x.png"; sourceTree = "<group>"; };
 		A2211C7E1A39A7B6005E135F /* btn_point_sel@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_point_sel@3x.png"; sourceTree = "<group>"; };
 		A2211C7F1A39A7B6005E135F /* btn_point@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "btn_point@3x.png"; sourceTree = "<group>"; };
@@ -5726,6 +5716,7 @@
 		A2F633E21A19D7AC00676B8C /* RecurringTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecurringTypeCell.h; sourceTree = "<group>"; };
 		A2F633E31A19D7AC00676B8C /* RecurringTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecurringTypeCell.m; sourceTree = "<group>"; };
 		A2F633E41A19D7AC00676B8C /* RecurringTypeCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecurringTypeCell.xib; sourceTree = "<group>"; };
+		AC6024F15D0E017186F4CFF3 /* Pods-PocketExpense.debug_lite.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PocketExpense.debug_lite.xcconfig"; path = "Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense.debug_lite.xcconfig"; sourceTree = "<group>"; };
 		AE81D7991325F23D0041BE73 /* libbz2.1.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libbz2.1.0.dylib; path = usr/lib/libbz2.1.0.dylib; sourceTree = SDKROOT; };
 		AE81D79B1325F2540041BE73 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		AE81D79D1325F2650041BE73 /* AddressBookUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBookUI.framework; path = System/Library/Frameworks/AddressBookUI.framework; sourceTree = SDKROOT; };
@@ -5744,10 +5735,6 @@
 		BE0A4C912140D75E00C22049 /* TermsOfUse_expense.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = TermsOfUse_expense.rtf; sourceTree = "<group>"; };
 		BE0EB63B2133F24200D8E063 /* Pocket Expense.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "Pocket Expense.entitlements"; path = "PocketExpense/Pocket Expense.entitlements"; sourceTree = "<group>"; };
 		BE0F4337214269DB008D7F07 /* PocketExpense-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PocketExpense-Bridging-Header.h"; sourceTree = "<group>"; };
-		BE0F4338214269DC008D7F07 /* IAPReceiptVerifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPReceiptVerifier.swift; sourceTree = "<group>"; };
-		BE0F4339214269DC008D7F07 /* RSAKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RSAKey.swift; sourceTree = "<group>"; };
-		BE0F433A214269DC008D7F07 /* Data+IAPReceiptVerifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+IAPReceiptVerifier.swift"; sourceTree = "<group>"; };
-		BE0F4340214275CB008D7F07 /* expensePurchase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = expensePurchase.swift; sourceTree = "<group>"; };
 		BE1928222134EBD800D5B3F7 /* Pocket Expense.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Pocket Expense.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1928252134EBD800D5B3F7 /* TodayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TodayViewController.h; sourceTree = "<group>"; };
 		BE1928262134EBD800D5B3F7 /* TodayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TodayViewController.m; sourceTree = "<group>"; };
@@ -5783,10 +5770,8 @@
 		BEB696DD213D0FAD00CDE712 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
-		BEF83328216B575800E71D61 /* launchFilm.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; path = launchFilm.mov; sourceTree = "<group>"; };
-		BEF83331216B5A3A00E71D61 /* XDLaunchFileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDLaunchFileViewController.h; sourceTree = "<group>"; };
-		BEF83332216B5A3A00E71D61 /* XDLaunchFileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDLaunchFileViewController.m; sourceTree = "<group>"; };
-		BEF83333216B5A3A00E71D61 /* XDLaunchFileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDLaunchFileViewController.xib; sourceTree = "<group>"; };
+		BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
+		BEFD68C1216C6FA500B86A64 /* ADEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADEngine.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -5815,9 +5800,11 @@
 				3AD131D91B0078A700D2E167 /* libsqlite3.dylib in Frameworks */,
 				3AE1F3631B743A85009CD48E /* Fabric.framework in Frameworks */,
 				3AD131D71B00789A00D2E167 /* libz.dylib in Frameworks */,
+				BEFD68C0216C5E2900B86A64 /* GoogleMobileAds.framework in Frameworks */,
 				A2839FAD191C613800C69427 /* Security.framework in Frameworks */,
 				AE81D7D41325F3860041BE73 /* QuartzCore.framework in Frameworks */,
 				608834071E13B1440018687F /* Bolts.framework in Frameworks */,
+				BEFD68C2216C6FA500B86A64 /* ADEngine.framework in Frameworks */,
 				3AD131D51B00786B00D2E167 /* MobileCoreServices.framework in Frameworks */,
 				A29C2AD21A2303EE00B3B684 /* CoreLocation.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -5832,7 +5819,6 @@
 				608834051E13B13A0018687F /* FBSDKShareKit.framework in Frameworks */,
 				A2AD424C191B57EB001A9AA0 /* libc++.dylib in Frameworks */,
 				8FF4168A159972FD006831BF /* iAd.framework in Frameworks */,
-				4E8B5EA220C5307A00C529A6 /* GoogleMobileAds.framework in Frameworks */,
 				608834031E13B11E0018687F /* FBSDKLoginKit.framework in Frameworks */,
 				A2CBE7EA199C49B60002F052 /* Crashlytics.framework in Frameworks */,
 				AECD316814EA53D300C94271 /* ImageIO.framework in Frameworks */,
@@ -5842,6 +5828,7 @@
 				AE81D79A1325F23D0041BE73 /* libbz2.1.0.dylib in Frameworks */,
 				AE81D79C1325F2540041BE73 /* libsqlite3.0.dylib in Frameworks */,
 				AE81D79E1325F2650041BE73 /* AddressBookUI.framework in Frameworks */,
+				4520731D1A9A14D8DB040C34 /* Pods_PocketExpense.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -5856,6 +5843,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E4263C32B3B2C2AA7FC8FA1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				AC6024F15D0E017186F4CFF3 /* Pods-PocketExpense.debug_lite.xcconfig */,
+				453051304D8FB981A24D8FC2 /* Pods-PocketExpense.release_lite.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -5870,12 +5866,8 @@
 			children = (
 				BE0EB63B2133F24200D8E063 /* Pocket Expense.entitlements */,
 				A2A440AC19F0FCFC00419103 /* Images.xcassets */,
-				BEF83328216B575800E71D61 /* launchFilm.mov */,
 				A2AD427C191B8A4D001A9AA0 /* PokcetExpenseAppDelegate.h */,
 				A2AD427D191B8A4D001A9AA0 /* PokcetExpenseAppDelegate.m */,
-				BEF83331216B5A3A00E71D61 /* XDLaunchFileViewController.h */,
-				BEF83332216B5A3A00E71D61 /* XDLaunchFileViewController.m */,
-				BEF83333216B5A3A00E71D61 /* XDLaunchFileViewController.xib */,
 				A2A7EB711975208100B48C0A /* Localizable.strings */,
 				A2560C1F19D3BB5900A5A950 /* iPhone */,
 				A256127319D3BB7400A5A950 /* iPad */,
@@ -5884,6 +5876,7 @@
 				BE1928242134EBD800D5B3F7 /* Pocket Expense */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				0E4263C32B3B2C2AA7FC8FA1 /* Pods */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -5891,10 +5884,10 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */,
 				4E5FF43220D8CDB60061262E /* StoreKit.framework */,
 				4E8B5EA520C534BE00C529A6 /* CoreMotion.framework */,
 				4E8B5EA320C5343A00C529A6 /* GLKit.framework */,
-				4E8B5EA120C5307A00C529A6 /* GoogleMobileAds.framework */,
 				6077AC731FD7C6A4006E115C /* Parse.framework */,
 				6077AC741FD7C6A4006E115C /* ParseUI.framework */,
 				608834061E13B1440018687F /* Bolts.framework */,
@@ -5939,6 +5932,7 @@
 				AE81D7AA1325F2860041BE73 /* SystemConfiguration.framework */,
 				AE81D7D31325F3860041BE73 /* QuartzCore.framework */,
 				BE03A192211D6DEC00D976F1 /* NotificationCenter.framework */,
+				38E40CBD64CB4A8EE4461C41 /* Pods_PocketExpense.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -6491,7 +6485,6 @@
 				6017DF231CC6156700A2AE09 /* cashflow_arrow_green.png */,
 				6017DF241CC6156700A2AE09 /* cashflow_arrow_green@2x.png */,
 				6017DF251CC6156700A2AE09 /* cashflow_arrow_green@3x.png */,
-				6017DF261CC6156700A2AE09 /* cashflow_arrow_red.png */,
 				6017DF281CC6156700A2AE09 /* cashflow_arrow_red@3x.png */,
 				3ADF05D71C3B630B00670206 /* iphone6_logo@2x.png */,
 				3ADF05D81C3B630B00670206 /* logo@2x.png */,
@@ -6523,7 +6516,6 @@
 				A22669341A289BB5005FC18F /* positive@3x.png */,
 				A2CE752B1A289A53000C58A5 /* negative.png */,
 				A2CE75191A28747B000C58A5 /* icon_edit1_30_30@3x.png */,
-				A2211C291A397BB5005E135F /* password1@3x.png */,
 				A2E428B01A27525000B68ABF /* icon_Contact_Info@3x.png */,
 				A2E428B21A27529C00B68ABF /* icon_delete_30_30@3x.png */,
 				A28D26391A2812E900D3535D /* bg_320_65@3x.png */,
@@ -7587,6 +7579,7 @@
 		4E7BA80A2063512600D9299A /* XDNewVersion */ = {
 			isa = PBXGroup;
 			children = (
+				BEFD68C1216C6FA500B86A64 /* ADEngine.framework */,
 				A289F7AA2101CF4400182A03 /* XDAppirater */,
 				4E95ADFE209C4CBD00FFEBE6 /* XDADSDetail */,
 				4E9636A52085EDFE00773132 /* XDSignIn */,
@@ -8756,10 +8749,6 @@
 		A2560D0D19D3BB5900A5A950 /* App purchase */ = {
 			isa = PBXGroup;
 			children = (
-				BE0F433A214269DC008D7F07 /* Data+IAPReceiptVerifier.swift */,
-				BE0F4338214269DC008D7F07 /* IAPReceiptVerifier.swift */,
-				BE0F4339214269DC008D7F07 /* RSAKey.swift */,
-				BE0F4340214275CB008D7F07 /* expensePurchase.swift */,
 				BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */,
 				BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */,
 				BE491B32216A371800FB5E40 /* XDInAppPurchaseManager.h */,
@@ -10345,7 +10334,6 @@
 			isa = PBXGroup;
 			children = (
 				609C660C1C7D71FC00DC284C /* billPaid.png */,
-				609C66061C7D6DA100DC284C /* navigation_add.png */,
 				609C66071C7D6DA100DC284C /* navigation_edit.png */,
 				609C66081C7D6DA100DC284C /* chart_time.png */,
 				609C66001C7D5B9000DC284C /* payBill_click.png */,
@@ -10821,11 +10809,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 1D6058960D05DD3E006BFB54 /* Build configuration list for PBXNativeTarget "PocketExpense" */;
 			buildPhases = (
+				149981B05E28CCBD22BC42B9 /* [CP] Check Pods Manifest.lock */,
 				1D60588D0D05DD3D006BFB54 /* Resources */,
 				1D60588E0D05DD3D006BFB54 /* Sources */,
 				1D60588F0D05DD3D006BFB54 /* Frameworks */,
 				A2CBE7E8199C49570002F052 /* Run Script */,
 				BE03A1A3211D6DEC00D976F1 /* Embed App Extensions */,
+				21DED4D2C4F634028AF6D4DF /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -10924,6 +10914,7 @@
 				Base,
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
+			productRefGroup = 19C28FACFE9D520D11CA2CBB /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -11319,7 +11310,6 @@
 				A256173019D3BB7F00A5A950 /* ipad_btn_6_sel@2x.png in Resources */,
 				BE3CBC782136894B0093B5A9 /* XDIpad_ADSViewController.xib in Resources */,
 				3AE2AA561C1FE1A100D6C552 /* pilot_1_phone@3x.png in Resources */,
-				6017DF2C1CC6156700A2AE09 /* cashflow_arrow_red.png in Resources */,
 				A25611A019D3BB5C00A5A950 /* help_1.png in Resources */,
 				A2211C2C1A398EA3005E135F /* billdetail_bg@3x.png in Resources */,
 				A2E428B11A27525000B68ABF /* icon_Contact_Info@3x.png in Resources */,
@@ -11927,7 +11917,6 @@
 				A2754FCF1A08706700891EBE /* payHistory@2x.png in Resources */,
 				3AE4D8351C0EC506009BF52B /* category_bg_asset@2x.png in Resources */,
 				A256121B19D3BB5C00A5A950 /* ipad_cell_b_450_44_sel@2x.png in Resources */,
-				609C66091C7D6DA100DC284C /* navigation_add.png in Resources */,
 				3AE60DFB1C17CBFC00FEF8DE /* icon_search_14_14@3x.png in Resources */,
 				A2561B5619D3BF6900A5A950 /* ipad_cell_630_70@2x.png in Resources */,
 				A256175B19D3BB7F00A5A950 /* ipad_btn_sign_of_division_sel.png in Resources */,
@@ -12184,7 +12173,6 @@
 				A256104E19D3BB5C00A5A950 /* TransactionCategorySplitViewController.xib in Resources */,
 				A2D1B0111A198A7A007B90C0 /* iphone6_btn_empty_sel@2x.png in Resources */,
 				A2F633251A19C10D00676B8C /* ipad_btn_9_sel@2x.png in Resources */,
-				A2211C2A1A397BB5005E135F /* password1@3x.png in Resources */,
 				A24495801A52A1A3003E9889 /* ipad_ReportRootViewController.xib in Resources */,
 				6065066D1C731CCC00A7B70A /* ipad_budget_transfer_bg.png in Resources */,
 				60E2B8B81C5B3439007DAB17 /* account_category_form_bottom_white.png in Resources */,
@@ -12199,7 +12187,6 @@
 				3AE5E4AA1C22A5C80032F410 /* setting_back_up@3x.png in Resources */,
 				A256173619D3BB7F00A5A950 /* ipad_btn_8@2x.png in Resources */,
 				A25611DA19D3BB5C00A5A950 /* icon_edit1_30_30_sel.png in Resources */,
-				BEF83335216B5A3A00E71D61 /* XDLaunchFileViewController.xib in Resources */,
 				A25611D919D3BB5C00A5A950 /* icon_delete@2x.png in Resources */,
 				3AE2B0671C3A511A002CA41F /* setting_budget_left@3x.png in Resources */,
 				3AE2AA4A1C1FE1A100D6C552 /* iphone6_pilot_2_bg@2x.png in Resources */,
@@ -12817,7 +12804,6 @@
 				A256191019D3BB7F00A5A950 /* ipad_nav_480_44@2x.png in Resources */,
 				A256123C19D3BB5C00A5A950 /* none@2x.png in Resources */,
 				A25618FC19D3BB7F00A5A950 /* ipad_list_btn_120_30@2x.png in Resources */,
-				BEF83329216B575800E71D61 /* launchFilm.mov in Resources */,
 				A2211C891A39A7F3005E135F /* btn_plus@3x.png in Resources */,
 				A256106619D3BB5C00A5A950 /* detail_bg_ipad.png in Resources */,
 				3AE4DAC71BD0C540009668FE /* menuTableViewCell.xib in Resources */,
@@ -12963,6 +12949,54 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		149981B05E28CCBD22BC42B9 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-PocketExpense-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		21DED4D2C4F634028AF6D4DF /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A2CBE7E8199C49570002F052 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -12975,7 +13009,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 5396d094a6603764683087a0e2248c3bf6260141 50f74ab0a57fa148308f6defcd78262470388367b36f17b5206e4bd5b77e22e2";
+			shellScript = "./Fabric.framework/run 5396d094a6603764683087a0e2248c3bf6260141 50f74ab0a57fa148308f6defcd78262470388367b36f17b5206e4bd5b77e22e2\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -13421,7 +13455,6 @@
 				A256169C19D3BB7F00A5A950 /* KalMonthView.m in Sources */,
 				4E7BA8D82063512700D9299A /* numberKeyboardView.m in Sources */,
 				A256169A19D3BB7F00A5A950 /* KalGridView.m in Sources */,
-				BE0F433D214269DD008D7F07 /* Data+IAPReceiptVerifier.swift in Sources */,
 				A2560FA619D3BB5C00A5A950 /* AccountTypeEditViewController.m in Sources */,
 				3AEDFD921BF427B1002633EE /* CashFlowViewController.m in Sources */,
 				A256169119D3BB7F00A5A950 /* OverViewcategoryViewController.m in Sources */,
@@ -13430,14 +13463,12 @@
 				4E7BA9082063512800D9299A /* XDAccountTypeBtn.m in Sources */,
 				A2561A8419D3BBD700A5A950 /* ReaderConstants.m in Sources */,
 				A25616E219D3BB7F00A5A950 /* PasscodeCheckViewController_iPad.m in Sources */,
-				BE0F433B214269DD008D7F07 /* IAPReceiptVerifier.swift in Sources */,
 				3AE4DAD51BD0CD11009668FE /* UIViewController+MMDrawerController.m in Sources */,
 				A25619B119D3BBAB00A5A950 /* ColorLabelView.m in Sources */,
 				A2561A8519D3BBD700A5A950 /* ReaderContentPage.m in Sources */,
 				A2560FEF19D3BB5C00A5A950 /* KalGridView_week.m in Sources */,
 				A2560FD119D3BB5C00A5A950 /* ReminderViewController.m in Sources */,
 				4E933B7B207B32C00083AA02 /* XDBillCalDayBtn.m in Sources */,
-				BE0F433C214269DD008D7F07 /* RSAKey.swift in Sources */,
 				A25616F119D3BB7F00A5A950 /* ipad_SelectImageViewController.m in Sources */,
 				A276BD461A2D4A60006C6514 /* MonthCalDataView.m in Sources */,
 				A2561A5D19D3BBD700A5A950 /* DDData.m in Sources */,
@@ -13446,7 +13477,6 @@
 				A2560FB819D3BB5C00A5A950 /* UIViewAdditions_bill_iPhone.m in Sources */,
 				4E7BA90F2063512800D9299A /* XDDayCollectionView.m in Sources */,
 				A2C113051A35893700F7FDEE /* CalDateView.m in Sources */,
-				BE0F4341214275CB008D7F07 /* expensePurchase.swift in Sources */,
 				A2560FA019D3BB5C00A5A950 /* AccountSelect.m in Sources */,
 				4E7BA9052063512800D9299A /* XDAccountTableViewCell.m in Sources */,
 				A2C113081A35897200F7FDEE /* UIViewController+Animation.m in Sources */,
@@ -13510,7 +13540,6 @@
 				A256166719D3BB7F00A5A950 /* ipad_PaymentViewController.m in Sources */,
 				A2560FBB19D3BB5C00A5A950 /* BillEditViewController.m in Sources */,
 				A256169019D3BB7F00A5A950 /* ChildCategoryCount.m in Sources */,
-				BEF83334216B5A3A00E71D61 /* XDLaunchFileViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -13586,6 +13615,7 @@
 		};
 		AE8A2B8A135690D30066CD85 /* Debug_Lite */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AC6024F15D0E017186F4CFF3 /* Pods-PocketExpense.debug_lite.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -13607,6 +13637,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Shared1/Flurry-iOS-6.2.0",
 					"$(PROJECT_DIR)/Shared1",
+					"$(PROJECT_DIR)/iPhone/Class/XDNewVersion",
 				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -13615,7 +13646,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PocketExpense-Info_Lite.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -13630,12 +13661,16 @@
 					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.12.2",
 					"$(PROJECT_DIR)/Shared1/Flurry-iOS-6.2.0/Flurry",
 					"$(PROJECT_DIR)/Shared1/Flurry-iOS-6.2.0/FlurryAds",
+					"\"$(SRCROOT)/ADEngine.framework\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-licucore",
 					"-ObjC",
+					"-all_load",
+					"$(inherited)",
 				);
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.btgs.pocketexpenselite;
 				PRODUCT_NAME = "Pocket Expense";
 				PROVISIONING_PROFILE = "";
@@ -13672,6 +13707,7 @@
 		};
 		AE8A2B8C135690DE0066CD85 /* Release_Lite */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 453051304D8FB981A24D8FC2 /* Pods-PocketExpense.release_lite.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -13692,13 +13728,14 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Shared1/Flurry-iOS-6.2.0",
 					"$(PROJECT_DIR)/Shared1",
+					"$(PROJECT_DIR)/iPhone/Class/XDNewVersion",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = PocketExpense_Prefix.pch;
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PocketExpense-Info_Lite.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -13713,12 +13750,16 @@
 					"$(PROJECT_DIR)/GoogleMobileAdsSdkiOS-6.12.2",
 					"$(PROJECT_DIR)/Shared1/Flurry-iOS-6.2.0/Flurry",
 					"$(PROJECT_DIR)/Shared1/Flurry-iOS-6.2.0/FlurryAds",
+					"\"$(SRCROOT)/ADEngine.framework\"",
 				);
 				OTHER_LDFLAGS = (
 					"-lz",
 					"-licucore",
 					"-ObjC",
+					"-all_load",
+					"$(inherited)",
 				);
+				OTHER_LIBTOOLFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.btgs.pocketexpenselite;
 				PRODUCT_NAME = "Pocket Expense";
 				PROVISIONING_PROFILE = "";

@@ -229,7 +229,10 @@
                                         @"iPhone10,5": @"iPhone 8 Plus",     // GSM
                                         @"iPhone10,3": @"iPhone X",          // CDMA
                                         @"iPhone10,6": @"iPhone X",          // GSM
+                                        @"iPhone11,4": @"iPhone Xs Max",
                                         @"iPhone11,6": @"iPhone Xs Max",
+                                        @"iPhone11,8": @"iphone XR",
+                                        @"iPhone11,2": @"iphone XS",
                                         @"iPad4,1"   : @"iPad Air",          // 5th Generation iPad (iPad Air) - Wifi
                                         @"iPad4,2"   : @"iPad Air",          // 5th Generation iPad (iPad Air) - Cellular
                                         @"iPad4,4"   : @"iPad Mini",         // (2nd Generation iPad Mini - Wifi)

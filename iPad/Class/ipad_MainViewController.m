@@ -14,7 +14,6 @@
 #import "ipad_TranscactionQuickEditViewController.h"
 #import "PersonalnfoViewController.h"
 #import "ParseDBManager.h"
-#import "Pocket_Expense-Swift.h"
 
 @implementation ipad_MainViewController
 
@@ -26,124 +25,12 @@
     [self initPointandBtnAction];
     [self initFrameView];
     [self checkDateWithPurchase];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(returnReceipt:) name:@"returnReceipt" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestRefreshReceipt:) name:@"requestRefreshReceipt" object:nil];
-    //    expensePurchase* expense = [[expensePurchase alloc]init];
-    //    [expense request];
+
 }
 
 
-//-(void)purchaseNotif{
-//    [self checkDateWithPurchase];
-//}
-
-//
-//-(void)isNeedToRepurchase:(NSNotification*)notif{
-//    if (notif) {
-//        //        NSLog(@"dic == %@",[notif object]);
-//        NSDictionary* dic = [notif object];
-//        NSString* proID = [[dic allKeys]firstObject];
-//        NSDate* date = [dic objectForKey:proID];
-//
-//        [[XDDataManager shareManager] puchasedInfoInSetting:date productID:proID originalProID:nil];
-//        //        NSLog(@"proid = %@ ,, date == %@",proID, date);
-//
-//
-//    }else{
-//        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-//        [[XDDataManager shareManager]removeSettingPurchase];
-//        [[XDDataManager shareManager]openWidgetInSettingWithBool14:NO];
-//
-//        appDelegate.isPurchased = NO;
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-//        [appDelegate insertAdsMob];
-//    }
-//
-//    //    NSString* purchasedID = [[NSUserDefaults standardUserDefaults] objectForKey:KInAppPurchaseID];
-//    //    if ([purchasedID isEqualToString:KInAppPurchaseProductIdMonth]) {
-//    //        if([self.inAppPM canMakePurchases]){
-//    //            [self.inAppPM purchaseUpgrade:KInAppPurchaseProductIdMonth];
-//    //        }
-//    //
-//    //    }else if ([purchasedID isEqualToString:KInAppPurchaseProductIdYear]){
-//    //        if([self.inAppPM canMakePurchases]){
-//    //            [self.inAppPM purchaseUpgrade:KInAppPurchaseProductIdYear];
-//    //        }
-//    //    }
-//
-//}
-
--(void)requestRefreshReceipt:(NSNotification*)notif{
-    NSDictionary* dic = [notif object];
-    NSArray* newarray = [dic objectForKey:@"latest_receipt_info"];
-    NSArray* array = [newarray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"expires_date" ascending:YES]]];
+-(void)returnReceipt:(NSDictionary*)lastReceipt{
     
-    NSDictionary* lastReceipt = [array lastObject];
-    
-    //    NSLog(@"lastReceipt = %@",[notif object]);
-    
-    NSString* purchasedStr = [lastReceipt valueForKey:@"purchase_date"];
-    NSString* expiresStr =[lastReceipt valueForKey:@"expires_date"];
-    NSString* productID = [lastReceipt valueForKey:@"product_id"];
-    NSString* originalID = [lastReceipt valueForKey:@"original_transaction_id"];
-    
-    //    NSString* originalTransacionID = [lastReceipt valueForKey:@"original_transaction_id"];
-    
-    if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
-        return;
-    }
-    
-    NSString* purchaseSubStr = [purchasedStr substringToIndex:purchasedStr.length - 7];
-    NSString* expireSubStr = [expiresStr substringToIndex:expiresStr.length - 7];
-    
-    NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
-    [dateFormant setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
-    
-    NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
-    NSDate* expireDate = [dateFormant dateFromString:expireSubStr];
-    
-    //    NSString* loclOriginalTransactionID = [[NSUserDefaults standardUserDefaults] stringForKey:@"originalTransactionID"];
-    
-    //续订了
-    if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
-        
-        
-        [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
-        
-        
-    }else{  //没续订
-        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
-        setting.purchasedProductID = nil;
-        setting.purchasedStartDate = nil;
-        setting.purchasedEndDate = nil;
-        setting.dateTime = [NSDate GMTTime];
-        setting.otherBool17 = @NO;
-        setting.purchasedIsSubscription = @NO;
-        
-        [[XDDataManager shareManager] saveContext];
-        
-        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
-        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-        appDelegate.isPurchased = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-        [appDelegate insertAdsMob];
-        
-        
-    }
-}
-
-
--(void)returnReceipt:(NSNotification*)notif{
-    NSDictionary* dic = [notif object];
-    NSArray* newarray = [dic objectForKey:@"latest_receipt_info"];
-    NSArray* array = [newarray sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"expires_date" ascending:YES]]];
-    
-    NSDictionary* lastReceipt = [array lastObject];
-    
-    //    NSLog(@"lastReceipt = %@",[notif object]);
     
     NSString* purchasedStr = [lastReceipt valueForKey:@"purchase_date"];
     NSString* expiresStr =[lastReceipt valueForKey:@"expires_date"];
@@ -189,7 +76,6 @@
     
     appDelegate.isPurchased = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-    [appDelegate insertAdsMob];
 }
 
 
@@ -212,7 +98,6 @@
                 {
                     [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
                     appDelegate.isPurchased = NO;
-                    [appDelegate insertAdsMob];
                     
                     [[XDDataManager shareManager] removeSettingPurchase];
                 }
@@ -225,8 +110,7 @@
                     NSData* receipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
                     if (receipt) {
                         //要提示重新订阅
-                        expensePurchase* expense = [[expensePurchase alloc]init];
-                        [expense request];
+                        [self validateReceipt];
                     }else{
 //                        SKReceiptRefreshRequest* request = [[SKReceiptRefreshRequest alloc] init];
 //                        request.delegate = self;
@@ -248,61 +132,73 @@
                         PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
                         appDelegate.isPurchased = NO;
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-                        [appDelegate insertAdsMob];
                     }
                 }
             }
         }
-    }else{
-        [appDelegate insertAdsMob];
     }
 }
+-(void)validateReceipt
+{
+    
+    NSURL* receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
+    
+    if (receiptData == nil) {
+        [self noSubscription];
 
-//#pragma mark -  SKRequestDelegate
-//- (void)requestDidFinish:(SKRequest *)request NS_AVAILABLE(10_7, 3_0){
-//    NSData* receipt = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] appStoreReceiptURL]];
-//    if (receipt) {
-//        expensePurchase* expense = [[expensePurchase alloc]init];
-//        [expense requestRefreshReceipt];
-//        
-//    }else{
-//        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
-//        setting.purchasedProductID = nil;
-//        setting.purchasedStartDate = nil;
-//        setting.purchasedEndDate = nil;
-//        setting.dateTime = [NSDate GMTTime];
-//        setting.otherBool17 = @NO;
-//        setting.purchasedIsSubscription = @NO;
-//        
-//        [[XDDataManager shareManager] saveContext];
-//        
-//        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
-//        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-//        appDelegate.isPurchased = NO;
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-//        [appDelegate insertAdsMob];
-//    }
-//    
-//}
-//
-//- (void)request:(SKRequest *)request didFailWithError:(NSError *)error NS_AVAILABLE(10_7, 3_0){
-//    //    [self noSubscription];
-//    Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
-//    setting.purchasedProductID = nil;
-//    setting.purchasedStartDate = nil;
-//    setting.purchasedEndDate = nil;
-//    setting.dateTime = [NSDate GMTTime];
-//    setting.otherBool17 = @NO;
-//    setting.purchasedIsSubscription = @NO;
-//    
-//    [[XDDataManager shareManager] saveContext];
-//    
-//    [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
-//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-//    appDelegate.isPurchased = NO;
-//    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-//    [appDelegate insertAdsMob];
-//}
+        return;
+    }
+    NSString* urlStr = @"http://purchase-verification-service.us-east-1.elasticbeanstalk.com/v2/validate/ios/7/com.btgs.pocketexpenselite/Sub_PKEP_1M_T22";
+    
+    NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
+    NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
+    
+    NSDictionary* dic = @{@"receipt":encodeStr};
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    
+    NSMutableURLRequest* connectionRequest = [NSMutableURLRequest requestWithURL:sandBoxUrl];
+    connectionRequest.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+    connectionRequest.HTTPBody = jsonData;
+    connectionRequest.HTTPMethod = @"POST";
+    [connectionRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [connectionRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    // create a background session for connecting to the Receipt Verification service.
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *datatask = [session dataTaskWithRequest: connectionRequest
+                                                completionHandler: ^(NSData *apiData
+                                                                     , NSURLResponse *apiResponse
+                                                                     , NSError *conxErr)
+                                      {
+                                          // background datatask completion block
+                                          if (apiData) {
+                                              
+                                              NSError *parseErr;
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData: apiData
+                                                                                                   options: 0
+                                                                                                     error: &parseErr];
+                                              // TODO: add error handling for conxErr, json parsing, and invalid http response statuscode
+                                              NSDictionary* recerptDic = json[@"receipt"];
+                                              
+                                              NSArray* lastReceiptArr = recerptDic[@"latest_receipt_info"];
+                                              NSDictionary* lastReceiptInfo = lastReceiptArr.lastObject;
+                                              
+                                              [self returnReceipt:lastReceiptInfo];
+                                              
+                                          }else{
+                                              [self noSubscription];
+                                          }
+                                          
+                                          
+                                          /* TODO: Unlock the In App purchases ...
+                                           At this point the json dictionary will contain the verified receipt from Apple
+                                           and each purchased item will be in the array of lineitems.
+                                           */
+                                      }];
+    
+    [datatask resume];
+}
 
 -(void)refleshData
 {

@@ -39,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *monthBtn;
 @property (weak, nonatomic) IBOutlet UIButton *yearBtn;
 @property (weak, nonatomic) IBOutlet UIButton *lifetimeBtn;
+@property (weak, nonatomic) IBOutlet UIButton *restoreBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *restoreBtnHeight;
 
 @end
 
@@ -63,10 +65,12 @@
     //添加观察通知，当获取到价格的时候就将价格显示出来
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(preVersionPrice) name:GET_PRO_VERSION_PRICE_ACTION object:nil];
-
+    [self.restoreBtn setTitle:NSLocalizedString(@"VC_RestorePurchased", nil) forState:UIControlStateNormal];
     
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.isPurchased) {
+        self.restoreBtn.hidden = YES;
+        self.restoreBtnHeight.constant = 0.01;
         Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
         
@@ -117,9 +121,15 @@
                 }
             }
         }
+    }else{
+        self.restoreBtnHeight.constant = 40;
+        self.restoreBtn.hidden = NO;
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelClick:) name:@"purchaseSuccessful" object:nil];
+}
+- (IBAction)restoreBtnClick:(id)sender {
+    [[XDInAppPurchaseManager shareManager] restoreUpgrade];
 }
 
 - (IBAction)cancelClick:(id)sender {

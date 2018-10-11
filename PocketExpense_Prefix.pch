@@ -18,7 +18,7 @@
     #import "XDChartHelpClass.h"
     #import "AFNetworking.h"
     #import "Setting+CoreDataClass.h"
-//    #import <ADEngine/ADEngine.h>
+    #import <ADEngine/ADEngine.h>
 
 #define FontSFUITextRegular                                 @"SFUIText-Regular"
 #define FontSFUITextLight                                   @"SFUIText-Light"
@@ -78,6 +78,37 @@ typedef enum : NSUInteger {
     TransactionIncome,
     TranscationTransfer,
 } TransactionType;
+
+
+//PE1101 - iPhone - Banner - Calendar
+//PE1102 - iPhone - Banner - Accounts
+//PE1103 - iPhone - Banner - AccountDetails
+//PE1104 - iPhone - Banner - Category
+//PE1105 - iPhone - Banner - Budget
+//PE1106 - iPhone - Banner - Bills
+//
+//PE1201 - iPhone - Interstitial - Launch
+//PE1202 - iPhone - Interstitial - NewTransactionSave
+//PE1203 - iPhone - Interstitial - ReconcileOFF
+//PE1204 - iPhone - Interstitial - BudgetSave
+//PE1205 - iPhone - Interstitial - BillAddPaid
+//PE1206 - iPhone - Interstitial - NewBillSave
+//
+//PE2101 - iPad - Banner - Calendar
+//PE2102 - iPad - Banner - Accounts
+//PE2103 - iPad - Banner - AccountDetails
+//PE2104 - iPad - Banner - PieChart
+//PE2105 - iPad - Banner - Budget
+//PE2106 - iPad - Banner - Bills
+//PE2107 - iPad - Banner - Cashflow
+//PE2108 - iPad - Banner - Networth
+//
+//PE2201 - iPad - Interstitial - Launch
+//PE2202 - iPad - Interstitial - NewTransactionSave
+//PE2203 - iPad - Interstitial - ReconcileOFF
+//PE2204 - iPad - Interstitial - BudgetSave
+//PE2205 - iPad - Interstitial - BillAddPaid
+//PE2206 - iPad - Interstitial - NewBillSave
 
 #endif
 
