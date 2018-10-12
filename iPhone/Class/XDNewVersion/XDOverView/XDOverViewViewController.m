@@ -679,14 +679,12 @@
         NSString* auto_renew_status = pendingRenewal[@"auto_renew_status"];
         NSString* expiration_intent = pendingRenewal[@"expiration_intent"];
         
-        NSLog(@"auto_renew_status === %@ ,,expiration_intent == %@",auto_renew_status,expiration_intent);
-        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-
         if ([auto_renew_status isEqualToString:@"0"]) {
             if ([expiration_intent isEqualToString:@"1"] || [expiration_intent isEqualToString:@"3"]) {
-                UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"You have canceled subscription, all premium feature are not available." message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
-                [failedAlert show];
-                appDelegate.appAlertView = failedAlert;
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"You have canceled subscription, all premium feature are not available." message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
+                    [failedAlert show];
+                });
             }
         }
     }

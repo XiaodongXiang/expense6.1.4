@@ -16,10 +16,19 @@
 	<string>$(PRODUCT_NAME)</string>
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
+	<key>CFBundleShortVersionString</key>
+	<string>6.2</string>
+	<key>CFBundleVersion</key>
+	<string>2.0</string>
 	<key>FacebookAppID</key>
 	<string>159401807755015</string>
-	<key>CFBundleShortVersionString</key>
-	<string>6.1.4</string>
+	<key>NSExtension</key>
+	<dict>
+		<key>NSExtensionPointIdentifier</key>
+		<string>com.apple.widget-extension</string>
+		<key>NSExtensionPrincipalClass</key>
+		<string>TodayViewController</string>
+	</dict>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SF-UI-Text-Medium.otf</string>
@@ -30,14 +39,5 @@
 		<string>Avenir LT 85 Heavy.ttf</string>
 		<string>Avenir LT 45 Book.ttf</string>
 	</array>
-	<key>CFBundleVersion</key>
-	<string>6.1.4</string>
-	<key>NSExtension</key>
-	<dict>
-		<key>NSExtensionPrincipalClass</key>
-		<string>TodayViewController</string>
-		<key>NSExtensionPointIdentifier</key>
-		<string>com.apple.widget-extension</string>
-	</dict>
 </dict>
 </plist>
