@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>6.2</string>
+	<string>6.2 </string>
 	<key>CFBundleVersion</key>
-	<string>2.0</string>
+	<string>1.1</string>
 	<key>FacebookAppID</key>
 	<string>159401807755015</string>
 	<key>NSExtension</key>
