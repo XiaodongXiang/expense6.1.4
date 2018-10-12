@@ -43,6 +43,7 @@
 @interface ipad_TranscactionQuickEditViewController ()
 {
 }
+@property(nonatomic, strong)ADEngineController* interstitial;
 
 @end
 
@@ -65,6 +66,11 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        //插页广告
+            PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2202 - iPad - Interstitial - NewTransactionSave"];
+        }
     }
     return self;
 }
@@ -1544,14 +1550,13 @@
     }
     else
         [self.navigationController popViewControllerAnimated:YES];
-    
-    //插页广告
-//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-    if (!appDelegate.isPurchased) {
-        ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
-        [interstitial showInterstitialAdWithTarget:appDelegate_iPhone.mainViewController];
-    }
 
+
+    //插页广告
+    AppDelegate_iPad* appDelegate_ipad = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        [self.interstitial showInterstitialAdWithTarget:appDelegate_ipad.mainViewController];
+    }
 }
 
 -(void)btnAmountAction:(id)sender

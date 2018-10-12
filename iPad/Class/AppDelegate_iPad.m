@@ -472,6 +472,9 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application
 {
     [_touchBack removeFromSuperview];
+    
+    [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
+
 	if(AddPopoverController !=nil)
 	{
 		NSManagedObjectContext *managedObjectContext_ = self.managedObjectContext;

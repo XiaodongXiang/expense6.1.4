@@ -186,7 +186,7 @@
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"tabbarDismiss" object:@NO];
-
+    [[UIApplication sharedApplication]setStatusBarHidden:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -596,13 +596,14 @@
         BOOL lifeTime = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG];
         
         if (lifeTime || [purchasedID isEqualToString:kInAppPurchaseProductIdLifetime]) {
+            
             return;
         }else{
             if (!date || !purchasedID) {
                 {
                     [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
                     appDelegate.isPurchased = NO;
-                    
+//                    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
                     [[XDDataManager shareManager] removeSettingPurchase];
                 }
             }else if (purchasedID && date) {
@@ -617,6 +618,8 @@
                         [self validateReceipt];
                     }else{
                         
+//                        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+
                         Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
                         setting.purchasedProductID = nil;
                         setting.purchasedStartDate = nil;
@@ -649,6 +652,8 @@
     
     if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+
         return;
     }
     
@@ -665,10 +670,12 @@
     //续订了
     if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
         [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
-        
+//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+
     }else{  //没续订
         [self noSubscription];
-        
+//        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+
         NSString* auto_renew_status = pendingRenewal[@"auto_renew_status"];
         NSString* expiration_intent = pendingRenewal[@"expiration_intent"];
         
@@ -686,6 +693,7 @@
 }
 
 -(void)noSubscription{
+//    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
     [[XDDataManager shareManager] removeSettingPurchase];
     [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];

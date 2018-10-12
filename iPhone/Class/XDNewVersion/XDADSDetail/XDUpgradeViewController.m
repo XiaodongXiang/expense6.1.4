@@ -40,6 +40,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *lastCell;
 @property (weak, nonatomic) IBOutlet UIButton *restoreBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *restoreBtnH;
+@property (weak, nonatomic) IBOutlet UILabel *premiumTitle;
 
 @end
 
@@ -93,6 +94,8 @@
             self.yearTimeLbl.textColor = [UIColor whiteColor];
             self.yearPriceLbl.textColor = [UIColor whiteColor];
             
+            self.premiumTitle.text = @"Lifetime Premium";
+            
         }else{
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
@@ -103,7 +106,8 @@
                     //            self.monthBtn.enabled = NO;
                     
                     self.yearBg.image = [UIImage imageNamed:@"year"];
-                    
+                    self.premiumTitle.text = @"Monthly Premium";
+
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.yearTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -112,6 +116,8 @@
                     self.saleLbl.hidden = YES;
                     //            self.yearBtn.enabled = NO;
                     self.monthBg.image = [UIImage imageNamed:@"month"];
+                    self.premiumTitle.text = @"Yearly Premium";
+
                 }else{
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -128,6 +134,8 @@
                     self.monthPriceLbl.textColor = [UIColor whiteColor];
                     self.yearTimeLbl.textColor = [UIColor whiteColor];
                     self.yearPriceLbl.textColor = [UIColor whiteColor];
+                    self.premiumTitle.text = @"Lifetime Premium";
+
                 }
             }
         }
@@ -177,7 +185,8 @@
             self.monthView.userInteractionEnabled = NO;
             self.yearView.userInteractionEnabled = NO;
             self.saleLbl.hidden = YES;
-            
+            self.premiumTitle.text = @"Lifetime Premium";
+
         }else{
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
@@ -187,6 +196,7 @@
                     self.monthTimeLbl.textColor = RGBColor(122, 163, 239);
                     //            self.monthBtn.enabled = NO;
                     self.yearBg.image = [UIImage imageNamed:@"year"];
+                    self.premiumTitle.text = @"Monthly Premium";
 
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
@@ -196,6 +206,7 @@
                     self.saleLbl.hidden = YES;
                     //            self.yearBtn.enabled = NO;
                     self.monthBg.image = [UIImage imageNamed:@"month"];
+                    self.premiumTitle.text = @"Yearly Premium";
 
                 }else{
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
@@ -213,7 +224,8 @@
                     self.monthPriceLbl.textColor = [UIColor whiteColor];
                     self.yearTimeLbl.textColor = [UIColor whiteColor];
                     self.yearPriceLbl.textColor = [UIColor whiteColor];
-                    
+                    self.premiumTitle.text = @"Lifetime Premium";
+
                 }
             }
         }

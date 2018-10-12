@@ -400,6 +400,7 @@
                     </button>
                 </subviews>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="1000" minY="0.0" maxX="0.0" maxY="0.0"/>
             <point key="canvasLocation" x="-1229.5" y="320"/>
         </tableViewCell>
         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="191" id="BUD-g8-t6L">

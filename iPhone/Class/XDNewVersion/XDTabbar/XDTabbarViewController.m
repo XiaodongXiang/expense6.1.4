@@ -202,7 +202,6 @@
     self = [super init];
     if (self) {
         self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1202 - iPhone - Interstitial - NewTransactionSave"];
-
     }
     return self;
 }

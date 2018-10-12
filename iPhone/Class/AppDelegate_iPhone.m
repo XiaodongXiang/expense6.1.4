@@ -638,7 +638,7 @@
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     
-    [[ADEngineManage adEngineManage] downloadConfigByAppName:@"PocketExpense"];
+    [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
 
     
     [_touchBack removeFromSuperview];
@@ -1280,6 +1280,7 @@
     XDTabbarViewController* tabbarVc = [[XDTabbarViewController alloc]init];
     
 
+//    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
 //    _overViewController=[[OverViewWeekCalenderViewController alloc]init];
 //    _navCtrl=[[UINavigationController alloc]initWithRootViewController:_overViewController];
 ////
@@ -1374,6 +1375,8 @@
 
         }
     }
+//    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+
     
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{

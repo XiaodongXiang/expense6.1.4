@@ -74,6 +74,8 @@
     [[NSNotificationCenter defaultCenter]removeObserver:self];
 }
 #pragma mark view life cycle
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -219,6 +221,8 @@
     appDelegate.adsView.hidden = YES;
     [self resetStyleWithAds];
     
+    [[UIApplication sharedApplication]setStatusBarHidden:NO];
+
 }
 
 

@@ -40,6 +40,8 @@
     
     if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+
         return;
     }
     
@@ -60,7 +62,7 @@
         
         
         [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
-        
+//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
         
     }else{  //没续订
         
@@ -70,6 +72,7 @@
 }
 
 -(void)noSubscription{
+//    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
     [[XDDataManager shareManager] removeSettingPurchase];
     [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -98,7 +101,8 @@
                 {
                     [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
                     appDelegate.isPurchased = NO;
-                    
+//                    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+
                     [[XDDataManager shareManager] removeSettingPurchase];
                 }
             }else if (purchasedID && date) {
@@ -112,11 +116,8 @@
                         //要提示重新订阅
                         [self validateReceipt];
                     }else{
-//                        SKReceiptRefreshRequest* request = [[SKReceiptRefreshRequest alloc] init];
-//                        request.delegate = self;
-//                        [request start];
                         
-                        
+//                        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
                         Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
                         setting.purchasedProductID = nil;
                         setting.purchasedStartDate = nil;
@@ -132,6 +133,8 @@
                         PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
                         appDelegate.isPurchased = NO;
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+//                        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+
                     }
                 }
             }

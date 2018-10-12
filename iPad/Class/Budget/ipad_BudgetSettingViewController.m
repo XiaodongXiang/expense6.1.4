@@ -13,7 +13,9 @@
 #import "PokcetExpenseAppDelegate.h"
 #import "EPNormalClass.h"
 
-@interface ipad_BudgetSettingViewController ()
+@interface ipad_BudgetSettingViewController ()<ipad_BudgetSettingViewDelegate>
+
+@property(nonatomic, strong)ADEngineController* interstitial;
 
 @end
 
@@ -230,6 +232,7 @@
     {
         _budgetListViewController = [[ipad_BudgetListViewController alloc]initWithNibName:@"ipad_BudgetListViewController" bundle:nil];
         _budgetListViewController.budgetSettingViewController = self;
+        _budgetListViewController.xxdDelegate = self;
         [self.navigationController pushViewController:_budgetListViewController animated:YES];
     }
     
@@ -246,6 +249,25 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)budgetSettingSave{
+    [self.interstitial showInterstitialAdWithTarget:self];
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        //插页广告
+        
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2204 - iPad - Interstitial - BudgetSave"];
+        }
+    }
+    return self;
 }
 
 @end

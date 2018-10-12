@@ -119,6 +119,8 @@
         self.bottomConstant.constant = 0;
     }
     
+    
+    
 }
 
 #pragma mark - ADEngineControllerBannerDelegate

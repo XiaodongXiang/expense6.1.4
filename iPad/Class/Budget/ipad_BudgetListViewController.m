@@ -31,14 +31,6 @@
 @synthesize tcsvc_TextField,budgetAmountLabel;
 @synthesize transactionSpliteViewToBudgetListView;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
 
 - (void)viewDidLoad
 {
@@ -279,13 +271,9 @@
 //        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         [self.navigationController popViewControllerAnimated:YES];
     }
-
-    //插页广告
-
-//    AppDelegate_iPad *appDelegate_ipad = (AppDelegate_iPad *)[[UIApplication sharedApplication]delegate];
-    if (!appDelegate.isPurchased) {
-        ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
-        [interstitial showInterstitialAdWithTarget:self.navigationController];
+    
+    if ([self.xxdDelegate respondsToSelector:@selector(budgetSettingSave)]) {
+        [self.xxdDelegate budgetSettingSave];
     }
 }
 

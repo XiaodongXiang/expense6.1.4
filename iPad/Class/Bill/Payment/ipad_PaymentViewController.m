@@ -17,7 +17,8 @@
 #import <Parse/Parse.h>
 #import "ParseDBManager.h"
 
-@interface ipad_PaymentViewController ()
+@interface ipad_PaymentViewController ()<ipad_BillPaymentViewDelegate>
+@property(nonatomic, strong)ADEngineController* interstitial;
 
 @end
 
@@ -31,6 +32,18 @@
 @synthesize addPaymentBtn,iBillEditViewController;
 @synthesize categoryimage,nameLabel;
 @synthesize dueLabelText,totalLabelText,paidLabelText,padiContainView,paid2LabelText;
+
+
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2205 - iPad - Interstitial - BillAddPaid"];
+        }
+    }
+    return self;
+}
 #pragma mark Life
 - (void)viewDidLoad
 {
@@ -211,6 +224,8 @@
     self.iBillEditViewController.billFather = self.billFather;
     self.iBillEditViewController.iPaymentViewController = self;
     [self.navigationController pushViewController:self.iBillEditViewController animated:YES];
+    
+    
 }
 
 - (void)addPaymentBtnPressed:(id)sender
@@ -220,6 +235,12 @@
 	payController.billFather = self.billFather;
     payController.typeoftodo = @"ADD";
     [self.navigationController pushViewController:payController animated:YES];
+    
+    payController.xxdDelegate = self;
+}
+
+-(void)billPaySuccess{
+    [self.interstitial showInterstitialAdWithTarget:self];
 }
 
 #pragma mark

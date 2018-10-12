@@ -52,10 +52,27 @@
 }
 @property (weak, nonatomic) IBOutlet UIView *adBannerView;
 @property(nonatomic, strong)ADEngineController* adBanner;
+@property(nonatomic, strong)ADEngineController* interstitial;
 
 @end
  
 @implementation ipad_AccountViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+        //插页广告
+        
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2203 - iPad - Interstitial - ReconcileOFF"];
+        }
+    }
+    return self;
+}
+
 - (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
@@ -82,7 +99,7 @@
     
     self.iAccountEditViewController = nil;
     self.iTransactionQuickEditViewController = nil;
-	[self reFlashTableViewData];
+    [self reFlashTableViewData];
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -106,6 +123,9 @@
         self.leftTableView.height = _accountAndCategoryContainView.frame.size.height-60;
         self.categoryTableView.height = _accountAndCategoryContainView.frame.size.height-60;
     }
+    
+    self.view.frame =CGRectMake(80, 44, IPAD_WIDTH, IPAD_HEIGHT);
+
 }
 
 
@@ -1612,9 +1632,9 @@
     }else{
         //插页广告
         PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        
         if (!appDelegate.isPurchased) {
-            ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
-            [interstitial showInterstitialAdWithTarget:self];
+            [self.interstitial showInterstitialAdWithTarget:self];
         }
     }
 

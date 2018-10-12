@@ -581,10 +581,10 @@ dateTableViewCell,amountText,accountLabel,dateLabel,billFather,transaction,accou
         [self.navigationController popViewControllerAnimated:YES];
     }
     
-    if (!appDelegate.isPurchased) {
-        ADEngineController* interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"ADTEST - Interstitial"];
-        [interstitial showInterstitialAdWithTarget:self.navigationController];
+    if ([self.xxdDelegate respondsToSelector:@selector(billPaySuccess)]) {
+        [self.xxdDelegate billPaySuccess];
     }
+  
         
 }
 

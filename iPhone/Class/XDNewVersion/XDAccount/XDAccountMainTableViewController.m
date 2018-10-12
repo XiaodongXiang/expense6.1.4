@@ -30,6 +30,7 @@
 @property(nonatomic, strong)NSMutableArray* dataMuArr;
 @property (strong, nonatomic) IBOutlet UITableViewCell *addAccountCell;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomH;
 
 
 @property(nonatomic, strong)ADEngineController* adBanner;
@@ -212,6 +213,9 @@
         }
     }else{
         self.adBannerView.hidden = YES;
+        if (IS_IPHONE_X) {
+            self.bottomH.constant = 0;
+        }
     }
     
 }
@@ -220,8 +224,15 @@
 - (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
     if (result) {
         self.adBannerView.hidden = NO;
+        if (IS_IPHONE_X) {
+            self.bottomH.constant = 24;
+        }
+        
     }else{
         self.adBannerView.hidden = YES;
+        if (IS_IPHONE_X) {
+            self.bottomH.constant = 0;
+        }
     }
 }
 

@@ -180,9 +180,11 @@
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
                 [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
                 appDelegate.isPurchased = YES;
-                
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+                });
                 
             }else{
                 [self completeTransaction:transaction];
@@ -190,12 +192,13 @@
             NSLog(@"-----交易完成 --------");
             break;
         case SKPaymentTransactionStateFailed://交易失败
-            [self failedTransaction:transaction];
             NSLog(@"-----交易失败 --------");
+            [self failedTransaction:transaction];
             break;
         case SKPaymentTransactionStateRestored://已经购买过该商品
-            [self restoreTransaction:transaction];
             NSLog(@"-----已经购买过该商品 --------");
+
+            [self restoreTransaction:transaction];
             break;
     }
 }
@@ -222,18 +225,20 @@
     
     [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
     appDelegate.isPurchased = YES;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+    });
 
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     [self finishSomeUnfinishTransaction];
-
+//    [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
     
 }
 
 -(void)failedTransaction:(SKPaymentTransaction*)transaction{
-    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
-    [appDelegate hideIndicator];
+    
     
 //    NSLog(@"交易失败2 %@",transaction.error);
 //    if (transaction.error.code == SKErrorPaymentCancelled)
@@ -256,13 +261,17 @@
 //    {
 //        [self showAlertControllerTitle:@"Hint" Message:@"Invalid client"];
 //    }
+    
+    [self validateReceipt];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     
     [self finishSomeUnfinishTransaction];
     
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+    });
 }
 
 //- (void)showAlertControllerTitle:(NSString *)title Message:(NSString *)message
@@ -278,16 +287,21 @@
         appDelegate.isPurchased = YES;
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
         [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+        });
 
         [appDelegate hideIndicator];
+//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+        [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
+        [self finishSomeUnfinishTransaction];
     }else{
         [self validateReceipt];
     }
-    [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
-    [self finishSomeUnfinishTransaction];
+   
 }
 
 
@@ -311,15 +325,15 @@
 //        NSLog(@"%@",purchasedItemIDs);
 //    }
 //    
-    [self finishSomeUnfinishTransaction];
+//    [self finishSomeUnfinishTransaction];
 
-    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
-    [appDelegate hideIndicator];
+//    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
+//    [appDelegate hideIndicator];
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{
-    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
-    [appDelegate hideIndicator];
+//    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
+//    [appDelegate hideIndicator];
 }
 
 #pragma mark - function
@@ -335,9 +349,11 @@
         [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
         
         appDelegate.isPurchased = NO;
-
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        });
         [self finishSomeUnfinishTransaction];
 
         return;
@@ -354,12 +370,17 @@
         [[XDDataManager shareManager] puchasedInfoInSetting:[NSDate date] productID:kInAppPurchaseProductIdLifetime originalProID:nil];
         appDelegate.isPurchased = YES;
         [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideProImage" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideProImage" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        });
 
         
         [self finishSomeUnfinishTransaction];
+//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+
         return;
     }
     
@@ -383,16 +404,27 @@
         [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:nil];
         appDelegate.isPurchased = YES;
         [[XDDataManager shareManager]openWidgetInSettingWithBool14:YES];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"hideProImage" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideProImage" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+        });
+
+//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
 
     }else{  //没续订
+//        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+
         [[XDDataManager shareManager] removeSettingPurchase];
         [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
         
         appDelegate.isPurchased = NO;
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        });
         
         
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -402,15 +434,19 @@
     }
     
     [self finishSomeUnfinishTransaction];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
 
+    });
 }
 
 
 -(void)finishSomeUnfinishTransaction{
+    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
+    [appDelegate hideIndicator];
     NSArray* transactions = [SKPaymentQueue defaultQueue].transactions;
     if (transactions.count > 0)
     {
@@ -447,6 +483,7 @@
     NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
     
     if (receiptData == nil) {
+        [self finishSomeUnfinishTransaction];
         return;
     }
     NSString* urlStr = @"http://purchase-verification-service.us-east-1.elasticbeanstalk.com/v2/validate/ios/7/com.btgs.pocketexpenselite/Sub_PKEP_1M_T22";
@@ -473,7 +510,6 @@
                                       {
                                           // background datatask completion block
                                           
-                                          [appDelegate hideIndicator];
                                           if (apiData) {
                                               
                                               NSError *parseErr;
@@ -492,18 +528,22 @@
                                               [[XDDataManager shareManager] removeSettingPurchase];
                                               [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
                                               PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+//                                              [[ADEngineManage adEngineManage] lockFunctionsShowAd];
 
                                               appDelegate.isPurchased = NO;
-                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
-                                              [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
-                                              
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+                                              });
+                                              [self finishSomeUnfinishTransaction];
                                               
                                               dispatch_async(dispatch_get_main_queue(), ^{
                                                   UIAlertView *restoreAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_Restore Error", nil) message:NSLocalizedString(@"VC_A prior purchase transaction could not be found. To restore the purchased product, tap the Buy button. Paid customers will NOT be charged again, but the purchase will be restored.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
                                                   [restoreAlert show];
                                               });
                                           }
-                                          
+                                          [appDelegate hideIndicator];
+
                                           
                                           /* TODO: Unlock the In App purchases ...
                                            At this point the json dictionary will contain the verified receipt from Apple

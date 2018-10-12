@@ -243,15 +243,17 @@
     self.notifDetailLabel.text = [NSString stringWithFormat:@"%@ %@",_remindMeString,[self reminderDatePickValueChange:_remindAtDate]];
     self.noteLabel.text = _noteString;
     
-//    if (![_repeatString isEqualToString:@"Never"]) {
-//        _repeatShow = YES;
-//    }
-    _repeatShow = NO;
+    if (![_repeatString isEqualToString:@"Never"]) {
+        _repeatShow = YES;
+        _fRepeatBtn.hidden = YES;
+    }
     if (![_remindMeString isEqualToString:@"None"]) {
         _notifShow = YES;
+        _fNotifBtn.hidden = YES;
     }
     if (billFather.bf_billNote.length > 0) {
         _noteShow = YES;
+        _fNoteBtn.hidden = YES;
     }
     if (_noteShow && _notifShow && _repeatShow) {
         _functionCellShow = NO;
@@ -260,6 +262,8 @@
     }
     
     [self setEditBillThreeBtnImageView];
+    [self setFunctionBtnFrame];
+
 }
 
 - (IBAction)cancelBtnClick:(id)sender {
@@ -321,7 +325,7 @@
     EP_BillRule* editBill = billFather.bf_billRule;
 
     if ([editBill.ep_recurringType isEqualToString:@"Never"]) {
-        editBill.ep_billName = self.nameTextF.text;
+      billFather.bf_billName =  editBill.ep_billName = self.nameTextF.text;
         editBill.ep_billAmount = [NSNumber numberWithDouble:[self.amountTextF.text doubleValue]];
         editBill.ep_billDueDate = self.datePicker.date;
         editBill.ep_billEndDate = _endDate;
@@ -596,21 +600,23 @@
 
 -(void)setEditBillThreeBtnImageView{
     
-    CGFloat width = SCREEN_WIDTH/2;
+    CGFloat width = SCREEN_WIDTH/3;
     
+    UIImageView* imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"circulation"]];
+    imageView.frame = CGRectMake(0, 0, 30, 30);
     self.fRepeatBtn.frame = CGRectMake(0, 0, 0, 56);
-    
+    imageView.center = CGPointMake(self.fRepeatBtn.width/2, self.fRepeatBtn.height/2);
+    [self.fRepeatBtn addSubview:imageView];
+
     UIImageView* imageView1 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"remind"]];
     imageView1.frame = CGRectMake(0, 0, 30, 30);
-    self.fNotifBtn.frame =CGRectMake(0, 0, width, 56);
-
+    self.fNotifBtn.frame =CGRectMake(width, 0, width, 56);
     imageView1.center = CGPointMake(self.fNotifBtn.width/2, self.fNotifBtn.height/2);
     [self.fNotifBtn addSubview:imageView1];
     
     UIImageView* imageView2 = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"remark"]];
     imageView2.frame = CGRectMake(0, 0, 30, 30);
-    self.fNoteBtn.frame =CGRectMake(width, 0, width, 56);
-
+    self.fNoteBtn.frame =CGRectMake(width*2, 0, width, 56);
     imageView2.center = CGPointMake(self.fNoteBtn.width/2, self.fNoteBtn.height/2);
     [self.fNoteBtn addSubview:imageView2];
 }

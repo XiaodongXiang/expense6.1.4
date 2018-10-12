@@ -14,6 +14,7 @@
                 <outlet property="adBannerView" destination="L0Y-zC-drF" id="gUe-7U-utU"/>
                 <outlet property="addAccountCell" destination="Qzg-Ap-5lc" id="3v4-DU-RzI"/>
                 <outlet property="bannerHeight" destination="VHE-U8-EMY" id="Osc-5i-Qh1"/>
+                <outlet property="bottomH" destination="roC-EG-zOg" id="WDX-m5-L74"/>
                 <outlet property="tableView" destination="i5M-Pr-FkT" id="SDo-Y2-osQ"/>
                 <outlet property="view" destination="C9q-n5-s5l" id="xif-n4-Pvv"/>
             </connections>

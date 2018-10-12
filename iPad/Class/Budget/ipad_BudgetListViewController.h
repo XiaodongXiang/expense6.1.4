@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol ipad_BudgetSettingViewDelegate <NSObject>
+
+-(void)budgetSettingSave;
+
+@end
+
 @class ipad_BudgetSettingViewController,ipad_TransacationSplitViewController;
 @interface ipad_BudgetListViewController : UIViewController
 <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,UIScrollViewDelegate>
@@ -30,7 +36,7 @@
 
 @property(nonatomic,strong)NSMutableArray           *budgetExistArray;
 @property(nonatomic,strong)NSMutableArray           *budgetEditArray;
-
+@property(nonatomic, weak)id<ipad_BudgetSettingViewDelegate> xxdDelegate;
 @property(nonatomic,strong)ipad_BudgetSettingViewController *budgetSettingViewController;
 @property(nonatomic,strong)ipad_TransacationSplitViewController *iTransactionCategorySplitViewController;
 @property(nonatomic,assign)BOOL transactionSpliteViewToBudgetListView;

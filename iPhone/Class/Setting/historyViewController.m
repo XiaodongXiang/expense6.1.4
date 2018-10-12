@@ -21,7 +21,7 @@
 
 -(NSArray *)array{
     if (!_array) {
-        _array = @[@"v 6.1.3\n- Fixed subcategory statistics issue\n- Fixed transaction sorting issue\n- Fixed time display issue in exported CSV file",@"v 6.1.2\n- Crash fixes\n- Optimize display in exported reports\n- Sync issue fixes\n- Minor bug fixes",@"v 6.1.1\n- Fixed crash when iPhone‘s calendar is set to Buddhist calendar\n- Show Net Worth in Accounts page\n- Add subcategory reporting\n- Deepen the uncleared transaction's color",@"v 6.1\n- All new design, delightful interaction and better structure\n- Optimized for iPhone X, support Face ID\n- Support 3D Touch\n- Bug fixes"];
+        _array = @[@"v 6.1.4\n- Compatible with iOS 12\n- Support add transaction in widget\n- Minor bug fixes",@"v 6.1.3\n- Fixed subcategory statistics issue\n- Fixed transaction sorting issue\n- Fixed time display issue in exported CSV file",@"v 6.1.2\n- Crash fixes\n- Optimize display in exported reports\n- Sync issue fixes\n- Minor bug fixes",@"v 6.1.1\n- Fixed crash when iPhone‘s calendar is set to Buddhist calendar\n- Show Net Worth in Accounts page\n- Add subcategory reporting\n- Deepen the uncleared transaction's color",@"v 6.1\n- All new design, delightful interaction and better structure\n- Optimized for iPhone X, support Face ID\n- Support 3D Touch\n- Bug fixes"];
 
     }
     return _array;
@@ -36,7 +36,7 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return self.array.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{

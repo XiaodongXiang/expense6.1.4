@@ -26,6 +26,7 @@
 @property(nonatomic, strong)ADEngineController* adBanner;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *srcollViewBottomConstant;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomH;
 @end
 
 @implementation XDPieDetailViewController
@@ -102,8 +103,14 @@
 - (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
     if (result) {
         self.adBannerView.hidden = NO;
-        self.srcollViewBottomConstant.constant = 50;
+        if (IS_IPHONE_X) {
+            self.srcollViewBottomConstant.constant = 74;
+            self.bottomH.constant = 24;
+        }else{
+            self.srcollViewBottomConstant.constant = 50;
+            self.bottomH.constant = 0;
 
+        }
     }else{
         self.adBannerView.hidden = YES;
         self.srcollViewBottomConstant.constant = 0;

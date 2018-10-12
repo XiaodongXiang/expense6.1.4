@@ -18,6 +18,8 @@
 #import "BillFather.h"
 @class ipad_BillsViewController,ipad_PaymentViewController,iPad_BillCategoryViewController;
 
+typedef void(^billSave)(void);
+
 @interface ipad_BillEditViewController : UIViewController<UIActionSheetDelegate,UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource>
 {
 	UITableView											*mytableView;
@@ -167,7 +169,7 @@
 @property (nonatomic, strong) IBOutlet UILabel       *endDateLabel;
 @property (nonatomic, strong) IBOutlet UILabel          *endDateLabelText;
 
-
+@property (nonatomic, copy) billSave billViewSave;
 
 -(IBAction)EditChanged:(id)sender;
 -(IBAction)TextDidEnd:(id)sender;

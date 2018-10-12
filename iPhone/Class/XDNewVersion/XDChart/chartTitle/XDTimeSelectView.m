@@ -390,7 +390,6 @@
     }else if(indexPath.row == 3){
         [cell.contentView addSubview:_endDatePicker];
     }
-    
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -404,9 +403,6 @@
         _startDateShow = NO;
     }
     
-    [_tableView beginUpdates];
-    [_tableView endUpdates];
-    
     [UIView animateWithDuration:0.2 animations:^{
         if (_startDateShow || _endDateShow) {
             self.height = 441;
@@ -418,6 +414,9 @@
         _saveBtn.y = self.height - 49;
 
     }];
+    
+    [_tableView beginUpdates];
+    [_tableView endUpdates];
 }
 
 -(void)btnClick:(UIButton*)btn{

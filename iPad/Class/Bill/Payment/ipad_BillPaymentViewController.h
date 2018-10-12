@@ -11,7 +11,11 @@
 #import "BillFather.h"
 #import "Transaction.h"
 
+@protocol ipad_BillPaymentViewDelegate <NSObject>
 
+-(void)billPaySuccess;
+
+@end
 @interface ipad_BillPaymentViewController : UIViewController
 <UITextFieldDelegate,NSFetchedResultsControllerDelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate>
 {
@@ -71,6 +75,6 @@
 @property(nonatomic,strong)IBOutlet UILabel             *accountLabelText;
 @property(nonatomic,strong)IBOutlet UILabel             *paymentDateLabelText;
 
-
+@property(nonatomic,weak)id<ipad_BillPaymentViewDelegate> xxdDelegate;
 
 @end

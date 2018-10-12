@@ -40,6 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIView *adBannerView;
 @property(nonatomic, strong)ADEngineController* adBanner;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *calendarContainViewBottomConstant;
+@property(nonatomic, strong)ADEngineController* interstitial;
 
 @end
 
@@ -61,6 +62,16 @@
 @synthesize upcomingLabelText,noRecordLabelText;
 @synthesize needShowSelectedDateBillViewController;
 
+- (instancetype)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
+    self  = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (!appDelegate.isPurchased) {
+            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2206 - iPad - Interstitial - NewBillSave"];
+        }
+    }
+    return self;
+}
 #pragma mark View Life Style
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
@@ -80,6 +91,8 @@
             [self refleshUI];
         });
     }
+    self.view.frame =CGRectMake(80, 44, IPAD_WIDTH, IPAD_HEIGHT);
+
 }
 
 #pragma mark - ADEngineControllerBannerDelegate
@@ -220,6 +233,7 @@
 #pragma mark Btn Action
 -(void)addBtnPressed:(UIButton *)sender
 {
+    
     AppDelegate_iPad *appDelegate_iPad = (AppDelegate_iPad *)[[UIApplication sharedApplication]delegate];
     ipad_BillEditViewController *billEditViewController = [[ipad_BillEditViewController alloc]initWithNibName:@"ipad_BillEditViewController" bundle:nil];
     billEditViewController.typeOftodo = @"IPAD_ADD";
@@ -240,6 +254,9 @@
     UIViewAutoresizingFlexibleTopMargin |
     UIViewAutoresizingFlexibleBottomMargin;
 
+    billEditViewController.billViewSave = ^{
+        [self.interstitial showInterstitialAdWithTarget:self];
+    };
 
 }
 

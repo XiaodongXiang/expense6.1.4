@@ -34,6 +34,7 @@
                 <outlet property="monthPriceLbl" destination="Z9q-bn-eZF" id="vDG-It-qf7"/>
                 <outlet property="monthTimeLbl" destination="ZTY-3D-Vm2" id="U4v-dh-Ad2"/>
                 <outlet property="monthView" destination="Lq8-af-dAk" id="eeh-43-wHI"/>
+                <outlet property="premiumTitle" destination="V78-j4-6yV" id="Khv-fR-EMH"/>
                 <outlet property="reportCell" destination="RGE-N2-LNj" id="cO5-kj-BoA"/>
                 <outlet property="restoreBtn" destination="9Ic-mS-TAM" id="bM9-IB-hUf"/>
                 <outlet property="restoreBtnH" destination="1zb-KN-ndL" id="f0J-N8-EM6"/>

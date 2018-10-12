@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="adBabberViewHeight" destination="5PT-Aw-DNs" id="cww-fA-fBd"/>
                 <outlet property="adBannerView" destination="hfc-dY-tkk" id="UHl-vj-8QS"/>
+                <outlet property="bottomH" destination="UCW-U1-CaY" id="fcv-xq-o8d"/>
                 <outlet property="dataScrollTopLeading" destination="oU4-3j-23m" id="Lky-87-NgA"/>
                 <outlet property="dateScrollView" destination="WRy-WQ-fp5" id="Usq-Ak-BvF"/>
                 <outlet property="pieScrollView" destination="wFg-m1-v0O" id="peE-22-jm1"/>
