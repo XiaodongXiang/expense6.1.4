@@ -2598,6 +2598,8 @@
 		BEB696E2213D0FAD00CDE712 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DA213D0FAD00CDE712 /* AFNetworkReachabilityManager.m */; };
 		BEB696E3213D0FAD00CDE712 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
+		BEFCAF292170D3A100065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
+		BEFCAF2A2170D3A200065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
 		BEFD68C0216C5E2900B86A64 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */; };
 		BEFD68C2216C6FA500B86A64 /* ADEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68C1216C6FA500B86A64 /* ADEngine.framework */; };
 /* End PBXBuildFile section */
@@ -11516,6 +11518,7 @@
 				3A1F02F01C0ED08200D02C14 /* icon_check3_sel@2x.png in Resources */,
 				A2F633B11A19C1DA00676B8C /* btn_equal_sign@2x.png in Resources */,
 				3AE2AA631C1FE1A100D6C552 /* sign_top_bg@2x.png in Resources */,
+				BEFCAF292170D3A100065457 /* PocketExpense-Info_Lite.plist in Resources */,
 				3ADE68F81C3E311800C1E18C /* btn_rep_expense@2x.png in Resources */,
 				A256175619D3BB7F00A5A950 /* ipad_btn_revocation@2x.png in Resources */,
 				3ADE89231B42748D00552972 /* ipad_sign_in@2x.png in Resources */,
@@ -12943,6 +12946,7 @@
 				BE3CCD14216057AF00F2EE4A /* SF-UI-Text-Regular.otf in Resources */,
 				BE3CCD15216057B200F2EE4A /* SF-UI-Text-Light.otf in Resources */,
 				BE19283F2134F19200D5B3F7 /* Images.xcassets in Resources */,
+				BEFCAF2A2170D3A200065457 /* PocketExpense-Info_Lite.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

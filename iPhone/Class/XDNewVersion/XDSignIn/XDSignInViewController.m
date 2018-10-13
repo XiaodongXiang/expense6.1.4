@@ -195,7 +195,7 @@
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"Log In";
     hud.mode = MBProgressHUDModeIndeterminate;
-
+    [PFFacebookUtils facebookLoginManager].loginBehavior = FBSDKLoginBehaviorWeb;
     [PFFacebookUtils logInInBackgroundWithReadPermissions:@[@"user_about_me"] block:^(PFUser *user, NSError *error)
      {
          [hud hideAnimated:YES];
