@@ -28,28 +28,26 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string></string>
+			<string>Pocket Expense</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>PocketExpenseLite</string>
-				<string>fbauth2</string>
 			</array>
 		</dict>
 		<dict>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string></string>
+			<string>Pocket Expense</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>db-6rdffw1lvpr4zuc</string>
 				<string>fb159401807755015</string>
-				<string>fbauth2</string>
+				<string>db-6rdffw1lvpr4zuc</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.1</string>
+	<string>1.2</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -175,10 +173,14 @@
 	<key>URL types</key>
 	<array>
 		<dict>
+			<key>URL Schemes</key>
+			<array>
+				<string>PocketExpenseLite</string>
+			</array>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>db-6rdffw1lvpr4zuc</string>
 				<string>fb159401807755015</string>
+				<string>db-6rdffw1lvpr4zuc</string>
 			</array>
 		</dict>
 		<dict>

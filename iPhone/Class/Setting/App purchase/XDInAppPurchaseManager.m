@@ -8,6 +8,7 @@
 #import "XDInAppPurchaseManager.h"
 #import <StoreKit/StoreKit.h>
 #import "PokcetExpenseAppDelegate.h"
+#import <Parse/Parse.h>
 
 #define LITE_UNLOCK_FLAG    @"isProUpgradePurchased"
 
@@ -154,6 +155,10 @@
 #pragma mark - 购买产品
 
 - (void)paymentQueue:(nonnull SKPaymentQueue *)queue updatedTransactions:(nonnull NSArray<SKPaymentTransaction *> *)transactions {
+    if (![PFUser currentUser]) {
+        [self finishSomeUnfinishTransaction];
+        return;
+    }
     
     SKPaymentTransaction *transaction = transactions.lastObject;
     

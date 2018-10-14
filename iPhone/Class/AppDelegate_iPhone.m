@@ -1125,6 +1125,7 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [super applicationDidBecomeActive:application];
+    [FBSDKAppEvents activateApp];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUI" object:nil];

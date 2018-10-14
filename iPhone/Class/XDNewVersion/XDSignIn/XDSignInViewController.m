@@ -208,7 +208,6 @@
          if (!user)
          {
              NSLog(@"Uh oh. The user cancelled the Facebook login.");
-             
          }
          else if (user.isNew)
          {
@@ -222,7 +221,6 @@
                      NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=normal",result[@"id"]]];
                      
                      NSData  *avaData = [NSData dataWithContentsOfURL:url];
-                     
                      
                      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) ;
                      NSString *documentsPath = [paths objectAtIndex:0];
@@ -239,6 +237,7 @@
          else
          {
              NSLog(@"User logged in through Facebook!");
+             [[ParseDBManager sharedManager] getPFSetting];
              [appDelegate succededInLogIn];
              
              
