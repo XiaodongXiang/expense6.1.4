@@ -47,7 +47,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.2</string>
+	<string>1.3</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -173,14 +173,14 @@
 	<key>URL types</key>
 	<array>
 		<dict>
-			<key>URL Schemes</key>
-			<array>
-				<string>PocketExpenseLite</string>
-			</array>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb159401807755015</string>
 				<string>db-6rdffw1lvpr4zuc</string>
+			</array>
+			<key>URL Schemes</key>
+			<array>
+				<string>PocketExpenseLite</string>
 			</array>
 		</dict>
 		<dict>

@@ -16,7 +16,7 @@
 #import <MessageUI/MFMailComposeViewController.h>
 #import "PokcetExpenseAppDelegate.h"
 @interface XDAppriater (hidden)
-- (BOOL)connectedToNetwork;
+
 @end
 
 @implementation XDAppriater(hidden)

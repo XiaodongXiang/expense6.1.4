@@ -490,7 +490,6 @@
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)urls sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     
-
 	if (urls!=nil)
 	{
         //免费版将数据转移到正式版

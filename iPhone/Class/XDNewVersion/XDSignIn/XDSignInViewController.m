@@ -14,6 +14,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate_iPhone.h"
 #import "ParseDBManager.h"
+
 @interface XDSignInViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -188,10 +189,18 @@
     }
 }
 
+
+
+
 - (IBAction)fbBtnClick:(id)sender {
     
     AppDelegate_iPhone *appDelegate = (AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
     
+    if (![appDelegate networkConnected]) {
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"No Network Connection!" message:nil delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alert show];
+        return;
+    }
     MBProgressHUD* hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     hud.label.text = @"Log In";
     hud.mode = MBProgressHUDModeIndeterminate;

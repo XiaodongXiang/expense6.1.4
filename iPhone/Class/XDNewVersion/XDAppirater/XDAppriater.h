@@ -10,8 +10,8 @@
 #import <Foundation/Foundation.h>
 
 @interface XDAppriater : NSObject
-
 +(XDAppriater*)shareAppirater;
+- (BOOL)connectedToNetwork;
 
 -(void)showAppirater;
 -(void)judgeShowRateView;
