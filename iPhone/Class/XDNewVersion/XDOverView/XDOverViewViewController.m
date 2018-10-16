@@ -20,7 +20,7 @@
 #import "ParseDBManager.h"
 #import "Transaction.h"
 #import <Parse/Parse.h>
-
+#import <Appsee/Appsee.h>
 #import "XDAppriater.h"
 
 @interface XDOverViewViewController ()<XDCalendarViewDelegate,XDTransicationTableViewDelegate,XDAddTransactionViewDelegate,SKRequestDelegate,ADEngineControllerBannerDelegate>
@@ -258,9 +258,12 @@
     self.navigationItem.titleView = self.titleBtn;
     
     
+    [Appsee setUserID:[PFUser currentUser].email];
+    
     [self getCurrentVersion];
     [self checkDateWithPurchase];
 
+    
 //    [self validateReceipt];
 }
 

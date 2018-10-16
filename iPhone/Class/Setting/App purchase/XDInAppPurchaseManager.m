@@ -9,7 +9,7 @@
 #import <StoreKit/StoreKit.h>
 #import "PokcetExpenseAppDelegate.h"
 #import <Parse/Parse.h>
-
+#import <Appsee/Appsee.h>
 #define LITE_UNLOCK_FLAG    @"isProUpgradePurchased"
 
 @interface XDInAppPurchaseManager ()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
@@ -222,10 +222,15 @@
     
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdMonth originalProID:originalProID];
+        [Appsee addEvent:@"Succeed - Monthly"];
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
          [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdYear originalProID:originalProID];
+        [Appsee addEvent:@"Succeed - Yearly"];
+
     }else{
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+        [Appsee addEvent:@"Succeed - Lifetime"];
+
     }
     
     [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
@@ -243,31 +248,108 @@
 }
 
 -(void)failedTransaction:(SKPaymentTransaction*)transaction{
+    NSString* proID = transaction.payment.productIdentifier;
     
-    
+    if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
+        if (transaction.error.code == SKErrorPaymentCancelled)
+        {
+            [Appsee addEvent:@"Cancel - Monthly"];
+        }
+        else if(transaction.error.code==SKErrorPaymentInvalid)
+        {
+            [Appsee addEvent:@"Payment Invalid - Monthly"];
+        }
+        else if(transaction.error.code==SKErrorPaymentNotAllowed)
+        {
+            [Appsee addEvent:@"Payment Not Allowed - Monthly"];
+        }
+        else if(transaction.error.code==SKErrorStoreProductNotAvailable)
+        {
+            [Appsee addEvent:@"Product Not Available - Monthly"];
+        }
+        else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
+        {
+            [Appsee addEvent:@"Service Permission Denied - Monthly"];
+        }
+        else if (transaction.error.code == SKErrorClientInvalid)
+        {
+            [Appsee addEvent:@"Client Invalid - Monthly"];
+        }else if (transaction.error.code == SKErrorCloudServiceRevoked){
+            
+        }else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed){
+            
+        }else if (transaction.error.code == SKErrorUnknown){
+            
+        }
+        
+    }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
+        if (transaction.error.code == SKErrorPaymentCancelled)
+        {
+            [Appsee addEvent:@"Cancel - Yearly"];
+        }
+        else if(transaction.error.code==SKErrorPaymentInvalid)
+        {
+            [Appsee addEvent:@"Payment Invalid - Yearly"];
+        }
+        else if(transaction.error.code==SKErrorPaymentNotAllowed)
+        {
+            [Appsee addEvent:@"Payment Not Allowed - Yearly"];
+        }
+        else if(transaction.error.code==SKErrorStoreProductNotAvailable)
+        {
+            [Appsee addEvent:@"Product Not Available - Yearly"];
+        }
+        else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
+        {
+            [Appsee addEvent:@"Service Permission Denied - Yearly"];
+        }
+        else if (transaction.error.code == SKErrorClientInvalid)
+        {
+            [Appsee addEvent:@"Client Invalid - Yearly"];
+        }else if (transaction.error.code == SKErrorCloudServiceRevoked){
+            
+        }else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed){
+            
+        }else if (transaction.error.code == SKErrorUnknown){
+            
+        }
+        
+    }else{
+        if (transaction.error.code == SKErrorPaymentCancelled)
+        {
+            [Appsee addEvent:@"Cancel - Lifetime"];
+        }
+        else if(transaction.error.code==SKErrorPaymentInvalid)
+        {
+            [Appsee addEvent:@"Payment Invalid - Lifetime"];
+        }
+        else if(transaction.error.code==SKErrorPaymentNotAllowed)
+        {
+            [Appsee addEvent:@"Payment Not Allowed - Lifetime"];
+        }
+        else if(transaction.error.code==SKErrorStoreProductNotAvailable)
+        {
+            [Appsee addEvent:@"Product Not Available - Lifetime"];
+        }
+        else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
+        {
+            [Appsee addEvent:@"Service Permission Denied - Lifetime"];
+        }
+        else if (transaction.error.code == SKErrorClientInvalid)
+        {
+            [Appsee addEvent:@"Client Invalid - Lifetime"];
+        }else if (transaction.error.code == SKErrorCloudServiceRevoked){
+            
+        }else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed){
+            
+        }else if (transaction.error.code == SKErrorUnknown){
+            
+        }
+    }
 //    NSLog(@"交易失败2 %@",transaction.error);
-//    if (transaction.error.code == SKErrorPaymentCancelled)
-//    {
-//        [self showAlertControllerTitle:@"Hint" Message:@"You have cancelled your purchase."];
-//    }
-//    else if(transaction.error.code==SKErrorPaymentInvalid)
-//    {
-//        [self showAlertControllerTitle:@"Hint" Message:@"Pay is invalid"];
-//    }
-//    else if(transaction.error.code==SKErrorPaymentNotAllowed)
-//    {
-//        [self showAlertControllerTitle:@"Hint" Message:@"No payment"];
-//    }
-//    else if(transaction.error.code==SKErrorStoreProductNotAvailable)
-//    {
-//        [self showAlertControllerTitle:@"Hint" Message:@"The product is invalid"];
-//    }
-//    else if(transaction.error.code==SKErrorClientInvalid)
-//    {
-//        [self showAlertControllerTitle:@"Hint" Message:@"Invalid client"];
-//    }
+   
     
-    [self validateReceipt];
+    [self failedValidateReceipt];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     
     [self finishSomeUnfinishTransaction];
@@ -278,6 +360,8 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
     });
 }
+
+
 
 //- (void)showAlertControllerTitle:(NSString *)title Message:(NSString *)message
 //{
@@ -449,6 +533,105 @@
 }
 
 
+-(void)returnFailuredReceipt:(NSDictionary *)lastReceipt{
+    
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    [appDelegate hideIndicator];
+    
+    if (!lastReceipt) {
+        [[XDDataManager shareManager] removeSettingPurchase];
+        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+        
+        appDelegate.isPurchased = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        });
+        [self finishSomeUnfinishTransaction];
+        
+        return;
+    }
+    //    NSLog(@"lastReceipt = %@",[notif object]);
+    
+    NSString* purchasedStr = [lastReceipt valueForKey:@"purchase_date"];
+    NSString* expiresStr =[lastReceipt valueForKey:@"expires_date"];
+    NSString* productID = [lastReceipt valueForKey:@"product_id"];
+    //    NSString* originalTransacionID = [lastReceipt valueForKey:@"original_transaction_id"];
+    
+    if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+        [[XDDataManager shareManager] puchasedInfoInSetting:[NSDate date] productID:kInAppPurchaseProductIdLifetime originalProID:nil];
+        appDelegate.isPurchased = YES;
+        [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideProImage" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        });
+        
+        
+        [self finishSomeUnfinishTransaction];
+        //        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+        
+        return;
+    }
+    
+    NSString* purchaseSubStr = [purchasedStr substringToIndex:purchasedStr.length - 7];
+    NSString* expireSubStr = [expiresStr substringToIndex:expiresStr.length - 7];
+    
+    NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
+    [dateFormant setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
+    NSDate* expireDate = [dateFormant dateFromString:expireSubStr];
+    
+    //续订了
+    if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
+        
+        if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+        }
+        
+        [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:nil];
+        appDelegate.isPurchased = YES;
+        [[XDDataManager shareManager]openWidgetInSettingWithBool14:YES];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"hideProImage" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+        });
+        
+        //        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+        
+    }else{  //没续订
+        //        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+        
+        [[XDDataManager shareManager] removeSettingPurchase];
+        [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+        
+        appDelegate.isPurchased = NO;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        });
+    }
+    
+    [self finishSomeUnfinishTransaction];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        
+    });
+}
+
+
 -(void)finishSomeUnfinishTransaction{
     PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
     [appDelegate hideIndicator];
@@ -549,6 +732,83 @@
                                           }
                                           [appDelegate hideIndicator];
 
+                                          
+                                          /* TODO: Unlock the In App purchases ...
+                                           At this point the json dictionary will contain the verified receipt from Apple
+                                           and each purchased item will be in the array of lineitems.
+                                           */
+                                      }];
+    
+    [datatask resume];
+}
+
+
+-(void)failedValidateReceipt
+{
+    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
+    [appDelegate showIndicator];
+    
+    NSURL* receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
+    
+    if (receiptData == nil) {
+        [self finishSomeUnfinishTransaction];
+        return;
+    }
+    NSString* urlStr = @"http://purchase-verification-service.us-east-1.elasticbeanstalk.com/v2/validate/ios/7/com.btgs.pocketexpenselite/Sub_PKEP_1M_T22";
+    
+    NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
+    NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
+    
+    NSDictionary* dic = @{@"receipt":encodeStr};
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    
+    NSMutableURLRequest* connectionRequest = [NSMutableURLRequest requestWithURL:sandBoxUrl];
+    connectionRequest.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+    connectionRequest.HTTPBody = jsonData;
+    connectionRequest.HTTPMethod = @"POST";
+    [connectionRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [connectionRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    // create a background session for connecting to the Receipt Verification service.
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *datatask = [session dataTaskWithRequest: connectionRequest
+                                                completionHandler: ^(NSData *apiData
+                                                                     , NSURLResponse *apiResponse
+                                                                     , NSError *conxErr)
+                                      {
+                                          // background datatask completion block
+                                          
+                                          if (apiData) {
+                                              
+                                              NSError *parseErr;
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData: apiData
+                                                                                                   options: 0
+                                                                                                     error: &parseErr];
+                                              // TODO: add error handling for conxErr, json parsing, and invalid http response statuscode
+                                              NSDictionary* recerptDic = json[@"receipt"];
+                                              
+                                              NSArray* lastReceiptArr = recerptDic[@"latest_receipt_info"];
+                                              NSDictionary* lastReceiptInfo = lastReceiptArr.lastObject;
+                                              
+                                              [self returnFailuredReceipt:lastReceiptInfo];
+                                              
+                                          }else{
+                                              [[XDDataManager shareManager] removeSettingPurchase];
+                                              [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+                                              PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+                                              //                                              [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+                                              
+                                              appDelegate.isPurchased = NO;
+                                              dispatch_async(dispatch_get_main_queue(), ^{
+                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+                                                  [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+                                              });
+                                              [self finishSomeUnfinishTransaction];
+                                        
+                                          }
+                                          [appDelegate hideIndicator];
+                                          
                                           
                                           /* TODO: Unlock the In App purchases ...
                                            At this point the json dictionary will contain the verified receipt from Apple

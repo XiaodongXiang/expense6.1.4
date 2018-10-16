@@ -8,6 +8,7 @@
 #import "XDIpad_ADSViewController.h"
 #import "PokcetExpenseAppDelegate.h"
 #import "XDInAppPurchaseManager.h"
+#import <Appsee/Appsee.h>
 @interface XDIpad_ADSViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -60,6 +61,8 @@
     [self.scrollView addSubview:self.monthView];
     [self.scrollView addSubview:self.yearView];
     [self.scrollView addSubview:self.lifetimeView];
+    
+    [Appsee addEvent:@"Enter Shop"];
     
     [self preVersionPrice];
     //添加观察通知，当获取到价格的时候就将价格显示出来
@@ -133,6 +136,8 @@
 }
 
 - (IBAction)cancelClick:(id)sender {
+    
+    [Appsee addEvent:@"Leave Shop"];
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
@@ -165,6 +170,8 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
 //    }
+    [Appsee addEvent:@"Attemp to Buy - Monthly"];
+
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdMonth];
     
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -177,6 +184,8 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
 //    }
+    [Appsee addEvent:@"Attemp to Buy - Yearly"];
+
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdYear];
 
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -189,6 +198,8 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 //    }
+    [Appsee addEvent:@"Attemp to Buy - Lifetime"];
+
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:kInAppPurchaseProductIdLifetime];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
 

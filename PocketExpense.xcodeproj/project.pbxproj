@@ -10818,6 +10818,7 @@
 				A2CBE7E8199C49570002F052 /* Run Script */,
 				BE03A1A3211D6DEC00D976F1 /* Embed App Extensions */,
 				21DED4D2C4F634028AF6D4DF /* [CP] Embed Pods Frameworks */,
+				BEF83D6F2175897F00630CFE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -10836,6 +10837,7 @@
 				BE19281E2134EBD800D5B3F7 /* Sources */,
 				BE19281F2134EBD800D5B3F7 /* Frameworks */,
 				BE1928202134EBD800D5B3F7 /* Resources */,
+				BEF83D70217589C600630CFE /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -13017,6 +13019,40 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "./Fabric.framework/run 5396d094a6603764683087a0e2248c3bf6260141 50f74ab0a57fa148308f6defcd78262470388367b36f17b5206e4bd5b77e22e2\n";
+		};
+		BEF83D6F2175897F00630CFE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\nbuildNumber=$(/usr/libexec/PlistBuddy-c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set:CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n\n";
+		};
+		BEF83D70217589C600630CFE /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\n\nbuildNumber=$(/usr/libexec/PlistBuddy-c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set:CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -1,4 +1,5 @@
 PODS:
+  - Appsee (2.4.5)
   - AWSCore (2.6.31)
   - AWSDynamoDB (2.6.31):
     - AWSCore (= 2.6.31)
@@ -6,23 +7,26 @@ PODS:
   - Masonry (1.1.0)
 
 DEPENDENCIES:
+  - Appsee
   - AWSDynamoDB
   - Google-Mobile-Ads-SDK
   - Masonry
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
+    - Appsee
     - AWSCore
     - AWSDynamoDB
     - Google-Mobile-Ads-SDK
     - Masonry
 
 SPEC CHECKSUMS:
+  Appsee: daf5819e0e45da6166a4752854583125cc9f3910
   AWSCore: c7abfb87ef802d1c4b5dd56db64ac8b4a7823ef0
   AWSDynamoDB: eb3eb7d49b14f1e523afa80373a8ab0fbde935a9
   Google-Mobile-Ads-SDK: a1cbce28c0c78ca1fb0b6c4f213485f55527c99f
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
 
-PODFILE CHECKSUM: fc3c10b69916c9e7fff05586ce62ed5c9a90cada
+PODFILE CHECKSUM: a2f3767adc1818614a144d42407462be4cf72e90
 
 COCOAPODS: 1.5.3

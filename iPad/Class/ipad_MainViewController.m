@@ -14,6 +14,8 @@
 #import "ipad_TranscactionQuickEditViewController.h"
 #import "PersonalnfoViewController.h"
 #import "ParseDBManager.h"
+#import <Appsee/Appsee.h>
+#import <Parse/Parse.h>
 
 @implementation ipad_MainViewController
 
@@ -24,6 +26,9 @@
 
     [self initPointandBtnAction];
     [self initFrameView];
+    
+    [Appsee setUserID:[PFUser currentUser].email];
+
     [self checkDateWithPurchase];
 
 }

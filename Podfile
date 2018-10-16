@@ -12,6 +12,7 @@ use_frameworks!
 pod 'AWSDynamoDB'
 pod 'Google-Mobile-Ads-SDK'
 pod 'Masonry'
+pod 'Appsee'
 
 end
 

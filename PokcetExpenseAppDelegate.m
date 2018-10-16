@@ -46,6 +46,7 @@
 #define PURCHASE_PRICE                          @"PurchasePirce"
 
 #import "ParseDBManager.h"
+#import <Appsee/Appsee.h>
 
 @implementation PokcetExpenseAppDelegate
 
@@ -132,6 +133,7 @@
 
     
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
+    [Appsee start];
 
     NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());
     application.applicationIconBadgeNumber = 0;

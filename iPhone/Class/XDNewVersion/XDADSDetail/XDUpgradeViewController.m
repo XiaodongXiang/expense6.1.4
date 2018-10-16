@@ -9,6 +9,7 @@
 #import "PokcetExpenseAppDelegate.h"
 #import "XDTermsOfUseViewController.h"
 #import "XDInAppPurchaseManager.h"
+#import <Appsee/Appsee.h>
 
 @interface XDUpgradeViewController ()<SKRequestDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -55,7 +56,7 @@
     self.yearView.frame = CGRectMake(width, 0, width, self.scrollview.height);
     self.lifetimeView.frame = CGRectMake(width * 2, 0, width, self.scrollview.height);
 
-   
+    [Appsee addEvent:@"Enter Shop"];
     
     self.monthView.centerX = SCREEN_WIDTH / 6;
     self.yearView.centerX = SCREEN_WIDTH / 2;
@@ -150,6 +151,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
   
+    
 }
 
 -(void)purchaseSuccessful{
@@ -197,6 +199,8 @@
                     //            self.monthBtn.enabled = NO;
                     self.yearBg.image = [UIImage imageNamed:@"year"];
                     self.premiumTitle.text = @"Monthly Premium";
+                    
+                    
 
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
@@ -266,7 +270,11 @@
 }
 
 - (IBAction)cancelClick:(id)sender {
+    
+    [Appsee addEvent:@"Leave Shop"];
+
     [self dismissViewControllerAnimated:YES completion:nil];
+    
 }
 
 - (IBAction)monthBtnClick:(id)sender {
@@ -277,6 +285,8 @@
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
 //    }
 //
+    [Appsee addEvent:@"Attemp to Buy - Monthly"];
+
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdMonth];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
     [appDelegate.epnc setFlurryEvent_WithIdentify:@"Purchase_month_subscribe"];
@@ -289,6 +299,8 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
 //    }
+    [Appsee addEvent:@"Attemp to Buy - Yearly"];
+
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdYear];
 
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -302,6 +314,8 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 //    }
+    [Appsee addEvent:@"Attemp to Buy - Lifetime"];
+
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
