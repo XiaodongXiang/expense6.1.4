@@ -170,7 +170,7 @@
     {
         case SKPaymentTransactionStatePurchasing:      //点击购买按钮添加支付队列，商品添加进列表
             //Update your UI to reflect the in-progress status, and wait to be called again.
-            NSLog(@"-----商品添加进列表 --------");
+            NSLog(@"%@-----商品添加进列表 --------",transaction.payment.productIdentifier);
             break;
         case SKPaymentTransactionStateDeferred:
             //Update your UI to reflect the deferred status, and wait to be called again.
@@ -249,6 +249,8 @@
 
 -(void)failedTransaction:(SKPaymentTransaction*)transaction{
     NSString* proID = transaction.payment.productIdentifier;
+    
+    NSLog(@"transaction.error == %@",transaction.error.localizedDescription);
     
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         if (transaction.error.code == SKErrorPaymentCancelled)

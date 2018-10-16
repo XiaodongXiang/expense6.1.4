@@ -108,6 +108,8 @@
                     
                     self.yearBg.image = [UIImage imageNamed:@"year"];
                     self.premiumTitle.text = @"Monthly Premium";
+                    
+                    
 
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
@@ -135,6 +137,8 @@
                     self.monthPriceLbl.textColor = [UIColor whiteColor];
                     self.yearTimeLbl.textColor = [UIColor whiteColor];
                     self.yearPriceLbl.textColor = [UIColor whiteColor];
+                    self.yearDetailLbl.textColor = [UIColor whiteColor];
+
                     self.premiumTitle.text = @"Lifetime Premium";
 
                 }
@@ -147,6 +151,7 @@
     }else{
         self.restoreBtn.hidden = NO;
         self.restoreBtnH.constant = 40;
+        self.premiumTitle.text = @"Upgrade to Premium";
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
@@ -201,7 +206,13 @@
                     self.premiumTitle.text = @"Monthly Premium";
                     
                     
-
+                    self.lifetimeDetailLbl.textColor = [UIColor whiteColor];
+                    self.lifetimePriceLbl.textColor = [UIColor whiteColor];
+                    self.liteTimeLbl.textColor = [UIColor whiteColor];
+                    self.yearTimeLbl.textColor = [UIColor whiteColor];
+                    self.yearPriceLbl.textColor = [UIColor whiteColor];
+                    self.yearDetailLbl.textColor = [UIColor whiteColor];
+                    
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.yearTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -211,6 +222,13 @@
                     //            self.yearBtn.enabled = NO;
                     self.monthBg.image = [UIImage imageNamed:@"month"];
                     self.premiumTitle.text = @"Yearly Premium";
+                    
+                    
+                    self.monthTimeLbl.textColor = [UIColor whiteColor];
+                    self.monthPriceLbl.textColor = [UIColor whiteColor];
+                    self.lifetimeDetailLbl.textColor = [UIColor whiteColor];
+                    self.lifetimePriceLbl.textColor = [UIColor whiteColor];
+                    self.liteTimeLbl.textColor = [UIColor whiteColor];
 
                 }else{
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
@@ -228,6 +246,7 @@
                     self.monthPriceLbl.textColor = [UIColor whiteColor];
                     self.yearTimeLbl.textColor = [UIColor whiteColor];
                     self.yearPriceLbl.textColor = [UIColor whiteColor];
+                    self.yearDetailLbl.textColor = [UIColor whiteColor];
                     self.premiumTitle.text = @"Lifetime Premium";
 
                 }
@@ -241,6 +260,8 @@
     }else{
         self.restoreBtn.hidden = NO;
         self.restoreBtnH.constant = 40;
+        self.premiumTitle.text = @"Upgrade to Premium";
+
     }
     
     [self.view layoutSubviews];
