@@ -45,6 +45,10 @@ unless agreed in writing otherwise between You and us.
 
 Copyright 2018 Google
 
+## GoogleAnalytics
+
+Copyright 2016 Google
+
 ## Masonry
 
 Copyright (c) 2011-2012 Masonry Team - https://github.com/Masonry

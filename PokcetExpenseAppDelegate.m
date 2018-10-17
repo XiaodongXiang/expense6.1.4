@@ -47,6 +47,8 @@
 
 #import "ParseDBManager.h"
 #import <Appsee/Appsee.h>
+#import <GoogleAnalytics/GAI.h>
+#import <GoogleAnalytics/GAIDictionaryBuilder.h>
 
 @implementation PokcetExpenseAppDelegate
 
@@ -134,6 +136,8 @@
     
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
     [Appsee start];
+    
+//    [[GAI sharedInstance] trackerWithTrackingId:@"YOUR_TRACKING_ID"];
 
     NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());
     application.applicationIconBadgeNumber = 0;

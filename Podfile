@@ -13,7 +13,7 @@ pod 'AWSDynamoDB'
 pod 'Google-Mobile-Ads-SDK'
 pod 'Masonry'
 pod 'Appsee'
-
+pod 'GoogleAnalytics'
 end
 
 
