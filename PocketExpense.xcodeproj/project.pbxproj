@@ -2563,6 +2563,7 @@
 		AEB229E11325D3FB00ABEDBE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB229E01325D3FB00ABEDBE /* CoreData.framework */; };
 		AEB22B281325D6D500ABEDBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB22B271325D6D500ABEDBE /* UIKit.framework */; };
 		AECD316814EA53D300C94271 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AECD316714EA53D200C94271 /* ImageIO.framework */; };
+		BE0625E421772F28006DE2F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE0625E321772F27006DE2F2 /* GoogleService-Info.plist */; };
 		BE0A4C8F2140D5A100C22049 /* XDTermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0A4C8D2140D5A100C22049 /* XDTermsOfUseViewController.m */; };
 		BE0A4C902140D5A100C22049 /* XDTermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE0A4C8E2140D5A100C22049 /* XDTermsOfUseViewController.xib */; };
 		BE0A4C922140D75F00C22049 /* TermsOfUse_expense.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE0A4C912140D75E00C22049 /* TermsOfUse_expense.rtf */; };
@@ -5731,6 +5732,7 @@
 		AEB22B271325D6D500ABEDBE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AECD316714EA53D200C94271 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		BE03A192211D6DEC00D976F1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		BE0625E321772F27006DE2F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BE0A4C8C2140D5A100C22049 /* XDTermsOfUseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDTermsOfUseViewController.h; sourceTree = "<group>"; };
 		BE0A4C8D2140D5A100C22049 /* XDTermsOfUseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDTermsOfUseViewController.m; sourceTree = "<group>"; };
 		BE0A4C8E2140D5A100C22049 /* XDTermsOfUseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDTermsOfUseViewController.xib; sourceTree = "<group>"; };
@@ -10110,6 +10112,7 @@
 				A2561AB219D3BDDF00A5A950 /* PocketExpense_Prefix.pch */,
 				A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */,
 				A20988F0191A2A2A0087EA15 /* PokcetExpense.xcdatamodeld */,
+				BE0625E321772F27006DE2F2 /* GoogleService-Info.plist */,
 				A25619BD19D3BBD700A5A950 /* Appirater.h */,
 				A25619BE19D3BBD700A5A950 /* Appirater.m */,
 				A25619BF19D3BBD700A5A950 /* customer net&file */,
@@ -11803,6 +11806,7 @@
 				A256109119D3BB5C00A5A950 /* bar2_267_40@2x.png in Resources */,
 				3ADBA1031BF9D5F700512D2C /* income_color@2x.png in Resources */,
 				A25611E019D3BB5C00A5A950 /* icon_mail_30_30.png in Resources */,
+				BE0625E421772F28006DE2F2 /* GoogleService-Info.plist in Resources */,
 				A2561B6419D3BF6900A5A950 /* ipad_pop_154_268@2x.png in Resources */,
 				A22669361A289BB5005FC18F /* negative@3x.png in Resources */,
 				A2561B4B19D3BF6900A5A950 /* ipad_arrow1_left_30_30.png in Resources */,
@@ -12991,7 +12995,9 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -12999,7 +13005,9 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

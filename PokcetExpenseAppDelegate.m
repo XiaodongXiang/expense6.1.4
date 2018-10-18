@@ -50,6 +50,8 @@
 #import <GoogleAnalytics/GAI.h>
 #import <GoogleAnalytics/GAIDictionaryBuilder.h>
 
+@import Firebase;
+
 @implementation PokcetExpenseAppDelegate
 
 @synthesize window;
@@ -233,6 +235,8 @@
         self.settings.others16 = @"1";
         [self.managedObjectContext save:&error];
     }
+    
+    [FIRApp configure];
     
     //获取网络时间和本地时间差
     [NSDate internetServerDate:^(NSDate * internetDate) {

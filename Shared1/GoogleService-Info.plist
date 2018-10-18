@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>345043253517-pf577btk4v01u8uesfbvu4e1k27800cb.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.345043253517-pf577btk4v01u8uesfbvu4e1k27800cb</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB_2w-OE73G7QcPBSYbjbmooJEfc8EjUe0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>345043253517</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.btgs.pocketexpenselite</string>
+	<key>PROJECT_ID</key>
+	<string>expense-17f4e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>expense-17f4e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:345043253517:ios:bb66939fab4fb5ee</string>
+	<key>DATABASE_URL</key>
+	<string>https://expense-17f4e.firebaseio.com</string>
+	<key>ADMOB_APP_ID</key>
+	<string>ca-app-pub-2853676859073957~7620111028</string>
+</dict>
+</plist>

@@ -10,7 +10,7 @@
 #import "XDTermsOfUseViewController.h"
 #import "XDInAppPurchaseManager.h"
 #import <Appsee/Appsee.h>
-
+@import Firebase;
 @interface XDUpgradeViewController ()<SKRequestDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
 @property (strong, nonatomic) IBOutlet UIView *monthView;
@@ -307,7 +307,8 @@
 //    }
 //
     [Appsee addEvent:@"Attemp to Buy - Monthly"];
-
+    [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
+    
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdMonth];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
     [appDelegate.epnc setFlurryEvent_WithIdentify:@"Purchase_month_subscribe"];
@@ -321,6 +322,7 @@
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
 //    }
     [Appsee addEvent:@"Attemp to Buy - Yearly"];
+    [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
 
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdYear];
 
@@ -336,6 +338,7 @@
 //        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 //    }
     [Appsee addEvent:@"Attemp to Buy - Lifetime"];
+    [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
 
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 

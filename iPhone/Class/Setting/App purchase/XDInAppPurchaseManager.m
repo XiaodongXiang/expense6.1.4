@@ -10,6 +10,7 @@
 #import "PokcetExpenseAppDelegate.h"
 #import <Parse/Parse.h>
 #import <Appsee/Appsee.h>
+@import Firebase;
 #define LITE_UNLOCK_FLAG    @"isProUpgradePurchased"
 
 @interface XDInAppPurchaseManager ()<SKProductsRequestDelegate, SKPaymentTransactionObserver>
@@ -223,13 +224,19 @@
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdMonth originalProID:originalProID];
         [Appsee addEvent:@"Succeed - Monthly"];
+        [FIRAnalytics logEventWithName:@"succeed-Monthly" parameters:nil];
+
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
          [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdYear originalProID:originalProID];
         [Appsee addEvent:@"Succeed - Yearly"];
+        [FIRAnalytics logEventWithName:@"succeed-Yearly" parameters:nil];
+
 
     }else{
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
         [Appsee addEvent:@"Succeed - Lifetime"];
+        [FIRAnalytics logEventWithName:@"succeed-Lifetime" parameters:nil];
+
 
     }
     
@@ -256,26 +263,38 @@
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
             [Appsee addEvent:@"Cancel - Monthly"];
+            [FIRAnalytics logEventWithName:@"cancel_monthly" parameters:nil];
+
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
             [Appsee addEvent:@"Payment Invalid - Monthly"];
+            [FIRAnalytics logEventWithName:@"payment_invalid_monthly" parameters:nil];
+
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
             [Appsee addEvent:@"Payment Not Allowed - Monthly"];
+            [FIRAnalytics logEventWithName:@"payment_not_allowed_monthly" parameters:nil];
+
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
             [Appsee addEvent:@"Product Not Available - Monthly"];
+            [FIRAnalytics logEventWithName:@"product_not_available_monthly" parameters:nil];
+
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
             [Appsee addEvent:@"Service Permission Denied - Monthly"];
+            [FIRAnalytics logEventWithName:@"service_permission_denied_monthly" parameters:nil];
+
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
             [Appsee addEvent:@"Client Invalid - Monthly"];
+            [FIRAnalytics logEventWithName:@"client_invalid_monthly" parameters:nil];
+
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
             
         }else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed){
@@ -288,26 +307,34 @@
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
             [Appsee addEvent:@"Cancel - Yearly"];
+            [FIRAnalytics logEventWithName:@"cancel_yearly" parameters:nil];
+
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
             [Appsee addEvent:@"Payment Invalid - Yearly"];
+            [FIRAnalytics logEventWithName:@"payment_invalid_yearly" parameters:nil];
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
             [Appsee addEvent:@"Payment Not Allowed - Yearly"];
+            [FIRAnalytics logEventWithName:@"payment_not_allowed_yearly" parameters:nil];
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
             [Appsee addEvent:@"Product Not Available - Yearly"];
+            [FIRAnalytics logEventWithName:@"product_not_available_yearly" parameters:nil];
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
             [Appsee addEvent:@"Service Permission Denied - Yearly"];
+            [FIRAnalytics logEventWithName:@"service_permission_denied_yearly" parameters:nil];
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
             [Appsee addEvent:@"Client Invalid - Yearly"];
+            [FIRAnalytics logEventWithName:@"client_invalid_yearly" parameters:nil];
+            
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
             
         }else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed){
@@ -320,26 +347,32 @@
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
             [Appsee addEvent:@"Cancel - Lifetime"];
+            [FIRAnalytics logEventWithName:@"cancel_lifetime" parameters:nil];
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
             [Appsee addEvent:@"Payment Invalid - Lifetime"];
+            [FIRAnalytics logEventWithName:@"payment_invalid_lifetime" parameters:nil];
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
             [Appsee addEvent:@"Payment Not Allowed - Lifetime"];
+            [FIRAnalytics logEventWithName:@"payment_not_allowed_lifetime" parameters:nil];
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
             [Appsee addEvent:@"Product Not Available - Lifetime"];
+            [FIRAnalytics logEventWithName:@"product_not_available_lifetime" parameters:nil];
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
             [Appsee addEvent:@"Service Permission Denied - Lifetime"];
+            [FIRAnalytics logEventWithName:@"service_permission_denied_lifetime" parameters:nil];
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
             [Appsee addEvent:@"Client Invalid - Lifetime"];
+            [FIRAnalytics logEventWithName:@"client_invalid_lifetime" parameters:nil];
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
             
         }else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed){

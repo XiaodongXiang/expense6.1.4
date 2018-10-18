@@ -14,6 +14,7 @@ pod 'Google-Mobile-Ads-SDK'
 pod 'Masonry'
 pod 'Appsee'
 pod 'GoogleAnalytics'
+pod 'Firebase/Core'
 end
 
 

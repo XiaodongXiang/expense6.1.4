@@ -3,13 +3,63 @@ PODS:
   - AWSCore (2.6.31)
   - AWSDynamoDB (2.6.31):
     - AWSCore (= 2.6.31)
+  - Firebase/Core (5.10.0):
+    - Firebase/CoreOnly
+    - FirebaseAnalytics (= 5.2.0)
+  - Firebase/CoreOnly (5.10.0):
+    - FirebaseCore (= 5.1.5)
+  - FirebaseAnalytics (5.2.0):
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.2)
+    - GoogleAppMeasurement (~> 5.2)
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - FirebaseCore (5.1.5):
+    - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseInstanceID (3.2.2):
+    - FirebaseCore (~> 5.1)
+    - GoogleUtilities/Environment (~> 5.3)
+    - GoogleUtilities/UserDefaults (~> 5.3)
   - Google-Mobile-Ads-SDK (7.34.0)
   - GoogleAnalytics (3.17.0)
+  - GoogleAppMeasurement (5.2.0):
+    - GoogleUtilities/AppDelegateSwizzler (~> 5.2)
+    - GoogleUtilities/MethodSwizzler (~> 5.2)
+    - GoogleUtilities/Network (~> 5.2)
+    - "GoogleUtilities/NSData+zlib (~> 5.2)"
+    - nanopb (~> 0.3)
+  - GoogleUtilities/AppDelegateSwizzler (5.3.2):
+    - GoogleUtilities/Environment
+    - GoogleUtilities/Logger
+    - GoogleUtilities/Network
+  - GoogleUtilities/Environment (5.3.2)
+  - GoogleUtilities/Logger (5.3.2):
+    - GoogleUtilities/Environment
+  - GoogleUtilities/MethodSwizzler (5.3.2):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/Network (5.3.2):
+    - GoogleUtilities/Logger
+    - "GoogleUtilities/NSData+zlib"
+    - GoogleUtilities/Reachability
+  - "GoogleUtilities/NSData+zlib (5.3.2)"
+  - GoogleUtilities/Reachability (5.3.2):
+    - GoogleUtilities/Logger
+  - GoogleUtilities/UserDefaults (5.3.2):
+    - GoogleUtilities/Logger
   - Masonry (1.1.0)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
 
 DEPENDENCIES:
   - Appsee
   - AWSDynamoDB
+  - Firebase/Core
   - Google-Mobile-Ads-SDK
   - GoogleAnalytics
   - Masonry
@@ -19,18 +69,32 @@ SPEC REPOS:
     - Appsee
     - AWSCore
     - AWSDynamoDB
+    - Firebase
+    - FirebaseAnalytics
+    - FirebaseCore
+    - FirebaseInstanceID
     - Google-Mobile-Ads-SDK
     - GoogleAnalytics
+    - GoogleAppMeasurement
+    - GoogleUtilities
     - Masonry
+    - nanopb
 
 SPEC CHECKSUMS:
   Appsee: daf5819e0e45da6166a4752854583125cc9f3910
   AWSCore: c7abfb87ef802d1c4b5dd56db64ac8b4a7823ef0
   AWSDynamoDB: eb3eb7d49b14f1e523afa80373a8ab0fbde935a9
+  Firebase: 6691d47562a780c26281ce8464518faafc90c610
+  FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
+  FirebaseCore: c6079de64c1a87000e52e9b408dddcadc901177f
+  FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
   Google-Mobile-Ads-SDK: a1cbce28c0c78ca1fb0b6c4f213485f55527c99f
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
+  GoogleAppMeasurement: 2b3a023a61239c8d002e6e4fcf4abce8eddce0e0
+  GoogleUtilities: 82f04aeff8426309dbdbc75f6c8accd1e584a5da
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: 5d923cb24150de953982a28d7622a7cfeb96f3a9
+PODFILE CHECKSUM: 7d25b1d2729457175f2ea47e9feafde4f328e2fc
 
 COCOAPODS: 1.5.3
