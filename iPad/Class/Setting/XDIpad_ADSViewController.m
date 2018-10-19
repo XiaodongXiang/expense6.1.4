@@ -64,8 +64,9 @@
     [self.scrollView addSubview:self.yearView];
     [self.scrollView addSubview:self.lifetimeView];
     
-    [Appsee addEvent:@"Enter Shop"];
-    
+//    [Appsee addEvent:@"Enter Shop"];
+    [FIRAnalytics logEventWithName:@"enter_shop" parameters:nil];
+
     [self preVersionPrice];
     //添加观察通知，当获取到价格的时候就将价格显示出来
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
@@ -140,11 +141,19 @@
 }
 
 - (IBAction)cancelClick:(id)sender {
-    
-    [Appsee addEvent:@"Leave Shop"];
+
+//    [Appsee addEvent:@"Leave Shop"];
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+    [FIRAnalytics logEventWithName:@"leave_shop" parameters:nil];
+    
+}
+
 //获取保存在本地的商品价格，显示
 -(void)preVersionPrice
 {
@@ -174,7 +183,7 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
 //    }
-    [Appsee addEvent:@"Attemp to Buy - Monthly"];
+//    [Appsee addEvent:@"Attemp to Buy - Monthly"];
     [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
 
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdMonth];
@@ -189,7 +198,7 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
 //    }
-    [Appsee addEvent:@"Attemp to Buy - Yearly"];
+//    [Appsee addEvent:@"Attemp to Buy - Yearly"];
     [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
 
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdYear];
@@ -204,7 +213,7 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 //    }
-    [Appsee addEvent:@"Attemp to Buy - Lifetime"];
+//    [Appsee addEvent:@"Attemp to Buy - Lifetime"];
     [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
 
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:kInAppPurchaseProductIdLifetime];

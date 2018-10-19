@@ -223,18 +223,32 @@
     
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdMonth originalProID:originalProID];
+#ifdef DEBUG
         [Appsee addEvent:@"Succeed - Monthly"];
+#else
+        
+#endif
         [FIRAnalytics logEventWithName:@"succeed_monthly" parameters:nil];
 
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
          [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdYear originalProID:originalProID];
+#ifdef DEBUG
         [Appsee addEvent:@"Succeed - Yearly"];
+
+#else
+        
+#endif
         [FIRAnalytics logEventWithName:@"succeed_yearly" parameters:nil];
 
 
     }else{
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+#ifdef DEBUG
+        
         [Appsee addEvent:@"Succeed - Lifetime"];
+#else
+        
+#endif
         [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
 
 
@@ -262,37 +276,37 @@
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
-            [Appsee addEvent:@"Cancel - Monthly"];
+//            [Appsee addEvent:@"Cancel - Monthly"];
             [FIRAnalytics logEventWithName:@"cancel_monthly" parameters:nil];
 
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
-            [Appsee addEvent:@"Payment Invalid - Monthly"];
+//            [Appsee addEvent:@"Payment Invalid - Monthly"];
             [FIRAnalytics logEventWithName:@"payment_invalid_monthly" parameters:nil];
 
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
-            [Appsee addEvent:@"Payment Not Allowed - Monthly"];
+//            [Appsee addEvent:@"Payment Not Allowed - Monthly"];
             [FIRAnalytics logEventWithName:@"payment_not_allowed_monthly" parameters:nil];
 
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
-            [Appsee addEvent:@"Product Not Available - Monthly"];
+//            [Appsee addEvent:@"Product Not Available - Monthly"];
             [FIRAnalytics logEventWithName:@"product_not_available_monthly" parameters:nil];
 
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
-            [Appsee addEvent:@"Service Permission Denied - Monthly"];
+//            [Appsee addEvent:@"Service Permission Denied - Monthly"];
             [FIRAnalytics logEventWithName:@"service_permission_denied_monthly" parameters:nil];
 
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
-            [Appsee addEvent:@"Client Invalid - Monthly"];
+//            [Appsee addEvent:@"Client Invalid - Monthly"];
             [FIRAnalytics logEventWithName:@"client_invalid_monthly" parameters:nil];
 
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
@@ -306,33 +320,33 @@
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
-            [Appsee addEvent:@"Cancel - Yearly"];
+//            [Appsee addEvent:@"Cancel - Yearly"];
             [FIRAnalytics logEventWithName:@"cancel_yearly" parameters:nil];
 
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
-            [Appsee addEvent:@"Payment Invalid - Yearly"];
+//            [Appsee addEvent:@"Payment Invalid - Yearly"];
             [FIRAnalytics logEventWithName:@"payment_invalid_yearly" parameters:nil];
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
-            [Appsee addEvent:@"Payment Not Allowed - Yearly"];
+//            [Appsee addEvent:@"Payment Not Allowed - Yearly"];
             [FIRAnalytics logEventWithName:@"payment_not_allowed_yearly" parameters:nil];
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
-            [Appsee addEvent:@"Product Not Available - Yearly"];
+//            [Appsee addEvent:@"Product Not Available - Yearly"];
             [FIRAnalytics logEventWithName:@"product_not_available_yearly" parameters:nil];
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
-            [Appsee addEvent:@"Service Permission Denied - Yearly"];
+//            [Appsee addEvent:@"Service Permission Denied - Yearly"];
             [FIRAnalytics logEventWithName:@"service_permission_denied_yearly" parameters:nil];
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
-            [Appsee addEvent:@"Client Invalid - Yearly"];
+//            [Appsee addEvent:@"Client Invalid - Yearly"];
             [FIRAnalytics logEventWithName:@"client_invalid_yearly" parameters:nil];
             
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
@@ -346,32 +360,32 @@
     }else{
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
-            [Appsee addEvent:@"Cancel - Lifetime"];
+//            [Appsee addEvent:@"Cancel - Lifetime"];
             [FIRAnalytics logEventWithName:@"cancel_lifetime" parameters:nil];
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
-            [Appsee addEvent:@"Payment Invalid - Lifetime"];
+//            [Appsee addEvent:@"Payment Invalid - Lifetime"];
             [FIRAnalytics logEventWithName:@"payment_invalid_lifetime" parameters:nil];
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
-            [Appsee addEvent:@"Payment Not Allowed - Lifetime"];
+//            [Appsee addEvent:@"Payment Not Allowed - Lifetime"];
             [FIRAnalytics logEventWithName:@"payment_not_allowed_lifetime" parameters:nil];
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
-            [Appsee addEvent:@"Product Not Available - Lifetime"];
+//            [Appsee addEvent:@"Product Not Available - Lifetime"];
             [FIRAnalytics logEventWithName:@"product_not_available_lifetime" parameters:nil];
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
-            [Appsee addEvent:@"Service Permission Denied - Lifetime"];
+//            [Appsee addEvent:@"Service Permission Denied - Lifetime"];
             [FIRAnalytics logEventWithName:@"service_permission_denied_lifetime" parameters:nil];
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
-            [Appsee addEvent:@"Client Invalid - Lifetime"];
+//            [Appsee addEvent:@"Client Invalid - Lifetime"];
             [FIRAnalytics logEventWithName:@"client_invalid_lifetime" parameters:nil];
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
             
