@@ -22,6 +22,7 @@
 #import <Parse/Parse.h>
 #import <Appsee/Appsee.h>
 #import "XDAppriater.h"
+@import Firebase;
 
 @interface XDOverViewViewController ()<XDCalendarViewDelegate,XDTransicationTableViewDelegate,XDAddTransactionViewDelegate,SKRequestDelegate,ADEngineControllerBannerDelegate>
 
@@ -263,7 +264,8 @@
     [self getCurrentVersion];
     [self checkDateWithPurchase];
 
-    
+    [FIRAnalytics setScreenName:@"calendr_main_view_iphone" screenClass:@"XDOverViewViewController"];
+
 //    [self validateReceipt];
 }
 

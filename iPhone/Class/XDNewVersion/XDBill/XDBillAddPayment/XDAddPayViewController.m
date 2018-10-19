@@ -18,6 +18,7 @@
 #import "ParseDBManager.h"
 #import "numberKeyboardView.h"
 #import "AppDelegate_iPhone.h"
+@import Firebase;
 @interface XDAddPayViewController ()
 {
     NSMutableArray* _accountMuArr;
@@ -146,6 +147,8 @@
     if (!appDelegate.isPurchased) {
         [self.interstitial nowShowInterstitialAdWithTarget:self];
     }
+    [FIRAnalytics setScreenName:@"bill_add_payment_view_iphone" screenClass:@"XDAddPayViewController"];
+
 }
 
 - (IBAction)cancelClick:(id)sender {

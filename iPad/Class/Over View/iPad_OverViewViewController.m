@@ -15,7 +15,7 @@
 #import "BrokenLineObject.h"
 #import "AppDelegate_iPad.h"
 #import "ipad_ADSDeatailViewController.h"
-
+@import     Firebase;
 #define TRANSACTIONHAS5Count @"transactionOver5Count"
 
 
@@ -53,6 +53,9 @@
     [super viewDidLoad];
     [self initPoint];
     [self hideorShowAds];
+    
+    [FIRAnalytics setScreenName:@"calendar_view_ipad" screenClass:@"iPad_OverViewViewController"];
+
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -16,6 +16,7 @@
 #import "ParseDBManager.h"
 #import <Appsee/Appsee.h>
 #import <Parse/Parse.h>
+@import Firebase;
 
 @implementation ipad_MainViewController
 
@@ -30,6 +31,8 @@
     [Appsee setUserID:[PFUser currentUser].email];
 
     [self checkDateWithPurchase];
+
+    [FIRAnalytics setScreenName:@"main_view_ipad" screenClass:@"ipad_MainViewController"];
 
 }
 

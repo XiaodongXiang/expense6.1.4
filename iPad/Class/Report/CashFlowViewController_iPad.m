@@ -11,7 +11,7 @@
 #import "BrokenLineObject.h"
 #import "CashflowTableViewCell_iPad.h"
 #import "UUChart.h"
-
+@import Firebase;
 
 @interface CashFlowViewController_iPad ()<UITableViewDataSource,UITableViewDelegate,UUChartDataSource,ADEngineControllerBannerDelegate>
 {
@@ -91,6 +91,8 @@
     [self createTableView];
     [self createLineChart];
     [self createMenu];
+    
+    [FIRAnalytics setScreenName:@"cashflow_main_view_ipad" screenClass:@"CashFlowViewController_iPad"];
 }
 #pragma mark - 创建控件
 -(void)createTimeLabel

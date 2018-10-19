@@ -14,7 +14,7 @@
 #import "ReportBrokenLineView.h"
 #import "ipad_DateRangeTransactionViewController.h"
 #import "TranDataRect.h"
-
+@import Firebase;
 @implementation BarChartData
 @synthesize totalAmount;
 @synthesize  tranArray;
@@ -57,6 +57,7 @@
     [super viewDidLoad];
     //初始化指针，以及需要的数组。
     [self initPoint];
+    [FIRAnalytics setScreenName:@"report_cashflow_main_view_ipad" screenClass:@"ipad_ReportCashFlowViewController"];
 }
 
 -(void)initPoint

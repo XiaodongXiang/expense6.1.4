@@ -13,6 +13,7 @@
 #import "BillsViewController.h"
 #import "XDAddPayViewController.h"
 #import "PokcetExpenseAppDelegate.h"
+@import Firebase;
 @interface XDBillMainViewController ()<XDAddBillViewDelegate,BillsViewDelegate,XDBillCalendarViewDelegate,ADEngineControllerBannerDelegate>
 @property(nonatomic, strong)UIScrollView *scrollView;
 
@@ -112,7 +113,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [FIRAnalytics setScreenName:@"bill_main_view_iphone" screenClass:@"XDBillMainViewController"];
+
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 //    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     self.titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 30)];

@@ -17,6 +17,7 @@
 #import <Parse/Parse.h>
 #import "ParseDBManager.h"
 
+@import Firebase;
 @interface XDBillCalendarViewController ()<UITableViewDelegate,UITableViewDataSource,XDBillCalViewDelegate,SWTableViewCellDelegate,UIActionSheetDelegate>
 {
     NSMutableArray* _totalMuArray;
@@ -45,6 +46,7 @@
     [self returnSelectedDate:[[NSDate date]initDate]];
     _selectDate = [[NSDate date]initDate];
     
+    [FIRAnalytics setScreenName:@"bill_calendar_view_iphone" screenClass:@"XDBillCalendarViewController"];
 
 }
 

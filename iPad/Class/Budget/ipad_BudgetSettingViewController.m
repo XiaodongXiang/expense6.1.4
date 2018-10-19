@@ -12,7 +12,7 @@
 
 #import "PokcetExpenseAppDelegate.h"
 #import "EPNormalClass.h"
-
+@import Firebase;
 @interface ipad_BudgetSettingViewController ()<ipad_BudgetSettingViewDelegate>
 
 @property(nonatomic, strong)ADEngineController* interstitial;
@@ -26,6 +26,7 @@
     
     [self initNavStyle];
     [self initPoint];
+    [FIRAnalytics setScreenName:@"budget_setting_view_ipad" screenClass:@"ipad_BudgetSettingViewController"];
 }
 
 -(void)viewWillAppear:(BOOL)animated

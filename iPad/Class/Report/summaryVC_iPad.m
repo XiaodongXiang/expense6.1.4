@@ -15,7 +15,7 @@
 #import "EP_BillItem.h"
 #import "Payee.h"
 #import "SummaryTableViewCell_iPad.h"
-
+@import Firebase;
 @interface summaryVC_iPad ()<UITableViewDataSource,UITableViewDelegate,ADEngineControllerBannerDelegate>
 {
     BOOL hasBudget;
@@ -123,6 +123,8 @@
     [self createTimeLabel];
     [self createMenu];
     self.view.backgroundColor=[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
+    
+    [FIRAnalytics setScreenName:@"summary_main_view_ipad" screenClass:@"summaryVC_iPad"];
 }
 #pragma mark - 创建控件
 -(void)createTableViews

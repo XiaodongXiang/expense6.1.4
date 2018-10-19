@@ -13,6 +13,7 @@
 #import "firstView_iPad.h"
 #import "thirdView_iPad.h"
 #import "secondView_iPad.h"
+@import  Firebase;
 
 @interface SignViewController_iPad ()<UIScrollViewDelegate>
 {
@@ -36,6 +37,9 @@
     self.view.backgroundColor=[UIColor whiteColor];
     [self createScrollView];
     [self createSubviews];
+    
+    [FIRAnalytics setScreenName:@"sign_in_view_ipad" screenClass:@"SignViewController_iPad"];
+
 }
 -(void)createScrollView
 {

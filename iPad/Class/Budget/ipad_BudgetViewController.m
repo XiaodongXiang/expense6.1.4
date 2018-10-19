@@ -26,7 +26,7 @@
 #import "ipad_TransferViewController_NS.h"
 #import "budgetBar_iPad.h"
 
-
+@import Firebase;
 
 #define BUDGETBAR_WITH  550
 #define SPENTIMAGE_LEFTX    48
@@ -75,6 +75,7 @@
     [self initPoint];
     [self reFlashTableViewData];
     
+    [FIRAnalytics setScreenName:@"budget_main_view_ipad" screenClass:@"ipad_BudgetViewController"];
 }
 
 -(void)viewWillAppear:(BOOL)animated

@@ -9,7 +9,7 @@
 #import "NetWorthViewController_iPad.h"
 #import "PokcetExpenseAppDelegate.h"
 #import "NetWorthTableViewCell_iPad.h"
-
+@import Firebase;
 
 @interface NetWorthViewController_iPad ()<UITableViewDataSource,UITableViewDelegate,ADEngineControllerBannerDelegate>
 {
@@ -85,6 +85,7 @@
     [self createTableView];
     [self createMenu];
     [self createChart];
+    [FIRAnalytics setScreenName:@"networth_main_view_ipad" screenClass:@"NetWorthViewController_iPad"];
     
     self.view.backgroundColor=[UIColor colorWithRed:240/255.0 green:240/255.0 blue:240/255.0 alpha:1];
 }

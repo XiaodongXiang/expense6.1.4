@@ -19,6 +19,8 @@
 #import <Parse/Parse.h>
 #import "ParseDBManager.h"
 
+@import  Firebase;
+
 @implementation ipad_CategoryEditViewController
 
 #pragma mark -view cycle life
@@ -35,6 +37,8 @@
     [self initNavStyle];
     [self initIconBtnArrayandaddBtn];
     [self setControlContex];
+    
+    [FIRAnalytics setScreenName:@"category_edit_view_ipad" screenClass:@"ipad_CategoryEditViewController"];
 
 }
 -(void)viewWillAppear:(BOOL)animated{

@@ -19,6 +19,7 @@
 #import "CustomSearchCell.h"
 #import "XDAddTransactionViewController.h"
 #import "Category.h"
+@import Firebase;
 @interface AccountSearchViewController ()<XDAddTransactionViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *backView;
@@ -61,7 +62,7 @@
         self.topLeading.constant = 44;
     }
     
-    
+    [FIRAnalytics setScreenName:@"search_view_iphone" screenClass:@"AccountSearchViewController"];
     
     [self initPoint];
     [self initNarBarStyle];

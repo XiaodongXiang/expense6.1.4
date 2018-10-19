@@ -34,7 +34,7 @@
 #import <Parse/Parse.h>
 #import "Custom_iPad_BillsCell.h"
 
-
+@import Firebase;
 @interface ipad_BillsViewController ()<ADEngineControllerBannerDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *adBannerView;
@@ -116,6 +116,7 @@
     [self initPoint];
     [self initKalView];
     
+    [FIRAnalytics setScreenName:@"bill_main_view_ipad" screenClass:@"ipad_BillsViewController"];
     //这一步可以省略
 //    [self reFlashBillModuleViewData];
 }

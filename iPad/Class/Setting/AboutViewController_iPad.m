@@ -11,7 +11,7 @@
 #import "policyViewController.h"
 #import "iPad_historyViewController.h"
 #import "AppDelegate_iPad.h"
-
+@import Firebase;
 @interface AboutViewController_iPad ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
@@ -23,6 +23,7 @@
     [self tableviewSet];
     [self initPoint];
     [self.navigationController.navigationBar setTintColor:[UIColor colorWithRed:99/255.0 green:203/255.0 blue:255/255.0 alpha:1]];
+    [FIRAnalytics setScreenName:@"about_view_ipad" screenClass:@"AboutViewController_iPad"];
 
 }
 -(void)initPoint

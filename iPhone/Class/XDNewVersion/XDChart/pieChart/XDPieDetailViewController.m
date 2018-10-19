@@ -11,6 +11,7 @@
 #import "XDPieSelectCategoryViewController.h"
 #import "PokcetExpenseAppDelegate.h"
 
+@import Firebase;
 @interface XDPieDetailViewController ()<XDPiePageViewDelegate,ADEngineControllerBannerDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *dateScrollView;
 @property (weak, nonatomic) IBOutlet UIScrollView *pieScrollView;
@@ -121,6 +122,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [FIRAnalytics setScreenName:@"chart_detail_view_iphone" screenClass:@"XDPieDetailViewController"];
 
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:FontSFUITextMedium size:17],NSForegroundColorAttributeName:RGBColor(85, 85, 85)}];
 

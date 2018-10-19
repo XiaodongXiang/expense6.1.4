@@ -37,6 +37,7 @@
 #import "ParseDBManager.h"
 
 #import "TestViewController.h"
+@import Firebase;
 //#import "ipad_SearchRelatedViewController.h"
 
 #define ANIMATIONCURVE 0.25
@@ -104,7 +105,7 @@
         else
             firsttoBeHere = 1;
     }
-    
+    [FIRAnalytics setScreenName:@"add_transaction_main_view_ipad" screenClass:@"ipad_TranscactionQuickEditViewController"];
 }
 
 

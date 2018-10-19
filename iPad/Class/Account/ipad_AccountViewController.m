@@ -33,6 +33,7 @@
 #import "BHI_Utility.h"
 
 #import "Custom_iPad_Account_TransactionCell.h"
+@import  Firebase;
 
 #pragma mark Custom Class Define - CategoryCount
 
@@ -91,6 +92,9 @@
     [super viewDidLoad];
     [self initPoint];
     [self initDateRangeMemoryDefine];
+    
+    [FIRAnalytics setScreenName:@"account_main_view_ipad" screenClass:@"ipad_AccountViewController"];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

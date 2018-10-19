@@ -30,7 +30,7 @@
 #import "TransactionCategoryViewController.h"
 #import "XDAddAccountViewController.h"
 #import "PokcetExpenseAppDelegate.h"
-
+@import  Firebase;
 @interface XDAddTransactionViewController ()<XDTransactionAccountViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,SelectImageViewDelegate,UIPickerViewDelegate,XDTransactionCatgroyViewDelegate,XDCategorySplitTableViewDelegate,XDTransactionPayeeCollectionViewDelegate,XDRepeatTableViewDelegate,XDTranscationNoteViewDelegate,SettingTransactionCategoryViewDelegate,XDAddAccountViewDelegate,UITextFieldDelegate>
 {
     BOOL _todayShow;
@@ -397,8 +397,10 @@
 //        self.datePickerLabel.text = [self returnInitDate:calSelectedDate];
 //    }
     self.tableView.separatorColor = RGBColor(226, 226, 226);
-    
+    [FIRAnalytics setScreenName:@"add_transaction_view_iphone" screenClass:@"XDAddTransactionViewController"];
+
 }
+
 
 
 -(void)setupTransferBtn{

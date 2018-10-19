@@ -10,6 +10,8 @@
 #import "CategoryTableViewCell_iPad.h"
 #import "CustomDateRangeViewController.h"
 
+@import Firebase;
+
 @interface CategoryViewController_iPad ()<UITableViewDataSource,UITableViewDelegate,PiChartViewDelegate,ADEngineControllerBannerDelegate>
 {
     double totalCategoryExpenseAmount;
@@ -98,6 +100,8 @@
     [self createMenu];
 
     formerTag = -1;
+    
+    [FIRAnalytics setScreenName:@"category_main_view_ipad" screenClass:@"CategoryViewController_iPad"];
 }
 - (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);

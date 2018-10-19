@@ -9,6 +9,8 @@
 #import "PokcetExpenseAppDelegate.h"
 #import "XDInAppPurchaseManager.h"
 #import <Appsee/Appsee.h>
+@import Firebase;
+@import Firebase;
 @interface XDIpad_ADSViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -130,6 +132,8 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelClick:) name:@"purchaseSuccessful" object:nil];
+    
+    [FIRAnalytics setScreenName:@"purchase_view_ipad" screenClass:@"XDIpad_ADSViewController"];
 }
 - (IBAction)restoreBtnClick:(id)sender {
     [[XDInAppPurchaseManager shareManager] restoreUpgrade];
@@ -171,6 +175,7 @@
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
 //    }
     [Appsee addEvent:@"Attemp to Buy - Monthly"];
+    [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
 
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdMonth];
     
@@ -185,6 +190,7 @@
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
 //    }
     [Appsee addEvent:@"Attemp to Buy - Yearly"];
+    [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
 
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdYear];
 
@@ -199,6 +205,7 @@
 //        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 //    }
     [Appsee addEvent:@"Attemp to Buy - Lifetime"];
+    [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
 
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:kInAppPurchaseProductIdLifetime];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];

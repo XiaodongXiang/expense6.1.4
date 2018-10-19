@@ -7,6 +7,8 @@
 
 #import "XDTermsOfUseViewController.h"
 
+@import Firebase;
+
 @interface XDTermsOfUseViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *textView;
 
@@ -24,7 +26,8 @@
     NSAttributedString * attributeStr = [[NSAttributedString alloc] initWithURL:txtUrl options:@{NSDocumentTypeDocumentAttribute:NSRTFTextDocumentType} documentAttributes:nil error:nil];
     
     self.textView.attributedText = attributeStr;
-    
+    [FIRAnalytics setScreenName:@"terms_of_use_view_iphone" screenClass:@"XDTermsOfUseViewController"];
+
     
 }
 - (IBAction)cancelClick:(id)sender {

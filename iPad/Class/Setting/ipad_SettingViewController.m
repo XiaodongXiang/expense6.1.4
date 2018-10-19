@@ -32,7 +32,7 @@
 #import "PasscodeStyle_iPhoneViewController_iPad.h"
 #import "AboutViewController_iPad.h"
 #import "AppDelegate_iPhone.h"
-
+@import Firebase;
 @interface ipad_SettingViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *premiumIcon;
 @property (strong, nonatomic) IBOutlet UITableViewCell *premiumCell;
@@ -99,6 +99,7 @@
             [self.tableView reloadData];
         }
     }
+    [FIRAnalytics setScreenName:@"setting_main_view_ipad" screenClass:@"ipad_SettingViewController"];
 }
 
 

@@ -16,6 +16,7 @@
 #import "XDChartDataClass.h"
 #import "XDPieDetailViewController.h"
 #import "SettingViewController.h"
+@import Firebase;
 @interface XDChartMainViewController ()<XDTitleAccountTableViewDelegate,XDTimeSelectViewDelegate,UIScrollViewDelegate,XDChartPageViewDelegate>
 {
     Accounts* _selectedAccount;
@@ -147,7 +148,8 @@
 //    self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(rightDrawerButton) image:[UIImage imageNamed:@"time"]];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(settingButtonPress) image:[UIImage imageNamed:@"setting_new"]];
-    
+    [FIRAnalytics setScreenName:@"chart_main_view_iphone" screenClass:@"XDChartMainViewController"];
+
     [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
 //    [self.navigationController.navigationBar setColor: [UIColor whiteColor]];

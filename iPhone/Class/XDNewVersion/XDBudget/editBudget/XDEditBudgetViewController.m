@@ -17,6 +17,7 @@
 #import "ParseDBManager.h"
 #import "BudgetCountClass.h"
 #import "PokcetExpenseAppDelegate.h"
+@import Firebase;
 @interface XDEditBudgetViewController ()<XDBudgetSelectTableViewDelegate,XDCategorySplitCellDelegate>
 {
     UIButton* _weekBtn;
@@ -80,7 +81,8 @@
         
         self.bottomLeading.constant = 34;
     }
-    
+    [FIRAnalytics setScreenName:@"budget_create_view_iphone" screenClass:@"XDEditBudgetViewController"];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(cancelClick) image:[UIImage imageNamed:@"Return_icon_normal"]];

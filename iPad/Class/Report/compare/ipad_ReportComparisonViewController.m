@@ -10,7 +10,7 @@
 #import "PokcetExpenseAppDelegate.h"
 #import "ipad_ReportCategotyViewController.h"
 #import "ipad_CategoryCmpCell.h"
-
+@import Firebase;
 @implementation CategoryCmp
 @synthesize categoryAmount1;
 @synthesize categoryAmount2;
@@ -46,6 +46,7 @@
     [self initPoint];
     //初始化subdateRange的格子数以及title
     [self initDateRangeMemoryDefine];
+    [FIRAnalytics setScreenName:@"report_comparison_view_ipad" screenClass:@"ipad_ReportComparisonViewController"];
 }
 
 -(void)initPoint

@@ -14,7 +14,7 @@
 
 #import "ParseDBManager.h"
 #import <Parse/Parse.h>
-
+@import Firebase;
 @implementation ipad_SettingPayeeEditViewController
 @synthesize nameCell,categoryCell,noteCell;
 @synthesize nameText,CategoryLabel,noteText;
@@ -32,6 +32,7 @@
     [self initControlStyleAndEvent];
     [self setControlValueByTransaction];
     
+    [FIRAnalytics setScreenName:@"payee_edit_main_view_ipad" screenClass:@"ipad_SettingPayeeEditViewController"];
 }
 
 -(void)viewWillAppear:(BOOL)animated

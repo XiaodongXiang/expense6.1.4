@@ -51,7 +51,8 @@
     [super viewDidLoad];
     
     CGFloat width = SCREEN_WIDTH/3;
-    
+    [FIRAnalytics setScreenName:@"purchase_view_iphone" screenClass:@"XDUpgradeViewController"];
+
     self.monthView.frame = CGRectMake(0, 0, width, self.scrollview.height);
     self.yearView.frame = CGRectMake(width, 0, width, self.scrollview.height);
     self.lifetimeView.frame = CGRectMake(width * 2, 0, width, self.scrollview.height);
@@ -308,6 +309,7 @@
 //
     [Appsee addEvent:@"Attemp to Buy - Monthly"];
     [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
+   
     
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdMonth];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -323,7 +325,7 @@
 //    }
     [Appsee addEvent:@"Attemp to Buy - Yearly"];
     [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
-
+ 
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdYear];
 
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];

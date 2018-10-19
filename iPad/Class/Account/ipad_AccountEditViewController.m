@@ -17,6 +17,7 @@
  
 #import <Parse/Parse.h>
 #import "ParseDBManager.h"
+@import Firebase;
 
 @implementation ipad_AccountEditViewController
 #pragma mark Customer API
@@ -805,6 +806,9 @@
     [self initControlStyleAndEvent];
     [self initMemoryDefine];
     [self setDefaultValueForControler];
+    
+    [FIRAnalytics setScreenName:@"account_edit_view_ipad" screenClass:@"ipad_AccountEditViewController"];
+
 }
 
 - (void)viewWillAppear:(BOOL)animated

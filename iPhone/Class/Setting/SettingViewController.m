@@ -52,6 +52,8 @@
 #import "HMJActivityIndicator.h"
 #import "XDSignInViewController.h"
 #import "XDUpgradeViewController.h"
+@import Firebase;
+
 @interface SettingViewController()<FSMediaPickerDelegate>
 @property (weak, nonatomic) IBOutlet UIButton *profileIconBtn;
 
@@ -87,7 +89,8 @@
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(settingReloadData) name:@"settingReloadData" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resetStyleWithAds) name:@"hideProImage" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"refreshSettingUI" object:nil];
-    
+    [FIRAnalytics setScreenName:@"setting_view_iphone" screenClass:@"SettingViewController"];
+
     [self initPoint];
     [self initNavStyle];
     [self initTableCellStyle];

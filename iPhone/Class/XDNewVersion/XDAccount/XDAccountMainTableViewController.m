@@ -17,6 +17,7 @@
 #import "ParseDBManager.h"
 #import <Parse/Parse.h>
 
+@import Firebase;
 @interface XDAccountMainTableViewController ()<XDAddAccountViewDelegate,UIActionSheetDelegate,XDAccountTableViewCellDelegate,UITableViewDelegate,UITableViewDataSource,ADEngineControllerBannerDelegate>
 {
     BOOL _isEdit;
@@ -242,7 +243,8 @@
 //    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
 //    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     [self.navigationController.navigationBar setColor: [UIColor whiteColor]];
-    
+    [FIRAnalytics setScreenName:@"account_main_view_iphone" screenClass:@"XDAccountMainTableViewController"];
+
     
     self.title =  NSLocalizedString(@"VC_Account", nil);
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:FontSFUITextMedium size:17],NSForegroundColorAttributeName:RGBColor(85, 85, 85)}];

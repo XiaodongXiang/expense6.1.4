@@ -14,7 +14,7 @@
 #import "Category.h"
 #import "ipad_TranscactionQuickEditViewController.h"
 #import "AppDelegate_iPad.h"
-
+@import Firebase;
 @interface ipad_SearchViewController ()
 
 @end
@@ -38,6 +38,7 @@
     
     [self initPoint];
     [self initNavStyle];
+    [FIRAnalytics setScreenName:@"search_main_view_ipad" screenClass:@"ipad_SearchViewController"];
 }
 
 -(void)viewWillAppear:(BOOL)animated

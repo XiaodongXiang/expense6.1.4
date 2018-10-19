@@ -17,6 +17,7 @@
 #import "CategoryBackView.h"
 #import "PokcetExpenseAppDelegate.h"
 
+@import Firebase;
 @interface XDAddAccountViewController ()<XDAccountCategoryDelegate>
 {
     BOOL _dateCellShow;
@@ -115,6 +116,7 @@
     [super viewDidLoad];
     
     self.categoryBackView = [[CategoryBackView alloc]initWithFrame:self.categoryBtn.frame];
+    [FIRAnalytics setScreenName:@"add_account_view_iphone" screenClass:@"XDAddAccountViewController"];
 
     if (IS_IPHONE_X) {
         self.nacBackViewH.constant = 188;

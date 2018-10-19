@@ -15,6 +15,7 @@
 #import "AppDelegate_iPhone.h"
 #import "ParseDBManager.h"
 
+@import Firebase;
 @interface XDSignInViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -60,7 +61,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [FIRAnalytics setScreenName:@"sign_in_view_iphone" screenClass:@"XDSignInViewController"];
+
     NSArray* titleArr = @[@"See where your money goes",@"Get intuitive analysis",@"Budgets under control",@"Never forget a bill"];
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH*4, 0);
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];

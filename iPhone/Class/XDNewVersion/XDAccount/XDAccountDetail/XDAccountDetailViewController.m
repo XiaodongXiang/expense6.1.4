@@ -15,6 +15,7 @@
 #import "Category.h"
 #import "SearchRelatedViewController.h"
 #import "PokcetExpenseAppDelegate.h"
+@import Firebase;
 @interface XDAccountDetailViewController ()<SCAdViewDelegate,XDAccountTableViewDelegate,XDAddTransactionViewDelegate,ADEngineControllerBannerDelegate>
 {
     AccountCount* _currentAccount;
@@ -153,6 +154,7 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(addTransaction) image:[UIImage imageNamed:@"add_category"]];
 
     self.navigationController.interactivePopGestureRecognizer.delegate = (id)self;
+    [FIRAnalytics setScreenName:@"account_detail_view_iphone" screenClass:@"XDAccountDetailViewController"];
 
     self.title = _account.accountsItem.accName;
     

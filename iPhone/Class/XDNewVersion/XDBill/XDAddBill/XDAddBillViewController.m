@@ -22,6 +22,7 @@
 #import "BillFather.h"
 #import "PokcetExpenseAppDelegate.h"
 #import "AppDelegate_iPhone.h"
+@import Firebase;
 @interface XDAddBillViewController ()<XDBillRepeatTableViewDelegate,XDBillEndDateTableViewDelegate,XDTransactionCatgroyViewDelegate,XDBillNotifTableViewDelegate,XDTranscationNoteViewDelegate,SettingTransactionCategoryViewDelegate,UIActionSheetDelegate>
 {
     BOOL _repeatShow;
@@ -153,7 +154,8 @@
         self.navBackViewH.constant = 188;
     }
     [self.nameTextF becomeFirstResponder];
-    
+    [FIRAnalytics setScreenName:@"bill_add_view_iphone" screenClass:@"XDAddBillViewController"];
+
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.amountTextF.inputView = self.keyboard;
     [self.nameTextF setValue:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2] forKeyPath:@"_placeholderLabel.textColor"];

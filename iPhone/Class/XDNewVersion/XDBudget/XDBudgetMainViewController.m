@@ -19,6 +19,7 @@
 #import "XDBudgetDetailViewController.h"
 #import "SettingViewController.h"
 #import "PokcetExpenseAppDelegate.h"
+@import Firebase;
 @interface XDBudgetMainViewController ()<UIScrollViewDelegate,XDEditBudgetViewDelegate,XDBudgetTableViewDelegate,ADEngineControllerBannerDelegate>
 {
     __block NSInteger _index;
@@ -192,6 +193,9 @@
     self.automaticallyAdjustsScrollViewInsets = NO;
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(calendarFirstDayChange) name:@"calendarFirstDayChange" object:nil];
+    
+    [FIRAnalytics setScreenName:@"budget_main_view_iphone" screenClass:@"XDBudgetMainViewController"];
+
 }
 
 -(void)calendarFirstDayChange{

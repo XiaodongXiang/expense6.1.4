@@ -16,6 +16,7 @@
 
 #import <Parse/Parse.h>
 #import "ParseDBManager.h"
+@import Firebase;
 
 @interface XDBillPayViewController ()<XDAddBillViewDelegate>
 {
@@ -110,7 +111,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [FIRAnalytics setScreenName:@"bill_pay_payment_view_iphone" screenClass:@"XDBillPayViewController"];
+
     if (IS_IPHONE_X) {
         self.topViewLeading.constant = 88;
         self.bottomLeading.constant = 34;

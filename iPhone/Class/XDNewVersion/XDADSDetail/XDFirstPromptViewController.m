@@ -51,6 +51,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(failSync) name:@"logInPromptFailed" object:nil];
 
     [self startLoad];
+    
+    
 }
 
 

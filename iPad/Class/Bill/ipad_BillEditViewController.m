@@ -26,7 +26,7 @@
 
 #import <Parse/Parse.h>
 #import "ParseDBManager.h"
-
+@import Firebase;
 static int monthCount = 0;
 
 @implementation ipad_BillEditViewController
@@ -63,6 +63,9 @@ static int monthCount = 0;
     [self initMemoryDefine];
     [self setTableCellTitleForMark];
     [self initControlValueByBill];
+    
+    
+    [FIRAnalytics setScreenName:@"bill_edit_view_ipad" screenClass:@"ipad_BillEditViewController"];
 }
 
 - (void)viewWillAppear:(BOOL)animated

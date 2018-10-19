@@ -59,7 +59,7 @@
 #import "XDFirstPromptViewController.h"
 
 #import "XDUpgradeViewController.h"
-
+@import Firebase;
 
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
 #define ScreenWidth [[UIScreen mainScreen] bounds].size.width
@@ -496,9 +496,34 @@
             [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
         }
     }
-    
+        
     return YES;
 }
+
+
+//-(void)setFirAnalyticsScreenName{
+//
+//    [FIRAnalytics setScreenName:@"purchase_view_iphone" screenClass:@"XDUpgradeViewController"];
+//    [FIRAnalytics setScreenName:@"terms_of_use_view_iphone" screenClass:@"XDTermsOfUseViewController"];
+//    [FIRAnalytics setScreenName:@"sign_in_view_iphone" screenClass:@"XDSignInViewController"];
+//    [FIRAnalytics setScreenName:@"bill_main_view_iphone" screenClass:@"XDBillMainViewController"];
+//    [FIRAnalytics setScreenName:@"bill_add_payment_view_iphone" screenClass:@"XDAddPayViewController"];
+//    [FIRAnalytics setScreenName:@"bill_pay_payment_view_iphone" screenClass:@"XDBillPayViewController"];
+//    [FIRAnalytics setScreenName:@"bill_add_view_iphone" screenClass:@"XDAddBillViewController"];
+//    [FIRAnalytics setScreenName:@"bill_calendar_view_iphone" screenClass:@"XDBillCalendarViewController"];
+//    [FIRAnalytics setScreenName:@"calendr_main_view_iphone" screenClass:@"XDOverViewViewController"];
+//    [FIRAnalytics setScreenName:@"add_transaction_view_iphone" screenClass:@"XDAddTransactionViewController"];
+//    [FIRAnalytics setScreenName:@"chart_main_view_iphone" screenClass:@"XDChartMainViewController"];
+//    [FIRAnalytics setScreenName:@"chart_detail_view_iphone" screenClass:@"XDPieDetailViewController"];
+//    [FIRAnalytics setScreenName:@"account_main_view_iphone" screenClass:@"XDAccountMainTableViewController"];
+//    [FIRAnalytics setScreenName:@"add_account_view_iphone" screenClass:@"XDAddAccountViewController"];
+//    [FIRAnalytics setScreenName:@"account_detail_view_iphone" screenClass:@"XDAccountDetailViewController"];
+//    [FIRAnalytics setScreenName:@"budget_main_view_iphone" screenClass:@"XDBudgetMainViewController"];
+//    [FIRAnalytics setScreenName:@"budget_create_view_iphone" screenClass:@"XDEditBudgetViewController"];
+//    [FIRAnalytics setScreenName:@"setting_view_iphone" screenClass:@"SettingViewController"];
+//
+//}
+
 
 -(void)getPFSettingSuccessful{
     
