@@ -223,32 +223,34 @@
     
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdMonth originalProID:originalProID];
-#ifdef DEBUG
-        [Appsee addEvent:@"Succeed - Monthly"];
-#else
         
-#endif
+//#ifdef DEBUG
+//        [Appsee addEvent:@"Succeed - Monthly"];
+//#else
+//
+//#endif
+        
         [FIRAnalytics logEventWithName:@"succeed_monthly" parameters:nil];
 
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
          [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdYear originalProID:originalProID];
-#ifdef DEBUG
-        [Appsee addEvent:@"Succeed - Yearly"];
-
-#else
-        
-#endif
+//#ifdef DEBUG
+//        [Appsee addEvent:@"Succeed - Yearly"];
+//
+//#else
+//
+//#endif
         [FIRAnalytics logEventWithName:@"succeed_yearly" parameters:nil];
 
 
     }else{
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
-#ifdef DEBUG
-        
-        [Appsee addEvent:@"Succeed - Lifetime"];
-#else
-        
-#endif
+//#ifdef DEBUG
+//
+//        [Appsee addEvent:@"Succeed - Lifetime"];
+//#else
+//
+//#endif
         [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
 
 

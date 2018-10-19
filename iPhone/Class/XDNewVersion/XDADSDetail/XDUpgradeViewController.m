@@ -64,11 +64,11 @@
     self.yearView.frame = CGRectMake(width, 0, width, self.scrollview.height);
     self.lifetimeView.frame = CGRectMake(width * 2, 0, width, self.scrollview.height);
 
-#ifdef DEBUG
-    [Appsee addEvent:@"Enter Shop"];
-#else
-    
-#endif
+//#ifdef DEBUG
+//    [Appsee addEvent:@"Enter Shop"];
+//#else
+//
+//#endif
     
     [FIRAnalytics logEventWithName:@"enter_shop" parameters:nil];
 
@@ -307,11 +307,11 @@
 
 - (IBAction)cancelClick:(id)sender {
     
-#ifdef DEBUG
-    [Appsee addEvent:@"Leave Shop"];
-#else
-    
-#endif
+//#ifdef DEBUG
+//    [Appsee addEvent:@"Leave Shop"];
+//#else
+//
+//#endif
 
     [self dismissViewControllerAnimated:YES completion:nil];
     
@@ -325,12 +325,12 @@
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
 //    }
 //
-#ifdef DEBUG
-    [Appsee addEvent:@"Attemp to Buy - Monthly"];
-
-#else
-    
-#endif
+//#ifdef DEBUG
+//    [Appsee addEvent:@"Attemp to Buy - Monthly"];
+//
+//#else
+//
+//#endif
     [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
    
     
@@ -346,12 +346,12 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
 //    }
-#ifdef DEBUG
-    [Appsee addEvent:@"Attemp to Buy - Yearly"];
-
-#else
-    
-#endif
+//#ifdef DEBUG
+//    [Appsee addEvent:@"Attemp to Buy - Yearly"];
+//
+//#else
+//
+//#endif
     [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
  
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdYear];
@@ -367,11 +367,11 @@
 //    {
 //        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 //    }
-#ifdef DEBUG
-    [Appsee addEvent:@"Attemp to Buy - Lifetime"];
-#else
-    
-#endif
+//#ifdef DEBUG
+//    [Appsee addEvent:@"Attemp to Buy - Lifetime"];
+//#else
+//    
+//#endif
     [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
 
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:kInAppPurchaseProductIdLifetime];
