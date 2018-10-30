@@ -2599,6 +2599,13 @@
 		BEB696E2213D0FAD00CDE712 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DA213D0FAD00CDE712 /* AFNetworkReachabilityManager.m */; };
 		BEB696E3213D0FAD00CDE712 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
+		BEFB24AE2188044B00507A5C /* BayMaxKVODelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A02188044B00507A5C /* BayMaxKVODelegate.m */; };
+		BEFB24AF2188044B00507A5C /* BayMaxDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A32188044B00507A5C /* BayMaxDebugView.m */; };
+		BEFB24B02188044B00507A5C /* BayMaxDegradeAssist.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A42188044B00507A5C /* BayMaxDegradeAssist.m */; };
+		BEFB24B12188044B00507A5C /* BayMaxTimerSubTarget.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A62188044B00507A5C /* BayMaxTimerSubTarget.m */; };
+		BEFB24B22188044B00507A5C /* BayMaxProtector.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A82188044B00507A5C /* BayMaxProtector.m */; };
+		BEFB24B32188044B00507A5C /* BayMaxContainers.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24AA2188044B00507A5C /* BayMaxContainers.m */; };
+		BEFB24B42188044B00507A5C /* BayMaxCatchError.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24AD2188044B00507A5C /* BayMaxCatchError.m */; };
 		BEFCAF292170D3A100065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
 		BEFCAF2A2170D3A200065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
 		BEFD68C0216C5E2900B86A64 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */; };
@@ -5774,6 +5781,21 @@
 		BEB696DD213D0FAD00CDE712 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
+		BEFB249F2188044B00507A5C /* BayMaxProtector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxProtector.h; sourceTree = "<group>"; };
+		BEFB24A02188044B00507A5C /* BayMaxKVODelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxKVODelegate.m; sourceTree = "<group>"; };
+		BEFB24A12188044B00507A5C /* BayMaxCFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxCFunctions.h; sourceTree = "<group>"; };
+		BEFB24A22188044B00507A5C /* BayMaxCatchError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxCatchError.h; sourceTree = "<group>"; };
+		BEFB24A32188044B00507A5C /* BayMaxDebugView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxDebugView.m; sourceTree = "<group>"; };
+		BEFB24A42188044B00507A5C /* BayMaxDegradeAssist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxDegradeAssist.m; sourceTree = "<group>"; };
+		BEFB24A52188044B00507A5C /* BayMaxContainers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxContainers.h; sourceTree = "<group>"; };
+		BEFB24A62188044B00507A5C /* BayMaxTimerSubTarget.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxTimerSubTarget.m; sourceTree = "<group>"; };
+		BEFB24A72188044B00507A5C /* BayMaxKVODelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxKVODelegate.h; sourceTree = "<group>"; };
+		BEFB24A82188044B00507A5C /* BayMaxProtector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxProtector.m; sourceTree = "<group>"; };
+		BEFB24A92188044B00507A5C /* BayMaxTimerSubTarget.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxTimerSubTarget.h; sourceTree = "<group>"; };
+		BEFB24AA2188044B00507A5C /* BayMaxContainers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxContainers.m; sourceTree = "<group>"; };
+		BEFB24AB2188044B00507A5C /* BayMaxDegradeAssist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxDegradeAssist.h; sourceTree = "<group>"; };
+		BEFB24AC2188044B00507A5C /* BayMaxDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxDebugView.h; sourceTree = "<group>"; };
+		BEFB24AD2188044B00507A5C /* BayMaxCatchError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxCatchError.m; sourceTree = "<group>"; };
 		BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		BEFD68C1216C6FA500B86A64 /* ADEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADEngine.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -7986,6 +8008,7 @@
 		4E7BA8B72063512700D9299A /* XDCategory */ = {
 			isa = PBXGroup;
 			children = (
+				BEFB249E2188044B00507A5C /* BaymaxProtectorClass */,
 				BEB696CF213D0FAD00CDE712 /* AFNetworking */,
 				4E299BA620EC595500C55F5F /* MBProgressHUD */,
 				4E94DA51209AFCAF001E0CC6 /* UINavigation-SXFixSpace */,
@@ -10807,6 +10830,28 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		BEFB249E2188044B00507A5C /* BaymaxProtectorClass */ = {
+			isa = PBXGroup;
+			children = (
+				BEFB249F2188044B00507A5C /* BayMaxProtector.h */,
+				BEFB24A02188044B00507A5C /* BayMaxKVODelegate.m */,
+				BEFB24A12188044B00507A5C /* BayMaxCFunctions.h */,
+				BEFB24A22188044B00507A5C /* BayMaxCatchError.h */,
+				BEFB24A32188044B00507A5C /* BayMaxDebugView.m */,
+				BEFB24A42188044B00507A5C /* BayMaxDegradeAssist.m */,
+				BEFB24A52188044B00507A5C /* BayMaxContainers.h */,
+				BEFB24A62188044B00507A5C /* BayMaxTimerSubTarget.m */,
+				BEFB24A72188044B00507A5C /* BayMaxKVODelegate.h */,
+				BEFB24A82188044B00507A5C /* BayMaxProtector.m */,
+				BEFB24A92188044B00507A5C /* BayMaxTimerSubTarget.h */,
+				BEFB24AA2188044B00507A5C /* BayMaxContainers.m */,
+				BEFB24AB2188044B00507A5C /* BayMaxDegradeAssist.h */,
+				BEFB24AC2188044B00507A5C /* BayMaxDebugView.h */,
+				BEFB24AD2188044B00507A5C /* BayMaxCatchError.m */,
+			);
+			path = BaymaxProtectorClass;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -13086,6 +13131,7 @@
 				3ABE00F61B044F5E00D18188 /* ApplicationDBVersion.m in Sources */,
 				4E7BA8CA2063512700D9299A /* XDTransactionAccountView.m in Sources */,
 				4E7BA9122063512800D9299A /* UIView+XDExtension.m in Sources */,
+				BEFB24AE2188044B00507A5C /* BayMaxKVODelegate.m in Sources */,
 				A2561A6319D3BBD700A5A950 /* HTTPResponse.m in Sources */,
 				A2561A8819D3BBD700A5A950 /* ReaderDocument.m in Sources */,
 				A2560FFB19D3BB5C00A5A950 /* OverViewBudgetPiCharView.m in Sources */,
@@ -13131,6 +13177,7 @@
 				A2560FD619D3BB5C00A5A950 /* BudgetIntroduceViewController.m in Sources */,
 				A25616D019D3BB7F00A5A950 /* ipad_ExportSelectedCategoryViewController.m in Sources */,
 				A2560FF419D3BB5C00A5A950 /* KalViewController_week.m in Sources */,
+				BEFB24B12188044B00507A5C /* BayMaxTimerSubTarget.m in Sources */,
 				4E880058206B219600792827 /* XDBudgetTransferViewController.m in Sources */,
 				A25616EA19D3BB7F00A5A950 /* ipad_PayeeSettingCell.m in Sources */,
 				A2560FF319D3BB5C00A5A950 /* KalView_week.m in Sources */,
@@ -13238,6 +13285,7 @@
 				A27EAC2419EB9AF300045F97 /* GeneralViewController.m in Sources */,
 				A2560FD319D3BB5C00A5A950 /* BudgetDetailViewController.m in Sources */,
 				4E88A6452064FC17000B95F2 /* XDPieChartBigView.m in Sources */,
+				BEFB24B42188044B00507A5C /* BayMaxCatchError.m in Sources */,
 				A243D66C20FEEB0300E31721 /* historyViewController.m in Sources */,
 				3ABE00F31B044F5E00D18188 /* BillReports.m in Sources */,
 				4E94DA5F209AFCB0001E0CC6 /* UINavigationItem+SXFixSpace.m in Sources */,
@@ -13328,6 +13376,7 @@
 				4E7BA8D02063512700D9299A /* XDRepeatTableViewController.m in Sources */,
 				A256164E19D3BB7F00A5A950 /* ipad_AccountEditViewController.m in Sources */,
 				A256166A19D3BB7F00A5A950 /* ipad_TransferViewController_NS.m in Sources */,
+				BEFB24B32188044B00507A5C /* BayMaxContainers.m in Sources */,
 				A2560F9B19D3BB5C00A5A950 /* AccountCount.m in Sources */,
 				4E7BA9132063512800D9299A /* NSDate+XDExtension.m in Sources */,
 				BEB696DF213D0FAD00CDE712 /* AFHTTPSessionManager.m in Sources */,
@@ -13340,6 +13389,7 @@
 				3A8687C81BDA1A1600417115 /* headerView.m in Sources */,
 				A2560FA219D3BB5C00A5A950 /* AccountsViewController.m in Sources */,
 				A256164D19D3BB7F00A5A950 /* ipad_AccountCategoryCell.m in Sources */,
+				BEFB24AF2188044B00507A5C /* BayMaxDebugView.m in Sources */,
 				A256167019D3BB7F00A5A950 /* ipad_BudgetListViewController.m in Sources */,
 				A2560FF219D3BB5C00A5A950 /* KalTileView_week.m in Sources */,
 				A25616C519D3BB7F00A5A950 /* ipad_RepCashflowFilterViewController.m in Sources */,
@@ -13370,6 +13420,7 @@
 				3ADE77C61BF5984B003BE9EB /* UUColor.m in Sources */,
 				A2561A9319D3BBD700A5A950 /* ReaderViewController.m in Sources */,
 				A256104F19D3BB5C00A5A950 /* TransactionCategoryViewController .m in Sources */,
+				BEFB24B02188044B00507A5C /* BayMaxDegradeAssist.m in Sources */,
 				3ABE00E11B044F5D00D18188 /* BudgetTransfer.m in Sources */,
 				4E7BA8C02063512700D9299A /* XDOverViewViewController.m in Sources */,
 				A256167819D3BB7F00A5A950 /* ipad_FatherCategorySelectedViewController.m in Sources */,
@@ -13503,6 +13554,7 @@
 				3ABE00DE1B044F5D00D18188 /* TransactionRule.m in Sources */,
 				A2560FEA19D3BB5C00A5A950 /* TrackerCell.m in Sources */,
 				A256166919D3BB7F00A5A950 /* ipad_DateSelBillsViewController.m in Sources */,
+				BEFB24B22188044B00507A5C /* BayMaxProtector.m in Sources */,
 				A256169C19D3BB7F00A5A950 /* KalMonthView.m in Sources */,
 				4E7BA8D82063512700D9299A /* numberKeyboardView.m in Sources */,
 				A256169A19D3BB7F00A5A950 /* KalGridView.m in Sources */,

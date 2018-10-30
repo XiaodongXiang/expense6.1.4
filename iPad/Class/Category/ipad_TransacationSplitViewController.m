@@ -619,7 +619,7 @@
     if (hight < 216)
     {
         double keyBoardHigh = 216-hight+35;
-        NSLog(@"keyBoardHigh:%f",keyBoardHigh);
+//        NSLog(@"keyBoardHigh:%f",keyBoardHigh);
         [tcsvc_tableView setContentOffset:CGPointMake(0, keyBoardHigh) animated:YES];
     }
 }

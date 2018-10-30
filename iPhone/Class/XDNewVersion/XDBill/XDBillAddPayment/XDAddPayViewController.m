@@ -141,7 +141,9 @@
     
     self.amountTF.inputView = self.keyboard;
     self.tableView.separatorColor = RGBColor(226, 226, 226);
-
+    if (IS_IPHONE_X) {
+        self.amountTF.inputView.transform = CGAffineTransformMakeTranslation(0, -34);
+    }
     //插页广告
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     if (!appDelegate.isPurchased) {

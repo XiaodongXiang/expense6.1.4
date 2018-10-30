@@ -112,6 +112,7 @@
             
             self.premiumTitle.text = @"Lifetime Premium";
             
+            self.lifetimeBtn.enabled = NO;
         }else{
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
@@ -124,7 +125,7 @@
                     self.yearBg.image = [UIImage imageNamed:@"year"];
                     self.premiumTitle.text = @"Monthly Premium";
                     
-                    
+                    self.monthBtn.enabled = NO;
 
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
@@ -136,6 +137,7 @@
                     self.monthBg.image = [UIImage imageNamed:@"month"];
                     self.premiumTitle.text = @"Yearly Premium";
 
+                    self.yearBtn.enabled = NO;
                 }else{
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -155,7 +157,7 @@
                     self.yearDetailLbl.textColor = [UIColor whiteColor];
 
                     self.premiumTitle.text = @"Lifetime Premium";
-
+                    self.lifetimeBtn.enabled = NO;
                 }
             }
         }
@@ -167,6 +169,10 @@
         self.restoreBtn.hidden = NO;
         self.restoreBtnH.constant = 40;
         self.premiumTitle.text = @"Upgrade to Premium";
+        
+        self.monthBtn.enabled = YES;
+        self.yearBtn.enabled = YES;
+        self.lifetimeBtn.enabled = YES;
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
@@ -190,6 +196,10 @@
         Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
         
+        self.monthBtn.enabled = YES;
+        self.yearBtn.enabled = YES;
+        self.lifetimeBtn.enabled = YES;
+        
         if (defaults2) {
             self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
             self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -209,6 +219,7 @@
             self.saleLbl.hidden = YES;
             self.premiumTitle.text = @"Lifetime Premium";
 
+            self.lifetimeBtn.enabled = NO;
         }else{
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
@@ -227,7 +238,7 @@
                     self.yearTimeLbl.textColor = [UIColor whiteColor];
                     self.yearPriceLbl.textColor = [UIColor whiteColor];
                     self.yearDetailLbl.textColor = [UIColor whiteColor];
-                    
+                    self.monthBtn.enabled = NO;
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.yearTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -244,7 +255,7 @@
                     self.lifetimeDetailLbl.textColor = [UIColor whiteColor];
                     self.lifetimePriceLbl.textColor = [UIColor whiteColor];
                     self.liteTimeLbl.textColor = [UIColor whiteColor];
-
+                    self.yearBtn.enabled = NO;
                 }else{
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -263,7 +274,7 @@
                     self.yearPriceLbl.textColor = [UIColor whiteColor];
                     self.yearDetailLbl.textColor = [UIColor whiteColor];
                     self.premiumTitle.text = @"Lifetime Premium";
-
+                    self.lifetimeBtn.enabled = NO;
                 }
             }
         }
@@ -277,6 +288,9 @@
         self.restoreBtnH.constant = 40;
         self.premiumTitle.text = @"Upgrade to Premium";
 
+        self.monthBtn.enabled = YES;
+        self.yearBtn.enabled = YES;
+        self.lifetimeBtn.enabled = YES;
     }
     
     [self.view layoutSubviews];

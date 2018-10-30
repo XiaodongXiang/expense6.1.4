@@ -49,6 +49,7 @@
 #import <Appsee/Appsee.h>
 #import <GoogleAnalytics/GAI.h>
 #import <GoogleAnalytics/GAIDictionaryBuilder.h>
+#import "BayMaxProtector.h"
 
 @import Firebase;
 
@@ -137,10 +138,33 @@
 
     
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
-    [Appsee start];
+//    [Appsee start];
     
 //    [[GAI sharedInstance] trackerWithTrackingId:@"YOUR_TRACKING_ID"];
-
+    
+    [BayMaxProtector openProtectionsOn:BayMaxProtectionTypeAll catchErrorHandler:^(BayMaxCatchError * _Nullable error) {
+        NSArray *callStacks = [error.errorInfos objectForKey:BMPErrorCallStackSymbols];
+        NSLog(@"callStacks:%@",callStacks);
+        /*unrecognizedSelector类型的错误，*/
+        if (error.errorType == BayMaxErrorTypeUnrecognizedSelector) {
+            NSLog(@"ErrorUnRecognizedSelInfos:%@",error.errorInfos);
+            
+        }else if (error.errorType == BayMaxErrorTypeTimer){
+            NSLog(@"ErrorTimerinfos:%@",error.errorInfos);
+            
+            
+        }else if (error.errorType == BayMaxErrorTypeKVO){
+            NSLog(@"ErrorKVOinfos:%@",error.errorInfos);
+            
+        }else if (error.errorType == BayMaxErrorTypeContainers){
+            NSLog(@"ErrorContainersinfos:%@",error.errorInfos);
+            
+        }else{
+            NSLog(@"infos:%@",error.errorInfos);
+        }
+        
+    }];
+    
     NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());
     application.applicationIconBadgeNumber = 0;
     NSError *error = nil;
@@ -1164,7 +1188,6 @@
         
         if ([self.epnc secondCompare:reminderDate withDate:[NSDate date]]>=0 ) {
             
-            
             UILocalNotification *noti = [[UILocalNotification alloc] init];
             if (noti)
             {
@@ -1174,7 +1197,7 @@
                 noti.soundName = UILocalNotificationDefaultSoundName;
                 NSDateFormatter *dateFormatter =[[NSDateFormatter alloc]init];
                 [dateFormatter setDateFormat:@"MM dd, yyyy"];
-                
+                [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
                 NSString *dateString = [NSString stringWithFormat:@"%@",[dateFormatter stringFromDate:oneBillfather.bf_billDueDate]];
                 
                 noti.alertBody = [NSString stringWithFormat:@"%@ on %@ need to paid.",oneBillfather.bf_billRule.ep_billName,dateString];

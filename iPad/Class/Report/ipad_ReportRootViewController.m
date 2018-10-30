@@ -43,7 +43,7 @@
         cashFlowVC=[[ipad_ReportCashFlowViewController alloc]initWithNibName:@"ipad_ReportCashFlowViewController" bundle:nil];
         
         [SVGloble shareInstance].globleWidth = 960*2; //屏幕宽度
-        NSLog(@"[SVGloble shareInstance].globleWidth:%f",[SVGloble shareInstance].globleWidth);
+//        NSLog(@"[SVGloble shareInstance].globleWidth:%f",[SVGloble shareInstance].globleWidth);
         [SVGloble shareInstance].globleHeight = 704;  //屏幕高度（无顶栏）
         [SVGloble shareInstance].globleAllHeight = 704;  //屏幕高度（有顶栏）
         

@@ -131,6 +131,9 @@
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     _colorArr = @[@"8281FF",@"639AF4",@"7AD2FF",@"4CD3B2",@"47D469",@"F2BE44",@"FF965D",@"FD7881",@"D38CF2"];
     self.accountAmountTextField.inputView = self.keyboard;
+    if (IS_IPHONE_X) {
+        self.accountAmountTextField.inputView.transform = CGAffineTransformMakeTranslation(0, -34);
+    }
     _colorView.layer.cornerRadius = 5;
     _colorView.layer.masksToBounds = YES;
     

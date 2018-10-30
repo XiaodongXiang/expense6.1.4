@@ -155,9 +155,12 @@
     }
     [self.nameTextF becomeFirstResponder];
     [FIRAnalytics setScreenName:@"bill_add_view_iphone" screenClass:@"XDAddBillViewController"];
-
-    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     self.amountTextF.inputView = self.keyboard;
+
+    if (IS_IPHONE_X) {
+        self.amountTextF.inputView.transform = CGAffineTransformMakeTranslation(0, -34);
+    }
+    self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     [self.nameTextF setValue:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2] forKeyPath:@"_placeholderLabel.textColor"];
     [self.amountTextF setValue:[UIColor colorWithRed:1 green:1 blue:1 alpha:0.2] forKeyPath:@"_placeholderLabel.textColor"];
     self.categoryBackView.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_WIDTH+80);
@@ -221,7 +224,7 @@
     self.saveBtn.enabled = YES;
     [self.saveBtn setImage:[UIImage imageNamed:@"done_normal"] forState:UIControlStateNormal];
 
-    EP_BillItem* editBill = billFather.bf_billItem;
+//    EP_BillItem* editBill = billFather.bf_billItem;
     
     _selectCategory = billFather.bf_category;
     _repeatString = billFather.bf_billRecurringType;
@@ -233,7 +236,7 @@
 
     self.amountTextF.text = [NSString stringWithFormat:@"%.2f",billFather.bf_billAmount];
     self.nameTextF.text = billFather.bf_billName;
-    self.dateLabel.text = [self returnInitDate:editBill.dateTime];
+    self.dateLabel.text = [self returnInitDate:billFather.bf_billDueDate];
     self.repeatDetailLabel.text = _repeatString;
     self.datePicker.date = billFather.bf_billDueDate;
     

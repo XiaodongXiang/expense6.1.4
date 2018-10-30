@@ -50,7 +50,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *accDRstring;
 @property (nullable, nonatomic, copy) NSNumber *otherBool14;
 @property (nullable, nonatomic, copy) NSString *passcode;
-@property (nullable, nonatomic, copy) NSNumber *otherBool7;//是否上传成功
+@property (nullable, nonatomic, copy) NSNumber *otherBool7;
 @property (nullable, nonatomic, copy) NSNumber *otherBool8;
 @property (nullable, nonatomic, copy) NSNumber *payeeTranMemo;
 @property (nullable, nonatomic, copy) NSNumber *otherBool15;
@@ -77,7 +77,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *others;
 @property (nullable, nonatomic, copy) NSString *weekstartday;
 @property (nullable, nonatomic, copy) NSString *expDRString;
-@property (nullable, nonatomic, copy) NSNumber *otherBool17;
+@property (nullable, nonatomic, copy) NSNumber *otherBool17;//是否上传成功
 @property (nullable, nonatomic, copy) NSNumber *syncAuto;
 @property (nullable, nonatomic, copy) NSString *cateDRstring;
 @property (nullable, nonatomic, copy) NSDate *dateTime;

@@ -687,6 +687,7 @@
  		[self.window addSubview:_passCodeCheckView.view];
     }
 
+    
 }
 
 

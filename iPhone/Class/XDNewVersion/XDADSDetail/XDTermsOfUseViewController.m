@@ -27,7 +27,7 @@
     
     self.textView.attributedText = attributeStr;
     [FIRAnalytics setScreenName:@"terms_of_use_view_iphone" screenClass:@"XDTermsOfUseViewController"];
-
+    self.textView.editable = NO;
     
 }
 - (IBAction)cancelClick:(id)sender {

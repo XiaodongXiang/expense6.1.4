@@ -34,8 +34,11 @@
       weakSelf.categoryMoneyTextF.text = string;
     };
     
-    
+  
     self.categoryMoneyTextF.inputView  = self.number;
+    if (IS_IPHONE_X) {
+        self.categoryMoneyTextF.inputView.transform = CGAffineTransformMakeTranslation(0, -34);
+    }
     self.amount = _categorySelect.amount;
     
     if ( self.amount != 0.0) {

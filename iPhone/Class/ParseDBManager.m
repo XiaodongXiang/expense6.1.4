@@ -4590,7 +4590,15 @@
                         [objectServer removeObjectForKey:@"purchaseOriginalProductID"];
                     }
                     
-                    [objectServer saveInBackground];
+                    [objectServer saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                        if (succeeded) {
+                            setting.otherBool17 = @YES;
+                        }else{
+                            setting.otherBool17 = @NO;
+                        }
+                        [[XDDataManager shareManager] saveContext];
+                        
+                    }];
                     
                 }else{
                     if (![setting.purchasedIsSubscription boolValue]) {

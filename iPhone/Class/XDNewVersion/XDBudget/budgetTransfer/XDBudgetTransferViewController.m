@@ -130,7 +130,9 @@
     self.toCateView.userInteractionEnabled = NO;
     
     self.amountTextField.inputView = self.keyboard;
-    
+    if (IS_IPHONE_X) {
+        self.amountTextField.inputView.transform = CGAffineTransformMakeTranslation(0, -34);
+    }
     NSMutableArray* muArr = [NSMutableArray arrayWithArray:[[XDDataManager shareManager]getObjectsFromTable:@"BudgetTemplate" predicate:[NSPredicate predicateWithFormat:@"isNew = 1 and state = %@",@"1"] sortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"category.categoryName" ascending:YES]]]];
     [muArr removeObject:budgetTemple];
     self.dataArray = muArr;

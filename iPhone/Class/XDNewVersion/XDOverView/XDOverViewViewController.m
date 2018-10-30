@@ -267,6 +267,13 @@
     [FIRAnalytics setScreenName:@"calendr_main_view_iphone" screenClass:@"XDOverViewViewController"];
 
 //    [self validateReceipt];
+    if ([PFUser currentUser]) {
+        Setting* setting = [[XDDataManager shareManager] getSetting];
+        if ([setting.otherBool17 boolValue] == NO) {
+            [[ParseDBManager sharedManager] savingSetting];
+        }
+    }
+    
 }
 
 
