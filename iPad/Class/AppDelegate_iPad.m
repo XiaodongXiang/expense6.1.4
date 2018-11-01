@@ -357,7 +357,7 @@
     
     LAContext *context=[LAContext new];
     context.localizedFallbackTitle=@"";
-    BOOL *touchIDOpen=[context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error];
+    BOOL *touchIDOpen=[context canEvaluatePolicy:kLAPolicyDeviceOwnerAuthentication error:&error];
     if (touchIDOpen==NULL)
     {
         [_touchBack removeFromSuperview];
@@ -365,10 +365,13 @@
     if ([self.settings.passcodeStyle isEqualToString:@"touchid"])
     {
         _touchBack=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(passcodeAgain)];
+        [_touchBack addGestureRecognizer:tap];
+        
         _touchBack.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad_touch"]];
         [self.window addSubview:_touchBack];
         [self.window bringSubviewToFront:_touchBack];
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:IS_IPHONE_X?@"Face ID":@"Touch ID" reply:^(BOOL success, NSError * _Nullable error) {
+        [context evaluatePolicy:kLAPolicyDeviceOwnerAuthentication localizedReason:IS_IPHONE_X?@"Face ID":@"Touch ID" reply:^(BOOL success, NSError * _Nullable error) {
             if (success)
             {
                 dispatch_sync(dispatch_get_main_queue(), ^{
@@ -424,14 +427,34 @@
     
   	return YES;
 }
-
+-(void)passcodeAgain{
+    //touch ID
+    LAContext *context=[LAContext new];
+    context.localizedFallbackTitle=@"";
+    
+    NSError *error;
+    BOOL *touchIDOpen=[context canEvaluatePolicy:kLAPolicyDeviceOwnerAuthentication error:&error];
+    if (touchIDOpen==NULL)
+    {
+        //        [_touchBack removeFromSuperview];
+    }
+    [context evaluatePolicy:kLAPolicyDeviceOwnerAuthentication localizedReason:IS_IPHONE_X?@"Face ID":@"Touch ID" reply:^(BOOL success, NSError * _Nullable error) {
+        if (success)
+        {
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                [_touchBack removeFromSuperview];
+            });
+        }
+        
+    }];
+}
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     LAContext *context=[LAContext new];
     context.localizedFallbackTitle=@"";
     NSError *error;
-    BOOL *touchIDOpen=[context canEvaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics error:&error];
+    BOOL *touchIDOpen=[context canEvaluatePolicy:kLAPolicyDeviceOwnerAuthentication error:&error];
     if (touchIDOpen==NULL)
     {
         [_touchBack removeFromSuperview];
@@ -439,10 +462,13 @@
     if ([self.settings.passcodeStyle isEqualToString:@"touchid"])
     {
         _touchBack=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(passcodeAgain)];
+        [_touchBack addGestureRecognizer:tap];
+        
         _touchBack.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"ipad_touch"]];
         [self.window addSubview:_touchBack];
         [self.window bringSubviewToFront:_touchBack];
-        [context evaluatePolicy:LAPolicyDeviceOwnerAuthenticationWithBiometrics localizedReason:IS_IPHONE_X?@"Face ID":@"Touch ID" reply:^(BOOL success, NSError * _Nullable error) {
+        [context evaluatePolicy:kLAPolicyDeviceOwnerAuthentication localizedReason:IS_IPHONE_X?@"Face ID":@"Touch ID" reply:^(BOOL success, NSError * _Nullable error) {
             if (success)
             {
                 dispatch_sync(dispatch_get_main_queue(), ^{
@@ -452,6 +478,7 @@
             else
             {
                 NSLog(@"failed");
+                
             }
         }];
     }

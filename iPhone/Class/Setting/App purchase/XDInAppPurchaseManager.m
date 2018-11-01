@@ -183,6 +183,8 @@
                 PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
                 [appDelegate hideIndicator];
                 
+                [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
+
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
                 [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
                 appDelegate.isPurchased = YES;
@@ -242,7 +244,6 @@
 //#endif
         [FIRAnalytics logEventWithName:@"succeed_yearly" parameters:nil];
 
-
     }else{
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
 //#ifdef DEBUG
@@ -252,7 +253,6 @@
 //
 //#endif
         [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
-
 
     }
     
@@ -359,7 +359,7 @@
             
         }
         
-    }else{
+    }else if([proID isEqualToString:kInAppPurchaseProductIdLifetime]){
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
 //            [Appsee addEvent:@"Cancel - Lifetime"];
@@ -396,6 +396,9 @@
         }else if (transaction.error.code == SKErrorUnknown){
             
         }
+    }else{
+        [FIRAnalytics logEventWithName:@"cancel_other" parameters:@{@"error_code":[NSString stringWithFormat:@"%ld",transaction.error.code],@"transactionID":transaction.payment.productIdentifier,@"date":transaction.transactionDate}];
+
     }
 //    NSLog(@"交易失败2 %@",transaction.error);
    

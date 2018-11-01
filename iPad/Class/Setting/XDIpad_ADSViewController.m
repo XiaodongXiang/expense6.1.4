@@ -74,6 +74,11 @@
     [self.restoreBtn setTitle:NSLocalizedString(@"VC_RestorePurchased", nil) forState:UIControlStateNormal];
     
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    self.monthBtn.enabled = YES;
+    self.yearBtn.enabled = YES;
+    self.lifetimeBtn.enabled = YES;
+    
     if (appDelegate.isPurchased) {
         self.restoreBtn.hidden = YES;
         self.restoreBtnHeight.constant = 0.01;
@@ -93,6 +98,7 @@
             self.yearView.userInteractionEnabled = NO;
             self.saleLbl.hidden = YES;
             
+            self.lifetimeBtn.enabled = NO;
         }else{
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
@@ -104,6 +110,7 @@
                     
                     self.yearBg.image = [UIImage imageNamed:@"year"];
                     
+                    self.monthBtn.enabled = NO;
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.yearTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -112,6 +119,8 @@
                     self.saleLbl.hidden = YES;
                     //            self.yearBtn.enabled = NO;
                     self.monthBg.image = [UIImage imageNamed:@"month"];
+                    
+                    self.yearBtn.enabled = NO;
                 }else{
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.lifeTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -123,7 +132,7 @@
                     self.yearBg.image = [UIImage imageNamed:@"month-1"];
                     self.monthView.userInteractionEnabled = NO;
                     self.yearView.userInteractionEnabled = NO;
-                    
+                    self.lifetimeBtn.enabled = NO;
                 }
             }
         }
