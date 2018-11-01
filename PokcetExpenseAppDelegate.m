@@ -162,7 +162,6 @@
         }else{
             NSLog(@"infos:%@",error.errorInfos);
         }
-        
     }];
     
     NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());

@@ -873,7 +873,6 @@
 		6032EA3F1C6186EA005FFC01 /* LCImagePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6032EA3E1C6186EA005FFC01 /* LCImagePickerViewController.m */; };
 		6032EA4D1C620E87005FFC01 /* cashflow_arrow_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 6032EA491C620E87005FFC01 /* cashflow_arrow_red.png */; };
 		6032EA4E1C620E87005FFC01 /* cashflow_arrow_red@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6032EA4A1C620E87005FFC01 /* cashflow_arrow_red@2x.png */; };
-		604C196F1C7EF6B400146A54 /* side_account_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 604C196E1C7EF6B400146A54 /* side_account_click.png */; };
 		6054BE261C8D3226006EBC6B /* pilot_1_bg_iphone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6054BE241C8D3226006EBC6B /* pilot_1_bg_iphone4.png */; };
 		6054BE271C8D3226006EBC6B /* pilot_2_bg_iphone4.png in Resources */ = {isa = PBXBuildFile; fileRef = 6054BE251C8D3226006EBC6B /* pilot_2_bg_iphone4.png */; };
 		60552FAF1CB39EC7005993C1 /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 60552FAE1CB39EC7005993C1 /* Parse.framework */; };
@@ -1127,39 +1126,8 @@
 		60C0B0A71C5A130600DE50D7 /* account_bg_icon_other.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C0B09E1C5A130600DE50D7 /* account_bg_icon_other.png */; };
 		60C0B0A81C5A130600DE50D7 /* account_bg_Saving.png in Resources */ = {isa = PBXBuildFile; fileRef = 60C0B09F1C5A130600DE50D7 /* account_bg_Saving.png */; };
 		60D5D5E41C623CFA003E1D26 /* account_category_form_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D5D5E31C623CFA003E1D26 /* account_category_form_gray@2x.png */; };
-		60D91FF21C7EF35A00B14E20 /* side_account_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FCC1C7EF35A00B14E20 /* side_account_click@2x.png */; };
-		60D91FF31C7EF35A00B14E20 /* side_account.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FCD1C7EF35A00B14E20 /* side_account.png */; };
-		60D91FF41C7EF35A00B14E20 /* side_account@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FCE1C7EF35A00B14E20 /* side_account@2x.png */; };
 		60D91FF51C7EF35A00B14E20 /* side_bg_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FCF1C7EF35A00B14E20 /* side_bg_color.png */; };
 		60D91FF61C7EF35A00B14E20 /* side_bg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD01C7EF35A00B14E20 /* side_bg@2x.png */; };
-		60D91FF71C7EF35A00B14E20 /* side_bill_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD11C7EF35A00B14E20 /* side_bill_click.png */; };
-		60D91FF81C7EF35A00B14E20 /* side_bill_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD21C7EF35A00B14E20 /* side_bill_click@2x.png */; };
-		60D91FF91C7EF35A00B14E20 /* side_bill.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD31C7EF35A00B14E20 /* side_bill.png */; };
-		60D91FFA1C7EF35A00B14E20 /* side_bill@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD41C7EF35A00B14E20 /* side_bill@2x.png */; };
-		60D91FFB1C7EF35A00B14E20 /* side_budget_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD51C7EF35A00B14E20 /* side_budget_click.png */; };
-		60D91FFC1C7EF35A00B14E20 /* side_budget_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD61C7EF35A00B14E20 /* side_budget_click@2x.png */; };
-		60D91FFD1C7EF35A00B14E20 /* side_budget.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD71C7EF35A00B14E20 /* side_budget.png */; };
-		60D91FFE1C7EF35A00B14E20 /* side_budget@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD81C7EF35A00B14E20 /* side_budget@2x.png */; };
-		60D91FFF1C7EF35A00B14E20 /* side_cashflow_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FD91C7EF35A00B14E20 /* side_cashflow_click.png */; };
-		60D920001C7EF35A00B14E20 /* side_cashflow_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FDA1C7EF35A00B14E20 /* side_cashflow_click@2x.png */; };
-		60D920011C7EF35A00B14E20 /* side_cashflow.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FDB1C7EF35A00B14E20 /* side_cashflow.png */; };
-		60D920021C7EF35A00B14E20 /* side_cashflow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FDC1C7EF35A00B14E20 /* side_cashflow@2x.png */; };
-		60D920031C7EF35A00B14E20 /* side_category_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FDD1C7EF35A00B14E20 /* side_category_click.png */; };
-		60D920041C7EF35A00B14E20 /* side_category_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FDE1C7EF35A00B14E20 /* side_category_click@2x.png */; };
-		60D920051C7EF35A00B14E20 /* side_category.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FDF1C7EF35A00B14E20 /* side_category.png */; };
-		60D920061C7EF35A00B14E20 /* side_category@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE01C7EF35A00B14E20 /* side_category@2x.png */; };
-		60D920071C7EF35A00B14E20 /* side_networth_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE11C7EF35A00B14E20 /* side_networth_click.png */; };
-		60D920081C7EF35A00B14E20 /* side_networth_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE21C7EF35A00B14E20 /* side_networth_click@2x.png */; };
-		60D920091C7EF35A00B14E20 /* side_networth.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE31C7EF35A00B14E20 /* side_networth.png */; };
-		60D9200A1C7EF35A00B14E20 /* side_networth@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE41C7EF35A00B14E20 /* side_networth@2x.png */; };
-		60D9200B1C7EF35A00B14E20 /* side_overview_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE51C7EF35A00B14E20 /* side_overview_click.png */; };
-		60D9200C1C7EF35A00B14E20 /* side_overview_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE61C7EF35A00B14E20 /* side_overview_click@2x.png */; };
-		60D9200D1C7EF35A00B14E20 /* side_overview.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE71C7EF35A00B14E20 /* side_overview.png */; };
-		60D9200E1C7EF35A00B14E20 /* side_overview@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE81C7EF35A00B14E20 /* side_overview@2x.png */; };
-		60D9200F1C7EF35A00B14E20 /* side_summary_click.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FE91C7EF35A00B14E20 /* side_summary_click.png */; };
-		60D920101C7EF35A00B14E20 /* side_summary_click@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FEA1C7EF35A00B14E20 /* side_summary_click@2x.png */; };
-		60D920111C7EF35A00B14E20 /* side_summary.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FEB1C7EF35A00B14E20 /* side_summary.png */; };
-		60D920121C7EF35A00B14E20 /* side_summary@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FEC1C7EF35A00B14E20 /* side_summary@2x.png */; };
 		60D920131C7EF35A00B14E20 /* ipad_siderbar_setting.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FED1C7EF35A00B14E20 /* ipad_siderbar_setting.png */; };
 		60D920141C7EF35A00B14E20 /* ipad_siderbar_setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FEE1C7EF35A00B14E20 /* ipad_siderbar_setting@2x.png */; };
 		60D920151C7EF35A00B14E20 /* ipad_siderbar_sync.png in Resources */ = {isa = PBXBuildFile; fileRef = 60D91FEF1C7EF35A00B14E20 /* ipad_siderbar_sync.png */; };
@@ -3695,7 +3663,6 @@
 		6032EA3E1C6186EA005FFC01 /* LCImagePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LCImagePickerViewController.m; sourceTree = "<group>"; };
 		6032EA491C620E87005FFC01 /* cashflow_arrow_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cashflow_arrow_red.png; sourceTree = "<group>"; };
 		6032EA4A1C620E87005FFC01 /* cashflow_arrow_red@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cashflow_arrow_red@2x.png"; sourceTree = "<group>"; };
-		604C196E1C7EF6B400146A54 /* side_account_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_account_click.png; sourceTree = "<group>"; };
 		6054BE241C8D3226006EBC6B /* pilot_1_bg_iphone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pilot_1_bg_iphone4.png; sourceTree = "<group>"; };
 		6054BE251C8D3226006EBC6B /* pilot_2_bg_iphone4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pilot_2_bg_iphone4.png; sourceTree = "<group>"; };
 		60552FAE1CB39EC7005993C1 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
@@ -3967,39 +3934,8 @@
 		60C0B09F1C5A130600DE50D7 /* account_bg_Saving.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_bg_Saving.png; sourceTree = "<group>"; };
 		60D5D5E31C623CFA003E1D26 /* account_category_form_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "account_category_form_gray@2x.png"; sourceTree = "<group>"; };
 		60D7AFD71CA0EB4C0022E2FF /* PokcetExpense 11.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PokcetExpense 11.xcdatamodel"; sourceTree = "<group>"; };
-		60D91FCC1C7EF35A00B14E20 /* side_account_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_account_click@2x.png"; sourceTree = "<group>"; };
-		60D91FCD1C7EF35A00B14E20 /* side_account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_account.png; sourceTree = "<group>"; };
-		60D91FCE1C7EF35A00B14E20 /* side_account@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_account@2x.png"; sourceTree = "<group>"; };
 		60D91FCF1C7EF35A00B14E20 /* side_bg_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_bg_color.png; sourceTree = "<group>"; };
 		60D91FD01C7EF35A00B14E20 /* side_bg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_bg@2x.png"; sourceTree = "<group>"; };
-		60D91FD11C7EF35A00B14E20 /* side_bill_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_bill_click.png; sourceTree = "<group>"; };
-		60D91FD21C7EF35A00B14E20 /* side_bill_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_bill_click@2x.png"; sourceTree = "<group>"; };
-		60D91FD31C7EF35A00B14E20 /* side_bill.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_bill.png; sourceTree = "<group>"; };
-		60D91FD41C7EF35A00B14E20 /* side_bill@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_bill@2x.png"; sourceTree = "<group>"; };
-		60D91FD51C7EF35A00B14E20 /* side_budget_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_budget_click.png; sourceTree = "<group>"; };
-		60D91FD61C7EF35A00B14E20 /* side_budget_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_budget_click@2x.png"; sourceTree = "<group>"; };
-		60D91FD71C7EF35A00B14E20 /* side_budget.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_budget.png; sourceTree = "<group>"; };
-		60D91FD81C7EF35A00B14E20 /* side_budget@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_budget@2x.png"; sourceTree = "<group>"; };
-		60D91FD91C7EF35A00B14E20 /* side_cashflow_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_cashflow_click.png; sourceTree = "<group>"; };
-		60D91FDA1C7EF35A00B14E20 /* side_cashflow_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_cashflow_click@2x.png"; sourceTree = "<group>"; };
-		60D91FDB1C7EF35A00B14E20 /* side_cashflow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_cashflow.png; sourceTree = "<group>"; };
-		60D91FDC1C7EF35A00B14E20 /* side_cashflow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_cashflow@2x.png"; sourceTree = "<group>"; };
-		60D91FDD1C7EF35A00B14E20 /* side_category_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_category_click.png; sourceTree = "<group>"; };
-		60D91FDE1C7EF35A00B14E20 /* side_category_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_category_click@2x.png"; sourceTree = "<group>"; };
-		60D91FDF1C7EF35A00B14E20 /* side_category.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_category.png; sourceTree = "<group>"; };
-		60D91FE01C7EF35A00B14E20 /* side_category@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_category@2x.png"; sourceTree = "<group>"; };
-		60D91FE11C7EF35A00B14E20 /* side_networth_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_networth_click.png; sourceTree = "<group>"; };
-		60D91FE21C7EF35A00B14E20 /* side_networth_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_networth_click@2x.png"; sourceTree = "<group>"; };
-		60D91FE31C7EF35A00B14E20 /* side_networth.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_networth.png; sourceTree = "<group>"; };
-		60D91FE41C7EF35A00B14E20 /* side_networth@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_networth@2x.png"; sourceTree = "<group>"; };
-		60D91FE51C7EF35A00B14E20 /* side_overview_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_overview_click.png; sourceTree = "<group>"; };
-		60D91FE61C7EF35A00B14E20 /* side_overview_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_overview_click@2x.png"; sourceTree = "<group>"; };
-		60D91FE71C7EF35A00B14E20 /* side_overview.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_overview.png; sourceTree = "<group>"; };
-		60D91FE81C7EF35A00B14E20 /* side_overview@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_overview@2x.png"; sourceTree = "<group>"; };
-		60D91FE91C7EF35A00B14E20 /* side_summary_click.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_summary_click.png; sourceTree = "<group>"; };
-		60D91FEA1C7EF35A00B14E20 /* side_summary_click@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_summary_click@2x.png"; sourceTree = "<group>"; };
-		60D91FEB1C7EF35A00B14E20 /* side_summary.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = side_summary.png; sourceTree = "<group>"; };
-		60D91FEC1C7EF35A00B14E20 /* side_summary@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "side_summary@2x.png"; sourceTree = "<group>"; };
 		60D91FED1C7EF35A00B14E20 /* ipad_siderbar_setting.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_siderbar_setting.png; sourceTree = "<group>"; };
 		60D91FEE1C7EF35A00B14E20 /* ipad_siderbar_setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ipad_siderbar_setting@2x.png"; sourceTree = "<group>"; };
 		60D91FEF1C7EF35A00B14E20 /* ipad_siderbar_sync.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ipad_siderbar_sync.png; sourceTree = "<group>"; };
@@ -8269,40 +8205,8 @@
 		60C0B0331C59E50B00DE50D7 /* sideIcon */ = {
 			isa = PBXGroup;
 			children = (
-				604C196E1C7EF6B400146A54 /* side_account_click.png */,
-				60D91FCC1C7EF35A00B14E20 /* side_account_click@2x.png */,
-				60D91FCD1C7EF35A00B14E20 /* side_account.png */,
-				60D91FCE1C7EF35A00B14E20 /* side_account@2x.png */,
 				60D91FCF1C7EF35A00B14E20 /* side_bg_color.png */,
 				60D91FD01C7EF35A00B14E20 /* side_bg@2x.png */,
-				60D91FD11C7EF35A00B14E20 /* side_bill_click.png */,
-				60D91FD21C7EF35A00B14E20 /* side_bill_click@2x.png */,
-				60D91FD31C7EF35A00B14E20 /* side_bill.png */,
-				60D91FD41C7EF35A00B14E20 /* side_bill@2x.png */,
-				60D91FD51C7EF35A00B14E20 /* side_budget_click.png */,
-				60D91FD61C7EF35A00B14E20 /* side_budget_click@2x.png */,
-				60D91FD71C7EF35A00B14E20 /* side_budget.png */,
-				60D91FD81C7EF35A00B14E20 /* side_budget@2x.png */,
-				60D91FD91C7EF35A00B14E20 /* side_cashflow_click.png */,
-				60D91FDA1C7EF35A00B14E20 /* side_cashflow_click@2x.png */,
-				60D91FDB1C7EF35A00B14E20 /* side_cashflow.png */,
-				60D91FDC1C7EF35A00B14E20 /* side_cashflow@2x.png */,
-				60D91FDD1C7EF35A00B14E20 /* side_category_click.png */,
-				60D91FDE1C7EF35A00B14E20 /* side_category_click@2x.png */,
-				60D91FDF1C7EF35A00B14E20 /* side_category.png */,
-				60D91FE01C7EF35A00B14E20 /* side_category@2x.png */,
-				60D91FE11C7EF35A00B14E20 /* side_networth_click.png */,
-				60D91FE21C7EF35A00B14E20 /* side_networth_click@2x.png */,
-				60D91FE31C7EF35A00B14E20 /* side_networth.png */,
-				60D91FE41C7EF35A00B14E20 /* side_networth@2x.png */,
-				60D91FE51C7EF35A00B14E20 /* side_overview_click.png */,
-				60D91FE61C7EF35A00B14E20 /* side_overview_click@2x.png */,
-				60D91FE71C7EF35A00B14E20 /* side_overview.png */,
-				60D91FE81C7EF35A00B14E20 /* side_overview@2x.png */,
-				60D91FE91C7EF35A00B14E20 /* side_summary_click.png */,
-				60D91FEA1C7EF35A00B14E20 /* side_summary_click@2x.png */,
-				60D91FEB1C7EF35A00B14E20 /* side_summary.png */,
-				60D91FEC1C7EF35A00B14E20 /* side_summary@2x.png */,
 				60D91FED1C7EF35A00B14E20 /* ipad_siderbar_setting.png */,
 				60D91FEE1C7EF35A00B14E20 /* ipad_siderbar_setting@2x.png */,
 				60D91FEF1C7EF35A00B14E20 /* ipad_siderbar_sync.png */,
@@ -11068,7 +10972,6 @@
 				60BE81FC1C86D1D000B871E2 /* sideslip_relation_click@3x.png in Resources */,
 				3ADF38C71C11597700253A8D /* mark_grey@2x.png in Resources */,
 				3ADE892C1B42748D00552972 /* ipad_arrow.png in Resources */,
-				60D91FFB1C7EF35A00B14E20 /* side_budget_click.png in Resources */,
 				A25611A519D3BB5C00A5A950 /* help_16_1.png in Resources */,
 				606507101C73FE1900A7B70A /* icon_comp.png in Resources */,
 				A256123819D3BB5C00A5A950 /* net_worth_uncleared_bg_320_60@2x.png in Resources */,
@@ -11089,7 +10992,6 @@
 				A2561B6219D3BF6900A5A950 /* ipad_pop_154_232@2x.png in Resources */,
 				A25611F119D3BB5C00A5A950 /* icon_photo_39_18_sel@2x.png in Resources */,
 				A256116C19D3BB5C00A5A950 /* cell_b_320_44_sel.png in Resources */,
-				60D91FF21C7EF35A00B14E20 /* side_account_click@2x.png in Resources */,
 				4E7BA8DF2063512700D9299A /* BudgetTableViewCell.xib in Resources */,
 				A256107919D3BB5C00A5A950 /* arrow1_30_30@2x.png in Resources */,
 				A274E7A91A58E8E4005E069A /* iphone6_btn_calendar_sel@2x.png in Resources */,
@@ -11122,7 +11024,6 @@
 				A20076111A1CBBA5000E32E3 /* arrow4.png in Resources */,
 				6065074F1C7474C900A7B70A /* btn_expense.png in Resources */,
 				3AF38F821B69EF6C00D55C8F /* next@2x.png in Resources */,
-				60D920031C7EF35A00B14E20 /* side_category_click.png in Resources */,
 				A25611F419D3BB5C00A5A950 /* icon_photo_80_44_sel.png in Resources */,
 				3ADE68FC1C3E311800C1E18C /* btn_rep_income@2x.png in Resources */,
 				3AEAF2FD1C4F14AF00D17451 /* PasscodeStyle_iPhoneViewController_iPad.xib in Resources */,
@@ -11259,14 +11160,12 @@
 				A2754FD81A087EBF00891EBE /* BudgetCell_NS.xib in Resources */,
 				3AE13FD21C43342A0056A0D2 /* iphone6_siderbar_sync@2x.png in Resources */,
 				A256186C19D3BB7F00A5A950 /* ipad_btn_comparison@2x.png in Resources */,
-				60D91FF31C7EF35A00B14E20 /* side_account.png in Resources */,
 				3AE842581BFEB3D50035DCE0 /* date_gray.png in Resources */,
 				3ADF05D61C3B62C300670206 /* password2@3x.png in Resources */,
 				3ADD89141BE1C33600694647 /* iphone6_account_bg_Debt@2x.png in Resources */,
 				A25618A119D3BB7F00A5A950 /* ipad_cell_b1_858_44.png in Resources */,
 				3AE2AA5B1C1FE1A100D6C552 /* sign_1_ip5.jpg in Resources */,
 				A25611A819D3BB5C00A5A950 /* help_16_2@2x.png in Resources */,
-				60D920101C7EF35A00B14E20 /* side_summary_click@2x.png in Resources */,
 				A2F633221A19C10D00676B8C /* ipad_btn_0.png in Resources */,
 				3AE5E4AB1C22A5C80032F410 /* setting_category@3x.png in Resources */,
 				3ADBA0F51BF9D5F700512D2C /* income_color5@2x.png in Resources */,
@@ -11300,10 +11199,8 @@
 				606506511C731BC800A7B70A /* account_iconbg_asset.png in Resources */,
 				A256174819D3BB7F00A5A950 /* ipad_btn_minus_sel@2x.png in Resources */,
 				60F6396A1C62FF9500931290 /* siderbar_user@3x.png in Resources */,
-				60D91FF81C7EF35A00B14E20 /* side_bill_click@2x.png in Resources */,
 				A256169619D3BB7F00A5A950 /* iPad_OverViewViewController.xib in Resources */,
 				3AE2AA3E1C1FE1A100D6C552 /* gear3@3x.png in Resources */,
-				60D91FFC1C7EF35A00B14E20 /* side_budget_click@2x.png in Resources */,
 				A256102219D3BB5C00A5A950 /* EmailViewController.xib in Resources */,
 				A256173219D3BB7F00A5A950 /* ipad_btn_7@2x.png in Resources */,
 				606507321C73FE1900A7B70A /* my_kids.png in Resources */,
@@ -11475,7 +11372,6 @@
 				A256194F19D3BB7F00A5A950 /* ipad_title_bill_630_70@2x.png in Resources */,
 				A274E7951A58E877005E069A /* btn_account_sel@2x.png in Resources */,
 				A256189C19D3BB7F00A5A950 /* ipad_cell_630_50_sel@2x.png in Resources */,
-				60D920091C7EF35A00B14E20 /* side_networth.png in Resources */,
 				3AE5E46E1C22A2F20032F410 /* navigation_adjustment@3x.png in Resources */,
 				A25618F419D3BB7F00A5A950 /* ipad_icon_setting_30_30_sel@2x.png in Resources */,
 				A256192919D3BB7F00A5A950 /* ipad_pop_cell_140_36_sel.png in Resources */,
@@ -11518,7 +11414,6 @@
 				A256105C19D3BB5C00A5A950 /* add_320_568@2x.png in Resources */,
 				3AE69FAC1C4CBEF8005E211B /* ipad_pilot_2_bg.png in Resources */,
 				A25611AB19D3BB5C00A5A950 /* help_2@2x.png in Resources */,
-				604C196F1C7EF6B400146A54 /* side_account_click.png in Resources */,
 				3AE2F4501C48E65B006062E0 /* updatehistory@2x.png in Resources */,
 				A256117519D3BB5C00A5A950 /* cell_d_290_44@2x.png in Resources */,
 				606506571C731BC800A7B70A /* account_iconbg_loan.png in Resources */,
@@ -11719,12 +11614,10 @@
 				4E7BA9072063512800D9299A /* XDAccountCategoryView.xib in Resources */,
 				3AE8425C1BFEBCAA0035DCE0 /* calendar_nav@3x.png in Resources */,
 				A256195319D3BB7F00A5A950 /* mark_gray@2x.png in Resources */,
-				60D920001C7EF35A00B14E20 /* side_cashflow_click@2x.png in Resources */,
 				3A1F02F71C0ED8DE00D02C14 /* icon_check3_sel@3x.png in Resources */,
 				3ADE68F91C3E311800C1E18C /* btn_rep_expense@3x.png in Resources */,
 				3AE1ABE91C210D1A00F26F22 /* sign_icon_remind@3x.png in Resources */,
 				A256108E19D3BB5C00A5A950 /* back2_30_30_sel.png in Resources */,
-				60D920011C7EF35A00B14E20 /* side_cashflow.png in Resources */,
 				60BE81EA1C86D1D000B871E2 /* iphone6_sideslip_revise_click@2x.png in Resources */,
 				3ADF38E11C118AF800253A8D /* btn_transfer@3x.png in Resources */,
 				A2560FA519D3BB5C00A5A950 /* AccountTranscationViewController.xib in Resources */,
@@ -11747,7 +11640,6 @@
 				A25611A919D3BB5C00A5A950 /* help_1@2x.png in Resources */,
 				A2DB69C21A8CA89A00A92B62 /* ipad_bill_detail_bg.png in Resources */,
 				602FA5F41C5F24710016A362 /* iPad_budgetBar_list_select@2x.png in Resources */,
-				60D9200A1C7EF35A00B14E20 /* side_networth@2x.png in Resources */,
 				A20076461A1CC013000E32E3 /* icon_edit2_30_30@3x.png in Resources */,
 				3AE2AA4D1C1FE1A100D6C552 /* Parse@2x.png in Resources */,
 				A256189519D3BB7F00A5A950 /* ipad_cell_400_44.png in Resources */,
@@ -11791,7 +11683,6 @@
 				3A8687B91BD9E5AD00417115 /* siderbar_arrow@2x.png in Resources */,
 				A256166419D3BB7F00A5A950 /* iPad_ReminderViewController.xib in Resources */,
 				A25618F219D3BB7F00A5A950 /* ipad_icon_setting_30_30@2x.png in Resources */,
-				60D920041C7EF35A00B14E20 /* side_category_click@2x.png in Resources */,
 				A2211CB91A39A852005E135F /* btn_minus@3x.png in Resources */,
 				60E2B8B71C5B3439007DAB17 /* account_category_form_bottom_gray@2x.png in Resources */,
 				6054BE261C8D3226006EBC6B /* pilot_1_bg_iphone4.png in Resources */,
@@ -11816,7 +11707,6 @@
 				3AE69FB31C4CBEF8005E211B /* pilot_1_phone.png in Resources */,
 				3AE1ABE71C210D1A00F26F22 /* sign_icon_load@3x.png in Resources */,
 				A256107D19D3BB5C00A5A950 /* arrow2_10_90@2x.png in Resources */,
-				60D91FF41C7EF35A00B14E20 /* side_account@2x.png in Resources */,
 				A256189819D3BB7F00A5A950 /* ipad_cell_470_60@2x.png in Resources */,
 				6076DAC91C84593100952CA7 /* budgetselect_cilck.png in Resources */,
 				A25618AB19D3BB7F00A5A950 /* ipad_cell_b_add_transactions.png in Resources */,
@@ -11870,7 +11760,6 @@
 				A2561B4F19D3BF6900A5A950 /* ipad_cell_400_50.png in Resources */,
 				6076DACA1C84593100952CA7 /* budgetselect_cilck@2x.png in Resources */,
 				4E7BA9032063512800D9299A /* XDAccountDetailViewController.xib in Resources */,
-				60D91FFD1C7EF35A00B14E20 /* side_budget.png in Resources */,
 				A2ACBB471A01CCD80048F5F5 /* nav_bar_320_64@2x.png in Resources */,
 				A25618CE19D3BB7F00A5A950 /* ipad_head_480_22@2x.png in Resources */,
 				A256165119D3BB7F00A5A950 /* ipad_AccountTypeEditViewController.xib in Resources */,
@@ -11896,7 +11785,6 @@
 				3ADBA0DE1BF9D5F700512D2C /* expense_color7@3x.png in Resources */,
 				A20076301A1CBD59000E32E3 /* icon_search1_30_30@2x.png in Resources */,
 				3ABF0F021B1C188F000A7F26 /* document@2x.png in Resources */,
-				60D920061C7EF35A00B14E20 /* side_category@2x.png in Resources */,
 				A27FAE011A0216290044C469 /* btn_charts@2x.png in Resources */,
 				A256172E19D3BB7F00A5A950 /* ipad_btn_6@2x.png in Resources */,
 				606506501C731BC800A7B70A /* account_edit_sort.png in Resources */,
@@ -12001,7 +11889,6 @@
 				3AE60DFA1C17CBFC00FEF8DE /* icon_search_14_14@2x.png in Resources */,
 				A256124C19D3BB5C00A5A950 /* red_1_7@2x.png in Resources */,
 				A256191F19D3BB7F00A5A950 /* ipad_pop_arrow2_12_8_sel.png in Resources */,
-				60D91FF91C7EF35A00B14E20 /* side_bill.png in Resources */,
 				3ADD89081BE1C33600694647 /* account_bg_cash@3x.png in Resources */,
 				3AE301AE1C58BDF6008AEE88 /* overview_budget_arrow.png in Resources */,
 				606507081C73FE1900A7B70A /* icon_auto_gas.png in Resources */,
@@ -12116,7 +12003,6 @@
 				3AE4D8361C0EC506009BF52B /* category_bg_cash@2x.png in Resources */,
 				3AE4D8371C0EC506009BF52B /* category_bg_checking@2x.png in Resources */,
 				A256126E19D3BB5C00A5A950 /* tab_bar1_320_59@2x.png in Resources */,
-				60D920071C7EF35A00B14E20 /* side_networth_click.png in Resources */,
 				A256171F19D3BB7F00A5A950 /* ipad_btn_2_sel.png in Resources */,
 				A256174F19D3BB7F00A5A950 /* ipad_btn_plus_sel.png in Resources */,
 				A256187B19D3BB7F00A5A950 /* ipad_btn_sel.png in Resources */,
@@ -12176,7 +12062,6 @@
 				3ADE890D1B42748D00552972 /* ipad_cell_sign_in_a2@2x.png in Resources */,
 				A25616B219D3BB7F00A5A950 /* ipad_ReportComparisonViewController.xib in Resources */,
 				606507741C759CE600A7B70A /* full_version_ipad3.png in Resources */,
-				60D9200C1C7EF35A00B14E20 /* side_overview_click@2x.png in Resources */,
 				6017DF2B1CC6156700A2AE09 /* cashflow_arrow_green@3x.png in Resources */,
 				3AC1302C1B40D7A900E56E19 /* iphone6_sign_in@2x.png in Resources */,
 				A25616FA19D3BB7F00A5A950 /* Avenir LT 65 Medium.ttf in Resources */,
@@ -12216,7 +12101,6 @@
 				3AE1550B1BEC84C800F9CA91 /* btn_account_81_29_sel@3x.png in Resources */,
 				A2561B6019D3BF6900A5A950 /* ipad_pop_154_88@2x.png in Resources */,
 				A25611B719D3BB5C00A5A950 /* icon_account_30_30@2x.png in Resources */,
-				60D91FFF1C7EF35A00B14E20 /* side_cashflow_click.png in Resources */,
 				A2F633D41A19C1EA00676B8C /* btn_point_sel@2x.png in Resources */,
 				3ADBA0E21BF9D5F700512D2C /* expense_color9.png in Resources */,
 				4E7BA8D92063512700D9299A /* numberKeyboardView.xib in Resources */,
@@ -12306,7 +12190,6 @@
 				60D920161C7EF35A00B14E20 /* ipad_siderbar_sync@2x.png in Resources */,
 				A25611AE19D3BB5C00A5A950 /* help_4_2.png in Resources */,
 				3ADE88D31B42387800552972 /* iphone6_text1@2x.png in Resources */,
-				60D91FFE1C7EF35A00B14E20 /* side_budget@2x.png in Resources */,
 				A256122D19D3BB5C00A5A950 /* nav_bar_320_44.png in Resources */,
 				A2561B1719D3BF6900A5A950 /* bar_267_40@2x.png in Resources */,
 				A2D1B01D1A198A7A007B90C0 /* iphone6_btn_multiply_sel@2x.png in Resources */,
@@ -12376,7 +12259,6 @@
 				606507471C74059C00A7B70A /* ipad_icon_back_30_30@2x.png in Resources */,
 				606507181C73FE1900A7B70A /* icon_health_fitness.png in Resources */,
 				A256119C19D3BB5C00A5A950 /* gray_1_7.png in Resources */,
-				60D9200E1C7EF35A00B14E20 /* side_overview@2x.png in Resources */,
 				3ADBA1041BF9D5F700512D2C /* income_color@3x.png in Resources */,
 				A256100F19D3BB5C00A5A950 /* DateRangeViewController.xib in Resources */,
 				A2560F9F19D3BB5C00A5A950 /* AccountSearchViewController.xib in Resources */,
@@ -12386,7 +12268,6 @@
 				602FA5E11C5EF2780016A362 /* bill_form_bottom_white@2x.png in Resources */,
 				A256194719D3BB7F00A5A950 /* ipad_tab_bar_630_49.png in Resources */,
 				3AE154AE1BEC4A5300F9CA91 /* account_iconbg_Debt@2x.png in Resources */,
-				60D920111C7EF35A00B14E20 /* side_summary.png in Resources */,
 				A274E7A11A58E8CE005E069A /* btn_calendar_sel@3x.png in Resources */,
 				A25611D619D3BB5C00A5A950 /* icon_delete.png in Resources */,
 				A2F633211A19C10D00676B8C /* ipad_btn_0_sel@2x.png in Resources */,
@@ -12451,7 +12332,6 @@
 				A29FA3881A1DDB59009A9EFF /* banner_iphone@3x.png in Resources */,
 				A256117419D3BB5C00A5A950 /* cell_d_290_44.png in Resources */,
 				3AE2AA491C1FE1A100D6C552 /* iphone6_pilot_1_savemoney@2x.png in Resources */,
-				60D920081C7EF35A00B14E20 /* side_networth_click@2x.png in Resources */,
 				A256124019D3BB5C00A5A950 /* pop_bg2.png in Resources */,
 				A256170F19D3BB7F00A5A950 /* btn_upgrade_now_ipad@2x.png in Resources */,
 				3ADE68E51C3E01F200C1E18C /* btn_expense_sel@2x.png in Resources */,
@@ -12605,7 +12485,6 @@
 				A2561B1619D3BF6900A5A950 /* bar_267_40.png in Resources */,
 				A256115619D3BB5C00A5A950 /* calendar@2x.png in Resources */,
 				3AE154EF1BEC597500F9CA91 /* budget_bg_320_109@3x.png in Resources */,
-				60D920121C7EF35A00B14E20 /* side_summary@2x.png in Resources */,
 				60BE81EE1C86D1D000B871E2 /* sideslip_copy_click.png in Resources */,
 				A25611B619D3BB5C00A5A950 /* icon_account_30_30.png in Resources */,
 				A256120619D3BB5C00A5A950 /* icon_sel_34_34.png in Resources */,
@@ -12638,7 +12517,6 @@
 				A256118419D3BB5C00A5A950 /* cell_i2_320_44.png in Resources */,
 				A256109F19D3BB5C00A5A950 /* big_gray_1_40@2x.png in Resources */,
 				3AE346651BE899FD001B0DDD /* category_bg_Saving@3x.png in Resources */,
-				60D9200D1C7EF35A00B14E20 /* side_overview.png in Resources */,
 				A256188D19D3BB7F00A5A950 /* ipad_cell2_420_50.png in Resources */,
 				A256111A19D3BB5C00A5A950 /* btn_related_81_29@2x.png in Resources */,
 				A256172019D3BB7F00A5A950 /* ipad_btn_2_sel@2x.png in Resources */,
@@ -12648,7 +12526,6 @@
 				3AE2B0941C3A7328002CA41F /* billPaid@3x.png in Resources */,
 				60E2B8C31C5B3439007DAB17 /* account_form_gray@2x.png in Resources */,
 				3AE136B91C59BD2600B88168 /* pocket_title@2x.png in Resources */,
-				60D920021C7EF35A00B14E20 /* side_cashflow@2x.png in Resources */,
 				A256119D19D3BB5C00A5A950 /* gray_1_7@2x.png in Resources */,
 				6065065C1C731BC800A7B70A /* calander_green_point.png in Resources */,
 				606507401C73FE1900A7B70A /* uncategorized_income.png in Resources */,
@@ -12682,7 +12559,6 @@
 				A256107119D3BB5C00A5A950 /* full_version_iphone3@2x.png in Resources */,
 				3AC130631B41470B00E56E19 /* cell_sign_in_a1@3x.png in Resources */,
 				3AE2B0681C3A511A002CA41F /* setting_budget_left_sel.png in Resources */,
-				60D91FF71C7EF35A00B14E20 /* side_bill_click.png in Resources */,
 				3ADD89181BE1C33600694647 /* iphone6_account_bg_Saving@2x.png in Resources */,
 				A29FA3871A1DDB59009A9EFF /* iphone6_banner_iphone@2x.png in Resources */,
 				A25611A619D3BB5C00A5A950 /* help_16_1@2x.png in Resources */,
@@ -12761,7 +12637,6 @@
 				606507291C73FE1900A7B70A /* icon_wedding.png in Resources */,
 				3ADF38C81C11597700253A8D /* mark_red@2x.png in Resources */,
 				3A5F29361BDF6323003D9DDE /* siderbar_search@3x.png in Resources */,
-				60D9200B1C7EF35A00B14E20 /* side_overview_click.png in Resources */,
 				A256115A19D3BB5C00A5A950 /* cell_290_118.png in Resources */,
 				A2F633761A19C1CC00676B8C /* btn_1_sel@2x.png in Resources */,
 				A256185019D3BB7F00A5A950 /* ipad_arrow2_budget@2x.png in Resources */,
@@ -12794,7 +12669,6 @@
 				6065067D1C731FA000A7B70A /* checking.png in Resources */,
 				A20076121A1CBBA5000E32E3 /* arrow4@2x.png in Resources */,
 				A2F6339D1A19C1CC00676B8C /* iphone6_btn_7_sel@2x.png in Resources */,
-				60D91FFA1C7EF35A00B14E20 /* side_bill@2x.png in Resources */,
 				60D91FF61C7EF35A00B14E20 /* side_bg@2x.png in Resources */,
 				3AE346611BE899FD001B0DDD /* category_bg_Debt@3x.png in Resources */,
 				A25616F619D3BB7F00A5A950 /* ipad_TranscactionQuickEditViewController.xib in Resources */,
@@ -12900,7 +12774,6 @@
 				3AE4D6BB1C0D7094009BF52B /* iphone6_budget_transfer_bg@2x.png in Resources */,
 				A2754FD01A08706700891EBE /* payHistory@3x.png in Resources */,
 				4E723600206E09C700D9A7A3 /* XDBillMainViewController.xib in Resources */,
-				60D920051C7EF35A00B14E20 /* side_category.png in Resources */,
 				A256107819D3BB5C00A5A950 /* arrow1_30_30.png in Resources */,
 				6096B7FF1C72D24200A21210 /* about_bg_ipad.png in Resources */,
 				3ADBA0C71BF9D5F700512D2C /* expense_color00.png in Resources */,
@@ -12956,7 +12829,6 @@
 				4E7BA8F82063512700D9299A /* XDAddAccountViewController.xib in Resources */,
 				6065074A1C7473BE00A7B70A /* btn_transfer_sel.png in Resources */,
 				A256120919D3BB5C00A5A950 /* icon_sel_40_40@2x.png in Resources */,
-				60D9200F1C7EF35A00B14E20 /* side_summary_click.png in Resources */,
 				3AE136B21C599A9800B88168 /* overview_calander_bg.png in Resources */,
 				3ABF0F251B1C188F000A7F26 /* phone_icon@3x.png in Resources */,
 				3AE5E4721C22A3290032F410 /* navigation_edit@3x.png in Resources */,
