@@ -45,6 +45,9 @@
         self.amount = @"";
         [self addObserver:self forKeyPath:@"amount" options:NSKeyValueObservingOptionNew context:nil];
        
+        UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, self.height+0.5, SCREEN_WIDTH, 40)];
+        view.backgroundColor = [UIColor whiteColor];
+        [self addSubview:view];
     }
     return self;
 }
