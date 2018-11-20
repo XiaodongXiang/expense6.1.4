@@ -253,6 +253,7 @@
         _proImageViewl3.hidden = YES;
     }
     [_settingTableView reloadData];
+    
 }
 
 - (IBAction)profileIconClick:(id)sender {

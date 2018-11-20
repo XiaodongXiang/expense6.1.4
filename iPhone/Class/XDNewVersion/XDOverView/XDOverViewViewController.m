@@ -273,7 +273,7 @@
             [[ParseDBManager sharedManager] savingSetting];
         }
     }
-    
+    [self validateReceipt];
 }
 
 
@@ -654,54 +654,6 @@
     }
 }
 
--(void)returnReceipt:(NSDictionary*)lastReceipt  pendingRenewal:(NSDictionary*)pendingRenewal{
-    
-    NSString* purchasedStr = [lastReceipt valueForKey:@"purchase_date"];
-    NSString* expiresStr =[lastReceipt valueForKey:@"expires_date"];
-    NSString* productID = [lastReceipt valueForKey:@"product_id"];
-    NSString* originalID = [lastReceipt valueForKey:@"original_transaction_id"];
-    //    NSString* originalTransacionID = [lastReceipt valueForKey:@"original_transaction_id"];
-    
-    if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
-//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
-
-        return;
-    }
-    
-    NSString* purchaseSubStr = [purchasedStr substringToIndex:purchasedStr.length - 7];
-    NSString* expireSubStr = [expiresStr substringToIndex:expiresStr.length - 7];
-    
-    NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
-    [dateFormant setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-    [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
-    
-    NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
-    NSDate* expireDate = [dateFormant dateFromString:expireSubStr];
-    
-    //续订了
-    if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
-        [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
-//        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
-
-    }else{  //没续订
-        [self noSubscription];
-//        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
-
-        NSString* auto_renew_status = pendingRenewal[@"auto_renew_status"];
-        NSString* expiration_intent = pendingRenewal[@"expiration_intent"];
-        
-        if ([auto_renew_status isEqualToString:@"0"]) {
-            if ([expiration_intent isEqualToString:@"1"] || [expiration_intent isEqualToString:@"3"]) {
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"You have canceled subscription, all premium feature are not available." message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
-                    [failedAlert show];
-                });
-            }
-        }
-    }
-}
-
 -(void)noSubscription{
 //    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
     [[XDDataManager shareManager] removeSettingPurchase];
@@ -798,6 +750,54 @@
                                       }];
 
     [datatask resume];
+}
+
+-(void)returnReceipt:(NSDictionary*)lastReceipt  pendingRenewal:(NSDictionary*)pendingRenewal{
+    
+    NSString* purchasedStr = [lastReceipt valueForKey:@"purchase_date"];
+    NSString* expiresStr =[lastReceipt valueForKey:@"expires_date"];
+    NSString* productID = [lastReceipt valueForKey:@"product_id"];
+    NSString* originalID = [lastReceipt valueForKey:@"original_transaction_id"];
+    //    NSString* originalTransacionID = [lastReceipt valueForKey:@"original_transaction_id"];
+    
+    if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+        //        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+        
+        return;
+    }
+    
+    NSString* purchaseSubStr = [purchasedStr substringToIndex:purchasedStr.length - 7];
+    NSString* expireSubStr = [expiresStr substringToIndex:expiresStr.length - 7];
+    
+    NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
+    [dateFormant setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
+    NSDate* expireDate = [dateFormant dateFromString:expireSubStr];
+    
+    //续订了
+    if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
+        [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
+        //        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+        
+    }else{  //没续订
+        [self noSubscription];
+        //        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+        
+        NSString* auto_renew_status = pendingRenewal[@"auto_renew_status"];
+        NSString* expiration_intent = pendingRenewal[@"expiration_intent"];
+        
+        if ([auto_renew_status isEqualToString:@"0"]) {
+            if ([expiration_intent isEqualToString:@"1"] || [expiration_intent isEqualToString:@"3"]) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"You have canceled subscription, all premium feature are not available." message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
+                    [failedAlert show];
+                });
+            }
+        }
+    }
 }
 
 @end

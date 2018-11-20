@@ -169,7 +169,7 @@
      }
     switch (transaction.transactionState)
     {
-        case SKPaymentTransactionStatePurchasing:      //点击购买按钮添加支付队列，商品添加进列表
+        case SKPaymentTransactionStatePurchasing://点击购买按钮添加支付队列，商品添加进列表
             //Update your UI to reflect the in-progress status, and wait to be called again.
             NSLog(@"%@-----商品添加进列表 --------",transaction.payment.productIdentifier);
             break;
@@ -225,34 +225,23 @@
     
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdMonth originalProID:originalProID];
-        
-//#ifdef DEBUG
-//        [Appsee addEvent:@"Succeed - Monthly"];
-//#else
-//
-//#endif
-        
+
         [FIRAnalytics logEventWithName:@"succeed_monthly" parameters:nil];
 
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
          [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdYear originalProID:originalProID];
-//#ifdef DEBUG
-//        [Appsee addEvent:@"Succeed - Yearly"];
-//
-//#else
-//
-//#endif
+
         [FIRAnalytics logEventWithName:@"succeed_yearly" parameters:nil];
 
-    }else{
+    }else if([proID isEqualToString:kInAppPurchaseProductIdLifetime]){
+        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
-//#ifdef DEBUG
-//
-//        [Appsee addEvent:@"Succeed - Lifetime"];
-//#else
-//
-//#endif
+
         [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
+
+    }else{
+        
+        [FIRAnalytics logEventWithName:@"succeed_other" parameters:nil];
 
     }
     
@@ -397,6 +386,7 @@
             
         }
     }else{
+        
         [FIRAnalytics logEventWithName:@"cancel_other" parameters:@{@"error_code":[NSString stringWithFormat:@"%ld",transaction.error.code],@"transactionID":transaction.payment.productIdentifier,@"date":transaction.transactionDate}];
 
     }

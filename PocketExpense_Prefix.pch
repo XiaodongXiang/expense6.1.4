@@ -31,7 +31,7 @@
 #define RGBColor(a,b,c) [UIColor colorWithRed:a/255. green:b/255. blue:c/255. alpha:1]
 
 #define PURCHASE_PRICE                          @"PurchasePirce"
-#define GET_PRO_VERSION_PRICE_ACTION           @"Get_Pro_Version_Price_Action"
+#define GET_PRO_VERSION_PRICE_ACTION            @"Get_Pro_Version_Price_Action"
 #define ENTERAPP_COUNT      @"Enter_app_Count"
 
 #define PURCHASE_PRICE_MONTH     @"purchasePriceMonth"

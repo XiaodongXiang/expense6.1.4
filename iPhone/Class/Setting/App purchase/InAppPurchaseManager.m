@@ -744,7 +744,6 @@
     [failedAlert show];
     appDelegate.appAlertView = failedAlert;
 
-
 }
 
 
