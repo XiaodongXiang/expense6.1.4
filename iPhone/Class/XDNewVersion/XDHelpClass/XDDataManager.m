@@ -66,13 +66,23 @@
     NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:startDate];
     if ([productID isEqualToString:KInAppPurchaseProductIdMonth]) {
         // 修改订阅测试时间
-          comp.month += 1;
+#ifdef DEBUG
+        comp.minute += 5;
+#else
+        comp.month += 1;
+#endif
+//          comp.month += 1;
 //        comp.minute += 5;
         endDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
         
     }else if ([productID isEqualToString:KInAppPurchaseProductIdYear]){
         // 修改订阅测试时间
+//        comp.year += 1;
+#ifdef DEBUG
+        comp.hour += 1;
+#else
         comp.year += 1;
+#endif
 //         comp.day += 1;
 //        comp.hour += 1;
         endDate = [[NSCalendar currentCalendar] dateFromComponents:comp];

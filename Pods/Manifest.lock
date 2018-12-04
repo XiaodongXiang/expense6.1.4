@@ -8,6 +8,9 @@ PODS:
     - FirebaseAnalytics (= 5.2.0)
   - Firebase/CoreOnly (5.10.0):
     - FirebaseCore (= 5.1.5)
+  - Firebase/InAppMessagingDisplay (5.10.0):
+    - Firebase/CoreOnly
+    - FirebaseInAppMessagingDisplay (= 0.12.0)
   - FirebaseAnalytics (5.2.0):
     - FirebaseCore (~> 5.1)
     - FirebaseInstanceID (~> 3.2)
@@ -19,6 +22,14 @@ PODS:
     - nanopb (~> 0.3)
   - FirebaseCore (5.1.5):
     - GoogleUtilities/Logger (~> 5.2)
+  - FirebaseInAppMessaging (0.12.0):
+    - FirebaseAnalytics (~> 5.2)
+    - FirebaseCore (~> 5.1)
+    - FirebaseInstanceID (~> 3.2)
+    - GoogleUtilities/Environment (~> 5.0)
+  - FirebaseInAppMessagingDisplay (0.12.0):
+    - FirebaseCore
+    - FirebaseInAppMessaging (>= 0.12.0)
   - FirebaseInstanceID (3.2.2):
     - FirebaseCore (~> 5.1)
     - GoogleUtilities/Environment (~> 5.3)
@@ -60,6 +71,7 @@ DEPENDENCIES:
   - Appsee
   - AWSDynamoDB
   - Firebase/Core
+  - Firebase/InAppMessagingDisplay
   - Google-Mobile-Ads-SDK
   - GoogleAnalytics
   - Masonry
@@ -72,6 +84,8 @@ SPEC REPOS:
     - Firebase
     - FirebaseAnalytics
     - FirebaseCore
+    - FirebaseInAppMessaging
+    - FirebaseInAppMessagingDisplay
     - FirebaseInstanceID
     - Google-Mobile-Ads-SDK
     - GoogleAnalytics
@@ -87,6 +101,8 @@ SPEC CHECKSUMS:
   Firebase: 6691d47562a780c26281ce8464518faafc90c610
   FirebaseAnalytics: 831f1f127f4a75698e9875a87bf7e2668730d953
   FirebaseCore: c6079de64c1a87000e52e9b408dddcadc901177f
+  FirebaseInAppMessaging: 6a2e8c3cfa6327dc5a495fe9f4fd45604d82fc58
+  FirebaseInAppMessagingDisplay: 4a154d15e3a3480bab28241c9241084009f1f8b1
   FirebaseInstanceID: 78ba376fcd5b94c001f9999b2cbd3d1f1e56e78d
   Google-Mobile-Ads-SDK: a1cbce28c0c78ca1fb0b6c4f213485f55527c99f
   GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
@@ -95,6 +111,6 @@ SPEC CHECKSUMS:
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
 
-PODFILE CHECKSUM: 7d25b1d2729457175f2ea47e9feafde4f328e2fc
+PODFILE CHECKSUM: 937a7ce75a4dab83bf8fc2e224f3a8f81aeac67b
 
 COCOAPODS: 1.5.3

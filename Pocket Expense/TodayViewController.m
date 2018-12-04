@@ -1061,7 +1061,6 @@ API_AVAILABLE(ios(10.0)){
     return [[NSFileManager defaultManager]
             containerURLForSecurityApplicationGroupIdentifier:@"group.com.btgs.pocketExpenseLite.coredata"];
     
-    
 }
 
 @end

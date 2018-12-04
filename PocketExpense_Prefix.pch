@@ -74,6 +74,13 @@
 #define KInAppPurchaseProductIdMonth @"Sub_PKEP_1M_T2"
 #define KInAppPurchaseProductIdYear @"Sub_PKEP_1Y_T2"
 
+
+#ifdef DEBUG
+#define RECEIPTURL @"http://purchase-verification-service-secondary.us-east-1.elasticbeanstalk.com/v2/validate/ios/7/com.btgs.pocketexpenselite/Sub_PKEP_1M_T22"
+#else
+#define RECEIPTURL @"http://purchase-verification-service.us-east-1.elasticbeanstalk.com/v2/validate/ios/7/com.btgs.pocketexpenselite/Sub_PKEP_1M_T22"
+#endif
+
 typedef enum : NSUInteger {
     TransactionExpense,
     TransactionIncome,

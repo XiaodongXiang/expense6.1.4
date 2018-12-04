@@ -160,7 +160,7 @@
 
         return;
     }
-    NSString* urlStr = @"http://purchase-verification-service.us-east-1.elasticbeanstalk.com/v2/validate/ios/7/com.btgs.pocketexpenselite/Sub_PKEP_1M_T22";
+    NSString* urlStr = RECEIPTURL;
     
     NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
     NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];

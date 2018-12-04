@@ -2531,6 +2531,13 @@
 		AEB229E11325D3FB00ABEDBE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB229E01325D3FB00ABEDBE /* CoreData.framework */; };
 		AEB22B281325D6D500ABEDBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB22B271325D6D500ABEDBE /* UIKit.framework */; };
 		AECD316814EA53D300C94271 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AECD316714EA53D200C94271 /* ImageIO.framework */; };
+		BE051B9621B618820069571B /* XDOverviewChristmasViewA.m in Sources */ = {isa = PBXBuildFile; fileRef = BE051B9521B618820069571B /* XDOverviewChristmasViewA.m */; };
+		BE051B9821B618970069571B /* XDOverviewChristmasViewA.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE051B9721B618970069571B /* XDOverviewChristmasViewA.xib */; };
+		BE051B9C21B61B3B0069571B /* XDPlanControlClass.m in Sources */ = {isa = PBXBuildFile; fileRef = BE051B9B21B61B3B0069571B /* XDPlanControlClass.m */; };
+		BE051BA621B66DCD0069571B /* XDChristmasLiteOneViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE051BA421B66DCC0069571B /* XDChristmasLiteOneViewController.m */; };
+		BE051BA721B66DCD0069571B /* XDChristmasLiteOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE051BA521B66DCD0069571B /* XDChristmasLiteOneViewController.xib */; };
+		BE051BAB21B66E0A0069571B /* XDChristmasLitePlanAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE051BA921B66E0A0069571B /* XDChristmasLitePlanAViewController.m */; };
+		BE051BAC21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE051BAA21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib */; };
 		BE0625E421772F28006DE2F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE0625E321772F27006DE2F2 /* GoogleService-Info.plist */; };
 		BE0A4C8F2140D5A100C22049 /* XDTermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0A4C8D2140D5A100C22049 /* XDTermsOfUseViewController.m */; };
 		BE0A4C902140D5A100C22049 /* XDTermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE0A4C8E2140D5A100C22049 /* XDTermsOfUseViewController.xib */; };
@@ -5675,6 +5682,17 @@
 		AEB22B271325D6D500ABEDBE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AECD316714EA53D200C94271 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		BE03A192211D6DEC00D976F1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
+		BE051B9421B618820069571B /* XDOverviewChristmasViewA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDOverviewChristmasViewA.h; sourceTree = "<group>"; };
+		BE051B9521B618820069571B /* XDOverviewChristmasViewA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDOverviewChristmasViewA.m; sourceTree = "<group>"; };
+		BE051B9721B618970069571B /* XDOverviewChristmasViewA.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDOverviewChristmasViewA.xib; sourceTree = "<group>"; };
+		BE051B9A21B61B3B0069571B /* XDPlanControlClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPlanControlClass.h; sourceTree = "<group>"; };
+		BE051B9B21B61B3B0069571B /* XDPlanControlClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPlanControlClass.m; sourceTree = "<group>"; };
+		BE051BA321B66DCC0069571B /* XDChristmasLiteOneViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XDChristmasLiteOneViewController.h; sourceTree = "<group>"; };
+		BE051BA421B66DCC0069571B /* XDChristmasLiteOneViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XDChristmasLiteOneViewController.m; sourceTree = "<group>"; };
+		BE051BA521B66DCD0069571B /* XDChristmasLiteOneViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = XDChristmasLiteOneViewController.xib; sourceTree = "<group>"; };
+		BE051BA821B66E0A0069571B /* XDChristmasLitePlanAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasLitePlanAViewController.h; sourceTree = "<group>"; };
+		BE051BA921B66E0A0069571B /* XDChristmasLitePlanAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasLitePlanAViewController.m; sourceTree = "<group>"; };
+		BE051BAA21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasLitePlanAViewController.xib; sourceTree = "<group>"; };
 		BE0625E321772F27006DE2F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BE0A4C8C2140D5A100C22049 /* XDTermsOfUseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDTermsOfUseViewController.h; sourceTree = "<group>"; };
 		BE0A4C8D2140D5A100C22049 /* XDTermsOfUseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDTermsOfUseViewController.m; sourceTree = "<group>"; };
@@ -7541,6 +7559,7 @@
 		4E7BA80A2063512600D9299A /* XDNewVersion */ = {
 			isa = PBXGroup;
 			children = (
+				BE051B8C21B616EA0069571B /* XDChristmas */,
 				BEFD68C1216C6FA500B86A64 /* ADEngine.framework */,
 				A289F7AA2101CF4400182A03 /* XDAppirater */,
 				4E95ADFE209C4CBD00FFEBE6 /* XDADSDetail */,
@@ -10701,6 +10720,48 @@
 			path = revocation;
 			sourceTree = "<group>";
 		};
+		BE051B8C21B616EA0069571B /* XDChristmas */ = {
+			isa = PBXGroup;
+			children = (
+				BE051B9921B61B090069571B /* PlanControlClass */,
+				BE051B9321B618500069571B /* PlanA */,
+				BE051B9221B618500069571B /* PlanB */,
+			);
+			path = XDChristmas;
+			sourceTree = "<group>";
+		};
+		BE051B9221B618500069571B /* PlanB */ = {
+			isa = PBXGroup;
+			children = (
+				BE051BA321B66DCC0069571B /* XDChristmasLiteOneViewController.h */,
+				BE051BA421B66DCC0069571B /* XDChristmasLiteOneViewController.m */,
+				BE051BA521B66DCD0069571B /* XDChristmasLiteOneViewController.xib */,
+			);
+			path = PlanB;
+			sourceTree = "<group>";
+		};
+		BE051B9321B618500069571B /* PlanA */ = {
+			isa = PBXGroup;
+			children = (
+				BE051B9421B618820069571B /* XDOverviewChristmasViewA.h */,
+				BE051B9521B618820069571B /* XDOverviewChristmasViewA.m */,
+				BE051B9721B618970069571B /* XDOverviewChristmasViewA.xib */,
+				BE051BA821B66E0A0069571B /* XDChristmasLitePlanAViewController.h */,
+				BE051BA921B66E0A0069571B /* XDChristmasLitePlanAViewController.m */,
+				BE051BAA21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib */,
+			);
+			path = PlanA;
+			sourceTree = "<group>";
+		};
+		BE051B9921B61B090069571B /* PlanControlClass */ = {
+			isa = PBXGroup;
+			children = (
+				BE051B9A21B61B3B0069571B /* XDPlanControlClass.h */,
+				BE051B9B21B61B3B0069571B /* XDPlanControlClass.m */,
+			);
+			path = PlanControlClass;
+			sourceTree = "<group>";
+		};
 		BE1928242134EBD800D5B3F7 /* Pocket Expense */ = {
 			isa = PBXGroup;
 			children = (
@@ -10771,6 +10832,7 @@
 				BE03A1A3211D6DEC00D976F1 /* Embed App Extensions */,
 				21DED4D2C4F634028AF6D4DF /* [CP] Embed Pods Frameworks */,
 				BEF83D6F2175897F00630CFE /* ShellScript */,
+				58FE204450DF1DC78A520641 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -11009,6 +11071,7 @@
 				A256105A19D3BB5C00A5A950 /* add_320_200bg@2x.png in Resources */,
 				A256109219D3BB5C00A5A950 /* bar_320_40.png in Resources */,
 				A200761E1A1CBCDA000E32E3 /* icon_copy1_30_30@3x.png in Resources */,
+				BE051BA721B66DCD0069571B /* XDChristmasLiteOneViewController.xib in Resources */,
 				60C0B0A21C5A130600DE50D7 /* account_bg_checking.png in Resources */,
 				A2211CB11A39A841005E135F /* btn_8@3x.png in Resources */,
 				3AE69FB21C4CBEF8005E211B /* pilot_1_chart.png in Resources */,
@@ -11320,6 +11383,7 @@
 				3ADF05DA1C3B630B00670206 /* iphone6_logo@2x.png in Resources */,
 				601A19791C5F4F25002A3D2F /* PersonalnfoViewController.xib in Resources */,
 				A256123E19D3BB5C00A5A950 /* picture_115_163@2x.png in Resources */,
+				BE051B9821B618970069571B /* XDOverviewChristmasViewA.xib in Resources */,
 				3AE2AA4B1C1FE1A100D6C552 /* iphone6_sign_top_bg@2x.png in Resources */,
 				A256121F19D3BB5C00A5A950 /* list_report@2x.png in Resources */,
 				A256123F19D3BB5C00A5A950 /* pop_bg.png in Resources */,
@@ -11672,6 +11736,7 @@
 				3ADD890A1BE1C33600694647 /* account_bg_credit-card@3x.png in Resources */,
 				4E7BA8DE2063512700D9299A /* XDBudgetMainViewController.xib in Resources */,
 				A2211C951A39A80B005E135F /* btn_1@3x.png in Resources */,
+				BE051BAC21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib in Resources */,
 				A2561B6F19D3BF6900A5A950 /* line_320_1@2x.png in Resources */,
 				3ABF0F141B1C188F000A7F26 /* iphone6_logo_a2@2x.png in Resources */,
 				A200762F1A1CBD59000E32E3 /* icon_search1_30_30.png in Resources */,
@@ -12931,6 +12996,28 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		58FE204450DF1DC78A520641 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessagingDisplay/InAppMessagingDisplayResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppMessagingDisplayResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		A2CBE7E8199C49570002F052 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -12960,7 +13047,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+			shellScript = "#!/bin/bash\n\n#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n#buildNumber=$(($buildNumber + 1))\n\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
 		};
 		BEF83D70217589C600630CFE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -12977,7 +13064,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+			shellScript = "#!/bin/bash\n\n#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n#buildNumber=$(($buildNumber + 1))\n\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -13140,6 +13227,7 @@
 				3ABE00EA1B044F5D00D18188 /* BillRule.m in Sources */,
 				3AE4DAD41BD0CD11009668FE /* MMDrawerVisualState.m in Sources */,
 				A256103819D3BB5C00A5A950 /* PasscodeViewController_iPhone.m in Sources */,
+				BE051B9C21B61B3B0069571B /* XDPlanControlClass.m in Sources */,
 				A2560FEC19D3BB5C00A5A950 /* EventKitDataSource_week.m in Sources */,
 				A2561A9C19D3BBD700A5A950 /* ZipArchive.mm in Sources */,
 				A2560FAD19D3BB5C00A5A950 /* SearchCellCell.m in Sources */,
@@ -13151,6 +13239,7 @@
 				A2560FAF19D3BB5C00A5A950 /* AppDelegate_iPhone.m in Sources */,
 				BEB696E1213D0FAD00CDE712 /* AFURLRequestSerialization.m in Sources */,
 				A2953B2B1A4A697300CEB22A /* CategoryEditViewController.m in Sources */,
+				BE051BA621B66DCD0069571B /* XDChristmasLiteOneViewController.m in Sources */,
 				A2C113031A35893700F7FDEE /* CalendarCell.m in Sources */,
 				3AE2AA701C1FE20F00D6C552 /* firstView.m in Sources */,
 				A2F633E51A19D7AC00676B8C /* RecurringTypeCell.m in Sources */,
@@ -13235,6 +13324,7 @@
 				4E7BA8FD2063512800D9299A /* XDAccountDetailTableViewCell.m in Sources */,
 				4E7BA9022063512800D9299A /* SCAdView.m in Sources */,
 				A2560FC919D3BB5C00A5A950 /* CalenderListView.m in Sources */,
+				BE051BAB21B66E0A0069571B /* XDChristmasLitePlanAViewController.m in Sources */,
 				A24495891A52A1AB003E9889 /* SVTopScrollView.m in Sources */,
 				4E7BA8EB2063512700D9299A /* XDTimeSelectView.m in Sources */,
 				A2560FBF19D3BB5C00A5A950 /* HMJMonthMonthView.m in Sources */,
@@ -13342,6 +13432,7 @@
 				3ADE77C51BF5984B003BE9EB /* UUChartLabel.m in Sources */,
 				A2561A8619D3BBD700A5A950 /* ReaderContentTile.m in Sources */,
 				A256168F19D3BB7F00A5A950 /* FYChartView.m in Sources */,
+				BE051B9621B618820069571B /* XDOverviewChristmasViewA.m in Sources */,
 				A2560FF019D3BB5C00A5A950 /* KalLogic_week.m in Sources */,
 				A2C113001A35893700F7FDEE /* HelpClass.m in Sources */,
 				60BE813F1C86C74000B871E2 /* CustomBillCell.m in Sources */,
@@ -13622,7 +13713,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PocketExpense-Info_Lite.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -13711,7 +13802,7 @@
 				GCC_THUMB_SUPPORT = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "PocketExpense-Info_Lite.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

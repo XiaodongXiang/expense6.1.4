@@ -15,6 +15,7 @@ pod 'Masonry'
 pod 'Appsee'
 pod 'GoogleAnalytics'
 pod 'Firebase/Core'
+pod 'Firebase/InAppMessagingDisplay'
 end
 
 

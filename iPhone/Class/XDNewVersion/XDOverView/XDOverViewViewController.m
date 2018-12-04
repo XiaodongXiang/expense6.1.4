@@ -22,6 +22,11 @@
 #import <Parse/Parse.h>
 #import <Appsee/Appsee.h>
 #import "XDAppriater.h"
+#import "XDOverviewChristmasViewA.h"
+#import "XDPlanControlClass.h"
+#import "XDChristmasLiteOneViewController.h"
+#import "XDChristmasLitePlanAViewController.h"
+
 @import Firebase;
 
 @interface XDOverViewViewController ()<XDCalendarViewDelegate,XDTransicationTableViewDelegate,XDAddTransactionViewDelegate,SKRequestDelegate,ADEngineControllerBannerDelegate>
@@ -45,6 +50,7 @@
 
 @property(nonatomic, strong)ADEngineController* adBanner;
 @property(nonatomic, strong)UIView* adBannerView;
+@property(nonatomic, strong)XDOverviewChristmasViewA* christmasView;
 
 @end
 
@@ -188,6 +194,8 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"tabbarDismiss" object:@NO];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
+    
+   
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -273,8 +281,52 @@
             [[ParseDBManager sharedManager] savingSetting];
         }
     }
-    [self validateReceipt];
+//    [self validateReceipt];
+
+    if ([XDPlanControlClass shareControlClass].needShow) {
+        [self showChristmasView];
+    }
 }
+
+-(void)showChristmasView{
+    self.lineView.height = 137;
+    self.lineView.backgroundColor = [UIColor whiteColor];
+    self.christmasView = [[[NSBundle mainBundle] loadNibNamed:@"XDOverviewChristmasViewA" owner:self options:nil]lastObject];
+    self.transTableView.view.y = CGRectGetMaxY(self.lineView.frame);
+
+    [XDPlanControlClass shareControlClass].christmasView = self.christmasView;
+    [self.christmasView.christmasCancelBtn addTarget:self action:@selector(christmasViewCancel) forControlEvents:UIControlEventTouchUpInside];
+    [self.christmasView.christmasBtn addTarget:self action:@selector(presentChristmasVc) forControlEvents:UIControlEventTouchUpInside];
+    self.christmasView.frame = CGRectMake(0, self.calView.y, SCREEN_WIDTH, 137);
+    
+
+    [self.lineView addSubview:self.christmasView];
+}
+
+-(void)presentChristmasVc{
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        
+        XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
+        [self presentViewController:christmas animated:YES completion:nil];
+
+    }else{
+        
+        XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
+        [self presentViewController:christmas animated:YES completion:nil];
+    }
+}
+
+-(void)christmasViewCancel{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.lineView.height = 10;
+        self.transTableView.view.y = CGRectGetMaxY(self.lineView.frame);
+        self.lineView.backgroundColor = RGBColor(246, 246, 246);
+
+    }completion:^(BOOL finished) {
+        [self.christmasView removeFromSuperview];
+    }];
+}
+
 
 
 -(void)titleBtnClick{
@@ -332,6 +384,7 @@
     [self.view addSubview:self.calView];
 
     self.lineView = [[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.calView.frame), SCREEN_WIDTH, 10)];
+    self.lineView.clipsToBounds = YES;
     self.lineView.backgroundColor = RGBColor(246, 246, 246);
     [self.view addSubview:self.lineView];
     [self.view addSubview:self.transTableView.tableView];
@@ -565,11 +618,11 @@
 
 -(void)getCurrentVersion
 {
-    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"CFBundleVersion"];
-    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleVersion"];
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"CFBundleShortVersionString"];
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     if (![currentVersion isEqualToString:lastVersion]) {
         self.bubbleView.hidden = NO;
-        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:@"CFBundleVersion"];
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:@"CFBundleShortVersionString"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[XDAppriater shareAppirater] setEmptyAppirater];
@@ -700,7 +753,7 @@
 
         return;
     }
-    NSString* urlStr = @"http://purchase-verification-service.us-east-1.elasticbeanstalk.com/v2/validate/ios/7/com.btgs.pocketexpenselite/Sub_PKEP_1M_T22";
+    NSString* urlStr = RECEIPTURL;
 
     NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
     NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
