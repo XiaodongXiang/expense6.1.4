@@ -14,6 +14,10 @@
 #import "XDTabbarView.h"
 #import "XDChartMainViewController.h"
 #import "AppDelegate_iPhone.h"
+#import "XDChristmasPlanBPopViewController.h"
+#import "XDChristmasPlanAPopViewController.h"
+#import "XDPlanControlClass.h"
+
 
 #import "XDAppriater.h"
 @interface XDTabbarViewController ()<XDAddTransactionViewDelegate>
@@ -26,6 +30,8 @@
 @property(nonatomic, strong)XDChartMainViewController * chartViewController;
 @property(nonatomic, strong)ADEngineController* interstitial;
 
+@property(nonatomic, strong)XDChristmasPlanAPopViewController* planA;
+@property(nonatomic, strong)XDChristmasPlanBPopViewController* planB;
 
 
 @end
@@ -94,17 +100,23 @@
     
     self.tabbarView.block = ^(NSInteger index) {
         
+        
         if (index == 2) {
             XDAddTransactionViewController* addVc = [[XDAddTransactionViewController alloc]initWithNibName:@"XDAddTransactionViewController" bundle:nil];
             addVc.calSelectedDate = weakSelf.date;
             addVc.delegate = weakSelf;
 //            NSLog(@"selectedDate = %@", weakSelf.date);
             [weakSelf presentViewController:addVc animated:YES completion:nil];
+            
+
         }else{
             if (index == weakSelf.selectedIndex) {
                 [weakSelf.overViewCalendarViewController scrollToToday];
             }
             weakSelf.selectedIndex = index;
+            
+            
+            
         }
         
         if (index == 0) {
@@ -122,6 +134,23 @@
     };
     
 //    [self adView];
+}
+
+-(void)christmasPopViewGetNowClick{
+    [self.planA dismiss];
+    
+}
+-(void)dismissPopView{
+    [self.planA dismiss];
+}
+
+
+-(void)bchristmasPopViewGetNowClick{
+    [self.planB dismiss];
+    
+}
+-(void)bdismissPopView{
+    [self.planB dismiss];
 }
 
 -(void)tabbarDismiss:(NSNotification*)notif{
@@ -194,6 +223,28 @@
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
     if (!appDelegate.isPurchased) {
         [self.interstitial showInterstitialAdWithTarget:self];
+    }
+    
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        
+        self.planA = [[XDChristmasPlanAPopViewController alloc]initWithNibName:@"XDChristmasPlanAPopViewController" bundle:nil];
+         self.planA.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [self.planA show];
+        
+        [self.planA.getNowBtn addTarget:self action:@selector(christmasPopViewGetNowClick) forControlEvents:UIControlEventTouchUpInside];
+        [self.planA.cancelBtn addTarget:self action:@selector(dismissPopView) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:self.planA.view];
+        
+    }else{
+        
+        self.planB = [[XDChristmasPlanBPopViewController alloc]initWithNibName:@"XDChristmasPlanBPopViewController" bundle:nil];
+        self.planB.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+        [self.planB show];
+        
+        [self.planB.openBtn addTarget:self action:@selector(bchristmasPopViewGetNowClick) forControlEvents:UIControlEventTouchUpInside];
+        [self.planB.cancelBtn addTarget:self action:@selector(bdismissPopView) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview: self.planB.view];
+        
     }
 }
 

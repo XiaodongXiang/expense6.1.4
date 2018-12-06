@@ -434,17 +434,6 @@
             }
         }
     }
-//    AccountCount* fromAccount = [self.dataMuArr objectAtIndex:fromRow];
-//    AccountCount* toAccount = [self.dataMuArr objectAtIndex:toRow];
-//
-//    NSInteger fromNum = [fromAccount.accountsItem.orderIndex integerValue];
-//    NSInteger toNum = [toAccount.accountsItem.orderIndex integerValue];
-//    [self.dataMuArr exchangeObjectAtIndex:fromRow withObjectAtIndex:toRow];
-//    fromAccount.accountsItem.orderIndex = @(toNum);
-//    toAccount.accountsItem.orderIndex = @(fromNum);
-//    fromAccount.accountsItem.updatedTime = fromAccount.accountsItem.dateTime_sync = toAccount.accountsItem.updatedTime = toAccount.accountsItem.dateTime_sync = [NSDate date];
-//    [[XDDataManager shareManager] saveContext];
-    
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath

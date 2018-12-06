@@ -10,7 +10,7 @@
 @interface UIColor (Extension)
 
 + (CAGradientLayer *)setGradualChangingColor:(UIView *)view fromColor:(UIColor *)fromColor toColor:(UIColor *)toColor;
-
++ (CAGradientLayer *)setGradualSecondChangingColor:(UIView *)view fromColor:(UIColor *)fromColor toColor:(UIColor *)toColor;
 +(UIColor*)mostColor:(UIImage*)image;
 
 

@@ -26,6 +26,8 @@
 #import "XDPlanControlClass.h"
 #import "XDChristmasLiteOneViewController.h"
 #import "XDChristmasLitePlanAViewController.h"
+#import "XDChristmasPlanAbViewController.h"
+#import "XDChristmasPlanBbViewController.h"
 
 @import Firebase;
 
@@ -285,6 +287,7 @@
 
     if ([XDPlanControlClass shareControlClass].needShow) {
         [self showChristmasView];
+        self.emptyImageView.y = CGRectGetMaxY(self.lineView.frame);
     }
 }
 
@@ -304,15 +307,28 @@
 }
 
 -(void)presentChristmasVc{
-    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+    NSInteger plan = [XDPlanControlClass shareControlClass].planType;
+    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
+    if ( plan == ChristmasPlanA) {
         
-        XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
-        [self presentViewController:christmas animated:YES completion:nil];
+       if(subPlan == ChristmasSubPlana){
+            XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
+            [self presentViewController:christmas animated:YES completion:nil];
 
+       }else if (subPlan == ChristmasSubPlanb){
+           XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
+           [self presentViewController:christmas animated:YES completion:nil];
+       }
     }else{
-        
-        XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
-        [self presentViewController:christmas animated:YES completion:nil];
+        if(subPlan == ChristmasSubPlana){
+            XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
+            [self presentViewController:christmas animated:YES completion:nil];
+
+        }else if(subPlan == ChristmasSubPlanb){
+            XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
+            [self presentViewController:christmas animated:YES completion:nil];
+
+        }
     }
 }
 

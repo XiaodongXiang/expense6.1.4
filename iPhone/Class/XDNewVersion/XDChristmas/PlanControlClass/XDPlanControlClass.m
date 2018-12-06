@@ -19,13 +19,24 @@
 }
 
 -(void)setChristmasView:(XDOverviewChristmasViewA *)christmasView{
-    self.planType = ChristmasPlanA;
     
     if (self.planType == ChristmasPlanA) {
+        if (IS_IPHONE_5) {
+            [christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_se"] forState:UIControlStateNormal];
+        }else if (IS_IPHONE_6){
+            [christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_8"] forState:UIControlStateNormal];
+        }else{
+            [christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_plus"] forState:UIControlStateNormal];
+        }
         
-        [christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_8"] forState:UIControlStateNormal];
     }else{
-        [christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_banner_8"] forState:UIControlStateNormal];
+        if (IS_IPHONE_5) {
+            [christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone se"] forState:UIControlStateNormal];
+        }else if (IS_IPHONE_6){
+            [christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_banner_8"] forState:UIControlStateNormal];
+        }else{
+            [christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone 8plus"] forState:UIControlStateNormal];
+        }
     }
 }
 
@@ -34,4 +45,16 @@
 }
 
 
+-(ChristmasPlanType)planType{
+    
+    return random()%2;
+}
+
+-(ChristmasSubPlan)planSubType{
+    return random()%2;
+}
+
+-(ChristmasPlanCategory)planCategory{
+    return random()%4;
+}
 @end

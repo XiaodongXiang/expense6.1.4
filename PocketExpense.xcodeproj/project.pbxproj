@@ -2531,6 +2531,8 @@
 		AEB229E11325D3FB00ABEDBE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB229E01325D3FB00ABEDBE /* CoreData.framework */; };
 		AEB22B281325D6D500ABEDBE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB22B271325D6D500ABEDBE /* UIKit.framework */; };
 		AECD316814EA53D300C94271 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AECD316714EA53D200C94271 /* ImageIO.framework */; };
+		BE00543D21B8C9C900C96A91 /* XDOurAppsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE00543B21B8C9C900C96A91 /* XDOurAppsViewController.m */; };
+		BE00543E21B8C9C900C96A91 /* XDOurAppsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE00543C21B8C9C900C96A91 /* XDOurAppsViewController.xib */; };
 		BE051B9621B618820069571B /* XDOverviewChristmasViewA.m in Sources */ = {isa = PBXBuildFile; fileRef = BE051B9521B618820069571B /* XDOverviewChristmasViewA.m */; };
 		BE051B9821B618970069571B /* XDOverviewChristmasViewA.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE051B9721B618970069571B /* XDOverviewChristmasViewA.xib */; };
 		BE051B9C21B61B3B0069571B /* XDPlanControlClass.m in Sources */ = {isa = PBXBuildFile; fileRef = BE051B9B21B61B3B0069571B /* XDPlanControlClass.m */; };
@@ -2581,6 +2583,14 @@
 		BEFB24B22188044B00507A5C /* BayMaxProtector.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A82188044B00507A5C /* BayMaxProtector.m */; };
 		BEFB24B32188044B00507A5C /* BayMaxContainers.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24AA2188044B00507A5C /* BayMaxContainers.m */; };
 		BEFB24B42188044B00507A5C /* BayMaxCatchError.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24AD2188044B00507A5C /* BayMaxCatchError.m */; };
+		BEFC592621B77EAE0072F012 /* XDChristmasPlanAbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFC592421B77EAE0072F012 /* XDChristmasPlanAbViewController.m */; };
+		BEFC592721B77EAE0072F012 /* XDChristmasPlanAbViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFC592521B77EAE0072F012 /* XDChristmasPlanAbViewController.xib */; };
+		BEFC592E21B7AAE00072F012 /* XDChristmasPlanBbViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFC592C21B7AAE00072F012 /* XDChristmasPlanBbViewController.m */; };
+		BEFC592F21B7AAE00072F012 /* XDChristmasPlanBbViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFC592D21B7AAE00072F012 /* XDChristmasPlanBbViewController.xib */; };
+		BEFC593821B7BB540072F012 /* XDChristmasPlanBPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFC593621B7BB540072F012 /* XDChristmasPlanBPopViewController.m */; };
+		BEFC593921B7BB540072F012 /* XDChristmasPlanBPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFC593721B7BB540072F012 /* XDChristmasPlanBPopViewController.xib */; };
+		BEFC593D21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFC593B21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.m */; };
+		BEFC593E21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFC593C21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib */; };
 		BEFCAF292170D3A100065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
 		BEFCAF2A2170D3A200065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
 		BEFD68C0216C5E2900B86A64 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */; };
@@ -5681,6 +5691,9 @@
 		AEB229E01325D3FB00ABEDBE /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		AEB22B271325D6D500ABEDBE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		AECD316714EA53D200C94271 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		BE00543A21B8C9C900C96A91 /* XDOurAppsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDOurAppsViewController.h; sourceTree = "<group>"; };
+		BE00543B21B8C9C900C96A91 /* XDOurAppsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDOurAppsViewController.m; sourceTree = "<group>"; };
+		BE00543C21B8C9C900C96A91 /* XDOurAppsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDOurAppsViewController.xib; sourceTree = "<group>"; };
 		BE03A192211D6DEC00D976F1 /* NotificationCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NotificationCenter.framework; path = System/Library/Frameworks/NotificationCenter.framework; sourceTree = SDKROOT; };
 		BE051B9421B618820069571B /* XDOverviewChristmasViewA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDOverviewChristmasViewA.h; sourceTree = "<group>"; };
 		BE051B9521B618820069571B /* XDOverviewChristmasViewA.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDOverviewChristmasViewA.m; sourceTree = "<group>"; };
@@ -5750,6 +5763,18 @@
 		BEFB24AB2188044B00507A5C /* BayMaxDegradeAssist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxDegradeAssist.h; sourceTree = "<group>"; };
 		BEFB24AC2188044B00507A5C /* BayMaxDebugView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxDebugView.h; sourceTree = "<group>"; };
 		BEFB24AD2188044B00507A5C /* BayMaxCatchError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxCatchError.m; sourceTree = "<group>"; };
+		BEFC592321B77EAE0072F012 /* XDChristmasPlanAbViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasPlanAbViewController.h; sourceTree = "<group>"; };
+		BEFC592421B77EAE0072F012 /* XDChristmasPlanAbViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasPlanAbViewController.m; sourceTree = "<group>"; };
+		BEFC592521B77EAE0072F012 /* XDChristmasPlanAbViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasPlanAbViewController.xib; sourceTree = "<group>"; };
+		BEFC592B21B7AAE00072F012 /* XDChristmasPlanBbViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasPlanBbViewController.h; sourceTree = "<group>"; };
+		BEFC592C21B7AAE00072F012 /* XDChristmasPlanBbViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasPlanBbViewController.m; sourceTree = "<group>"; };
+		BEFC592D21B7AAE00072F012 /* XDChristmasPlanBbViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasPlanBbViewController.xib; sourceTree = "<group>"; };
+		BEFC593521B7BB540072F012 /* XDChristmasPlanBPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasPlanBPopViewController.h; sourceTree = "<group>"; };
+		BEFC593621B7BB540072F012 /* XDChristmasPlanBPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasPlanBPopViewController.m; sourceTree = "<group>"; };
+		BEFC593721B7BB540072F012 /* XDChristmasPlanBPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasPlanBPopViewController.xib; sourceTree = "<group>"; };
+		BEFC593A21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasPlanAPopViewController.h; sourceTree = "<group>"; };
+		BEFC593B21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasPlanAPopViewController.m; sourceTree = "<group>"; };
+		BEFC593C21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasPlanAPopViewController.xib; sourceTree = "<group>"; };
 		BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		BEFD68C1216C6FA500B86A64 /* ADEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADEngine.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -7559,6 +7584,7 @@
 		4E7BA80A2063512600D9299A /* XDNewVersion */ = {
 			isa = PBXGroup;
 			children = (
+				BE00543921B8C9B600C96A91 /* XDOurApps */,
 				BE051B8C21B616EA0069571B /* XDChristmas */,
 				BEFD68C1216C6FA500B86A64 /* ADEngine.framework */,
 				A289F7AA2101CF4400182A03 /* XDAppirater */,
@@ -10720,6 +10746,16 @@
 			path = revocation;
 			sourceTree = "<group>";
 		};
+		BE00543921B8C9B600C96A91 /* XDOurApps */ = {
+			isa = PBXGroup;
+			children = (
+				BE00543A21B8C9C900C96A91 /* XDOurAppsViewController.h */,
+				BE00543B21B8C9C900C96A91 /* XDOurAppsViewController.m */,
+				BE00543C21B8C9C900C96A91 /* XDOurAppsViewController.xib */,
+			);
+			path = XDOurApps;
+			sourceTree = "<group>";
+		};
 		BE051B8C21B616EA0069571B /* XDChristmas */ = {
 			isa = PBXGroup;
 			children = (
@@ -10736,6 +10772,12 @@
 				BE051BA321B66DCC0069571B /* XDChristmasLiteOneViewController.h */,
 				BE051BA421B66DCC0069571B /* XDChristmasLiteOneViewController.m */,
 				BE051BA521B66DCD0069571B /* XDChristmasLiteOneViewController.xib */,
+				BEFC592B21B7AAE00072F012 /* XDChristmasPlanBbViewController.h */,
+				BEFC592C21B7AAE00072F012 /* XDChristmasPlanBbViewController.m */,
+				BEFC592D21B7AAE00072F012 /* XDChristmasPlanBbViewController.xib */,
+				BEFC593521B7BB540072F012 /* XDChristmasPlanBPopViewController.h */,
+				BEFC593621B7BB540072F012 /* XDChristmasPlanBPopViewController.m */,
+				BEFC593721B7BB540072F012 /* XDChristmasPlanBPopViewController.xib */,
 			);
 			path = PlanB;
 			sourceTree = "<group>";
@@ -10749,6 +10791,12 @@
 				BE051BA821B66E0A0069571B /* XDChristmasLitePlanAViewController.h */,
 				BE051BA921B66E0A0069571B /* XDChristmasLitePlanAViewController.m */,
 				BE051BAA21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib */,
+				BEFC592321B77EAE0072F012 /* XDChristmasPlanAbViewController.h */,
+				BEFC592421B77EAE0072F012 /* XDChristmasPlanAbViewController.m */,
+				BEFC592521B77EAE0072F012 /* XDChristmasPlanAbViewController.xib */,
+				BEFC593A21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.h */,
+				BEFC593B21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.m */,
+				BEFC593C21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib */,
 			);
 			path = PlanA;
 			sourceTree = "<group>";
@@ -11072,6 +11120,7 @@
 				A256109219D3BB5C00A5A950 /* bar_320_40.png in Resources */,
 				A200761E1A1CBCDA000E32E3 /* icon_copy1_30_30@3x.png in Resources */,
 				BE051BA721B66DCD0069571B /* XDChristmasLiteOneViewController.xib in Resources */,
+				BEFC592F21B7AAE00072F012 /* XDChristmasPlanBbViewController.xib in Resources */,
 				60C0B0A21C5A130600DE50D7 /* account_bg_checking.png in Resources */,
 				A2211CB11A39A841005E135F /* btn_8@3x.png in Resources */,
 				3AE69FB21C4CBEF8005E211B /* pilot_1_chart.png in Resources */,
@@ -11671,10 +11720,12 @@
 				3AE154B31BEC4A5300F9CA91 /* bill_cycle@2x.png in Resources */,
 				3AE3EC831C045202009362AE /* button_background.png in Resources */,
 				A256108219D3BB5C00A5A950 /* arrow6_30_30.png in Resources */,
+				BEFC593E21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib in Resources */,
 				3AE154DC1BEC4A5300F9CA91 /* icon_all_arrow@3x.png in Resources */,
 				A256186A19D3BB7F00A5A950 /* ipad_btn_category_sel@2x.png in Resources */,
 				60C0B0911C5A12DD00DE50D7 /* account_choose_right_click.png in Resources */,
 				A256115419D3BB5C00A5A950 /* budget_bg_sel@2x.png in Resources */,
+				BEFC593921B7BB540072F012 /* XDChristmasPlanBPopViewController.xib in Resources */,
 				4E7BA9072063512800D9299A /* XDAccountCategoryView.xib in Resources */,
 				3AE8425C1BFEBCAA0035DCE0 /* calendar_nav@3x.png in Resources */,
 				A256195319D3BB7F00A5A950 /* mark_gray@2x.png in Resources */,
@@ -11764,6 +11815,7 @@
 				3AE2B0881C3A6144002CA41F /* button_arrow_left@2x.png in Resources */,
 				A256107A19D3BB5C00A5A950 /* arrow1_8_13.png in Resources */,
 				A2561B7219D3BF6900A5A950 /* tab_bar_320_49.png in Resources */,
+				BE00543E21B8C9C900C96A91 /* XDOurAppsViewController.xib in Resources */,
 				A2754FDF1A0899BC00891EBE /* budgetRedL_4_7@2x.png in Resources */,
 				A27FADFA1A0216290044C469 /* btn_bills_sel@2x.png in Resources */,
 				A256108F19D3BB5C00A5A950 /* back2_30_30_sel@2x.png in Resources */,
@@ -12922,6 +12974,7 @@
 				3ADBA0DD1BF9D5F700512D2C /* expense_color7@2x.png in Resources */,
 				3AE2F4561C48EC7F006062E0 /* payBill_cilck@2x.png in Resources */,
 				3AE238931C4743F60076F5E4 /* iphone6_reduction@2x.png in Resources */,
+				BEFC592721B77EAE0072F012 /* XDChristmasPlanAbViewController.xib in Resources */,
 				A256125419D3BB5C00A5A950 /* rise_red@2x.png in Resources */,
 				3AE1ABE01C21057400F26F22 /* pilot_point2@2x.png in Resources */,
 				3AF38F811B69EF6C00D55C8F /* logo_a3@3x.png in Resources */,
@@ -13168,6 +13221,7 @@
 				A256165019D3BB7F00A5A950 /* ipad_AccountTypeEditViewController.m in Sources */,
 				4E7BA8E72063512700D9299A /* XDDateSelectedModel.m in Sources */,
 				4E59E5B420C7BC9700CD57C9 /* XDChartHelpClass.m in Sources */,
+				BE00543D21B8C9C900C96A91 /* XDOurAppsViewController.m in Sources */,
 				A25619B219D3BBAB00A5A950 /* DuplicateTimeViewController.m in Sources */,
 				A256104D19D3BB5C00A5A950 /* TransactionCategorySplitViewController.m in Sources */,
 				4E7BA9042063512800D9299A /* XDAccountDetailViewController.m in Sources */,
@@ -13179,6 +13233,7 @@
 				A2560FB419D3BB5C00A5A950 /* KalLogic_bill_iPhone.m in Sources */,
 				A25619AB19D3BBAB00A5A950 /* BrokenLineObject.m in Sources */,
 				A2561A8319D3BBD700A5A950 /* CGPDFDocument.m in Sources */,
+				BEFC593821B7BB540072F012 /* XDChristmasPlanBPopViewController.m in Sources */,
 				A20988F8191A2A2A0087EA15 /* PokcetExpense.xcdatamodeld in Sources */,
 				A256167E19D3BB7F00A5A950 /* UICustomSwitch.m in Sources */,
 				3ABE00E71B044F5D00D18188 /* Payee.m in Sources */,
@@ -13410,6 +13465,7 @@
 				A256101319D3BB5C00A5A950 /* SubCateRect.m in Sources */,
 				3AE091291C5600A3006A4EA2 /* CashFlowViewController_iPad.m in Sources */,
 				3AEDFD971BF43591002633EE /* CashFlowTableViewCell.m in Sources */,
+				BEFC592621B77EAE0072F012 /* XDChristmasPlanAbViewController.m in Sources */,
 				A25619BB19D3BBAB00A5A950 /* UIHMJDatePicker.m in Sources */,
 				3AE2AA7E1C1FF76600D6C552 /* SignViewController.m in Sources */,
 				3AE091231C55BE26006A4EA2 /* NetWorthTableViewCell_iPad.m in Sources */,
@@ -13484,6 +13540,7 @@
 				A2561A5F19D3BBD700A5A950 /* DDRange.m in Sources */,
 				A2CE75281A288DEB000C58A5 /* CategorySplitCell.m in Sources */,
 				A256169319D3BB7F00A5A950 /* ReportCategoryTableViewCell.m in Sources */,
+				BEFC592E21B7AAE00072F012 /* XDChristmasPlanBbViewController.m in Sources */,
 				4E9873422071D4BC007CC203 /* XDBillRepeatTableViewController.m in Sources */,
 				4E7BA90D2063512800D9299A /* XDCalendarClass.m in Sources */,
 				A256100E19D3BB5C00A5A950 /* DateRangeViewController.m in Sources */,
@@ -13536,6 +13593,7 @@
 				A2560FD119D3BB5C00A5A950 /* ReminderViewController.m in Sources */,
 				4E933B7B207B32C00083AA02 /* XDBillCalDayBtn.m in Sources */,
 				A25616F119D3BB7F00A5A950 /* ipad_SelectImageViewController.m in Sources */,
+				BEFC593D21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.m in Sources */,
 				A276BD461A2D4A60006C6514 /* MonthCalDataView.m in Sources */,
 				A2561A5D19D3BBD700A5A950 /* DDData.m in Sources */,
 				4E7BA8E42063512700D9299A /* XDChartModel.m in Sources */,

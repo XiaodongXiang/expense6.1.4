@@ -6,6 +6,7 @@
 //
 
 #import "XDChristmasLitePlanAViewController.h"
+#import "XDPlanControlClass.h"
 
 @interface XDChristmasLitePlanAViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *bg;
@@ -37,10 +38,26 @@
         self.bg.image = [UIImage imageNamed:@"christmas_di_8"];
     }
     
+    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
+        self.contentImgView.image = [UIImage imageNamed:@"christmas_68%off"];
+        self.text1.text = @"Congratulations to get the 7-day free trial.\nShare to get 68% off a month to Premium.";
+    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
+        self.contentImgView.image = [UIImage imageNamed:@"christmas_7day"];
+        self.text1.text = @"Gifts for Christmas!\nStart Your 7-Day Free Trial.";
+    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+        self.contentImgView.image = [UIImage imageNamed:@"christmas_68%off"];
+        self.text1.text = @"Give a gift they’ll love.\nShare 68% off a month to friends.";
+    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
+        self.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
+        self.text1.text = @"Gifts for LIFETIME ACHIEVEMENT!\nShare to get the 50% off Hours keeper.";
+    }
+    
+    
 }
 - (IBAction)shareBtnClick:(id)sender {
     
 }
+
 - (IBAction)cancelClick:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

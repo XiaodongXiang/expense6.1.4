@@ -52,6 +52,8 @@
 #import "HMJActivityIndicator.h"
 #import "XDSignInViewController.h"
 #import "XDUpgradeViewController.h"
+#import "XDOurAppsViewController.h"
+
 @import Firebase;
 
 @interface SettingViewController()<FSMediaPickerDelegate>
@@ -67,6 +69,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *premiunIcon;
 @property (weak, nonatomic) IBOutlet UILabel *exprieDateLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *exprieDateLblH;
+@property (strong, nonatomic) IBOutlet UITableViewCell *ourAppCell;
 
 @end
 
@@ -685,7 +688,7 @@
             return 3;
         else if (section==3)
         {
-            return 1;
+            return 2;
         }
         else if(section==4)
         {
@@ -709,7 +712,7 @@
             return 3;
         else if (section==3)
         {
-            return 1;
+            return 2;
         }
         else if(section==4)
         {
@@ -786,7 +789,11 @@
                 return _generalCell;
             }
         }else if (indexPath.section == 3){
-            if (indexPath.row == 0){
+            if (indexPath.row == 0) {
+                [self.ourAppCell addSubview:view];
+                return self.ourAppCell;
+            }
+            if (indexPath.row == 1){
                 [_exportCell addSubview:view];
                 return _exportCell;
 //            }else{
@@ -835,7 +842,11 @@
                 return _generalCell;
             }
         }else if (indexPath.section == 3){
-            if (indexPath.row == 0){
+            if (indexPath.row == 0) {
+                [self.ourAppCell addSubview:view];
+                return self.ourAppCell;
+            }
+            if (indexPath.row == 1){
                 [_exportCell addSubview:view];
                 return _exportCell;
 //            }else{
@@ -861,7 +872,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
 //    AppDelegate_iPhone *appDelegate_iPhone = (AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
-
     
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
@@ -981,8 +991,12 @@
                 
             }
         }else if (indexPath.section == 3){
+            if (indexPath.row == 0) {
+                XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
+                [self presentViewController:ourVc animated:YES completion:nil];
+            }
             if (appDelegate.isPurchased) {
-                if (indexPath.row == 0) {
+                if (indexPath.row == 1) {
 //                    BackUpAndRestoreViewController * backUpAndRestoreViewController =[[BackUpAndRestoreViewController alloc] initWithNibName:@"BackUpAndRestoreViewController" bundle:nil];
 //                    [self.navigationController pushViewController:backUpAndRestoreViewController animated:YES];
 //                }else{
@@ -992,7 +1006,7 @@
 
             }else{
 
-                if (indexPath.row == 0) {
+                if (indexPath.row == 1) {
                     
 
                     XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];

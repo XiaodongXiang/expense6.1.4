@@ -68,6 +68,12 @@
     double yearPrice = 0;
     for(SKProduct *product in productArr){
 
+        if (@available(iOS 11.2, *)) {
+            NSLog(@"product == %@ ---- %@",product.introductoryPrice.price,product.price);
+        } else {
+            // Fallback on earlier versions
+            
+        }
         [self.productDic setObject:product forKey:product.productIdentifier];
         
         if ([product.productIdentifier isEqualToString:KInAppPurchaseProductIdMonth]) {
