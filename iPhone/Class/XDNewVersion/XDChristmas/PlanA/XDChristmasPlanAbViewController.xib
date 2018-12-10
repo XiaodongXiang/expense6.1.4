@@ -29,6 +29,7 @@
                 <outlet property="titleLbl" destination="H1R-hA-dDS" id="LbZ-Ve-seO"/>
                 <outlet property="titleTopL" destination="7Mf-eL-Xty" id="c3g-Qx-sh6"/>
                 <outlet property="tryPremiumBtn" destination="3YU-i0-4B7" id="zjC-Nm-RXp"/>
+                <outlet property="tryPremiumH" destination="Atr-Il-Ybc" id="Azl-KA-k3m"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

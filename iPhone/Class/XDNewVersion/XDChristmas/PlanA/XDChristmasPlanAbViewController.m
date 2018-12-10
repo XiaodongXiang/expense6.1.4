@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *titleH;
 @property (weak, nonatomic) IBOutlet UIImageView *bg;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancelTopL;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tryPremiumH;
 
 @end
 
@@ -52,6 +53,7 @@
     }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
         self.contentImgView.image = [UIImage imageNamed:@"christmas_68%off"];
         self.titleLbl.text = @"Give a gift they’ll love.\nShare 68% off a month to friends.";
+        self.tryPremiumH.constant = 0.01;
     }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
         self.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
         self.titleLbl.text = @"Gifts for LIFETIME ACHIEVEMENT!\nShare to get the 50% off Hours keeper.";

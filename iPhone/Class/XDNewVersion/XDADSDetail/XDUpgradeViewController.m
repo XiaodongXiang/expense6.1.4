@@ -326,9 +326,11 @@
 //#else
 //
 //#endif
-
+   
     [self dismissViewControllerAnimated:YES completion:nil];
-    
+    if ([self.xxdDelegate respondsToSelector:@selector(XDUpgradeViewDismiss)]) {
+        [self.xxdDelegate XDUpgradeViewDismiss];
+    }
 }
 
 - (IBAction)monthBtnClick:(id)sender {

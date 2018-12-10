@@ -48,7 +48,7 @@
                         <constraint firstAttribute="width" constant="250" id="8yP-dd-bTK"/>
                     </constraints>
                     <string key="text">Limited time off
-Starts at $1.49/month after
+Starts at $1.99/month after
 Ends in x days</string>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                     <color key="textColor" red="1" green="0.92549019610000005" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -88,9 +88,8 @@ Ends in x days</string>
             <constraints>
                 <constraint firstItem="AVx-cS-AEH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="186" id="3tm-eo-g7B"/>
                 <constraint firstItem="L4C-qF-QLh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3wG-Yc-bRP"/>
-                <constraint firstItem="xi6-Og-KO2" firstAttribute="width" secondItem="pFo-19-ddw" secondAttribute="width" id="4fn-Kc-RMP"/>
                 <constraint firstItem="pFo-19-ddw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="-90" id="C2e-yI-3kT"/>
-                <constraint firstItem="xi6-Og-KO2" firstAttribute="height" secondItem="pFo-19-ddw" secondAttribute="height" id="Qfp-Kk-UjN"/>
+                <constraint firstItem="xi6-Og-KO2" firstAttribute="leading" secondItem="pFo-19-ddw" secondAttribute="trailing" constant="8" id="Lz1-wi-PxU"/>
                 <constraint firstItem="AVx-cS-AEH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="TfU-zF-sTw"/>
                 <constraint firstItem="L1T-GO-fYM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="UNv-oi-frE"/>
                 <constraint firstItem="AVx-cS-AEH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aQ1-Zr-Fju"/>
@@ -100,7 +99,6 @@ Ends in x days</string>
                 <constraint firstItem="VLh-hL-ewW" firstAttribute="top" secondItem="AVx-cS-AEH" secondAttribute="bottom" constant="77" id="fvs-u2-oVq"/>
                 <constraint firstItem="L4C-qF-QLh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="owz-BS-mBU"/>
                 <constraint firstItem="xi6-Og-KO2" firstAttribute="top" secondItem="pFo-19-ddw" secondAttribute="top" id="rCL-i2-K75"/>
-                <constraint firstItem="xi6-Og-KO2" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="90" id="uHN-G3-VHN"/>
                 <constraint firstItem="pFo-19-ddw" firstAttribute="top" secondItem="VLh-hL-ewW" secondAttribute="bottom" constant="30.5" id="ucT-qQ-bSX"/>
                 <constraint firstItem="L4C-qF-QLh" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="xmw-ug-45E"/>
                 <constraint firstItem="L4C-qF-QLh" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="zrt-dU-FbV"/>

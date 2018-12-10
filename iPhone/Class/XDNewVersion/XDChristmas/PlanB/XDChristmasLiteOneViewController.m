@@ -26,7 +26,7 @@
     if (IS_IPHONE_X) {
         self.bg.image = [UIImage imageNamed:@"Bchristmas_x_pic_a"];
         self.contentCenterY.constant = -70;
-        self.topL.constant = 40;
+        self.topL.constant = 30;
     }else if (IS_IPHONE_5){
         self.bg.image = [UIImage imageNamed:@"Bchristmas_se_pic_a"];
     }else if (IS_IPHONE_6PLUS){

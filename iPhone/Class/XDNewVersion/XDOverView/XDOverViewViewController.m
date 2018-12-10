@@ -269,7 +269,7 @@
     self.navigationItem.titleView = self.titleBtn;
     
     
-    [Appsee setUserID:[PFUser currentUser].email];
+//    [Appsee setUserID:[PFUser currentUser].email];
     
     [self getCurrentVersion];
     [self checkDateWithPurchase];

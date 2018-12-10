@@ -2576,6 +2576,8 @@
 		BEB696E2213D0FAD00CDE712 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DA213D0FAD00CDE712 /* AFNetworkReachabilityManager.m */; };
 		BEB696E3213D0FAD00CDE712 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
+		BEFACB5A21BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFACB5821BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m */; };
+		BEFACB5B21BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFACB5921BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib */; };
 		BEFB24AE2188044B00507A5C /* BayMaxKVODelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A02188044B00507A5C /* BayMaxKVODelegate.m */; };
 		BEFB24AF2188044B00507A5C /* BayMaxDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A32188044B00507A5C /* BayMaxDebugView.m */; };
 		BEFB24B02188044B00507A5C /* BayMaxDegradeAssist.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A42188044B00507A5C /* BayMaxDegradeAssist.m */; };
@@ -2595,6 +2597,8 @@
 		BEFCAF2A2170D3A200065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
 		BEFD68C0216C5E2900B86A64 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */; };
 		BEFD68C2216C6FA500B86A64 /* ADEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68C1216C6FA500B86A64 /* ADEngine.framework */; };
+		BEFDC0ED21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFDC0EB21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.m */; };
+		BEFDC0EE21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFDC0EC21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -5748,6 +5752,9 @@
 		BEB696DD213D0FAD00CDE712 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
 		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
+		BEFACB5721BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasShareSuccessPlanBPopViewController.h; sourceTree = "<group>"; };
+		BEFACB5821BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasShareSuccessPlanBPopViewController.m; sourceTree = "<group>"; };
+		BEFACB5921BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasShareSuccessPlanBPopViewController.xib; sourceTree = "<group>"; };
 		BEFB249F2188044B00507A5C /* BayMaxProtector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxProtector.h; sourceTree = "<group>"; };
 		BEFB24A02188044B00507A5C /* BayMaxKVODelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxKVODelegate.m; sourceTree = "<group>"; };
 		BEFB24A12188044B00507A5C /* BayMaxCFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxCFunctions.h; sourceTree = "<group>"; };
@@ -5777,6 +5784,9 @@
 		BEFC593C21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasPlanAPopViewController.xib; sourceTree = "<group>"; };
 		BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		BEFD68C1216C6FA500B86A64 /* ADEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADEngine.framework; sourceTree = "<group>"; };
+		BEFDC0EA21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasShareSuccessdPlanAPopViewController.h; sourceTree = "<group>"; };
+		BEFDC0EB21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasShareSuccessdPlanAPopViewController.m; sourceTree = "<group>"; };
+		BEFDC0EC21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasShareSuccessdPlanAPopViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -7584,9 +7594,9 @@
 		4E7BA80A2063512600D9299A /* XDNewVersion */ = {
 			isa = PBXGroup;
 			children = (
+				BEFD68C1216C6FA500B86A64 /* ADEngine.framework */,
 				BE00543921B8C9B600C96A91 /* XDOurApps */,
 				BE051B8C21B616EA0069571B /* XDChristmas */,
-				BEFD68C1216C6FA500B86A64 /* ADEngine.framework */,
 				A289F7AA2101CF4400182A03 /* XDAppirater */,
 				4E95ADFE209C4CBD00FFEBE6 /* XDADSDetail */,
 				4E9636A52085EDFE00773132 /* XDSignIn */,
@@ -10778,6 +10788,9 @@
 				BEFC593521B7BB540072F012 /* XDChristmasPlanBPopViewController.h */,
 				BEFC593621B7BB540072F012 /* XDChristmasPlanBPopViewController.m */,
 				BEFC593721B7BB540072F012 /* XDChristmasPlanBPopViewController.xib */,
+				BEFACB5721BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.h */,
+				BEFACB5821BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m */,
+				BEFACB5921BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib */,
 			);
 			path = PlanB;
 			sourceTree = "<group>";
@@ -10797,6 +10810,9 @@
 				BEFC593A21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.h */,
 				BEFC593B21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.m */,
 				BEFC593C21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib */,
+				BEFDC0EA21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.h */,
+				BEFDC0EB21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.m */,
+				BEFDC0EC21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.xib */,
 			);
 			path = PlanA;
 			sourceTree = "<group>";
@@ -11093,6 +11109,7 @@
 				3AE5E4A01C22A5C80032F410 /* setting_export@2x.png in Resources */,
 				606506591C731BC800A7B70A /* account_iconbg_Saving.png in Resources */,
 				3AE2B06E1C3A511A002CA41F /* setting_budget_spent_sel.png in Resources */,
+				BEFDC0EE21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.xib in Resources */,
 				3A5F29341BDF6303003D9DDE /* siderbar_setting@2x.png in Resources */,
 				3AE5E46C1C22A2E80032F410 /* navigation_add@3x.png in Resources */,
 				A25618D019D3BB7F00A5A950 /* ipad_head_630_130@2x.png in Resources */,
@@ -12954,6 +12971,7 @@
 				A25611F219D3BB5C00A5A950 /* icon_photo_80_44.png in Resources */,
 				606506781C731FA000A7B70A /* icon_other.png in Resources */,
 				3ADBA0FF1BF9D5F700512D2C /* income_color8@3x.png in Resources */,
+				BEFACB5B21BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib in Resources */,
 				A256171E19D3BB7F00A5A950 /* ipad_btn_2@2x.png in Resources */,
 				A256104C19D3BB5C00A5A950 /* FatherCategorySelectedViewController.xib in Resources */,
 				A256116419D3BB5C00A5A950 /* cell_a_320_50_sel.png in Resources */,
@@ -13100,7 +13118,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\n#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n#buildNumber=$(($buildNumber + 1))\n\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+			shellScript = "#!/bin/bash\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
 		};
 		BEF83D70217589C600630CFE /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -13117,7 +13135,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "#!/bin/bash\n\n#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\n#buildNumber=$(($buildNumber + 1))\n\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
+			shellScript = "#!/bin/bash\n\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$INFOPLIST_FILE\")\n\nbuildNumber=$(($buildNumber + 1))\n\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"$INFOPLIST_FILE\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -13502,6 +13520,7 @@
 				A256100219D3BB5C00A5A950 /* SearchRelatedViewController.m in Sources */,
 				3AE300DE1BF07B2900E157E1 /* summaryTableviewCell.m in Sources */,
 				A2560FDF19D3BB5C00A5A950 /* BudgetCell_NS.m in Sources */,
+				BEFDC0ED21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.m in Sources */,
 				A256166519D3BB7F00A5A950 /* ipad_BillPaymentViewController.m in Sources */,
 				A25616F319D3BB7F00A5A950 /* ipad_TransactionRecurringViewController.m in Sources */,
 				60BE820E1C86EC6C00B871E2 /* Custom_iPad_LeftBBillsCell.m in Sources */,
@@ -13656,6 +13675,7 @@
 				A2560FB619D3BB5C00A5A950 /* KalTileView_bill_iPhone.m in Sources */,
 				A29C2ACA1A2302AA00B3B684 /* Reachability.m in Sources */,
 				4E98735120720B08007CC203 /* XDBillNotifTableViewController.m in Sources */,
+				BEFACB5A21BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m in Sources */,
 				A256101819D3BB5C00A5A950 /* CurrencyTypeViewController.m in Sources */,
 				3ACDD9F71B53DD8E007F879D /* HMJCustomAnimationButton.m in Sources */,
 				3ABE00D21B044F5C00D18188 /* BudgetReports.m in Sources */,

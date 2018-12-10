@@ -43,7 +43,7 @@
                         <constraint firstAttribute="width" constant="250" id="Yjk-Bl-zab"/>
                     </constraints>
                     <string key="text">Limited time off
-Starts at $1.49/month after
+Starts at $1.99/month after
 Ends in x days</string>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                     <color key="textColor" red="1" green="0.92549019607843142" blue="0.7803921568627451" alpha="1" colorSpace="calibratedRGB"/>

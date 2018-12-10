@@ -57,19 +57,19 @@
 @import Firebase;
 
 @interface SettingViewController()<FSMediaPickerDelegate>
+
 @property (weak, nonatomic) IBOutlet UIButton *profileIconBtn;
 
 @property (weak, nonatomic) IBOutlet UILabel *profileEmail;
 @property (weak, nonatomic) IBOutlet UILabel *lastTimeLbl;
-@property (strong, nonatomic) IBOutlet UITableViewCell *profileCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *upgradeCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *syncChildCell;
 @property (weak, nonatomic) IBOutlet UILabel *syncingLbl;
-@property (strong, nonatomic) IBOutlet UITableViewCell *premiumCell;
-@property (weak, nonatomic) IBOutlet UIImageView *premiunIcon;
 @property (weak, nonatomic) IBOutlet UILabel *exprieDateLbl;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *exprieDateLblH;
 @property (strong, nonatomic) IBOutlet UITableViewCell *ourAppCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *profileCell;
+@property (weak, nonatomic) IBOutlet UIImageView *profileImgView;
 
 @end
 
@@ -88,6 +88,7 @@
 //        self.edgesForExtendedLayout = UIRectEdgeNone;
 //    }
 //    self.automaticallyAdjustsScrollViewInsets=NO;
+    [self.navigationController.navigationBar setColor: [UIColor whiteColor]];
 
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(settingReloadData) name:@"settingReloadData" object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(resetStyleWithAds) name:@"hideProImage" object:nil];
@@ -136,7 +137,7 @@
         
         
         if ([proID isEqualToString:kInAppPurchaseProductIdLifetime] || defaults2) {
-            self.premiunIcon.image = [UIImage imageNamed:@"member_3"];
+//            self.premiunIcon.image = [UIImage imageNamed:@"member_3"];
             self.exprieDateLblH.constant = 0;
             
         }else{
@@ -144,9 +145,9 @@
                 appdelegate.isPurchased = NO;
             }else{
                 if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
-                    self.premiunIcon.image = [UIImage imageNamed:@"member_1"];
+//                    self.premiunIcon.image = [UIImage imageNamed:@"member_1"];
                 }else{
-                    self.premiunIcon.image = [UIImage imageNamed:@"member_2"];
+//                    self.premiunIcon.image = [UIImage imageNamed:@"member_2"];
                 }
                 NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
                 [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -157,6 +158,16 @@
             }
             [self.tableView reloadData];
         }
+    }
+    
+    if (IS_IPHONE_X) {
+        self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
+    }else if (IS_IPHONE_6){
+        self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
+    }else if (IS_IPHONE_6PLUS){
+        self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_plus"];
+    }else{
+        self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_se"];
     }
 }
 
@@ -171,7 +182,7 @@
             BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
             
             if ([proID isEqualToString:kInAppPurchaseProductIdLifetime] || defaults2) {
-                self.premiunIcon.image = [UIImage imageNamed:@"member_3"];
+//                self.premiunIcon.image = [UIImage imageNamed:@"member_3"];
                 self.exprieDateLblH.constant = 0;
                 
             }else{
@@ -179,9 +190,9 @@
                     appdelegate.isPurchased = NO;
                 }else{
                     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
-                        self.premiunIcon.image = [UIImage imageNamed:@"member_1"];
+//                        self.premiunIcon.image = [UIImage imageNamed:@"member_1"];
                     }else{
-                        self.premiunIcon.image = [UIImage imageNamed:@"member_2"];
+//                        self.premiunIcon.image = [UIImage imageNamed:@"member_2"];
                     }
                     NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
                     [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -680,7 +691,7 @@
     {
         if (section==0)
         {
-            return 4;
+            return 3;
         }
         if(section ==1 )
             return 2;
@@ -704,7 +715,7 @@
     {
         if (section==0)
         {
-            return 4;
+            return 3;
         }
         if(section ==1 )
             return 2;
@@ -756,8 +767,6 @@
     if (!appDelegate.isPurchased) {
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
-                view.y = 89;
-                [self.profileCell addSubview:view];
                 return self.profileCell;
             }else if (indexPath.row == 1){
                 [_syncCell addSubview:view];
@@ -809,16 +818,11 @@
     }else{
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
-                view.y = 89;
-                [self.profileCell addSubview:view];
                 return self.profileCell;
-            }else if(indexPath.row == 1){
-                [self.premiumCell addSubview:view];
-                return self.premiumCell;
-            }else if (indexPath.row == 2){
+            }else if (indexPath.row == 1){
                 [_syncCell addSubview:view];
                 return _syncCell;
-            }else if (indexPath.row == 3){
+            }else if (indexPath.row == 2){
                 //                [self.syncChildCell addSubview:view];
                 return self.syncChildCell;
             }
@@ -874,98 +878,74 @@
 //    AppDelegate_iPhone *appDelegate_iPhone = (AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
     
         if (indexPath.section == 0) {
-            if (indexPath.row == 0) {
-                UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:@"Do you want to log out?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-                
-                UIAlertAction *showAllInfoAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"VC_LOG OUT", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-                    
-                    PokcetExpenseAppDelegate * appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
-                    if (appDelegate.isSyncing==YES && appDelegate.autoSyncOn==NO)
-                    {
-                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"Data is syncing, please don't disconnect the internet and wait a moment, then try to sign out again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                        [alertView show];
-                    }else{
-                        HMJActivityIndicator *indicatorView=[[HMJActivityIndicator alloc]initWithFrame:CGRectMake((SCREEN_WIDTH-50)/2, (SCREEN_HEIGHT-50)/2, 50, 50)];
-                        [indicatorView.indicator startAnimating];
-                        self.view.userInteractionEnabled=NO;
-                        [appDelegate.window addSubview:indicatorView];
-                        
-                        //在parse登出前记录下objectId
-                        NSString *lastUser=[[PFUser currentUser]objectId];
-                        
-                        [PFUser logOutInBackgroundWithBlock:^(NSError *error)
-                         {
-                             NSFetchRequest *requestLocal=[[NSFetchRequest alloc]init];
-                             NSEntityDescription *descLocal=[NSEntityDescription entityForName:@"User" inManagedObjectContext:appDelegate.managedObjectContext];
-                             requestLocal.entity=descLocal;
-                             NSArray *array=[appDelegate.managedObjectContext executeFetchRequest:requestLocal error:&error];
-                             User *user=array[0];
-                             user.lastUser=lastUser;
-                             [appDelegate.managedObjectContext save:&error];
-                             
-                             //登出dropbox
-                             if ([appDelegate.dropbox.drop_account isLinked])
-                             {
-                                 [appDelegate.dropbox.drop_account unlink];
-                                 appDelegate.dropbox.drop_dataStore=nil;
-                             }
-                             
-                             [indicatorView removeFromSuperview];
-                             
-                             [self.navigationController popToRootViewControllerAnimated:YES];
-                             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-                             
-                             
-                             
-                         }];
-                        XDSignInViewController *signVC=[[XDSignInViewController alloc]init];
-                        appDelegate.window.rootViewController=signVC;
-                        
-                    }
-                    
-                    
-                }];
-             
-                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"VC_Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-                    
-                }];
-                [actionSheetController addAction:cancelAction];
-                [actionSheetController addAction:showAllInfoAction];
-                
-                [self presentViewController:actionSheetController animated:YES completion:nil];
-              
-            }
+//            if (indexPath.row == 0) {
+//                UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:@"Do you want to log out?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+//
+//                UIAlertAction *showAllInfoAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"VC_LOG OUT", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+//
+//                    PokcetExpenseAppDelegate * appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
+//                    if (appDelegate.isSyncing==YES && appDelegate.autoSyncOn==NO)
+//                    {
+//                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"Data is syncing, please don't disconnect the internet and wait a moment, then try to sign out again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                        [alertView show];
+//                    }else{
+//                        HMJActivityIndicator *indicatorView=[[HMJActivityIndicator alloc]initWithFrame:CGRectMake((SCREEN_WIDTH-50)/2, (SCREEN_HEIGHT-50)/2, 50, 50)];
+//                        [indicatorView.indicator startAnimating];
+//                        self.view.userInteractionEnabled=NO;
+//                        [appDelegate.window addSubview:indicatorView];
+//
+//                        //在parse登出前记录下objectId
+//                        NSString *lastUser=[[PFUser currentUser]objectId];
+//
+//                        [PFUser logOutInBackgroundWithBlock:^(NSError *error)
+//                         {
+//                             NSFetchRequest *requestLocal=[[NSFetchRequest alloc]init];
+//                             NSEntityDescription *descLocal=[NSEntityDescription entityForName:@"User" inManagedObjectContext:appDelegate.managedObjectContext];
+//                             requestLocal.entity=descLocal;
+//                             NSArray *array=[appDelegate.managedObjectContext executeFetchRequest:requestLocal error:&error];
+//                             User *user=array[0];
+//                             user.lastUser=lastUser;
+//                             [appDelegate.managedObjectContext save:&error];
+//
+//                             //登出dropbox
+//                             if ([appDelegate.dropbox.drop_account isLinked])
+//                             {
+//                                 [appDelegate.dropbox.drop_account unlink];
+//                                 appDelegate.dropbox.drop_dataStore=nil;
+//                             }
+//
+//                             [indicatorView removeFromSuperview];
+//
+//                             [self.navigationController popToRootViewControllerAnimated:YES];
+//                             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+//
+//
+//
+//                         }];
+//                        XDSignInViewController *signVC=[[XDSignInViewController alloc]init];
+//                        appDelegate.window.rootViewController=signVC;
+//
+//                    }
+//
+//
+//                }];
+//
+//                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"VC_Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//
+//                }];
+//                [actionSheetController addAction:cancelAction];
+//                [actionSheetController addAction:showAllInfoAction];
+//
+//                [self presentViewController:actionSheetController animated:YES completion:nil];
+//
+//            }
             
             if (indexPath.row == 2) {
                 [self sync];
             }
-            if (!appDelegate.isPurchased) {
-                if (indexPath.row == 3) {
-                    AppDelegate_iPhone * appDelegate = (AppDelegate_iPhone *)[[UIApplication sharedApplication] delegate];
-                    appDelegate.settings.others = @"PocketExpense_v1";
-                    NSError * error;
-                    if (![appDelegate.managedObjectContext save:&error])
-                    {
-                        NSLog(@"Unresolved error %@, %@",error, [error userInfo]);
-                        
-                    }
-                    XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
-                    [self presentViewController:adsVc animated:YES completion:nil];
-                
-                }
-//                    else if(indexPath.row == 4){
-//                    [appDelegate.inAppPM restorePurchase];
-//                }
-            }else{
-                if (indexPath.row == 1) {
-//                    Setting* setting = [[XDDataManager shareManager] getSetting];
-//                    if ([setting.purchasedProductID isEqualToString:kInAppPurchaseProductIdLifetime]) {
-//                        return;
-//                    }
-                    XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
-                    [self presentViewController:adsVc animated:YES completion:nil];
-
-                }
+            if (indexPath.row == 0) {
+                XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
+                [self presentViewController:adsVc animated:YES completion:nil];
                 
             }
         }else if (indexPath.section == 1 ){
@@ -1078,26 +1058,16 @@
 {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 90;
+            return 145;
         }
     }
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
 
-    if (appDelegate.isPurchased) {
-        if (indexPath.section == 0 && indexPath.row == 3) {
-            if (_syncSwitch.on) {
-                return 0.01;
-            }else{
-                return 51;
-            }
-        }
-    }else{
-        if (indexPath.section == 0 && indexPath.row == 2) {
-            if (_syncSwitch.on) {
-                return 0.01;
-            }else{
-                return 51;
-            }
+    if (indexPath.section == 0 && indexPath.row == 2) {
+        if (_syncSwitch.on) {
+            return 0.01;
+        }else{
+            return 51;
         }
     }
     

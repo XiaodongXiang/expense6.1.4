@@ -59,6 +59,9 @@
 #import "XDFirstPromptViewController.h"
 
 #import "XDUpgradeViewController.h"
+#import "XDPlanControlClass.h"
+
+
 @import Firebase;
 
 #define ScreenHeight [[UIScreen mainScreen] bounds].size.height
@@ -487,6 +490,8 @@
     [notificationCenter addObserver:self selector:@selector(showCustomTabView) name:@"ADMOB_ADS_SHOW" object:nil];
         
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPFSettingSuccessful) name:@"getPFSettingSuccessful" object:nil];
+    
+    [[XDPlanControlClass shareControlClass] validateReceipt];
     
     //插页广告
     if ([PFUser currentUser]) {

@@ -39,7 +39,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(instancetype)shareControlClass;
 
-
+-(void)validateReceipt;
 @end
 
 NS_ASSUME_NONNULL_END

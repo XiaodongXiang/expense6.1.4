@@ -7,6 +7,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface XDUpgradeViewController : UIViewController
+@protocol XDUpgradeViewDelegate <NSObject>
 
+@optional
+-(void)XDUpgradeViewDismiss;
+
+@end
+@interface XDUpgradeViewController : UIViewController
+@property(weak  ,nonatomic)id<XDUpgradeViewDelegate> xxdDelegate;
 @end

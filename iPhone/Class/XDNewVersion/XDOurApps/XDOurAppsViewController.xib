@@ -32,6 +32,7 @@
                 <outlet property="thirdBtn" destination="Yfl-UE-mat" id="Zub-se-uvC"/>
                 <outlet property="thirdCell" destination="56n-8L-0pI" id="RA2-R7-59S"/>
                 <outlet property="topView" destination="vJc-mw-EFj" id="zcd-Ch-iXn"/>
+                <outlet property="topViewH" destination="Acr-09-Sw5" id="mev-jQ-bJL"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -66,7 +67,7 @@
                 <constraint firstItem="IhV-jY-vKD" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="nOp-Un-Wle"/>
                 <constraint firstItem="IhV-jY-vKD" firstAttribute="top" secondItem="vJc-mw-EFj" secondAttribute="bottom" constant="-50" id="t9c-GY-6ky"/>
             </constraints>
-            <point key="canvasLocation" x="-6" y="106"/>
+            <point key="canvasLocation" x="-7.2000000000000002" y="105.69715142428787"/>
         </view>
         <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="120" id="dBz-Qb-pdk">
             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>

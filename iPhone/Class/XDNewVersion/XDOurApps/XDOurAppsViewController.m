@@ -20,6 +20,7 @@
 @property (weak, nonatomic) IBOutlet UIView *fourthBackView;
 @property (weak, nonatomic) IBOutlet UIButton *thirdBtn;
 @property (weak, nonatomic) IBOutlet UIButton *fourthBtn;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewH;
 
 @end
 
@@ -36,6 +37,7 @@
     cancelBtn.frame = CGRectMake(5, 20, 44, 44);
     if (IS_IPHONE_X) {
         cancelBtn.y = 40;
+        self.topViewH.constant = 180;
     }
     [cancelBtn addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:cancelBtn];

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDChristmasShareSuccessPlanBPopViewController">
+            <connections>
+                <outlet property="bgImgView" destination="LT5-Mc-xnj" id="hs2-Uh-A7M"/>
+                <outlet property="cancelBtn" destination="Zc0-v7-qWx" id="BeY-Kx-l69"/>
+                <outlet property="cancenLT" destination="5uS-cO-m1T" id="bxm-0b-4Id"/>
+                <outlet property="contentCenterY" destination="Tub-kG-fVy" id="ltk-sL-VPq"/>
+                <outlet property="contentImgView" destination="NaH-Rd-lVr" id="3r7-Tx-LZp"/>
+                <outlet property="useItBtn" destination="BhU-wg-zOu" id="1ZT-7Q-3k6"/>
+                <outlet property="useItTopH" destination="FqV-xQ-4xy" id="LHs-KT-ZXH"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xly-rC-Hjh">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_8" translatesAutoresizingMaskIntoConstraints="NO" id="LT5-Mc-xnj">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BhU-wg-zOu">
+                            <rect key="frame" x="20" y="491" width="335" height="52"/>
+                            <state key="normal" image="bChristmas_share_btn_normat"/>
+                            <state key="highlighted" image="bChristmas_share_btn_Selected"/>
+                            <connections>
+                                <action selector="useItClick:" destination="-1" eventType="touchUpInside" id="PpY-bv-xrM"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc0-v7-qWx">
+                            <rect key="frame" x="5" y="20" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="Nh6-tY-4Ay"/>
+                                <constraint firstAttribute="height" constant="44" id="er7-AY-9oP"/>
+                            </constraints>
+                            <state key="normal" image="Cancel"/>
+                        </button>
+                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bChristmas_share_7day" translatesAutoresizingMaskIntoConstraints="NO" id="NaH-Rd-lVr">
+                            <rect key="frame" x="113" y="192.5" width="149" height="132"/>
+                        </imageView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.76276408449999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="Zc0-v7-qWx" firstAttribute="top" secondItem="xly-rC-Hjh" secondAttribute="top" constant="20" id="5uS-cO-m1T"/>
+                        <constraint firstItem="BhU-wg-zOu" firstAttribute="leading" secondItem="xly-rC-Hjh" secondAttribute="leading" constant="20" id="6EB-OY-jSr"/>
+                        <constraint firstItem="NaH-Rd-lVr" firstAttribute="centerX" secondItem="xly-rC-Hjh" secondAttribute="centerX" id="BNC-SO-FV5"/>
+                        <constraint firstItem="LT5-Mc-xnj" firstAttribute="top" secondItem="xly-rC-Hjh" secondAttribute="top" id="C87-nr-Mnh"/>
+                        <constraint firstAttribute="trailing" secondItem="BhU-wg-zOu" secondAttribute="trailing" constant="20" id="E0E-qU-hzf"/>
+                        <constraint firstItem="BhU-wg-zOu" firstAttribute="top" secondItem="NaH-Rd-lVr" secondAttribute="bottom" constant="166.5" id="FqV-xQ-4xy"/>
+                        <constraint firstAttribute="bottom" secondItem="LT5-Mc-xnj" secondAttribute="bottom" id="O5n-QL-rS4"/>
+                        <constraint firstItem="NaH-Rd-lVr" firstAttribute="centerY" secondItem="xly-rC-Hjh" secondAttribute="centerY" constant="-75" id="Tub-kG-fVy"/>
+                        <constraint firstItem="BhU-wg-zOu" firstAttribute="centerX" secondItem="xly-rC-Hjh" secondAttribute="centerX" id="X2W-Jv-N3K"/>
+                        <constraint firstItem="Zc0-v7-qWx" firstAttribute="leading" secondItem="xly-rC-Hjh" secondAttribute="leading" constant="5" id="cxh-30-sv6"/>
+                        <constraint firstAttribute="trailing" secondItem="LT5-Mc-xnj" secondAttribute="trailing" id="rg1-1U-w0e"/>
+                        <constraint firstItem="LT5-Mc-xnj" firstAttribute="leading" secondItem="xly-rC-Hjh" secondAttribute="leading" id="sQL-TS-8Lx"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="xly-rC-Hjh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5Qm-p5-QXi"/>
+                <constraint firstItem="xly-rC-Hjh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AH8-if-6xE"/>
+                <constraint firstAttribute="trailing" secondItem="xly-rC-Hjh" secondAttribute="trailing" id="WwC-eb-cpn"/>
+                <constraint firstAttribute="bottom" secondItem="xly-rC-Hjh" secondAttribute="bottom" id="ZHC-Gi-O11"/>
+            </constraints>
+            <point key="canvasLocation" x="39.200000000000003" y="46.326836581709152"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Cancel" width="44" height="44"/>
+        <image name="bChristmas_share_7day" width="149" height="132"/>
+        <image name="bChristmas_share_btn_Selected" width="308" height="52"/>
+        <image name="bChristmas_share_btn_normat" width="308" height="52"/>
+        <image name="pic_8" width="375" height="667"/>
+    </resources>
+</document>

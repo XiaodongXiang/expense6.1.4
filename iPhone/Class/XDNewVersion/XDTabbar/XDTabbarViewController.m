@@ -18,6 +18,7 @@
 #import "XDChristmasPlanAPopViewController.h"
 #import "XDPlanControlClass.h"
 
+#import "XDUpgradeViewController.h"
 
 #import "XDAppriater.h"
 @interface XDTabbarViewController ()<XDAddTransactionViewDelegate>
@@ -138,6 +139,8 @@
 
 -(void)christmasPopViewGetNowClick{
     [self.planA dismiss];
+    XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
+    [self presentViewController:adsVc animated:YES completion:nil];
     
 }
 -(void)dismissPopView{
@@ -147,6 +150,8 @@
 
 -(void)bchristmasPopViewGetNowClick{
     [self.planB dismiss];
+    XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
+    [self presentViewController:adsVc animated:YES completion:nil];
     
 }
 -(void)bdismissPopView{
