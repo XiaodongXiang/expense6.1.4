@@ -10,7 +10,6 @@
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *firstCell;
-@property (weak, nonatomic) IBOutlet UIView *firstTopView;
 @property (strong, nonatomic) IBOutlet UITableViewCell *secondCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *thirdCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *forthCell;
@@ -21,6 +20,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *thirdBtn;
 @property (weak, nonatomic) IBOutlet UIButton *fourthBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewH;
+@property (weak, nonatomic) IBOutlet UIView *firstBackView;
+@property (weak, nonatomic) IBOutlet UIButton *firstBtn;
 
 @end
 
@@ -50,47 +51,40 @@
     
     self.tableView.tableFooterView = [[UIView alloc]initWithFrame:CGRectZero];
     
-    [self.firstTopView.layer addSublayer:[UIColor setGradualSecondChangingColor:self.firstTopView fromColor:RGBColor(129, 177, 255) toColor:RGBColor(82, 147, 252)]];
+   
     
-    UIView* firstBackView = [[UIView alloc]initWithFrame:CGRectMake(15, 0, SCREEN_WIDTH-30, 84)];
-    firstBackView.backgroundColor = [UIColor whiteColor];
-    firstBackView.layer.cornerRadius = 10;
-    firstBackView.layer.shadowOffset = CGSizeMake(0, 15);
-    firstBackView.layer.shadowColor = [UIColor blackColor].CGColor;
-    firstBackView.layer.shadowOpacity = 0.05;//阴影透明度，默认0
-    firstBackView.layer.shadowRadius = 5;//阴影半径，默认3
-    firstBackView.layer.masksToBounds = NO;
-    [self.firstCell addSubview:firstBackView];
+    self.firstBackView.layer.cornerRadius = self.thirdBackView.layer.cornerRadius = self.fourthBackView.layer.cornerRadius = self.secondBackView.layer.cornerRadius = 10;
+    self.firstBackView.layer.shadowOffset = self.thirdBackView.layer.shadowOffset = self.fourthBackView.layer.shadowOffset = self.secondBackView.layer.shadowOffset = CGSizeMake(0, 4);
+    self.firstBackView.layer.shadowColor = self.thirdBackView.layer.shadowColor = self.fourthBackView.layer.shadowColor = self.secondBackView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.firstBackView.layer.shadowOpacity = self.thirdBackView.layer.shadowOpacity = self.fourthBackView.layer.shadowOpacity = self.secondBackView.layer.shadowOpacity = 0.06;//阴影透明度，默认0
+    self.firstBackView.layer.shadowRadius = self.thirdBackView.layer.shadowRadius = self.fourthBackView.layer.shadowRadius = self.secondBackView.layer.shadowRadius = 18;//阴影半径，默认3
+    self.firstBackView.layer.masksToBounds = self.thirdBackView.layer.masksToBounds = self.fourthBackView.layer.masksToBounds = self.secondBackView.layer.masksToBounds = NO;
     
-    UIImageView* imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"hours keeper"]];
-    imageView.frame = CGRectMake(15, 12, 60, 60);
-    [firstBackView addSubview:imageView];
     
-    UILabel* titleLabel = [[UILabel alloc]initWithFrame:CGRectMake(85, 23, 200, 21)];
-    titleLabel.font = [UIFont fontWithName:FontSFUITextMedium size:18];
-    titleLabel.text = @"Hours keeper";
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/hours-keeper/id563155321?mt=8"]]){
+        [self.firstBtn setImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
+    }else{
+        [self.firstBtn setImage:[UIImage imageNamed:@"get"] forState:UIControlStateNormal];
+    };
     
-    UILabel* detailLabel = [[UILabel alloc]initWithFrame:CGRectMake(85, CGRectGetMaxY(titleLabel.frame)+4, 300, 14)];
-    detailLabel.font = [UIFont fontWithName:FontSFUITextRegular size:12];
-    detailLabel.textColor = [UIColor lightGrayColor];
-    detailLabel.text = @"Time Sheet, Pay and Invoice";
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/checkbook-account-tracker/id484000695?mt=8"]]){
+        [self.secondBtn setImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
+    }else{
+        [self.secondBtn setImage:[UIImage imageNamed:@"get"] forState:UIControlStateNormal];
+    };
     
-    [firstBackView addSubview:titleLabel];
-    [firstBackView addSubview:detailLabel];
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/scanner-now/id1193953564?mt=8"]]){
+        [self.thirdBtn setImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
+    }else{
+        [self.thirdBtn setImage:[UIImage imageNamed:@"get"] forState:UIControlStateNormal];
+    };
     
-    UIButton* btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    btn.frame = CGRectMake(firstBackView.width - 69, 27, 54, 30);
-    [btn setImage:[UIImage imageNamed:@"get"] forState:UIControlStateNormal];
-    btn.tag = 1;
-    [btn addTarget:self action:@selector(getOrOopenClick:) forControlEvents:UIControlEventTouchUpInside];
-    [firstBackView addSubview:btn];
-    
-    self.thirdBackView.layer.cornerRadius = self.fourthBackView.layer.cornerRadius = self.secondBackView.layer.cornerRadius = 10;
-    self.thirdBackView.layer.shadowOffset = self.fourthBackView.layer.shadowOffset = self.secondBackView.layer.shadowOffset = CGSizeMake(0, 15);
-    self.thirdBackView.layer.shadowColor = self.fourthBackView.layer.shadowColor = self.secondBackView.layer.shadowColor = [UIColor blackColor].CGColor;
-    self.thirdBackView.layer.shadowOpacity = self.fourthBackView.layer.shadowOpacity = self.secondBackView.layer.shadowOpacity = 0.05;//阴影透明度，默认0
-    self.thirdBackView.layer.shadowRadius = self.fourthBackView.layer.shadowRadius = self.secondBackView.layer.shadowRadius = 5;//阴影半径，默认3
-    self.thirdBackView.layer.masksToBounds = self.fourthBackView.layer.masksToBounds = self.secondBackView.layer.masksToBounds = NO;
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/fax-now-send-fax-from-pocket/id1197930396?mt=8"]]){
+        [self.fourthBtn setImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
+    }else{
+        [self.fourthBtn setImage:[UIImage imageNamed:@"get"] forState:UIControlStateNormal];
+    };
+
 }
 
 -(void)cancelClick{
@@ -127,7 +121,25 @@
 }
 
 - (IBAction)getOrOopenClick:(id)sender {
-    
+    UIButton * btn = sender;
+
+    if (btn.tag == 1) {
+        NSString *urlStr = @"https://itunes.apple.com/us/app/hours-keeper/id563155321?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+
+    }else if (btn.tag == 2){
+        NSString *urlStr = @"https://itunes.apple.com/us/app/checkbook-account-tracker/id484000695?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+
+    }else if (btn.tag == 3){
+        NSString *urlStr = @"https://itunes.apple.com/us/app/scanner-now/id1193953564?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+
+    }else if (btn.tag == 4){
+        NSString *urlStr = @"https://itunes.apple.com/us/app/fax-now-send-fax-from-pocket/id1197930396?mt=8";
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+
+    }
 }
 
 @end

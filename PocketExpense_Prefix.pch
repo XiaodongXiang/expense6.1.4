@@ -37,6 +37,8 @@
 #define PURCHASE_PRICE_MONTH     @"purchasePriceMonth"
 #define PURCHASE_PRICE_YEAR     @"purchasePriceYear"
 #define PURCHASE_PRICE_LIFETIME     @"purchasePriceLifetime"
+#define PURCHASE_PRICE_MONTH_INTRODUCTORY    @"purchasePriceMonthIntroductory"
+#define PURCHASE_PRICE_INTRODUCTORY_CAN_BUY  @"canBuyIntroductoryPrice"
 
 #define XDAPPIRATERIMPORTANTEVENT  @"appiraterShowWithImportantEvent"
 #define XDAPPIRATERCLOSERATEVIEW   @"appiraterClosedEvent"

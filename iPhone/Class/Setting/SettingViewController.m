@@ -66,10 +66,15 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *syncChildCell;
 @property (weak, nonatomic) IBOutlet UILabel *syncingLbl;
 @property (weak, nonatomic) IBOutlet UILabel *exprieDateLbl;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *exprieDateLblH;
 @property (strong, nonatomic) IBOutlet UITableViewCell *ourAppCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *profileCell;
 @property (weak, nonatomic) IBOutlet UIImageView *profileImgView;
+@property (weak, nonatomic) IBOutlet UIButton *noPurchasedProfileIcon;
+@property (weak, nonatomic) IBOutlet UILabel *noPurchasedEmail;
+@property (weak, nonatomic) IBOutlet UILabel *noPurchasedSyncTimeLbl;
+@property (strong, nonatomic) IBOutlet UITableViewCell *noPurchasedProfileCell;
+
+
 
 @end
 
@@ -110,55 +115,25 @@
 
     [[UITableViewHeaderFooterView appearance] setTintColor:[UIColor whiteColor]];
     
-    self.profileIconBtn.layer.cornerRadius = 20;
-    self.profileIconBtn.layer.masksToBounds = YES;
+    self.profileIconBtn.layer.cornerRadius = self.noPurchasedProfileIcon.layer.cornerRadius = 20;
+    self.profileIconBtn.layer.masksToBounds = self.noPurchasedProfileIcon.layer.masksToBounds = YES;
     
     PFUser *user=[PFUser currentUser];
-    self.profileEmail.text = user.username;
+    self.profileEmail.text = self.noPurchasedEmail.text = user.username;
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
     NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
     NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
     UIImage *image=[[UIImage alloc]initWithData:imageData];
     if (imageData) {
         [self.profileIconBtn setImage:image forState:UIControlStateNormal];
+        [self.noPurchasedProfileIcon setImage:image forState:UIControlStateNormal];
     }
     
     
     User* ur = [[[XDDataManager shareManager]getObjectsFromTable:@"User"]lastObject];
     
-    self.lastTimeLbl.text = [self returnDateFormatter:ur.syncTime];
-    
-    if (appdelegate.isPurchased) {
-        Setting* setting = [[XDDataManager shareManager] getSetting];
-        BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
-
-       
-        NSString* proID = setting.purchasedProductID;
-        
-        
-        if ([proID isEqualToString:kInAppPurchaseProductIdLifetime] || defaults2) {
-//            self.premiunIcon.image = [UIImage imageNamed:@"member_3"];
-            self.exprieDateLblH.constant = 0;
-            
-        }else{
-            if (![setting.purchasedIsSubscription boolValue]) {
-                appdelegate.isPurchased = NO;
-            }else{
-                if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
-//                    self.premiunIcon.image = [UIImage imageNamed:@"member_1"];
-                }else{
-//                    self.premiunIcon.image = [UIImage imageNamed:@"member_2"];
-                }
-                NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-                [formatter setDateFormat:@"yyyy-MM-dd"];
-                NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
-                
-                self.exprieDateLblH.constant = 10;
-                self.exprieDateLbl.text = [NSString stringWithFormat:@"Renews :%@",expiredString];
-            }
-            [self.tableView reloadData];
-        }
-    }
+    self.lastTimeLbl.text = self.noPurchasedSyncTimeLbl.text = [self returnDateFormatter:ur.syncTime];
+    [self.noPurchasedProfileIcon addTarget:self action:@selector(profileIconClick:) forControlEvents:UIControlEventTouchUpInside];
     
     if (IS_IPHONE_X) {
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
@@ -175,36 +150,17 @@
 
 -(void)settingReloadData{
     dispatch_async(dispatch_get_main_queue(), ^{
-        AppDelegate_iPhone *appdelegate = (AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
-        if (appdelegate.isPurchased) {
-            Setting* setting = [[XDDataManager shareManager] getSetting];
-            NSString* proID = setting.purchasedProductID;
-            BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
-            
-            if ([proID isEqualToString:kInAppPurchaseProductIdLifetime] || defaults2) {
-//                self.premiunIcon.image = [UIImage imageNamed:@"member_3"];
-                self.exprieDateLblH.constant = 0;
-                
-            }else{
-                if (![setting.purchasedIsSubscription boolValue]) {
-                    appdelegate.isPurchased = NO;
-                }else{
-                    if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
-//                        self.premiunIcon.image = [UIImage imageNamed:@"member_1"];
-                    }else{
-//                        self.premiunIcon.image = [UIImage imageNamed:@"member_2"];
-                    }
-                    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-                    [formatter setDateFormat:@"yyyy-MM-dd"];
-                    NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
-                    
-                    self.exprieDateLblH.constant = 10;
-                    self.exprieDateLbl.text = [NSString stringWithFormat:@"Renews :%@",expiredString];
-                }
-            }
-        }
         [self.tableView reloadData];
+
     });
+    //
+//    Setting* setting = [[XDDataManager shareManager] getSetting];
+//
+//    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+//    [formatter setDateFormat:@"yyyy-MM-dd"];
+//    NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
+//
+//    self.exprieDateLbl.text  = [NSString stringWithFormat:@"Renews :%@",expiredString];
 }
 
 
@@ -757,17 +713,15 @@
 	
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     //没购买
-    
-
-
-    //没购买
     UIView* view = [[UIView alloc]initWithFrame:CGRectMake(53, 50, SCREEN_WIDTH, 0.5)];
     view.backgroundColor = RGBColor(230, 230, 230);
     
     if (!appDelegate.isPurchased) {
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
-                return self.profileCell;
+                view.y = 145;
+                [self.noPurchasedProfileCell addSubview:view];
+                return self.noPurchasedProfileCell;
             }else if (indexPath.row == 1){
                 [_syncCell addSubview:view];
                 return _syncCell;
@@ -818,6 +772,17 @@
     }else{
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
+                if (appDelegate.isPurchased) {
+                    if ([[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG]) {
+                        self.exprieDateLbl.text = @"";
+                    }else{
+                        Setting* setting = [[XDDataManager shareManager] getSetting];
+                        NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+                        [formatter setDateFormat:@"yyyy-MM-dd"];
+                        NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
+                        self.exprieDateLbl.text = [NSString stringWithFormat:@"Renews :%@",expiredString];
+                    }
+                }
                 return self.profileCell;
             }else if (indexPath.row == 1){
                 [_syncCell addSubview:view];
@@ -1195,7 +1160,7 @@
             
             User* ur = [[[XDDataManager shareManager]getObjectsFromTable:@"User"]lastObject];
             
-            self.lastTimeLbl.text = [self returnDateFormatter:ur.syncTime];
+            self.lastTimeLbl.text = self.noPurchasedSyncTimeLbl.text = [self returnDateFormatter:ur.syncTime];
             
         }
         appDelegate.settings.syncAuto=[NSNumber numberWithBool:YES];
@@ -1259,6 +1224,7 @@
 -(void)mediaPicker:(FSMediaPicker *)mediaPicker didFinishWithMediaInfo:(NSDictionary *)mediaInfo
 {
     [self.profileIconBtn setImage:mediaPicker.editMode == FSEditModeCircular? mediaInfo.circularEditedImage:mediaInfo.editedImage forState:UIControlStateNormal];
+    [self.noPurchasedProfileIcon setImage:mediaPicker.editMode == FSEditModeCircular? mediaInfo.circularEditedImage:mediaInfo.editedImage forState:UIControlStateNormal];
     
     UIImage *avatarImage=mediaPicker.editMode == FSEditModeCircular? mediaInfo.circularEditedImage:mediaInfo.editedImage;
     //    NSFileManager *manager=[NSFileManager defaultManager];
@@ -1277,6 +1243,7 @@
 -(void)setAvatarImage:(UIImage *)image
 {
     [self.profileIconBtn setImage:image forState:UIControlStateNormal];
+    [self.noPurchasedProfileIcon setImage:image forState:UIControlStateNormal];
 }
 
 #pragma mark - ..
@@ -1307,7 +1274,7 @@
             
             User* ur = [[[XDDataManager shareManager]getObjectsFromTable:@"User"]lastObject];
             
-            self.lastTimeLbl.text = [self returnDateFormatter:ur.syncTime];
+            self.lastTimeLbl.text = self.noPurchasedSyncTimeLbl.text = [self returnDateFormatter:ur.syncTime];
             
         });
 

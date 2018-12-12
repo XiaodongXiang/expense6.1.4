@@ -47,7 +47,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>154</string>
+	<string>320</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -66,6 +66,8 @@
 	<string>159401807755015</string>
 	<key>FacebookDisplayName</key>
 	<string>Pocket Expense</string>
+	<key>FirebaseMessagingAutoInitEnabled</key>
+	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
 	<key>LSApplicationQueriesSchemes</key>

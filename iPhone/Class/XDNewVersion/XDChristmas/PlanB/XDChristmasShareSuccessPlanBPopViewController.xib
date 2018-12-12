@@ -29,16 +29,14 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xly-rC-Hjh">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_8" translatesAutoresizingMaskIntoConstraints="NO" id="LT5-Mc-xnj">
+                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pic_8" translatesAutoresizingMaskIntoConstraints="NO" id="LT5-Mc-xnj">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </imageView>
-                        <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BhU-wg-zOu">
+                        <button opaque="NO" alpha="0.0" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BhU-wg-zOu">
                             <rect key="frame" x="20" y="491" width="335" height="52"/>
                             <state key="normal" image="bChristmas_share_btn_normat"/>
                             <state key="highlighted" image="bChristmas_share_btn_Selected"/>
-                            <connections>
-                                <action selector="useItClick:" destination="-1" eventType="touchUpInside" id="PpY-bv-xrM"/>
-                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc0-v7-qWx">
                             <rect key="frame" x="5" y="20" width="44" height="44"/>
@@ -48,11 +46,11 @@
                             </constraints>
                             <state key="normal" image="Cancel"/>
                         </button>
-                        <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bChristmas_share_7day" translatesAutoresizingMaskIntoConstraints="NO" id="NaH-Rd-lVr">
+                        <imageView userInteractionEnabled="NO" alpha="0.0" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bChristmas_share_7day" translatesAutoresizingMaskIntoConstraints="NO" id="NaH-Rd-lVr">
                             <rect key="frame" x="113" y="192.5" width="149" height="132"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.76276408449999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Zc0-v7-qWx" firstAttribute="top" secondItem="xly-rC-Hjh" secondAttribute="top" constant="20" id="5uS-cO-m1T"/>
                         <constraint firstItem="BhU-wg-zOu" firstAttribute="leading" secondItem="xly-rC-Hjh" secondAttribute="leading" constant="20" id="6EB-OY-jSr"/>
@@ -69,7 +67,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="xly-rC-Hjh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="5Qm-p5-QXi"/>
                 <constraint firstItem="xly-rC-Hjh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="AH8-if-6xE"/>

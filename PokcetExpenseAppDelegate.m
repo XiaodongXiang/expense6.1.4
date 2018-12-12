@@ -51,7 +51,12 @@
 #import <GoogleAnalytics/GAIDictionaryBuilder.h>
 #import "BayMaxProtector.h"
 
+
 @import Firebase;
+
+@interface PokcetExpenseAppDelegate ()<FIRMessagingDelegate,SKRequestDelegate>
+
+@end
 
 @implementation PokcetExpenseAppDelegate
 
@@ -128,6 +133,7 @@
 	//[tranDRplistDictionary writeToFile:storePath atomically: YES];
  	
 }
+
 
 
 #pragma mark Life Cycle
@@ -261,6 +267,32 @@
     
     [FIRApp configure];
     
+    [FIRMessaging messaging].delegate = self;
+
+    if ([UNUserNotificationCenter class] != nil) {
+        // iOS 10 or later
+        // For iOS 10 display notification (sent via APNS)
+        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+        UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert |
+        UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
+        [[UNUserNotificationCenter currentNotificationCenter]
+         requestAuthorizationWithOptions:authOptions
+         completionHandler:^(BOOL granted, NSError * _Nullable error) {
+             // ...
+         }];
+    } else {
+        // iOS 10 notifications aren't available; fall back to iOS 8-9 notifications.
+        UIUserNotificationType allNotificationTypes =
+        (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+        UIUserNotificationSettings *settings =
+        [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+        [application registerUserNotificationSettings:settings];
+    }
+    
+    [application registerForRemoteNotifications];
+    
+    
+    
     //获取网络时间和本地时间差
     [NSDate internetServerDate:^(NSDate * internetDate) {
         
@@ -280,13 +312,246 @@
         [userDefault synchronize];
     }
     
+    
+    
     [self.epnc setFlurryEvent_withUpgrade:NO];
     
-
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getIntroductoryPriceNotif) name:@"getIntroductoryPriceNotif" object:nil];
+  
+    
+    
+    
+    
     return YES;
 }
 
+-(void)getIntroductoryPriceNotif{
+    if (!self.isPurchased) {
+        [self validateReceipt];
+    }
+    
+}
 
+
+-(void)validateReceipt
+{
+    
+    NSURL* receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
+    
+    if (receiptData == nil) {
+        
+        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Tips" message:@"We will check if you are eligible to purchase a discounted product, which may require you to enter a password, please understand." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            
+            SKReceiptRefreshRequest* refresh = [[SKReceiptRefreshRequest alloc]init];
+            refresh.delegate = self;
+            [refresh start];
+            
+        }];
+        UIAlertAction* action1 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+        [alert addAction:action];
+        [alert addAction:action1];
+        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        
+        return;
+    }
+    NSString* urlStr = RECEIPTURL;
+    
+    NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
+    NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
+    
+    NSDictionary* dic = @{@"receipt":encodeStr};
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    
+    NSMutableURLRequest* connectionRequest = [NSMutableURLRequest requestWithURL:sandBoxUrl];
+    connectionRequest.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+    connectionRequest.HTTPBody = jsonData;
+    connectionRequest.HTTPMethod = @"POST";
+    [connectionRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [connectionRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    // create a background session for connecting to the Receipt Verification service.
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *datatask = [session dataTaskWithRequest: connectionRequest
+                                                completionHandler: ^(NSData *apiData
+                                                                     , NSURLResponse *apiResponse
+                                                                     , NSError *conxErr)
+                                      {
+                                          // background datatask completion block
+                                          if (apiData) {
+                                              
+                                              NSError *parseErr;
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData: apiData
+                                                                                                   options: 0
+                                                                                                     error: &parseErr];
+                                              // TODO: add error handling for conxErr, json parsing, and invalid http response statuscode
+                                              NSDictionary* recerptDic = json[@"receipt"];
+                                              if (recerptDic) {
+                                                  
+                                                  NSArray* lastReceiptArr = recerptDic[@"latest_receipt_info"];
+                                                  
+                                                  [self judgeCanBuyIntroductoryPrice:lastReceiptArr];
+                                              }else{
+                                                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                              }
+                                              
+                                          }else{
+                                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                              
+                                          }
+                                          
+                                          
+                                          /* TODO: Unlock the In App purchases ...
+                                           At this point the json dictionary will contain the verified receipt from Apple
+                                           and each purchased item will be in the array of lineitems.
+                                           */
+                                      }];
+    
+    [datatask resume];
+}
+
+-(void)validateReceiptAgain
+{
+    
+    NSURL* receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
+    
+    if (receiptData == nil) {
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+        return;
+    }
+    NSString* urlStr = RECEIPTURL;
+    
+    NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
+    NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
+    
+    NSDictionary* dic = @{@"receipt":encodeStr};
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    
+    NSMutableURLRequest* connectionRequest = [NSMutableURLRequest requestWithURL:sandBoxUrl];
+    connectionRequest.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+    connectionRequest.HTTPBody = jsonData;
+    connectionRequest.HTTPMethod = @"POST";
+    [connectionRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [connectionRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    // create a background session for connecting to the Receipt Verification service.
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *datatask = [session dataTaskWithRequest: connectionRequest
+                                                completionHandler: ^(NSData *apiData
+                                                                     , NSURLResponse *apiResponse
+                                                                     , NSError *conxErr)
+                                      {
+                                          // background datatask completion block
+                                          if (apiData) {
+                                              
+                                              NSError *parseErr;
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData: apiData
+                                                                                                   options: 0
+                                                                                                     error: &parseErr];
+                                              // TODO: add error handling for conxErr, json parsing, and invalid http response statuscode
+                                              NSDictionary* recerptDic = json[@"receipt"];
+                                              if (recerptDic) {
+                                                  
+                                                  NSArray* lastReceiptArr = recerptDic[@"latest_receipt_info"];
+                                                  
+                                                  [self judgeCanBuyIntroductoryPrice:lastReceiptArr];
+                                              }else{
+                                                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                              }
+                                              
+                                          }else{
+                                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                              
+                                          }
+                                          
+                                          
+                                          /* TODO: Unlock the In App purchases ...
+                                           At this point the json dictionary will contain the verified receipt from Apple
+                                           and each purchased item will be in the array of lineitems.
+                                           */
+                                      }];
+    
+    [datatask resume];
+}
+
+-(void)judgeCanBuyIntroductoryPrice:(NSArray*)array{
+    BOOL cantBuy = NO;
+    
+    for (NSDictionary* dic in array) {
+        BOOL sub1 = [[dic valueForKey:@"is_in_intro_offer_period"] boolValue];
+        BOOL sub2 = [[dic valueForKey:@"is_trial_period"]boolValue];
+        
+        if (sub1 || sub2) {
+            cantBuy = YES;
+        }
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:!cantBuy] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+    
+}
+
+- (void)requestDidFinish:(SKRequest *)request NS_AVAILABLE(10_7, 3_0){
+    [self validateReceiptAgain];
+}
+- (void)request:(SKRequest *)request didFailWithError:(NSError *)error NS_AVAILABLE(10_7, 3_0){                                                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+}
+
+
+
+- (void)messaging:(FIRMessaging *)messaging didReceiveRegistrationToken:(NSString *)fcmToken {
+    NSLog(@"FCM registration token: %@", fcmToken);
+    // Notify about received token.
+    NSDictionary *dataDict = [NSDictionary dictionaryWithObject:fcmToken forKey:@"token"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:
+     @"FCMToken" object:nil userInfo:dataDict];
+    // TODO: If necessary send token to application server.
+    // Note: This callback is fired at each app startup and whenever a new token is generated.
+}
+
+- (void)application:(UIApplication *)application
+didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [FIRMessaging messaging].APNSToken = deviceToken;
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    // If you are receiving a notification message while your app is in the background,
+    // this callback will not be fired till the user taps on the notification launching the application.
+    // TODO: Handle data of notification
+    
+    // With swizzling disabled you must let Messaging know about the message, for Analytics
+    // [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+    
+    // Print message ID.
+//    if (userInfo[kGCMMessageIDKey]) {
+//        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+//    }
+    
+    // Print full message.
+    NSLog(@"userInfo == %@", userInfo);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+    // If you are receiving a notification message while your app is in the background,
+    // this callback will not be fired till the user taps on the notification launching the application.
+    // TODO: Handle data of notification
+    
+    // With swizzling disabled you must let Messaging know about the message, for Analytics
+    // [[FIRMessaging messaging] appDidReceiveMessage:userInfo];
+    
+    // Print message ID.
+//    if (userInfo[kGCMMessageIDKey]) {
+//        NSLog(@"Message ID: %@", userInfo[kGCMMessageIDKey]);
+//    }
+    
+    // Print full message.
+    NSLog(@"userInfo == %@", userInfo);
+    
+    completionHandler(UIBackgroundFetchResultNewData);
+}
 
 
 //////-------------------------------------------------------------------------------------------------------

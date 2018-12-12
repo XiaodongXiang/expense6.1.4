@@ -2595,6 +2595,8 @@
 		BEFC593E21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFC593C21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib */; };
 		BEFCAF292170D3A100065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
 		BEFCAF2A2170D3A200065457 /* PocketExpense-Info_Lite.plist in Resources */ = {isa = PBXBuildFile; fileRef = A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */; };
+		BEFD270C21C0BE170024EB8D /* textView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFD270B21C0BE170024EB8D /* textView.m */; };
+		BEFD270E21C0BE2E0024EB8D /* textView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFD270D21C0BE2E0024EB8D /* textView.xib */; };
 		BEFD68C0216C5E2900B86A64 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */; };
 		BEFD68C2216C6FA500B86A64 /* ADEngine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BEFD68C1216C6FA500B86A64 /* ADEngine.framework */; };
 		BEFDC0ED21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFDC0EB21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.m */; };
@@ -5782,6 +5784,9 @@
 		BEFC593A21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasPlanAPopViewController.h; sourceTree = "<group>"; };
 		BEFC593B21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasPlanAPopViewController.m; sourceTree = "<group>"; };
 		BEFC593C21B7CF1E0072F012 /* XDChristmasPlanAPopViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasPlanAPopViewController.xib; sourceTree = "<group>"; };
+		BEFD270A21C0BE170024EB8D /* textView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = textView.h; sourceTree = "<group>"; };
+		BEFD270B21C0BE170024EB8D /* textView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = textView.m; sourceTree = "<group>"; };
+		BEFD270D21C0BE2E0024EB8D /* textView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = textView.xib; sourceTree = "<group>"; };
 		BEFD68BF216C5E2800B86A64 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMobileAds.framework; sourceTree = "<group>"; };
 		BEFD68C1216C6FA500B86A64 /* ADEngine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ADEngine.framework; sourceTree = "<group>"; };
 		BEFDC0EA21BA6B500073FFDF /* XDChristmasShareSuccessdPlanAPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasShareSuccessdPlanAPopViewController.h; sourceTree = "<group>"; };
@@ -10769,6 +10774,9 @@
 		BE051B8C21B616EA0069571B /* XDChristmas */ = {
 			isa = PBXGroup;
 			children = (
+				BEFD270A21C0BE170024EB8D /* textView.h */,
+				BEFD270B21C0BE170024EB8D /* textView.m */,
+				BEFD270D21C0BE2E0024EB8D /* textView.xib */,
 				BE051B9921B61B090069571B /* PlanControlClass */,
 				BE051B9321B618500069571B /* PlanA */,
 				BE051B9221B618500069571B /* PlanB */,
@@ -10956,7 +10964,7 @@
 								enabled = 0;
 							};
 							com.apple.Push = {
-								enabled = 0;
+								enabled = 1;
 							};
 							com.apple.VPNLite = {
 								enabled = 0;
@@ -12707,6 +12715,7 @@
 				6096B8001C72D24200A21210 /* about_bg_ipad@2x.png in Resources */,
 				A256108819D3BB5C00A5A950 /* arrow_30_30_blue.png in Resources */,
 				3AE154BD1BEC4A5300F9CA91 /* icon_all_arrow@2x.png in Resources */,
+				BEFD270E21C0BE2E0024EB8D /* textView.xib in Resources */,
 				A256169219D3BB7F00A5A950 /* OverViewcategoryViewController.xib in Resources */,
 				3AE69FAE1C4CBEF8005E211B /* Parse.png in Resources */,
 				A2F633D61A19C1EA00676B8C /* iphone6_btn_point@2x.png in Resources */,
@@ -13050,6 +13059,7 @@
 				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -13060,6 +13070,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -13593,6 +13604,7 @@
 				3ABE00DE1B044F5D00D18188 /* TransactionRule.m in Sources */,
 				A2560FEA19D3BB5C00A5A950 /* TrackerCell.m in Sources */,
 				A256166919D3BB7F00A5A950 /* ipad_DateSelBillsViewController.m in Sources */,
+				BEFD270C21C0BE170024EB8D /* textView.m in Sources */,
 				BEFB24B22188044B00507A5C /* BayMaxProtector.m in Sources */,
 				A256169C19D3BB7F00A5A950 /* KalMonthView.m in Sources */,
 				4E7BA8D82063512700D9299A /* numberKeyboardView.m in Sources */,

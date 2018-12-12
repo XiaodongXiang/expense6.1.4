@@ -25,7 +25,6 @@
                 <outlet property="contentImgView" destination="U8D-dL-xff" id="2gV-Dg-BT1"/>
                 <outlet property="shareBtn" destination="3Ui-It-Xeb" id="lJa-QP-VKo"/>
                 <outlet property="textLbl" destination="2sx-2b-qtk" id="elT-pF-d0K"/>
-                <outlet property="titleH" destination="PY9-rX-iAE" id="hgF-kX-9GZ"/>
                 <outlet property="titleLbl" destination="H1R-hA-dDS" id="LbZ-Ve-seO"/>
                 <outlet property="titleTopL" destination="7Mf-eL-Xty" id="c3g-Qx-sh6"/>
                 <outlet property="tryPremiumBtn" destination="3YU-i0-4B7" id="zjC-Nm-RXp"/>
@@ -53,7 +52,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2sx-2b-qtk">
-                    <rect key="frame" x="109.5" y="530.5" width="156.5" height="55"/>
+                    <rect key="frame" x="109.5" y="521" width="156.5" height="55"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="55" id="PN1-Xq-CCv"/>
                     </constraints>
@@ -70,41 +69,46 @@ Ends in X days.</string>
                         <constraint firstAttribute="height" constant="150" id="IJu-5g-pE2"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start your 7-day free trial." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1R-hA-dDS">
-                    <rect key="frame" x="37.5" y="368.5" width="300" height="30"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start your 7-day free trial." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H1R-hA-dDS">
+                    <rect key="frame" x="20" y="368.5" width="335" height="20.5"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="300" id="6PN-sf-2lv"/>
-                        <constraint firstAttribute="height" constant="30" id="PY9-rX-iAE"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20.5" id="trF-SD-yZF"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="1" green="0.92549019610000005" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YU-i0-4B7">
-                    <rect key="frame" x="71" y="398.5" width="233" height="77"/>
+                <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3YU-i0-4B7">
+                    <rect key="frame" x="71" y="389" width="233" height="77"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="77" id="Atr-Il-Ybc"/>
                         <constraint firstAttribute="width" constant="233" id="yhU-GG-MVh"/>
                     </constraints>
                     <state key="normal" image="christmas_button"/>
                     <state key="highlighted" image="christmas_button_press"/>
+                    <connections>
+                        <action selector="tryPremiumBtnClick:" destination="-1" eventType="touchUpInside" id="osq-nb-4kJ"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Ui-It-Xeb">
-                    <rect key="frame" x="81" y="475.5" width="213" height="45"/>
+                    <rect key="frame" x="81" y="466" width="213" height="45"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="213" id="fHv-2x-9TR"/>
                         <constraint firstAttribute="height" constant="45" id="tNH-Eb-gMh"/>
                     </constraints>
                     <state key="normal" image="christmas_button_ wireframe"/>
+                    <connections>
+                        <action selector="shareBtnClick:" destination="-1" eventType="touchUpInside" id="R7p-nK-iUj"/>
+                    </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try Premium Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZa-gX-6wn">
-                    <rect key="frame" x="71" y="398.5" width="233" height="67"/>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Try Premium Now" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZa-gX-6wn">
+                    <rect key="frame" x="71" y="389" width="233" height="67"/>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="18"/>
                     <color key="textColor" red="0.75686274509999996" green="0.58431372550000005" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Share" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aNJ-rp-hYP">
-                    <rect key="frame" x="81" y="475.5" width="213" height="45"/>
+                    <rect key="frame" x="81" y="466" width="213" height="45"/>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="18"/>
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
@@ -112,6 +116,7 @@ Ends in X days.</string>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="H1R-hA-dDS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="1LL-hK-thQ"/>
                 <constraint firstItem="Zv1-ws-pSj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1aT-XW-DlD"/>
                 <constraint firstItem="2sx-2b-qtk" firstAttribute="top" secondItem="3Ui-It-Xeb" secondAttribute="bottom" constant="10" id="5NX-Se-Ql7"/>
                 <constraint firstItem="t7F-Cr-zDm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="61k-pt-p7U"/>
@@ -123,6 +128,7 @@ Ends in X days.</string>
                 <constraint firstItem="3YU-i0-4B7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="H9Y-jv-AMh"/>
                 <constraint firstItem="t7F-Cr-zDm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="M8b-i1-KFO"/>
                 <constraint firstItem="3Ui-It-Xeb" firstAttribute="top" secondItem="3YU-i0-4B7" secondAttribute="bottom" id="OKs-dc-acm"/>
+                <constraint firstAttribute="trailing" secondItem="H1R-hA-dDS" secondAttribute="trailing" constant="20" id="TuT-mc-lar"/>
                 <constraint firstItem="aNJ-rp-hYP" firstAttribute="leading" secondItem="3Ui-It-Xeb" secondAttribute="leading" id="VAh-Gp-5AW"/>
                 <constraint firstItem="Zv1-ws-pSj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Vbd-lI-5uC"/>
                 <constraint firstItem="U8D-dL-xff" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="Xbn-1K-dFC"/>

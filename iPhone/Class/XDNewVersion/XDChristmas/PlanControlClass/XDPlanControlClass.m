@@ -7,6 +7,9 @@
 
 #import "XDPlanControlClass.h"
 #import "PokcetExpenseAppDelegate.h"
+#import <Parse/Parse.h>
+
+@import Firebase;
 
 @implementation XDPlanControlClass
 
@@ -29,6 +32,8 @@
         }else{
             [christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_plus"] forState:UIControlStateNormal];
         }
+        [FIRAnalytics logEventWithName:@"christmas_A_banner_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
         
     }else{
         if (IS_IPHONE_5) {
@@ -38,6 +43,8 @@
         }else{
             [christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone 8plus"] forState:UIControlStateNormal];
         }
+        [FIRAnalytics logEventWithName:@"christmas_a_banner_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
     }
 }
 
@@ -46,24 +53,48 @@
 }
 
 
--(ChristmasPlanType)planType{
-//    return random()%2;
-    return 0;
-}
 
--(ChristmasSubPlan)planSubType{
-//    return random()%2;
-    return 0;
-}
+//-(ChristmasPlanType)planType{
+////    return random()%2;
+//    return 0;
+//}
+//
+//-(ChristmasSubPlan)planSubType{
+////    return random()%2;
+//    return 0;
+//}
+//
+//-(ChristmasPlanCategory)planCategory{
+//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+//    if (!appDelegate.isPurchased) {
+//
+//    }
+//
+//    //    return random()%4;
+//    return 1;
+//}
+-(NSNumber*)isChristmasNewUser{
+    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
+    comp.year = 2018;
+    comp.month = 12;
+    comp.day = 22;
+    comp.hour = 0;
+    comp.minute = 0;
+    comp.second = 0;
+    NSDate* startDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
 
--(ChristmasPlanCategory)planCategory{
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-    if (!appDelegate.isPurchased) {
-        
+    if ([[PFUser currentUser].createdAt compare:startDate] == NSOrderedDescending) {
+        return [NSNumber numberWithBool:YES];
+    }else{
+        return [NSNumber numberWithBool:NO];
     }
+}
+
+-(NSNumber*)pageTimeWithStartDate:(NSDate *)enterDate endDate:(NSDate *)leaveDate{
     
-    //    return random()%4;
-    return 1;
+    NSTimeInterval interval = [enterDate timeIntervalSinceDate:leaveDate];
+    
+    return [NSNumber numberWithDouble:interval];
 }
 
 -(void)validateReceipt
@@ -122,5 +153,20 @@
                                       }];
     
     [datatask resume];
+}
+
+
+-(NSInteger)distanceEndTime{
+    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
+    comp.year = 2019;
+    comp.month = 1;
+    comp.day = 3;
+    NSDate* endDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
+
+     NSDateComponents *delta = [[NSCalendar currentCalendar] components:NSCalendarUnitDay fromDate:[NSDate date] toDate:endDate options:0];
+    
+    
+    
+    return delta.day;
 }
 @end

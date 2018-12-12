@@ -29,6 +29,8 @@
 #import "XDChristmasPlanAbViewController.h"
 #import "XDChristmasPlanBbViewController.h"
 
+#import "textView.h"
+
 @import Firebase;
 
 @interface XDOverViewViewController ()<XDCalendarViewDelegate,XDTransicationTableViewDelegate,XDAddTransactionViewDelegate,SKRequestDelegate,ADEngineControllerBannerDelegate>
@@ -250,6 +252,7 @@
     self.selectedDate = [NSDate date];
     [self initNavStyle];
     [self initXDtransicationTableView];
+//    [self validateReceipt];
 //    self.title = [self monthFormatterWithSeletedMonth:[NSDate date]];
     self.view.backgroundColor = RGBColor(246, 246, 246);
     
@@ -289,6 +292,40 @@
         [self showChristmasView];
         self.emptyImageView.y = CGRectGetMaxY(self.lineView.frame);
     }
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshChristmas) name:@"refreshChristmas" object:nil];
+    
+    textView* view = [[[NSBundle mainBundle]loadNibNamed:@"textView" owner:self options:nil]lastObject];
+    view.frame = CGRectMake(0, SCREEN_HEIGHT-350, SCREEN_WIDTH, 175);
+    
+    [self.view addSubview:view];
+    
+    
+}
+
+-(void)refreshChristmas{
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        if (IS_IPHONE_5) {
+            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_se"] forState:UIControlStateNormal];
+        }else if (IS_IPHONE_6){
+            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_8"] forState:UIControlStateNormal];
+        }else{
+            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_plus"] forState:UIControlStateNormal];
+        }
+//        [FIRAnalytics logEventWithName:@"christmas_A_banner_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+        
+    }else{
+        if (IS_IPHONE_5) {
+            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone se"] forState:UIControlStateNormal];
+        }else if (IS_IPHONE_6){
+            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_banner_8"] forState:UIControlStateNormal];
+        }else{
+            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone 8plus"] forState:UIControlStateNormal];
+        }
+//        [FIRAnalytics logEventWithName:@"christmas_a_banner_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+    }
 }
 
 -(void)showChristmasView{
@@ -309,22 +346,33 @@
 -(void)presentChristmasVc{
     NSInteger plan = [XDPlanControlClass shareControlClass].planType;
     NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
+    
+
     if ( plan == ChristmasPlanA) {
         
        if(subPlan == ChristmasSubPlana){
+           
+           [FIRAnalytics logEventWithName:@"christmas_A_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
             XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
             [self presentViewController:christmas animated:YES completion:nil];
 
        }else if (subPlan == ChristmasSubPlanb){
+           [FIRAnalytics logEventWithName:@"christmas_A_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
            XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
            [self presentViewController:christmas animated:YES completion:nil];
        }
     }else{
         if(subPlan == ChristmasSubPlana){
+            [FIRAnalytics logEventWithName:@"christmas_a_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
             XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
             [self presentViewController:christmas animated:YES completion:nil];
 
         }else if(subPlan == ChristmasSubPlanb){
+            [FIRAnalytics logEventWithName:@"christmas_a_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
             XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
             [self presentViewController:christmas animated:YES completion:nil];
 
@@ -341,6 +389,30 @@
     }completion:^(BOOL finished) {
         [self.christmasView removeFromSuperview];
     }];
+    
+    
+    NSInteger plan = [XDPlanControlClass shareControlClass].planType;
+    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
+    
+    
+    if ( plan == ChristmasPlanA) {
+        
+        if(subPlan == ChristmasSubPlana){
+            
+            [FIRAnalytics logEventWithName:@"christmas_A_banner_B_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+        }else if (subPlan == ChristmasSubPlanb){
+            [FIRAnalytics logEventWithName:@"christmas_A_banner_b_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        }
+    }else{
+        if(subPlan == ChristmasSubPlana){
+            [FIRAnalytics logEventWithName:@"christmas_a_banner_B_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+        }else if(subPlan == ChristmasSubPlanb){
+            [FIRAnalytics logEventWithName:@"christmas_a_banner_b_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+        }
+    }
 }
 
 
@@ -728,9 +800,12 @@
     [[XDDataManager shareManager] removeSettingPurchase];
     [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+
     appDelegate.isPurchased = NO;
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+    });
 }
 
 //auto_renew_status  目前自动续订订阅的续订状态。
@@ -758,6 +833,7 @@
 //“5” - Unknown error
 
 
+
 -(void)validateReceipt
 {
   
@@ -766,7 +842,7 @@
 
     if (receiptData == nil) {
         [self noSubscription];
-
+        
         return;
     }
     NSString* urlStr = RECEIPTURL;
@@ -820,6 +896,9 @@
 
     [datatask resume];
 }
+
+
+
 
 -(void)returnReceipt:(NSDictionary*)lastReceipt  pendingRenewal:(NSDictionary*)pendingRenewal{
     

@@ -59,6 +59,7 @@
 - (void)productsRequest:(nonnull SKProductsRequest *)request didReceiveResponse:(nonnull SKProductsResponse *)response {
     NSLog(@"-----------收到产品反馈信息--------------");
     NSArray* productArr = response.products;
+    
     if (productArr.count==0)
     {
         NSLog(@"无法获取产品信息，购买失败");
@@ -67,13 +68,20 @@
     double monthPrice = 0;
     double yearPrice = 0;
     for(SKProduct *product in productArr){
+        
+        NSString* productID = product.productIdentifier;
 
-        if (@available(iOS 11.2, *)) {
-            NSLog(@"product == %@ ---- %@",product.introductoryPrice.price,product.price);
-        } else {
-            // Fallback on earlier versions
-            
+        if ([productID isEqualToString:KInAppPurchaseProductIdMonth]) {
+            if (@available(iOS 11.2, *)) {
+                if (product.introductoryPrice) {
+                    [self saveIntroductoryPrice:product];
+                }else{
+                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                }
+            }
         }
+        
+        
         [self.productDic setObject:product forKey:product.productIdentifier];
         
         if ([product.productIdentifier isEqualToString:KInAppPurchaseProductIdMonth]) {
@@ -90,6 +98,29 @@
 //    [[NSUserDefaults standardUserDefaults] setObject:productDic forKey:salePriceData];
 
 }
+
+-(void)saveIntroductoryPrice:(SKProduct*)product{
+    if (@available(iOS 11.2, *)) {
+        
+        if (product.introductoryPrice) {
+            double introductoryPrice = [product.introductoryPrice.price doubleValue];
+            NSNumberFormatter *numberFmt =[[NSNumberFormatter alloc] init];
+            [numberFmt setFormatterBehavior:NSNumberFormatterBehavior10_4];
+            
+            [numberFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
+            [numberFmt setLocale:product.priceLocale];
+            [numberFmt setMaximumFractionDigits:2];
+            
+            
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"getIntroductoryPriceNotif" object:nil];
+            [userDefaults setValue:[numberFmt stringFromNumber:[NSNumber numberWithDouble:introductoryPrice]] forKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
+           
+        }
+    }
+}
+
 //内购流程2:获取商品信息成功之后，把商品信息存储起来，发送通知让相关页面把价格显示出来
 -(void)updateTheBarTitleWithPrice:(double)p withLocal:(NSLocale*)l productID:(NSString*)productID
 {
@@ -137,6 +168,7 @@
                         }
                     }
                 }
+               
                 
                 SKPayment* payment = [SKPayment paymentWithProduct:product];
                 [[SKPaymentQueue defaultQueue] addPayment:payment];

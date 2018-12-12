@@ -501,10 +501,8 @@
             [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
         }
     }
-        
     return YES;
 }
-
 
 //-(void)setFirAnalyticsScreenName{
 //

@@ -9,9 +9,8 @@
 #import "XDPlanControlClass.h"
 
 @interface XDChristmasShareSuccessPlanBPopViewController ()
-@property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
+
 @property (weak, nonatomic) IBOutlet UIImageView *contentImgView;
-@property (weak, nonatomic) IBOutlet UIButton *useItBtn;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImgView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancenLT;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *useItTopH;
@@ -27,6 +26,8 @@
     if (IS_IPHONE_X) {
         self.bgImgView.image = [UIImage imageNamed:@"pic_x"];
         self.cancenLT.constant = 25;
+        self.contentCenterY.constant = -95;
+        self.useItTopH.constant = 187;
     }else if (IS_IPHONE_5){
         self.bgImgView.image = [UIImage imageNamed:@"pic_se"];
     }else if (IS_IPHONE_6PLUS){
@@ -36,7 +37,7 @@
     }
     
     if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        self.contentImgView.image = [UIImage imageNamed:@"bChristmas_68%"];
+        self.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_68%off"];
         if (IS_IPHONE_6PLUS) {
             self.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_68%off"];
         }
@@ -45,18 +46,37 @@
         [self.useItBtn setImage:[UIImage imageNamed:@"bChristmas_share_btn_normat_7day"] forState:UIControlStateNormal];
         [self.useItBtn setImage:[UIImage imageNamed:@"bChristmas_share_btn_Selected_7day"] forState:UIControlStateHighlighted];
 
-    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
         self.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_68%off"];
         
-    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
+    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
         self.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_50%off"];
         
     }
 }
-- (IBAction)useItClick:(id)sender {
-    
+
+-(void)show{
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        self.bgImgView.alpha = 1;
+        self.contentImgView.alpha = 1;
+        self.useItBtn.alpha = 1;
+    }];
 }
 
+
+-(void)dismiss{
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        self.bgImgView.alpha = 0;
+        self.contentImgView.alpha = 0;
+        self.useItBtn.alpha = 0;
+    }completion:^(BOOL finished) {
+        [self.view removeFromSuperview];
+
+    }];
+    
+}
 
 
 @end

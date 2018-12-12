@@ -138,7 +138,7 @@
                     self.premiumTitle.text = @"Yearly Premium";
 
                     self.yearBtn.enabled = NO;
-                }else{
+                }else if([proID isEqualToString:kInAppPurchaseProductIdLifetime]){
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.lifetimePriceLbl.textColor = RGBColor(122, 163, 239);
@@ -303,6 +303,9 @@
     NSString *monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH];
     NSString *yearPrice = [userDefaults stringForKey:PURCHASE_PRICE_YEAR];
     NSString *lifetimePrice = [userDefaults stringForKey:PURCHASE_PRICE_LIFETIME];
+    if ([userDefaults boolForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY]) {
+        monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
+    }
     double sale = [userDefaults doubleForKey:@"salePrice"];
     
     self.saleLbl.text = [NSString stringWithFormat:@"Save %d%%",(int)sale];

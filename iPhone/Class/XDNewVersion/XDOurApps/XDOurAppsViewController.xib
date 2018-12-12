@@ -19,8 +19,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDOurAppsViewController">
             <connections>
+                <outlet property="firstBackView" destination="sja-Vc-02x" id="J1r-KU-ddF"/>
+                <outlet property="firstBtn" destination="jBc-C4-CJR" id="CWA-5W-iSN"/>
                 <outlet property="firstCell" destination="dBz-Qb-pdk" id="haj-Ui-JMA"/>
-                <outlet property="firstTopView" destination="8c4-ty-x25" id="Tw9-Jf-nCI"/>
                 <outlet property="forthCell" destination="25t-9F-ena" id="fP0-se-xiv"/>
                 <outlet property="fourthBackView" destination="oNR-bv-SoD" id="lMJ-Iy-Q2o"/>
                 <outlet property="fourthBtn" destination="I28-ZB-T63" id="cAt-N7-ALl"/>
@@ -69,25 +70,73 @@
             </constraints>
             <point key="canvasLocation" x="-7.2000000000000002" y="105.69715142428787"/>
         </view>
-        <tableViewCell contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="120" id="dBz-Qb-pdk">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="120" id="dBz-Qb-pdk">
             <rect key="frame" x="0.0" y="0.0" width="375" height="120"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dBz-Qb-pdk" id="ikG-lh-az1">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="119.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8c4-ty-x25">
-                        <rect key="frame" x="0.0" y="-450" width="375" height="500"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sja-Vc-02x">
+                        <rect key="frame" x="15" y="0.0" width="345" height="84"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="hours keeper" translatesAutoresizingMaskIntoConstraints="NO" id="8C3-UQ-q2R">
+                                <rect key="frame" x="15" y="12" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="60" id="M6h-BP-zEA"/>
+                                    <constraint firstAttribute="height" constant="60" id="VL7-Nl-4vY"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hours Keeper" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zFn-gC-JpS">
+                                <rect key="frame" x="90" y="23" width="200" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="Rg8-rk-00x"/>
+                                    <constraint firstAttribute="height" constant="21" id="fP3-1I-fPt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time Sheet, Pay and Invoice" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hpX-N9-uVY">
+                                <rect key="frame" x="90" y="49" width="191" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="191" id="JJ6-3M-ggd"/>
+                                    <constraint firstAttribute="height" constant="21" id="khC-kJ-cJR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" tag="1" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jBc-C4-CJR">
+                                <rect key="frame" x="276" y="27" width="54" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="EAq-OT-Xq7"/>
+                                    <constraint firstAttribute="width" constant="54" id="vHs-i3-ctk"/>
+                                </constraints>
+                                <state key="normal" image="get"/>
+                                <connections>
+                                    <action selector="getOrOopenClick:" destination="-1" eventType="touchUpInside" id="T3o-fY-iqI"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="500" id="lfb-uk-8gq"/>
+                            <constraint firstItem="hpX-N9-uVY" firstAttribute="top" secondItem="zFn-gC-JpS" secondAttribute="bottom" constant="5" id="27k-rz-FkD"/>
+                            <constraint firstItem="zFn-gC-JpS" firstAttribute="top" secondItem="sja-Vc-02x" secondAttribute="top" constant="23" id="5Um-qu-kw2"/>
+                            <constraint firstAttribute="height" constant="84" id="FIQ-Rz-3qM"/>
+                            <constraint firstItem="hpX-N9-uVY" firstAttribute="leading" secondItem="8C3-UQ-q2R" secondAttribute="trailing" constant="15" id="Pti-2i-Qfm"/>
+                            <constraint firstAttribute="trailing" secondItem="jBc-C4-CJR" secondAttribute="trailing" constant="15" id="m09-Nb-agW"/>
+                            <constraint firstItem="8C3-UQ-q2R" firstAttribute="top" secondItem="sja-Vc-02x" secondAttribute="top" constant="12" id="m9x-b5-SsJ"/>
+                            <constraint firstItem="zFn-gC-JpS" firstAttribute="leading" secondItem="8C3-UQ-q2R" secondAttribute="trailing" constant="15" id="pJ1-0s-ctB"/>
+                            <constraint firstItem="8C3-UQ-q2R" firstAttribute="leading" secondItem="sja-Vc-02x" secondAttribute="leading" constant="15" id="vz2-me-fII"/>
+                            <constraint firstItem="jBc-C4-CJR" firstAttribute="centerY" secondItem="sja-Vc-02x" secondAttribute="centerY" id="yJ9-OA-RsW"/>
                         </constraints>
                     </view>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="8c4-ty-x25" secondAttribute="trailing" id="am2-d0-WOw"/>
-                    <constraint firstItem="8c4-ty-x25" firstAttribute="leading" secondItem="ikG-lh-az1" secondAttribute="leading" id="woq-kj-lSt"/>
-                    <constraint firstItem="8c4-ty-x25" firstAttribute="top" secondItem="ikG-lh-az1" secondAttribute="top" constant="-450" id="ywi-QK-SFl"/>
+                    <constraint firstAttribute="trailing" secondItem="sja-Vc-02x" secondAttribute="trailing" constant="15" id="Xmy-g1-0Ql"/>
+                    <constraint firstItem="sja-Vc-02x" firstAttribute="leading" secondItem="ikG-lh-az1" secondAttribute="leading" constant="15" id="mfP-gM-qh8"/>
+                    <constraint firstItem="sja-Vc-02x" firstAttribute="top" secondItem="ikG-lh-az1" secondAttribute="top" id="p64-QX-FZD"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -319,5 +368,6 @@
         <image name="Fax Now" width="62" height="62"/>
         <image name="Scanner Now" width="62" height="62"/>
         <image name="get" width="54" height="30"/>
+        <image name="hours keeper" width="62" height="62"/>
     </resources>
 </document>

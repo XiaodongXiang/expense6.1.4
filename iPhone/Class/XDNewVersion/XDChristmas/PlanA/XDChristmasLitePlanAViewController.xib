@@ -91,7 +91,7 @@ Share to get 68% off a month to Premium.</string>
                         <constraint firstAttribute="height" constant="55" id="pBo-Jz-SY4"/>
                     </constraints>
                     <string key="text">Limited time offer.
-Starts at $1.99/month after.
+Starts at $1.49/month after.
 Ends in X days.</string>
                     <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="12"/>
                     <color key="textColor" red="0.98039215690000003" green="0.8980392157" blue="0.79607843140000001" alpha="0.39717209510000001" colorSpace="calibratedRGB"/>

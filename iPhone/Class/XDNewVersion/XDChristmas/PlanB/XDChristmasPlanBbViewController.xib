@@ -47,7 +47,7 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="250" id="8yP-dd-bTK"/>
                     </constraints>
-                    <string key="text">Limited time off
+                    <string key="text">Limited time offer
 Starts at $1.99/month after
 Ends in x days</string>
                     <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>

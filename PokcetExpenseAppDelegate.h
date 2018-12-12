@@ -18,6 +18,7 @@
 #import "BudgetItem.h"
 #import "EPNormalClass.h"
 #import "EPDataBaseModifyClass.h"
+#import <UserNotifications/UserNotifications.h>
 
 #import "DropboxObject.h"
 #import "InAppPurchaseManager.h"
@@ -50,7 +51,7 @@ typedef enum {
 //@interface PokcetExpenseAppDelegate : NSObject <UIApplicationDelegate,PurchaseManagerDelegate,GADInterstitialDelegate>
 //无广告
 @class Reachability;
-@interface PokcetExpenseAppDelegate : NSObject <UIApplicationDelegate,PurchaseManagerDelegate,SKRequestDelegate>
+@interface PokcetExpenseAppDelegate : NSObject <UIApplicationDelegate,PurchaseManagerDelegate,SKRequestDelegate,UNUserNotificationCenterDelegate>
 
 {
     

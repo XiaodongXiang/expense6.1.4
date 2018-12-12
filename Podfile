@@ -16,6 +16,9 @@ pod 'Appsee'
 pod 'GoogleAnalytics'
 pod 'Firebase/Core'
 pod 'Firebase/InAppMessagingDisplay'
+pod 'Firebase/Messaging'
+pod 'Firebase/RemoteConfig'
+
 end
 
 

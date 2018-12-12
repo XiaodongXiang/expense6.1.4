@@ -36,10 +36,15 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic, assign)BOOL needShow;
 @property(nonatomic, strong)XDOverviewChristmasViewA* christmasView;
 
+@property (strong, nonatomic) NSNumber* isChristmasNewUser;
+
+
+-(NSNumber*)pageTimeWithStartDate:(NSDate*)enterDate  endDate:(NSDate*)leaveDate;
 
 +(instancetype)shareControlClass;
 
 -(void)validateReceipt;
+-(NSInteger)distanceEndTime;
 @end
 
 NS_ASSUME_NONNULL_END
