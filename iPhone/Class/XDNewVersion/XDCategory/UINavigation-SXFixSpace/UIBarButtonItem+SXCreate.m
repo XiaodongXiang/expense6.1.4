@@ -42,9 +42,12 @@
     }
     button.imageEdgeInsets = imageEdgeInsets;
     
+    
     return [[UIBarButtonItem alloc] initWithCustomView:button];
     
 }
+
+
 
 +(UIBarButtonItem *)itemWithTarget:(id)target action:(SEL)action title:(NSString *)title {
     return [self itemWithTarget:target action:action title:title font:nil titleColor:nil highlightedColor:nil titleEdgeInsets:UIEdgeInsetsZero];

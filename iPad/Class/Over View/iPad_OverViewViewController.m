@@ -15,6 +15,16 @@
 #import "BrokenLineObject.h"
 #import "AppDelegate_iPad.h"
 #import "ipad_ADSDeatailViewController.h"
+
+
+#import "XDPlanControlClass.h"
+#import "XDChristmasLiteOneViewController.h"
+#import "XDChristmasLitePlanAViewController.h"
+#import "XDChristmasPlanAbViewController.h"
+#import "XDChristmasPlanBbViewController.h"
+#import <Parse/Parse.h>
+#import "textView.h"
+
 @import     Firebase;
 #define TRANSACTIONHAS5Count @"transactionOver5Count"
 
@@ -23,6 +33,10 @@
 @property (weak, nonatomic) IBOutlet UIView *adBannerView;
 
 @property(nonatomic, strong)ADEngineController* adBanner;
+
+@property(nonatomic, strong)XDOverviewChristmasViewA* christmasView;
+
+
 @end
 
 @implementation iPad_OverViewViewController
@@ -56,6 +70,122 @@
     
     [FIRAnalytics setScreenName:@"calendar_view_ipad" screenClass:@"iPad_OverViewViewController"];
 
+    if ([XDPlanControlClass shareControlClass].needShow) {
+        [self showChristmasView];
+        calendarContainView.y = 152;
+        calendarContainView.height = 674-137;
+        kalViewController.kalView.bottomView.y = 533 - 137;
+
+        
+//        textView* view = [[[NSBundle mainBundle]loadNibNamed:@"textView" owner:self options:nil]lastObject];
+//        view.frame = CGRectMake(0, 0, categoryContainView.width, 175);
+//        
+//        [categoryContainView addSubview:view];
+    }
+    
+    
+    
+}
+
+-(void)showChristmasView{
+    self.christmasView = [[[NSBundle mainBundle] loadNibNamed:@"XDOverviewChristmasViewA" owner:self options:nil]lastObject];
+    
+    [XDPlanControlClass shareControlClass].christmasView = self.christmasView;
+    [self.christmasView.christmasCancelBtn addTarget:self action:@selector(christmasViewCancel) forControlEvents:UIControlEventTouchUpInside];
+    [self.christmasView.christmasBtn addTarget:self action:@selector(presentChristmasVc) forControlEvents:UIControlEventTouchUpInside];
+    self.christmasView.frame = CGRectMake(15, 15, calendarContainView.width, 137);
+    
+    
+    [self.view addSubview:self.christmasView];
+}
+
+-(void)presentChristmasVc{
+    NSInteger plan = [XDPlanControlClass shareControlClass].planType;
+    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
+    
+    
+    if ( plan == ChristmasPlanA) {
+        
+        if(subPlan == ChristmasSubPlana){
+            
+            [FIRAnalytics logEventWithName:@"christmas_A_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+            XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
+            christmas.modalPresentationStyle = UIModalPresentationFormSheet;
+            christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            christmas.preferredContentSize = CGSizeMake(375, 667);
+            
+            [self presentViewController:christmas animated:YES completion:nil];
+            
+        }else if (subPlan == ChristmasSubPlanb){
+            [FIRAnalytics logEventWithName:@"christmas_A_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+            XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
+            christmas.modalPresentationStyle = UIModalPresentationFormSheet;
+            christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            christmas.preferredContentSize = CGSizeMake(375, 667);
+
+            [self presentViewController:christmas animated:YES completion:nil];
+        }
+    }else{
+        if(subPlan == ChristmasSubPlana){
+            [FIRAnalytics logEventWithName:@"christmas_a_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+            XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
+            christmas.modalPresentationStyle = UIModalPresentationFormSheet;
+            christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            christmas.preferredContentSize = CGSizeMake(375, 667);
+
+            [self presentViewController:christmas animated:YES completion:nil];
+            
+        }else if(subPlan == ChristmasSubPlanb){
+            [FIRAnalytics logEventWithName:@"christmas_a_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+            XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
+            christmas.modalPresentationStyle = UIModalPresentationFormSheet;
+            christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+            christmas.preferredContentSize = CGSizeMake(375, 667);
+
+            [self presentViewController:christmas animated:YES completion:nil];
+            
+        }
+    }
+}
+
+-(void)christmasViewCancel{
+    [UIView animateWithDuration:0.2 animations:^{
+        self.christmasView.height = 0;
+        calendarContainView.y = 15;
+        kalViewController.kalView.bottomView.y = 533;
+        calendarContainView.height = 674;
+        
+    }completion:^(BOOL finished) {
+        [self.christmasView removeFromSuperview];
+    }];
+    
+    
+    NSInteger plan = [XDPlanControlClass shareControlClass].planType;
+    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
+    
+    
+    if ( plan == ChristmasPlanA) {
+        
+        if(subPlan == ChristmasSubPlana){
+            
+            [FIRAnalytics logEventWithName:@"christmas_A_banner_B_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+        }else if (subPlan == ChristmasSubPlanb){
+            [FIRAnalytics logEventWithName:@"christmas_A_banner_b_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        }
+    }else{
+        if(subPlan == ChristmasSubPlana){
+            [FIRAnalytics logEventWithName:@"christmas_a_banner_B_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+        }else if(subPlan == ChristmasSubPlanb){
+            [FIRAnalytics logEventWithName:@"christmas_a_banner_b_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            
+        }
+    }
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -85,7 +215,10 @@
     }else{
         self.adBannerView.hidden = YES;
         kalViewController.kalView.bottomView.y = 533;
+        if([XDPlanControlClass shareControlClass].needShow){
+            kalViewController.kalView.bottomView.y = 533 - 137;
 
+        }
     }
     
 }
@@ -94,12 +227,24 @@
 - (void)aDEngineControllerBannerDelegateDisplayOrNot:(BOOL)result ad:(ADEngineController *)ad {
     if (result) {
         self.adBannerView.hidden = NO;
+        
         kalViewController.kalView.bottomView.y = 533-60;
         calendarContainView.height = 616;
+        if ([XDPlanControlClass shareControlClass].needShow) {
+            
+            kalViewController.kalView.bottomView.y = 533-60 - 137;
+            calendarContainView.height = 616-137;
+        }
     }else{
         self.adBannerView.hidden = YES;;
         kalViewController.kalView.bottomView.y = 533;
         calendarContainView.height = 674;
+        
+        if ([XDPlanControlClass shareControlClass].needShow) {
+            
+            kalViewController.kalView.bottomView.y = 533 - 137;
+            calendarContainView.height = 674-137;
+        }
 
     }
 }
@@ -198,6 +343,7 @@
     kalViewController.delegate=dataSource;
     kalViewController.view.tag = 1;
     [calendarContainView addSubview:kalViewController.view];
+    
     
     [kalViewController.dataSource getCalendarView:dataSource];
     [kalViewController.dataSource getTableView:kalViewController.kalView.tableView];

@@ -60,6 +60,7 @@
 
 #import "XDUpgradeViewController.h"
 #import "XDPlanControlClass.h"
+#import <objc/runtime.h>
 
 
 @import Firebase;
@@ -691,7 +692,70 @@
     }
 
     
+//}
+//
+//- (void)applicationDidEnterBackground:(UIApplication *)application NS_AVAILABLE_IOS(4_0){
+    
+    UIViewController *rootVC = [[UIApplication sharedApplication].delegate window].rootViewController;
+    
+    UIViewController *parent = rootVC;
+    
+    while ((parent = rootVC.presentedViewController) != nil ) {
+        rootVC = parent;
+    }
+    
+    while ([rootVC isKindOfClass:[UINavigationController class]]) {
+        rootVC = [(UINavigationController *)rootVC topViewController];
+    }
+    
+    
+//    NSLog(@"applicationDidEnterBackgroundrootVC == %@   ---- %@",rootVC,[self getCurrentVC]);
+    NSString *className = [NSString stringWithUTF8String:class_getName([rootVC class])];
+
+    if ([className isEqualToString:@"CKSMSComposeController"]) {
+        [rootVC dismissViewControllerAnimated:YES completion: nil];
+    }
+    
+    
 }
+
+- (UIViewController *)getCurrentVC
+{
+    UIViewController *rootViewController = [UIApplication sharedApplication].keyWindow.rootViewController;
+    
+    UIViewController *currentVC = [self getCurrentVCFrom:rootViewController];
+    
+    return currentVC;
+}
+
+//- (UIViewController *)getCurrentVCFrom:(UIViewController *)rootVC
+//{
+//    UIViewController *currentVC;
+//
+//    if ([rootVC presentedViewController]) {
+//        // 视图是被presented出来的
+//
+//        rootVC = [rootVC presentedViewController];
+//    }
+//
+//    if ([rootVC isKindOfClass:[UITabBarController class]]) {
+//        // 根视图为UITabBarController
+//
+//        currentVC = [self getCurrentVCFrom:[(UITabBarController *)rootVC selectedViewController]];
+//
+//    } else if ([rootVC isKindOfClass:[UINavigationController class]]){
+//        // 根视图为UINavigationController
+//
+//        currentVC = [self getCurrentVCFrom:[(UINavigationController *)rootVC visibleViewController]];
+//
+//    } else {
+//        // 根视图为非导航类
+//
+//        currentVC = rootVC;
+//    }
+//
+//    return currentVC;
+//}
 
 
 ///////当输入 dropbox账户的时候成功的时候就会自动回到应用程序中去

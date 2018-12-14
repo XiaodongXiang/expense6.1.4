@@ -51,6 +51,7 @@
 #import <GoogleAnalytics/GAIDictionaryBuilder.h>
 #import "BayMaxProtector.h"
 
+#import "FBHelper.h"
 
 @import Firebase;
 
@@ -266,6 +267,7 @@
     }
     
     [FIRApp configure];
+    [FBHelper instance];
     
     [FIRMessaging messaging].delegate = self;
 
@@ -327,7 +329,7 @@
 }
 
 -(void)getIntroductoryPriceNotif{
-    if (!self.isPurchased) {
+    if (!self.isPurchased && [PFUser currentUser]) {
         [self validateReceipt];
     }
     
@@ -342,18 +344,9 @@
     
     if (receiptData == nil) {
         
-        UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Tips" message:@"We will check if you are eligible to purchase a discounted product, which may require you to enter a password, please understand." preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            
-            SKReceiptRefreshRequest* refresh = [[SKReceiptRefreshRequest alloc]init];
-            refresh.delegate = self;
-            [refresh start];
-            
-        }];
-        UIAlertAction* action1 = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
-        [alert addAction:action];
-        [alert addAction:action1];
-        [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+        SKReceiptRefreshRequest* refresh = [[SKReceiptRefreshRequest alloc]init];
+        refresh.delegate = self;
+        [refresh start];
         
         return;
     }
@@ -561,6 +554,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 
     
 }
+
 
 
 //添加

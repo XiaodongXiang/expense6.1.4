@@ -6,10 +6,17 @@
 //
 
 #import "XDChristmasPlanAPopViewController.h"
+#import <Parse/Parse.h>
+#import "XDPlanControlClass.h"
+
+
+@import Firebase;
 
 @interface XDChristmasPlanAPopViewController ()
 @property (weak, nonatomic) IBOutlet UIView *backView;
 
+@property(nonatomic, strong)NSDate* enterDate;
+@property(nonatomic, strong)NSDate* leaveDate;
 
 @end
 
@@ -21,6 +28,20 @@
     
     self.backView.y = SCREEN_HEIGHT;
     self.backView.centerX = SCREEN_WIDTH/2;
+    
+    self.enterDate = [NSDate date];
+    
+    [FIRAnalytics logEventWithName:@"christmas_popup_A_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.leaveDate = [NSDate date];
+    
+    [FIRAnalytics logEventWithName:@"christmas_popup_A_pagetime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
+
+    
 }
 
 -(void)show{
@@ -44,6 +65,8 @@
         [self.view removeFromSuperview];
     }];
 }
+
+
 
 
 /*

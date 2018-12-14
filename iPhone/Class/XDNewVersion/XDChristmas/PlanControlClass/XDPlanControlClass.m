@@ -8,7 +8,7 @@
 #import "XDPlanControlClass.h"
 #import "PokcetExpenseAppDelegate.h"
 #import <Parse/Parse.h>
-
+#import "FBHelper.h"
 @import Firebase;
 
 @implementation XDPlanControlClass
@@ -50,29 +50,99 @@
 
 -(BOOL)needShow{
     return YES;
+
+    NSString *version= [UIDevice currentDevice].systemVersion;
+    if(version.doubleValue < 11.2) {
+        return NO;
+    }
+    
+    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
+    comp.year = 2018;
+    comp.month = 12;
+    comp.day = 22;
+    comp.hour = 0;
+    comp.minute = 0;
+    comp.second = 0;
+    NSDate* startDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
+  
+    
+    NSDateComponents* comp1 = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
+    comp1.year = 2019;
+    comp1.month = 1;
+    comp1.day = 3;
+    comp1.hour = 23;
+    comp1.minute = 59;
+    comp1.second = 59;
+    NSDate* endDate = [[NSCalendar currentCalendar] dateFromComponents:comp1];
+    
+    if ([[NSDate date] compare:startDate] != NSOrderedDescending || [[NSDate date] compare:endDate] != NSOrderedAscending) {
+        return NO;
+    }
+    
+ 
+    return YES;
 }
 
-
+-(BOOL)everyDayShowOnce{
+    if (!self.needShow) {
+        return NO;
+    }
+    
+    NSDate* today = [NSDate date];
+    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear  fromDate:today];
+    comp.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+    NSDate* initDate = [[NSCalendar currentCalendar]dateFromComponents:comp];
+    
+    NSDate* date = [[NSUserDefaults standardUserDefaults] valueForKey:@"everyDayShowOnceDate"];
+    if (!date) {
+        [[NSUserDefaults standardUserDefaults] setObject:initDate forKey:@"everyDayShowOnceDate"];
+        return YES;
+    }
+    if ([date compare:initDate] == NSOrderedSame) {
+        return NO;
+    }else{
+        [[NSUserDefaults standardUserDefaults] setObject:initDate forKey:@"everyDayShowOnceDate"];
+        return YES;
+    }
+    
+    return NO;
+}
 
 //-(ChristmasPlanType)planType{
 ////    return random()%2;
-//    return 0;
-//}
 //
+//    NSString* value = [FBHelper valueByConfigureName:@"cm_ip_layout_type"];
+//    if ([value isEqualToString:@"LEILEI"]) {
+//        return ChristmasPlanB;
+//    }else{
+//        return ChristmasPlanA;
+//    }
+//    return ChristmasPlanA;
+//}
+////
 //-(ChristmasSubPlan)planSubType{
-////    return random()%2;
-//    return 0;
+//
+//    NSString* value2 = [FBHelper valueByConfigureName:@"cm_ip_button_type"];
+//    if ([value2 isEqualToString:@"Get And Share"]) {
+//        return ChristmasSubPlanb;
+//    }else{
+//        return ChristmasSubPlana;
+//    }
+//     return ChristmasSubPlanb;
+//
 //}
 //
 //-(ChristmasPlanCategory)planCategory{
 //    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
 //    if (!appDelegate.isPurchased) {
-//
+//        return ChristmasPlanCategoryHasReceive7Days;
+//    }else{
+//        return ChristmasPlanCategoryLifetime;
 //    }
 //
-//    //    return random()%4;
-//    return 1;
+//    return ChristmasPlanCategoryHasReceive7Days;
 //}
+ 
 -(NSNumber*)isChristmasNewUser{
     NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
     comp.year = 2018;

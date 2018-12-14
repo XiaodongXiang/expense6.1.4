@@ -39,7 +39,7 @@
                             <state key="highlighted" image="aChristmas_use it_press"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="en4-bH-rMn">
-                            <rect key="frame" x="8" y="28" width="44" height="44"/>
+                            <rect key="frame" x="10" y="15" width="44" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <state key="normal" image="Cancel"/>
                             <connections>

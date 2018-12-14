@@ -21,8 +21,8 @@ typedef enum : NSUInteger {
 
 typedef enum : NSUInteger {
     ChristmasPlanCategoryHasReceive7Days,
-    ChristmasPlanCategoryNotHasReceive7Days,
-    ChristmasPlanCategoryNotLifetime,
+//    ChristmasPlanCategoryNotHasReceive7Days,
+//    ChristmasPlanCategoryNotLifetime,
     ChristmasPlanCategoryLifetime,
 } ChristmasPlanCategory;
 NS_ASSUME_NONNULL_BEGIN
@@ -45,6 +45,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)validateReceipt;
 -(NSInteger)distanceEndTime;
+
+-(BOOL)everyDayShowOnce;
+
 @end
 
 NS_ASSUME_NONNULL_END

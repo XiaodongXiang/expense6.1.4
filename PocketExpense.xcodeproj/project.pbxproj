@@ -2540,7 +2540,6 @@
 		BE051BA721B66DCD0069571B /* XDChristmasLiteOneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE051BA521B66DCD0069571B /* XDChristmasLiteOneViewController.xib */; };
 		BE051BAB21B66E0A0069571B /* XDChristmasLitePlanAViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE051BA921B66E0A0069571B /* XDChristmasLitePlanAViewController.m */; };
 		BE051BAC21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE051BAA21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib */; };
-		BE0625E421772F28006DE2F2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BE0625E321772F27006DE2F2 /* GoogleService-Info.plist */; };
 		BE0A4C8F2140D5A100C22049 /* XDTermsOfUseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE0A4C8D2140D5A100C22049 /* XDTermsOfUseViewController.m */; };
 		BE0A4C902140D5A100C22049 /* XDTermsOfUseViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE0A4C8E2140D5A100C22049 /* XDTermsOfUseViewController.xib */; };
 		BE0A4C922140D75F00C22049 /* TermsOfUse_expense.rtf in Resources */ = {isa = PBXBuildFile; fileRef = BE0A4C912140D75E00C22049 /* TermsOfUse_expense.rtf */; };
@@ -2575,6 +2574,8 @@
 		BEB696E1213D0FAD00CDE712 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696D8213D0FAD00CDE712 /* AFURLRequestSerialization.m */; };
 		BEB696E2213D0FAD00CDE712 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DA213D0FAD00CDE712 /* AFNetworkReachabilityManager.m */; };
 		BEB696E3213D0FAD00CDE712 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */; };
+		BEF782A421C25A5A00E71AE7 /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF782A321C25A5A00E71AE7 /* FBHelper.m */; };
+		BEF782A621C2785300E71AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF782A521C2785300E71AE7 /* GoogleService-Info.plist */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
 		BEFACB5A21BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFACB5821BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m */; };
 		BEFACB5B21BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFACB5921BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib */; };
@@ -5712,7 +5713,6 @@
 		BE051BA821B66E0A0069571B /* XDChristmasLitePlanAViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasLitePlanAViewController.h; sourceTree = "<group>"; };
 		BE051BA921B66E0A0069571B /* XDChristmasLitePlanAViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDChristmasLitePlanAViewController.m; sourceTree = "<group>"; };
 		BE051BAA21B66E0A0069571B /* XDChristmasLitePlanAViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDChristmasLitePlanAViewController.xib; sourceTree = "<group>"; };
-		BE0625E321772F27006DE2F2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BE0A4C8C2140D5A100C22049 /* XDTermsOfUseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDTermsOfUseViewController.h; sourceTree = "<group>"; };
 		BE0A4C8D2140D5A100C22049 /* XDTermsOfUseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDTermsOfUseViewController.m; sourceTree = "<group>"; };
 		BE0A4C8E2140D5A100C22049 /* XDTermsOfUseViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDTermsOfUseViewController.xib; sourceTree = "<group>"; };
@@ -5752,6 +5752,9 @@
 		BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		BEB696DC213D0FAD00CDE712 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		BEB696DD213D0FAD00CDE712 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		BEF782A221C25A5A00E71AE7 /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
+		BEF782A321C25A5A00E71AE7 /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
+		BEF782A521C2785300E71AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
 		BEFACB5721BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasShareSuccessPlanBPopViewController.h; sourceTree = "<group>"; };
@@ -10097,9 +10100,9 @@
 				A2A0A0151AA03F8A00B786B5 /* Flurry-iOS-6.2.0 */,
 				A2561A2219D3BBD700A5A950 /* main.m */,
 				A2561AB219D3BDDF00A5A950 /* PocketExpense_Prefix.pch */,
+				BEF782A521C2785300E71AE7 /* GoogleService-Info.plist */,
 				A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */,
 				A20988F0191A2A2A0087EA15 /* PokcetExpense.xcdatamodeld */,
-				BE0625E321772F27006DE2F2 /* GoogleService-Info.plist */,
 				A25619BD19D3BBD700A5A950 /* Appirater.h */,
 				A25619BE19D3BBD700A5A950 /* Appirater.m */,
 				A25619BF19D3BBD700A5A950 /* customer net&file */,
@@ -10828,6 +10831,8 @@
 		BE051B9921B61B090069571B /* PlanControlClass */ = {
 			isa = PBXGroup;
 			children = (
+				BEF782A221C25A5A00E71AE7 /* FBHelper.h */,
+				BEF782A321C25A5A00E71AE7 /* FBHelper.m */,
 				BE051B9A21B61B3B0069571B /* XDPlanControlClass.h */,
 				BE051B9B21B61B3B0069571B /* XDPlanControlClass.m */,
 			);
@@ -11883,7 +11888,6 @@
 				A256109119D3BB5C00A5A950 /* bar2_267_40@2x.png in Resources */,
 				3ADBA1031BF9D5F700512D2C /* income_color@2x.png in Resources */,
 				A25611E019D3BB5C00A5A950 /* icon_mail_30_30.png in Resources */,
-				BE0625E421772F28006DE2F2 /* GoogleService-Info.plist in Resources */,
 				A2561B6419D3BF6900A5A950 /* ipad_pop_154_268@2x.png in Resources */,
 				A22669361A289BB5005FC18F /* negative@3x.png in Resources */,
 				A2561B4B19D3BF6900A5A950 /* ipad_arrow1_left_30_30.png in Resources */,
@@ -12712,6 +12716,7 @@
 				A256123D19D3BB5C00A5A950 /* picture_115_163.png in Resources */,
 				3ABF0F101B1C188F000A7F26 /* Welcome_to@2x.png in Resources */,
 				A27FAE171A0216350044C469 /* iphone6_tab_bar@2x.png in Resources */,
+				BEF782A621C2785300E71AE7 /* GoogleService-Info.plist in Resources */,
 				6096B8001C72D24200A21210 /* about_bg_ipad@2x.png in Resources */,
 				A256108819D3BB5C00A5A950 /* arrow_30_30_blue.png in Resources */,
 				3AE154BD1BEC4A5300F9CA91 /* icon_all_arrow@2x.png in Resources */,
@@ -13294,6 +13299,7 @@
 				BE67B801215A39D100B2BB0B /* Setting+CoreDataClass.m in Sources */,
 				4E7235FF206E09C700D9A7A3 /* XDBillMainViewController.m in Sources */,
 				3AE4DAD31BD0CD11009668FE /* MMDrawerController.m in Sources */,
+				BEF782A421C25A5A00E71AE7 /* FBHelper.m in Sources */,
 				A2561A6119D3BBD700A5A950 /* HTTPAuthenticationRequest.m in Sources */,
 				A2561A9B19D3BBD700A5A950 /* zip.c in Sources */,
 				A25616F519D3BB7F00A5A950 /* ipad_TranscactionQuickEditViewController.m in Sources */,

@@ -39,7 +39,7 @@
                             <state key="highlighted" image="bChristmas_share_btn_Selected"/>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zc0-v7-qWx">
-                            <rect key="frame" x="5" y="20" width="44" height="44"/>
+                            <rect key="frame" x="10" y="15" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="Nh6-tY-4Ay"/>
                                 <constraint firstAttribute="height" constant="44" id="er7-AY-9oP"/>
@@ -52,7 +52,7 @@
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstItem="Zc0-v7-qWx" firstAttribute="top" secondItem="xly-rC-Hjh" secondAttribute="top" constant="20" id="5uS-cO-m1T"/>
+                        <constraint firstItem="Zc0-v7-qWx" firstAttribute="top" secondItem="xly-rC-Hjh" secondAttribute="top" constant="15" id="5uS-cO-m1T"/>
                         <constraint firstItem="BhU-wg-zOu" firstAttribute="leading" secondItem="xly-rC-Hjh" secondAttribute="leading" constant="20" id="6EB-OY-jSr"/>
                         <constraint firstItem="NaH-Rd-lVr" firstAttribute="centerX" secondItem="xly-rC-Hjh" secondAttribute="centerX" id="BNC-SO-FV5"/>
                         <constraint firstItem="LT5-Mc-xnj" firstAttribute="top" secondItem="xly-rC-Hjh" secondAttribute="top" id="C87-nr-Mnh"/>
@@ -61,7 +61,7 @@
                         <constraint firstAttribute="bottom" secondItem="LT5-Mc-xnj" secondAttribute="bottom" id="O5n-QL-rS4"/>
                         <constraint firstItem="NaH-Rd-lVr" firstAttribute="centerY" secondItem="xly-rC-Hjh" secondAttribute="centerY" constant="-75" id="Tub-kG-fVy"/>
                         <constraint firstItem="BhU-wg-zOu" firstAttribute="centerX" secondItem="xly-rC-Hjh" secondAttribute="centerX" id="X2W-Jv-N3K"/>
-                        <constraint firstItem="Zc0-v7-qWx" firstAttribute="leading" secondItem="xly-rC-Hjh" secondAttribute="leading" constant="5" id="cxh-30-sv6"/>
+                        <constraint firstItem="Zc0-v7-qWx" firstAttribute="leading" secondItem="xly-rC-Hjh" secondAttribute="leading" constant="10" id="cxh-30-sv6"/>
                         <constraint firstAttribute="trailing" secondItem="LT5-Mc-xnj" secondAttribute="trailing" id="rg1-1U-w0e"/>
                         <constraint firstItem="LT5-Mc-xnj" firstAttribute="leading" secondItem="xly-rC-Hjh" secondAttribute="leading" id="sQL-TS-8Lx"/>
                     </constraints>

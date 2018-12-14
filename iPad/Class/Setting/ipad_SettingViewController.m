@@ -32,10 +32,15 @@
 #import "PasscodeStyle_iPhoneViewController_iPad.h"
 #import "AboutViewController_iPad.h"
 #import "AppDelegate_iPhone.h"
+#import "XDOurAppsViewController.h"
+
+
 @import Firebase;
 @interface ipad_SettingViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *premiumIcon;
 @property (strong, nonatomic) IBOutlet UITableViewCell *premiumCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *oursAppCell;
+@property (weak, nonatomic) IBOutlet UIView *redPoint;
 
 @end
 
@@ -100,6 +105,14 @@
         }
     }
     [FIRAnalytics setScreenName:@"setting_main_view_ipad" screenClass:@"ipad_SettingViewController"];
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
+        self.redPoint.layer.cornerRadius = 5;
+        self.redPoint.layer.masksToBounds = YES;
+        self.redPoint.hidden = NO;
+    }else{
+        self.redPoint.hidden = YES;
+    }
 }
 
 
@@ -482,7 +495,7 @@
         }
         else if(section==4)
         {
-            return 1;
+            return 2;
         }
         else
         {
@@ -504,7 +517,7 @@
         }
         else if(section==4)
         {
-            return 1;
+            return 2;
         }
         else
         {
@@ -570,7 +583,11 @@
         }
         else if(indexPath.section==4)
         {
-            return appVersionCell;
+            if (indexPath.row == 0) {
+                return appVersionCell;
+            }else{
+                return self.oursAppCell;
+            }
         }
         else
         {
@@ -622,7 +639,11 @@
     //indexPath.section==3
     else if (indexPath.section==4)
     {
-        return appVersionCell;
+        if (indexPath.row == 0) {
+            return appVersionCell;
+        }else{
+            return self.oursAppCell;
+        }
     }
     
     //indexpath==0.row==0
@@ -769,25 +790,30 @@
             }
             else if (indexPath.row==1)
             {
-                Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
-                if (mailClass != nil)
-                {
-                    // We must always check whether the current device is configured for sending emails
-                    if ([mailClass canSendMail])
-                    {
-                        [self displayComposerSheet];
-                    }
-                    else
-                    {
-                        
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_No Mail Accounts", nil) message:NSLocalizedString(@"VC_Please set up a mail account in order to send mail.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
-                        [alertView show];
-                        AppDelegate_iPad *appDelegate = (AppDelegate_iPad *)[[UIApplication sharedApplication] delegate];
-                        appDelegate.appAlertView = alertView;
-                    }
-                }
+//                Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+//                if (mailClass != nil)
+//                {
+//                    // We must always check whether the current device is configured for sending emails
+//                    if ([mailClass canSendMail])
+//                    {
+//                        [self displayComposerSheet];
+//                    }
+//                    else
+//                    {
+//
+//                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_No Mail Accounts", nil) message:NSLocalizedString(@"VC_Please set up a mail account in order to send mail.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
+//                        [alertView show];
+//                        AppDelegate_iPad *appDelegate = (AppDelegate_iPad *)[[UIApplication sharedApplication] delegate];
+//                        appDelegate.appAlertView = alertView;
+//                    }
+//                }
+//
+//                [settingTableView reloadData];
                 
-                [settingTableView reloadData];
+                XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterOursApp"];
+                self.redPoint.hidden = YES;
+                [self.navigationController pushViewController:ourVc animated:YES];
             }
             else if (indexPath.row==2){
                 [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/pocket-expense-personal-finance/id424575621?mt=8"]];
@@ -906,25 +932,29 @@
             }
             else if (indexPath.row==1)
             {
-                Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
-                if (mailClass != nil)
-                {
-                    // We must always check whether the current device is configured for sending emails
-                    if ([mailClass canSendMail])
-                    {
-                        [self displayComposerSheet];
-                    }
-                    else
-                    {
-                        
-                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_No Mail Accounts", nil) message:NSLocalizedString(@"VC_Please set up a mail account in order to send mail.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
-                        [alertView show];
-                        AppDelegate_iPad *appDelegate = (AppDelegate_iPad *)[[UIApplication sharedApplication] delegate];
-                        appDelegate.appAlertView = alertView;
-                        
-                    }
-                }
-                [settingTableView reloadData];
+//                Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+//                if (mailClass != nil)
+//                {
+//                    // We must always check whether the current device is configured for sending emails
+//                    if ([mailClass canSendMail])
+//                    {
+//                        [self displayComposerSheet];
+//                    }
+//                    else
+//                    {
+//
+//                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_No Mail Accounts", nil) message:NSLocalizedString(@"VC_Please set up a mail account in order to send mail.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
+//                        [alertView show];
+//                        AppDelegate_iPad *appDelegate = (AppDelegate_iPad *)[[UIApplication sharedApplication] delegate];
+//                        appDelegate.appAlertView = alertView;
+//
+//                    }
+//                }
+//                [settingTableView reloadData];
+                XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterOursApp"];
+                self.redPoint.hidden = YES;
+                [self.navigationController pushViewController:ourVc animated:YES];
                 
             }
             else if (indexPath.row==2){

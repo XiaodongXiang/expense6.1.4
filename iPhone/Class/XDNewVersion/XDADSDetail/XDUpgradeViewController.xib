@@ -538,7 +538,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unlimited number of accounts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddX-Xm-abl">
-                        <rect key="frame" x="79" y="17.5" width="216" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="233.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="dWx-dx-Cwq"/>
                         </constraints>

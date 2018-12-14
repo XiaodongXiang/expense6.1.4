@@ -344,7 +344,7 @@ NSString *const KalDataSourceChangedNotification = @"KalDataSourceChangedNotific
   tableView = kalView.tableView;
   tableView.dataSource = dataSource;
   tableView.delegate = delegate;
-    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+  tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
   [kalView selectDate:[KalDate dateFromNSDate:self.initialDate]];
   [self reloadData];
     

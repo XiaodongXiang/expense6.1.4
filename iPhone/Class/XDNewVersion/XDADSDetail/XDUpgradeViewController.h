@@ -15,4 +15,6 @@
 @end
 @interface XDUpgradeViewController : UIViewController
 @property(weak  ,nonatomic)id<XDUpgradeViewDelegate> xxdDelegate;
+@property (assign, nonatomic) BOOL isChristmasEnter;
+
 @end

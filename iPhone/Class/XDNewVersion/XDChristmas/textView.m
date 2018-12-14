@@ -42,7 +42,7 @@
     }else if(pickerView ==self .pick2){
         return 2;
     }else{
-        return 4;
+        return 2;
     }
     return 2;
 }
@@ -68,10 +68,6 @@
             return @"1";
         }else if(row == 1){
             return @"2";
-        }else if(row == 2){
-            return @"3";
-        }else if(row == 3){
-            return @"4";
         }
     }
     return @"";

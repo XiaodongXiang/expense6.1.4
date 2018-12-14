@@ -74,7 +74,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *noPurchasedSyncTimeLbl;
 @property (strong, nonatomic) IBOutlet UITableViewCell *noPurchasedProfileCell;
 
+@property (weak, nonatomic) IBOutlet UIView *redPointView;
 
+@property (strong, nonatomic) IBOutlet UITableViewCell *signOutCell;
 
 @end
 
@@ -143,6 +145,14 @@
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_plus"];
     }else{
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_se"];
+    }
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
+        self.redPointView.layer.cornerRadius = 5;
+        self.redPointView.layer.masksToBounds = YES;
+        self.redPointView.hidden = NO;
+    }else{
+        self.redPointView.hidden = YES;
     }
 }
 
@@ -659,7 +669,7 @@
         }
         else if(section==4)
         {
-            return 1;
+            return 2;
         }
         else
         {
@@ -683,7 +693,7 @@
         }
         else if(section==4)
         {
-            return 1;
+            return 2;
         }
         else
         {
@@ -767,6 +777,8 @@
             if (indexPath.row == 0) {
                 [_appVersionCell addSubview:view];
                 return _appVersionCell;
+            }else{
+                return self.signOutCell;
             }
         }
     }else{
@@ -826,6 +838,8 @@
             if (indexPath.row == 0) {
                 [_appVersionCell addSubview:view];
                 return _appVersionCell;
+            }else{
+                return self.signOutCell;
             }
         }
         
@@ -938,6 +952,8 @@
         }else if (indexPath.section == 3){
             if (indexPath.row == 0) {
                 XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterOursApp"];
+                self.redPointView.hidden = YES;
                 [self presentViewController:ourVc animated:YES completion:nil];
             }
             if (appDelegate.isPurchased) {
@@ -964,8 +980,13 @@
                 
             }
         }else if(indexPath.section == 4){
-            AboutViewController *aboutVC=[[AboutViewController alloc]initWithNibName:@"AboutViewController" bundle:nil];
-            [self.navigationController pushViewController:aboutVC animated:YES];
+            if (indexPath.row == 0) {
+                
+                AboutViewController *aboutVC=[[AboutViewController alloc]initWithNibName:@"AboutViewController" bundle:nil];
+                [self.navigationController pushViewController:aboutVC animated:YES];
+            }else{
+                [self logout];
+            }
         }else if (indexPath.section == 5){
              [self logout];
         }

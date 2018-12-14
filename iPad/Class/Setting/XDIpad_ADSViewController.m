@@ -153,6 +153,10 @@
 
 //    [Appsee addEvent:@"Leave Shop"];
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    if ([self.xxdDelegate respondsToSelector:@selector(ipadUpgradeViewDismiss)]) {
+        [self.xxdDelegate ipadUpgradeViewDismiss];
+    }
 
 }
 

@@ -41,7 +41,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t7F-Cr-zDm">
-                    <rect key="frame" x="10" y="10" width="44" height="44"/>
+                    <rect key="frame" x="10" y="15" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="3CK-1F-mLZ"/>
                         <constraint firstAttribute="height" constant="44" id="qoY-8f-oVd"/>
@@ -119,7 +119,7 @@ Ends in X days.</string>
                 <constraint firstItem="H1R-hA-dDS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="1LL-hK-thQ"/>
                 <constraint firstItem="Zv1-ws-pSj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="1aT-XW-DlD"/>
                 <constraint firstItem="2sx-2b-qtk" firstAttribute="top" secondItem="3Ui-It-Xeb" secondAttribute="bottom" constant="10" id="5NX-Se-Ql7"/>
-                <constraint firstItem="t7F-Cr-zDm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="61k-pt-p7U"/>
+                <constraint firstItem="t7F-Cr-zDm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="61k-pt-p7U"/>
                 <constraint firstItem="JZa-gX-6wn" firstAttribute="trailing" secondItem="3YU-i0-4B7" secondAttribute="trailing" id="6hB-Cq-IdS"/>
                 <constraint firstItem="H1R-hA-dDS" firstAttribute="top" secondItem="U8D-dL-xff" secondAttribute="bottom" constant="170" id="7Mf-eL-Xty"/>
                 <constraint firstItem="aNJ-rp-hYP" firstAttribute="trailing" secondItem="3Ui-It-Xeb" secondAttribute="trailing" id="9Jw-oe-AHH"/>

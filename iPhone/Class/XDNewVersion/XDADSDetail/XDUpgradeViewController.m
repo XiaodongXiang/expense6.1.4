@@ -10,6 +10,7 @@
 #import "XDTermsOfUseViewController.h"
 #import "XDInAppPurchaseManager.h"
 #import <Appsee/Appsee.h>
+#import <Parse/Parse.h>
 @import Firebase;
 @interface XDUpgradeViewController ()<SKRequestDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -51,7 +52,25 @@
     [super viewDidDisappear:animated];
     
     [FIRAnalytics logEventWithName:@"leave_shop" parameters:nil];
+    
+    if (self.isChristmasEnter) {
+        
+        [FIRAnalytics logEventWithName:@"christmas_leave_shop" parameters:nil];
+    }
+}
 
+-(void)setIsChristmasEnter:(BOOL)isChristmasEnter{
+    _isChristmasEnter = isChristmasEnter;
+    
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:animated];
+    
+    if (self.isChristmasEnter) {
+        
+        [FIRAnalytics logEventWithName:@"christmas_enter_shop" parameters:nil];
+    }
 }
 
 - (void)viewDidLoad {
@@ -352,6 +371,13 @@
 //#endif
     [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
    
+    if (self.isChristmasEnter) {
+        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_monthly" parameters:nil];
+        
+        if ([PFUser currentUser]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
+        }
+    }
     
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdMonth];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -373,6 +399,13 @@
 //#endif
     [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
  
+    if (self.isChristmasEnter) {
+        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_yearly" parameters:nil];
+        if ([PFUser currentUser]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
+        }
+    }
+    
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdYear];
 
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -392,7 +425,14 @@
 //    
 //#endif
     [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
+    
+    if (self.isChristmasEnter) {
+        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_lifetime" parameters:nil];
+        if ([PFUser currentUser]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
+        }
 
+    }
     [[XDInAppPurchaseManager shareManager] purchaseUpgrade:kInAppPurchaseProductIdLifetime];
 
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];

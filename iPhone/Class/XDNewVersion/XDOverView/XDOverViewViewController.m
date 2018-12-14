@@ -50,11 +50,13 @@
 
 @property(nonatomic, strong)UIButton * titleBtn;
 
-@property(nonatomic, strong)UIView * bubbleView;
+//@property(nonatomic, strong)UIView * bubbleView;
 
 @property(nonatomic, strong)ADEngineController* adBanner;
 @property(nonatomic, strong)UIView* adBannerView;
 @property(nonatomic, strong)XDOverviewChristmasViewA* christmasView;
+
+@property(nonatomic, strong)UIView* redPointView;
 
 @end
 
@@ -76,38 +78,38 @@
     return _adBannerView;
 }
 
--(UIView *)bubbleView{
-    if (!_bubbleView) {
-        _bubbleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-        _bubbleView.backgroundColor = [UIColor clearColor];
-        
-        UIImageView* imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bubble"]];
-        if (IS_IPHONE_X) {
-            imageView.frame = CGRectMake(SCREEN_WIDTH - 104, 85, 95, 40);
-        }else{
-            imageView.frame = CGRectMake(SCREEN_WIDTH - 104, 64, 95, 40);
-        }
-        imageView.contentMode = UIViewContentModeCenter;
-        
-        [self popJumpAnimationView:imageView];
-        
-        [_bubbleView addSubview:imageView];
-        
-        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 14, 95, 16)];
-        label.font = [UIFont fontWithName:FontSFUITextRegular size:14];
-        label.text = NSLocalizedString(@"VC_Account", nil);
-        label.textColor = [UIColor whiteColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        [imageView addSubview:label];
-        
-        
-        [self.navigationController.view addSubview:_bubbleView];
-        
-        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(bubbleDismiss)];
-        [_bubbleView addGestureRecognizer:tap];
-    }
-    return _bubbleView;
-}
+//-(UIView *)bubbleView{
+//    if (!_bubbleView) {
+//        _bubbleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+//        _bubbleView.backgroundColor = [UIColor clearColor];
+//
+//        UIImageView* imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bubble"]];
+//        if (IS_IPHONE_X) {
+//            imageView.frame = CGRectMake(SCREEN_WIDTH - 104, 85, 95, 40);
+//        }else{
+//            imageView.frame = CGRectMake(SCREEN_WIDTH - 104, 64, 95, 40);
+//        }
+//        imageView.contentMode = UIViewContentModeCenter;
+//
+//        [self popJumpAnimationView:imageView];
+//
+//        [_bubbleView addSubview:imageView];
+//
+//        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 14, 95, 16)];
+//        label.font = [UIFont fontWithName:FontSFUITextRegular size:14];
+//        label.text = NSLocalizedString(@"VC_Account", nil);
+//        label.textColor = [UIColor whiteColor];
+//        label.textAlignment = NSTextAlignmentCenter;
+//        [imageView addSubview:label];
+//
+//
+//        [self.navigationController.view addSubview:_bubbleView];
+//
+//        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(bubbleDismiss)];
+//        [_bubbleView addGestureRecognizer:tap];
+//    }
+//    return _bubbleView;
+//}
 
 -(UIImageView *)emptyImageView{
     if (!_emptyImageView) {
@@ -118,7 +120,7 @@
         _emptyImageView.backgroundColor = [UIColor whiteColor];
         [self.view addSubview:_emptyImageView];
         [self.view bringSubviewToFront:_emptyImageView];
-        [self.view bringSubviewToFront:_bubbleView];
+//        [self.view bringSubviewToFront:_bubbleView];
         [self.view bringSubviewToFront:_adBannerView];
     }
     return _emptyImageView;
@@ -199,6 +201,10 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"tabbarDismiss" object:@NO];
     [[UIApplication sharedApplication]setStatusBarHidden:NO];
     
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
+        self.redPointView.hidden = YES;
+    }
+
    
 }
 
@@ -295,10 +301,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshChristmas) name:@"refreshChristmas" object:nil];
     
-    textView* view = [[[NSBundle mainBundle]loadNibNamed:@"textView" owner:self options:nil]lastObject];
-    view.frame = CGRectMake(0, SCREEN_HEIGHT-350, SCREEN_WIDTH, 175);
-    
-    [self.view addSubview:view];
+//    textView* view = [[[NSBundle mainBundle]loadNibNamed:@"textView" owner:self options:nil]lastObject];
+//    view.frame = CGRectMake(0, SCREEN_HEIGHT-350, SCREEN_WIDTH, 175);
+//    
+//    [self.view addSubview:view];
     
     
 }
@@ -486,6 +492,19 @@
     [self.navigationController.navigationBar setColor: [UIColor whiteColor]];
 
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(settingButtonPress) image:[UIImage imageNamed:@"setting_new"]];
+    
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
+        self.redPointView = [[UIView alloc]initWithFrame:CGRectMake(30, 10, 10, 10)];
+        self.redPointView.backgroundColor = [UIColor redColor];
+        self.redPointView.layer.cornerRadius = 5;
+        self.redPointView.layer.masksToBounds = YES;
+        [self.navigationController.navigationBar addSubview:self.redPointView];
+    }else{
+        self.redPointView.hidden = YES;
+    }
+
+
  
     UIView *barView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 93, 44)];
     
@@ -617,6 +636,7 @@
     SettingViewController *settingVC=[[SettingViewController alloc]initWithNibName:@"SettingViewController" bundle:nil];
     UINavigationController *nav=[[UINavigationController alloc]initWithRootViewController:settingVC];
     [self presentViewController:nav animated:YES completion:nil];
+    
 }
 -(void)searchBtnClick{
     
@@ -700,16 +720,16 @@
     
 }
 
--(void)bubbleDismiss{
-    [self.bubbleView removeFromSuperview];
-}
+//-(void)bubbleDismiss{
+//    [self.bubbleView removeFromSuperview];
+//}
 
 -(void)getCurrentVersion
 {
     NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"CFBundleShortVersionString"];
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     if (![currentVersion isEqualToString:lastVersion]) {
-        self.bubbleView.hidden = NO;
+//        self.bubbleView.hidden = NO;
         [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:@"CFBundleShortVersionString"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -732,7 +752,7 @@
         }
         [[XDDataManager shareManager] saveContext];
     }else{
-        self.bubbleView.hidden = YES;
+//        self.bubbleView.hidden = YES;
     }
 }
 

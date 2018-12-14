@@ -54,17 +54,20 @@ Ends in x days</string>
                     <color key="textColor" red="1" green="0.92549019610000005" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFo-19-ddw">
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFo-19-ddw">
                     <rect key="frame" x="11.5" y="540" width="172" height="52"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="172" id="A8P-4r-WHc"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="172" id="A8P-4r-WHc"/>
                         <constraint firstAttribute="height" constant="52" id="BlR-ns-2io"/>
                     </constraints>
                     <state key="normal" image="bChristmas_btn_normal_get"/>
                     <state key="highlighted" image="bChristmas_btn_Selected_get"/>
+                    <connections>
+                        <action selector="getClick:" destination="-1" eventType="touchUpInside" id="4Cu-aJ-UlM"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L1T-GO-fYM">
-                    <rect key="frame" x="10" y="10" width="44" height="44"/>
+                    <rect key="frame" x="10" y="15" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="G6w-G4-zce"/>
                         <constraint firstAttribute="height" constant="44" id="w7I-JN-maT"/>
@@ -74,32 +77,37 @@ Ends in x days</string>
                         <action selector="cancelClick:" destination="-1" eventType="touchUpInside" id="9AE-gv-T8S"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi6-Og-KO2">
+                <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xi6-Og-KO2">
                     <rect key="frame" x="191.5" y="540" width="172" height="52"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="52" id="Yqb-wI-Hbg"/>
-                        <constraint firstAttribute="width" constant="172" id="cR0-m8-cp0"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="172" id="cR0-m8-cp0"/>
                     </constraints>
                     <state key="normal" image="bChristmas_btn_normal_share"/>
                     <state key="highlighted" image="bChristmas_btn_Selected_share"/>
+                    <connections>
+                        <action selector="shareClick:" destination="-1" eventType="touchUpInside" id="sOK-vN-eq9"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="AVx-cS-AEH" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="186" id="3tm-eo-g7B"/>
                 <constraint firstItem="L4C-qF-QLh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="3wG-Yc-bRP"/>
-                <constraint firstItem="pFo-19-ddw" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" constant="-90" id="C2e-yI-3kT"/>
+                <constraint firstItem="xi6-Og-KO2" firstAttribute="width" secondItem="pFo-19-ddw" secondAttribute="width" id="JFc-0u-Aa5"/>
                 <constraint firstItem="xi6-Og-KO2" firstAttribute="leading" secondItem="pFo-19-ddw" secondAttribute="trailing" constant="8" id="Lz1-wi-PxU"/>
                 <constraint firstItem="AVx-cS-AEH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="30" id="TfU-zF-sTw"/>
                 <constraint firstItem="L1T-GO-fYM" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="10" id="UNv-oi-frE"/>
                 <constraint firstItem="AVx-cS-AEH" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="aQ1-Zr-Fju"/>
-                <constraint firstItem="L1T-GO-fYM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="cNf-ie-J4Y"/>
+                <constraint firstItem="L1T-GO-fYM" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="15" id="cNf-ie-J4Y"/>
                 <constraint firstAttribute="trailing" secondItem="AVx-cS-AEH" secondAttribute="trailing" constant="30" id="cVQ-fT-2RW"/>
                 <constraint firstItem="VLh-hL-ewW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="fU0-kr-txn"/>
                 <constraint firstItem="VLh-hL-ewW" firstAttribute="top" secondItem="AVx-cS-AEH" secondAttribute="bottom" constant="77" id="fvs-u2-oVq"/>
+                <constraint firstAttribute="trailing" secondItem="xi6-Og-KO2" secondAttribute="trailing" constant="11.5" id="mAa-yf-GMi"/>
                 <constraint firstItem="L4C-qF-QLh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="owz-BS-mBU"/>
                 <constraint firstItem="xi6-Og-KO2" firstAttribute="top" secondItem="pFo-19-ddw" secondAttribute="top" id="rCL-i2-K75"/>
                 <constraint firstItem="pFo-19-ddw" firstAttribute="top" secondItem="VLh-hL-ewW" secondAttribute="bottom" constant="30.5" id="ucT-qQ-bSX"/>
+                <constraint firstItem="pFo-19-ddw" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="11.5" id="w00-lc-6ZH"/>
                 <constraint firstItem="L4C-qF-QLh" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="xmw-ug-45E"/>
                 <constraint firstItem="L4C-qF-QLh" firstAttribute="bottom" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="zrt-dU-FbV"/>
             </constraints>

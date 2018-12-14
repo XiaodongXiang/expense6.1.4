@@ -45,9 +45,17 @@
 				<string>db-6rdffw1lvpr4zuc</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>HoursKeeper</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>320</string>
+	<string>517</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -76,6 +84,10 @@
 		<string>fb-messenger-api</string>
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
+		<string>HoursKeeper</string>
+		<string>faxnow</string>
+		<string>PCheckBook</string>
+		<string>scannnernow</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
