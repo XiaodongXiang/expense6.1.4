@@ -116,7 +116,7 @@
 
     }else{
         imageToShare = [UIImage imageNamed:@"share_expense_68"];
-        textToShare = @"Gifts for Christmas! Enjoy your 50% Off on Hours Keeper. More than just a Hours Keeper you need.";
+        textToShare = @"Gifts for Christmas! Enjoy your 68% off on Pocket Expense. Let the wisdom began！";
     }
     
     NSURL *urlToShare = [NSURL URLWithString:@"https://itunes.apple.com/us/app/pocket-expense-6/id424575621?mt=8"];

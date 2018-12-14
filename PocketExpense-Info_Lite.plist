@@ -55,7 +55,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>517</string>
+	<string>528</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -88,6 +88,7 @@
 		<string>faxnow</string>
 		<string>PCheckBook</string>
 		<string>scannnernow</string>
+		<string>db-b43ep996igwezzh</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

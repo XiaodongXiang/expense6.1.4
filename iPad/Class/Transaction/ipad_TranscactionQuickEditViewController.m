@@ -46,6 +46,10 @@
 #import "XDChristmasPlanAPopViewController.h"
 #import "XDIpad_ADSViewController.h"
 
+#import "XDChristmasLiteOneViewController.h"
+#import "XDChristmasLitePlanAViewController.h"
+#import "XDChristmasPlanAbViewController.h"
+#import "XDChristmasPlanBbViewController.h"
 @import Firebase;
 //#import "ipad_SearchRelatedViewController.h"
 
@@ -1600,18 +1604,42 @@
     [self.planA dismiss];
     AppDelegate_iPad* appDelegate_ipad = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
 
-    XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
-    //        adsDetailViewController.isComeFromSetting = NO;
-    //        adsDetailViewController.pageNum = i;
-    //        adsDetailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-//    adsDetailViewController.xxdDelegate = self;
-    adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-    adsDetailViewController.preferredContentSize = CGSizeMake(375, 667);
+//    XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
+//    //        adsDetailViewController.isComeFromSetting = NO;
+//    //        adsDetailViewController.pageNum = i;
+//    //        adsDetailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+////    adsDetailViewController.xxdDelegate = self;
+//    adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+//    adsDetailViewController.preferredContentSize = CGSizeMake(375, 667);
+//
+//    adsDetailViewController.view.superview.autoresizingMask =
+//    UIViewAutoresizingFlexibleTopMargin |
+//    UIViewAutoresizingFlexibleBottomMargin;
+//    [appDelegate_ipad.mainViewController presentViewController:adsDetailViewController animated:YES completion:nil];
+    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
     
-    adsDetailViewController.view.superview.autoresizingMask =
-    UIViewAutoresizingFlexibleTopMargin |
-    UIViewAutoresizingFlexibleBottomMargin;
-    [appDelegate_ipad.mainViewController presentViewController:adsDetailViewController animated:YES completion:nil];
+    if(subPlan == ChristmasSubPlana){
+        
+        //        [FIRAnalytics logEventWithName:@"christmas_A_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+        XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
+        
+        christmas.modalPresentationStyle = UIModalPresentationFormSheet;
+        christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        christmas.preferredContentSize = CGSizeMake(375, 667);
+        [self presentViewController:christmas animated:YES completion:nil];
+        
+        
+    }else if (subPlan == ChristmasSubPlanb){
+        //        [FIRAnalytics logEventWithName:@"christmas_A_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+        XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
+        
+        christmas.modalPresentationStyle = UIModalPresentationFormSheet;
+        christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        christmas.preferredContentSize = CGSizeMake(375, 667);
+        [self presentViewController:christmas animated:YES completion:nil];
+    }
     
     [FIRAnalytics logEventWithName:@"christmas_popup_A_getNow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
     
@@ -1626,20 +1654,43 @@
 
 -(void)bchristmasPopViewGetNowClick{
     [self.planB dismiss];
-    XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
+//    XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
     //        adsDetailViewController.isComeFromSetting = NO;
     //        adsDetailViewController.pageNum = i;
     //        adsDetailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
 //    adsDetailViewController.xxdDelegate = self;
-    adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-    adsDetailViewController.preferredContentSize = CGSizeMake(375, 667);
+//    adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+//    adsDetailViewController.preferredContentSize = CGSizeMake(375, 667);
+//
+//    adsDetailViewController.view.superview.autoresizingMask =
+//    UIViewAutoresizingFlexibleTopMargin |
+//    UIViewAutoresizingFlexibleBottomMargin;
+//    AppDelegate_iPad* appDelegate_ipad = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
+//
+//    [appDelegate_ipad.mainViewController presentViewController:adsDetailViewController animated:YES completion:nil];
+    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
     
-    adsDetailViewController.view.superview.autoresizingMask =
-    UIViewAutoresizingFlexibleTopMargin |
-    UIViewAutoresizingFlexibleBottomMargin;
-    AppDelegate_iPad* appDelegate_ipad = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
-
-    [appDelegate_ipad.mainViewController presentViewController:adsDetailViewController animated:YES completion:nil];
+    if(subPlan == ChristmasSubPlana){
+        //        [FIRAnalytics logEventWithName:@"christmas_a_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+        XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
+        
+        christmas.modalPresentationStyle = UIModalPresentationFormSheet;
+        christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        christmas.preferredContentSize = CGSizeMake(375, 667);
+        [self presentViewController:christmas animated:YES completion:nil];
+        
+    }else if(subPlan == ChristmasSubPlanb){
+        //        [FIRAnalytics logEventWithName:@"christmas_a_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+        XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
+        
+        christmas.modalPresentationStyle = UIModalPresentationFormSheet;
+        christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        christmas.preferredContentSize = CGSizeMake(375, 667);
+        [self presentViewController:christmas animated:YES completion:nil];
+        
+    }
     
     [FIRAnalytics logEventWithName:@"christmas_popup_a_getNow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
     

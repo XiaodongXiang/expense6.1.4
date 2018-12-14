@@ -195,7 +195,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
 
     }else{
         imageToShare = [UIImage imageNamed:@"share_expense_68"];
-        textToShare = @"Gifts for Christmas! Enjoy your 50% Off on Hours Keeper. More than just a Hours Keeper you need.";
+        textToShare = @"Gifts for Christmas! Enjoy your 68% off on Pocket Expense. Let the wisdom began！";
 
     }
     

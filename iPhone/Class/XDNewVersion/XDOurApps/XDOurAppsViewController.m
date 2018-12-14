@@ -76,7 +76,7 @@
     self.firstBackView.layer.masksToBounds = self.thirdBackView.layer.masksToBounds = self.fourthBackView.layer.masksToBounds = self.secondBackView.layer.masksToBounds = NO;
     
     
-    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"HoursKeeper://"]]){
+    if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"db-b43ep996igwezzh://"]]){
         [self.firstBtn setImage:[UIImage imageNamed:@"open"] forState:UIControlStateNormal];
     }else{
         [self.firstBtn setImage:[UIImage imageNamed:@"get"] forState:UIControlStateNormal];
@@ -156,11 +156,11 @@
 
     if (btn.tag == 1) {
         
-        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"HoursKeeper://"]]){
+        if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"db-b43ep996igwezzh://"]]){
 
 //            NSString *urlStr = @"HoursKeeper://";
 //            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=OurApps-PKEP-HRKP&mt=8";
+            NSString *urlStr = @"db-b43ep996igwezzh://";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
 
             [FIRAnalytics logEventWithName:@"ours_app_open_hoursKeeper" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];

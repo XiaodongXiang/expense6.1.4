@@ -108,41 +108,40 @@
     return NO;
 }
 
-//-(ChristmasPlanType)planType{
-////    return random()%2;
+-(ChristmasPlanType)planType{
+//    return random()%2;
+    
+    NSString* value = [FBHelper valueByConfigureName:@"cm_ip_layout_type"];
+    if ([value isEqualToString:@"LEILEI"]) {
+        return ChristmasPlanB;
+    }else{
+        return ChristmasPlanA;
+    }
+    return ChristmasPlanA;
+}
 //
-//    NSString* value = [FBHelper valueByConfigureName:@"cm_ip_layout_type"];
-//    if ([value isEqualToString:@"LEILEI"]) {
-//        return ChristmasPlanB;
-//    }else{
-//        return ChristmasPlanA;
-//    }
-//    return ChristmasPlanA;
-//}
-////
-//-(ChristmasSubPlan)planSubType{
-//
-//    NSString* value2 = [FBHelper valueByConfigureName:@"cm_ip_button_type"];
-//    if ([value2 isEqualToString:@"Get And Share"]) {
-//        return ChristmasSubPlanb;
-//    }else{
-//        return ChristmasSubPlana;
-//    }
-//     return ChristmasSubPlanb;
-//
-//}
-//
-//-(ChristmasPlanCategory)planCategory{
-//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-//    if (!appDelegate.isPurchased) {
-//        return ChristmasPlanCategoryHasReceive7Days;
-//    }else{
-//        return ChristmasPlanCategoryLifetime;
-//    }
-//
-//    return ChristmasPlanCategoryHasReceive7Days;
-//}
- 
+-(ChristmasSubPlan)planSubType{
+
+    NSString* value2 = [FBHelper valueByConfigureName:@"cm_ip_button_type"];
+    if ([value2 isEqualToString:@"Get And Share"]) {
+        return ChristmasSubPlanb;
+    }else{
+        return ChristmasSubPlana;
+    }
+     return ChristmasSubPlanb;
+    
+}
+
+-(ChristmasPlanCategory)planCategory{
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (!appDelegate.isPurchased) {
+        return ChristmasPlanCategoryHasReceive7Days;
+    }else{
+        return ChristmasPlanCategoryLifetime;
+    }
+
+    return ChristmasPlanCategoryHasReceive7Days;
+}
 -(NSNumber*)isChristmasNewUser{
     NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
     comp.year = 2018;
