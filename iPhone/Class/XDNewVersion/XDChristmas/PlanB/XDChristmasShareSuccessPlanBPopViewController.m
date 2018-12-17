@@ -12,7 +12,6 @@
 
 @interface XDChristmasShareSuccessPlanBPopViewController ()
 
-@property (weak, nonatomic) IBOutlet UIImageView *contentImgView;
 @property (weak, nonatomic) IBOutlet UIImageView *bgImgView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *cancenLT;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *useItTopH;
@@ -40,6 +39,7 @@
     }else if (IS_IPHONE_5){
         self.bgImgView.image = [UIImage imageNamed:@"pic_se"];
     }else if (IS_IPHONE_6PLUS){
+        self.contentCenterY.constant = -105;
         self.bgImgView.image = [UIImage imageNamed:@"pic_plus"];
     }else{
         self.bgImgView.image = [UIImage imageNamed:@"pic_8"];

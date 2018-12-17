@@ -11,6 +11,10 @@
 #import "XDInAppPurchaseManager.h"
 #import <Appsee/Appsee.h>
 #import <Parse/Parse.h>
+
+#import "XDChristmasShareSuccessPlanBPopViewController.h"
+#import "XDChristmasShareSuccessdPlanAPopViewController.h"
+#import "XDPlanControlClass.h"
 @import Firebase;
 @interface XDUpgradeViewController ()<SKRequestDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -43,6 +47,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *restoreBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *restoreBtnH;
 @property (weak, nonatomic) IBOutlet UILabel *premiumTitle;
+
+@property(nonatomic, strong)XDChristmasShareSuccessdPlanAPopViewController* popAVc;
+@property(nonatomic, strong)XDChristmasShareSuccessPlanBPopViewController* popBVc;
 
 @end
 
@@ -195,13 +202,71 @@
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
-  
     
 }
 
 -(void)purchaseSuccessful{
     [self settingReloadData];
+    
+    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
+    if (christmasUserObjectID.length > 0) {
+        if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+            self.popAVc = [[XDChristmasShareSuccessdPlanAPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessdPlanAPopViewController" bundle:nil];
+            [self.view addSubview:self.popAVc.view];
+            self.popAVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
+            [self.popAVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
+            [self.popAVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
+            self.popAVc.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
+            [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download"] forState:UIControlStateNormal];
+            [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download_press"] forState:UIControlStateHighlighted];
+
+            [self.popAVc show];
+        }else{
+            self.popBVc = [[XDChristmasShareSuccessPlanBPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessPlanBPopViewController" bundle:nil];
+            [self.view addSubview:self.popBVc.view];
+            self.popBVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
+            [self.popBVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
+            [self.popBVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
+            self.popBVc.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_50%off"];
+
+            [self.popBVc show];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+    }
 }
+
+-(void)vcCancelClick{
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        [self.popAVc dismiss];
+        [FIRAnalytics logEventWithName:@"christmas_A_purchasedSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
+    }else{
+        [self.popBVc dismiss];
+        [FIRAnalytics logEventWithName:@"christmas_a_purchasedSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
+    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+
+}
+
+-(void)vcUseItClick{
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        [self.popAVc dismiss];
+        [FIRAnalytics logEventWithName:@"christmas_A_purchasedSuccess_download" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
+    }else{
+        [self.popBVc dismiss];
+        [FIRAnalytics logEventWithName:@"christmas_a_purchasedSuccess_download" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+
+    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+
+    
+    NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=ChristmasActivity-PKEP-HRKP&mt=8";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+}
+
 
 - (IBAction)restoreBtnClick:(id)sender {
 //    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -323,7 +388,9 @@
     NSString *yearPrice = [userDefaults stringForKey:PURCHASE_PRICE_YEAR];
     NSString *lifetimePrice = [userDefaults stringForKey:PURCHASE_PRICE_LIFETIME];
     if ([userDefaults boolForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY]) {
-        monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
+        if ([userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY].length > 0) {
+            monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
+        }
     }
     double sale = [userDefaults doubleForKey:@"salePrice"];
     
@@ -342,12 +409,6 @@
 }
 
 - (IBAction)cancelClick:(id)sender {
-    
-//#ifdef DEBUG
-//    [Appsee addEvent:@"Leave Shop"];
-//#else
-//
-//#endif
    
     [self dismissViewControllerAnimated:YES completion:nil];
     if ([self.xxdDelegate respondsToSelector:@selector(XDUpgradeViewDismiss)]) {
@@ -357,18 +418,7 @@
 
 - (IBAction)monthBtnClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-//
-//    if ([appDelegate.inAppPM canMakePurchases])
-//    {
-//        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
-//    }
-//
-//#ifdef DEBUG
-//    [Appsee addEvent:@"Attemp to Buy - Monthly"];
-//
-//#else
-//
-//#endif
+
     [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
    
     if (self.isChristmasEnter) {
@@ -386,17 +436,7 @@
 
 - (IBAction)yearBtnClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    
-//    if ([appDelegate.inAppPM canMakePurchases])
-//    {
-//        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
-//    }
-//#ifdef DEBUG
-//    [Appsee addEvent:@"Attemp to Buy - Yearly"];
-//
-//#else
-//
-//#endif
+ 
     [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
  
     if (self.isChristmasEnter) {
@@ -414,16 +454,7 @@
 
 - (IBAction)lifetimeClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    
-//    if ([appDelegate.inAppPM canMakePurchases])
-//    {
-//        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
-//    }
-//#ifdef DEBUG
-//    [Appsee addEvent:@"Attemp to Buy - Lifetime"];
-//#else
-//    
-//#endif
+
     [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
     
     if (self.isChristmasEnter) {

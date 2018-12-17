@@ -49,44 +49,54 @@
 }
 
 -(BOOL)needShow{
-    return YES;
+//    return YES;
 
+    BOOL dismiss = [[NSUserDefaults standardUserDefaults] boolForKey:@"dismissChristmasBanner"];
+    
     NSString *version= [UIDevice currentDevice].systemVersion;
-    if(version.doubleValue < 11.2) {
+    if(version.doubleValue < 11.2 || dismiss) {
         return NO;
     }
     
-    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
-    comp.year = 2018;
-    comp.month = 12;
-    comp.day = 22;
-    comp.hour = 0;
-    comp.minute = 0;
-    comp.second = 0;
-    NSDate* startDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
-  
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-    NSDateComponents* comp1 = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
-    comp1.year = 2019;
-    comp1.month = 1;
-    comp1.day = 3;
-    comp1.hour = 23;
-    comp1.minute = 59;
-    comp1.second = 59;
-    NSDate* endDate = [[NSCalendar currentCalendar] dateFromComponents:comp1];
-    
-    if ([[NSDate date] compare:startDate] != NSOrderedDescending || [[NSDate date] compare:endDate] != NSOrderedAscending) {
-        return NO;
+    if (appDelegate.isPurchased == YES) {
+        
+        NSString* avalue = [FBHelper valueByConfigureName:@"cm_pa_layout_type"];
+        NSString* avalue2 = [FBHelper valueByConfigureName:@"cm_pa_button_type"];
+        
+        if (!avalue || avalue.length == 0 || [avalue isEqualToString:@"None"]) {
+            return NO;
+        }
+        if (!avalue2 || avalue2.length == 0 || [avalue2 isEqualToString:@"None"]) {
+            return NO;
+        }
+        
+    }else{
+        
+        
+        NSString* Avalue = [FBHelper valueByConfigureName:@"cm_ip_layout_type"];
+        NSString* Avalue2 = [FBHelper valueByConfigureName:@"cm_ip_button_type"];
+        
+        if (!Avalue || Avalue.length == 0 || [Avalue isEqualToString:@"None"]) {
+            return NO;
+        }
+        if (!Avalue2 || Avalue2.length == 0 || [Avalue2 isEqualToString:@"None"]) {
+            return NO;
+        }
     }
     
- 
+    
     return YES;
 }
 
 -(BOOL)everyDayShowOnce{
-    if (!self.needShow) {
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+
+    if (!self.needShow || appDelegate.isPurchased == YES) {
         return NO;
     }
+    
     
     NSDate* today = [NSDate date];
     NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear  fromDate:today];
@@ -110,24 +120,46 @@
 
 -(ChristmasPlanType)planType{
 //    return random()%2;
-    
-    NSString* value = [FBHelper valueByConfigureName:@"cm_ip_layout_type"];
-    if ([value isEqualToString:@"LEILEI"]) {
-        return ChristmasPlanB;
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.isPurchased) {
+        NSString* value = [FBHelper valueByConfigureName:@"cm_pa_layout_type"];
+        if ([value isEqualToString:@"LEILEI"]) {
+            return ChristmasPlanB;
+        }else{
+            return ChristmasPlanA;
+        }
     }else{
-        return ChristmasPlanA;
+        NSString* value = [FBHelper valueByConfigureName:@"cm_ip_layout_type"];
+        if ([value isEqualToString:@"LEILEI"]) {
+            return ChristmasPlanB;
+        }else{
+            return ChristmasPlanA;
+        }
     }
+    
     return ChristmasPlanA;
 }
 //
 -(ChristmasSubPlan)planSubType{
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.isPurchased) {
+        NSString* value2 = [FBHelper valueByConfigureName:@"cm_pa_button_type"];
+        if ([value2 isEqualToString:@"Get And Share"]) {
+            return ChristmasSubPlanb;
+        }else{
+            return ChristmasSubPlana;
+        }
 
-    NSString* value2 = [FBHelper valueByConfigureName:@"cm_ip_button_type"];
-    if ([value2 isEqualToString:@"Get And Share"]) {
-        return ChristmasSubPlanb;
     }else{
-        return ChristmasSubPlana;
+        NSString* value2 = [FBHelper valueByConfigureName:@"cm_ip_button_type"];
+        if ([value2 isEqualToString:@"Get And Share"]) {
+            return ChristmasSubPlanb;
+        }else{
+            return ChristmasSubPlana;
+        }
     }
+        
+    
      return ChristmasSubPlanb;
     
 }
@@ -142,6 +174,7 @@
 
     return ChristmasPlanCategoryHasReceive7Days;
 }
+
 -(NSNumber*)isChristmasNewUser{
     NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
     comp.year = 2018;

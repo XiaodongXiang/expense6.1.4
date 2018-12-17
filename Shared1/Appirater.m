@@ -103,12 +103,12 @@ NSString* templateReviewURL = @"https://itunes.apple.com/cn/app/pocket-expense-p
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	
     //如果是 debug版本，立马就弹出来
-	if (APPIRATER_DEBUG)
-	{
-		[self performSelectorOnMainThread:@selector(showPrompt) withObject:nil waitUntilDone:NO];
-		
-		return;
-	}
+//    if (DEBUG)
+//    {
+//        [self performSelectorOnMainThread:@selector(showPrompt) withObject:nil waitUntilDone:NO];
+//
+//        return;
+//    }
 	
 	BOOL willShowPrompt = NO;
 	
@@ -121,12 +121,7 @@ NSString* templateReviewURL = @"https://itunes.apple.com/cn/app/pocket-expense-p
     //获取当前设备上保存的版本号
 	NSString *trackingVersion = [userDefaults stringForKey:kAppiraterCurrentVersion];
     
-    //如果设备上没有版本号，就说明，这个版本是最新的
-	if (trackingVersion == nil)
-	{
-		trackingVersion = version;
-		[userDefaults setObject:version forKey:kAppiraterCurrentVersion];
-	}
+   
 	
 	if (APPIRATER_DEBUG)
 		NSLog(@"APPIRATER Tracking version: %@", trackingVersion);
@@ -184,7 +179,7 @@ NSString* templateReviewURL = @"https://itunes.apple.com/cn/app/pocket-expense-p
 	{
         
         if (ISPAD) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:[NSString stringWithFormat:@"Pocket Expense %@ redesign user interface. Support more powerful charts, custom account styles, and touch ID.\n\nIf you like Pocket Expense, we will be very happy if you rate or review Pocket Expense on the app store.",version] delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:@"- Optimize purchased user ui display.\n- Minor bug fixes." delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];
             alertView.tag = 101;
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [alertView show];
@@ -199,7 +194,7 @@ NSString* templateReviewURL = @"https://itunes.apple.com/cn/app/pocket-expense-p
             [userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];//设置已经评论过了这个app
             [userDefaults setBool:NO forKey:kAppiraterDeclinedToRate];
         }else{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:[NSString stringWithFormat:@"Pocket Expense %@ has been completely redesigned, with more clarity, better structure, improved workflow and delightful interaction.\n\nWe hope you enjoy the all-new apps – If you have a moment to leave a review in the App Store we would really appreciate it.",version] delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:@"- Optimize purchased user ui display.\n- Minor bug fixes." delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];
             alertView.tag = 101;
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [alertView show];
@@ -213,6 +208,13 @@ NSString* templateReviewURL = @"https://itunes.apple.com/cn/app/pocket-expense-p
             [userDefaults setInteger:1 forKey:kAppiraterLaunchCount];
             [userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];//设置已经评论过了这个app
             [userDefaults setBool:NO forKey:kAppiraterDeclinedToRate];
+        }
+        
+        //如果设备上没有版本号，就说明，这个版本是最新的
+        if (trackingVersion == nil)
+        {
+            trackingVersion = version;
+            [userDefaults setObject:version forKey:kAppiraterCurrentVersion];
         }
 	}
 	

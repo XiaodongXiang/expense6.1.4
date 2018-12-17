@@ -10,7 +10,6 @@
 #import <Parse/Parse.h>
 @import Firebase;
 @interface XDChristmasShareSuccessdPlanAPopViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *contentImgView;
 @property (weak, nonatomic) IBOutlet UIImageView *backView;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
@@ -36,6 +35,11 @@
         self.useItBtn.centerX = 160;
         self.backView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 370);
         self.useItBtn.y = 428;
+    }else if (IS_IPHONE_6PLUS){
+        self.contentImgView.centerX = SCREEN_WIDTH/2;
+        self.useItBtn.centerX = SCREEN_WIDTH/2;
+        self.backView.centerX = SCREEN_WIDTH/2;
+        
     }
     self.view.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.0f];
 

@@ -8,11 +8,14 @@
 #import <UIKit/UIKit.h>
 
 @protocol XDIpad_ADSViewDelegate <NSObject>
+
+
 @optional
 -(void)ipadUpgradeViewDismiss;
 
 @end
 @interface XDIpad_ADSViewController : UIViewController
+@property (assign, nonatomic) BOOL isChristmasEnter;
 
 @property( nonatomic, weak)id<XDIpad_ADSViewDelegate> xxdDelegate;
 

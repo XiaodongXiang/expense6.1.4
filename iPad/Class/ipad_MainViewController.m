@@ -16,8 +16,13 @@
 #import "ParseDBManager.h"
 #import <Appsee/Appsee.h>
 #import <Parse/Parse.h>
+
 @import Firebase;
 
+@interface ipad_MainViewController ()
+
+
+@end
 @implementation ipad_MainViewController
 
 #pragma mark Life Method
@@ -28,13 +33,18 @@
     [self initPointandBtnAction];
     [self initFrameView];
     
-    [Appsee setUserID:[PFUser currentUser].email];
+//    [Appsee setUserID:[PFUser currentUser].email];
 
     [self checkDateWithPurchase];
 
     [FIRAnalytics setScreenName:@"main_view_ipad" screenClass:@"ipad_MainViewController"];
 
+
 }
+
+
+
+
 
 
 -(void)returnReceipt:(NSDictionary*)lastReceipt{
@@ -93,9 +103,14 @@
 
 //检测是否订阅，并检测订阅时间是否到期
 -(void)checkDateWithPurchase{
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    AppDelegate_iPad *appDelegate = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
     
-    if (appDelegate.isPurchased) {
+    Setting* setting = [[XDDataManager shareManager] getSetting];
+    
+    NSString* productID = setting.purchasedProductID;
+    BOOL isPurchase = [setting.purchasedIsSubscription boolValue];
+    //判断免费版是否被购买了
+    if (appDelegate.isPurchased || (productID.length > 0 && isPurchase)) {
         Setting* setting = [[XDDataManager shareManager] getSetting];
         
         NSDate* date = setting.purchasedStartDate;

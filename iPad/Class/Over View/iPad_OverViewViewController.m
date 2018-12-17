@@ -25,6 +25,11 @@
 #import <Parse/Parse.h>
 #import "textView.h"
 
+
+#import "XDPlanControlClass.h"
+#import "XDChristmasShareSuccessPlanBPopViewController.h"
+#import "XDChristmasShareSuccessdPlanAPopViewController.h"
+
 @import     Firebase;
 #define TRANSACTIONHAS5Count @"transactionOver5Count"
 
@@ -36,6 +41,9 @@
 
 @property(nonatomic, strong)XDOverviewChristmasViewA* christmasView;
 
+
+@property(nonatomic, strong)XDChristmasShareSuccessdPlanAPopViewController* popAVc;
+@property(nonatomic, strong)XDChristmasShareSuccessPlanBPopViewController* popBVc;
 
 @end
 
@@ -82,10 +90,92 @@
 //        
 //        [categoryContainView addSubview:view];
     }
-    
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
     
 }
+
+-(void)purchaseSuccessful{
+    
+    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
+    if (christmasUserObjectID.length > 0) {
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.christmasView.height = 0;
+            calendarContainView.y = 15;
+            kalViewController.kalView.bottomView.y = 533;
+            calendarContainView.height = 674;
+            
+        }completion:^(BOOL finished) {
+            [self.christmasView removeFromSuperview];
+            
+            AppDelegate_iPad *appDelegate = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
+
+            
+            if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+                self.popAVc = [[XDChristmasShareSuccessdPlanAPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessdPlanAPopViewController" bundle:nil];
+                [appDelegate.mainViewController.view addSubview:self.popAVc.view];
+                self.popAVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
+                self.popAVc.view.centerX = SCREEN_WIDTH/2;
+                self.popAVc.view.centerY = SCREEN_HEIGHT/2-25;
+                [self.popAVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
+                [self.popAVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
+                self.popAVc.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
+                [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download"] forState:UIControlStateNormal];
+                [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download_press"] forState:UIControlStateHighlighted];
+                
+                [self.popAVc show];
+            }else{
+                self.popBVc = [[XDChristmasShareSuccessPlanBPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessPlanBPopViewController" bundle:nil];
+                [appDelegate.mainViewController.view addSubview:self.popBVc.view];
+                self.popBVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
+                self.popAVc.view.centerX = SCREEN_WIDTH/2;
+                self.popAVc.view.centerY = SCREEN_HEIGHT/2-25;
+                [self.popBVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
+                [self.popBVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
+                self.popBVc.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_50%off"];
+                
+                [self.popBVc show];
+            }
+            
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
+
+        }];
+    }
+}
+
+-(void)vcCancelClick{
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        [self.popAVc dismiss];
+        [FIRAnalytics logEventWithName:@"christmas_A_purchasedSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+    }else{
+        [self.popBVc dismiss];
+        [FIRAnalytics logEventWithName:@"christmas_a_purchasedSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
+
+}
+
+-(void)vcUseItClick{
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        [self.popAVc dismiss];
+        [FIRAnalytics logEventWithName:@"christmas_A_purchasedSuccess_download" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+    }else{
+        [self.popBVc dismiss];
+        [FIRAnalytics logEventWithName:@"christmas_a_purchasedSuccess_download" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
+    
+    NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=ChristmasActivity-PKEP-HRKP&mt=8";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+}
+
 
 -(void)showChristmasView{
     self.christmasView = [[[NSBundle mainBundle] loadNibNamed:@"XDOverviewChristmasViewA" owner:self options:nil]lastObject];
@@ -261,10 +351,7 @@
     {
         appDelegate.isPurchased = YES;
     }
-    else
-    {
-        appDelegate.isPurchased = NO;
-    }
+   
     
     if (appDelegate.isPurchased)
     {

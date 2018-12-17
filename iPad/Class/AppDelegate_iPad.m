@@ -398,7 +398,7 @@
     
     [[XDAppriater shareAppirater] judgeShowRateView];
   
-    
+    [self initLitePurchaseInformation];
     
     
     passCodeCheckView = [[PasscodeCheckViewController_iPad alloc] initWithNibName:@"PasscodeCheckViewController_iPad" bundle:nil];
@@ -427,6 +427,30 @@
     
   	return YES;
 }
+
+-(void)initLitePurchaseInformation
+{
+    
+    NSUserDefaults *defaults2 = [NSUserDefaults standardUserDefaults];
+    Setting* setting = [[XDDataManager shareManager] getSetting];
+    
+    NSString* productID = setting.purchasedProductID;
+    BOOL isPurchase = [setting.purchasedIsSubscription boolValue];
+    //判断免费版是否被购买了
+    if ([defaults2 valueForKey:LITE_UNLOCK_FLAG] || (productID.length > 0 && isPurchase))
+    {
+        self.isPurchased = YES;
+        [[XDDataManager shareManager]openWidgetInSettingWithBool14:YES];
+    }
+    else
+    {
+        self.isPurchased = NO;
+        [[XDDataManager shareManager]openWidgetInSettingWithBool14:NO];
+        
+    }
+    
+}
+
 -(void)passcodeAgain{
     //touch ID
     LAContext *context=[LAContext new];

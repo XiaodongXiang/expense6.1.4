@@ -13,7 +13,7 @@
 #import <ParseFacebookUtilsV4/PFFacebookUtils.h>
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
-
+#import "ParseDBManager.h"
 @interface thirdView_iPad ()<UITextFieldDelegate>
 {
     int direction;
@@ -365,6 +365,7 @@
             }
             else
             {
+                [[ParseDBManager sharedManager] getPFSetting];
                 [appDelegate succededInLogIn];
             }
         }];

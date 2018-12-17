@@ -158,7 +158,8 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
             adsDetailViewController.xxdDelegate = self;
             adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
             adsDetailViewController.preferredContentSize = CGSizeMake(375, 667);
-            
+            adsDetailViewController.isChristmasEnter = YES;
+
             adsDetailViewController.view.superview.autoresizingMask =
             UIViewAutoresizingFlexibleTopMargin |
             UIViewAutoresizingFlexibleBottomMargin;
@@ -281,6 +282,9 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
 
             [self presentViewController:adsVc animated:YES completion:nil];
         }
+        
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
+
         [FIRAnalytics logEventWithName:@"christmas_A_b_1_shareSuccess_useIt" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
 
 //    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){

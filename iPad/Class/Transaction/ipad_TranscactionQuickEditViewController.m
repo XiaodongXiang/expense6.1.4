@@ -1627,7 +1627,7 @@
         christmas.modalPresentationStyle = UIModalPresentationFormSheet;
         christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         christmas.preferredContentSize = CGSizeMake(375, 667);
-        [self presentViewController:christmas animated:YES completion:nil];
+        [appDelegate_ipad.mainViewController presentViewController:christmas animated:YES completion:nil];
         
         
     }else if (subPlan == ChristmasSubPlanb){
@@ -1638,7 +1638,7 @@
         christmas.modalPresentationStyle = UIModalPresentationFormSheet;
         christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         christmas.preferredContentSize = CGSizeMake(375, 667);
-        [self presentViewController:christmas animated:YES completion:nil];
+        [appDelegate_ipad.mainViewController presentViewController:christmas animated:YES completion:nil];
     }
     
     [FIRAnalytics logEventWithName:@"christmas_popup_A_getNow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
@@ -1668,6 +1668,8 @@
 //    AppDelegate_iPad* appDelegate_ipad = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
 //
 //    [appDelegate_ipad.mainViewController presentViewController:adsDetailViewController animated:YES completion:nil];
+    AppDelegate_iPad* appDelegate_ipad = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
+
     NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
     
     if(subPlan == ChristmasSubPlana){
@@ -1678,7 +1680,7 @@
         christmas.modalPresentationStyle = UIModalPresentationFormSheet;
         christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         christmas.preferredContentSize = CGSizeMake(375, 667);
-        [self presentViewController:christmas animated:YES completion:nil];
+        [appDelegate_ipad.mainViewController presentViewController:christmas animated:YES completion:nil];
         
     }else if(subPlan == ChristmasSubPlanb){
         //        [FIRAnalytics logEventWithName:@"christmas_a_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
@@ -1688,7 +1690,7 @@
         christmas.modalPresentationStyle = UIModalPresentationFormSheet;
         christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
         christmas.preferredContentSize = CGSizeMake(375, 667);
-        [self presentViewController:christmas animated:YES completion:nil];
+        [appDelegate_ipad.mainViewController presentViewController:christmas animated:YES completion:nil];
         
     }
     

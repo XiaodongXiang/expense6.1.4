@@ -202,7 +202,8 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
             adsDetailViewController.xxdDelegate = self;
             adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
             adsDetailViewController.preferredContentSize = CGSizeMake(375, 667);
-            
+            adsDetailViewController.isChristmasEnter = YES;
+
             adsDetailViewController.view.superview.autoresizingMask =
             UIViewAutoresizingFlexibleTopMargin |
             UIViewAutoresizingFlexibleBottomMargin;

@@ -71,8 +71,8 @@
     [_logOutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     self.view.backgroundColor=[UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1];
     
-    AppDelegate_iPhone *appdelegate = (AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
-    Setting* setting = [[XDDataManager shareManager] getSetting];
+    PokcetExpenseAppDelegate *appdelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+//    Setting* setting = [[XDDataManager shareManager] getSetting];
     if (appdelegate.isPurchased) {
         Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
@@ -1115,6 +1115,26 @@
                 
                  [self.navigationController popToRootViewControllerAnimated:YES];
                  [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                 
+                 Setting* setting = [[XDDataManager shareManager] getSetting];
+                 setting.purchasedProductID = nil;
+                 setting.purchasedStartDate = nil;
+                 setting.purchasedEndDate = nil;
+                 setting.dateTime = nil;
+                 setting.otherBool17 = nil;
+                 setting.purchasedIsSubscription = nil;
+                 setting.purchaseOriginalProductID = nil;
+                 setting.purchasedUpdateTime = nil;
+                 
+                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:LITE_UNLOCK_FLAG];
+                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"dismissChristmasBanner"];
+
+                 [[XDDataManager shareManager] saveContext];
+                 
+                 [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
+                 
                  
                  [indicatorview removeFromSuperview];
                  

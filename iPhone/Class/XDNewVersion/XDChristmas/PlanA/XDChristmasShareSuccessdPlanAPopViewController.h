@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface XDChristmasShareSuccessdPlanAPopViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIButton *cancelBtn;
 @property (weak, nonatomic) IBOutlet UIButton *useItBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *contentImgView;
 
 -(void)show;
 -(void)dismiss;

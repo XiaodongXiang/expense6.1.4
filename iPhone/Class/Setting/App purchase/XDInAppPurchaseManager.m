@@ -10,6 +10,7 @@
 #import "PokcetExpenseAppDelegate.h"
 #import <Parse/Parse.h>
 #import <Appsee/Appsee.h>
+#import "XDPlanControlClass.h"
 @import Firebase;
 #define LITE_UNLOCK_FLAG    @"isProUpgradePurchased"
 
@@ -72,11 +73,13 @@
         NSString* productID = product.productIdentifier;
 
         if ([productID isEqualToString:KInAppPurchaseProductIdMonth]) {
-            if (@available(iOS 11.2, *)) {
-                if (product.introductoryPrice) {
-                    [self saveIntroductoryPrice:product];
-                }else{
-                    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+            if ([XDPlanControlClass shareControlClass].needShow) {
+                if (@available(iOS 11.2, *)) {
+                    if (product.introductoryPrice) {
+                        [self saveIntroductoryPrice:product];
+                    }else{
+                        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                    }
                 }
             }
         }
@@ -95,8 +98,6 @@
     double sale = (monthPrice * 12 - yearPrice)/(monthPrice * 12) * 100;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:sale] forKey:@"salePrice"];
     
-//    [[NSUserDefaults standardUserDefaults] setObject:productDic forKey:salePriceData];
-
 }
 
 -(void)saveIntroductoryPrice:(SKProduct*)product{
@@ -150,7 +151,7 @@
 
 -(void)purchaseUpgrade:(NSString*)productID{
     if ([SKPaymentQueue canMakePayments]) {
-        if (self.productDic) {
+        if (self.productDic.count > 0) {
             SKProduct* product = self.productDic[productID];
             if (product) {
                 PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -269,7 +270,6 @@
         [FIRAnalytics logEventWithName:@"succeed_monthly" parameters:nil];
         
         if (christmasUserObjectID.length > 0) {
-            
             if ([[NSUserDefaults standardUserDefaults] boolForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY]) {
                 NSString*  monthPrice = [[NSUserDefaults standardUserDefaults] stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
                 if (monthPrice.length>0) {
@@ -280,7 +280,6 @@
             }else{
                 [FIRAnalytics logEventWithName:@"christmas_succeed_monthly" parameters:@{@"month_price":@"originalPrice"}];
             }
-
         }
 
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
@@ -317,6 +316,10 @@
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        
+        if (christmasUserObjectID.length > 0) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
+        }
     });
 
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
@@ -517,7 +520,10 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+        if (christmasUserObjectID.length <= 0) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+
+        }
     });
 }
 

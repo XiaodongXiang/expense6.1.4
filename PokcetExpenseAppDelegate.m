@@ -237,6 +237,10 @@
 
     }
 
+    [FIRApp configure];
+    [FBHelper instance];
+    [Appirater appLaunched];
+    
     self.isPurchased = NO;
     
 //    inAppPM =  [[InAppPurchaseManager alloc]init];
@@ -266,8 +270,6 @@
         [self.managedObjectContext save:&error];
     }
     
-    [FIRApp configure];
-    [FBHelper instance];
     
     [FIRMessaging messaging].delegate = self;
 
@@ -683,6 +685,14 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 {
     [application cancelAllLocalNotifications];
     [FBSDKAppEvents activateApp];
+    
+    
+//#ifdef DEBUG
+//    UIAlertController *alert = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"%@",!self.isPurchased ? @"免费" : @"付费"] message:[NSString stringWithFormat:@"cm_pa_layout_type = %@\n cm_pa_button_type = %@\n  cm_ip_layout_type = %@\n cm_ip_button_type = %@",[FBHelper valueByConfigureName:@"cm_pa_layout_type"],[FBHelper valueByConfigureName:@"cm_pa_button_type"],[FBHelper valueByConfigureName:@"cm_ip_layout_type"],[FBHelper valueByConfigureName:@"cm_ip_button_type"]] preferredStyle:UIAlertControllerStyleAlert];
+//    UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//    [alert addAction:action];
+//    [self.window.rootViewController presentViewController:alert animated:YES completion:nil];
+//#endif
 }
 
 -(void)setFlurry
@@ -722,7 +732,6 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     {
         self.isPurchased = YES;
         [[XDDataManager shareManager]openWidgetInSettingWithBool14:YES];
-
     }
     else
     {

@@ -9,7 +9,8 @@
 #import "PokcetExpenseAppDelegate.h"
 #import "XDInAppPurchaseManager.h"
 #import <Appsee/Appsee.h>
-@import Firebase;
+#import <Parse/Parse.h>
+
 @import Firebase;
 @interface XDIpad_ADSViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
@@ -48,6 +49,10 @@
 @end
 
 @implementation XDIpad_ADSViewController
+-(void)setIsChristmasEnter:(BOOL)isChristmasEnter{
+    _isChristmasEnter = isChristmasEnter;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -176,6 +181,11 @@
     NSString *lifetimePrice = [userDefaults stringForKey:PURCHASE_PRICE_LIFETIME];
     double sale = [userDefaults doubleForKey:@"salePrice"];
     
+    if ([userDefaults boolForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY]) {
+        if ([userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY].length > 0) {
+            monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
+        }
+    }
     self.saleLbl.text = [NSString stringWithFormat:@"Save %d%%",(int)sale];
     if (monthPrice.length > 0) {
         self.monthPriceLbl.text = monthPrice;
@@ -192,13 +202,15 @@
 - (IBAction)monthBtnClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-//    if ([appDelegate.inAppPM canMakePurchases])
-//    {
-//        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdMonth];
-//    }
-//    [Appsee addEvent:@"Attemp to Buy - Monthly"];
     [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
 
+    if (self.isChristmasEnter) {
+        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_monthly" parameters:nil];
+        if ([PFUser currentUser]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
+        }
+    }
+    
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdMonth];
     
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -207,13 +219,13 @@
 - (IBAction)yearBtnClick:(id)sender {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
-//    if ([appDelegate.inAppPM canMakePurchases])
-//    {
-//        [appDelegate.inAppPM  purchaseUpgrade:KInAppPurchaseProductIdYear];
-//    }
-//    [Appsee addEvent:@"Attemp to Buy - Yearly"];
     [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
-
+    if (self.isChristmasEnter) {
+        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_yearly" parameters:nil];
+        if ([PFUser currentUser]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
+        }
+    }
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdYear];
 
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -222,13 +234,15 @@
 - (IBAction)lifetimeBtnClick:(id)sender {
     
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-//    if ([appDelegate.inAppPM canMakePurchases])
-//    {
-//        [appDelegate.inAppPM  purchaseUpgrade:kInAppPurchaseProductIdLifetime];
-//    }
-//    [Appsee addEvent:@"Attemp to Buy - Lifetime"];
-    [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
 
+    [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
+    if (self.isChristmasEnter) {
+        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_lifetime" parameters:nil];
+        if ([PFUser currentUser]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
+        }
+    }
+    
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:kInAppPurchaseProductIdLifetime];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
 

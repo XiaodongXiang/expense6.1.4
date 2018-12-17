@@ -1138,7 +1138,12 @@
             setting.otherBool17 = nil;
             setting.purchasedIsSubscription = nil;
             setting.purchaseOriginalProductID = nil;
+            setting.purchasedUpdateTime = nil;
+            
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:LITE_UNLOCK_FLAG];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"dismissChristmasBanner"];
             
             [[XDDataManager shareManager] saveContext];
             

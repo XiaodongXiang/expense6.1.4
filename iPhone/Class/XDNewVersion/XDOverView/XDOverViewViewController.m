@@ -251,6 +251,22 @@
 }
 
 
+-(void)purchaseSuccessful{
+    
+    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
+    if (christmasUserObjectID.length > 0) {
+
+        [UIView animateWithDuration:0.2 animations:^{
+            self.lineView.height = 10;
+            self.transTableView.view.y = CGRectGetMaxY(self.lineView.frame);
+            self.lineView.backgroundColor = RGBColor(246, 246, 246);
+            
+        }completion:^(BOOL finished) {
+            [self.christmasView removeFromSuperview];
+        }];
+    }
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -266,6 +282,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"refreshUI" object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedDateHasData:) name:@"selectedDateHasData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
 
     [self emptyImageViewShow];
     
