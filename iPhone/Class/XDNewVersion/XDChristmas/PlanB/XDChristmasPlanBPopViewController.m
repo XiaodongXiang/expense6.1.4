@@ -15,36 +15,18 @@
 @interface XDChristmasPlanBPopViewController ()
 @property (weak, nonatomic) IBOutlet UIView *backView;
 
-@property(nonatomic, strong)NSDate* enterDate;
-@property(nonatomic, strong)NSDate* leaveDate;
-
 @end
 
 @implementation XDChristmasPlanBPopViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-
-    
-    
+        
     self.backView.y = SCREEN_HEIGHT;
     self.backView.centerX = SCREEN_WIDTH/2;
     
-    
-    self.enterDate = [NSDate date];
-    
-    [FIRAnalytics logEventWithName:@"christmas_popup_a_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    self.leaveDate = [NSDate date];
-    
-    [FIRAnalytics logEventWithName:@"christmas_popup_a_pagetime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-    
-    
-}
 
 -(void)show{
     [UIView animateWithDuration:0.2 animations:^{

@@ -11,6 +11,12 @@
 #import "FBHelper.h"
 @import Firebase;
 
+#define CM_IP_BUTTON   @"cm_ip_button_type"
+#define CM_IP_LAYOUT   @"cm_ip_layout_type"
+#define CM_PA_BUTTON   @"cm_pa_button_type"
+#define CM_PA_LAYOUT   @"cm_pa_layout_type"
+
+
 @implementation XDPlanControlClass
 
 +(instancetype)shareControlClass{
@@ -24,6 +30,9 @@
 
 -(void)setChristmasView:(XDOverviewChristmasViewA *)christmasView{
     
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+
+    
     if (self.planType == ChristmasPlanA) {
         if (IS_IPHONE_5) {
             [christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_se"] forState:UIControlStateNormal];
@@ -32,8 +41,11 @@
         }else{
             [christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_plus"] forState:UIControlStateNormal];
         }
-        [FIRAnalytics logEventWithName:@"christmas_A_banner_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
+        if (appDelegate.isPurchased) {
+            [FIRAnalytics logEventWithName:@"CA_PU_ShowBanner" parameters:nil];
+        }else{
+             [FIRAnalytics logEventWithName:@"CA_FU_ShowBanner" parameters:nil];
+        }
         
     }else{
         if (IS_IPHONE_5) {
@@ -43,8 +55,11 @@
         }else{
             [christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone 8plus"] forState:UIControlStateNormal];
         }
-        [FIRAnalytics logEventWithName:@"christmas_a_banner_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
+        if (appDelegate.isPurchased) {
+            [FIRAnalytics logEventWithName:@"CA_PU_ShowBanner" parameters:nil];
+        }else{
+            [FIRAnalytics logEventWithName:@"CA_FU_ShowBanner" parameters:nil];
+        }
     }
 }
 
@@ -62,8 +77,8 @@
     
     if (appDelegate.isPurchased == YES) {
         
-        NSString* avalue = [FBHelper valueByConfigureName:@"cm_pa_layout_type"];
-        NSString* avalue2 = [FBHelper valueByConfigureName:@"cm_pa_button_type"];
+        NSString* avalue = [FBHelper valueByConfigureName:CM_PA_LAYOUT];
+        NSString* avalue2 = [FBHelper valueByConfigureName:CM_PA_BUTTON];
         
         if (!avalue || avalue.length == 0 || [avalue isEqualToString:@"None"]) {
             return NO;
@@ -75,8 +90,8 @@
     }else{
         
         
-        NSString* Avalue = [FBHelper valueByConfigureName:@"cm_ip_layout_type"];
-        NSString* Avalue2 = [FBHelper valueByConfigureName:@"cm_ip_button_type"];
+        NSString* Avalue = [FBHelper valueByConfigureName:CM_IP_LAYOUT];
+        NSString* Avalue2 = [FBHelper valueByConfigureName:CM_IP_BUTTON];
         
         if (!Avalue || Avalue.length == 0 || [Avalue isEqualToString:@"None"]) {
             return NO;
@@ -122,28 +137,27 @@
 //    return random()%2;
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.isPurchased) {
-        NSString* value = [FBHelper valueByConfigureName:@"cm_pa_layout_type"];
+        NSString* value = [FBHelper valueByConfigureName:CM_PA_LAYOUT];
         if ([value isEqualToString:@"LEILEI"]) {
             return ChristmasPlanB;
         }else{
             return ChristmasPlanA;
         }
     }else{
-        NSString* value = [FBHelper valueByConfigureName:@"cm_ip_layout_type"];
+        NSString* value = [FBHelper valueByConfigureName:CM_IP_LAYOUT];
         if ([value isEqualToString:@"LEILEI"]) {
             return ChristmasPlanB;
         }else{
             return ChristmasPlanA;
         }
     }
-    
     return ChristmasPlanA;
 }
 //
 -(ChristmasSubPlan)planSubType{
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.isPurchased) {
-        NSString* value2 = [FBHelper valueByConfigureName:@"cm_pa_button_type"];
+        NSString* value2 = [FBHelper valueByConfigureName:CM_PA_BUTTON];
         if ([value2 isEqualToString:@"Get And Share"]) {
             return ChristmasSubPlanb;
         }else{
@@ -151,17 +165,17 @@
         }
 
     }else{
-        NSString* value2 = [FBHelper valueByConfigureName:@"cm_ip_button_type"];
+        NSString* value2 = [FBHelper valueByConfigureName:CM_IP_BUTTON];
         if ([value2 isEqualToString:@"Get And Share"]) {
             return ChristmasSubPlanb;
         }else{
             return ChristmasSubPlana;
         }
     }
-        
-    
+
+
      return ChristmasSubPlanb;
-    
+
 }
 
 -(ChristmasPlanCategory)planCategory{

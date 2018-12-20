@@ -1,5 +1,4 @@
 PODS:
-  - Appsee (2.4.5)
   - AWSCore (2.6.31)
   - AWSDynamoDB (2.6.31):
     - AWSCore (= 2.6.31)
@@ -92,7 +91,6 @@ PODS:
   - Protobuf (3.6.1)
 
 DEPENDENCIES:
-  - Appsee
   - AWSDynamoDB
   - Firebase/Core
   - Firebase/InAppMessagingDisplay
@@ -104,7 +102,6 @@ DEPENDENCIES:
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
-    - Appsee
     - AWSCore
     - AWSDynamoDB
     - Firebase
@@ -125,7 +122,6 @@ SPEC REPOS:
     - Protobuf
 
 SPEC CHECKSUMS:
-  Appsee: daf5819e0e45da6166a4752854583125cc9f3910
   AWSCore: c7abfb87ef802d1c4b5dd56db64ac8b4a7823ef0
   AWSDynamoDB: eb3eb7d49b14f1e523afa80373a8ab0fbde935a9
   Firebase: 6691d47562a780c26281ce8464518faafc90c610
@@ -145,6 +141,6 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
 
-PODFILE CHECKSUM: 03593821b193b2814f6e6f88ff8dc71a4538e796
+PODFILE CHECKSUM: 75e8fac072438255c0bd2f4bad097db91c4b97a2
 
 COCOAPODS: 1.5.3

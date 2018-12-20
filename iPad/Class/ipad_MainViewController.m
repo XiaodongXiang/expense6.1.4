@@ -14,7 +14,6 @@
 #import "ipad_TranscactionQuickEditViewController.h"
 #import "PersonalnfoViewController.h"
 #import "ParseDBManager.h"
-#import <Appsee/Appsee.h>
 #import <Parse/Parse.h>
 
 @import Firebase;
@@ -38,12 +37,166 @@
     [self checkDateWithPurchase];
 
     [FIRAnalytics setScreenName:@"main_view_ipad" screenClass:@"ipad_MainViewController"];
-
+    [self getCurrentVersion];
+    
 
 }
 
+-(void)getCurrentVersion
+{
+    NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"CFBundleShortVersionString"];
+    NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
+    if (![currentVersion isEqualToString:lastVersion]) {
+        [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:@"CFBundleShortVersionString"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        
+        [self uploadUserProperty];
+        
+    }
+}
 
+-(void)uploadUserProperty{
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.isPurchased) {
+        BOOL defaults = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
+        if (defaults) {
+            [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
+        }else{
+            Setting* setting = [[XDDataManager shareManager] getSetting];
+            NSString* proID = setting.purchasedProductID;
+            if ([setting.purchasedIsSubscription boolValue]) {
+                if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
+                    [FIRAnalytics setUserPropertyString:@"monthly" forName:@"subscription_type"];
+                    [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
+                    
+                }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
+                    [FIRAnalytics setUserPropertyString:@"yearly" forName:@"subscription_type"];
+                    [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
+                    
+                }else{
+                    [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
+                }
+            }
+        }
+    }else{
+        
+        [FIRAnalytics setUserPropertyString:@"free" forName:@"subscription_type"];
+    }
+    
+    [self validateReceiptWithUserProperty];
+    
+}
 
+-(void)validateReceiptWithUserProperty
+{
+    
+    NSURL* receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
+    
+    if (receiptData == nil) {
+        return;
+    }
+    NSString* urlStr = RECEIPTURL;
+    
+    NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
+    NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
+    
+    NSDictionary* dic = @{@"receipt":encodeStr};
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    
+    NSMutableURLRequest* connectionRequest = [NSMutableURLRequest requestWithURL:sandBoxUrl];
+    connectionRequest.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+    connectionRequest.HTTPBody = jsonData;
+    connectionRequest.HTTPMethod = @"POST";
+    [connectionRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [connectionRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    // create a background session for connecting to the Receipt Verification service.
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *datatask = [session dataTaskWithRequest: connectionRequest
+                                                completionHandler: ^(NSData *apiData
+                                                                     , NSURLResponse *apiResponse
+                                                                     , NSError *conxErr)
+                                      {
+                                          // background datatask completion block
+                                          if (apiData) {
+                                              
+                                              NSError *parseErr;
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData: apiData
+                                                                                                   options: 0
+                                                                                                     error: &parseErr];
+                                              // TODO: add error handling for conxErr, json parsing, and invalid http response statuscode
+                                              NSDictionary* recerptDic = json[@"receipt"];
+                                              
+                                              NSArray* lastReceiptArr = recerptDic[@"latest_receipt_info"];
+                                              NSDictionary* pendingRenewal = [recerptDic[@"pending_renewal_info"] lastObject];
+                                              NSDictionary* lastReceiptInfo = lastReceiptArr.lastObject;
+                                              NSDictionary* firstReceiptInfo = lastReceiptArr.firstObject;
+                                              if (lastReceiptArr.count <= 0) {
+                                                  [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
+                                              }else{
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",lastReceiptArr.count] forName:@"subscription_continuity"];
+                                              }
+                                              
+                                              if (lastReceiptInfo) {
+                                                  [self returnUserPropertyReceipt:lastReceiptInfo pendingRenewal:pendingRenewal];
+                                              }
+                                              if (firstReceiptInfo) {
+                                                  NSString* purchasedStr = [firstReceiptInfo valueForKey:@"purchase_date"];
+                                                  NSString* purchaseSubStr = [purchasedStr substringToIndex:purchasedStr.length - 7];
+                                                  
+                                                  NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
+                                                  [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+                                                  NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
+                                                  
+                                                  NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear  fromDate:purchaseDate];
+                                                  
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.year] forName:@"subscription_year"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.month] forName:@"subscription_month"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.day] forName:@"subscription_day"];
+                                                  
+                                              }
+                                              
+                                          }else{
+                                              [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
+                                          }
+                                      }];
+    
+    [datatask resume];
+}
+
+-(void)returnUserPropertyReceipt:(NSDictionary*)lastReceipt  pendingRenewal:(NSDictionary*)pendingRenewal{
+    
+    NSString* expiresStr =[lastReceipt valueForKey:@"expires_date"];
+    NSString* productID = [lastReceipt valueForKey:@"product_id"];
+    
+    if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
+        return;
+    }
+    
+    NSString* expireSubStr = [expiresStr substringToIndex:expiresStr.length - 7];
+    
+    NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
+    [dateFormant setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate* expireDate = [dateFormant dateFromString:expireSubStr];
+    
+    //续订了
+    if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
+        
+    }else{  //没续订
+        NSString* auto_renew_status = pendingRenewal[@"auto_renew_status"];
+        NSString* expiration_intent = pendingRenewal[@"expiration_intent"];
+        
+        if ([auto_renew_status isEqualToString:@"0"]) {
+            if ([expiration_intent isEqualToString:@"1"] || [expiration_intent isEqualToString:@"3"]) {
+                [FIRAnalytics setUserPropertyString:@"cancelled" forName:@"subscription_status"];
+            }
+        }
+    }
+}
 
 
 
@@ -211,6 +364,12 @@
                                               NSDictionary* lastReceiptInfo = lastReceiptArr.lastObject;
                                               
                                               [self returnReceipt:lastReceiptInfo];
+                                              
+                                              if (lastReceiptArr.count <= 0) {
+                                                  [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
+                                              }else{
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",lastReceiptArr.count] forName:@"subscription_continuity"];
+                                              }
                                               
                                           }else{
                                               [self noSubscription];

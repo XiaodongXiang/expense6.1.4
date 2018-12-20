@@ -8,7 +8,6 @@
 #import "XDIpad_ADSViewController.h"
 #import "PokcetExpenseAppDelegate.h"
 #import "XDInAppPurchaseManager.h"
-#import <Appsee/Appsee.h>
 #import <Parse/Parse.h>
 
 @import Firebase;
@@ -46,13 +45,14 @@
 @property (weak, nonatomic) IBOutlet UIButton *restoreBtn;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *restoreBtnHeight;
 
+@property (weak, nonatomic) IBOutlet UILabel *monthSaleLbl;
+@property (weak, nonatomic) IBOutlet UILabel *monthIntroLbl;
+@property (weak, nonatomic) IBOutlet UIView *monthIntroLineView;
+
 @end
 
 @implementation XDIpad_ADSViewController
--(void)setIsChristmasEnter:(BOOL)isChristmasEnter{
-    _isChristmasEnter = isChristmasEnter;
-    
-}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -114,6 +114,11 @@
                     //            self.monthBtn.enabled = NO;
                     
                     self.yearBg.image = [UIImage imageNamed:@"year"];
+                    
+                    
+                    self.monthSaleLbl.hidden = YES;
+                    self.monthIntroLbl.textColor = RGBColor(122, 163, 239);
+                    self.monthIntroLineView.backgroundColor = RGBColor(122, 163, 239);
                     
                     self.monthBtn.enabled = NO;
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
@@ -184,8 +189,18 @@
     if ([userDefaults boolForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY]) {
         if ([userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY].length > 0) {
             monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
+            self.monthBg.image = [UIImage imageNamed:@"month_intro"];
+            self.monthSaleLbl.text = @"Save 68%";
+            self.monthIntroLbl.text = [userDefaults stringForKey:PURCHASE_PRICE_MONTH];
+            
+            self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = NO;
+        }else{
+            self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = YES;
         }
+    }else{
+        self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = YES;
     }
+    
     self.saleLbl.text = [NSString stringWithFormat:@"Save %d%%",(int)sale];
     if (monthPrice.length > 0) {
         self.monthPriceLbl.text = monthPrice;
@@ -203,13 +218,6 @@
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     [FIRAnalytics logEventWithName:@"attemp_to_buy_monthly" parameters:@{@"user_action":@"attemp_to_buy_monthly"}];
-
-    if (self.isChristmasEnter) {
-        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_monthly" parameters:nil];
-        if ([PFUser currentUser]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
-        }
-    }
     
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdMonth];
     
@@ -220,12 +228,7 @@
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     
     [FIRAnalytics logEventWithName:@"attemp_to_buy_yearly" parameters:@{@"user_action":@"attemp_to_buy_yearly"}];
-    if (self.isChristmasEnter) {
-        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_yearly" parameters:nil];
-        if ([PFUser currentUser]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
-        }
-    }
+
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:KInAppPurchaseProductIdYear];
 
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];
@@ -236,12 +239,6 @@
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
 
     [FIRAnalytics logEventWithName:@"attemp_to_buy_lifetime" parameters:@{@"user_action":@"attemp_to_buy_lifetime"}];
-    if (self.isChristmasEnter) {
-        [FIRAnalytics logEventWithName:@"christmas_attemp_to_buy_lifetime" parameters:nil];
-        if ([PFUser currentUser]) {
-            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
-        }
-    }
     
     [[XDInAppPurchaseManager shareManager]purchaseUpgrade:kInAppPurchaseProductIdLifetime];
     [appDelegate.epnc setFlurryEvent_withUpgrade:YES];

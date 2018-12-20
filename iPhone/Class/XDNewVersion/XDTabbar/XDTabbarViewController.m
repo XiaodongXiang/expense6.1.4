@@ -154,56 +154,60 @@
 
     if(subPlan == ChristmasSubPlana){
         
-//        [FIRAnalytics logEventWithName:@"christmas_A_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
         XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
         [self presentViewController:christmas animated:YES completion:nil];
         
     }else if (subPlan == ChristmasSubPlanb){
-//        [FIRAnalytics logEventWithName:@"christmas_A_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
         
         XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
         [self presentViewController:christmas animated:YES completion:nil];
     }
-    [FIRAnalytics logEventWithName:@"christmas_popup_A_getNow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-    
+    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_OpenPopup" parameters:nil];
+    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_OpenPopup" parameters:nil];
+    }
 }
 -(void)dismissPopView{
     [self.planA dismiss];
     
-    [FIRAnalytics logEventWithName:@"christmas_popup_A_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
+    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_ClosePopup" parameters:nil];
+    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_ClosePopup" parameters:nil];
+    }
 }
 
 -(void)bchristmasPopViewGetNowClick{
     [self.planB dismiss];
-//    XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
-//    [self presentViewController:adsVc animated:YES completion:nil];
     NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
 
     if(subPlan == ChristmasSubPlana){
-//        [FIRAnalytics logEventWithName:@"christmas_a_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
         XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
         [self presentViewController:christmas animated:YES completion:nil];
         
     }else if(subPlan == ChristmasSubPlanb){
-//        [FIRAnalytics logEventWithName:@"christmas_a_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
         XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
         [self presentViewController:christmas animated:YES completion:nil];
         
     }
     
-    [FIRAnalytics logEventWithName:@"christmas_popup_a_getNow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_OpenPopup" parameters:nil];
+    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_OpenPopup" parameters:nil];
+    }
 
     
 }
 -(void)bdismissPopView{
     [self.planB dismiss];
     
-    [FIRAnalytics logEventWithName:@"christmas_popup_a_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
+    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_ClosePopup" parameters:nil];
+    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_ClosePopup" parameters:nil];
+    }
 }
 
 -(void)tabbarDismiss:(NSNotification*)notif{
@@ -240,34 +244,6 @@
     return image;
 }
 
-//-(void)adView{
-//    NSString *purchasePrice = [[NSUserDefaults standardUserDefaults] stringForKey:PURCHASE_PRICE];
-//
-//    UIImage *adsImage=[UIImage imageNamed:[NSString customImageName:@"advertisement"]];
-//
-//    AppDelegate_iPhone *appdelegate=(AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
-//
-//    appdelegate.adsView=[[UIView alloc]initWithFrame:CGRectMake(0, SCREEN_HEIGHT-79-70-adsImage.size.height, SCREEN_WIDTH, adsImage.size.height)];
-//    appdelegate.adsView.backgroundColor=[UIColor colorWithPatternImage:adsImage];
-//    [self.view addSubview:appdelegate.adsView];
-//
-//    UILabel *priceLabel=[[UILabel alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-15-80, (adsImage.size.height-30)/2, 80, 30)];
-//    priceLabel.text=purchasePrice;
-//    priceLabel.textAlignment=NSTextAlignmentCenter;
-//    priceLabel.textColor=[UIColor whiteColor];
-//    priceLabel.font=[UIFont fontWithName:@"HelveticaNeue-Medium" size:17];
-//    [appdelegate.adsView addSubview:priceLabel];
-//    if (appdelegate.isPurchased)
-//    {
-//        [appdelegate.adsView removeFromSuperview];
-//    }
-//
-//    UIButton *adsBtn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, adsImage.size.height)];
-//    adsBtn.backgroundColor=[UIColor clearColor];
-//    [adsBtn addTarget:self action:@selector(adsBtnClicked:) forControlEvents:UIControlEventTouchUpInside];
-//    [appdelegate.adsView addSubview:adsBtn];
-//}
-
 #pragma mark - XDAddTransactionViewDelegate
 -(void)addTransactionCompletion{
     [self.overViewCalendarViewController reloadTableView];
@@ -299,6 +275,12 @@
             [self.planB.cancelBtn addTarget:self action:@selector(bdismissPopView) forControlEvents:UIControlEventTouchUpInside];
             [self.view addSubview: self.planB.view];
             
+        }
+        
+        if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
+             [FIRAnalytics logEventWithName:@"CA_FU_ShowPopup" parameters:nil];
+        }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+            [FIRAnalytics logEventWithName:@"CA_PU_ShowPopup" parameters:nil];
         }
     }
    

@@ -9,7 +9,6 @@
 #import <StoreKit/StoreKit.h>
 #import "PokcetExpenseAppDelegate.h"
 #import <Parse/Parse.h>
-#import <Appsee/Appsee.h>
 #import "XDPlanControlClass.h"
 @import Firebase;
 #define LITE_UNLOCK_FLAG    @"isProUpgradePurchased"
@@ -86,6 +85,7 @@
         
         
         [self.productDic setObject:product forKey:product.productIdentifier];
+        
         
         if ([product.productIdentifier isEqualToString:KInAppPurchaseProductIdMonth]) {
             monthPrice = [product.price doubleValue];
@@ -269,41 +269,31 @@
 
         [FIRAnalytics logEventWithName:@"succeed_monthly" parameters:nil];
         
-        if (christmasUserObjectID.length > 0) {
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY]) {
-                NSString*  monthPrice = [[NSUserDefaults standardUserDefaults] stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
-                if (monthPrice.length>0) {
-                    [FIRAnalytics logEventWithName:@"christmas_succeed_monthly" parameters:@{@"month_price":monthPrice}];
-                }else{
-                    [FIRAnalytics logEventWithName:@"christmas_succeed_monthly" parameters:@{@"month_price":@"originalPrice"}];
-                }
-            }else{
-                [FIRAnalytics logEventWithName:@"christmas_succeed_monthly" parameters:@{@"month_price":@"originalPrice"}];
-            }
+        if (purchaseDate) {
+            [FIRAnalytics setUserPropertyString:[self stringDate:purchaseDate] forName:@"subscription_date"];
+            [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%f",[purchaseDate timeIntervalSince1970]] forName:@"subscription_date_interval"];
         }
+        
+        if (christmasUserObjectID.length > 0) {
+            [FIRAnalytics logEventWithName:@"CA_FU_USE_SUCCEED" parameters:nil];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+        }
+        [FIRAnalytics setUserPropertyString:@"monthly" forName:@"subscription_type"];
 
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
          [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdYear originalProID:originalProID];
 
         [FIRAnalytics logEventWithName:@"succeed_yearly" parameters:nil];
 
-        if (christmasUserObjectID.length > 0) {
-            
-            [FIRAnalytics logEventWithName:@"christmas_succeed_yearly" parameters:@{@"year_price":@"originalPrice"}];
+        [FIRAnalytics setUserPropertyString:@"yearly" forName:@"subscription_type"];
 
-        }
-        
     }else if([proID isEqualToString:kInAppPurchaseProductIdLifetime]){
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
 
         [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
-
-        if (christmasUserObjectID.length > 0) {
-            
-            [FIRAnalytics logEventWithName:@"christmas_succeed_yearly" parameters:@{@"lifetime_price":@"originalPrice"}];
-            
-        }
+        
+        [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
     }else{
         
         [FIRAnalytics logEventWithName:@"succeed_other" parameters:nil];
@@ -314,24 +304,32 @@
     appDelegate.isPurchased = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
         
         if (christmasUserObjectID.length > 0) {
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
         }
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
+       
     });
 
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     [self finishSomeUnfinishTransaction];
-//    [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
     
+}
+
+-(NSString*)stringDate:(NSDate*)date{
+    NSDateFormatter *dateFormatter =[[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"yyyyMMdd"];
+    [dateFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    NSString* stringDate = [dateFormatter stringFromDate:date];
+    
+    return stringDate;
 }
 
 -(void)failedTransaction:(SKPaymentTransaction*)transaction{
     NSString* proID = transaction.payment.productIdentifier;
     
-    NSLog(@"transaction.error == %@",transaction.error.localizedDescription);
     NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
 
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
@@ -341,7 +339,7 @@
             [FIRAnalytics logEventWithName:@"cancel_monthly" parameters:nil];
             
             if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_cancel_yearly" parameters:nil];
+                [FIRAnalytics logEventWithName:@"CA_FU_USE_CANCELED" parameters:nil];
             }
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
@@ -349,41 +347,30 @@
 //            [Appsee addEvent:@"Payment Invalid - Monthly"];
             [FIRAnalytics logEventWithName:@"payment_invalid_monthly" parameters:nil];
 
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_payment_invalid_monthly" parameters:nil];
-            }
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
 //            [Appsee addEvent:@"Payment Not Allowed - Monthly"];
             [FIRAnalytics logEventWithName:@"payment_not_allowed_monthly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_payment_not_allowed_monthly" parameters:nil];
-            }
+          
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
 //            [Appsee addEvent:@"Product Not Available - Monthly"];
             [FIRAnalytics logEventWithName:@"product_not_available_monthly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_product_not_available_monthly" parameters:nil];
-            }
+          
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
 //            [Appsee addEvent:@"Service Permission Denied - Monthly"];
             [FIRAnalytics logEventWithName:@"service_permission_denied_monthly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_service_permission_denied_monthly" parameters:nil];
-            }
+           
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
 //            [Appsee addEvent:@"Client Invalid - Monthly"];
             [FIRAnalytics logEventWithName:@"client_invalid_monthly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_client_invalid_monthly" parameters:nil];
-            }
+          
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
             
         }else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed){
@@ -397,49 +384,37 @@
         {
 //            [Appsee addEvent:@"Cancel - Yearly"];
             [FIRAnalytics logEventWithName:@"cancel_yearly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_cancel_yearly" parameters:nil];
-            }
+          
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
 //            [Appsee addEvent:@"Payment Invalid - Yearly"];
             [FIRAnalytics logEventWithName:@"payment_invalid_yearly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_payment_invalid_yearly" parameters:nil];
-            }
+           
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
 //            [Appsee addEvent:@"Payment Not Allowed - Yearly"];
             [FIRAnalytics logEventWithName:@"payment_not_allowed_yearly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_payment_not_allowed_yearly" parameters:nil];
-            }
+         
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
 //            [Appsee addEvent:@"Product Not Available - Yearly"];
             [FIRAnalytics logEventWithName:@"product_not_available_yearly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_product_not_available_yearly" parameters:nil];
-            }
+          
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
 //            [Appsee addEvent:@"Service Permission Denied - Yearly"];
             [FIRAnalytics logEventWithName:@"service_permission_denied_yearly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_service_permission_denied_yearly" parameters:nil];
-            }
+          
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
 //            [Appsee addEvent:@"Client Invalid - Yearly"];
             [FIRAnalytics logEventWithName:@"client_invalid_yearly" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_client_invalid_yearly" parameters:nil];
-            }
+           
             
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
             
@@ -454,49 +429,37 @@
         {
 //            [Appsee addEvent:@"Cancel - Lifetime"];
             [FIRAnalytics logEventWithName:@"cancel_lifetime" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_cancel_lifetime" parameters:nil];
-            }
+         
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
 //            [Appsee addEvent:@"Payment Invalid - Lifetime"];
             [FIRAnalytics logEventWithName:@"payment_invalid_lifetime" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_payment_invalid_lifetime" parameters:nil];
-            }
+         
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
 //            [Appsee addEvent:@"Payment Not Allowed - Lifetime"];
             [FIRAnalytics logEventWithName:@"payment_not_allowed_lifetime" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_payment_not_allowed_lifetime" parameters:nil];
-            }
+         
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
 //            [Appsee addEvent:@"Product Not Available - Lifetime"];
             [FIRAnalytics logEventWithName:@"product_not_available_lifetime" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_product_not_available_lifetime" parameters:nil];
-            }
+         
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
 //            [Appsee addEvent:@"Service Permission Denied - Lifetime"];
             [FIRAnalytics logEventWithName:@"service_permission_denied_lifetime" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_service_permission_denied_lifetime" parameters:nil];
-            }
+        
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
 //            [Appsee addEvent:@"Client Invalid - Lifetime"];
             [FIRAnalytics logEventWithName:@"client_invalid_lifetime" parameters:nil];
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"christmas_client_invalid_lifetime" parameters:nil];
-            }
+         
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
             
         }else if (transaction.error.code == SKErrorCloudServiceNetworkConnectionFailed){
@@ -511,12 +474,13 @@
     }
 //    NSLog(@"交易失败2 %@",transaction.error);
    
-    
+
     [self failedValidateReceipt];
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     
     [self finishSomeUnfinishTransaction];
-    
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];

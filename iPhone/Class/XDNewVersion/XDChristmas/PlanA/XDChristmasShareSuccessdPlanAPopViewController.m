@@ -13,8 +13,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *backView;
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
-@property(nonatomic, strong)NSDate* enterDate;
-@property(nonatomic, strong)NSDate* leaveDate;
 
 @end
 
@@ -27,7 +25,7 @@
     self.useItBtn.alpha = 0;
     self.contentImgView.alpha = 0;
     self.backView.alpha = 0;
-    self.enterDate = [NSDate date];
+
     if (IS_IPHONE_X) {
         self.cancelBtn.frame = CGRectMake(10, 30, 44, 44);
     }else if (IS_IPHONE_5){
@@ -46,82 +44,16 @@
     if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
         self.contentImgView.image = [UIImage imageNamed:@"christmas_68%off"];
         
-        if([XDPlanControlClass shareControlClass].planSubType == ChristmasSubPlana){
-            [FIRAnalytics logEventWithName:@"christmas_A_B_1_shareSuccess_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
-        }else{
-            [FIRAnalytics logEventWithName:@"christmas_A_b_1_shareSuccess_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
-        }
-
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
-//        self.contentImgView.image = [UIImage imageNamed:@"christmas_7day"];
-//
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_2_shareSuccess_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
-//        self.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
-//        [self.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download"] forState:UIControlStateNormal];
-//        [self.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download_press"] forState:UIControlStateHighlighted];
-//
-//
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_3_shareSuccess_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
         
     }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
         self.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
         [self.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download"] forState:UIControlStateNormal];
         [self.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download_press"] forState:UIControlStateHighlighted];
 
-        if([XDPlanControlClass shareControlClass].planSubType == ChristmasSubPlana){
-            [FIRAnalytics logEventWithName:@"christmas_A_B_4_shareSuccess_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
-        }else{
-            [FIRAnalytics logEventWithName:@"christmas_A_b_4_shareSuccess_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
-        }
     }
-    
-    
-    
+   
 }
 
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    
-    self.leaveDate = [NSDate date];
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        
-        if([XDPlanControlClass shareControlClass].planSubType == ChristmasSubPlana){
-            [FIRAnalytics logEventWithName:@"christmas_A_B_1_shareSuccess_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-
-            
-        }else{
-            [FIRAnalytics logEventWithName:@"christmas_A_b_1_shareSuccess_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-
-            
-        }
-        
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_2_shareSuccess_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-//
-//
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_3_shareSuccess_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-        
-        
-    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        
-        if([XDPlanControlClass shareControlClass].planSubType == ChristmasSubPlana){
-            [FIRAnalytics logEventWithName:@"christmas_A_B_4_shareSuccess_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-
-            
-        }else{
-            [FIRAnalytics logEventWithName:@"christmas_A_b_4_shareSuccess_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-
-        }
-        
-    }
-}
 
 -(void)show{
     [UIView animateWithDuration:0.3 animations:^{

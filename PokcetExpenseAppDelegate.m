@@ -46,7 +46,6 @@
 #define PURCHASE_PRICE                          @"PurchasePirce"
 
 #import "ParseDBManager.h"
-#import <Appsee/Appsee.h>
 #import <GoogleAnalytics/GAI.h>
 #import <GoogleAnalytics/GAIDictionaryBuilder.h>
 #import "BayMaxProtector.h"
@@ -143,6 +142,14 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
 
+//    NSString* purchaseSubStr = @"2018-10-08 02:37:34";
+//    NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
+//    [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+//    NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
+//
+//    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear  fromDate:purchaseDate];
+    
+    
     
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
 //    [Appsee start];
@@ -250,6 +257,9 @@
 //    [inAppPM finishSomeUnfinishTransaction];
 //    [inAppPM addTransactionObserver];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getIntroductoryPriceNotif) name:@"getIntroductoryPriceNotif" object:nil];
+
     [[XDInAppPurchaseManager shareManager] getProductInfo];
     [[XDInAppPurchaseManager shareManager] addTransactionObserver];
     
@@ -321,11 +331,6 @@
     [self.epnc setFlurryEvent_withUpgrade:NO];
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getIntroductoryPriceNotif) name:@"getIntroductoryPriceNotif" object:nil];
-  
-    
-    
-    
     
     return YES;
 }
@@ -334,7 +339,6 @@
     if (!self.isPurchased && [PFUser currentUser]) {
         [self validateReceipt];
     }
-    
 }
 
 
@@ -389,21 +393,19 @@
                                                   
                                                   [self judgeCanBuyIntroductoryPrice:lastReceiptArr];
                                               }else{
-                                                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                                  [FIRAnalytics setUserPropertyString:@"true" forName:@"subscription_introductory"];
                                               }
-                                              
                                           }else{
-                                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
-                                              
+                                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                              [FIRAnalytics setUserPropertyString:@"true" forName:@"subscription_introductory"];
                                           }
-                                          
                                           
                                           /* TODO: Unlock the In App purchases ...
                                            At this point the json dictionary will contain the verified receipt from Apple
                                            and each purchased item will be in the array of lineitems.
                                            */
                                       }];
-    
     [datatask resume];
 }
 
@@ -414,7 +416,7 @@
     NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
     
     if (receiptData == nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
         return;
     }
     NSString* urlStr = RECEIPTURL;
@@ -454,11 +456,14 @@
                                                   
                                                   [self judgeCanBuyIntroductoryPrice:lastReceiptArr];
                                               }else{
-                                                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                                  [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                                  [FIRAnalytics setUserPropertyString:@"true" forName:@"subscription_introductory"];
+
                                               }
                                               
                                           }else{
-                                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                              [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                                              [FIRAnalytics setUserPropertyString:@"true" forName:@"subscription_introductory"];
                                               
                                           }
                                           
@@ -468,7 +473,6 @@
                                            and each purchased item will be in the array of lineitems.
                                            */
                                       }];
-    
     [datatask resume];
 }
 
@@ -483,11 +487,16 @@
             cantBuy = YES;
         }
     }
+    if (!cantBuy) {
+        [FIRAnalytics setUserPropertyString:@"true" forName:@"subscription_introductory"];
+    }else{
+        [FIRAnalytics setUserPropertyString:@"false" forName:@"subscription_introductory"];
+    }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:!cantBuy] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
-    
 }
 
+#pragma mark - refreshReceipt delegate
 - (void)requestDidFinish:(SKRequest *)request NS_AVAILABLE(10_7, 3_0){
     [self validateReceiptAgain];
 }

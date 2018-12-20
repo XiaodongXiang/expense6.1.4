@@ -15,7 +15,6 @@
 
 @end
 @interface XDIpad_ADSViewController : UIViewController
-@property (assign, nonatomic) BOOL isChristmasEnter;
 
 @property( nonatomic, weak)id<XDIpad_ADSViewDelegate> xxdDelegate;
 

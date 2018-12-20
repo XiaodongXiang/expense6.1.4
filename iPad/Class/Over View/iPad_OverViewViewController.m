@@ -84,11 +84,6 @@
         calendarContainView.height = 674-137;
         kalViewController.kalView.bottomView.y = 533 - 137;
 
-        
-//        textView* view = [[[NSBundle mainBundle]loadNibNamed:@"textView" owner:self options:nil]lastObject];
-//        view.frame = CGRectMake(0, 0, categoryContainView.width, 175);
-//        
-//        [categoryContainView addSubview:view];
     }
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
     
@@ -98,6 +93,7 @@
     
     NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
     if (christmasUserObjectID.length > 0) {
+        
         
         [UIView animateWithDuration:0.2 animations:^{
             self.christmasView.height = 0;
@@ -138,7 +134,6 @@
             }
             
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
 
         }];
     }
@@ -147,30 +142,33 @@
 -(void)vcCancelClick{
     if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
         [self.popAVc dismiss];
-        [FIRAnalytics logEventWithName:@"christmas_A_purchasedSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
         
     }else{
         [self.popBVc dismiss];
-        [FIRAnalytics logEventWithName:@"christmas_a_purchasedSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
         
     }
+    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_ClosePopup" parameters:nil];
+    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_ClosePopup" parameters:nil];
+    }
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
 
 }
 
 -(void)vcUseItClick{
     if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
         [self.popAVc dismiss];
-        [FIRAnalytics logEventWithName:@"christmas_A_purchasedSuccess_download" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
     }else{
         [self.popBVc dismiss];
-        [FIRAnalytics logEventWithName:@"christmas_a_purchasedSuccess_download" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
+    }
+    
+    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_OpenPopup" parameters:nil];
+    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_OpenPopup" parameters:nil];
     }
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
     
     NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=ChristmasActivity-PKEP-HRKP&mt=8";
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
@@ -192,13 +190,17 @@
 -(void)presentChristmasVc{
     NSInteger plan = [XDPlanControlClass shareControlClass].planType;
     NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-    
+    NSInteger categoryPlan = [XDPlanControlClass shareControlClass].planCategory;
+
+    if (categoryPlan == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_OpenBanner" parameters:nil];
+    }else if(categoryPlan == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_OpenBanner" parameters:nil];
+    }
     
     if ( plan == ChristmasPlanA) {
         
         if(subPlan == ChristmasSubPlana){
-            
-            [FIRAnalytics logEventWithName:@"christmas_A_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
             
             XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
             christmas.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -208,7 +210,6 @@
             [self presentViewController:christmas animated:YES completion:nil];
             
         }else if (subPlan == ChristmasSubPlanb){
-            [FIRAnalytics logEventWithName:@"christmas_A_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
             
             XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
             christmas.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -219,7 +220,6 @@
         }
     }else{
         if(subPlan == ChristmasSubPlana){
-            [FIRAnalytics logEventWithName:@"christmas_a_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
             
             XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
             christmas.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -229,7 +229,6 @@
             [self presentViewController:christmas animated:YES completion:nil];
             
         }else if(subPlan == ChristmasSubPlanb){
-            [FIRAnalytics logEventWithName:@"christmas_a_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
             
             XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
             christmas.modalPresentationStyle = UIModalPresentationFormSheet;
@@ -253,29 +252,13 @@
         [self.christmasView removeFromSuperview];
     }];
     
-    
-    NSInteger plan = [XDPlanControlClass shareControlClass].planType;
-    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-    
-    
-    if ( plan == ChristmasPlanA) {
-        
-        if(subPlan == ChristmasSubPlana){
-            
-            [FIRAnalytics logEventWithName:@"christmas_A_banner_B_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-            
-        }else if (subPlan == ChristmasSubPlanb){
-            [FIRAnalytics logEventWithName:@"christmas_A_banner_b_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        }
-    }else{
-        if(subPlan == ChristmasSubPlana){
-            [FIRAnalytics logEventWithName:@"christmas_a_banner_B_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-            
-        }else if(subPlan == ChristmasSubPlanb){
-            [FIRAnalytics logEventWithName:@"christmas_a_banner_b_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-            
-        }
+    NSInteger categoryPlan = [XDPlanControlClass shareControlClass].planCategory;
+    if (categoryPlan == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_CloseBanner" parameters:nil];
+    }else if(categoryPlan == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_CloseBanner" parameters:nil];
     }
+ 
 }
 
 -(void)viewWillAppear:(BOOL)animated

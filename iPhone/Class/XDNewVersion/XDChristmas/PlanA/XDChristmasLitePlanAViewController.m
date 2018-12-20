@@ -13,7 +13,7 @@
 #import "ParseDBManager.h"
 #import <Parse/Parse.h>
 #import "XDIpad_ADSViewController.h"
-
+#import "XDInAppPurchaseManager.h"
 @import  Firebase;
 @interface XDChristmasLitePlanAViewController ()<XDUpgradeViewDelegate,XDIpad_ADSViewDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *bg;
@@ -27,8 +27,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *textCenterY;
 @property(nonatomic, strong)XDChristmasShareSuccessdPlanAPopViewController* popVc;
 
-@property(nonatomic, strong)NSDate* enterDate;
-@property(nonatomic, strong)NSDate* leaveDate;
 
 @end
 
@@ -50,59 +48,35 @@
     }else{
         self.bg.image = [UIImage imageNamed:@"christmas_di_8"];
     }
-    self.enterDate = [NSDate date];
     
     if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
         self.contentImgView.image = [UIImage imageNamed:@"christmas_68%off"];
         self.text1.text = @"Share to get 68% off a month to Premium.";
         self.text2.text = [NSString stringWithFormat:@"Limited time offer.\nStarts at $1.49/month after.\nEnds in %ld days.",(long)[[XDPlanControlClass shareControlClass] distanceEndTime]];
         
-        [FIRAnalytics logEventWithName:@"christmas_A_B_1_main_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+         [FIRAnalytics logEventWithName:@"CA_FU_Show" parameters:nil];;
 
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
-//        self.contentImgView.image = [UIImage imageNamed:@"christmas_7day"];
-//        self.text1.text = @"Gifts for Christmas!\nStart Your 7-Day Free Trial.";
-//        self.text2.text = [NSString stringWithFormat:@"Limited time offer.\nStarts at $1.49/month after.\nEnds in %ld days.",(long)[[XDPlanControlClass shareControlClass] distanceEndTime]];
-//
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_2_main_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
-//        self.contentImgView.image = [UIImage imageNamed:@"christmas_68%off"];
-//        self.text1.text = @"Give a gift they’ll love.\nShare 68% off a month to friends.";
-//        self.text2.text = [NSString stringWithFormat:@"Limited time offer.\nStarts at $1.49/month after.\nEnds in %ld days.",(long)[[XDPlanControlClass shareControlClass] distanceEndTime]];
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_3_main_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
     }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
         self.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
         self.text1.text = @"Share to get the 50% off Hours keeper.";
         self.text2.text = [NSString stringWithFormat:@"Limited time offer.\nStarts at $1.99/month after.\nEnds in %ld days.",(long)[[XDPlanControlClass shareControlClass] distanceEndTime]];
-        [FIRAnalytics logEventWithName:@"christmas_A_B_4_main_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        
+        [FIRAnalytics logEventWithName:@"CA_PU_Show" parameters:nil];
+
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
+
+}
+
+-(void)purchaseSuccessful{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dismissChristmasBanner"]) {
+
+        [self vcCancelClick];
+    }
     
 }
 
-
--(void)viewWillDisappear:(BOOL)animated{
-    [super viewWillDisappear:animated];
-    
-    self.leaveDate = [NSDate date];
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"christmas_A_B_1_main_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_2_main_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-//
-//
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_3_main_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-
-        
-    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"christmas_A_B_4_main_pageTime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-        
-    }
-}
 
 
 - (IBAction)shareBtnClick:(id)sender {
@@ -111,15 +85,14 @@
     NSString *textToShare = @"Gifts for Christmas! Enjoy your 68% off on Pocket Expense. Let the wisdom began.";
 
     if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        imageToShare = [UIImage imageNamed:@"share_expense_68"];
-        textToShare = @"Gifts for Christmas! Enjoy your 68% off on Pocket Expense. Let the wisdom began.";
+         [FIRAnalytics logEventWithName:@"CA_FU_Share" parameters:nil];
 
-    }else{
-        imageToShare = [UIImage imageNamed:@"share_expense_68"];
-        textToShare = @"Gifts for Christmas! Enjoy your 68% off on Pocket Expense. Let the wisdom began！";
+    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_Share" parameters:nil];
+
     }
     
-    NSURL *urlToShare = [NSURL URLWithString:@"https://itunes.apple.com/us/app/pocket-expense-6/id424575621?mt=8"];
+    NSURL *urlToShare = [NSURL URLWithString:@"https://itunes.apple.com/app/apple-store/id424575621?pt=12390800&ct=ChristmasActivity-PKEP&mt=8"];
     NSArray *items = @[urlToShare,textToShare,imageToShare];
     
     [self mq_share:items target:self success:^(BOOL success, NSString *text) {
@@ -131,24 +104,6 @@
             [self.popVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
             [self.popVc show];
             
-            
-            if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-                [FIRAnalytics logEventWithName:@"christmas_A_B_1_main_share" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"UIActivityType":text}];
-                
-//            }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
-//
-//                [FIRAnalytics logEventWithName:@"christmas_A_B_2_main_share" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"UIActivityType":text}];
-//
-//            }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
-//
-//
-//                [FIRAnalytics logEventWithName:@"christmas_A_B_3_main_share" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"UIActivityType":text}];
-//
-            }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-                
-                [FIRAnalytics logEventWithName:@"christmas_A_B_4_main_share" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"UIActivityType":text}];
-                
-            }
         }
     }];
     
@@ -159,83 +114,45 @@
 -(void)vcCancelClick{
     [self.popVc dismiss];
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"christmas_A_B_1_shareSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_2_shareSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//
-//
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_3_shareSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
-        
-    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"christmas_A_B_4_shareSuccess_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
-    }
 
 }
 
 -(void)vcUseItClick{
     if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
         
-      
+//        if (ISPAD) {
+//            XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
+//            adsDetailViewController.xxdDelegate = self;
+//            adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+//            adsDetailViewController.preferredContentSize = CGSizeMake(375, 667);
+//            adsDetailViewController.isChristmasEnter = YES;
+//            adsDetailViewController.view.superview.autoresizingMask =
+//            UIViewAutoresizingFlexibleTopMargin |
+//            UIViewAutoresizingFlexibleBottomMargin;
+//            [self presentViewController:adsDetailViewController animated:YES completion:nil];
+//        }else{
+//            XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
+//            adsVc.xxdDelegate = self;
+//            adsVc.isChristmasEnter = YES;
+//            [self presentViewController:adsVc animated:YES completion:nil];
+//        }
         
-        if (ISPAD) {
-            XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
-            //        adsDetailViewController.isComeFromSetting = NO;
-            //        adsDetailViewController.pageNum = i;
-            //        adsDetailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            adsDetailViewController.xxdDelegate = self;
-            adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-            adsDetailViewController.preferredContentSize = CGSizeMake(375, 667);
-            adsDetailViewController.isChristmasEnter = YES;
-            adsDetailViewController.view.superview.autoresizingMask =
-            UIViewAutoresizingFlexibleTopMargin |
-            UIViewAutoresizingFlexibleBottomMargin;
-            [self presentViewController:adsDetailViewController animated:YES completion:nil];
-
-
-        }else{
-
-            XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
-            adsVc.xxdDelegate = self;
-            adsVc.isChristmasEnter = YES;
-            [self presentViewController:adsVc animated:YES completion:nil];
-            
+        [[XDInAppPurchaseManager shareManager] purchaseUpgrade:KInAppPurchaseProductIdMonth];
+        if ([PFUser currentUser]) {
+            [[NSUserDefaults standardUserDefaults] setObject:[PFUser currentUser].objectId forKey:@"isChristmasEnter"];
         }
+        [FIRAnalytics logEventWithName:@"CA_FU_USE" parameters:nil];
         
-        [FIRAnalytics logEventWithName:@"christmas_A_B_1_shareSuccess_useIt" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
-//        [self puchasedInfoInSetting:[NSDate date] productID:@"7_day_free_trial" originalProID:@"7_day_free_trial"];
-//        [self vcCancelClick];
-//        [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
-//        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-//        appDelegate.isPurchased = YES;
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-//        [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
-//
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_2_shareSuccess_useIt" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
-//
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_3_shareSuccess_useIt" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//        NSString *urlStr = @"https://itunes.apple.com/us/app/hours-keeper/id563155321?mt=8";
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-
     }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
         
-        [FIRAnalytics logEventWithName:@"christmas_A_B_4_shareSuccess_useIt" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+        [FIRAnalytics logEventWithName:@"CA_PU_Download" parameters:nil];
+        
+
         NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=ChristmasActivity-PKEP-HRKP&mt=8";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
 
+        [self vcCancelClick];
     }
-    
-
-    
 }
 
 -(void)puchasedInfoInSetting:(NSDate*)startDate productID:(NSString*)productID originalProID:(NSString *)originalProID{
@@ -296,12 +213,10 @@
         
         NSLog(@"activityType == %@\ncompleted == %d\nreturnedItems==%@",activityType,completed,returnedItems);
         if (completed) {
-            NSLog(@">>>>>success");
             if (successBlock) {
                 successBlock(YES, [NSString stringWithFormat:@"%@",activityType]);
             }
         }else {
-            NSLog(@">>>>>faild -- %@",activityError);
             if (successBlock) {
                 successBlock(NO, @"");
             }
@@ -323,22 +238,9 @@
     
     
     if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"christmas_A_B_1_main_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotHasReceive7Days){
-//        
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_2_main_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//        
-//        
-//    }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryNotLifetime){
-//        
-//        [FIRAnalytics logEventWithName:@"christmas_A_B_3_main_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-//        
-//        
+         [FIRAnalytics logEventWithName:@"CA_FU_Close" parameters:nil];
     }else if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        
-        [FIRAnalytics logEventWithName:@"christmas_A_B_4_main_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
+        [FIRAnalytics logEventWithName:@"CA_PU_Close" parameters:nil];
     }
 }
 

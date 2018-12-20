@@ -20,7 +20,6 @@
 #import "ParseDBManager.h"
 #import "Transaction.h"
 #import <Parse/Parse.h>
-#import <Appsee/Appsee.h>
 #import "XDAppriater.h"
 #import "XDOverviewChristmasViewA.h"
 #import "XDPlanControlClass.h"
@@ -253,8 +252,8 @@
 
 -(void)purchaseSuccessful{
     
-    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
-    if (christmasUserObjectID.length > 0) {
+    
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dismissChristmasBanner"]) {
 
         [UIView animateWithDuration:0.2 animations:^{
             self.lineView.height = 10;
@@ -264,6 +263,8 @@
         }completion:^(BOOL finished) {
             [self.christmasView removeFromSuperview];
         }];
+        
+        
     }
 }
 
@@ -289,67 +290,60 @@
     self.titleBtn = [UIButton buttonWithType:UIButtonTypeCustom];
     self.titleBtn.frame = CGRectMake(0, 0, 150, 30);
     self.titleBtn.titleLabel.textAlignment = NSTextAlignmentCenter;
-//    [self.titleBtn setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
     [self.titleBtn setAttributedTitle:[self monthFormatterWithSeletedMonth:[NSDate date]] forState:UIControlStateNormal];
     [self.titleBtn addTarget:self action:@selector(titleBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleBtn;
     
     
-//    [Appsee setUserID:[PFUser currentUser].email];
     
     [self getCurrentVersion];
     [self checkDateWithPurchase];
 
     [FIRAnalytics setScreenName:@"calendr_main_view_iphone" screenClass:@"XDOverViewViewController"];
 
-//    [self validateReceipt];
     if ([PFUser currentUser]) {
         Setting* setting = [[XDDataManager shareManager] getSetting];
         if ([setting.otherBool17 boolValue] == NO) {
             [[ParseDBManager sharedManager] savingSetting];
         }
     }
-//    [self validateReceipt];
 
     if ([XDPlanControlClass shareControlClass].needShow) {
         [self showChristmasView];
         self.emptyImageView.y = CGRectGetMaxY(self.lineView.frame);
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshChristmas) name:@"refreshChristmas" object:nil];
-    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshChristmas) name:@"refreshChristmas" object:nil];
 //    textView* view = [[[NSBundle mainBundle]loadNibNamed:@"textView" owner:self options:nil]lastObject];
 //    view.frame = CGRectMake(0, SCREEN_HEIGHT-350, SCREEN_WIDTH, 175);
-//    
+//
 //    [self.view addSubview:view];
     
     
 }
 
--(void)refreshChristmas{
-    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-        if (IS_IPHONE_5) {
-            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_se"] forState:UIControlStateNormal];
-        }else if (IS_IPHONE_6){
-            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_8"] forState:UIControlStateNormal];
-        }else{
-            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_plus"] forState:UIControlStateNormal];
-        }
-//        [FIRAnalytics logEventWithName:@"christmas_A_banner_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
-        
-    }else{
-        if (IS_IPHONE_5) {
-            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone se"] forState:UIControlStateNormal];
-        }else if (IS_IPHONE_6){
-            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_banner_8"] forState:UIControlStateNormal];
-        }else{
-            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone 8plus"] forState:UIControlStateNormal];
-        }
-//        [FIRAnalytics logEventWithName:@"christmas_a_banner_show" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        
-    }
-}
+//-(void)refreshChristmas{
+//    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+//        if (IS_IPHONE_5) {
+//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_se"] forState:UIControlStateNormal];
+//        }else if (IS_IPHONE_6){
+//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_8"] forState:UIControlStateNormal];
+//        }else{
+//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_plus"] forState:UIControlStateNormal];
+//        }
+//
+//
+//    }else{
+//        if (IS_IPHONE_5) {
+//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone se"] forState:UIControlStateNormal];
+//        }else if (IS_IPHONE_6){
+//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_banner_8"] forState:UIControlStateNormal];
+//        }else{
+//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone 8plus"] forState:UIControlStateNormal];
+//        }
+//
+//    }
+//}
 
 -(void)showChristmasView{
     self.lineView.height = 137;
@@ -369,32 +363,32 @@
 -(void)presentChristmasVc{
     NSInteger plan = [XDPlanControlClass shareControlClass].planType;
     NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-    
+    NSInteger categoryPlan = [XDPlanControlClass shareControlClass].planCategory;
 
+    if (categoryPlan == ChristmasPlanCategoryHasReceive7Days) {
+         [FIRAnalytics logEventWithName:@"CA_FU_OpenBanner" parameters:nil];
+    }else if(categoryPlan == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_OpenBanner" parameters:nil];
+    }
     if ( plan == ChristmasPlanA) {
         
        if(subPlan == ChristmasSubPlana){
            
-           [FIRAnalytics logEventWithName:@"christmas_A_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
             XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
             [self presentViewController:christmas animated:YES completion:nil];
 
        }else if (subPlan == ChristmasSubPlanb){
-           [FIRAnalytics logEventWithName:@"christmas_A_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
 
            XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
            [self presentViewController:christmas animated:YES completion:nil];
        }
     }else{
         if(subPlan == ChristmasSubPlana){
-            [FIRAnalytics logEventWithName:@"christmas_a_banner_B_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
 
             XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
             [self presentViewController:christmas animated:YES completion:nil];
 
         }else if(subPlan == ChristmasSubPlanb){
-            [FIRAnalytics logEventWithName:@"christmas_a_banner_b_open" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
 
             XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
             [self presentViewController:christmas animated:YES completion:nil];
@@ -413,28 +407,11 @@
         [self.christmasView removeFromSuperview];
     }];
     
-    
-    NSInteger plan = [XDPlanControlClass shareControlClass].planType;
-    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-    
-    
-    if ( plan == ChristmasPlanA) {
-        
-        if(subPlan == ChristmasSubPlana){
-            
-            [FIRAnalytics logEventWithName:@"christmas_A_banner_B_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-            
-        }else if (subPlan == ChristmasSubPlanb){
-            [FIRAnalytics logEventWithName:@"christmas_A_banner_b_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-        }
-    }else{
-        if(subPlan == ChristmasSubPlana){
-            [FIRAnalytics logEventWithName:@"christmas_a_banner_B_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-            
-        }else if(subPlan == ChristmasSubPlanb){
-            [FIRAnalytics logEventWithName:@"christmas_a_banner_b_cancel" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-            
-        }
+    NSInteger categoryPlan = [XDPlanControlClass shareControlClass].planCategory;
+    if (categoryPlan == ChristmasPlanCategoryHasReceive7Days) {
+        [FIRAnalytics logEventWithName:@"CA_FU_CloseBanner" parameters:nil];
+    }else if(categoryPlan == ChristmasPlanCategoryLifetime){
+        [FIRAnalytics logEventWithName:@"CA_PU_CloseBanner" parameters:nil];
     }
 }
 
@@ -746,17 +723,12 @@
     NSString *lastVersion = [[NSUserDefaults standardUserDefaults] objectForKey:@"CFBundleShortVersionString"];
     NSString *currentVersion = [NSBundle mainBundle].infoDictionary[@"CFBundleShortVersionString"];
     if (![currentVersion isEqualToString:lastVersion]) {
-//        self.bubbleView.hidden = NO;
         [[NSUserDefaults standardUserDefaults] setObject:currentVersion forKey:@"CFBundleShortVersionString"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[XDAppriater shareAppirater] setEmptyAppirater];
         
-//        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"]lastObject];
-//        if ([setting.passcodeStyle isEqualToString:@"touchid"] && IS_IPHONE_X) {
-//            setting.passcodeStyle = @"none";
-//            [[XDDataManager shareManager]saveContext];
-//        }
+        [self uploadUserProperty];
         
         NSArray* array = [[XDDataManager shareManager] getObjectsFromTable:@"Accounts" predicate:[NSPredicate predicateWithFormat:@"state contains[c] %@",@"1"] sortDescriptors:@[[[NSSortDescriptor alloc] initWithKey:@"orderIndex" ascending:YES],[[NSSortDescriptor alloc] initWithKey:@"accName" ascending:YES]]];
         for (int i = 0; i < array.count; i++) {
@@ -773,6 +745,147 @@
     }
 }
 
+-(void)uploadUserProperty{
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+    if (appDelegate.isPurchased) {
+        BOOL defaults = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
+        if (defaults) {
+            [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
+        }else{
+            Setting* setting = [[XDDataManager shareManager] getSetting];
+            NSString* proID = setting.purchasedProductID;
+            if ([setting.purchasedIsSubscription boolValue]) {
+                if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
+                    [FIRAnalytics setUserPropertyString:@"monthly" forName:@"subscription_type"];
+                    [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
+
+                }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
+                    [FIRAnalytics setUserPropertyString:@"yearly" forName:@"subscription_type"];
+                    [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
+
+                }else{
+                    [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
+                }
+            }
+        }
+    }else{
+        
+        [FIRAnalytics setUserPropertyString:@"free" forName:@"subscription_type"];
+    }
+    
+    [self validateReceiptWithUserProperty];
+    
+}
+
+-(void)validateReceiptWithUserProperty
+{
+    
+    NSURL* receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
+    NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
+    
+    if (receiptData == nil) {
+        return;
+    }
+    NSString* urlStr = RECEIPTURL;
+    
+    NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
+    NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
+    
+    NSDictionary* dic = @{@"receipt":encodeStr};
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
+    
+    NSMutableURLRequest* connectionRequest = [NSMutableURLRequest requestWithURL:sandBoxUrl];
+    connectionRequest.cachePolicy = NSURLRequestUseProtocolCachePolicy;
+    connectionRequest.HTTPBody = jsonData;
+    connectionRequest.HTTPMethod = @"POST";
+    [connectionRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    [connectionRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
+    
+    // create a background session for connecting to the Receipt Verification service.
+    NSURLSession *session = [NSURLSession sharedSession];
+    NSURLSessionDataTask *datatask = [session dataTaskWithRequest: connectionRequest
+                                                completionHandler: ^(NSData *apiData
+                                                                     , NSURLResponse *apiResponse
+                                                                     , NSError *conxErr)
+                                      {
+                                          // background datatask completion block
+                                          if (apiData) {
+                                              
+                                              NSError *parseErr;
+                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData: apiData
+                                                                                                   options: 0
+                                                                                                     error: &parseErr];
+                                              // TODO: add error handling for conxErr, json parsing, and invalid http response statuscode
+                                              NSDictionary* recerptDic = json[@"receipt"];
+                                              
+                                              NSArray* lastReceiptArr = recerptDic[@"latest_receipt_info"];
+                                              NSDictionary* pendingRenewal = [recerptDic[@"pending_renewal_info"] lastObject];
+                                              NSDictionary* lastReceiptInfo = lastReceiptArr.lastObject;
+                                              NSDictionary* firstReceiptInfo = lastReceiptArr.firstObject;
+                                              if (lastReceiptArr.count <= 0) {
+                                                  [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
+                                              }else{
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",lastReceiptArr.count] forName:@"subscription_continuity"];
+                                              }
+                                              
+                                              if (lastReceiptInfo) {
+                                                  [self returnUserPropertyReceipt:lastReceiptInfo pendingRenewal:pendingRenewal];
+                                              }
+                                              if (firstReceiptInfo) {
+                                                  NSString* purchasedStr = [firstReceiptInfo valueForKey:@"purchase_date"];
+                                                  NSString* purchaseSubStr = [purchasedStr substringToIndex:purchasedStr.length - 7];
+                                                  
+                                                  NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
+                                                  [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+                                                  NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
+                                                  
+                                                  NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear  fromDate:purchaseDate];
+                                                  
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.year] forName:@"subscription_year"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.month] forName:@"subscription_month"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.day] forName:@"subscription_day"];
+
+                                              }
+                                              
+                                          }else{
+                                              [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
+                                          }
+                                      }];
+    
+    [datatask resume];
+}
+
+-(void)returnUserPropertyReceipt:(NSDictionary*)lastReceipt  pendingRenewal:(NSDictionary*)pendingRenewal{
+    
+    NSString* expiresStr =[lastReceipt valueForKey:@"expires_date"];
+    NSString* productID = [lastReceipt valueForKey:@"product_id"];
+    
+    if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]) {
+        return;
+    }
+    
+    NSString* expireSubStr = [expiresStr substringToIndex:expiresStr.length - 7];
+    
+    NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
+    [dateFormant setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
+    [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+    
+    NSDate* expireDate = [dateFormant dateFromString:expireSubStr];
+    
+    //续订了
+    if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
+        
+    }else{  //没续订
+        NSString* auto_renew_status = pendingRenewal[@"auto_renew_status"];
+        NSString* expiration_intent = pendingRenewal[@"expiration_intent"];
+        
+        if ([auto_renew_status isEqualToString:@"0"]) {
+            if ([expiration_intent isEqualToString:@"1"] || [expiration_intent isEqualToString:@"3"]) {
+                [FIRAnalytics setUserPropertyString:@"cancelled" forName:@"subscription_status"];
+            }
+        }
+    }
+}
 
 //检测是否订阅，并检测订阅时间是否到期
 -(void)checkDateWithPurchase{
@@ -919,7 +1032,13 @@
                                               NSDictionary* lastReceiptInfo = lastReceiptArr.lastObject;
                                               
                                               [self returnReceipt:lastReceiptInfo pendingRenewal:pendingRenewal];
-                                             
+                                              
+                                              if (lastReceiptArr.count <= 0) {
+                                                  [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
+                                              }else{
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",lastReceiptArr.count] forName:@"subscription_continuity"];
+                                              }
+                                              
                                           }else{
                                               [self noSubscription];
                                           }
@@ -966,7 +1085,8 @@
     if ([[NSDate GMTTime] compare:expireDate] == NSOrderedAscending) {
         [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
         //        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
-        
+        [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
+
     }else{  //没续订
         [self noSubscription];
         //        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
@@ -976,6 +1096,8 @@
         
         if ([auto_renew_status isEqualToString:@"0"]) {
             if ([expiration_intent isEqualToString:@"1"] || [expiration_intent isEqualToString:@"3"]) {
+                [FIRAnalytics setUserPropertyString:@"cancelled" forName:@"subscription_status"];
+
                 dispatch_async(dispatch_get_main_queue(), ^{
                     UIAlertView *failedAlert = [[UIAlertView alloc] initWithTitle:@"You have canceled subscription, all premium feature are not available." message:nil delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
                     [failedAlert show];

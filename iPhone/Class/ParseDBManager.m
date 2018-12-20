@@ -21,6 +21,7 @@
 #import "AppDelegate_iPad.h"
 
 #import "UIApplication+NetworkActivity.h"
+#define IS_FIRST_UPLOAD_SETTING     @"isFirstUploadSetting"
 
 @implementation ParseDBManager
 
@@ -4532,7 +4533,51 @@
 }
 
 #pragma mark - local to server
+-(void)saveDefaultParseSetting{
+    BOOL isFirstUploadSetting = [[NSUserDefaults standardUserDefaults] boolForKey:IS_FIRST_UPLOAD_SETTING];
+    if (!isFirstUploadSetting) {
+        
+        if (![PFUser currentUser]) {
+            return;
+        }
+        
+        Setting* setting = [[[XDDataManager shareManager]getObjectsFromTable:@"Setting"]lastObject];
+        PFQuery *query = [PFQuery queryWithClassName:@"Setting"];
+        [query whereKey:@"settingID" equalTo:[PFUser currentUser].objectId];
 
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            if (!error) {
+                if (objects.count <= 0) {
+                    
+                    PFObject* objectServer = [PFObject objectWithClassName:@"Setting"];
+                    objectServer[@"purchasedProductID"] = @"defalutSettingProID";
+                    objectServer[@"purchasedStartDate"] = [NSDate dateWithTimeIntervalSince1970:0];
+                    objectServer[@"purchasedEndDate"] = [NSDate dateWithTimeIntervalSince1970:0];
+                    objectServer[@"purchasedUpdateTime"] = [NSDate dateWithTimeIntervalSince1970:0];
+                    objectServer[@"settingID"] = [PFUser currentUser].objectId;
+                    objectServer[@"purchasedIsSubscription"] = [NSNumber numberWithInt:0];
+                    objectServer[@"purchaseOriginalProductID"] = @"1234567890";
+                    
+                    
+                    [objectServer saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                        if (succeeded) {
+                            setting.otherBool17 = @YES;
+                            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:IS_FIRST_UPLOAD_SETTING];
+                            
+                        }else{
+                            setting.otherBool17 = @NO;
+                        }
+                        [[XDDataManager shareManager] saveContext];
+                        
+                    }];
+                }
+            }
+        }];
+    }
+    
+    
+}
 
 -(void)savingSetting{
     
