@@ -208,20 +208,20 @@ and future features</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.49" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBn-Yj-Ukx">
-                    <rect key="frame" x="15" y="99" width="90" height="30"/>
+                    <rect key="frame" x="40" y="99" width="40" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="EDr-pj-iMc"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="FXB-Tp-b6z"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="11"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
                     <color key="textColor" white="1" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nzw-bx-Q1r">
-                    <rect key="frame" x="40" y="113.5" width="40" height="1"/>
+                    <rect key="frame" x="35" y="113.5" width="50" height="1"/>
                     <color key="backgroundColor" white="1" alpha="0.35406580110000002" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="mdi-Na-Sje"/>
-                        <constraint firstAttribute="width" constant="40" id="uZt-fU-USF"/>
                     </constraints>
                 </view>
             </subviews>
@@ -232,20 +232,20 @@ and future features</string>
                 <constraint firstItem="4mL-4Z-ZgJ" firstAttribute="top" secondItem="Ef3-IQ-tOi" secondAttribute="top" id="GwM-sC-zLs"/>
                 <constraint firstItem="mMW-Hn-nQP" firstAttribute="centerX" secondItem="Ef3-IQ-tOi" secondAttribute="centerX" id="M0N-YM-aGU"/>
                 <constraint firstAttribute="bottom" secondItem="4mL-4Z-ZgJ" secondAttribute="bottom" id="SjL-8a-XEV"/>
+                <constraint firstItem="Nzw-bx-Q1r" firstAttribute="trailing" secondItem="iBn-Yj-Ukx" secondAttribute="trailing" constant="5" id="U2V-Js-5y0"/>
+                <constraint firstItem="Nzw-bx-Q1r" firstAttribute="leading" secondItem="iBn-Yj-Ukx" secondAttribute="leading" constant="-5" id="XIG-kO-Syl"/>
                 <constraint firstAttribute="trailing" secondItem="EN6-Q6-F2c" secondAttribute="trailing" constant="10" id="Yz5-Xm-4Xm"/>
-                <constraint firstItem="Nzw-bx-Q1r" firstAttribute="centerY" secondItem="iBn-Yj-Ukx" secondAttribute="centerY" id="a1Q-WB-XYO"/>
                 <constraint firstItem="EN6-Q6-F2c" firstAttribute="leading" secondItem="Ef3-IQ-tOi" secondAttribute="leading" constant="10" id="bZi-TR-qvX"/>
                 <constraint firstItem="Nzw-bx-Q1r" firstAttribute="centerX" secondItem="iBn-Yj-Ukx" secondAttribute="centerX" id="cQo-MR-UeO"/>
                 <constraint firstItem="EN6-Q6-F2c" firstAttribute="top" secondItem="Ef3-IQ-tOi" secondAttribute="top" constant="26" id="dAa-Ar-2zI"/>
                 <constraint firstAttribute="bottom" secondItem="OtA-7f-1ok" secondAttribute="bottom" id="duK-ha-Aih"/>
-                <constraint firstItem="iBn-Yj-Ukx" firstAttribute="leading" secondItem="Ef3-IQ-tOi" secondAttribute="leading" constant="15" id="f2o-AV-zzY"/>
                 <constraint firstItem="OtA-7f-1ok" firstAttribute="leading" secondItem="Ef3-IQ-tOi" secondAttribute="leading" id="fhJ-i9-bKa"/>
                 <constraint firstAttribute="trailing" secondItem="OtA-7f-1ok" secondAttribute="trailing" id="fjq-rf-2VS"/>
                 <constraint firstAttribute="bottom" secondItem="iBn-Yj-Ukx" secondAttribute="bottom" constant="25" id="iSc-eE-ozD"/>
                 <constraint firstAttribute="trailing" secondItem="4mL-4Z-ZgJ" secondAttribute="trailing" id="k7G-DC-2oo"/>
                 <constraint firstItem="A3A-l2-7gb" firstAttribute="centerX" secondItem="Ef3-IQ-tOi" secondAttribute="centerX" constant="28" id="k8V-Vu-Y5A"/>
-                <constraint firstAttribute="trailing" secondItem="iBn-Yj-Ukx" secondAttribute="trailing" constant="15" id="qAR-5b-z77"/>
                 <constraint firstItem="4mL-4Z-ZgJ" firstAttribute="leading" secondItem="Ef3-IQ-tOi" secondAttribute="leading" id="qBC-L3-Kmf"/>
+                <constraint firstItem="iBn-Yj-Ukx" firstAttribute="centerX" secondItem="Ef3-IQ-tOi" secondAttribute="centerX" id="sQx-LU-WFS"/>
                 <constraint firstItem="A3A-l2-7gb" firstAttribute="top" secondItem="Ef3-IQ-tOi" secondAttribute="top" id="xme-Q7-Uu1"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

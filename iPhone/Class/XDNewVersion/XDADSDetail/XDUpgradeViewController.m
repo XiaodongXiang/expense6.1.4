@@ -47,8 +47,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *restoreBtnH;
 @property (weak, nonatomic) IBOutlet UILabel *premiumTitle;
 
-@property(nonatomic, strong)XDChristmasShareSuccessdPlanAPopViewController* popAVc;
-@property(nonatomic, strong)XDChristmasShareSuccessPlanBPopViewController* popBVc;
 @property (weak, nonatomic) IBOutlet UILabel *monthSaleLbl;
 @property (weak, nonatomic) IBOutlet UILabel *monthIntroLbl;
 @property (weak, nonatomic) IBOutlet UIView *monthIntroLineView;
@@ -96,6 +94,8 @@
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     [notificationCenter addObserver:self selector:@selector(preVersionPrice) name:GET_PRO_VERSION_PRICE_ACTION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"refreshSettingUI" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"purchaseSuccessful" object:nil];
+
 
 //    [self.tableview setTableFooterView:[[UIView alloc]initWithFrame:CGRectZero]];
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
@@ -190,66 +190,7 @@
         self.lifetimeBtn.enabled = YES;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
     
-}
-
--(void)purchaseSuccessful{
-    [self settingReloadData];
-    
-    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
-    if (christmasUserObjectID.length > 0) {
-        if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-            self.popAVc = [[XDChristmasShareSuccessdPlanAPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessdPlanAPopViewController" bundle:nil];
-            [self.view addSubview:self.popAVc.view];
-            self.popAVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
-            [self.popAVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.popAVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
-            self.popAVc.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
-            [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download"] forState:UIControlStateNormal];
-            [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download_press"] forState:UIControlStateHighlighted];
-
-            [self.popAVc show];
-        }else{
-            self.popBVc = [[XDChristmasShareSuccessPlanBPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessPlanBPopViewController" bundle:nil];
-            [self.view addSubview:self.popBVc.view];
-            self.popBVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
-            [self.popBVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.popBVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
-            self.popBVc.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_50%off"];
-
-            [self.popBVc show];
-        }
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-    }
-}
-
--(void)vcCancelClick{
-    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-        [self.popAVc dismiss];
-
-    }else{
-        [self.popBVc dismiss];
-
-    }
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-
-}
-
--(void)vcUseItClick{
-    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-        [self.popAVc dismiss];
-
-    }else{
-        [self.popBVc dismiss];
-
-    }
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-
-    
-    NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=ChristmasActivity-PKEP-HRKP&mt=8";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
 }
 
 
@@ -261,6 +202,8 @@
 
 -(void)settingReloadData{
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+    
+    [self preVersionPrice];
     if (appDelegate.isPurchased) {
         Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;

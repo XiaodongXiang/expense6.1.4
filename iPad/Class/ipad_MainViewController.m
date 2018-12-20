@@ -234,6 +234,7 @@
         
         [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
 //        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
         
     }else{  //没续订
         
@@ -250,6 +251,8 @@
     
     appDelegate.isPurchased = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshSettingUI" object:nil];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+
 }
 
 

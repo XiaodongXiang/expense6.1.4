@@ -319,7 +319,6 @@
 //
 //    [self.view addSubview:view];
     
-    
 }
 
 //-(void)refreshChristmas{
@@ -825,7 +824,7 @@
                                               if (lastReceiptArr.count <= 0) {
                                                   [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
                                               }else{
-                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",lastReceiptArr.count] forName:@"subscription_continuity"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%lu",(unsigned long)lastReceiptArr.count] forName:@"subscription_continuity"];
                                               }
                                               
                                               if (lastReceiptInfo) {
@@ -841,9 +840,9 @@
                                                   
                                                   NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear  fromDate:purchaseDate];
                                                   
-                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.year] forName:@"subscription_year"];
-                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.month] forName:@"subscription_month"];
-                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",comp.day] forName:@"subscription_day"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",(long)comp.year] forName:@"subscription_year"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",(long)comp.month] forName:@"subscription_month"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",(long)comp.day] forName:@"subscription_day"];
 
                                               }
                                               
@@ -1036,7 +1035,7 @@
                                               if (lastReceiptArr.count <= 0) {
                                                   [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
                                               }else{
-                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",lastReceiptArr.count] forName:@"subscription_continuity"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%lu",(unsigned long)lastReceiptArr.count] forName:@"subscription_continuity"];
                                               }
                                               
                                           }else{
@@ -1086,6 +1085,7 @@
         [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
         //        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
         [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
+        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
 
     }else{  //没续订
         [self noSubscription];

@@ -35,6 +35,8 @@
 #include <netinet/in.h>
 #import "PokcetExpenseAppDelegate.h"
 #import "AppDelegate_iPad.h"
+#import <Parse/Parse.h>
+
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
 
@@ -177,6 +179,9 @@ NSString* templateReviewURL = @"https://itunes.apple.com/cn/app/pocket-expense-p
 	}
 	else
 	{
+        if (![PFUser currentUser]) {
+            return;
+        }
         
         if (ISPAD) {
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:@"- Optimize purchased user ui display.\n- Minor bug fixes." delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];

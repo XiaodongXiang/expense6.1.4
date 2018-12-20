@@ -276,7 +276,7 @@
         
         if (christmasUserObjectID.length > 0) {
             [FIRAnalytics logEventWithName:@"CA_FU_USE_SUCCEED" parameters:nil];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+//            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
         }
         [FIRAnalytics setUserPropertyString:@"monthly" forName:@"subscription_type"];
 
@@ -340,6 +340,8 @@
             
             if (christmasUserObjectID.length > 0) {
                 [FIRAnalytics logEventWithName:@"CA_FU_USE_CANCELED" parameters:nil];
+                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+
             }
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)

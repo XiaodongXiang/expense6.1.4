@@ -142,15 +142,6 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
 
-//    NSString* purchaseSubStr = @"2018-10-08 02:37:34";
-//    NSDateFormatter *dateFormant = [[NSDateFormatter alloc] init];
-//    [dateFormant setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
-//    NSDate* purchaseDate = [dateFormant dateFromString:purchaseSubStr];
-//
-//    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear  fromDate:purchaseDate];
-    
-    
-    
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
 //    [Appsee start];
     

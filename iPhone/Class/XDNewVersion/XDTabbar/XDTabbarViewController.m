@@ -28,6 +28,9 @@
 #import "XDChristmasPlanAbViewController.h"
 #import "XDChristmasPlanBbViewController.h"
 
+#import "XDChristmasShareSuccessPlanBPopViewController.h"
+#import "XDChristmasShareSuccessdPlanAPopViewController.h"
+
 @import Firebase;
 @interface XDTabbarViewController ()<XDAddTransactionViewDelegate>
 @property(nonatomic, strong)XDOverViewViewController * overViewCalendarViewController;
@@ -42,6 +45,9 @@
 @property(nonatomic, strong)XDChristmasPlanAPopViewController* planA;
 @property(nonatomic, strong)XDChristmasPlanBPopViewController* planB;
 
+
+@property(nonatomic, strong)XDChristmasShareSuccessdPlanAPopViewController* popAVc;
+@property(nonatomic, strong)XDChristmasShareSuccessPlanBPopViewController* popBVc;
 
 @end
 
@@ -143,8 +149,66 @@
     };
     
 //    [self adView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
+
+}
+-(void)purchaseSuccessful{
+    
+    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
+    if (christmasUserObjectID.length > 0) {
+        if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+            self.popAVc = [[XDChristmasShareSuccessdPlanAPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessdPlanAPopViewController" bundle:nil];
+            [self.view addSubview:self.popAVc.view];
+            self.popAVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
+            [self.popAVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
+            [self.popAVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
+            self.popAVc.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
+            [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download"] forState:UIControlStateNormal];
+            [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download_press"] forState:UIControlStateHighlighted];
+            
+            [self.popAVc show];
+        }else{
+            self.popBVc = [[XDChristmasShareSuccessPlanBPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessPlanBPopViewController" bundle:nil];
+            [self.view addSubview:self.popBVc.view];
+            self.popBVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
+            [self.popBVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
+            [self.popBVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
+            self.popBVc.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_50%off"];
+            
+            [self.popBVc show];
+        }
+        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+    }
 }
 
+-(void)vcCancelClick{
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        [self.popAVc dismiss];
+        
+    }else{
+        [self.popBVc dismiss];
+        
+    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+    
+}
+
+-(void)vcUseItClick{
+    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
+        [self.popAVc dismiss];
+        
+    }else{
+        [self.popBVc dismiss];
+        
+    }
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
+    
+    
+    NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=ChristmasActivity-PKEP-HRKP&mt=8";
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
+}
 
 -(void)christmasPopViewGetNowClick{
     [self.planA dismiss];
