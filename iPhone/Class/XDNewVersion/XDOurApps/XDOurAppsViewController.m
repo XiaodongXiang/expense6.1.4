@@ -50,8 +50,7 @@
         cancelBtn.y = 40;
         self.topViewH.constant = 180;
     }
-    
-    
+
     
     [cancelBtn addTarget:self action:@selector(cancelClick) forControlEvents:UIControlEventTouchUpInside];
     [self.topView addSubview:cancelBtn];

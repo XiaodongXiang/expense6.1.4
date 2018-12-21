@@ -91,22 +91,20 @@
 
 -(void)purchaseSuccessful{
     
-    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
-    if (christmasUserObjectID.length > 0) {
         
+    [UIView animateWithDuration:0.2 animations:^{
+        self.christmasView.height = 0;
+        calendarContainView.y = 15;
+        kalViewController.kalView.bottomView.y = 533;
+        calendarContainView.height = 674;
         
-        [UIView animateWithDuration:0.2 animations:^{
-            self.christmasView.height = 0;
-            calendarContainView.y = 15;
-            kalViewController.kalView.bottomView.y = 533;
-            calendarContainView.height = 674;
-            
-        }completion:^(BOOL finished) {
-            [self.christmasView removeFromSuperview];
-            
-            AppDelegate_iPad *appDelegate = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
-
-            
+    }completion:^(BOOL finished) {
+        [self.christmasView removeFromSuperview];
+        
+        AppDelegate_iPad *appDelegate = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
+        
+        NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
+        if (christmasUserObjectID.length > 0) {
             if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
                 self.popAVc = [[XDChristmasShareSuccessdPlanAPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessdPlanAPopViewController" bundle:nil];
                 [appDelegate.mainViewController.view addSubview:self.popAVc.view];
@@ -132,11 +130,13 @@
                 
                 [self.popBVc show];
             }
-            
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
 
-        }];
-    }
+        }
+      
+        
+
+    }];
 }
 
 -(void)vcCancelClick{

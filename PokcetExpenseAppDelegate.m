@@ -485,6 +485,8 @@
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:!cantBuy] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"getIntroductoryPriceSuccess" object:nil];
 }
 
 #pragma mark - refreshReceipt delegate

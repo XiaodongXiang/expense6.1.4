@@ -19,6 +19,7 @@
 @import Firebase;
 
 @interface ipad_MainViewController ()
+@property(nonatomic, strong)UIView* redPointView;
 
 
 @end
@@ -39,7 +40,22 @@
     [FIRAnalytics setScreenName:@"main_view_ipad" screenClass:@"ipad_MainViewController"];
     [self getCurrentVersion];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(isFirstEnterPOursAppVc) name:@"isFirstEnterPOursAppVc" object:nil];
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
+        self.redPointView = [[UIView alloc]initWithFrame:CGRectMake(20, 0, 10, 10)];
+        self.redPointView.backgroundColor = [UIColor redColor];
+        self.redPointView.layer.cornerRadius = 5;
+        self.redPointView.layer.masksToBounds = YES;
+        [_settingModuleBtn addSubview:self.redPointView];
+    }else{
+        self.redPointView.hidden = YES;
+    }
+    
+}
 
+-(void)isFirstEnterPOursAppVc{
+    self.redPointView.hidden = YES;
 }
 
 -(void)getCurrentVersion
@@ -410,6 +426,8 @@
 {
     
     [super viewWillAppear:animated];
+    
+  
 }
 
 -(void)initPointandBtnAction
@@ -940,8 +958,8 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [_syncBtn.layer removeAllAnimations];
         
-        NSNotificationCenter *center=[NSNotificationCenter defaultCenter];
-        [center removeObserver:self];
+//        NSNotificationCenter *center=[NSNotificationCenter defaultCenter];
+//        [center removeObserver:self];
     });
 }
 @end

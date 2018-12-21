@@ -95,6 +95,8 @@
     [notificationCenter addObserver:self selector:@selector(preVersionPrice) name:GET_PRO_VERSION_PRICE_ACTION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"refreshSettingUI" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"purchaseSuccessful" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"getIntroductoryPriceSuccess" object:nil];
+
 
 
 //    [self.tableview setTableFooterView:[[UIView alloc]initWithFrame:CGRectZero]];

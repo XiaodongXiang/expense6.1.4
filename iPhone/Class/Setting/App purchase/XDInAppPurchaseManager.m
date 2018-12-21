@@ -481,7 +481,6 @@
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
     
     [self finishSomeUnfinishTransaction];
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
 
     dispatch_async(dispatch_get_main_queue(), ^{
         

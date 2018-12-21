@@ -813,6 +813,8 @@
                 XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterOursApp"];
                 self.redPoint.hidden = YES;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"isFirstEnterPOursAppVc" object:nil];
+
                 [self.navigationController pushViewController:ourVc animated:YES];
             }
             else if (indexPath.row==2){
@@ -954,6 +956,8 @@
                 XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterOursApp"];
                 self.redPoint.hidden = YES;
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"isFirstEnterPOursAppVc" object:nil];
+
                 [self.navigationController pushViewController:ourVc animated:YES];
                 
             }

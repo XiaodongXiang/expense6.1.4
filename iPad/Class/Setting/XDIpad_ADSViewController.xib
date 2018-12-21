@@ -36,6 +36,7 @@
                 <outlet property="monthSaleLbl" destination="A3A-l2-7gb" id="K3R-Cz-N1G"/>
                 <outlet property="monthTimeLbl" destination="EN6-Q6-F2c" id="iuL-9K-Z4i"/>
                 <outlet property="monthView" destination="Ef3-IQ-tOi" id="Wp6-69-dV1"/>
+                <outlet property="premiumTitle" destination="5Dl-bc-fiT" id="UIk-oa-vws"/>
                 <outlet property="reportCell" destination="pFY-gi-TRo" id="fsU-5d-gTD"/>
                 <outlet property="restoreBtn" destination="l5m-ZK-Z8S" id="hUq-zu-Oib"/>
                 <outlet property="restoreBtnHeight" destination="ERN-NA-ijC" id="BYD-xQ-D1g"/>
@@ -408,7 +409,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ads free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IXP-5C-aWe">
-                        <rect key="frame" x="79" y="17.5" width="65" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="59.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="rNb-We-Xs7"/>
                         </constraints>

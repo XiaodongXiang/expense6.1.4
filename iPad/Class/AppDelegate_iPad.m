@@ -562,10 +562,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     [super applicationDidBecomeActive:application];
     
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-    if (!appDelegate.isPurchased) {
-        [self.interstitial showInterstitialAdWithTarget:self.window.rootViewController];
-    }
+   
     if (self.isSignUping==YES )
     {
         [self.transferAlertview show];
