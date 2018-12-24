@@ -51,6 +51,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *monthIntroLbl;
 @property (weak, nonatomic) IBOutlet UIView *monthIntroLineView;
 
+@property (strong, nonatomic) IBOutlet UIView *upgradeNewView;
+@property (weak, nonatomic) IBOutlet UILabel *upgradeTimeStyleLbl;
+@property (weak, nonatomic) IBOutlet UILabel *upgradeNewEndTimeLbl;
+@property (strong, nonatomic) IBOutlet UIView *lifetimeNewView;
+@property (weak, nonatomic) IBOutlet UIImageView *lifetimeNewProfileIcon;
+@property (weak, nonatomic) IBOutlet UILabel *lifetimeNewEmail;
+
 @end
 
 @implementation XDUpgradeViewController
@@ -73,6 +80,8 @@
     self.yearView.frame = CGRectMake(width, 0, width, self.scrollview.height);
     self.lifetimeView.frame = CGRectMake(width * 2, 0, width, self.scrollview.height);
 
+    self.upgradeNewView.frame = CGRectMake(0, -1, width+1, self.scrollview.height+1);
+    self.lifetimeNewView.frame = CGRectMake(0, -5, SCREEN_WIDTH, self.scrollview.height + 5);
 //#ifdef DEBUG
 //    [Appsee addEvent:@"Enter Shop"];
 //#else
@@ -97,11 +106,20 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"purchaseSuccessful" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"getIntroductoryPriceSuccess" object:nil];
 
-
-
-//    [self.tableview setTableFooterView:[[UIView alloc]initWithFrame:CGRectZero]];
+    
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.isPurchased) {
+        
+        PFUser *user=[PFUser currentUser];
+        self.lifetimeNewEmail.text = user.email;
+        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
+        NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
+        UIImage *image=[[UIImage alloc]initWithData:imageData];
+        if (imageData) {
+            self.lifetimeNewProfileIcon.image = image;
+        }
+        
         Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
 
@@ -126,6 +144,10 @@
             self.premiumTitle.text = @"Lifetime Premium";
             
             self.lifetimeBtn.enabled = NO;
+            self.lifetimeNewView.hidden = NO;
+
+            [self.scrollview addSubview:self.lifetimeNewView];
+
         }else{
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
@@ -133,33 +155,46 @@
                     self.monthBg.image = [UIImage imageNamed:@"yigoumai"];
                     self.monthPriceLbl.textColor = RGBColor(122, 163, 239);
                     self.monthTimeLbl.textColor = RGBColor(122, 163, 239);
-                    //            self.monthBtn.enabled = NO;
-                    
                     self.monthSaleLbl.hidden = YES;
                     self.monthIntroLbl.textColor = RGBColor(122, 163, 239);
                     self.monthIntroLineView.backgroundColor = RGBColor(122, 163, 239);
-                    
                     self.yearBg.image = [UIImage imageNamed:@"year"];
                     self.premiumTitle.text = @"Monthly Premium";
-                    
                     self.monthBtn.enabled = NO;
 
+                    self.upgradeNewView.hidden = NO;
+                    [self.monthView addSubview:self.upgradeNewView];
+                    self.upgradeTimeStyleLbl.text = @"Monthly Premium";
+                    Setting* setting = [[XDDataManager shareManager] getSetting];
+                    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+                    [formatter setDateFormat:@"yyyy.MM.dd"];
+                    NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
+                    self.upgradeNewEndTimeLbl.text = [NSString stringWithFormat:@"%@",expiredString];
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.yearTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.yearPriceLbl.textColor = RGBColor(122, 163, 239);
                     self.yearDetailLbl.textColor = [UIColor colorWithRed:122/255. green:163/255. blue:239/255. alpha:0.5];
                     self.saleLbl.hidden = YES;
-                    //            self.yearBtn.enabled = NO;
                     self.monthBg.image = [UIImage imageNamed:@"month"];
                     self.premiumTitle.text = @"Yearly Premium";
-
                     self.yearBtn.enabled = NO;
+                    
+                    self.upgradeNewView.hidden = NO;
+                    [self.yearView addSubview:self.upgradeNewView];
+                    self.upgradeTimeStyleLbl.text = @"Yearly Premium";
+                    
+                    
+                    Setting* setting = [[XDDataManager shareManager] getSetting];
+                    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+                    [formatter setDateFormat:@"yyyy.MM.dd"];
+                    NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
+                    self.upgradeNewEndTimeLbl.text = [NSString stringWithFormat:@"%@",expiredString];
+                    
                 }else if([proID isEqualToString:kInAppPurchaseProductIdLifetime]){
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.lifetimePriceLbl.textColor = RGBColor(122, 163, 239);
-                    //            self.lifetimeBtn.enabled = NO;
                     self.lifetimeDetailLbl.textColor = [UIColor colorWithRed:122/255. green:163/255. blue:239/255. alpha:0.5];
                     self.saleLbl.hidden = YES;
                     self.monthBg.image = [UIImage imageNamed:@"month-1"];
@@ -175,6 +210,10 @@
 
                     self.premiumTitle.text = @"Lifetime Premium";
                     self.lifetimeBtn.enabled = NO;
+                    self.lifetimeNewView.hidden = NO;
+
+                    [self.scrollview addSubview:self.lifetimeNewView];
+
                 }
             }
         }
@@ -190,9 +229,9 @@
         self.monthBtn.enabled = YES;
         self.yearBtn.enabled = YES;
         self.lifetimeBtn.enabled = YES;
+        self.upgradeNewView.hidden = YES;
+        self.lifetimeNewView.hidden = YES;
     }
-    
-    
 }
 
 
@@ -207,6 +246,16 @@
     
     [self preVersionPrice];
     if (appDelegate.isPurchased) {
+        PFUser *user=[PFUser currentUser];
+        self.lifetimeNewEmail.text = user.email;
+        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+        NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
+        NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
+        UIImage *image=[[UIImage alloc]initWithData:imageData];
+        if (imageData) {
+            self.lifetimeNewProfileIcon.image = image;
+        }
+        
         Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
         
@@ -215,6 +264,8 @@
         self.lifetimeBtn.enabled = YES;
         
         if (defaults2) {
+            self.lifetimeNewView.frame = CGRectMake(0, -5, SCREEN_WIDTH, self.scrollview.height + 5);
+
             self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
             self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
             self.lifetimePriceLbl.textColor = RGBColor(122, 163, 239);
@@ -234,6 +285,9 @@
             self.premiumTitle.text = @"Lifetime Premium";
 
             self.lifetimeBtn.enabled = NO;
+            self.lifetimeNewView.hidden = NO;
+
+            [self.scrollview addSubview:self.lifetimeNewView];
         }else{
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
@@ -257,13 +311,24 @@
                     self.yearPriceLbl.textColor = [UIColor whiteColor];
                     self.yearDetailLbl.textColor = [UIColor whiteColor];
                     self.monthBtn.enabled = NO;
+                    
+
+                    self.upgradeNewView.hidden = NO;
+                    [self.monthView addSubview:self.upgradeNewView];
+                    self.upgradeTimeStyleLbl.text = @"Monthly Premium";
+                    Setting* setting = [[XDDataManager shareManager] getSetting];
+                    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+                    [formatter setDateFormat:@"yyyy.MM.dd"];
+                    NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
+                    self.upgradeNewEndTimeLbl.text = [NSString stringWithFormat:@"%@",expiredString];
+                    
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
+                    
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.yearTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.yearPriceLbl.textColor = RGBColor(122, 163, 239);
                     self.yearDetailLbl.textColor = [UIColor colorWithRed:122/255. green:163/255. blue:239/255. alpha:0.5];
                     self.saleLbl.hidden = YES;
-                    //            self.yearBtn.enabled = NO;
                     self.monthBg.image = [UIImage imageNamed:@"month"];
                     self.premiumTitle.text = @"Yearly Premium";
                     
@@ -274,11 +339,20 @@
                     self.lifetimePriceLbl.textColor = [UIColor whiteColor];
                     self.liteTimeLbl.textColor = [UIColor whiteColor];
                     self.yearBtn.enabled = NO;
+                    
+                    self.upgradeNewView.hidden = NO;
+                    [self.yearView addSubview:self.upgradeNewView];
+                    self.upgradeTimeStyleLbl.text = @"Yearly Premium";
+                    Setting* setting = [[XDDataManager shareManager] getSetting];
+                    NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+                    [formatter setDateFormat:@"yyyy.MM.dd"];
+                    NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
+                    self.upgradeNewEndTimeLbl.text = [NSString stringWithFormat:@"%@",expiredString];
+                    
                 }else{
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.lifetimePriceLbl.textColor = RGBColor(122, 163, 239);
-                    //            self.lifetimeBtn.enabled = NO;
                     self.lifetimeDetailLbl.textColor = [UIColor colorWithRed:122/255. green:163/255. blue:239/255. alpha:0.5];
                     self.saleLbl.hidden = YES;
                     self.monthBg.image = [UIImage imageNamed:@"month-1"];
@@ -293,6 +367,9 @@
                     self.yearDetailLbl.textColor = [UIColor whiteColor];
                     self.premiumTitle.text = @"Lifetime Premium";
                     self.lifetimeBtn.enabled = NO;
+                    self.lifetimeNewView.hidden = NO;
+
+                    [self.scrollview addSubview:self.lifetimeNewView];
                 }
             }
         }
@@ -309,6 +386,8 @@
         self.monthBtn.enabled = YES;
         self.yearBtn.enabled = YES;
         self.lifetimeBtn.enabled = YES;
+        self.lifetimeNewView.hidden = YES;
+
     }
     
     [self.view layoutSubviews];

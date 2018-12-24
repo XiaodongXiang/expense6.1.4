@@ -16,7 +16,7 @@
 #import "PokcetExpenseAppDelegate.h"
 #import "ParseDBManager.h"
 #import <Parse/Parse.h>
-
+#import "XDUpgradeViewController.h"
 @import Firebase;
 @interface XDAccountMainTableViewController ()<XDAddAccountViewDelegate,UIActionSheetDelegate,XDAccountTableViewCellDelegate,UITableViewDelegate,UITableViewDataSource,ADEngineControllerBannerDelegate>
 {
@@ -33,10 +33,15 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomH;
 
+@property (strong, nonatomic) IBOutlet UITableViewCell *unUpgradeAddCell;
+@property (weak, nonatomic) IBOutlet UIView *unUpgradeBackView;
+
 
 @property(nonatomic, strong)ADEngineController* adBanner;
 @property (weak, nonatomic) IBOutlet UIView *adBannerView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *bannerHeight;
+
+
 @end
 
 @implementation XDAccountMainTableViewController
@@ -205,6 +210,7 @@
 
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
+
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
     if (!appDelegate.isPurchased) {
         if(!_adBanner) {
@@ -265,7 +271,9 @@
     // 指定左边缘滑动
     ges.edges = UIRectEdgeLeft;
     [self.view addGestureRecognizer:ges];
-    
+
+    [self drawBezierpath];
+
 }
 
 -(void)reloadTableView{
@@ -471,7 +479,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
     if (indexPath.row == self.dataMuArr.count) {
-        return self.addAccountCell;
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (appDelegate.isPurchased) {
+            return self.addAccountCell;
+        }else{
+            return self.unUpgradeAddCell;
+        }
     }else{
         cell.account = self.dataMuArr[indexPath.row];
         cell.xxdDelegate = self;
@@ -482,6 +495,18 @@
     
     return cell;
 }
+
+-(void)drawBezierpath{
+    
+    UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(3, 0, SCREEN_WIDTH-36, self.unUpgradeBackView.height-3) cornerRadius:10];
+    CAShapeLayer* layer = [CAShapeLayer layer];
+    layer.path = path.CGPath;
+    layer.fillColor = [UIColor clearColor].CGColor;
+    layer.lineDashPattern = @[@4, @5];
+    layer.strokeColor = RGBColor(220, 220, 220).CGColor;
+    [self.unUpgradeBackView.layer addSublayer:layer];
+}
+
 
 -(void)viewWillLayoutSubviews{
     [super viewWillLayoutSubviews];
@@ -497,10 +522,18 @@
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == self.dataMuArr.count) {
-        XDAddAccountViewController* ac = [[XDAddAccountViewController alloc]initWithNibName:@"XDAddAccountViewController" bundle:nil];
-        ac.delegate = self;
-        [self presentViewController:ac animated:YES completion:nil];
-
+        
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (appDelegate.isPurchased) {
+            XDAddAccountViewController* ac = [[XDAddAccountViewController alloc]initWithNibName:@"XDAddAccountViewController" bundle:nil];
+            ac.delegate = self;
+            [self presentViewController:ac animated:YES completion:nil];
+        }else{
+           
+            XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
+            [self presentViewController:adsVc animated:YES completion:nil];
+            
+        }
     }else{
         XDAccountDetailViewController* ac = [[XDAccountDetailViewController alloc]initWithNibName:@"XDAccountDetailViewController" bundle:nil];
         ac.account = self.dataMuArr[indexPath.row];

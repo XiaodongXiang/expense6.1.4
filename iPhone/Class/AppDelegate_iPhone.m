@@ -1218,8 +1218,6 @@
     }
 }
 
-
-
 /**
  applicationWillTerminate: saves changes in the application's managed object context before the application terminates.
  */
@@ -1240,13 +1238,6 @@
         }
     }
 }
-
-
-
-
-
-
-
 
 
 #pragma mark Handle Data

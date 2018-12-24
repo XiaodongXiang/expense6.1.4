@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Text-Medium.otf">
+            <string>SFUIText-Medium</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDAccountMainTableViewController">
             <connections>
@@ -16,6 +21,8 @@
                 <outlet property="bannerHeight" destination="VHE-U8-EMY" id="Osc-5i-Qh1"/>
                 <outlet property="bottomH" destination="roC-EG-zOg" id="WDX-m5-L74"/>
                 <outlet property="tableView" destination="i5M-Pr-FkT" id="SDo-Y2-osQ"/>
+                <outlet property="unUpgradeAddCell" destination="5eQ-cm-j7V" id="xPJ-DS-rMs"/>
+                <outlet property="unUpgradeBackView" destination="JPT-aV-DHf" id="wUC-iA-KHp"/>
                 <outlet property="view" destination="C9q-n5-s5l" id="xif-n4-Pvv"/>
             </connections>
         </placeholder>
@@ -74,8 +81,65 @@
             </constraints>
             <point key="canvasLocation" x="-671.20000000000005" y="118.29085457271366"/>
         </view>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="99" id="5eQ-cm-j7V">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5eQ-cm-j7V" id="rHD-r9-A74">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="98.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JPT-aV-DHf">
+                        <rect key="frame" x="15" y="4" width="384" height="78.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_VIP" translatesAutoresizingMaskIntoConstraints="NO" id="xXf-fp-25u">
+                                <rect key="frame" x="10" y="8" width="68" height="68"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="68" id="L6e-B7-fh0"/>
+                                    <constraint firstAttribute="height" constant="68" id="e1S-ey-TyF"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrad to premium to add more accounts" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXk-Lm-Mp9">
+                                <rect key="frame" x="92" y="6.5" width="247" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="TcI-HN-yMG"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="16"/>
+                                <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="account_enter" translatesAutoresizingMaskIntoConstraints="NO" id="bqW-m9-M85">
+                                <rect key="frame" x="349" y="30.5" width="18" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="18" id="OOL-d9-OZC"/>
+                                    <constraint firstAttribute="width" constant="18" id="TUe-nD-3co"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bqW-m9-M85" secondAttribute="trailing" constant="17" id="GsH-h5-fKU"/>
+                            <constraint firstItem="EXk-Lm-Mp9" firstAttribute="leading" secondItem="xXf-fp-25u" secondAttribute="trailing" constant="14" id="JAo-vL-MdF"/>
+                            <constraint firstItem="bqW-m9-M85" firstAttribute="centerY" secondItem="JPT-aV-DHf" secondAttribute="centerY" id="Olo-U3-FiG"/>
+                            <constraint firstItem="xXf-fp-25u" firstAttribute="leading" secondItem="JPT-aV-DHf" secondAttribute="leading" constant="10" id="RGy-x1-3Zv"/>
+                            <constraint firstItem="bqW-m9-M85" firstAttribute="leading" secondItem="EXk-Lm-Mp9" secondAttribute="trailing" constant="10" id="T49-Dt-giy"/>
+                            <constraint firstItem="EXk-Lm-Mp9" firstAttribute="centerY" secondItem="JPT-aV-DHf" secondAttribute="centerY" constant="-3" id="Ww7-L1-fc8"/>
+                            <constraint firstItem="xXf-fp-25u" firstAttribute="top" secondItem="JPT-aV-DHf" secondAttribute="top" constant="8" id="oZ7-ic-efO"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="JPT-aV-DHf" secondAttribute="bottom" constant="16" id="Diz-7D-68M"/>
+                    <constraint firstItem="JPT-aV-DHf" firstAttribute="top" secondItem="rHD-r9-A74" secondAttribute="top" constant="4" id="Syi-MF-5nk"/>
+                    <constraint firstItem="JPT-aV-DHf" firstAttribute="leading" secondItem="rHD-r9-A74" secondAttribute="leading" constant="15" id="YDK-oc-N1y"/>
+                    <constraint firstAttribute="trailing" secondItem="JPT-aV-DHf" secondAttribute="trailing" constant="15" id="fLj-S9-Ifp"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-1603.2" y="564.46776611694156"/>
+        </tableViewCell>
     </objects>
     <resources>
+        <image name="account_VIP" width="89" height="86"/>
+        <image name="account_enter" width="18" height="18"/>
         <image name="add account" width="359" height="98"/>
     </resources>
 </document>

@@ -8136,6 +8136,8 @@
 				A200D1CC20F33F3300E155AA /* XDFirstPromptViewController.h */,
 				A200D1CD20F33F3300E155AA /* XDFirstPromptViewController.m */,
 				A200D1CE20F33F3300E155AA /* XDFirstPromptViewController.xib */,
+				BE491B32216A371800FB5E40 /* XDInAppPurchaseManager.h */,
+				BE491B33216A371800FB5E40 /* XDInAppPurchaseManager.m */,
 				BE19284021353D2E00D5B3F7 /* XDUpgradeViewController.h */,
 				BE19284121353D2E00D5B3F7 /* XDUpgradeViewController.m */,
 				BE19284221353D2E00D5B3F7 /* XDUpgradeViewController.xib */,
@@ -8745,8 +8747,6 @@
 			children = (
 				BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */,
 				BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */,
-				BE491B32216A371800FB5E40 /* XDInAppPurchaseManager.h */,
-				BE491B33216A371800FB5E40 /* XDInAppPurchaseManager.m */,
 				A2560D1019D3BB5900A5A950 /* SKProduct+LocalizedPrice.h */,
 				A2560D1119D3BB5900A5A950 /* SKProduct+LocalizedPrice.m */,
 				BE0F4337214269DB008D7F07 /* PocketExpense-Bridging-Header.h */,

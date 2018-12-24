@@ -843,9 +843,7 @@
                                                   [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",(long)comp.year] forName:@"subscription_year"];
                                                   [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",(long)comp.month] forName:@"subscription_month"];
                                                   [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",(long)comp.day] forName:@"subscription_day"];
-
                                               }
-                                              
                                           }else{
                                               [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
                                           }

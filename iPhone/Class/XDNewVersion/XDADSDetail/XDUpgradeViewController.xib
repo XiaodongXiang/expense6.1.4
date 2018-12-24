@@ -26,6 +26,9 @@
                 <outlet property="lifetimeBg" destination="DlC-H1-KCz" id="o0c-fZ-pGm"/>
                 <outlet property="lifetimeBtn" destination="ovu-IW-Aim" id="yRX-Y4-xQA"/>
                 <outlet property="lifetimeDetailLbl" destination="iFm-1q-SuU" id="3Mw-8c-i8w"/>
+                <outlet property="lifetimeNewEmail" destination="tyg-DW-h2r" id="CqL-Si-fZj"/>
+                <outlet property="lifetimeNewProfileIcon" destination="fET-6C-Yej" id="gMo-zY-pZW"/>
+                <outlet property="lifetimeNewView" destination="HqQ-B1-JiK" id="vuY-Vj-Tuc"/>
                 <outlet property="lifetimePriceLbl" destination="nDr-jA-CjM" id="oQk-3I-WZW"/>
                 <outlet property="lifetimeView" destination="gow-4A-Z58" id="bs6-We-jpi"/>
                 <outlet property="liteTimeLbl" destination="frI-m2-Fbc" id="Rce-Iy-9vS"/>
@@ -45,6 +48,9 @@
                 <outlet property="scrollview" destination="Cjs-fd-Xd1" id="TSJ-CB-VnW"/>
                 <outlet property="syncCell" destination="KeN-rP-edU" id="wxu-dn-DU2"/>
                 <outlet property="tableview" destination="aCA-ZG-E5q" id="sIr-QX-Gk4"/>
+                <outlet property="upgradeNewEndTimeLbl" destination="hVI-Rz-FNF" id="8Z5-iM-J1s"/>
+                <outlet property="upgradeNewView" destination="dxd-MC-LAT" id="We1-0c-DEt"/>
+                <outlet property="upgradeTimeStyleLbl" destination="Ydt-fk-GJu" id="uuo-Cb-DpV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="widgetCell" destination="Fqt-WW-lob" id="ZHJ-ym-oe2"/>
                 <outlet property="yearBg" destination="hhF-bs-FsS" id="ZnY-Pa-jx6"/>
@@ -120,7 +126,7 @@ and future features</string>
                     <rect key="frame" x="0.0" y="321" width="375" height="50"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Ic-mS-TAM">
-                            <rect key="frame" x="20" y="5" width="137" height="40"/>
+                            <rect key="frame" x="20" y="5" width="147" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="1zb-KN-ndL"/>
                             </constraints>
@@ -250,7 +256,7 @@ and future features</string>
                 <constraint firstItem="Z9q-bn-eZF" firstAttribute="centerX" secondItem="Lq8-af-dAk" secondAttribute="centerX" id="yW1-0B-pQE"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-382.39999999999998" y="-205.09745127436284"/>
+            <point key="canvasLocation" x="-349" y="-205"/>
         </view>
         <view contentMode="scaleToFill" id="XK8-za-Tbl">
             <rect key="frame" x="0.0" y="0.0" width="120" height="154"/>
@@ -603,6 +609,105 @@ forever</string>
             </tableViewCellContentView>
             <point key="canvasLocation" x="470" y="418"/>
         </tableViewCell>
+        <view contentMode="scaleToFill" id="dxd-MC-LAT">
+            <rect key="frame" x="0.0" y="0.0" width="120" height="154"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="upgrade_month" translatesAutoresizingMaskIntoConstraints="NO" id="Us0-qD-qs6">
+                    <rect key="frame" x="0.0" y="0.0" width="120" height="154"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2018.1.1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hVI-Rz-FNF">
+                    <rect key="frame" x="40" y="118" width="40" height="13"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="11"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Purchased" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4f-fF-0aO">
+                    <rect key="frame" x="25" y="26" width="70.5" height="17"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
+                    <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monthly Premium" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ydt-fk-GJu">
+                    <rect key="frame" x="20" y="46" width="80" height="41"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="80" id="Z1T-np-VDL"/>
+                        <constraint firstAttribute="height" constant="41" id="eAp-kd-EId"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" red="0.6588235294117647" green="0.46274509803921571" blue="0.12156862745098039" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Renews:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJ5-TJ-2KA">
+                    <rect key="frame" x="38" y="105" width="44" height="13"/>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="11"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="Us0-qD-qs6" secondAttribute="trailing" id="9f2-T8-9rl"/>
+                <constraint firstItem="k4f-fF-0aO" firstAttribute="top" secondItem="dxd-MC-LAT" secondAttribute="top" constant="26" id="GhA-3A-mDS"/>
+                <constraint firstItem="Ydt-fk-GJu" firstAttribute="top" secondItem="k4f-fF-0aO" secondAttribute="bottom" constant="3" id="IRc-TJ-lXX"/>
+                <constraint firstItem="Us0-qD-qs6" firstAttribute="leading" secondItem="dxd-MC-LAT" secondAttribute="leading" id="Lo2-ak-hcw"/>
+                <constraint firstItem="Us0-qD-qs6" firstAttribute="top" secondItem="dxd-MC-LAT" secondAttribute="top" id="MDs-Gd-793"/>
+                <constraint firstItem="hVI-Rz-FNF" firstAttribute="centerX" secondItem="dxd-MC-LAT" secondAttribute="centerX" id="PtO-Np-Xkq"/>
+                <constraint firstItem="hVI-Rz-FNF" firstAttribute="top" secondItem="eJ5-TJ-2KA" secondAttribute="bottom" id="b6L-du-za6"/>
+                <constraint firstItem="eJ5-TJ-2KA" firstAttribute="centerX" secondItem="dxd-MC-LAT" secondAttribute="centerX" id="bnB-rT-K41"/>
+                <constraint firstItem="k4f-fF-0aO" firstAttribute="centerX" secondItem="dxd-MC-LAT" secondAttribute="centerX" id="g2g-X1-H0g"/>
+                <constraint firstItem="Ydt-fk-GJu" firstAttribute="centerX" secondItem="dxd-MC-LAT" secondAttribute="centerX" id="nMH-L9-bAC"/>
+                <constraint firstAttribute="bottom" secondItem="Us0-qD-qs6" secondAttribute="bottom" id="u6v-c4-0dF"/>
+                <constraint firstItem="eJ5-TJ-2KA" firstAttribute="top" secondItem="Ydt-fk-GJu" secondAttribute="bottom" constant="18" id="zF6-Kn-HIZ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-632" y="-16.191904047976013"/>
+        </view>
+        <view contentMode="scaleToFill" id="HqQ-B1-JiK">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="purchase_lifetime_vip_8" translatesAutoresizingMaskIntoConstraints="NO" id="tjH-og-3SB">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </imageView>
+                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head portrait1" translatesAutoresizingMaskIntoConstraints="NO" id="fET-6C-Yej">
+                    <rect key="frame" x="30" y="25" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="40" id="Om9-ai-QcB"/>
+                        <constraint firstAttribute="height" constant="40" id="gS4-sz-aWI"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="appxy@taotao.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyg-DW-h2r">
+                    <rect key="frame" x="85" y="34.5" width="147.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="0.6588235294" green="0.46274509800000002" blue="0.1215686275" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premium feature: 6 items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mcp-a8-nKN">
+                    <rect key="frame" x="85" y="90.5" width="186.5" height="19.5"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-MediumItalic" family="Helvetica Neue" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="tjH-og-3SB" firstAttribute="top" secondItem="HqQ-B1-JiK" secondAttribute="top" id="5Xf-W7-iVI"/>
+                <constraint firstItem="Mcp-a8-nKN" firstAttribute="leading" secondItem="tyg-DW-h2r" secondAttribute="leading" id="6kE-UM-ZxB"/>
+                <constraint firstItem="tjH-og-3SB" firstAttribute="leading" secondItem="HqQ-B1-JiK" secondAttribute="leading" id="Oc8-7Z-MVs"/>
+                <constraint firstAttribute="trailing" secondItem="tjH-og-3SB" secondAttribute="trailing" id="OfA-5b-oX4"/>
+                <constraint firstItem="fET-6C-Yej" firstAttribute="top" secondItem="HqQ-B1-JiK" secondAttribute="top" constant="25" id="ZZJ-AQ-GFF"/>
+                <constraint firstItem="fET-6C-Yej" firstAttribute="leading" secondItem="HqQ-B1-JiK" secondAttribute="leading" constant="30" id="doW-A0-a9v"/>
+                <constraint firstAttribute="bottom" secondItem="tjH-og-3SB" secondAttribute="bottom" id="j2G-Pg-0kn"/>
+                <constraint firstItem="Mcp-a8-nKN" firstAttribute="top" secondItem="tyg-DW-h2r" secondAttribute="bottom" constant="35" id="mU2-TL-EbW"/>
+                <constraint firstItem="tyg-DW-h2r" firstAttribute="centerY" secondItem="fET-6C-Yej" secondAttribute="centerY" id="ryG-v4-6rL"/>
+                <constraint firstItem="tyg-DW-h2r" firstAttribute="leading" secondItem="fET-6C-Yej" secondAttribute="trailing" constant="15" id="xd7-Ip-7hJ"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-815.20000000000005" y="276.1619190404798"/>
+        </view>
     </objects>
     <resources>
         <image name="Ads free" width="36" height="36"/>
@@ -611,9 +716,12 @@ forever</string>
         <image name="Quick input" width="36" height="36"/>
         <image name="Sync" width="36" height="36"/>
         <image name="accounts" width="36" height="36"/>
+        <image name="head portrait1" width="48" height="48"/>
         <image name="lifetime" width="121" height="164"/>
         <image name="month" width="121" height="164"/>
         <image name="pur-Cancel" width="44" height="44"/>
+        <image name="purchase_lifetime_vip_8" width="359" height="145"/>
+        <image name="upgrade_month" width="120" height="164"/>
         <image name="year" width="121" height="164"/>
     </resources>
 </document>
