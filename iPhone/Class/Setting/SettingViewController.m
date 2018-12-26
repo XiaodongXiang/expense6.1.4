@@ -53,6 +53,7 @@
 #import "XDSignInViewController.h"
 #import "XDUpgradeViewController.h"
 #import "XDOurAppsViewController.h"
+#import "XDShareLinkViewController.h"
 
 @import Firebase;
 
@@ -77,6 +78,7 @@
 @property (weak, nonatomic) IBOutlet UIView *redPointView;
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *signOutCell;
+@property (strong, nonatomic) IBOutlet UITableViewCell *sharelinkCell;
 
 @end
 
@@ -637,13 +639,6 @@
 {
     return 5;
 
-//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-//    if (!appDelegate.isPurchased)
-//    {
-//        return 6;
-//    }
-//    else
-//        return 5;
 }
 
 
@@ -651,71 +646,29 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section 
 {
     
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    //没购买
-    if (!appDelegate.isPurchased)
+    if (section==0)
     {
-        if (section==0)
-        {
-            return 3;
-        }
-        if(section ==1 )
-            return 2;
-        else if(section ==2)
-            return 3;
-        else if (section==3)
-        {
-            return 2;
-        }
-        else if(section==4)
-        {
-            return 2;
-        }
-        else
-        {
-            return 1;
-        }
-
+        return 4;
+    }
+    if(section ==1 )
+        return 2;
+    else if(section ==2)
+        return 3;
+    else if (section==3)
+    {
+        return 2;
+    }
+    else if(section==4)
+    {
+        return 2;
     }
     else
-    {
-        if (section==0)
-        {
-            return 3;
-        }
-        if(section ==1 )
-            return 2;
-        else if(section ==2)
-            return 3;
-        else if (section==3)
-        {
-            return 2;
-        }
-        else if(section==4)
-        {
-            return 2;
-        }
-        else
-        {
-            return 1;
-        }
-    }
+    
+        return 1;
+    
 
 }
 
-//-(void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-//
-//    if (indexPath.section==4 && appDelegate.isPurchased)
-//    {
-//        cell.backgroundColor = [UIColor clearColor];
-//    }
-//    else if (indexPath.section==5 && !appDelegate.isPurchased)
-//    {
-//        cell.backgroundColor=[UIColor clearColor];
-//    }
-//}
 
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath 
@@ -732,13 +685,17 @@
                 view.y = 145;
                 [self.noPurchasedProfileCell addSubview:view];
                 return self.noPurchasedProfileCell;
-            }else if (indexPath.row == 1){
+            }else if(indexPath.row == 1){
+                [self.sharelinkCell addSubview:view];
+                return self.sharelinkCell;
+                
+            }else if (indexPath.row == 2){
                 [_syncCell addSubview:view];
                 return _syncCell;
-            }else if (indexPath.row == 2){
+            }else if (indexPath.row == 3){
 //                [self.syncChildCell addSubview:view];
                 return self.syncChildCell;
-            }else if (indexPath.row == 3){
+            }else if (indexPath.row == 4){
                 [self.upgradeCell addSubview:view];
                 return self.upgradeCell;
             }
@@ -769,9 +726,6 @@
             if (indexPath.row == 1){
                 [_exportCell addSubview:view];
                 return _exportCell;
-//            }else{
-//                [_backUpCell addSubview:view];
-//                return _backUpCell;
             }
         }else if (indexPath.section == 4){
             if (indexPath.row == 0) {
@@ -796,10 +750,14 @@
                     }
                 }
                 return self.profileCell;
-            }else if (indexPath.row == 1){
+            }else if(indexPath.row == 1){
+                [self.sharelinkCell addSubview:view];
+                return self.sharelinkCell;
+                
+            }else if (indexPath.row == 2){
                 [_syncCell addSubview:view];
                 return _syncCell;
-            }else if (indexPath.row == 2){
+            }else if (indexPath.row == 3){
                 //                [self.syncChildCell addSubview:view];
                 return self.syncChildCell;
             }
@@ -830,9 +788,10 @@
             if (indexPath.row == 1){
                 [_exportCell addSubview:view];
                 return _exportCell;
-//            }else{
-//                [_backUpCell addSubview:view];
-//                return _backUpCell;
+            }else{
+                [self.sharelinkCell addSubview:view];
+                return self.sharelinkCell;
+
             }
         }else if (indexPath.section == 4){
             if (indexPath.row == 0) {
@@ -854,78 +813,19 @@
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
   
-//    AppDelegate_iPhone *appDelegate_iPhone = (AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
     
         if (indexPath.section == 0) {
-//            if (indexPath.row == 0) {
-//                UIAlertController *actionSheetController = [UIAlertController alertControllerWithTitle:@"Do you want to log out?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-//
-//                UIAlertAction *showAllInfoAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"VC_LOG OUT", nil) style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
-//
-//                    PokcetExpenseAppDelegate * appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
-//                    if (appDelegate.isSyncing==YES && appDelegate.autoSyncOn==NO)
-//                    {
-//                        UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:@"Data is syncing, please don't disconnect the internet and wait a moment, then try to sign out again." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                        [alertView show];
-//                    }else{
-//                        HMJActivityIndicator *indicatorView=[[HMJActivityIndicator alloc]initWithFrame:CGRectMake((SCREEN_WIDTH-50)/2, (SCREEN_HEIGHT-50)/2, 50, 50)];
-//                        [indicatorView.indicator startAnimating];
-//                        self.view.userInteractionEnabled=NO;
-//                        [appDelegate.window addSubview:indicatorView];
-//
-//                        //在parse登出前记录下objectId
-//                        NSString *lastUser=[[PFUser currentUser]objectId];
-//
-//                        [PFUser logOutInBackgroundWithBlock:^(NSError *error)
-//                         {
-//                             NSFetchRequest *requestLocal=[[NSFetchRequest alloc]init];
-//                             NSEntityDescription *descLocal=[NSEntityDescription entityForName:@"User" inManagedObjectContext:appDelegate.managedObjectContext];
-//                             requestLocal.entity=descLocal;
-//                             NSArray *array=[appDelegate.managedObjectContext executeFetchRequest:requestLocal error:&error];
-//                             User *user=array[0];
-//                             user.lastUser=lastUser;
-//                             [appDelegate.managedObjectContext save:&error];
-//
-//                             //登出dropbox
-//                             if ([appDelegate.dropbox.drop_account isLinked])
-//                             {
-//                                 [appDelegate.dropbox.drop_account unlink];
-//                                 appDelegate.dropbox.drop_dataStore=nil;
-//                             }
-//
-//                             [indicatorView removeFromSuperview];
-//
-//                             [self.navigationController popToRootViewControllerAnimated:YES];
-//                             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-//
-//
-//
-//                         }];
-//                        XDSignInViewController *signVC=[[XDSignInViewController alloc]init];
-//                        appDelegate.window.rootViewController=signVC;
-//
-//                    }
-//
-//
-//                }];
-//
-//                UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"VC_Cancel", nil) style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-//
-//                }];
-//                [actionSheetController addAction:cancelAction];
-//                [actionSheetController addAction:showAllInfoAction];
-//
-//                [self presentViewController:actionSheetController animated:YES completion:nil];
-//
-//            }
-            
-            if (indexPath.row == 2) {
+            if (indexPath.row == 3) {
                 [self sync];
             }
             if (indexPath.row == 0) {
                 XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
                 [self presentViewController:adsVc animated:YES completion:nil];
                 
+            }
+            if (indexPath.row == 1) {
+                XDShareLinkViewController* linkVc = [[XDShareLinkViewController alloc]initWithNibName:@"XDShareLinkViewController" bundle:nil];
+                [self presentViewController:linkVc animated:YES completion:nil];
             }
         }else if (indexPath.section == 1 ){
             if (indexPath.row == 0) {
@@ -958,9 +858,6 @@
             }
             if (appDelegate.isPurchased) {
                 if (indexPath.row == 1) {
-//                    BackUpAndRestoreViewController * backUpAndRestoreViewController =[[BackUpAndRestoreViewController alloc] initWithNibName:@"BackUpAndRestoreViewController" bundle:nil];
-//                    [self.navigationController pushViewController:backUpAndRestoreViewController animated:YES];
-//                }else{
                     ReportViewController *reportViewController = [[ReportViewController alloc]initWithNibName:@"ReportViewController" bundle:nil];
                     [self.navigationController pushViewController:reportViewController animated:YES];
                 }
@@ -968,17 +865,13 @@
             }else{
 
                 if (indexPath.row == 1) {
-                    
-
                     XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
                     [self presentViewController:adsVc animated:YES completion:nil];
                     
-//                }else{
-//                    XDADSDetailViewController* adsVc = [[XDADSDetailViewController alloc]initWithNibName:@"XDADSDetailViewController" bundle:nil];
-//                    [self presentViewController:adsVc animated:YES completion:nil];
                 }
                 
             }
+           
         }else if(indexPath.section == 4){
             if (indexPath.row == 0) {
                 
@@ -1047,9 +940,7 @@
             return 145;
         }
     }
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
-
-    if (indexPath.section == 0 && indexPath.row == 2) {
+    if (indexPath.section == 0 && indexPath.row == 3) {
         if (_syncSwitch.on) {
             return 0.01;
         }else{

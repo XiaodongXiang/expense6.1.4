@@ -17,7 +17,8 @@ pod 'Firebase/Core'
 pod 'Firebase/InAppMessagingDisplay'
 pod 'Firebase/Messaging'
 pod 'Firebase/RemoteConfig'
-
+pod 'Firebase/DynamicLinks'
+pod 'FirebaseAuth'
 end
 
 

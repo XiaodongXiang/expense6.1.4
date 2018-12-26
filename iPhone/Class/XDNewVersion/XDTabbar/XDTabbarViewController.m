@@ -31,6 +31,7 @@
 #import "XDChristmasShareSuccessPlanBPopViewController.h"
 #import "XDChristmasShareSuccessdPlanAPopViewController.h"
 
+
 @import Firebase;
 @interface XDTabbarViewController ()<XDAddTransactionViewDelegate>
 @property(nonatomic, strong)XDOverViewViewController * overViewCalendarViewController;
@@ -123,14 +124,11 @@
 //            NSLog(@"selectedDate = %@", weakSelf.date);
             [weakSelf presentViewController:addVc animated:YES completion:nil];
             
-
         }else{
             if (index == weakSelf.selectedIndex) {
                 [weakSelf.overViewCalendarViewController scrollToToday];
             }
             weakSelf.selectedIndex = index;
-            
-            
             
         }
         
@@ -148,11 +146,12 @@
         }
     };
     
-//    [self adView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
 
 }
+
+
 -(void)purchaseSuccessful{
     
     NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
