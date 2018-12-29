@@ -19,6 +19,7 @@
     #import "AFNetworking.h"
     #import "Setting+CoreDataClass.h"
     #import <ADEngine/ADEngine.h>
+    #import "XDPurchasedManager.h"
 
 
 #define FontSFUITextRegular                                 @"SFUIText-Regular"
@@ -39,6 +40,8 @@
 #define PURCHASE_PRICE_LIFETIME     @"purchasePriceLifetime"
 #define PURCHASE_PRICE_MONTH_INTRODUCTORY    @"purchasePriceMonthIntroductory"
 #define PURCHASE_PRICE_INTRODUCTORY_CAN_BUY  @"canBuyIntroductoryPrice"
+
+#define IS_FIRST_UPLOAD_SETTING     @"isFirstUploadSetting"
 
 #define XDAPPIRATERIMPORTANTEVENT  @"appiraterShowWithImportantEvent"
 #define XDAPPIRATERCLOSERATEVIEW   @"appiraterClosedEvent"

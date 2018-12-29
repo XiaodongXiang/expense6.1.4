@@ -2577,7 +2577,8 @@
 		BEF484FE21D36B7E00A78B0D /* XDShareLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF484FC21D36B7D00A78B0D /* XDShareLinkViewController.m */; };
 		BEF484FF21D36B7E00A78B0D /* XDShareLinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF484FD21D36B7D00A78B0D /* XDShareLinkViewController.xib */; };
 		BEF782A421C25A5A00E71AE7 /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF782A321C25A5A00E71AE7 /* FBHelper.m */; };
-		BEF782A621C2785300E71AE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF782A521C2785300E71AE7 /* GoogleService-Info.plist */; };
+		BEF8097821D6148D007A96F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */; };
+		BEF8097B21D7533E007A96F6 /* XDPurchasedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
 		BEFACB5A21BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFACB5821BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.m */; };
 		BEFACB5B21BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEFACB5921BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.xib */; };
@@ -5759,7 +5760,9 @@
 		BEF484FD21D36B7D00A78B0D /* XDShareLinkViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDShareLinkViewController.xib; sourceTree = "<group>"; };
 		BEF782A221C25A5A00E71AE7 /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
 		BEF782A321C25A5A00E71AE7 /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
-		BEF782A521C2785300E71AE7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BEF8097921D7533E007A96F6 /* XDPurchasedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPurchasedManager.h; sourceTree = "<group>"; };
+		BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPurchasedManager.m; sourceTree = "<group>"; };
 		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
 		BEFACB5721BDF1A3009A7D7A /* XDChristmasShareSuccessPlanBPopViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDChristmasShareSuccessPlanBPopViewController.h; sourceTree = "<group>"; };
@@ -7647,6 +7650,8 @@
 				4EE82680208713D200D243BB /* XDPresentTransition.m */,
 				4E7BA8102063512600D9299A /* XDDataManager.h */,
 				4E7BA80F2063512600D9299A /* XDDataManager.m */,
+				BEF8097921D7533E007A96F6 /* XDPurchasedManager.h */,
+				BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */,
 			);
 			path = XDHelpClass;
 			sourceTree = "<group>";
@@ -10106,7 +10111,7 @@
 				A2A0A0151AA03F8A00B786B5 /* Flurry-iOS-6.2.0 */,
 				A2561A2219D3BBD700A5A950 /* main.m */,
 				A2561AB219D3BDDF00A5A950 /* PocketExpense_Prefix.pch */,
-				BEF782A521C2785300E71AE7 /* GoogleService-Info.plist */,
+				BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */,
 				A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */,
 				A20988F0191A2A2A0087EA15 /* PokcetExpense.xcdatamodeld */,
 				A25619BD19D3BBD700A5A950 /* Appirater.h */,
@@ -10987,6 +10992,9 @@
 							com.apple.Push = {
 								enabled = 1;
 							};
+							com.apple.SafariKeychain = {
+								enabled = 1;
+							};
 							com.apple.VPNLite = {
 								enabled = 0;
 							};
@@ -11656,6 +11664,7 @@
 				6076DACB1C84593100952CA7 /* budgetselect_click@3x.png in Resources */,
 				A256173E19D3BB7F00A5A950 /* ipad_btn_empty@2x.png in Resources */,
 				3ADBA0EE1BF9D5F700512D2C /* income_color3.png in Resources */,
+				BEF8097821D6148D007A96F6 /* GoogleService-Info.plist in Resources */,
 				3ADA5BFD1BEB3E0100A01870 /* iphone6_budget_second_bg@2x.png in Resources */,
 				3AE154B21BEC4A5300F9CA91 /* account_iconbg_Saving@2x.png in Resources */,
 				A260ABF31A1D8B8400019D6C /* list_report_sel@3x.png in Resources */,
@@ -12733,7 +12742,6 @@
 				A256123D19D3BB5C00A5A950 /* picture_115_163.png in Resources */,
 				3ABF0F101B1C188F000A7F26 /* Welcome_to@2x.png in Resources */,
 				A27FAE171A0216350044C469 /* iphone6_tab_bar@2x.png in Resources */,
-				BEF782A621C2785300E71AE7 /* GoogleService-Info.plist in Resources */,
 				6096B8001C72D24200A21210 /* about_bg_ipad@2x.png in Resources */,
 				A256108819D3BB5C00A5A950 /* arrow_30_30_blue.png in Resources */,
 				3AE154BD1BEC4A5300F9CA91 /* icon_all_arrow@2x.png in Resources */,
@@ -13083,6 +13091,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -13095,6 +13104,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -13408,6 +13418,7 @@
 				60BE820B1C86E66400B871E2 /* Custom_iPad_BillsCell.m in Sources */,
 				BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */,
 				A2560FDD19D3BB5C00A5A950 /* TransferViewController_NS.m in Sources */,
+				BEF8097B21D7533E007A96F6 /* XDPurchasedManager.m in Sources */,
 				A2560FFC19D3BB5C00A5A950 /* OverViewCell.m in Sources */,
 				A25616C219D3BB7F00A5A950 /* DropboxSyncTableDefine.m in Sources */,
 				A2561A8B19D3BBD700A5A950 /* ReaderScrollView.m in Sources */,

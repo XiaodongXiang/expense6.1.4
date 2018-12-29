@@ -184,7 +184,8 @@ typedef NS_ENUM(NSInteger, FIAMDisplayRenderErrorType) {
                                                // failure cases
 };
 
-/** A protocol defining those callbacks to be triggered by the message display component
+/**
+ * A protocol defining those callbacks to be triggered by the message display component
  * under appropriate conditions.
  */
 NS_SWIFT_NAME(InAppMessagingDisplayDelegate)
@@ -237,7 +238,7 @@ NS_SWIFT_NAME(messageDismissed(dismissType:));
 NS_SWIFT_NAME(InAppMessagingDisplay)
 @protocol FIRInAppMessagingDisplay
 
-/*
+/**
  * Method for rendering a specified message on client side. It's called from main thread.
  * @param messageForDisplay the message object. It would be of one of the three message
  *   types at runtime.

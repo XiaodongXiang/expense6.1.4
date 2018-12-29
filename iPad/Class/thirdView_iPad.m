@@ -365,7 +365,7 @@
             }
             else
             {
-                [[ParseDBManager sharedManager] getPFSetting];
+                [[XDPurchasedManager shareManager] getPFSetting];
                 [appDelegate succededInLogIn];
             }
         }];
@@ -388,6 +388,8 @@
             else
             {
                 [appDelegate succededInSignUp];
+                [[XDPurchasedManager shareManager] saveDefaultParseSetting];
+
             }
         }];
     }

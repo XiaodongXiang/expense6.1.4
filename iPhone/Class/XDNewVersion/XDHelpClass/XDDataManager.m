@@ -105,7 +105,7 @@
     
     [self saveContext];
     
-    [[ParseDBManager sharedManager] savingSetting];
+    [[XDPurchasedManager shareManager] savePFSetting];
 }
 
 -(void)removeSettingPurchase{
@@ -119,7 +119,7 @@
 
     [self saveContext];
     
-    [[ParseDBManager sharedManager] savingSetting];
+    [[XDPurchasedManager shareManager] savePFSetting];
 }
 
 

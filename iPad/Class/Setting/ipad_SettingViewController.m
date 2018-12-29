@@ -1132,6 +1132,7 @@
                  
                  [[NSUserDefaults standardUserDefaults] removeObjectForKey:LITE_UNLOCK_FLAG];
                  [[NSUserDefaults standardUserDefaults] removeObjectForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
+                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:IS_FIRST_UPLOAD_SETTING];
                  [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
                  [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"dismissChristmasBanner"];
 

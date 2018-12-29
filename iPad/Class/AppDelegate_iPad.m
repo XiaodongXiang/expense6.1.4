@@ -340,7 +340,7 @@
         if ([PFUser currentUser])
         {
             [[ParseDBManager sharedManager] dataSyncWithServer];
-            [[ParseDBManager sharedManager] getPFSetting];
+            [[XDPurchasedManager shareManager] getPFSetting];
 
         }
     });

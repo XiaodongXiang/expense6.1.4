@@ -489,10 +489,6 @@
     [notificationCenter addObserver:self selector:@selector(preVersionPrice:) name:GET_PRO_VERSION_PRICE_ACTION object:nil];
     [notificationCenter addObserver:self selector:@selector(hideCustomTabView) name:@"ADMOB_ADS_HIDE" object:nil];
     [notificationCenter addObserver:self selector:@selector(showCustomTabView) name:@"ADMOB_ADS_SHOW" object:nil];
-        
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getPFSettingSuccessful) name:@"getPFSettingSuccessful" object:nil];
-    
-    [[XDPlanControlClass shareControlClass] validateReceipt];
     
     //插页广告
     if ([PFUser currentUser]) {
@@ -506,20 +502,7 @@
 }
 
 
--(void)getPFSettingSuccessful{
-    
-    Setting* setting = [[XDDataManager shareManager] getSetting];
-    if ([setting.purchasedIsSubscription boolValue]) {
-        self.isPurchased = YES;
-        [[XDDataManager shareManager]openWidgetInSettingWithBool14:YES];
-//        [self hideAds:nil];
-    }else{
-        self.isPurchased = NO;
-        [[XDDataManager shareManager]openWidgetInSettingWithBool14:NO];
-//        [self showAds:nil];
-    }
-    
-}
+
 
 
 
@@ -1205,16 +1188,6 @@
     if ([PFUser currentUser])
     {
         [[ParseDBManager sharedManager]dataSyncWithServer];
-        
-        BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
-        if (!defaults2) {
-            [[ParseDBManager sharedManager] getPFSetting];
-        }
-        
-        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-        if (!appDelegate.isPurchased) {
-            [self.interstitial showInterstitialAdWithTarget:self.window.rootViewController];
-        }
     }
 }
 

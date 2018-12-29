@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  * The root object for in-app messaging iOS SDK.
  *
- * Note: Firebase InApp Messaging depends on using a Firebase Instace ID & token pair to be able
+ * Note: Firebase InApp Messaging depends on using a Firebase Instance ID & token pair to be able
  * to retrieve FIAM messages defined for the current app instance. By default, Firebase in-app
  * messaging SDK would obtain the ID & token pair on app/SDK startup. As a result of using
  * ID & token pair, some device client data (linked to the instance ID) would be collected and sent

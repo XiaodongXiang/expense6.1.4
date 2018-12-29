@@ -376,39 +376,27 @@
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
-//            [Appsee addEvent:@"Cancel - Yearly"];
             [FIRAnalytics logEventWithName:@"cancel_yearly" parameters:nil];
-          
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
-//            [Appsee addEvent:@"Payment Invalid - Yearly"];
             [FIRAnalytics logEventWithName:@"payment_invalid_yearly" parameters:nil];
-           
         }
         else if(transaction.error.code==SKErrorPaymentNotAllowed)
         {
-//            [Appsee addEvent:@"Payment Not Allowed - Yearly"];
             [FIRAnalytics logEventWithName:@"payment_not_allowed_yearly" parameters:nil];
-         
         }
         else if(transaction.error.code==SKErrorStoreProductNotAvailable)
         {
-//            [Appsee addEvent:@"Product Not Available - Yearly"];
             [FIRAnalytics logEventWithName:@"product_not_available_yearly" parameters:nil];
-          
         }
         else if(transaction.error.code==SKErrorCloudServicePermissionDenied)
         {
-//            [Appsee addEvent:@"Service Permission Denied - Yearly"];
             [FIRAnalytics logEventWithName:@"service_permission_denied_yearly" parameters:nil];
-          
         }
         else if (transaction.error.code == SKErrorClientInvalid)
         {
-//            [Appsee addEvent:@"Client Invalid - Yearly"];
             [FIRAnalytics logEventWithName:@"client_invalid_yearly" parameters:nil];
-           
             
         }else if (transaction.error.code == SKErrorCloudServiceRevoked){
             

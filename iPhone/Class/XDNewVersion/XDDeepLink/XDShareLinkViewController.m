@@ -11,6 +11,8 @@
 #import "PokcetExpenseAppDelegate.h"
 #import <MessageUI/MessageUI.h>
 #import "MBProgressHUD.h"
+//#import <FirebaseDatabase/FirebaseDatabase.h>
+
 @import Firebase;
 
 typedef void(^SucceessBlock)(BOOL success, NSString* text);
@@ -39,12 +41,13 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     }completion:^(BOOL finished) {
         self.alphaView.hidden = YES;
     }];
+    
 }
 
 - (IBAction)cancelClick:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
-    
 }
+
 - (IBAction)tapDismiss:(id)sender {
     [self cancelShareClick:nil];
 }
@@ -83,13 +86,14 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     [self.view addSubview:self.bottomView];
     self.bottomView.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 211);
     
-    
+ 
 }
 
+
 -(void)createLink{
-    NSString* uid = [PFUser currentUser].objectId;
+    NSString* uid = [PFUser currentUser].email;
     NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
-//    NSURL *link = [[NSURL alloc] initWithString:@"https://pocketexpenselite.page.link/KPM8"];
+//    NSURL *link = [[NSURL alloc] initWithString:@"https://pocketexpenselite.page.link/EBMe"];
     NSString *dynamicLinksDomain = @"pocketexpenselite.page.link";
     FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc]
                                              initWithLink:link
@@ -222,7 +226,6 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     //    }
     activityVC.completionWithItemsHandler = ^(UIActivityType  _Nullable activityType, BOOL completed, NSArray * _Nullable returnedItems, NSError * _Nullable activityError) {
         
-        NSLog(@"activityType == %@\ncompleted == %d\nreturnedItems==%@",activityType,completed,returnedItems);
         if (completed) {
             if (successBlock) {
                 successBlock(YES, [NSString stringWithFormat:@"%@",activityType]);

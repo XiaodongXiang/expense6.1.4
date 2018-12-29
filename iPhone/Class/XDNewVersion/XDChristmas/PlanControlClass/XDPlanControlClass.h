@@ -43,7 +43,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(instancetype)shareControlClass;
 
--(void)validateReceipt;
 -(NSInteger)distanceEndTime;
 
 -(BOOL)everyDayShowOnce;

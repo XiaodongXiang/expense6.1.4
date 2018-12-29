@@ -55,7 +55,5 @@
 -(void)restoreDataRemove;
 
 
--(void)getPFSetting;
--(void)savingSetting;
 
 @end

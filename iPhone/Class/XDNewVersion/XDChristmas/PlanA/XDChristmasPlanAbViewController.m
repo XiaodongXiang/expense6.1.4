@@ -191,7 +191,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     setting.purchaseOriginalProductID = originalProID;
     
     [[XDDataManager shareManager] saveContext];
-    [[ParseDBManager sharedManager] savingSetting];
+    [[XDPurchasedManager shareManager] savePFSetting];
 }
 
 

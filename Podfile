@@ -19,6 +19,10 @@ pod 'Firebase/Messaging'
 pod 'Firebase/RemoteConfig'
 pod 'Firebase/DynamicLinks'
 pod 'FirebaseAuth'
+pod 'Firebase/Functions'
+pod 'Firebase/Database'
+pod 'GoogleAppMeasurement'
+
 end
 
 

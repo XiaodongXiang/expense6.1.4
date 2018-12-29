@@ -304,7 +304,7 @@
     if ([PFUser currentUser]) {
         Setting* setting = [[XDDataManager shareManager] getSetting];
         if ([setting.otherBool17 boolValue] == NO) {
-            [[ParseDBManager sharedManager] savingSetting];
+            [[XDPurchasedManager shareManager] savePFSetting];
         }
     }
 

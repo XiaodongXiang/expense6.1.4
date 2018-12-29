@@ -213,63 +213,7 @@
     return [NSNumber numberWithDouble:interval];
 }
 
--(void)validateReceipt
-{
-    
-    NSURL* receiptUrl = [[NSBundle mainBundle] appStoreReceiptURL];
-    NSData* receiptData = [NSData dataWithContentsOfURL:receiptUrl];
-    NSString* urlStr = RECEIPTURL;
-    
-    NSString * encodeStr = [receiptData base64EncodedStringWithOptions:0];
-    NSURL* sandBoxUrl = [[NSURL alloc]initWithString:urlStr];
-    
-    NSDictionary* dic = @{@"receipt":encodeStr};
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:dic options:0 error:nil];
-    
-    NSMutableURLRequest* connectionRequest = [NSMutableURLRequest requestWithURL:sandBoxUrl];
-    connectionRequest.cachePolicy = NSURLRequestUseProtocolCachePolicy;
-    connectionRequest.HTTPBody = jsonData;
-    connectionRequest.HTTPMethod = @"POST";
-    [connectionRequest setValue:@"application/json; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
-    [connectionRequest setValue:[NSString stringWithFormat:@"%lu", (unsigned long)[jsonData length]] forHTTPHeaderField:@"Content-Length"];
-    
-    // create a background session for connecting to the Receipt Verification service.
-    NSURLSession *session = [NSURLSession sharedSession];
-    NSURLSessionDataTask *datatask = [session dataTaskWithRequest: connectionRequest
-                                                completionHandler: ^(NSData *apiData
-                                                                     , NSURLResponse *apiResponse
-                                                                     , NSError *conxErr)
-                                      {
-                                          // background datatask completion block
-                                          if (apiData) {
-                                              
-                                              NSError *parseErr;
-                                              NSDictionary *json = [NSJSONSerialization JSONObjectWithData: apiData
-                                                                                                   options: 0
-                                                                                                     error: &parseErr];
-                                              // TODO: add error handling for conxErr, json parsing, and invalid http response statuscode
-                                              NSDictionary* recerptDic = json[@"receipt"];
-                                              
-                                              NSArray* lastReceiptArr = recerptDic[@"latest_receipt_info"];
-//                                              NSDictionary* pendingRenewal = [recerptDic[@"pending_renewal_info"] lastObject];
-                                              NSDictionary* lastReceiptInfo = lastReceiptArr.lastObject;
-                                              NSLog(@"receipt=== %@",lastReceiptInfo);
-                                              
-                                                
-                                          }else{
-                                              
-                                              
-                                          }
-                                          
-                                          
-                                          /* TODO: Unlock the In App purchases ...
-                                           At this point the json dictionary will contain the verified receipt from Apple
-                                           and each purchased item will be in the array of lineitems.
-                                           */
-                                      }];
-    
-    [datatask resume];
-}
+
 
 
 -(NSInteger)distanceEndTime{

@@ -179,7 +179,7 @@
     
     [[XDDataManager shareManager] saveContext];
     
-    [[ParseDBManager sharedManager] savingSetting];
+    [[XDPurchasedManager shareManager] savePFSetting];
 }
 
 #pragma mark - XDUpgradeViewDelegate

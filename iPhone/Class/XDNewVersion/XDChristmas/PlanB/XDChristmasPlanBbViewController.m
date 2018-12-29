@@ -219,7 +219,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     
     [[XDDataManager shareManager] saveContext];
     
-    [[ParseDBManager sharedManager] savingSetting];
+    [[XDPurchasedManager shareManager] savePFSetting];
 }
 
 

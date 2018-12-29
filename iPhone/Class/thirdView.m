@@ -339,6 +339,7 @@
             else
             {
                 [appDelegate succededInSignUp];
+                
             }
         }];
     }

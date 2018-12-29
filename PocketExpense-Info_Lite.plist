@@ -55,7 +55,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>771</string>
+	<string>853</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -75,6 +75,8 @@
 	<key>FacebookDisplayName</key>
 	<string>Pocket Expense</string>
 	<key>FirebaseMessagingAutoInitEnabled</key>
+	<false/>
+	<key>FirebaseScreenReportingEnabled</key>
 	<false/>
 	<key>ITSAppUsesNonExemptEncryption</key>
 	<false/>
@@ -126,7 +128,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>The photos captured by camera will be used as your avatar or the snapshots of your transations.</string>
 	<key>NSFaceIDUsageDescription</key>
-	<string>Face ID is used to unlock Pocket Expense</string>
+	<string>Face ID is used to unlock Pocket Expense.</string>
 	<key>NSMainNibFile</key>
 	<string>MainWindow_iPhone</string>
 	<key>NSMainNibFile~ipad</key>

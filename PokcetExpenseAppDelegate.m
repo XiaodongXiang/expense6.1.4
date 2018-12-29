@@ -51,7 +51,7 @@
 #import "BayMaxProtector.h"
 
 #import "FBHelper.h"
-
+#import <FirebaseDatabase/FirebaseDatabase.h>
 @import Firebase;
 
 @interface PokcetExpenseAppDelegate ()<FIRMessagingDelegate,SKRequestDelegate>
@@ -81,61 +81,6 @@
 
 @synthesize isPurchased,inAppPM;
 
-#pragma mark -
-#pragma mark DisposeData
-
-//-------将免费版的数据转移到正式版中...
--(void)DisposeData:(id)sender
-{
-	if([@"/importDatabase" isEqualToString:[url path]]) 
-	{
-		
-		NSString *query = [url query];
-		NSData *importUrlData = [GTMBase64 webSafeDecodeString:query];
-		NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-		NSString *documentsDirectory = [paths objectAtIndex:0];
-		NSString * litePath  = [NSString stringWithFormat:@"%@/%@",documentsDirectory, @"PocketExpenseLite.sqlite"];
-		NSString *curPath = [documentsDirectory stringByAppendingPathComponent:@"PocketExpense1.0.0.sqlite"];
-		NSFileManager *fileManager = [NSFileManager defaultManager];
-		[importUrlData writeToFile:litePath atomically:YES];
-		NSError * error;
-		[fileManager removeItemAtPath:curPath error:&error];
-		[fileManager copyItemAtPath:litePath toPath:curPath error:NULL];
-		
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_Pocket Expense data transfer success", nil)
-															message:NSLocalizedString(@"VC_Thanks for using our Full Version! Please restart the Full Version to complete the transfer.", nil)
-														   delegate:self 
-												  cancelButtonTitle:nil
-												  otherButtonTitles:NSLocalizedString(@"VC_OK", nil),nil];
-		alertView.tag = 10;
-		[alertView show];
-		[fileManager removeItemAtPath:litePath error:&error];
-		
-	}
-}
-
-
-#pragma mark -
-#pragma mark Application lifecycle
-
--(void)saveTranscationConfig
-{
-//	NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"transacationConfig.plist"];
-// 	
-//	[plistDictionary writeToFile:storePath atomically: YES];
-// 	
-}
-
--(void)saveTranscationDRConfig
-{
-	//NSString *storePath = [[self applicationDocumentsDirectory] stringByAppendingPathComponent:@"transacationDRSelConfig.plist"];
- 	
-	//[tranDRplistDictionary writeToFile:storePath atomically: YES];
- 	
-}
-
-
-
 #pragma mark Life Cycle
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -143,9 +88,6 @@
                              didFinishLaunchingWithOptions:launchOptions];
 
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
-//    [Appsee start];
-    
-//    [[GAI sharedInstance] trackerWithTrackingId:@"YOUR_TRACKING_ID"];
     
     [BayMaxProtector openProtectionsOn:BayMaxProtectionTypeAll catchErrorHandler:^(BayMaxCatchError * _Nullable error) {
         NSArray *callStacks = [error.errorInfos objectForKey:BMPErrorCallStackSymbols];
@@ -173,86 +115,19 @@
     application.applicationIconBadgeNumber = 0;
     NSError *error = nil;
 
-    //更新数据，4.5.1版本，transfer类型的transaction也可能由category
-    NSFetchRequest *fetchBill = [[NSFetchRequest alloc]initWithEntityName:@"EP_BillRule"];
-    NSPredicate *pre2 = [NSPredicate predicateWithFormat:@"ep_recurringType == 'Only Once'"];
-    [fetchBill setPredicate:pre2];
-    NSArray *objects_bill = [[NSArray alloc]initWithArray:[self.managedObjectContext executeFetchRequest:fetchBill error:&error]];
-    
-    for (int i=0; i<[objects_bill count]; i++)
-    {
-        EP_BillRule *oneBill = [objects_bill objectAtIndex:i];
-        oneBill.ep_recurringType = @"Never";
-        oneBill.dateTime = [NSDate date];
-        [self.managedObjectContext save:&error];
-    }
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if ([[userDefaults objectForKey:NEWUSEDATA] isEqualToString:FIRSTLAUNCHSINCEBACKUPNEWDATA]) {
-        [self.epdc setLocalDataBaseSyncTimeToday_whenRestore];
-        
-        //备份完成后第一次打开应用
-        
-        //删除云端数据
-        [self restoreDelete];
-        
-        NSString *resotreUUID=[EPNormalClass GetUUID];
-        [userDefaults setValue:resotreUUID forKey:@"restoreUUID"];
-        
-        PFQuery *query=[PFQuery queryWithClassName:@"Setting"];
-        [query whereKey:@"User" equalTo:[PFUser currentUser]];
-        NSArray *userSetting=[query findObjects:&error];
-        
-        if (userSetting.count)
-        {
-            PFObject *setting=[userSetting objectAtIndex:0];
-            setting[@"restoreUUID"]=resotreUUID;
-            [setting saveInBackground];
-        }
-        else
-        {
-            PFObject *object=[PFObject objectWithClassName:@"Setting"];
-            object[@"User"]=[PFUser currentUser];
-            object[@"restoreUUID"]=resotreUUID;
-            [object saveInBackground];
-        }
-        
-        [userDefaults removeObjectForKey:NEWUSEDATA];
-        [userDefaults synchronize];
-        
-        //修改设备synctime，方便完全同步数据至云端
-        NSFetchRequest *requestUser=[[NSFetchRequest alloc]init];
-        NSEntityDescription *descUser=[NSEntityDescription entityForName:@"User" inManagedObjectContext:self.managedObjectContext];
-        requestUser.entity=descUser;
-        
-        NSError *error;
-        
-        NSArray *arrayUser=[self.managedObjectContext executeFetchRequest:requestUser error:&error];
-        
-        User *user=[arrayUser objectAtIndex:0];
-        user.syncTime=[NSDate dateWithTimeIntervalSince1970:0];
-        [self.managedObjectContext save:&error];
-
-    }
-
+    [FIROptions defaultOptions].deepLinkURLScheme = @"PocketExpenseLite";
     [FIRApp configure];
     [FBHelper instance];
     [Appirater appLaunched];
     
     self.isPurchased = NO;
     
-//    inAppPM =  [[InAppPurchaseManager alloc]init];
-//    inAppPM.delegate = self;
-//    //免费版先获取商品信息
-//    [inAppPM loadStore];
-//    [inAppPM finishSomeUnfinishTransaction];
-//    [inAppPM addTransactionObserver];
-    
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getIntroductoryPriceNotif) name:@"getIntroductoryPriceNotif" object:nil];
 
     [[XDInAppPurchaseManager shareManager] getProductInfo];
     [[XDInAppPurchaseManager shareManager] addTransactionObserver];
+    
+    
     
     //免费版，判断是否内购成功
     if (!self.isPurchased)
@@ -296,8 +171,6 @@
     
     [application registerForRemoteNotifications];
     
-    
-    
     //获取网络时间和本地时间差
     [NSDate internetServerDate:^(NSDate * internetDate) {
         
@@ -317,12 +190,11 @@
         [userDefault synchronize];
     }
     
-    
-    
     [self.epnc setFlurryEvent_withUpgrade:NO];
     
-    
-    
+    [[XDPurchasedManager shareManager] saveDefaultParseSetting];
+
+   
     return YES;
 }
 
@@ -788,6 +660,22 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     [[NSNotificationCenter defaultCenter] removeObserver:observer name:LITE_NOTIFICT_NAME object:nil];
 }
 
+-(BOOL)saveLinksInfo:(FIRDynamicLink*)dynamicLink{
+    if (dynamicLink && dynamicLink.url) {
+        
+        NSURLComponents* queryItems = [NSURLComponents componentsWithURL:dynamicLink.url resolvingAgainstBaseURL:YES];
+        if (queryItems) {
+            if ([queryItems.query hasPrefix:@"invitedby="]) {
+                NSString* emailStr = [[queryItems.query componentsSeparatedByString:@"="]lastObject];
+
+                
+              
+            }
+        }
+    }
+    return YES;
+}
+
 - (BOOL)application:(UIApplication *)application
 continueUserActivity:(nonnull NSUserActivity *)userActivity
  restorationHandler:
@@ -796,22 +684,25 @@ continueUserActivity:(nonnull NSUserActivity *)userActivity
 #else
     (nonnull void (^)(NSArray *_Nullable))restorationHandler {
 #endif  // __IPHONE_12_0
-        BOOL handled = [[FIRDynamicLinks dynamicLinks] handleUniversalLink:userActivity.webpageURL
-                                                                completion:^(FIRDynamicLink * _Nullable dynamicLink,
-                                                                             NSError * _Nullable error) {
-                                                                    // ...
-                                                                }];
-        return handled;
-    }
+    BOOL handled = [[FIRDynamicLinks dynamicLinks] handleUniversalLink:userActivity.webpageURL
+                                                            completion:^(FIRDynamicLink * _Nullable dynamicLink,
+                                                                         NSError * _Nullable error) {
+                                                                // ...
+                                                                [self saveLinksInfo:dynamicLink];
+                                                                
+                                                            }];
+    return handled;
+}
     
-    - (BOOL)application:(UIApplication *)app
-openURL:(NSURL *)url
-options:(NSDictionary<NSString *, id> *)options {
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString *, id> *)options {
     return [self application:app
                      openURL:url
            sourceApplication:options[UIApplicationOpenURLOptionsSourceApplicationKey]
                   annotation:options[UIApplicationOpenURLOptionsAnnotationKey]];
 }
+   
+    
 //从其他应用打开本应用
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)urls sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
@@ -2089,66 +1980,66 @@ options:(NSDictionary<NSString *, id> *)options {
     }
 }
 
--(void)afterRestore
-{
-    if (![self networkConnected])
-    {
-        return;
-    }
-    NSError *error;
-    
-    //初始化RestoreUUID字符串
-    NSString *serverRestoreUUID=nil;
-    NSString *localRestoreUUID=nil;
-    
-    PFQuery *query=[PFQuery queryWithClassName:@"Setting"];
-    [query whereKey:@"User" equalTo:[PFUser currentUser]];
-    NSArray *array=[query findObjects:&error];
-    
-    
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    localRestoreUUID=[userDefaults objectForKey:@"restoreUUID"];
-    
-    if (array.count)
-    {
-
-    }
-    else
-    {
-        //云端尚未存储该用户的setting数据
-        PFObject *setting=[PFObject objectWithClassName:@"Setting"];
-        setting[@"restoreUUID"]=[EPNormalClass GetUUID];
-        setting[@"User"]=[PFUser currentUser];
-        [setting save:&error];
-        serverRestoreUUID=setting[@"restoreUUID"];
-    }
-    if (localRestoreUUID==nil)
-    {
-        NSString *UUIDString=[EPNormalClass GetUUID];
-        [userDefaults setValue:UUIDString forKey:@"restoreUUID"];
-        [userDefaults synchronize];
-    }
-    
-//    if (![serverRestoreUUID isEqualToString:localRestoreUUID])
+//-(void)afterRestore
+//{
+//    if (![self networkConnected])
 //    {
-//        [self removeAllData];
-//        
-//        [self.epdc initializeAccountType];
-//        [self.epdc initializeCategory];
-//        [self.epdc createDefaultAccount];
-//        
-//        User *user=[NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContext];
-//        user.syncTime=[NSDate dateWithTimeIntervalSince1970:0];
-//        user.userObjectId=[[PFUser currentUser]objectId];
-//        [self.managedObjectContext save:&error];
-//        
-//        //将本机 restoreUUID 修改同云端同步
-//        [userDefaults setObject:serverRestoreUUID forKey:@"restoreUUID"];
-//        [userDefaults synchronize];
-//        
+//        return;
 //    }
-    
-}
+//    NSError *error;
+//    
+//    //初始化RestoreUUID字符串
+//    NSString *serverRestoreUUID=nil;
+//    NSString *localRestoreUUID=nil;
+//    
+//    PFQuery *query=[PFQuery queryWithClassName:@"Setting"];
+//    [query whereKey:@"User" equalTo:[PFUser currentUser]];
+//    NSArray *array=[query findObjects:&error];
+//    
+//    
+//    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+//    localRestoreUUID=[userDefaults objectForKey:@"restoreUUID"];
+//    
+//    if (array.count)
+//    {
+//
+//    }
+//    else
+//    {
+//        //云端尚未存储该用户的setting数据
+//        PFObject *setting=[PFObject objectWithClassName:@"Setting"];
+//        setting[@"restoreUUID"]=[EPNormalClass GetUUID];
+//        setting[@"User"]=[PFUser currentUser];
+//        [setting save:&error];
+//        serverRestoreUUID=setting[@"restoreUUID"];
+//    }
+//    if (localRestoreUUID==nil)
+//    {
+//        NSString *UUIDString=[EPNormalClass GetUUID];
+//        [userDefaults setValue:UUIDString forKey:@"restoreUUID"];
+//        [userDefaults synchronize];
+//    }
+//    
+////    if (![serverRestoreUUID isEqualToString:localRestoreUUID])
+////    {
+////        [self removeAllData];
+////        
+////        [self.epdc initializeAccountType];
+////        [self.epdc initializeCategory];
+////        [self.epdc createDefaultAccount];
+////        
+////        User *user=[NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:self.managedObjectContext];
+////        user.syncTime=[NSDate dateWithTimeIntervalSince1970:0];
+////        user.userObjectId=[[PFUser currentUser]objectId];
+////        [self.managedObjectContext save:&error];
+////        
+////        //将本机 restoreUUID 修改同云端同步
+////        [userDefaults setObject:serverRestoreUUID forKey:@"restoreUUID"];
+////        [userDefaults synchronize];
+////        
+////    }
+//    
+//}
 -(void)restoreData
 {
     if (![self networkConnected])

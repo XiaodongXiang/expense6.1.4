@@ -14,6 +14,7 @@
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "AppDelegate_iPhone.h"
 #import "ParseDBManager.h"
+#import <FirebaseDatabase/FirebaseDatabase.h>
 
 @import Firebase;
 @interface XDSignInViewController ()
@@ -248,9 +249,8 @@
          else
          {
              NSLog(@"User logged in through Facebook!");
-             [[ParseDBManager sharedManager] getPFSetting];
+             [[XDPurchasedManager shareManager] getPFSetting];
              [appDelegate succededInLogIn];
-             
              
          }
          
@@ -358,7 +358,7 @@
             }
             else
             {
-                [[ParseDBManager sharedManager] getPFSetting];
+                [[XDPurchasedManager shareManager] getPFSetting];
                 [appDelegate succededInLogIn];
             }
         }];
@@ -393,10 +393,14 @@
             else
             {
                 [appDelegate succededInSignUp];
+                [[XDPurchasedManager shareManager] saveDefaultParseSetting];
+      
             }
         }];
         
     }
+    
+    
 }
 
 - (IBAction)signUpBtnClick:(id)sender {
