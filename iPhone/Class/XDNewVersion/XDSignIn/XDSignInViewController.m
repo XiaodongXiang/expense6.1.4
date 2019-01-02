@@ -249,8 +249,8 @@
          else
          {
              NSLog(@"User logged in through Facebook!");
-             [[XDPurchasedManager shareManager] getPFSetting];
              [appDelegate succededInLogIn];
+             [[XDPurchasedManager shareManager] getPFSetting];
              
          }
          
@@ -358,8 +358,9 @@
             }
             else
             {
-                [[XDPurchasedManager shareManager] getPFSetting];
                 [appDelegate succededInLogIn];
+                [[XDPurchasedManager shareManager] getPFSetting];
+
             }
         }];
         

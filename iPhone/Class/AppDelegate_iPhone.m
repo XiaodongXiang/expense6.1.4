@@ -419,6 +419,8 @@
         if ([PFUser currentUser])
         {
             [[ParseDBManager sharedManager]dataSyncWithServer];
+            [[XDPurchasedManager shareManager] getPFSetting];
+
         }
     });
     //处理budget更新，自动插入transaction
@@ -1188,6 +1190,8 @@
     if ([PFUser currentUser])
     {
         [[ParseDBManager sharedManager]dataSyncWithServer];
+        [[XDPurchasedManager shareManager] getPFSetting];
+
     }
 }
 
@@ -1309,34 +1313,10 @@
         });
     }
     
-    
-#warning - change
-    
     XDTabbarViewController* tabbarVc = [[XDTabbarViewController alloc]init];
-    
-
-//    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
-//    _overViewController=[[OverViewWeekCalenderViewController alloc]init];
-//    _navCtrl=[[UINavigationController alloc]initWithRootViewController:_overViewController];
-////
-//    _menuVC=[[menuViewController alloc]init];
-//    _menuVC.navigationControllerArray=[NSMutableArray arrayWithObjects:_navCtrl,@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
-//    _drawerVC=[[MMDrawerController alloc]initWithCenterViewController:_navCtrl leftDrawerViewController:_menuVC];
-//
-//    //drawController设置
-//    _drawerVC.showsShadow=NO;
-//    _drawerVC.maximumLeftDrawerWidth=MENU_WIDTH;
-//
-//    [_drawerVC setCloseDrawerGestureModeMask:MMCloseDrawerGestureModePanningCenterView];
-    
     self.window.rootViewController=tabbarVc;
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
-    
-    if (!self.isPurchased)
-    {
-//        [self showAds:nil];
-    }
-    
+
 }
 
 -(void)succededInLogIn

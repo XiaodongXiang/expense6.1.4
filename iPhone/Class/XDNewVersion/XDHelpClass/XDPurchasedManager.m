@@ -265,4 +265,32 @@
     }
 }
 
+-(void)puchasedMonthInfoInSetting:(NSDate*)startDate productID:(NSString*)productID originalProID:(NSString *)originalProID{
+    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:startDate];
+    
+    // 修改订阅测试时间
+#ifdef DEBUG
+    comp.minute += 3;
+#else
+    comp.day += 7;
+#endif
+    NSDate* endDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
+    
+      
+    Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
+    setting.purchasedProductID = productID;
+    setting.purchasedStartDate = startDate;
+    setting.purchasedEndDate = endDate;
+    setting.purchasedUpdateTime = [NSDate date];
+    setting.otherBool17 = @NO;
+    setting.purchasedIsSubscription = @YES;
+    setting.uuid = [PFUser currentUser].objectId;
+    setting.purchaseOriginalProductID = originalProID;
+    
+    [[XDDataManager shareManager] saveContext];
+    
+    [[XDPurchasedManager shareManager] savePFSetting];
+
+}
+
 @end

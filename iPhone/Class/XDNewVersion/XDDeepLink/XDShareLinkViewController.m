@@ -91,7 +91,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
 
 
 -(void)createLink{
-    NSString* uid = [PFUser currentUser].email;
+    NSString* uid = [PFUser currentUser].objectId;
     NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
 //    NSURL *link = [[NSURL alloc] initWithString:@"https://pocketexpenselite.page.link/EBMe"];
     NSString *dynamicLinksDomain = @"pocketexpenselite.page.link";

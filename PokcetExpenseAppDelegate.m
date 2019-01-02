@@ -89,6 +89,7 @@
 
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
     
+    
     [BayMaxProtector openProtectionsOn:BayMaxProtectionTypeAll catchErrorHandler:^(BayMaxCatchError * _Nullable error) {
         NSArray *callStacks = [error.errorInfos objectForKey:BMPErrorCallStackSymbols];
         NSLog(@"callStacks:%@",callStacks);
@@ -110,6 +111,9 @@
             NSLog(@"infos:%@",error.errorInfos);
         }
     }];
+    
+    [BayMaxProtector closeProtectionsOn:BayMaxProtectionTypeTimer];
+
     
     NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());
     application.applicationIconBadgeNumber = 0;
@@ -667,9 +671,10 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
         if (queryItems) {
             if ([queryItems.query hasPrefix:@"invitedby="]) {
                 NSString* emailStr = [[queryItems.query componentsSeparatedByString:@"="]lastObject];
-
-                
-              
+                if (![PFUser currentUser]) {
+                    [[NSUserDefaults standardUserDefaults] setValue:emailStr forKey:@"invitedby"];
+                    
+                }
             }
         }
     }
