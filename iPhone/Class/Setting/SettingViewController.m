@@ -79,6 +79,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *signOutCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *sharelinkCell;
+@property (weak, nonatomic) IBOutlet UIImageView *unUpgradeImgV;
 
 @end
 
@@ -141,12 +142,20 @@
     
     if (IS_IPHONE_X) {
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
+        self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_plus"];
+
     }else if (IS_IPHONE_6){
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
+        self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_2"];
+
     }else if (IS_IPHONE_6PLUS){
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_plus"];
+        self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_plus"];
+
     }else{
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_se"];
+        self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_se"];
+
     }
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
@@ -156,6 +165,7 @@
     }else{
         self.redPointView.hidden = YES;
     }
+    
 }
 
 
@@ -682,8 +692,6 @@
     if (!appDelegate.isPurchased) {
         if (indexPath.section == 0) {
             if (indexPath.row == 0) {
-                view.y = 145;
-                [self.noPurchasedProfileCell addSubview:view];
                 return self.noPurchasedProfileCell;
             }else if(indexPath.row == 1){
                 [self.sharelinkCell addSubview:view];
@@ -940,9 +948,15 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 145;
+            if (appDelegate.isPurchased) {
+                return 145;
+            }else{
+                return 181;
+                
+            }
         }
     }
     if (indexPath.section == 0 && indexPath.row == 3) {

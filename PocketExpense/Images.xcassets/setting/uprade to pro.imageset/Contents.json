@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "uprade to pro.png",
+      "filename" : "Get Premium Free.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "uprade to pro@2x.png",
+      "filename" : "Get Premium Free@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "uprade to pro@3x.png",
+      "filename" : "Get Premium Free@3x.png",
       "scale" : "3x"
     }
   ],
