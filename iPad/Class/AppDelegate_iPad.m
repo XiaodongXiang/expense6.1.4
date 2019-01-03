@@ -518,6 +518,13 @@
     [self getRecentlyTwoMonthesand50NeedtoReminderBills];
     [super applicationWillEnterForeground:application];
 
+    if ([PFUser currentUser])
+    {
+        [[ParseDBManager sharedManager]dataSyncWithServer];
+        [[XDPurchasedManager shareManager] getPFSetting];
+        
+    }
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -563,6 +570,8 @@
     [super applicationDidBecomeActive:application];
     
    
+   
+    
     if (self.isSignUping==YES )
     {
         [self.transferAlertview show];

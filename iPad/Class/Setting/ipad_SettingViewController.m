@@ -34,10 +34,14 @@
 #import "AppDelegate_iPhone.h"
 #import "XDOurAppsViewController.h"
 #import "XDShareLinkViewController.h"
-
+#import "FSMediaPicker.h"
 @import Firebase;
-@interface ipad_SettingViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *premiumIcon;
+@interface ipad_SettingViewController ()<FSMediaPickerDelegate>
+@property (weak, nonatomic) IBOutlet UIButton *profileIconBtn;
+@property (weak, nonatomic) IBOutlet UILabel *profileEmailLbl;
+@property (weak, nonatomic) IBOutlet UILabel *renewsLbl;
+
+
 @property (strong, nonatomic) IBOutlet UITableViewCell *premiumCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *oursAppCell;
 @property (weak, nonatomic) IBOutlet UIView *redPoint;
@@ -51,6 +55,40 @@
 @synthesize iSyncViewController;
 @synthesize proImageViewl2,proImageViewl3;
 @synthesize restoreLabelText,passcodeLabelText,currencyLabelText,faqLabelText,payeeLabelText,categoryLabelText,syncLabelText,exportLabelText,backupLabelText,migrateDateLabelText,appVersionLabelText,sendFeedbackLabelText,reviewLabelText,generalText;
+
+- (IBAction)profileBtnClick:(id)sender {
+    
+    FSMediaPicker *mediaPicker = [[FSMediaPicker alloc] init];
+    mediaPicker.mediaType = (FSMediaType)0;
+    mediaPicker.editMode = (FSEditMode)0;
+    mediaPicker.delegate = self;
+    [mediaPicker showFromView:self.profileIconBtn];
+}
+
+#pragma mark - FSMediaPicker Delegate
+-(void)mediaPicker:(FSMediaPicker *)mediaPicker didFinishWithMediaInfo:(NSDictionary *)mediaInfo
+{
+    [self.profileIconBtn setImage:mediaPicker.editMode == FSEditModeCircular? mediaInfo.circularEditedImage:mediaInfo.editedImage forState:UIControlStateNormal];
+    
+    UIImage *avatarImage=mediaPicker.editMode == FSEditModeCircular? mediaInfo.circularEditedImage:mediaInfo.editedImage;
+    //    NSFileManager *manager=[NSFileManager defaultManager];
+    
+    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
+    
+    NSData *imageData=UIImageJPEGRepresentation(avatarImage, 0.5);
+    [imageData writeToFile:imageFile atomically:YES];
+    
+    PFUser *user=[PFUser currentUser];
+    PFFile *photo=[PFFile fileWithName:[NSString stringWithFormat:@"avatar.jpg"] data:imageData];
+    user[@"avatar"]=photo;
+    [user saveInBackground];
+}
+-(void)setAvatarImage:(UIImage *)image
+{
+    [self.profileIconBtn setImage:image forState:UIControlStateNormal];
+}
+
 #pragma mark view life cycle
 - (void)viewDidLoad
 {
@@ -72,31 +110,6 @@
     [_logOutBtn addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     self.view.backgroundColor=[UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1];
     
-    PokcetExpenseAppDelegate *appdelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (appdelegate.isPurchased) {
-        Setting* setting = [[XDDataManager shareManager] getSetting];
-        BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
-        
-        
-        NSString* proID = setting.purchasedProductID;
-        
-        
-        if ([proID isEqualToString:kInAppPurchaseProductIdLifetime] || defaults2) {
-            self.premiumIcon.image = [UIImage imageNamed:@"member_3"];
-            
-        }else{
-            if (![setting.purchasedIsSubscription boolValue]) {
-                appdelegate.isPurchased = NO;
-            }else{
-                if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
-                    self.premiumIcon.image = [UIImage imageNamed:@"member_1"];
-                }else{
-                    self.premiumIcon.image = [UIImage imageNamed:@"member_2"];
-                }
-            }
-            [self.tableView reloadData];
-        }
-    }
     [FIRAnalytics setScreenName:@"setting_main_view_ipad" screenClass:@"ipad_SettingViewController"];
     
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
@@ -106,6 +119,19 @@
     }else{
         self.redPoint.hidden = YES;
     }
+    
+    self.profileEmailLbl.text = [PFUser currentUser].email;
+    self.profileIconBtn.layer.cornerRadius = self.profileIconBtn.width/2;
+    self.profileIconBtn.layer.masksToBounds = YES;
+    NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+    NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
+    NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
+    UIImage *image=[[UIImage alloc]initWithData:imageData];
+    if (imageData) {
+        [self.profileIconBtn setImage:image forState:UIControlStateNormal];
+    }
+    
+    
 }
 
 
@@ -487,6 +513,19 @@
     
 }
 
+-(NSString*)returnDateFormatter:(NSDate*)date{
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    if ([date compare:[NSDate dateWithTimeIntervalSince1970:0]] == NSOrderedSame) {
+        return [NSString stringWithFormat:@"Last Sync: %@",[formatter stringFromDate:[NSDate date]]];
+    }
+    
+    return [NSString stringWithFormat:@"Last Sync: %@",[formatter stringFromDate:date]];
+}
+
 // Customize the appearance of table view cells.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -502,6 +541,22 @@
             if (!appDelegate.isPurchased){
                 return restorePurchaseCell;
             }else{
+                if (appDelegate.isPurchased) {
+                    if ([[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG]) {
+                        self.renewsLbl.text = @"";
+                    }else{
+                        Setting* setting = [[XDDataManager shareManager] getSetting];
+                        NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
+                        [formatter setDateFormat:@"yyyy-MM-dd"];
+                        NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
+                        self.renewsLbl.text = [NSString stringWithFormat:@"Renews :%@",expiredString];
+                        
+                        if ([setting.otherBool18 boolValue] && [setting.otherBool16 boolValue]) {
+                            self.renewsLbl.text = [NSString stringWithFormat:@"Expire Date :%@",expiredString];
+                        }
+                    }
+                }
+                
                 return self.premiumCell;
             }
         }else{
@@ -663,6 +718,9 @@
     }
     else
     {
+        if (indexPath.section == 0 && indexPath.row == 0) {
+            return 145;
+        }
         if (indexPath.section==0 && indexPath.row==2)
         {
             return 45;
@@ -684,7 +742,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section==0) {
-        return 36.f;
+        return 0.01f;
     }
     else
         return 25.f;
@@ -775,7 +833,7 @@
                  
                  [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
                  
-                 
+                 appDelegate.isPurchased = NO;
                  [indicatorview removeFromSuperview];
                  
                  SignViewController_iPad *loginViewController=[[SignViewController_iPad alloc]init];

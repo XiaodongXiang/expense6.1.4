@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Setting *> *)fetchRequest;
 
-@property (nullable, nonatomic, copy) NSNumber *otherBool18;
+@property (nullable, nonatomic, copy) NSNumber *otherBool18;// alreadyInvited  1.已经邀请过成功
 @property (nullable, nonatomic, copy) NSString *others11;
 @property (nullable, nonatomic, copy) NSString *others12;
 @property (nullable, nonatomic, copy) NSString *others20;
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSNumber *otherBool14;
 @property (nullable, nonatomic, copy) NSString *passcode;
 @property (nullable, nonatomic, copy) NSNumber *otherBool7;
-@property (nullable, nonatomic, copy) NSNumber *otherBool8; // alreadyInvited  1.已经邀请过成功
+@property (nullable, nonatomic, copy) NSNumber *otherBool8;
 @property (nullable, nonatomic, copy) NSNumber *payeeTranMemo;
 @property (nullable, nonatomic, copy) NSNumber *otherBool15;
 @property (nullable, nonatomic, copy) NSNumber *payeeTranClear;

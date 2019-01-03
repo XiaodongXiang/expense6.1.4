@@ -598,8 +598,8 @@
     {
         [[ParseDBManager sharedManager]dataSyncWithServer];
         [[XDPurchasedManager shareManager] getPFSetting];
-        
     }
+    
 }
 
 

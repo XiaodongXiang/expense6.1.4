@@ -748,7 +748,7 @@
                         NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
                         self.exprieDateLbl.text = [NSString stringWithFormat:@"Renews :%@",expiredString];
                         
-                        if (setting.otherBool18) {
+                        if ([setting.otherBool18 boolValue] && [setting.otherBool16 boolValue]) {
                             self.exprieDateLbl.text = [NSString stringWithFormat:@"Expire Date :%@",expiredString];
 
                         }
@@ -1047,7 +1047,8 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:IS_FIRST_UPLOAD_SETTING];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"invitedby"];
 
-            
+            appDelegate.isPurchased = NO;
+
             [[XDDataManager shareManager] saveContext];
             
             [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];

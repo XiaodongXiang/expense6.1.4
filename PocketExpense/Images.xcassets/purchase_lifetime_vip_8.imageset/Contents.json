@@ -2,7 +2,6 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "purchase_lifetime_vip_8.png",
       "scale" : "1x"
     },
     {
@@ -11,6 +10,17 @@
       "scale" : "2x"
     },
     {
+      "resizing" : {
+        "mode" : "3-part-horizontal",
+        "center" : {
+          "mode" : "tile",
+          "width" : 1
+        },
+        "cap-insets" : {
+          "right" : 568,
+          "left" : 508
+        }
+      },
       "idiom" : "universal",
       "filename" : "purchase_lifetime_vip_8@3x.png",
       "scale" : "3x"

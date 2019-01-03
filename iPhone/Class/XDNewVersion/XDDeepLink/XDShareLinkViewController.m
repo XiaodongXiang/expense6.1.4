@@ -125,13 +125,14 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
 
 
 -(void)invite:(NSURL*)url{
-    NSString* uid = [PFUser currentUser].email;
-    NSString* subject = [NSString stringWithFormat:@"%@ wants you to play deeplink",uid];
+    NSString* subject = @"Join me at Pocket Expense";
     NSString* inviteLink = url.absoluteString;
-    NSString* message = [NSString stringWithFormat:@"<p>Let's play Pocket Expense together! Use my <a href=\"\%@\">referrer link</a>!</p>",inviteLink];
+    NSString* uid = [PFUser currentUser].objectId;
+    NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
+
+    NSString* message = [NSString stringWithFormat:@"<p>I'm using Pocket Expense. Join me and see hou easy to manage personal finance. <a href=\"\%@\" target=%@>%@</a></p>",inviteLink,inviteLink,link];
     
     if ([MFMailComposeViewController canSendMail]) {
-        
         MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
         picker.mailComposeDelegate = self;
         [picker setSubject:subject];
@@ -155,7 +156,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
         MFMessageComposeViewController* vc = [[MFMessageComposeViewController alloc]init];
         vc.body = [NSString stringWithFormat:@"%@",self.url.absoluteString];
         vc.messageComposeDelegate = self;
-        vc.title = @"Let's play Pocket Expense together!";
+        vc.title = @"I'm using Pocket Expense. Join me and see hou easy to manage personal finance.";
         [self presentViewController:vc animated:YES completion:nil];
         
     }
@@ -189,7 +190,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     [self cancelShareClick:nil];
     if (self.url) {
         
-        NSString *textToShare = @"Let's play Pocket Expense together!";
+        NSString *textToShare = @"I'm using Pocket Expense. Join me and see hou easy to manage personal finance.";
         NSURL *urlToShare = self.url;
         NSArray *items = @[urlToShare,textToShare];
         
@@ -201,7 +202,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
                 hub.mode = MBProgressHUDModeText;
                 [self.view addSubview:hub];
                 [hub showAnimated:YES];
-                [hub hideAnimated:YES afterDelay:1.5];
+                [hub hideAnimated:YES afterDelay:1.0];
                 
                 [self cancelShareClick:nil];
             }

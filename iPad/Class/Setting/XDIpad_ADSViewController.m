@@ -85,10 +85,18 @@
     self.yearBtn.enabled = YES;
     self.lifetimeBtn.enabled = YES;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelClick:) name:@"purchaseSuccessful" object:nil];
+    
+    [FIRAnalytics setScreenName:@"purchase_view_ipad" screenClass:@"XDIpad_ADSViewController"];
+    
     if (appDelegate.isPurchased) {
+        Setting* setting = [[XDDataManager shareManager] getSetting];
+        if ([setting.otherBool16 boolValue]) {
+            return;
+        }
+        
         self.restoreBtn.hidden = YES;
         self.restoreBtnHeight.constant = 0.01;
-        Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
         
         if (defaults2) {
@@ -160,9 +168,7 @@
         self.restoreBtn.hidden = NO;
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cancelClick:) name:@"purchaseSuccessful" object:nil];
-    
-    [FIRAnalytics setScreenName:@"purchase_view_ipad" screenClass:@"XDIpad_ADSViewController"];
+  
 }
 - (IBAction)restoreBtnClick:(id)sender {
     [[XDInAppPurchaseManager shareManager] restoreUpgrade];

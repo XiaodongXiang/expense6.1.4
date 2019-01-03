@@ -279,7 +279,29 @@
             
             return;
             
+        }else{
+            setting.otherBool16 = @NO;
+            [[XDDataManager shareManager] saveContext];
+            
+            PFQuery *query = [PFQuery queryWithClassName:@"Setting"];
+            
+            [query whereKey:@"settingID" equalTo:[PFUser currentUser].objectId];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                if (objects.count > 0) {
+                    for (PFObject* objectServer in objects) {
+                        objectServer[@"purchasedUpdateTime"] = [NSDate date];
+                        objectServer[@"alreadyInvited"] = @"1";
+                        objectServer[@"haveOneMonthTrial"] = @"0";
+                        objectServer[@"invitedSuccessNotif"] = @"1";
+                        objectServer[@"isTryingPremium"] = @"0";
+                        
+                        [objectServer saveInBackground];
+                    }
+                }
+            }];
         }
+
         
         [self noSubscription];
         
@@ -725,13 +747,6 @@
  	appDelegate1.mainViewController.popViewController = navigationController;
     appDelegate1.mainViewController.popViewController.view.tag = 100;
     [appDelegate1.mainViewController presentViewController:navigationController animated:YES completion:nil];
-//    navigationController.view.superview.frame = CGRectMake(
-//                                                           272,
-//                                                           0,
-//                                                           480,
-//                                                           490
-//                                                           );
-    
  	navigationController.view.superview.autoresizingMask =
     UIViewAutoresizingFlexibleTopMargin |
     UIViewAutoresizingFlexibleBottomMargin;
