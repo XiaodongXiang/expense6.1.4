@@ -86,7 +86,6 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
         self.bj.image = [UIImage imageNamed:@"sharelink_bj_8"];
     }
     
-    [self createLink];
     [self.view addSubview:self.bottomView];
     
     if (ISPAD) {
@@ -95,18 +94,20 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
         self.bottomView.frame = CGRectMake(0,SCREEN_HEIGHT,SCREEN_WIDTH, 211);
     }
     
- 
+    NSURL* url = [[NSUserDefaults standardUserDefaults] URLForKey:@"shortURL"];
+    if (url.absoluteString.length > 0) {
+        self.shareLinkCode.text = url.absoluteString;
+        self.url = url;
+    }else{
+        [self createLink];
+    }
 }
-
 
 -(void)createLink{
     NSString* uid = [PFUser currentUser].objectId;
     NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
-//    NSURL *link = [[NSURL alloc] initWithString:@"https://pocketexpenselite.page.link/EBMe"];
     NSString *dynamicLinksDomain = @"pocketexpenselite.page.link";
-    FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc]
-                                             initWithLink:link
-                                             domain:dynamicLinksDomain];
+    FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domain:dynamicLinksDomain];
     linkBuilder.iOSParameters = [[FIRDynamicLinkIOSParameters alloc]
                                  initWithBundleID:@"com.btgs.pocketexpenselite"];
     linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
@@ -116,34 +117,28 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
                                          NSArray<NSString *> * _Nullable warnings,
                                          NSError * _Nullable error) {
         if (error || shortURL == nil) { return; }
-        NSLog(@"The short URL is: %@", shortURL);
         
+        [[NSUserDefaults standardUserDefaults] setURL:shortURL forKey:@"shortURL"];
         self.shareLinkCode.text = shortURL.absoluteString;
         self.url = shortURL;
     }];
 }
 
 
+
 -(void)invite:(NSURL*)url{
     NSString* subject = @"Join me at Pocket Expense";
     NSString* inviteLink = url.absoluteString;
-    NSString* uid = [PFUser currentUser].objectId;
-    NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
-
-    NSString* message = [NSString stringWithFormat:@"<p>I'm using Pocket Expense. Join me and see hou easy to manage personal finance. <a href=\"\%@\" target=%@>%@</a></p>",inviteLink,inviteLink,link];
+    
+    NSString* message = [NSString stringWithFormat:@"<p>I'm using Pocket Expense. Join me and see how easy to manage personal finance. <a href=\"\%@\" target=%@>%@</a></p>",inviteLink,inviteLink,inviteLink];
     
     if ([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
         picker.mailComposeDelegate = self;
         [picker setSubject:subject];
-//        [picker setToRecipients:@[@"xiaodong.xiang@appxy.com"]];
         [picker setMessageBody:message isHTML:YES];
         [self presentViewController:picker animated:YES completion:nil];
-        
-        
     }
-    
-    
 }
 
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(nullable NSError *)error {
@@ -156,12 +151,10 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
         MFMessageComposeViewController* vc = [[MFMessageComposeViewController alloc]init];
         vc.body = [NSString stringWithFormat:@"%@",self.url.absoluteString];
         vc.messageComposeDelegate = self;
-        vc.title = @"I'm using Pocket Expense. Join me and see hou easy to manage personal finance.";
+        vc.title = @"I'm using Pocket Expense. Join me and see how easy to manage personal finance.";
         [self presentViewController:vc animated:YES completion:nil];
         
     }
-    
-    
 }
 
 - (IBAction)mailClick:(id)sender {
@@ -190,19 +183,19 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     [self cancelShareClick:nil];
     if (self.url) {
         
-        NSString *textToShare = @"I'm using Pocket Expense. Join me and see hou easy to manage personal finance.";
+        NSString *textToShare = @"I'm using Pocket Expense. Join me and see how easy to manage personal finance.";
         NSURL *urlToShare = self.url;
-        NSArray *items = @[urlToShare,textToShare];
+        NSArray *items = @[textToShare,urlToShare];
         
         [self mq_share:items target:self success:^(BOOL success, NSString *text) {
             if (success) {
                 
-                MBProgressHUD* hub = [[MBProgressHUD alloc]initWithView:self.view];
-                hub.label.text = @"Share Success";
-                hub.mode = MBProgressHUDModeText;
-                [self.view addSubview:hub];
-                [hub showAnimated:YES];
-                [hub hideAnimated:YES afterDelay:1.0];
+//                MBProgressHUD* hub = [[MBProgressHUD alloc]initWithView:self.view];
+//                hub.label.text = @"Share Success";
+//                hub.mode = MBProgressHUDModeText;
+//                [self.view addSubview:hub];
+//                [hub showAnimated:YES];
+//                [hub hideAnimated:YES afterDelay:1.0];
                 
                 [self cancelShareClick:nil];
             }

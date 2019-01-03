@@ -264,6 +264,7 @@
 #pragma mark - textField
 -(BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [self endEditing:YES];
     if (textField.tag==1)
     {
         [bottomTextField becomeFirstResponder];

@@ -196,9 +196,31 @@
     [self.epnc setFlurryEvent_withUpgrade:NO];
     
     [[XDPurchasedManager shareManager] saveDefaultParseSetting];
-
+    [self createLink];
    
     return YES;
+}
+
+-(void)createLink{
+    if ([[NSUserDefaults standardUserDefaults] URLForKey:@"shortURL"].absoluteString.length <= 0) {
+        NSString* uid = [PFUser currentUser].objectId;
+        NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
+        NSString *dynamicLinksDomain = @"pocketexpenselite.page.link";
+        FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domain:dynamicLinksDomain];
+        linkBuilder.iOSParameters = [[FIRDynamicLinkIOSParameters alloc]
+                                     initWithBundleID:@"com.btgs.pocketexpenselite"];
+        linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
+        linkBuilder.iOSParameters.appStoreID = @"424575621";
+        
+        [linkBuilder shortenWithCompletion:^(NSURL * _Nullable shortURL,
+                                             NSArray<NSString *> * _Nullable warnings,
+                                             NSError * _Nullable error) {
+            if (error || shortURL == nil) { return; }
+            
+            [[NSUserDefaults standardUserDefaults] setURL:shortURL forKey:@"shortURL"];
+        }];
+    }
+   
 }
 
 

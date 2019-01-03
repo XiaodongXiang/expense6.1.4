@@ -1046,7 +1046,9 @@
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:LITE_UNLOCK_FLAG];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:IS_FIRST_UPLOAD_SETTING];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"invitedby"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"shortURL"];
 
+            
             appDelegate.isPurchased = NO;
 
             [[XDDataManager shareManager] saveContext];

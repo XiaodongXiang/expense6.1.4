@@ -339,34 +339,38 @@
                     NSDate* endDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
                     
                     BOOL isSubcription = NO;
+                    BOOL alreadInvited = NO;
                     for (PFObject* object in objects) {
                         isSubcription = [object[@"purchasedIsSubscription"] boolValue];
+                        alreadInvited = [object[@"alreadyInvited"] boolValue];
                     }
                     
-                    if (!isSubcription) {
-                        for (PFObject* objectServer in objects) {
-                            objectServer[@"purchasedStartDate"] = [NSDate date];
-                            objectServer[@"purchasedEndDate"] = endDate;
-                            objectServer[@"purchasedUpdateTime"] = [NSDate date];
-                            objectServer[@"purchasedIsSubscription"] = [NSNumber numberWithInt:1];
-                            objectServer[@"alreadyInvited"] = @"1";
-                            objectServer[@"haveOneMonthTrial"] = @"0";
-                            objectServer[@"invitedSuccessNotif"] = @"1";
-                            objectServer[@"isTryingPremium"] = @"1";
-
-                            [objectServer saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (!alreadInvited) {
+                        if (!isSubcription) {
+                            for (PFObject* objectServer in objects) {
+                                objectServer[@"purchasedStartDate"] = [NSDate date];
+                                objectServer[@"purchasedEndDate"] = endDate;
+                                objectServer[@"purchasedUpdateTime"] = [NSDate date];
+                                objectServer[@"purchasedIsSubscription"] = [NSNumber numberWithInt:1];
+                                objectServer[@"alreadyInvited"] = @"1";
+                                objectServer[@"haveOneMonthTrial"] = @"0";
+                                objectServer[@"invitedSuccessNotif"] = @"1";
+                                objectServer[@"isTryingPremium"] = @"1";
                                 
-                            }];
-                        }
-                    }else{
-                        for (PFObject* objectServer in objects) {
-                            objectServer[@"purchasedUpdateTime"] = [NSDate date];
-                            objectServer[@"alreadyInvited"] = @"1";
-                            objectServer[@"haveOneMonthTrial"] = @"1";
-                            objectServer[@"invitedSuccessNotif"] = @"1";
-                            objectServer[@"isTryingPremium"] = @"0";
-
-                            [objectServer saveInBackground];
+                                [objectServer saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                                    
+                                }];
+                            }
+                        }else{
+                            for (PFObject* objectServer in objects) {
+                                objectServer[@"purchasedUpdateTime"] = [NSDate date];
+                                objectServer[@"alreadyInvited"] = @"1";
+                                objectServer[@"haveOneMonthTrial"] = @"1";
+                                objectServer[@"invitedSuccessNotif"] = @"1";
+                                objectServer[@"isTryingPremium"] = @"0";
+                                
+                                [objectServer saveInBackground];
+                            }
                         }
                     }
                 }
