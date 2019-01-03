@@ -21,14 +21,6 @@
 #import "Transaction.h"
 #import <Parse/Parse.h>
 #import "XDAppriater.h"
-#import "XDOverviewChristmasViewA.h"
-#import "XDPlanControlClass.h"
-#import "XDChristmasLiteOneViewController.h"
-#import "XDChristmasLitePlanAViewController.h"
-#import "XDChristmasPlanAbViewController.h"
-#import "XDChristmasPlanBbViewController.h"
-
-#import "textView.h"
 
 @import Firebase;
 
@@ -53,8 +45,6 @@
 
 @property(nonatomic, strong)ADEngineController* adBanner;
 @property(nonatomic, strong)UIView* adBannerView;
-@property(nonatomic, strong)XDOverviewChristmasViewA* christmasView;
-
 @property(nonatomic, strong)UIView* redPointView;
 
 @end
@@ -77,38 +67,6 @@
     return _adBannerView;
 }
 
-//-(UIView *)bubbleView{
-//    if (!_bubbleView) {
-//        _bubbleView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//        _bubbleView.backgroundColor = [UIColor clearColor];
-//
-//        UIImageView* imageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"bubble"]];
-//        if (IS_IPHONE_X) {
-//            imageView.frame = CGRectMake(SCREEN_WIDTH - 104, 85, 95, 40);
-//        }else{
-//            imageView.frame = CGRectMake(SCREEN_WIDTH - 104, 64, 95, 40);
-//        }
-//        imageView.contentMode = UIViewContentModeCenter;
-//
-//        [self popJumpAnimationView:imageView];
-//
-//        [_bubbleView addSubview:imageView];
-//
-//        UILabel* label = [[UILabel alloc]initWithFrame:CGRectMake(0, 14, 95, 16)];
-//        label.font = [UIFont fontWithName:FontSFUITextRegular size:14];
-//        label.text = NSLocalizedString(@"VC_Account", nil);
-//        label.textColor = [UIColor whiteColor];
-//        label.textAlignment = NSTextAlignmentCenter;
-//        [imageView addSubview:label];
-//
-//
-//        [self.navigationController.view addSubview:_bubbleView];
-//
-//        UITapGestureRecognizer * tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(bubbleDismiss)];
-//        [_bubbleView addGestureRecognizer:tap];
-//    }
-//    return _bubbleView;
-//}
 
 -(UIImageView *)emptyImageView{
     if (!_emptyImageView) {
@@ -250,25 +208,6 @@
 }
 
 
--(void)purchaseSuccessful{
-    
-    
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"dismissChristmasBanner"]) {
-
-        [UIView animateWithDuration:0.2 animations:^{
-            self.lineView.height = 10;
-            self.transTableView.view.y = CGRectGetMaxY(self.lineView.frame);
-            self.lineView.backgroundColor = RGBColor(246, 246, 246);
-            
-        }completion:^(BOOL finished) {
-            [self.christmasView removeFromSuperview];
-        }];
-        
-        
-    }
-}
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.edgesForExtendedLayout = UIRectEdgeNone;
@@ -307,113 +246,8 @@
             [[XDPurchasedManager shareManager] savePFSetting];
         }
     }
-
-    if ([XDPlanControlClass shareControlClass].needShow) {
-        [self showChristmasView];
-        self.emptyImageView.y = CGRectGetMaxY(self.lineView.frame);
-    }
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshChristmas) name:@"refreshChristmas" object:nil];
-//    textView* view = [[[NSBundle mainBundle]loadNibNamed:@"textView" owner:self options:nil]lastObject];
-//    view.frame = CGRectMake(0, SCREEN_HEIGHT-350, SCREEN_WIDTH, 175);
-//
-//    [self.view addSubview:view];
     
 }
-
-//-(void)refreshChristmas{
-//    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-//        if (IS_IPHONE_5) {
-//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_se"] forState:UIControlStateNormal];
-//        }else if (IS_IPHONE_6){
-//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_8"] forState:UIControlStateNormal];
-//        }else{
-//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"christmas_banner_plus"] forState:UIControlStateNormal];
-//        }
-//
-//
-//    }else{
-//        if (IS_IPHONE_5) {
-//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone se"] forState:UIControlStateNormal];
-//        }else if (IS_IPHONE_6){
-//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_banner_8"] forState:UIControlStateNormal];
-//        }else{
-//            [self.christmasView.christmasBtn setImage:[UIImage imageNamed:@"Bchristmas_iPhone 8plus"] forState:UIControlStateNormal];
-//        }
-//
-//    }
-//}
-
--(void)showChristmasView{
-    self.lineView.height = 137;
-    self.lineView.backgroundColor = [UIColor whiteColor];
-    self.christmasView = [[[NSBundle mainBundle] loadNibNamed:@"XDOverviewChristmasViewA" owner:self options:nil]lastObject];
-    self.transTableView.view.y = CGRectGetMaxY(self.lineView.frame);
-
-    [XDPlanControlClass shareControlClass].christmasView = self.christmasView;
-    [self.christmasView.christmasCancelBtn addTarget:self action:@selector(christmasViewCancel) forControlEvents:UIControlEventTouchUpInside];
-    [self.christmasView.christmasBtn addTarget:self action:@selector(presentChristmasVc) forControlEvents:UIControlEventTouchUpInside];
-    self.christmasView.frame = CGRectMake(0, self.calView.y, SCREEN_WIDTH, 137);
-    
-
-    [self.lineView addSubview:self.christmasView];
-}
-
--(void)presentChristmasVc{
-    NSInteger plan = [XDPlanControlClass shareControlClass].planType;
-    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-    NSInteger categoryPlan = [XDPlanControlClass shareControlClass].planCategory;
-
-    if (categoryPlan == ChristmasPlanCategoryHasReceive7Days) {
-         [FIRAnalytics logEventWithName:@"CA_FU_OpenBanner" parameters:nil];
-    }else if(categoryPlan == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_OpenBanner" parameters:nil];
-    }
-    if ( plan == ChristmasPlanA) {
-        
-       if(subPlan == ChristmasSubPlana){
-           
-            XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
-            [self presentViewController:christmas animated:YES completion:nil];
-
-       }else if (subPlan == ChristmasSubPlanb){
-
-           XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
-           [self presentViewController:christmas animated:YES completion:nil];
-       }
-    }else{
-        if(subPlan == ChristmasSubPlana){
-
-            XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
-            [self presentViewController:christmas animated:YES completion:nil];
-
-        }else if(subPlan == ChristmasSubPlanb){
-
-            XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
-            [self presentViewController:christmas animated:YES completion:nil];
-
-        }
-    }
-}
-
--(void)christmasViewCancel{
-    [UIView animateWithDuration:0.2 animations:^{
-        self.lineView.height = 10;
-        self.transTableView.view.y = CGRectGetMaxY(self.lineView.frame);
-        self.lineView.backgroundColor = RGBColor(246, 246, 246);
-
-    }completion:^(BOOL finished) {
-        [self.christmasView removeFromSuperview];
-    }];
-    
-    NSInteger categoryPlan = [XDPlanControlClass shareControlClass].planCategory;
-    if (categoryPlan == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_CloseBanner" parameters:nil];
-    }else if(categoryPlan == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_CloseBanner" parameters:nil];
-    }
-}
-
 
 
 -(void)titleBtnClick{
@@ -947,7 +781,6 @@
     [[XDDataManager shareManager] removeSettingPurchase];
     [[XDDataManager shareManager] openWidgetInSettingWithBool14:NO];
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
 
     appDelegate.isPurchased = NO;
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -1083,11 +916,43 @@
         [[XDDataManager shareManager] puchasedInfoInSetting:purchaseDate productID:productID originalProID:originalID];
         //        [[ADEngineManage adEngineManage] unlockAllFunctionsHideAd];
         [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
-        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
 
     }else{  //没续订
+        
+        Setting* setting = [[XDDataManager shareManager] getSetting];
+        if ([setting.otherBool19 boolValue]) {
+            [[XDDataManager shareManager] puchasedInfoInSetting:[NSDate date] productID:KInAppPurchaseProductIdMonth originalProID:@"1234567890"];
+            setting.otherBool16 = @YES;
+            setting.otherBool19 = @NO;
+            
+            [[XDDataManager shareManager] saveContext];
+            
+            PFQuery *query = [PFQuery queryWithClassName:@"Setting"];
+            
+            [query whereKey:@"settingID" equalTo:[PFUser currentUser].objectId];
+            
+            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                if (objects.count > 0) {
+                        for (PFObject* objectServer in objects) {
+                            objectServer[@"purchasedUpdateTime"] = [NSDate date];
+                            objectServer[@"alreadyInvited"] = @"1";
+                            objectServer[@"haveOneMonthTrial"] = @"0";
+                            objectServer[@"invitedSuccessNotif"] = @"1";
+                            objectServer[@"isTryingPremium"] = @"1";
+                            
+                            [objectServer saveInBackground];
+                        }
+                }
+            }];
+            
+            return;
+
+        }
+        
         [self noSubscription];
         //        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
+        
+       
         
         NSString* auto_renew_status = pendingRenewal[@"auto_renew_status"];
         NSString* expiration_intent = pendingRenewal[@"expiration_intent"];

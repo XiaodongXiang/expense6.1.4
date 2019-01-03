@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *others15;
 @property (nullable, nonatomic, copy) NSString *state;
 @property (nullable, nonatomic, copy) NSString *others16;
-@property (nullable, nonatomic, copy) NSNumber *otherBool19;
+@property (nullable, nonatomic, copy) NSNumber *otherBool19; // haveOneMonthTrial 1.有一个月试用
 @property (nullable, nonatomic, copy) NSNumber *otherBool2;
 @property (nullable, nonatomic, copy) NSString *others17;
 @property (nullable, nonatomic, copy) NSNumber *payeeMemo;
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *expenseLastView;
 @property (nullable, nonatomic, copy) NSString *currency;
 @property (nullable, nonatomic, copy) NSNumber *otherBool4;//打开widget
-@property (nullable, nonatomic, copy) NSNumber *otherBool20;
+@property (nullable, nonatomic, copy) NSNumber *otherBool20; // invitedSuccessNotif 1.需要提醒
 @property (nullable, nonatomic, copy) NSNumber *otherBool13;
 @property (nullable, nonatomic, copy) NSNumber *otherBool5;
 @property (nullable, nonatomic, copy) NSNumber *payeeName;
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSNumber *otherBool14;
 @property (nullable, nonatomic, copy) NSString *passcode;
 @property (nullable, nonatomic, copy) NSNumber *otherBool7;
-@property (nullable, nonatomic, copy) NSNumber *otherBool8;
+@property (nullable, nonatomic, copy) NSNumber *otherBool8; // alreadyInvited  1.已经邀请过成功
 @property (nullable, nonatomic, copy) NSNumber *payeeTranMemo;
 @property (nullable, nonatomic, copy) NSNumber *otherBool15;
 @property (nullable, nonatomic, copy) NSNumber *payeeTranClear;
@@ -69,7 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, copy) NSString *others1;
 @property (nullable, nonatomic, copy) NSString *others6;
 @property (nullable, nonatomic, copy) NSNumber *isBefore;
-@property (nullable, nonatomic, copy) NSNumber *otherBool16;
+@property (nullable, nonatomic, copy) NSNumber *otherBool16; // isTryingPremium 1.正在免费试用.
 @property (nullable, nonatomic, copy) NSString *others7;
 @property (nullable, nonatomic, copy) NSString *others8;
 @property (nullable, nonatomic, copy) NSNumber *payeeTranAmount;

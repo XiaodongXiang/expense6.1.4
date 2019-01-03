@@ -28,9 +28,9 @@
     NSDate* tranStartDay;
     NSDate* tranEndDay;
     NSDate* currentDay = [calendar dateFromComponents:[calendar components:unit fromDate:[NSDate date]]];
-    if ([currentDay compare:endTransaction.dateTime] == NSOrderedDescending) {
-        currentDay = endTransaction.dateTime ;
-    }
+//    if ([currentDay compare:endTransaction.dateTime] == NSOrderedDescending) {
+//        currentDay = endTransaction.dateTime ;
+//    }
     
     if (tranArr.count == 0) {
         tranStartDay = [calendar dateFromComponents:[calendar components:unit fromDate:[[NSDate date]initYearDate]]];
@@ -39,7 +39,9 @@
     }else{
         tranStartDay = [calendar dateFromComponents:[calendar components:unit fromDate:startTransaction.dateTime]];
         tranEndDay = [calendar dateFromComponents:[calendar components:unit fromDate:endTransaction.dateTime]];
-        
+        if ([tranEndDay compare:[NSDate date]] == NSOrderedAscending) {
+            tranEndDay = [NSDate date];
+        }
     }
     
     
@@ -105,7 +107,7 @@
             NSDate* date = [calendar dateFromComponents:monthComponents];
             [muarr addObject:date];
             
-            if ([date compare: currentDay] == NSOrderedSame) {
+            if ([date compare: [currentDay initDate]] == NSOrderedSame) {
                 if (completion) {
                     completion(i);
                 }

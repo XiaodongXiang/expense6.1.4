@@ -11,9 +11,6 @@
 #import "XDInAppPurchaseManager.h"
 #import <Parse/Parse.h>
 
-#import "XDChristmasShareSuccessPlanBPopViewController.h"
-#import "XDChristmasShareSuccessdPlanAPopViewController.h"
-#import "XDPlanControlClass.h"
 @import Firebase;
 @interface XDUpgradeViewController ()<SKRequestDelegate,UITextViewDelegate>
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollview;
@@ -47,10 +44,6 @@
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *restoreBtnH;
 @property (weak, nonatomic) IBOutlet UILabel *premiumTitle;
 
-@property (weak, nonatomic) IBOutlet UILabel *monthSaleLbl;
-@property (weak, nonatomic) IBOutlet UILabel *monthIntroLbl;
-@property (weak, nonatomic) IBOutlet UIView *monthIntroLineView;
-
 @property (strong, nonatomic) IBOutlet UIView *upgradeNewView;
 @property (weak, nonatomic) IBOutlet UILabel *upgradeTimeStyleLbl;
 @property (weak, nonatomic) IBOutlet UILabel *upgradeNewEndTimeLbl;
@@ -74,6 +67,7 @@
     [super viewDidLoad];
     
     CGFloat width = SCREEN_WIDTH/3;
+    
     [FIRAnalytics setScreenName:@"purchase_view_iphone" screenClass:@"XDUpgradeViewController"];
 
     self.monthView.frame = CGRectMake(0, 0, width, self.scrollview.height);
@@ -82,11 +76,6 @@
 
     self.upgradeNewView.frame = CGRectMake(0, -1, width+1, self.scrollview.height+1);
     self.lifetimeNewView.frame = CGRectMake(0, -5, SCREEN_WIDTH, self.scrollview.height + 5);
-//#ifdef DEBUG
-//    [Appsee addEvent:@"Enter Shop"];
-//#else
-//
-//#endif
     
     [FIRAnalytics logEventWithName:@"enter_shop" parameters:nil];
 
@@ -104,11 +93,17 @@
     [notificationCenter addObserver:self selector:@selector(preVersionPrice) name:GET_PRO_VERSION_PRICE_ACTION object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"refreshSettingUI" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"purchaseSuccessful" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(settingReloadData) name:@"getIntroductoryPriceSuccess" object:nil];
 
     
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     if (appDelegate.isPurchased) {
+        
+        Setting* setting = [[XDDataManager shareManager] getSetting];
+
+        if ([setting.otherBool16 boolValue]) {
+            return;
+            
+        }
         
         PFUser *user=[PFUser currentUser];
         self.lifetimeNewEmail.text = user.email;
@@ -120,7 +115,6 @@
             self.lifetimeNewProfileIcon.image = image;
         }
         
-        Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
 
         if (defaults2) {
@@ -155,10 +149,7 @@
                     self.monthBg.image = [UIImage imageNamed:@"yigoumai"];
                     self.monthPriceLbl.textColor = RGBColor(122, 163, 239);
                     self.monthTimeLbl.textColor = RGBColor(122, 163, 239);
-                    self.monthSaleLbl.hidden = YES;
-                    self.monthIntroLbl.textColor = RGBColor(122, 163, 239);
-                    self.monthIntroLineView.backgroundColor = RGBColor(122, 163, 239);
-                    self.yearBg.image = [UIImage imageNamed:@"year"];
+                     self.yearBg.image = [UIImage imageNamed:@"year"];
                     self.premiumTitle.text = @"Monthly Premium";
                     self.monthBtn.enabled = NO;
 
@@ -246,6 +237,12 @@
     
     [self preVersionPrice];
     if (appDelegate.isPurchased) {
+        
+        Setting* setting = [[XDDataManager shareManager] getSetting];
+        if ([setting.otherBool16 boolValue]) {
+            return;
+            
+        }
         PFUser *user=[PFUser currentUser];
         self.lifetimeNewEmail.text = user.email;
         NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
@@ -256,7 +253,7 @@
             self.lifetimeNewProfileIcon.image = image;
         }
         
-        Setting* setting = [[XDDataManager shareManager] getSetting];
+       
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
         
         self.monthBtn.enabled = YES;
@@ -298,11 +295,6 @@
                     //            self.monthBtn.enabled = NO;
                     self.yearBg.image = [UIImage imageNamed:@"year"];
                     self.premiumTitle.text = @"Monthly Premium";
-                    
-                    
-                    self.monthSaleLbl.hidden = YES;
-                    self.monthIntroLbl.textColor = RGBColor(122, 163, 239);
-                    self.monthIntroLineView.backgroundColor = RGBColor(122, 163, 239);
                     
                     self.lifetimeDetailLbl.textColor = [UIColor whiteColor];
                     self.lifetimePriceLbl.textColor = [UIColor whiteColor];
@@ -400,20 +392,6 @@
     NSString *monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH];
     NSString *yearPrice = [userDefaults stringForKey:PURCHASE_PRICE_YEAR];
     NSString *lifetimePrice = [userDefaults stringForKey:PURCHASE_PRICE_LIFETIME];
-    if ([userDefaults boolForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY]) {
-        if ([userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY].length > 0) {
-            monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
-            self.monthBg.image = [UIImage imageNamed:@"month_intro"];
-            self.monthSaleLbl.text = @"Save 68%";
-            self.monthIntroLbl.text = [userDefaults stringForKey:PURCHASE_PRICE_MONTH];
-            
-            self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = NO;
-        }else{
-            self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = YES;
-        }
-    }else{
-        self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = YES;
-    }
     
     double sale = [userDefaults doubleForKey:@"salePrice"];
     

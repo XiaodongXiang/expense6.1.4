@@ -17,18 +17,7 @@
 #import "ipad_ADSDeatailViewController.h"
 
 
-#import "XDPlanControlClass.h"
-#import "XDChristmasLiteOneViewController.h"
-#import "XDChristmasLitePlanAViewController.h"
-#import "XDChristmasPlanAbViewController.h"
-#import "XDChristmasPlanBbViewController.h"
 #import <Parse/Parse.h>
-#import "textView.h"
-
-
-#import "XDPlanControlClass.h"
-#import "XDChristmasShareSuccessPlanBPopViewController.h"
-#import "XDChristmasShareSuccessdPlanAPopViewController.h"
 
 @import     Firebase;
 #define TRANSACTIONHAS5Count @"transactionOver5Count"
@@ -38,13 +27,6 @@
 @property (weak, nonatomic) IBOutlet UIView *adBannerView;
 
 @property(nonatomic, strong)ADEngineController* adBanner;
-
-@property(nonatomic, strong)XDOverviewChristmasViewA* christmasView;
-
-
-@property(nonatomic, strong)XDChristmasShareSuccessdPlanAPopViewController* popAVc;
-@property(nonatomic, strong)XDChristmasShareSuccessPlanBPopViewController* popBVc;
-
 @end
 
 @implementation iPad_OverViewViewController
@@ -78,188 +60,11 @@
     
     [FIRAnalytics setScreenName:@"calendar_view_ipad" screenClass:@"iPad_OverViewViewController"];
 
-    if ([XDPlanControlClass shareControlClass].needShow) {
-        [self showChristmasView];
-        calendarContainView.y = 152;
-        calendarContainView.height = 674-137;
-        kalViewController.kalView.bottomView.y = 533 - 137;
-
-    }
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
     
 }
 
--(void)purchaseSuccessful{
-    
-        
-    [UIView animateWithDuration:0.2 animations:^{
-        self.christmasView.height = 0;
-        calendarContainView.y = 15;
-        kalViewController.kalView.bottomView.y = 533;
-        calendarContainView.height = 674;
-        
-    }completion:^(BOOL finished) {
-        [self.christmasView removeFromSuperview];
-        
-        AppDelegate_iPad *appDelegate = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
-        
-        NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
-        if (christmasUserObjectID.length > 0) {
-            if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-                self.popAVc = [[XDChristmasShareSuccessdPlanAPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessdPlanAPopViewController" bundle:nil];
-                [appDelegate.mainViewController.view addSubview:self.popAVc.view];
-                self.popAVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
-                self.popAVc.view.centerX = SCREEN_WIDTH/2;
-                self.popAVc.view.centerY = SCREEN_HEIGHT/2-25;
-                [self.popAVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
-                [self.popAVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
-                self.popAVc.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
-                [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download"] forState:UIControlStateNormal];
-                [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download_press"] forState:UIControlStateHighlighted];
-                
-                [self.popAVc show];
-            }else{
-                self.popBVc = [[XDChristmasShareSuccessPlanBPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessPlanBPopViewController" bundle:nil];
-                [appDelegate.mainViewController.view addSubview:self.popBVc.view];
-                self.popBVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
-                self.popAVc.view.centerX = SCREEN_WIDTH/2;
-                self.popAVc.view.centerY = SCREEN_HEIGHT/2-25;
-                [self.popBVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
-                [self.popBVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
-                self.popBVc.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_50%off"];
-                
-                [self.popBVc show];
-            }
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-
-        }
-      
-        
-
-    }];
-}
-
--(void)vcCancelClick{
-    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-        [self.popAVc dismiss];
-        
-    }else{
-        [self.popBVc dismiss];
-        
-    }
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_ClosePopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_ClosePopup" parameters:nil];
-    }
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-
-}
-
--(void)vcUseItClick{
-    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-        [self.popAVc dismiss];
-    }else{
-        [self.popBVc dismiss];
-    }
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_OpenPopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_OpenPopup" parameters:nil];
-    }
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-    
-    NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=ChristmasActivity-PKEP-HRKP&mt=8";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-}
 
 
--(void)showChristmasView{
-    self.christmasView = [[[NSBundle mainBundle] loadNibNamed:@"XDOverviewChristmasViewA" owner:self options:nil]lastObject];
-    
-    [XDPlanControlClass shareControlClass].christmasView = self.christmasView;
-    [self.christmasView.christmasCancelBtn addTarget:self action:@selector(christmasViewCancel) forControlEvents:UIControlEventTouchUpInside];
-    [self.christmasView.christmasBtn addTarget:self action:@selector(presentChristmasVc) forControlEvents:UIControlEventTouchUpInside];
-    self.christmasView.frame = CGRectMake(15, 15, calendarContainView.width, 137);
-    
-    
-    [self.view addSubview:self.christmasView];
-}
-
--(void)presentChristmasVc{
-    NSInteger plan = [XDPlanControlClass shareControlClass].planType;
-    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-    NSInteger categoryPlan = [XDPlanControlClass shareControlClass].planCategory;
-
-    if (categoryPlan == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_OpenBanner" parameters:nil];
-    }else if(categoryPlan == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_OpenBanner" parameters:nil];
-    }
-    
-    if ( plan == ChristmasPlanA) {
-        
-        if(subPlan == ChristmasSubPlana){
-            
-            XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
-            christmas.modalPresentationStyle = UIModalPresentationFormSheet;
-            christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            christmas.preferredContentSize = CGSizeMake(375, 667);
-            
-            [self presentViewController:christmas animated:YES completion:nil];
-            
-        }else if (subPlan == ChristmasSubPlanb){
-            
-            XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
-            christmas.modalPresentationStyle = UIModalPresentationFormSheet;
-            christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            christmas.preferredContentSize = CGSizeMake(375, 667);
-
-            [self presentViewController:christmas animated:YES completion:nil];
-        }
-    }else{
-        if(subPlan == ChristmasSubPlana){
-            
-            XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
-            christmas.modalPresentationStyle = UIModalPresentationFormSheet;
-            christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            christmas.preferredContentSize = CGSizeMake(375, 667);
-
-            [self presentViewController:christmas animated:YES completion:nil];
-            
-        }else if(subPlan == ChristmasSubPlanb){
-            
-            XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
-            christmas.modalPresentationStyle = UIModalPresentationFormSheet;
-            christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-            christmas.preferredContentSize = CGSizeMake(375, 667);
-
-            [self presentViewController:christmas animated:YES completion:nil];
-            
-        }
-    }
-}
-
--(void)christmasViewCancel{
-    [UIView animateWithDuration:0.2 animations:^{
-        self.christmasView.height = 0;
-        calendarContainView.y = 15;
-        kalViewController.kalView.bottomView.y = 533;
-        calendarContainView.height = 674;
-        
-    }completion:^(BOOL finished) {
-        [self.christmasView removeFromSuperview];
-    }];
-    
-    NSInteger categoryPlan = [XDPlanControlClass shareControlClass].planCategory;
-    if (categoryPlan == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_CloseBanner" parameters:nil];
-    }else if(categoryPlan == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_CloseBanner" parameters:nil];
-    }
- 
-}
 
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -288,10 +93,7 @@
     }else{
         self.adBannerView.hidden = YES;
         kalViewController.kalView.bottomView.y = 533;
-        if([XDPlanControlClass shareControlClass].needShow){
-            kalViewController.kalView.bottomView.y = 533 - 137;
-
-        }
+      
     }
     
 }
@@ -303,22 +105,12 @@
         
         kalViewController.kalView.bottomView.y = 533-60;
         calendarContainView.height = 616;
-        if ([XDPlanControlClass shareControlClass].needShow) {
-            
-            kalViewController.kalView.bottomView.y = 533-60 - 137;
-            calendarContainView.height = 616-137;
-        }
+      
     }else{
         self.adBannerView.hidden = YES;;
         kalViewController.kalView.bottomView.y = 533;
         calendarContainView.height = 674;
-        
-        if ([XDPlanControlClass shareControlClass].needShow) {
-            
-            kalViewController.kalView.bottomView.y = 533 - 137;
-            calendarContainView.height = 674-137;
-        }
-
+     
     }
 }
 

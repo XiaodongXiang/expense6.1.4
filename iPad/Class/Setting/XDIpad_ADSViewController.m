@@ -195,21 +195,6 @@
     NSString *lifetimePrice = [userDefaults stringForKey:PURCHASE_PRICE_LIFETIME];
     double sale = [userDefaults doubleForKey:@"salePrice"];
     
-    if ([userDefaults boolForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY]) {
-        if ([userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY].length > 0) {
-            monthPrice = [userDefaults stringForKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
-            self.monthBg.image = [UIImage imageNamed:@"month_intro"];
-            self.monthSaleLbl.text = @"Save 68%";
-            self.monthIntroLbl.text = [userDefaults stringForKey:PURCHASE_PRICE_MONTH];
-            
-            self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = NO;
-        }else{
-            self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = YES;
-        }
-    }else{
-        self.monthIntroLbl.hidden = self.monthSaleLbl.hidden = self.monthIntroLineView.hidden = YES;
-    }
-    
     self.saleLbl.text = [NSString stringWithFormat:@"Save %d%%",(int)sale];
     if (monthPrice.length > 0) {
         self.monthPriceLbl.text = monthPrice;

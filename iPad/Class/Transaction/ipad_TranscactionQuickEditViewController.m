@@ -38,18 +38,8 @@
 
 #import "TestViewController.h"
 
-#import "XDPlanControlClass.h"
 #import <Parse/Parse.h>
 
-
-#import "XDChristmasPlanBPopViewController.h"
-#import "XDChristmasPlanAPopViewController.h"
-#import "XDIpad_ADSViewController.h"
-
-#import "XDChristmasLiteOneViewController.h"
-#import "XDChristmasLitePlanAViewController.h"
-#import "XDChristmasPlanAbViewController.h"
-#import "XDChristmasPlanBbViewController.h"
 @import Firebase;
 //#import "ipad_SearchRelatedViewController.h"
 
@@ -58,9 +48,6 @@
 {
 }
 @property(nonatomic, strong)ADEngineController* interstitial;
-
-@property(nonatomic, strong)XDChristmasPlanAPopViewController* planA;
-@property(nonatomic, strong)XDChristmasPlanBPopViewController* planB;
 @end
 
 @implementation ipad_TranscactionQuickEditViewController
@@ -1573,128 +1560,7 @@
     if (!appDelegate.isPurchased) {
         [self.interstitial showInterstitialAdWithTarget:appDelegate_ipad.mainViewController];
     }
-    if ([[XDPlanControlClass shareControlClass] everyDayShowOnce]) {
-        if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-            
-            self.planA = [[XDChristmasPlanAPopViewController alloc]initWithNibName:@"XDChristmasPlanAPopViewController" bundle:nil];
-            self.planA.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [self.planA show];
-            
-            [self.planA.getNowBtn addTarget:self action:@selector(christmasPopViewGetNowClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.planA.cancelBtn addTarget:self action:@selector(dismissPopView) forControlEvents:UIControlEventTouchUpInside];
-            [appDelegate_ipad.mainViewController.view addSubview:self.planA.view];
-            
-            
-        }else{
-            
-            self.planB = [[XDChristmasPlanBPopViewController alloc]initWithNibName:@"XDChristmasPlanBPopViewController" bundle:nil];
-            self.planB.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [self.planB show];
-            
-            [self.planB.openBtn addTarget:self action:@selector(bchristmasPopViewGetNowClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.planB.cancelBtn addTarget:self action:@selector(bdismissPopView) forControlEvents:UIControlEventTouchUpInside];
-            [appDelegate_ipad.mainViewController.view addSubview:self.planB.view];
-            
-        }
-    }
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_ShowPopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_ShowPopup" parameters:nil];
-    }
-}
-
-
--(void)christmasPopViewGetNowClick{
-    [self.planA dismiss];
-    AppDelegate_iPad* appDelegate_ipad = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
-
-    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-    
-    if(subPlan == ChristmasSubPlana){
-        
-        
-        XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
-        
-        christmas.modalPresentationStyle = UIModalPresentationFormSheet;
-        christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        christmas.preferredContentSize = CGSizeMake(375, 667);
-        [appDelegate_ipad.mainViewController presentViewController:christmas animated:YES completion:nil];
-        
-        
-    }else if (subPlan == ChristmasSubPlanb){
-        
-        XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
-        
-        christmas.modalPresentationStyle = UIModalPresentationFormSheet;
-        christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        christmas.preferredContentSize = CGSizeMake(375, 667);
-        [appDelegate_ipad.mainViewController presentViewController:christmas animated:YES completion:nil];
-    }
-    
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_OpenPopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_OpenPopup" parameters:nil];
-    }
-}
--(void)dismissPopView{
-    [self.planA dismiss];
-    
-
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_ClosePopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_ClosePopup" parameters:nil];
-    }
-}
-
-
--(void)bchristmasPopViewGetNowClick{
-    [self.planB dismiss];
-    
-    AppDelegate_iPad* appDelegate_ipad = (AppDelegate_iPad*)[[UIApplication sharedApplication] delegate];
-
-    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-    
-    if(subPlan == ChristmasSubPlana){
-        
-        XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
-        
-        christmas.modalPresentationStyle = UIModalPresentationFormSheet;
-        christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        christmas.preferredContentSize = CGSizeMake(375, 667);
-        [appDelegate_ipad.mainViewController presentViewController:christmas animated:YES completion:nil];
-        
-    }else if(subPlan == ChristmasSubPlanb){
-        
-        XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
-        
-        christmas.modalPresentationStyle = UIModalPresentationFormSheet;
-        christmas.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        christmas.preferredContentSize = CGSizeMake(375, 667);
-        [appDelegate_ipad.mainViewController presentViewController:christmas animated:YES completion:nil];
-        
-    }
-    
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_OpenPopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_OpenPopup" parameters:nil];
-    }
-    
-}
--(void)bdismissPopView{
-    [self.planB dismiss];
-    
-
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_ClosePopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_ClosePopup" parameters:nil];
-    }
+   
 }
 
 

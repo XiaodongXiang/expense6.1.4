@@ -36,7 +36,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
 
 - (IBAction)cancelShareClick:(id)sender {
     [UIView animateWithDuration:0.2 animations:^{
-        self.bottomView.y = SCREEN_HEIGHT;
+        self.bottomView.y = ISPAD?667:SCREEN_HEIGHT;
         self.alphaView.alpha = 0;
     }completion:^(BOOL finished) {
         self.alphaView.hidden = YES;
@@ -59,7 +59,11 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
         if (IS_IPHONE_X) {
             self.bottomView.y = SCREEN_HEIGHT - 211;
         }else{
-            self.bottomView.y = SCREEN_HEIGHT - 177;
+            if (ISPAD) {
+                self.bottomView.y = 490;
+            }else{
+                self.bottomView.y = SCREEN_HEIGHT - 177;
+            }
         }
         
         self.alphaView.alpha = 1;
@@ -84,7 +88,12 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     
     [self createLink];
     [self.view addSubview:self.bottomView];
-    self.bottomView.frame = CGRectMake(0, SCREEN_HEIGHT, SCREEN_WIDTH, 211);
+    
+    if (ISPAD) {
+        self.bottomView.frame = CGRectMake(0, 667, 375, 211);
+    }else{
+        self.bottomView.frame = CGRectMake(0,SCREEN_HEIGHT,SCREEN_WIDTH, 211);
+    }
     
  
 }
@@ -126,7 +135,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
         MFMailComposeViewController *picker = [[MFMailComposeViewController alloc] init];
         picker.mailComposeDelegate = self;
         [picker setSubject:subject];
-        [picker setToRecipients:@[@"xiaodong.xiang@appxy.com"]];
+//        [picker setToRecipients:@[@"xiaodong.xiang@appxy.com"]];
         [picker setMessageBody:message isHTML:YES];
         [self presentViewController:picker animated:YES completion:nil];
         

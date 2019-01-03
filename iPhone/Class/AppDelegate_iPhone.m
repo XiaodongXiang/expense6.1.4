@@ -59,7 +59,6 @@
 #import "XDFirstPromptViewController.h"
 
 #import "XDUpgradeViewController.h"
-#import "XDPlanControlClass.h"
 #import <objc/runtime.h>
 
 
@@ -210,11 +209,6 @@
 {
     
     [Parse enableLocalDatastore];
-    
-    
-    // Initialize Parse.
-//    [Parse setApplicationId:@"BI4p05Rax27kKCV7Q00o9wJnNgPTBbDHsHVRgCTM"
-//                  clientKey:@"Y5pqvDEtUEJYtUgC53OIRbkSU0RE8SB4qfrSUl6e"];
 
     [Parse initializeWithConfiguration:[ParseClientConfiguration configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
         configuration.applicationId = @"BI4p05Rax27kKCV7Q00o9wJnNgPTBbDHsHVRgCTM";
@@ -228,7 +222,6 @@
     // [Optional] Track statistics around application opens.
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-//    [Crashlytics startWithAPIKey:@"5396d094a6603764683087a0e2248c3bf6260141"];
     [Fabric with:@[[Crashlytics class]]];
     
     if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
@@ -599,6 +592,13 @@
         {
             _overViewController.calViewController.view.hidden = YES;
         }
+    }
+    
+    if ([PFUser currentUser])
+    {
+        [[ParseDBManager sharedManager]dataSyncWithServer];
+        [[XDPurchasedManager shareManager] getPFSetting];
+        
     }
 }
 
@@ -1186,13 +1186,6 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUI" object:nil];
     });
     
-    
-    if ([PFUser currentUser])
-    {
-        [[ParseDBManager sharedManager]dataSyncWithServer];
-        [[XDPurchasedManager shareManager] getPFSetting];
-
-    }
 }
 
 /**

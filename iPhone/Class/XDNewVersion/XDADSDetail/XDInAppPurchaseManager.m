@@ -9,7 +9,7 @@
 #import <StoreKit/StoreKit.h>
 #import "PokcetExpenseAppDelegate.h"
 #import <Parse/Parse.h>
-#import "XDPlanControlClass.h"
+
 @import Firebase;
 #define LITE_UNLOCK_FLAG    @"isProUpgradePurchased"
 
@@ -67,23 +67,7 @@
     double yearPrice = 0;
     for(SKProduct *product in productArr){
         
-        NSString* productID = product.productIdentifier;
-
-        if ([productID isEqualToString:KInAppPurchaseProductIdMonth]) {
-            if ([XDPlanControlClass shareControlClass].needShow) {
-                if (@available(iOS 11.2, *)) {
-                    if (product.introductoryPrice) {
-                        [self saveIntroductoryPrice:product];
-                    }else{
-                        [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:NO] forKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
-                    }
-                }
-            }
-        }
-        
-        
         [self.productDic setObject:product forKey:product.productIdentifier];
-        
         
         if ([product.productIdentifier isEqualToString:KInAppPurchaseProductIdMonth]) {
             monthPrice = [product.price doubleValue];
@@ -96,28 +80,6 @@
     double sale = (monthPrice * 12 - yearPrice)/(monthPrice * 12) * 100;
     [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithDouble:sale] forKey:@"salePrice"];
     
-}
-
--(void)saveIntroductoryPrice:(SKProduct*)product{
-    if (@available(iOS 11.2, *)) {
-        
-        if (product.introductoryPrice) {
-            double introductoryPrice = [product.introductoryPrice.price doubleValue];
-            NSNumberFormatter *numberFmt =[[NSNumberFormatter alloc] init];
-            [numberFmt setFormatterBehavior:NSNumberFormatterBehavior10_4];
-            
-            [numberFmt setNumberStyle:NSNumberFormatterCurrencyStyle];
-            [numberFmt setLocale:product.priceLocale];
-            [numberFmt setMaximumFractionDigits:2];
-            
-            
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"getIntroductoryPriceNotif" object:nil];
-            [userDefaults setValue:[numberFmt stringFromNumber:[NSNumber numberWithDouble:introductoryPrice]] forKey:PURCHASE_PRICE_MONTH_INTRODUCTORY];
-           
-        }
-    }
 }
 
 //内购流程2:获取商品信息成功之后，把商品信息存储起来，发送通知让相关页面把价格显示出来
@@ -253,8 +215,6 @@
 //    expensePurchase* expense = [[expensePurchase alloc]init];
 //    [expense completeTransactionReceipt];
     
-    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
-    
     PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
     [appDelegate hideIndicator];
     
@@ -272,9 +232,6 @@
             [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%f",[purchaseDate timeIntervalSince1970]] forName:@"subscription_date_interval"];
         }
         
-        if (christmasUserObjectID.length > 0) {
-            [FIRAnalytics logEventWithName:@"CA_FU_USE_SUCCEED" parameters:nil];
-        }
         [FIRAnalytics setUserPropertyString:@"monthly" forName:@"subscription_type"];
 
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
@@ -296,10 +253,6 @@
     appDelegate.isPurchased = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        
-        if (christmasUserObjectID.length > 0) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"dismissChristmasBanner"];
-        }
         [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
        
@@ -322,19 +275,12 @@
 -(void)failedTransaction:(SKPaymentTransaction*)transaction{
     NSString* proID = transaction.payment.productIdentifier;
     
-    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
-
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         if (transaction.error.code == SKErrorPaymentCancelled)
         {
 //            [Appsee addEvent:@"Cancel - Monthly"];
             [FIRAnalytics logEventWithName:@"cancel_monthly" parameters:nil];
-            
-            if (christmasUserObjectID.length > 0) {
-                [FIRAnalytics logEventWithName:@"CA_FU_USE_CANCELED" parameters:nil];
-                [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-
-            }
+       
         }
         else if(transaction.error.code==SKErrorPaymentInvalid)
         {
@@ -465,10 +411,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
-        if (christmasUserObjectID.length <= 0) {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
-
-        }
+       
     });
 }
 

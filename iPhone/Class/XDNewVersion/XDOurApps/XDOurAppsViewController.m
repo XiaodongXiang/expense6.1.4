@@ -6,7 +6,6 @@
 //
 #import "ParseDBManager.h"
 #import <Parse/Parse.h>
-#import "XDPlanControlClass.h"
 
 #import "XDOurAppsViewController.h"
 @import  Firebase;
@@ -99,7 +98,6 @@
         [self.fourthBtn setImage:[UIImage imageNamed:@"get"] forState:UIControlStateNormal];
     };
 
-    [FIRAnalytics logEventWithName:@"ours_app_enter" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
 
 }
 
@@ -109,11 +107,6 @@
     [super viewWillDisappear:animated];
     
     self.leaveDate = [NSDate date];
-    
-    [FIRAnalytics logEventWithName:@"ours_app_pagetime" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser,@"pageTime":[[XDPlanControlClass shareControlClass] pageTimeWithStartDate:self.enterDate endDate:self.leaveDate]}];
-
-    [FIRAnalytics logEventWithName:@"ours_app_leave" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
-
     
 }
 
@@ -162,11 +155,11 @@
             NSString *urlStr = @"db-b43ep996igwezzh://";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
 
-            [FIRAnalytics logEventWithName:@"ours_app_open_hoursKeeper" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            [FIRAnalytics logEventWithName:@"ours_app_open_hoursKeeper" parameters:nil];
         }else{
             NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=OurApps-PKEP-HRKP&mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            [FIRAnalytics logEventWithName:@"ours_app_download_hoursKeeper" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            [FIRAnalytics logEventWithName:@"ours_app_download_hoursKeeper" parameters:nil];
         };
 
     }else if (btn.tag == 2){
@@ -174,35 +167,35 @@
             
             NSString *urlStr = @"PCheckBook://";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            [FIRAnalytics logEventWithName:@"ours_app_open_checkBook" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            [FIRAnalytics logEventWithName:@"ours_app_open_checkBook" parameters:nil];
             
         }else{
             NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id484000695?pt=118715235&ct=OurApps-PKEP-CKBK&mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            [FIRAnalytics logEventWithName:@"ours_app_download_checkBook" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            [FIRAnalytics logEventWithName:@"ours_app_download_checkBook" parameters:nil];
         }
     }else if (btn.tag == 3){
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"scannnernow://"]]){
             
             NSString *urlStr = @"scannnernow://";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            [FIRAnalytics logEventWithName:@"ours_app_open_sannernow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            [FIRAnalytics logEventWithName:@"ours_app_open_sannernow" parameters:nil];
             
         }else{
             NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id1193953564?pt=291138&ct=OurApps-PKEP-SCNN&mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            [FIRAnalytics logEventWithName:@"ours_app_download_sannernow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            [FIRAnalytics logEventWithName:@"ours_app_download_sannernow" parameters:nil];
         }
     }else if (btn.tag == 4){
         if ([[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"faxnow://"]]){
 
             NSString *urlStr = @"faxnow://";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            [FIRAnalytics logEventWithName:@"ours_app_open_faxnow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            [FIRAnalytics logEventWithName:@"ours_app_open_faxnow" parameters:nil];
         }else{
             NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id1197930396?pt=291138&ct=OurApps-PKEP-FXNW&mt=8";
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-            [FIRAnalytics logEventWithName:@"ours_app_download_faxnow" parameters:@{@"user":[PFUser currentUser].objectId,@"isChristmasNewUser":[XDPlanControlClass shareControlClass].isChristmasNewUser}];
+            [FIRAnalytics logEventWithName:@"ours_app_download_faxnow" parameters:nil];
         }
     }
 }

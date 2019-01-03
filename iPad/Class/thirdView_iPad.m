@@ -389,6 +389,7 @@
             {
                 [appDelegate succededInSignUp];
                 [[XDPurchasedManager shareManager] saveDefaultParseSetting];
+                [[XDPurchasedManager shareManager] tryOutPremium30DaysWithNewUser];
 
             }
         }];

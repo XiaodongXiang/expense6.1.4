@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 -(void)getPFSetting;
 -(void)savePFSetting;
 -(void)saveDefaultParseSetting;
-
+-(void)tryOutPremium30DaysWithNewUser;
 @end
 
 NS_ASSUME_NONNULL_END

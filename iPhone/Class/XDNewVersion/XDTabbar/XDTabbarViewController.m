@@ -14,22 +14,12 @@
 #import "XDTabbarView.h"
 #import "XDChartMainViewController.h"
 #import "AppDelegate_iPhone.h"
-#import "XDChristmasPlanBPopViewController.h"
-#import "XDChristmasPlanAPopViewController.h"
-#import "XDPlanControlClass.h"
 #import <Parse/Parse.h>
 
 #import "XDUpgradeViewController.h"
 
 #import "XDAppriater.h"
 
-#import "XDChristmasLiteOneViewController.h"
-#import "XDChristmasLitePlanAViewController.h"
-#import "XDChristmasPlanAbViewController.h"
-#import "XDChristmasPlanBbViewController.h"
-
-#import "XDChristmasShareSuccessPlanBPopViewController.h"
-#import "XDChristmasShareSuccessdPlanAPopViewController.h"
 
 
 @import Firebase;
@@ -43,12 +33,6 @@
 @property(nonatomic, strong)XDChartMainViewController * chartViewController;
 @property(nonatomic, strong)ADEngineController* interstitial;
 
-@property(nonatomic, strong)XDChristmasPlanAPopViewController* planA;
-@property(nonatomic, strong)XDChristmasPlanBPopViewController* planB;
-
-
-@property(nonatomic, strong)XDChristmasShareSuccessdPlanAPopViewController* popAVc;
-@property(nonatomic, strong)XDChristmasShareSuccessPlanBPopViewController* popBVc;
 
 @end
 
@@ -147,131 +131,9 @@
     };
     
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
-
 }
 
 
--(void)purchaseSuccessful{
-    
-    NSString* christmasUserObjectID = [[NSUserDefaults standardUserDefaults] objectForKey:@"isChristmasEnter"];
-    if (christmasUserObjectID.length > 0) {
-        if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-            self.popAVc = [[XDChristmasShareSuccessdPlanAPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessdPlanAPopViewController" bundle:nil];
-            [self.view addSubview:self.popAVc.view];
-            self.popAVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
-            [self.popAVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.popAVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
-            self.popAVc.contentImgView.image = [UIImage imageNamed:@"christmas_50%off"];
-            [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download"] forState:UIControlStateNormal];
-            [self.popAVc.useItBtn setImage:[UIImage imageNamed:@"aChristmas_Download_press"] forState:UIControlStateHighlighted];
-            
-            [self.popAVc show];
-        }else{
-            self.popBVc = [[XDChristmasShareSuccessPlanBPopViewController alloc]initWithNibName:@"XDChristmasShareSuccessPlanBPopViewController" bundle:nil];
-            [self.view addSubview:self.popBVc.view];
-            self.popBVc.view.frame  = CGRectMake(0, 0, ISPAD?375:SCREEN_WIDTH, ISPAD?667:SCREEN_HEIGHT);
-            [self.popBVc.cancelBtn addTarget:self action:@selector(vcCancelClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.popBVc.useItBtn addTarget:self action:@selector(vcUseItClick) forControlEvents:UIControlEventTouchUpInside];
-            self.popBVc.contentImgView.image = [UIImage imageNamed:@"bChristmas_share_50%off"];
-            
-            [self.popBVc show];
-        }
-        
-        [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-    }
-}
-
--(void)vcCancelClick{
-    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-        [self.popAVc dismiss];
-        
-    }else{
-        [self.popBVc dismiss];
-        
-    }
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-    
-}
-
--(void)vcUseItClick{
-    if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-        [self.popAVc dismiss];
-        
-    }else{
-        [self.popBVc dismiss];
-        
-    }
-    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-    
-    
-    NSString *urlStr = @"https://itunes.apple.com/app/apple-store/id563155321?pt=12390800&ct=ChristmasActivity-PKEP-HRKP&mt=8";
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStr]];
-}
-
--(void)christmasPopViewGetNowClick{
-    [self.planA dismiss];
-//    XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
-//    [self presentViewController:adsVc animated:YES completion:nil];
-    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-
-    if(subPlan == ChristmasSubPlana){
-        
-        XDChristmasLitePlanAViewController* christmas = [[XDChristmasLitePlanAViewController alloc]initWithNibName:@"XDChristmasLitePlanAViewController" bundle:nil];
-        [self presentViewController:christmas animated:YES completion:nil];
-        
-    }else if (subPlan == ChristmasSubPlanb){
-        
-        XDChristmasPlanAbViewController* christmas = [[XDChristmasPlanAbViewController alloc]initWithNibName:@"XDChristmasPlanAbViewController" bundle:nil];
-        [self presentViewController:christmas animated:YES completion:nil];
-    }
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_OpenPopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_OpenPopup" parameters:nil];
-    }
-}
--(void)dismissPopView{
-    [self.planA dismiss];
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_ClosePopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_ClosePopup" parameters:nil];
-    }
-}
-
--(void)bchristmasPopViewGetNowClick{
-    [self.planB dismiss];
-    NSInteger subPlan = [XDPlanControlClass shareControlClass].planSubType;
-
-    if(subPlan == ChristmasSubPlana){
-        XDChristmasLiteOneViewController* christmas = [[XDChristmasLiteOneViewController alloc]initWithNibName:@"XDChristmasLiteOneViewController" bundle:nil];
-        [self presentViewController:christmas animated:YES completion:nil];
-        
-    }else if(subPlan == ChristmasSubPlanb){
-        XDChristmasPlanBbViewController* christmas = [[XDChristmasPlanBbViewController alloc]initWithNibName:@"XDChristmasPlanBbViewController" bundle:nil];
-        [self presentViewController:christmas animated:YES completion:nil];
-        
-    }
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_OpenPopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_OpenPopup" parameters:nil];
-    }
-
-    
-}
--(void)bdismissPopView{
-    [self.planB dismiss];
-    
-    if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-        [FIRAnalytics logEventWithName:@"CA_FU_ClosePopup" parameters:nil];
-    }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-        [FIRAnalytics logEventWithName:@"CA_PU_ClosePopup" parameters:nil];
-    }
-}
 
 -(void)tabbarDismiss:(NSNotification*)notif{
     [UIView animateWithDuration:0.2 animations:^{
@@ -316,38 +178,8 @@
     if (!appDelegate.isPurchased) {
         [self.interstitial showInterstitialAdWithTarget:self];
     }
-    
-    if ([[XDPlanControlClass shareControlClass] everyDayShowOnce]) {
-        if ([XDPlanControlClass shareControlClass].planType == ChristmasPlanA) {
-            
-            self.planA = [[XDChristmasPlanAPopViewController alloc]initWithNibName:@"XDChristmasPlanAPopViewController" bundle:nil];
-            self.planA.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [self.planA show];
-            
-            [self.planA.getNowBtn addTarget:self action:@selector(christmasPopViewGetNowClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.planA.cancelBtn addTarget:self action:@selector(dismissPopView) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview:self.planA.view];
-            
-        }else{
-            
-            self.planB = [[XDChristmasPlanBPopViewController alloc]initWithNibName:@"XDChristmasPlanBPopViewController" bundle:nil];
-            self.planB.view.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-            [self.planB show];
-            
-            [self.planB.openBtn addTarget:self action:@selector(bchristmasPopViewGetNowClick) forControlEvents:UIControlEventTouchUpInside];
-            [self.planB.cancelBtn addTarget:self action:@selector(bdismissPopView) forControlEvents:UIControlEventTouchUpInside];
-            [self.view addSubview: self.planB.view];
-            
-        }
-        
-        if ([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryHasReceive7Days) {
-             [FIRAnalytics logEventWithName:@"CA_FU_ShowPopup" parameters:nil];
-        }else if([XDPlanControlClass shareControlClass].planCategory == ChristmasPlanCategoryLifetime){
-            [FIRAnalytics logEventWithName:@"CA_PU_ShowPopup" parameters:nil];
-        }
-    }
-   
 }
+
 
 - (instancetype)init
 {

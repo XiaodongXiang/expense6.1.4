@@ -747,6 +747,11 @@
                         [formatter setDateFormat:@"yyyy-MM-dd"];
                         NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
                         self.exprieDateLbl.text = [NSString stringWithFormat:@"Renews :%@",expiredString];
+                        
+                        if (setting.otherBool18) {
+                            self.exprieDateLbl.text = [NSString stringWithFormat:@"Expire Date :%@",expiredString];
+
+                        }
                     }
                 }
                 return self.profileCell;
@@ -948,6 +953,13 @@
         }
     }
     
+    Setting * setting = [[XDDataManager shareManager]getSetting];
+    if ([setting.otherBool18 boolValue]) {
+        if (indexPath.section == 0 && indexPath.row == 1) {
+            return 0.01;
+        }
+    }
+    
     return 51;
     
 }
@@ -1032,10 +1044,9 @@
             setting.purchasedUpdateTime = nil;
             
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:LITE_UNLOCK_FLAG];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
             [[NSUserDefaults standardUserDefaults] removeObjectForKey:IS_FIRST_UPLOAD_SETTING];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"dismissChristmasBanner"];
+            [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"invitedby"];
+
             
             [[XDDataManager shareManager] saveContext];
             

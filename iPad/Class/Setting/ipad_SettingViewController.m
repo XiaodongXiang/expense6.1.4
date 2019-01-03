@@ -33,7 +33,7 @@
 #import "AboutViewController_iPad.h"
 #import "AppDelegate_iPhone.h"
 #import "XDOurAppsViewController.h"
-
+#import "XDShareLinkViewController.h"
 
 @import Firebase;
 @interface ipad_SettingViewController ()
@@ -41,6 +41,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *premiumCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *oursAppCell;
 @property (weak, nonatomic) IBOutlet UIView *redPoint;
+@property (strong, nonatomic) IBOutlet UITableViewCell *shareLinkCell;
 
 @end
 
@@ -72,7 +73,6 @@
     self.view.backgroundColor=[UIColor colorWithRed:248/255.0 green:248/255.0 blue:248/255.0 alpha:1];
     
     PokcetExpenseAppDelegate *appdelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-//    Setting* setting = [[XDDataManager shareManager] getSetting];
     if (appdelegate.isPurchased) {
         Setting* setting = [[XDDataManager shareManager] getSetting];
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
@@ -83,7 +83,6 @@
         
         if ([proID isEqualToString:kInAppPurchaseProductIdLifetime] || defaults2) {
             self.premiumIcon.image = [UIImage imageNamed:@"member_3"];
-//            self.exprieDateLblH.constant = 0;
             
         }else{
             if (![setting.purchasedIsSubscription boolValue]) {
@@ -94,12 +93,6 @@
                 }else{
                     self.premiumIcon.image = [UIImage imageNamed:@"member_2"];
                 }
-//                NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
-//                [formatter setDateFormat:@"yyyy-MM-dd"];
-//                NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
-                
-//                self.exprieDateLblH.constant = 10;
-//                self.exprieDateLbl.text = [NSString stringWithFormat:@"Renews :%@",expiredString];
             }
             [self.tableView reloadData];
         }
@@ -463,12 +456,6 @@
 #pragma mark Table view methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (!appDelegate.isPurchased)
-    {
-        return 6;
-    }
-    else
         return 6;
 }
 
@@ -477,53 +464,25 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     
-	
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    if (!appDelegate.isPurchased)
+    if (section==0)
     {
-        if (section==0)
-        {
-            return 1;
-        }
-        if(section ==1 )
-            return 3;
-        else if(section ==2)
-            return 2;
-        else if (section==3)
-        {
-            return 2;
-        }
-        else if(section==4)
-        {
-            return 2;
-        }
-        else
-        {
-            return 1;
-        }
+        return 2;
+    }
+    if(section ==1 )
+        return 3;
+    else if(section ==2)
+        return 2;
+    else if (section==3)
+    {
+        return 2;
+    }
+    else if(section==4)
+    {
+        return 2;
+    }else
         
-    }
-    else
-    {
-        if(section == 0){
-            return 1;
-        }else if(section ==1 )
-            return 3;
-        else if(section ==2)
-            return 2;
-        else if (section==3)
-        {
-            return 2;
-        }
-        else if(section==4)
-        {
-            return 2;
-        }
-        else
-        {
-            return 1;
-        }
-    }
+        return 1;
+    
 
     
 }
@@ -536,69 +495,18 @@
     
     _topLineH.constant=EXPENSE_SCALE;
     _bottomLineH.constant=EXPENSE_SCALE;
-    //没购买
-    if (!appDelegate.isPurchased)
-    {
-        if (indexPath.section==0 && indexPath.row==0)
-        {
-            return restorePurchaseCell;
-        }
-        else if(indexPath.section ==1)
-        {
-            if(indexPath.row == 0)
-                return passcodeCell;
-            else if(indexPath.row == 1)
-                return currencyCell;
-            else
-                return generalCell;
-        }
-        else if(indexPath.section ==2)
-            
-        {
-            if(indexPath.row == 0)
-                return payeeCell;
-            else if(indexPath.row == 1)
-                return categoryCell;
-        }
-        
-        else  if(indexPath.section==3)
-        {
-            if(indexPath.row==0)
-                return syncCell;
-            else if(indexPath.row==1)
-            {
-                return exportCell;
-            }
-//            else if(indexPath.row == 2)
-//            {
-//                exportImage.image = [UIImage imageNamed:@"setting_cell_j2_320_44.png"];
-//                return backUpCell;
-//            }
-//
-//            else if(indexPath.row==3)
-//            {
-//                return exportCell;
-//            }
 
-        }
-        else if(indexPath.section==4)
-        {
-            if (indexPath.row == 0) {
-                return appVersionCell;
-            }else{
-                return self.oursAppCell;
-            }
-        }
-        else
-        {
-            if(indexPath.row==0)
-                return _logoutCell;
-        }
-        
-    }
     //购买了
     if (indexPath.section == 0) {
-        return self.premiumCell;
+        if (indexPath.row == 0) {
+            if (!appDelegate.isPurchased){
+                return restorePurchaseCell;
+            }else{
+                return self.premiumCell;
+            }
+        }else{
+            return self.shareLinkCell;
+        }
     }else if(indexPath.section ==1)
     {
         
@@ -616,9 +524,7 @@
             return payeeCell;
         else if(indexPath.row == 1)
             return categoryCell;
-    }
-    
-    else  if(indexPath.section==3)
+    } else  if(indexPath.section==3)
     {
         if(indexPath.row==0)
             return syncCell;
@@ -626,18 +532,8 @@
         {
             return exportCell;
         }
-//        else if(indexPath.row==2)
-//        {
-//            return backUpCell;
-//        }
-//        else if(indexPath.row==3)
-//        {
-//            return exportCell;
-//        }
         
-    }
-    //indexPath.section==3
-    else if (indexPath.section==4)
+    }else if (indexPath.section==4)
     {
         if (indexPath.row == 0) {
             return appVersionCell;
@@ -646,7 +542,6 @@
         }
     }
     
-    //indexpath==0.row==0
     
     return _logoutCell;
 
@@ -657,324 +552,77 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-    //没购买
-    if (!appDelegate.isPurchased)
+    
+    if (indexPath.section==0)
     {
-        if (indexPath.section==0 && indexPath.row==0)
-        {
-            [self backWithPopAdasDetailViewController:indexPath.row];
-
-        }
-        //(1)passcode (2)currency (3)help
-        else if(indexPath.section ==1)
-        {
-            if(indexPath.row == 0)
-            {
-                [self handlePasscode];
-                return;
-                
-            }
-            else if(indexPath.row == 1)
-            {
-                ipad_CurrencyTypeViewController* currencyController = [[ipad_CurrencyTypeViewController alloc] initWithStyle:UITableViewStylePlain];
-                PokcetExpenseAppDelegate * appDelegate =(PokcetExpenseAppDelegate *) [[UIApplication sharedApplication] delegate];
-                
-                currencyController.selectedCurrency = appDelegate.settings.currency;
-                [self.navigationController pushViewController:currencyController animated:YES];
-            }
-            else
-            {
-                iPad_GeneralViewController *generalViewController = [[iPad_GeneralViewController alloc]initWithNibName:@"iPad_GeneralViewController" bundle:nil];
-                [self.navigationController pushViewController:generalViewController animated:YES];
-                return;
-            }
+        if (indexPath.row==0) {
+            [self backWithPopAdasDetailViewController];
+        }else{
             
-        }
-        //(1)payee (2)category
-        else if(indexPath.section == 2)
-        {
-            if(indexPath.row == 0)
-            {
-                self.iSettingPayeeViewController = [[ipad_SettingPayeeViewController alloc] initWithNibName:@"ipad_SettingPayeeViewController" bundle:nil];
-                
-                [self.navigationController pushViewController:self.iSettingPayeeViewController animated:YES];
-                
-                
-            }
-            if (indexPath.row == 1)
-            {
-                self.iTransactionCategoryViewController =   [[ipad_TranscationCategorySelectViewController alloc]initWithNibName:@"ipad_TranscationCategorySelectViewController" bundle:nil];
-                self.iTransactionCategoryViewController.payeeEditViewController = nil;
-                self.iTransactionCategoryViewController.transactionEditViewController = nil;
-                self.iTransactionCategoryViewController.settingViewController = self;
-                [self.navigationController pushViewController:self.iTransactionCategoryViewController animated:YES];
-                
-            }
-        }
-        ///////
-        else if(indexPath.section == 3)
-        {
-            if (indexPath.row==0)
-            {
-                
-                return;
-            }
-//            else if(indexPath.row == 1)
-//            {
-//
-//                //dropbox restore
-//                UIAlertView *alertview = [[UIAlertView alloc]initWithTitle:nil message:@"We are sorry to announced that the restore function via Dropbox had been removed since Dropbox shut down their Sync API in April. \n However, you can still get your data synced by registering as our user in the settings rather than Dropbox." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                [alertview show];
-//
-//            }
-            else if(indexPath.row == 1)
-            {
-                
-                PokcetExpenseAppDelegate * appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
-                [appDelegate.epnc setFlurryEvent_WithIdentify:@"18_SET_BKUP"];
-                
-                
-                appDelegate.settings.others = @"PocketExpense_v1";
-                NSError * error;
-                if (![appDelegate.managedObjectContext save:&error]) {
-                    NSLog(@"Unresolved error %@, %@",error, [error userInfo]);
-                    
-                }
-                if ([appDelegate.settings.others17 isEqualToString:@"4.5"])
-                {
-
-                    ipad_ReportViewController *reportViewController = [[ipad_ReportViewController alloc]initWithNibName:@"ipad_ReportViewController" bundle:nil];
-                    [self.navigationController pushViewController:reportViewController animated:YES];                }
-                else
-                {
-                    [self backWithPopAdasDetailViewController:indexPath.row];
-                }
-                return;
-                
-            }
-//            else
-//            {
-//                PokcetExpenseAppDelegate * appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
-//                [appDelegate.epnc setFlurryEvent_WithIdentify:@"18_SET_BKUP"];
-//
-//
-//                appDelegate.settings.others = @"PocketExpense_v1";
-//                NSError * error;
-//                if (![appDelegate.managedObjectContext save:&error])
-//                {
-//                    NSLog(@"Unresolved error %@, %@",error, [error userInfo]);
-//
-//                }
-//                if ([appDelegate.settings.others17 isEqualToString:@"4.5"])
-//                {
-//                    BackUpAndRestoreViewController * backUpAndRestoreViewController = [[BackUpAndRestoreViewController alloc] initWithNibName:@"BackUpAndRestoreViewController" bundle:nil];
-//                    [self.navigationController pushViewController:backUpAndRestoreViewController animated:YES];
-//                }
-//                else
-//                {
-//                    [self backWithPopAdasDetailViewController:1];
-//                }
-//                return;
-//
-//            }
-        }
-        
-        //第四section
-        else if(indexPath.section==4)
-        {
-            if (indexPath.row==0)
-            {
-                AboutViewController_iPad *aboutViewController=[[AboutViewController_iPad alloc]initWithNibName:@"AboutViewController_iPad" bundle:nil];
-                [self.navigationController pushViewController:aboutViewController animated:YES];
-                
-            }
-            else if (indexPath.row==1)
-            {
-//                Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
-//                if (mailClass != nil)
-//                {
-//                    // We must always check whether the current device is configured for sending emails
-//                    if ([mailClass canSendMail])
-//                    {
-//                        [self displayComposerSheet];
-//                    }
-//                    else
-//                    {
-//
-//                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_No Mail Accounts", nil) message:NSLocalizedString(@"VC_Please set up a mail account in order to send mail.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
-//                        [alertView show];
-//                        AppDelegate_iPad *appDelegate = (AppDelegate_iPad *)[[UIApplication sharedApplication] delegate];
-//                        appDelegate.appAlertView = alertView;
-//                    }
-//                }
-//
-//                [settingTableView reloadData];
-                
-                XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterOursApp"];
-                self.redPoint.hidden = YES;
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"isFirstEnterPOursAppVc" object:nil];
-
-                [self.navigationController pushViewController:ourVc animated:YES];
-            }
-            else if (indexPath.row==2){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/cn/app/pocket-expense-personal-finance/id424575621?mt=8"]];
-            }
+            XDShareLinkViewController* linkVc = [[XDShareLinkViewController alloc]initWithNibName:@"XDShareLinkViewController" bundle:nil];
             
-            [settingTableView reloadData];
+            linkVc.modalPresentationStyle = UIModalPresentationFormSheet;
+            linkVc.preferredContentSize = CGSizeMake(375, 667);
+            AppDelegate_iPad *appDelegate1 = (AppDelegate_iPad *)[[UIApplication sharedApplication]delegate];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [appDelegate1.mainViewController presentViewController:linkVc animated:YES completion:nil];
             
-            
-        }
-        // 5 section.logout
-        else
-        {
-            if (indexPath.row==0)
-            {
-                [self logout];
-            }
         }
     }
-    else
+    
+    if(indexPath.section ==1)
     {
-        if (indexPath.section == 0) {
-            NSString * proId = [[NSUserDefaults standardUserDefaults] stringForKey:@"purchaseProductID"];
-            if ([proId isEqualToString:kInAppPurchaseProductIdLifetime]) {
-                return;
-            }
-
-            [self backWithPopAdasDetailViewController:indexPath.row];
-
-        }
-        //(1)passcode (2)currency (3)help
-        else if(indexPath.section ==1)
+        if(indexPath.row == 0)
         {
-            if(indexPath.row == 0)
-            {
-                [self handlePasscode];
-                return;
-                
-            }
-            else if(indexPath.row == 1)
-            {
-                ipad_CurrencyTypeViewController* currencyController = [[ipad_CurrencyTypeViewController alloc] initWithStyle:UITableViewStylePlain];
-                PokcetExpenseAppDelegate * appDelegate =(PokcetExpenseAppDelegate *) [[UIApplication sharedApplication] delegate];
-                
-                currencyController.selectedCurrency = appDelegate.settings.currency;
-                [self.navigationController pushViewController:currencyController animated:YES];
-            }
-            else
-            {
-                iPad_GeneralViewController *generalViewController = [[iPad_GeneralViewController alloc]initWithNibName:@"iPad_GeneralViewController" bundle:nil];
-                [self.navigationController pushViewController:generalViewController animated:YES];
-                return;
-            }
+            [self handlePasscode];
         }
-        //(1)payee (2)category
-        else     if(indexPath.section == 2)
+        else if(indexPath.row == 1)
         {
-            if(indexPath.row == 0)
-            {
-                self.iSettingPayeeViewController = [[ipad_SettingPayeeViewController alloc] initWithNibName:@"ipad_SettingPayeeViewController" bundle:nil];
-                
-                [self.navigationController pushViewController:self.iSettingPayeeViewController animated:YES];
-                
-                
-            }
-            if (indexPath.row == 1)
-            {
-                self.iTransactionCategoryViewController = [[ipad_TranscationCategorySelectViewController alloc]initWithNibName:@"ipad_TranscationCategorySelectViewController" bundle:nil];
-                self.iTransactionCategoryViewController.payeeEditViewController = nil;
-                self.iTransactionCategoryViewController.transactionEditViewController = nil;
-                self.iTransactionCategoryViewController.settingViewController = self;
-                [self.navigationController pushViewController:self.iTransactionCategoryViewController animated:YES];
-                
-            }
+            ipad_CurrencyTypeViewController* currencyController = [[ipad_CurrencyTypeViewController alloc] initWithStyle:UITableViewStylePlain];
+            currencyController.selectedCurrency = appDelegate.settings.currency;
+            [self.navigationController pushViewController:currencyController animated:YES];
         }
-        ///////
-        else if(indexPath.section == 3)
+        else
         {
-            //(1)sync (2)back up (3)export  (4)migrate data
-            //(1)sync (2)back up (3)export
-            if(indexPath.row == 0)
-            {
-                
-            }
-//            else if(indexPath.row == 1)
-//            {
-//
-//                //resotre dropbox
-//                UIAlertView *alertview = [[UIAlertView alloc]initWithTitle:nil message:@"We are sorry to announced that the restore function via Dropbox had been removed since Dropbox shut down their Sync API in April. \n However, you can still get your data synced by registering as our user in the settings rather than Dropbox." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                [alertview show];
-//
-//            }
-//            else if (indexPath.row==2)
-//            {
-//                
-//                //backup
-//                BackUpAndRestoreViewController * backUpAndRestoreViewController = [[BackUpAndRestoreViewController alloc] initWithNibName:@"BackUpAndRestoreViewController" bundle:nil];
-//                [self.navigationController pushViewController:backUpAndRestoreViewController animated:YES];
-//                
-//            }
-            else
-            {
-                ipad_ReportViewController *reportViewController = [[ipad_ReportViewController alloc]initWithNibName:@"ipad_ReportViewController" bundle:nil];
-                [self.navigationController pushViewController:reportViewController animated:YES];
-            }
+            iPad_GeneralViewController *generalViewController = [[iPad_GeneralViewController alloc]initWithNibName:@"iPad_GeneralViewController" bundle:nil];
+            [self.navigationController pushViewController:generalViewController animated:YES];
+        }
+    }
+    
+    if(indexPath.section == 3 && indexPath.row == 1)
+    {
+        if (appDelegate.isPurchased) {
+            ipad_ReportViewController *reportViewController = [[ipad_ReportViewController alloc]initWithNibName:@"ipad_ReportViewController" bundle:nil];
+            [self.navigationController pushViewController:reportViewController animated:YES];
+        }else{
+            [self backWithPopAdasDetailViewController];
+        }
+    }
+    //第四section
+    if(indexPath.section==4)
+    {
+        if (indexPath.row==0)
+        {
+            AboutViewController_iPad *aboutViewController=[[AboutViewController_iPad alloc]initWithNibName:@"AboutViewController_iPad" bundle:nil];
+            [self.navigationController pushViewController:aboutViewController animated:YES];
             
+        }else if (indexPath.row==1){
+            
+            XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterOursApp"];
+            self.redPoint.hidden = YES;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"isFirstEnterPOursAppVc" object:nil];
+            
+            [self.navigationController pushViewController:ourVc animated:YES];
             
         }
         
-        //第四section
-        else if(indexPath.section==4)
+    }
+    
+    if (indexPath.section == 5) {
+        if (indexPath.row==0)
         {
-            if (indexPath.row==0)
-            {
-                AboutViewController_iPad *aboutViewController=[[AboutViewController_iPad alloc]initWithNibName:@"AboutViewController_iPad" bundle:nil];
-                [self.navigationController pushViewController:aboutViewController animated:YES];
-            }
-            else if (indexPath.row==1)
-            {
-//                Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
-//                if (mailClass != nil)
-//                {
-//                    // We must always check whether the current device is configured for sending emails
-//                    if ([mailClass canSendMail])
-//                    {
-//                        [self displayComposerSheet];
-//                    }
-//                    else
-//                    {
-//
-//                        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"VC_No Mail Accounts", nil) message:NSLocalizedString(@"VC_Please set up a mail account in order to send mail.", nil) delegate:nil cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil];
-//                        [alertView show];
-//                        AppDelegate_iPad *appDelegate = (AppDelegate_iPad *)[[UIApplication sharedApplication] delegate];
-//                        appDelegate.appAlertView = alertView;
-//
-//                    }
-//                }
-//                [settingTableView reloadData];
-                XDOurAppsViewController* ourVc = [[XDOurAppsViewController alloc]initWithNibName:@"XDOurAppsViewController" bundle:nil];
-                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterOursApp"];
-                self.redPoint.hidden = YES;
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"isFirstEnterPOursAppVc" object:nil];
-
-                [self.navigationController pushViewController:ourVc animated:YES];
-                
-            }
-            else if (indexPath.row==2){
-                [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://itunes.apple.com/us/app/pocket-expense-lite/id830063876?mt=8"]];
-                [settingTableView reloadData];
-                
-            }
-            
-        }
-        // 5 section.log out
-        else
-        {
-            if (indexPath.row==0)
-            {
-                [self logout];
-            }
+            [self logout];
         }
     }
 }
@@ -1042,26 +690,15 @@
         return 25.f;
 }
 
--(void)backWithPopAdasDetailViewController:(NSInteger)i
+-(void)backWithPopAdasDetailViewController
 {
     AppDelegate_iPad *appDelegate1 = (AppDelegate_iPad *)[[UIApplication sharedApplication]delegate];
-    [self dismissViewControllerAnimated:NO completion:^{
-       XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
-//        adsDetailViewController.isComeFromSetting = NO;
-//        adsDetailViewController.pageNum = i;
-//        adsDetailViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-        adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
-        appDelegate1.mainViewController.popViewController = adsDetailViewController;
-        adsDetailViewController.preferredContentSize = CGSizeMake(390, 600);
-        [appDelegate1.mainViewController presentViewController:adsDetailViewController animated:YES completion:nil];
-        
-        adsDetailViewController.view.superview.autoresizingMask =
-        UIViewAutoresizingFlexibleTopMargin |
-        UIViewAutoresizingFlexibleBottomMargin;
-        
-
-        adsDetailViewController.view.superview.backgroundColor = [UIColor clearColor];
-    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    XDIpad_ADSViewController* adsDetailViewController = [[XDIpad_ADSViewController alloc]initWithNibName:@"XDIpad_ADSViewController" bundle:nil];
+    adsDetailViewController.modalPresentationStyle = UIModalPresentationFormSheet;
+    adsDetailViewController.preferredContentSize = CGSizeMake(390, 600);
+    [appDelegate1.mainViewController presentViewController:adsDetailViewController animated:YES completion:nil];
 }
 #pragma mark alert view delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -1131,10 +768,8 @@
                  setting.purchasedUpdateTime = nil;
                  
                  [[NSUserDefaults standardUserDefaults] removeObjectForKey:LITE_UNLOCK_FLAG];
-                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:PURCHASE_PRICE_INTRODUCTORY_CAN_BUY];
                  [[NSUserDefaults standardUserDefaults] removeObjectForKey:IS_FIRST_UPLOAD_SETTING];
-                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"isChristmasEnter"];
-                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"dismissChristmasBanner"];
+                 [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"invitedby"];
 
                  [[XDDataManager shareManager] saveContext];
                  
