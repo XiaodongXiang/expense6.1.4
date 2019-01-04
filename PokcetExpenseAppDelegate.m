@@ -202,24 +202,27 @@
 }
 
 -(void)createLink{
-    if ([[NSUserDefaults standardUserDefaults] URLForKey:@"shortURL"].absoluteString.length <= 0) {
-        NSString* uid = [PFUser currentUser].objectId;
-        NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
-        NSString *dynamicLinksDomain = @"pocketexpenselite.page.link";
-        FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domain:dynamicLinksDomain];
-        linkBuilder.iOSParameters = [[FIRDynamicLinkIOSParameters alloc]
-                                     initWithBundleID:@"com.btgs.pocketexpenselite"];
-        linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
-        linkBuilder.iOSParameters.appStoreID = @"424575621";
+    NSString* uid = [PFUser currentUser].objectId;
+    NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
+    NSString *dynamicLinksDomain = @"pocketexpenselite.page.link";
+    FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domain:dynamicLinksDomain];
+    linkBuilder.iOSParameters = [[FIRDynamicLinkIOSParameters alloc]
+                                 initWithBundleID:@"com.btgs.pocketexpenselite"];
+    linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
+    
+    linkBuilder.iOSParameters.appStoreID = @"424575621";
+    
+//    linkBuilder.socialMetaTagParameters = [[FIRDynamicLinkSocialMetaTagParameters alloc] init];
+//    linkBuilder.socialMetaTagParameters.title = @"Pocket Expense 6";
+//    linkBuilder.socialMetaTagParameters.descriptionText = @"See where your money goes";
+//    linkBuilder.socialMetaTagParameters.imageURL = [NSURL URLWithString:@"https://www.dropbox.com/s/vejageimdio2gec/test.png"];
+    [linkBuilder shortenWithCompletion:^(NSURL * _Nullable shortURL,
+                                         NSArray<NSString *> * _Nullable warnings,
+                                         NSError * _Nullable error) {
+        if (error || shortURL == nil) { return; }
         
-        [linkBuilder shortenWithCompletion:^(NSURL * _Nullable shortURL,
-                                             NSArray<NSString *> * _Nullable warnings,
-                                             NSError * _Nullable error) {
-            if (error || shortURL == nil) { return; }
-            
-            [[NSUserDefaults standardUserDefaults] setURL:shortURL forKey:@"shortURL"];
-        }];
-    }
+        [[NSUserDefaults standardUserDefaults] setURL:shortURL forKey:@"shortURL"];
+    }];
    
 }
 

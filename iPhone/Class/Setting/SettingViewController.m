@@ -76,6 +76,7 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *noPurchasedProfileCell;
 
 @property (weak, nonatomic) IBOutlet UIView *redPointView;
+@property (weak, nonatomic) IBOutlet UIView *shareRedPointView;
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *signOutCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *sharelinkCell;
@@ -142,7 +143,7 @@
     
     if (IS_IPHONE_X) {
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
-        self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_plus"];
+        self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_2"];
 
     }else if (IS_IPHONE_6){
         self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
@@ -164,6 +165,14 @@
         self.redPointView.hidden = NO;
     }else{
         self.redPointView.hidden = YES;
+    }
+    
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterShareLink"]) {
+        self.shareRedPointView.layer.cornerRadius = 5;
+        self.shareRedPointView.layer.masksToBounds = YES;
+        self.shareRedPointView.hidden = NO;
+    }else{
+        self.shareRedPointView.hidden = YES;
     }
     
 }
@@ -838,6 +847,8 @@
             }
             if (indexPath.row == 1) {
                 XDShareLinkViewController* linkVc = [[XDShareLinkViewController alloc]initWithNibName:@"XDShareLinkViewController" bundle:nil];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:YES] forKey:@"isFirstEnterShareLink"];
+                self.shareRedPointView.hidden = YES;
                 [self presentViewController:linkVc animated:YES completion:nil];
             }
         }else if (indexPath.section == 1 ){
@@ -984,8 +995,16 @@
         return 0;
     }
     
-    return 25.f;
+    return 10;
 }
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView* view = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 10)];
+    view.backgroundColor = RGBColor(246, 246, 246);
+    return view;
+    
+}
+
 #pragma mark alert view delegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {

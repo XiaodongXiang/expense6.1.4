@@ -77,7 +77,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     
     if (IS_IPHONE_X) {
         self.bj.image = [UIImage imageNamed:@"sharelink_bj_x"];
-        self.cancelTopL.constant = 30;
+        self.cancelTopL.constant = 40;
     }else if (IS_IPHONE_5){
         self.bj.image = [UIImage imageNamed:@"sharelink_bj_se"];
     }else if (IS_IPHONE_6PLUS){
@@ -112,6 +112,12 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
                                  initWithBundleID:@"com.btgs.pocketexpenselite"];
     linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
     linkBuilder.iOSParameters.appStoreID = @"424575621";
+    
+    
+//    linkBuilder.socialMetaTagParameters = [[FIRDynamicLinkSocialMetaTagParameters alloc] init];
+//    linkBuilder.socialMetaTagParameters.title = @"Pocket Expense 6";
+//    linkBuilder.socialMetaTagParameters.descriptionText = @"See where your money goes.";
+//    linkBuilder.socialMetaTagParameters.imageURL = [NSURL URLWithString:@"https://images.indianexpress.com/2018/12/FEATURE-1.jpg"];
     
     [linkBuilder shortenWithCompletion:^(NSURL * _Nullable shortURL,
                                          NSArray<NSString *> * _Nullable warnings,

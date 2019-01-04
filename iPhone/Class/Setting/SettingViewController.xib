@@ -64,6 +64,7 @@
                 <outlet property="reviewLabelText" destination="42" id="GPZ-ft-sQJ"/>
                 <outlet property="sendFeedbackLabelText" destination="26" id="NIX-Sd-rvF"/>
                 <outlet property="settingTableView" destination="4" id="LUy-FL-n0R"/>
+                <outlet property="shareRedPointView" destination="DNg-gC-jKs" id="gui-TH-cAU"/>
                 <outlet property="sharelinkCell" destination="2ik-CT-NJU" id="LxS-mo-yH8"/>
                 <outlet property="signOutCell" destination="alV-HC-XOP" id="KzD-Hw-qLJ"/>
                 <outlet property="symbolLabel" destination="S2d-hA-VHv" id="K16-m6-j2X"/>
@@ -990,12 +991,22 @@
                         <color key="shadowColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
+                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DNg-gC-jKs">
+                        <rect key="frame" x="271" y="17" width="10" height="10"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.23137254900000001" blue="0.1843137255" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="mFc-A6-enB"/>
+                            <constraint firstAttribute="width" constant="10" id="rkf-Js-w6z"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="kFm-0W-n1a" firstAttribute="top" secondItem="Fkc-lp-jiI" secondAttribute="top" id="1ob-Un-Bg4"/>
                     <constraint firstItem="kFm-0W-n1a" firstAttribute="leading" secondItem="Fkc-lp-jiI" secondAttribute="leading" constant="53" id="Dn2-gb-rwy"/>
                     <constraint firstAttribute="centerY" secondItem="veh-Te-gNW" secondAttribute="centerY" id="J1u-aT-ZnS"/>
                     <constraint firstAttribute="bottom" secondItem="kFm-0W-n1a" secondAttribute="bottom" constant="-0.5" id="JWE-ty-4eN"/>
+                    <constraint firstItem="DNg-gC-jKs" firstAttribute="centerY" secondItem="Fkc-lp-jiI" secondAttribute="centerY" id="OkQ-Z9-qlk"/>
+                    <constraint firstAttribute="trailing" secondItem="DNg-gC-jKs" secondAttribute="trailing" constant="5" id="Ui8-e0-sfd"/>
                     <constraint firstAttribute="trailing" secondItem="kFm-0W-n1a" secondAttribute="trailing" constant="68" id="ey8-Bz-laz"/>
                     <constraint firstItem="veh-Te-gNW" firstAttribute="leading" secondItem="Fkc-lp-jiI" secondAttribute="leading" constant="11.5" id="fmc-W8-0YS"/>
                 </constraints>

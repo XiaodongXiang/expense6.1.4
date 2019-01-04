@@ -321,7 +321,7 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(settingButtonPress) image:[UIImage imageNamed:@"setting_new"]];
     
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"] && ![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterShareLink"]) {
         self.redPointView = [[UIView alloc]initWithFrame:CGRectMake(30, 10, 10, 10)];
         self.redPointView.backgroundColor = [UIColor redColor];
         self.redPointView.layer.cornerRadius = 5;
@@ -330,7 +330,6 @@
     }else{
         self.redPointView.hidden = YES;
     }
-
 
  
     UIView *barView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 93, 44)];
@@ -752,9 +751,57 @@
                         [self validateReceipt];
                     }else{
                         
-//                        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
-
-                        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
+                        Setting* setting = [[XDDataManager shareManager] getSetting];
+                        if ([setting.otherBool19 boolValue]) {
+                            [[XDDataManager shareManager] puchasedInfoInSetting:[NSDate date] productID:KInAppPurchaseProductIdMonth originalProID:@"1234567890"];
+                            setting.otherBool16 = @YES;
+                            setting.otherBool19 = @NO;
+                            
+                            [[XDDataManager shareManager] saveContext];
+                            
+                            PFQuery *query = [PFQuery queryWithClassName:@"Setting"];
+                            
+                            [query whereKey:@"settingID" equalTo:[PFUser currentUser].objectId];
+                            
+                            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                if (objects.count > 0) {
+                                    for (PFObject* objectServer in objects) {
+                                        objectServer[@"purchasedUpdateTime"] = [NSDate date];
+                                        objectServer[@"alreadyInvited"] = @"1";
+                                        objectServer[@"haveOneMonthTrial"] = @"0";
+                                        objectServer[@"invitedSuccessNotif"] = @"1";
+                                        objectServer[@"isTryingPremium"] = @"1";
+                                        
+                                        [objectServer saveInBackground];
+                                    }
+                                }
+                            }];
+                            
+                            return;
+                            
+                        }else{
+                            setting.otherBool16 = @NO;
+                            [[XDDataManager shareManager] saveContext];
+                            
+                            PFQuery *query = [PFQuery queryWithClassName:@"Setting"];
+                            
+                            [query whereKey:@"settingID" equalTo:[PFUser currentUser].objectId];
+                            
+                            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                if (objects.count > 0) {
+                                    for (PFObject* objectServer in objects) {
+                                        objectServer[@"purchasedUpdateTime"] = [NSDate date];
+                                        objectServer[@"alreadyInvited"] = @"1";
+                                        objectServer[@"haveOneMonthTrial"] = @"0";
+                                        objectServer[@"invitedSuccessNotif"] = @"1";
+                                        objectServer[@"isTryingPremium"] = @"0";
+                                        
+                                        [objectServer saveInBackground];
+                                    }
+                                }
+                            }];
+                        }
+                        
                         setting.purchasedProductID = nil;
                         setting.purchasedStartDate = nil;
                         setting.purchasedEndDate = nil;

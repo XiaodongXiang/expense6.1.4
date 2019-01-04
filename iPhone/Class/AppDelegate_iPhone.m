@@ -539,7 +539,6 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
-
     
     if ([PFUser currentUser]) {
         
@@ -559,6 +558,16 @@
                 {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockSuccess" object:nil];
                     [_touchBack removeFromSuperview];
+                    
+                    //插页广告
+                    if ([PFUser currentUser]) {
+                        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+                        if (!appDelegate.isPurchased) {
+                            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
+                            [self.interstitial nowShowInterstitialAdWithTarget:[self getCurrentVC]];
+                        }
+                    }
+                    
                 }
                 [context evaluatePolicy:kLAPolicyDeviceOwnerAuthentication localizedReason:IS_IPHONE_X?@"Face ID":@"Touch ID" reply:^(BOOL success, NSError * _Nullable error) {
                     if (success)
@@ -566,6 +575,16 @@
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockSuccess" object:nil];
                         dispatch_sync(dispatch_get_main_queue(), ^{
                             [_touchBack removeFromSuperview];
+                            
+                            //插页广告
+                            if ([PFUser currentUser]) {
+                                PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+                                if (!appDelegate.isPurchased) {
+                                    self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
+                                    [self.interstitial nowShowInterstitialAdWithTarget:[self getCurrentVC]];
+                                }
+                            }
+                            
                         });
                     }
                     if(error.code == LAErrorAuthenticationFailed){
@@ -576,6 +595,16 @@
                     
                 }];
             });
+        }else{
+            //插页广告
+            if ([PFUser currentUser]) {
+                PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+                if (!appDelegate.isPurchased) {
+                    self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
+                    [self.interstitial nowShowInterstitialAdWithTarget:[self getCurrentVC]];
+                }
+            }
+            
         }
     }
     
@@ -598,8 +627,11 @@
     {
         [[ParseDBManager sharedManager]dataSyncWithServer];
         [[XDPurchasedManager shareManager] getPFSetting];
+        
+        
     }
     
+   
 }
 
 

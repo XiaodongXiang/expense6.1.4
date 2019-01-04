@@ -359,9 +359,57 @@
                         //要提示重新订阅
                         [self validateReceipt];
                     }else{
-                        
+                        Setting* setting = [[XDDataManager shareManager] getSetting];
+                        if ([setting.otherBool19 boolValue]) {
+                            [[XDDataManager shareManager] puchasedInfoInSetting:[NSDate date] productID:KInAppPurchaseProductIdMonth originalProID:@"1234567890"];
+                            setting.otherBool16 = @YES;
+                            setting.otherBool19 = @NO;
+                            
+                            [[XDDataManager shareManager] saveContext];
+                            
+                            PFQuery *query = [PFQuery queryWithClassName:@"Setting"];
+                            
+                            [query whereKey:@"settingID" equalTo:[PFUser currentUser].objectId];
+                            
+                            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                if (objects.count > 0) {
+                                    for (PFObject* objectServer in objects) {
+                                        objectServer[@"purchasedUpdateTime"] = [NSDate date];
+                                        objectServer[@"alreadyInvited"] = @"1";
+                                        objectServer[@"haveOneMonthTrial"] = @"0";
+                                        objectServer[@"invitedSuccessNotif"] = @"1";
+                                        objectServer[@"isTryingPremium"] = @"1";
+                                        
+                                        [objectServer saveInBackground];
+                                    }
+                                }
+                            }];
+                            
+                            return;
+                            
+                        }else{
+                            setting.otherBool16 = @NO;
+                            [[XDDataManager shareManager] saveContext];
+                            
+                            PFQuery *query = [PFQuery queryWithClassName:@"Setting"];
+                            
+                            [query whereKey:@"settingID" equalTo:[PFUser currentUser].objectId];
+                            
+                            [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+                                if (objects.count > 0) {
+                                    for (PFObject* objectServer in objects) {
+                                        objectServer[@"purchasedUpdateTime"] = [NSDate date];
+                                        objectServer[@"alreadyInvited"] = @"1";
+                                        objectServer[@"haveOneMonthTrial"] = @"0";
+                                        objectServer[@"invitedSuccessNotif"] = @"1";
+                                        objectServer[@"isTryingPremium"] = @"0";
+                                        
+                                        [objectServer saveInBackground];
+                                    }
+                                }
+                            }];
+                        }
 //                        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
-                        Setting* setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"] lastObject];
                         setting.purchasedProductID = nil;
                         setting.purchasedStartDate = nil;
                         setting.purchasedEndDate = nil;
@@ -435,7 +483,7 @@
                                               if (lastReceiptArr.count <= 0) {
                                                   [FIRAnalytics setUserPropertyString:@"never" forName:@"subscription_status"];
                                               }else{
-                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%ld",lastReceiptArr.count] forName:@"subscription_continuity"];
+                                                  [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%lu",(unsigned long)lastReceiptArr.count] forName:@"subscription_continuity"];
                                               }
                                               
                                           }else{

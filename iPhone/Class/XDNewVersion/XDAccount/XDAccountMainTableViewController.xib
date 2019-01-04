@@ -98,7 +98,7 @@
                                     <constraint firstAttribute="height" constant="68" id="e1S-ey-TyF"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrad to premium to add more accounts" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXk-Lm-Mp9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upgrade to premium to add more accounts" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXk-Lm-Mp9">
                                 <rect key="frame" x="92" y="6.5" width="247" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="TcI-HN-yMG"/>

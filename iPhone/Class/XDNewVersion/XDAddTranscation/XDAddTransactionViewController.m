@@ -30,6 +30,7 @@
 #import "TransactionCategoryViewController.h"
 #import "XDAddAccountViewController.h"
 #import "PokcetExpenseAppDelegate.h"
+#import "XDUpgradeViewController.h"
 @import  Firebase;
 @interface XDAddTransactionViewController ()<XDTransactionAccountViewDelegate,UIImagePickerControllerDelegate,UIActionSheetDelegate,UINavigationControllerDelegate,SelectImageViewDelegate,UIPickerViewDelegate,XDTransactionCatgroyViewDelegate,XDCategorySplitTableViewDelegate,XDTransactionPayeeCollectionViewDelegate,XDRepeatTableViewDelegate,XDTranscationNoteViewDelegate,SettingTransactionCategoryViewDelegate,XDAddAccountViewDelegate,UITextFieldDelegate>
 {
@@ -1624,10 +1625,20 @@
 }
 
 -(void)addAccountBtnClick{
-    
-    XDAddAccountViewController* ac = [[XDAddAccountViewController alloc]initWithNibName:@"XDAddAccountViewController" bundle:nil];
-    ac.delegate = self;
-    [self presentViewController:ac animated:YES completion:nil];
+    NSArray* array = [[XDDataManager shareManager] getObjectsFromTable:@"Accounts" predicate:[NSPredicate predicateWithFormat:@"state contains[c] %@",@"1"] sortDescriptors:nil];
+    if (array.count > 1) {
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (appDelegate.isPurchased) {
+            XDAddAccountViewController* ac = [[XDAddAccountViewController alloc]initWithNibName:@"XDAddAccountViewController" bundle:nil];
+            ac.delegate = self;
+            [self presentViewController:ac animated:YES completion:nil];
+        }else{
+            
+            XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
+            [self presentViewController:adsVc animated:YES completion:nil];
+            
+        }
+    }
     
 }
 

@@ -195,7 +195,6 @@
                 [[XDDataManager shareManager]openWidgetInSettingWithBool14:NO];
             }
             
-            
         }
     }];
 }
