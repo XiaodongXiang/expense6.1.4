@@ -5728,6 +5728,7 @@
 		BEF484FD21D36B7D00A78B0D /* XDShareLinkViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDShareLinkViewController.xib; sourceTree = "<group>"; };
 		BEF692E821DD9DC80064D15B /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
 		BEF692E921DD9DC90064D15B /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
+		BEF6B24F21E08DD60086F8F4 /* PokcetExpense 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PokcetExpense 13.xcdatamodel"; sourceTree = "<group>"; };
 		BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEF8097921D7533E007A96F6 /* XDPurchasedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPurchasedManager.h; sourceTree = "<group>"; };
 		BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPurchasedManager.m; sourceTree = "<group>"; };
@@ -13995,6 +13996,7 @@
 		A20988F0191A2A2A0087EA15 /* PokcetExpense.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				BEF6B24F21E08DD60086F8F4 /* PokcetExpense 13.xcdatamodel */,
 				BE67B7FC215A32CA00B2BB0B /* PokcetExpense 12.xcdatamodel */,
 				60D7AFD71CA0EB4C0022E2FF /* PokcetExpense 11.xcdatamodel */,
 				3AE5782E1BC61B2300399B04 /* PokcetExpense 10.xcdatamodel */,
@@ -14008,7 +14010,7 @@
 				A20988F6191A2A2A0087EA15 /* PokcetExpense 7.xcdatamodel */,
 				A20988F7191A2A2A0087EA15 /* PokcetExpense.xcdatamodel */,
 			);
-			currentVersion = BE67B7FC215A32CA00B2BB0B /* PokcetExpense 12.xcdatamodel */;
+			currentVersion = BEF6B24F21E08DD60086F8F4 /* PokcetExpense 13.xcdatamodel */;
 			name = PokcetExpense.xcdatamodeld;
 			path = ../PokcetExpense.xcdatamodeld;
 			sourceTree = "<group>";

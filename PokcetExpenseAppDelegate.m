@@ -197,7 +197,13 @@
     
     [[XDPurchasedManager shareManager] saveDefaultParseSetting];
     [self createLink];
-   
+    
+    if ([PFUser currentUser]) {
+        [[XDDataManager shareManager] fixStateIsZeroBug];
+        
+        [[XDDataManager shareManager] uploadLocalTransaction];
+        
+    }
     return YES;
 }
 
@@ -284,7 +290,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 
 -(void)applicationWillEnterForeground:(UIApplication *)application
 {
-
+   
     
 }
 

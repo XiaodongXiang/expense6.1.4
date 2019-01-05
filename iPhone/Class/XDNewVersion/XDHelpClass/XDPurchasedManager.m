@@ -165,10 +165,13 @@
                             setting.uuid = object[@"settingID"];
                             setting.purchaseOriginalProductID = object[@"purchaseOriginalProductID"];
                             
-                            setting.otherBool16 = [NSNumber numberWithInt:[object[@"isTryingPremium"]intValue]];
-                            setting.otherBool18 = [NSNumber numberWithInt:[object[@"alreadyInvited"]intValue]];
-                            setting.otherBool19 = [NSNumber numberWithInt:[object[@"haveOneMonthTrial"]intValue]];
-                            setting.otherBool20 = [NSNumber numberWithInt:[object[@"invitedSuccessNotif"]intValue]];
+                            setting.otherBool16 = [NSNumber numberWithInt:[object[@"isTryingPremium"]boolValue]];
+                            setting.otherBool18 = [NSNumber numberWithInt:[object[@"alreadyInvited"]boolValue]];
+                            setting.otherBool19 = [NSNumber numberWithInt:[object[@"haveOneMonthTrial"]boolValue]];
+                            setting.otherBool20 = [NSNumber numberWithInt:[object[@"invitedSuccessNotif"]boolValue]];
+                            
+                            object[@"invitedSuccessNotif"] = @"0";
+                            [object saveEventually];
                         }
                     }
                 }
@@ -181,6 +184,8 @@
                 [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
                 
                 setting.otherBool20 = [NSNumber numberWithBool:NO];
+                
+                
             }
             
             

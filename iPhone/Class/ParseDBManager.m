@@ -116,7 +116,12 @@
                     PFFile *imageFile=[PFFile fileWithName:t.photoName data:imageData];
                     transaction[@"photoData"]=imageFile;
                 }
-                [transaction saveInBackground];
+                [transaction saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (succeeded) {
+                        t.isUpload = @"1";
+                        [[XDDataManager shareManager] saveContext];
+                    }
+                }];
             }
         }
     }];
@@ -1021,7 +1026,6 @@
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 [[NSNotificationCenter defaultCenter]postNotificationName:@"logInPromptCompleted" object:nil];
-                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUI" object:nil];
 
             });
@@ -1157,6 +1161,7 @@
             [_childCtx save:&error];
             
             dispatch_async(dispatch_get_main_queue(), ^{
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUI" object:nil];
             });
             

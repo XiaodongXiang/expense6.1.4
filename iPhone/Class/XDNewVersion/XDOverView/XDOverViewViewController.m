@@ -21,7 +21,6 @@
 #import "Transaction.h"
 #import <Parse/Parse.h>
 #import "XDAppriater.h"
-
 @import Firebase;
 
 @interface XDOverViewViewController ()<XDCalendarViewDelegate,XDTransicationTableViewDelegate,XDAddTransactionViewDelegate,SKRequestDelegate,ADEngineControllerBannerDelegate>
@@ -321,7 +320,7 @@
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(settingButtonPress) image:[UIImage imageNamed:@"setting_new"]];
     
     
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"] && ![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterShareLink"]) {
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"isFirstEnterOursApp"]) {
         self.redPointView = [[UIView alloc]initWithFrame:CGRectMake(30, 10, 10, 10)];
         self.redPointView.backgroundColor = [UIColor redColor];
         self.redPointView.layer.cornerRadius = 5;
@@ -1019,8 +1018,6 @@
         
         [self noSubscription];
         //        [[ADEngineManage adEngineManage] lockFunctionsShowAd];
-        
-       
         
         NSString* auto_renew_status = pendingRenewal[@"auto_renew_status"];
         NSString* expiration_intent = pendingRenewal[@"expiration_intent"];

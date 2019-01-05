@@ -1468,7 +1468,7 @@
                         childTransaction.expenseAccount = nil;
                         
                     }
-                    else if([categoruSelect.category.categoryType isEqualToString:@"EXPENSE"])                    {
+                    else if([categoruSelect.category.categoryType isEqualToString:@"EXPENSE"]){
                         childTransaction.expenseAccount = self.accounts;
                         childTransaction.incomeAccount = nil;
                     }

@@ -11,6 +11,7 @@
 #import "Category.h"
 #import "ParseDBManager.h"
 #import <Parse/Parse.h>
+
 @implementation XDDataManager
 
 @synthesize backgroundContext = _backgroundContext;
@@ -128,6 +129,12 @@
 -(id)insertObjectToTable:(NSString*)tableName
 {
     id object = [NSEntityDescription insertNewObjectForEntityForName:tableName inManagedObjectContext:self.managedObjectContext];
+    return object;
+}
+
+-(id)backgroundInsertObjectToTable:(NSString*)tableName{
+    
+    id object = [NSEntityDescription insertNewObjectForEntityForName:tableName inManagedObjectContext:self.backgroundContext];
     return object;
 }
 
@@ -334,6 +341,348 @@
     
     
     return string;
+    
+}
+
+
+-(void)fixStateIsZeroBug{
+    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra fromDate:[NSDate date]];
+    comp.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+    comp.year = 2019;
+    comp.month = 1;
+    comp.day = 3;
+    NSDate* date = [[NSCalendar currentCalendar] dateFromComponents:comp];
+    
+    if ([[PFUser currentUser].createdAt compare:date] == NSOrderedDescending) {
+        return;
+    }
+    if (![PFUser currentUser]) {
+        return;
+    }
+    
+    [self allTransactionToLocal:date];
+   
+}
+
+-(void)allTransactionToLocal:(NSDate*)date{
+    NSArray* array = [self getObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"updatedTime <= %@",date] sortDescriptors:nil];
+    
+    if (array.count <= 0) {//说明数据没了,不严谨
+        NSPredicate *predicateServerFather=[NSPredicate predicateWithFormat:@"user=%@ and state=%@ and parTransaction=%@",[PFUser currentUser],@"0",nil];
+        PFQuery *queryFather=[PFQuery queryWithClassName:@"Transaction" predicate:predicateServerFather];
+        [queryFather orderByDescending:@"updatedTime"];
+        queryFather.limit = 100000;
+        [queryFather findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            
+            [self.backgroundContext performBlock:^{
+                for (int i = 0; i < objects.count; i++) {
+                    PFObject* object = objects[i];
+                    Transaction* localTransation = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",object[@"uuid"]] sortDescriptors:nil]lastObject];
+                    if (!localTransation) {
+                        Transaction* transaction = [self backgroundInsertObjectToTable:@"Transaction"];
+                        [self assignTransactionLocal:transaction WithServer:object];
+                        transaction.state = @"1";
+                        transaction.isUpload = @"1";
+                    }else{
+                        localTransation.state = @"1";
+                        localTransation.isUpload = @"1";
+                    }
+                    
+                    
+                    object[@"state"] = @"1";
+                    [object saveEventually:^(BOOL succeeded, NSError * _Nullable error) {
+                        
+                    }];
+                }
+                NSError *error;
+                [self.backgroundContext save:&error];
+                
+            }];
+            
+        }];
+        
+        NSPredicate *predicateServerchild=[NSPredicate predicateWithFormat:@"user=%@ and state=%@ and parTransaction!=%@",[PFUser currentUser],@"0",nil];
+        PFQuery *querychild=[PFQuery queryWithClassName:@"Transaction" predicate:predicateServerchild];
+        [querychild orderByDescending:@"updatedTime"];
+        querychild.limit = 100000;
+        [querychild findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+            
+            [self.backgroundContext performBlock:^{
+                for (int i = 0; i < objects.count; i++) {
+                    PFObject* object = objects[i];
+                    Transaction* localTransation = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",object[@"uuid"]] sortDescriptors:nil]lastObject];
+                    if (!localTransation) {
+                        Transaction* transaction = [self backgroundInsertObjectToTable:@"Transaction"];
+                        [self assignTransactionLocal:transaction WithServer:object];
+                        transaction.state = @"1";
+                        transaction.isUpload = @"1";
+
+                    }else{
+                        localTransation.state = @"1";
+                        localTransation.isUpload = @"1";
+                    }
+                    
+                    
+                    object[@"state"] = @"1";
+                    [object saveEventually:^(BOOL succeeded, NSError * _Nullable error) {
+                        
+                    }];
+                }
+                NSError *error;
+                [self.backgroundContext save:&error];
+                
+            }];
+            
+        }];
+    }
+}
+
+-(void)uploadLocalTransaction{
+    if ([PFUser currentUser]) {
+        [self.backgroundContext performBlock:^{
+            NSArray* array = [self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"state = %@ and (isUpload = %@)",@"1",[NSNull null]] sortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending:NO]]];
+            
+            for (Transaction* transaction in array) {
+                
+                PFQuery * query=[PFQuery queryWithClassName:@"Transaction"];
+                [query whereKey:@"user" equalTo:[PFUser currentUser]];
+                [query whereKey:@"uuid" equalTo:transaction.uuid];
+
+                [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
+                    if (object && [object[@"state"] isEqualToString:@"0"]) {
+                        object[@"state"] = @"1";
+                        [object saveEventually:^(BOOL succeeded, NSError * _Nullable error) {
+                            if (succeeded) {
+                                Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
+                                if (subTran) {
+                                    transaction.isUpload = @"1";
+                                }
+                            }
+                        }];
+                    }
+                }];
+            }
+            [self.backgroundContext save:nil];
+
+        }];
+    }
+
+}
+
+
+
+-(void)assignTransactionLocal:(Transaction *)transaction WithServer:(PFObject *)objectServer
+{
+    transaction.amount=objectServer[@"amount"];
+    transaction.dateTime=objectServer[@"dateTime"];
+    transaction.dateTime_sync=objectServer[@"dateTime_Sync"];
+    transaction.groupByDate=objectServer[@"groupByDate"];
+    transaction.isClear=objectServer[@"isClear"];
+    transaction.notes=objectServer[@"notes"];
+    transaction.orderIndex=objectServer[@"orderIndex"];
+    transaction.others=objectServer[@"others"];
+    transaction.recurringType=objectServer[@"recurringType"];
+    transaction.transactionBool=objectServer[@"transactionBool"];
+    transaction.transactionstring=objectServer[@"transactionstring"];
+    transaction.transactionType=objectServer[@"transactionType"];
+    transaction.type=objectServer[@"type"];
+    transaction.uuid=objectServer[@"uuid"];
+    transaction.updatedTime=objectServer[@"updatedTime"];
+    if (objectServer[@"category"]!=nil)
+    {
+        if ([objectServer[@"category"] isEqualToString:@"4349B269-0856-436E-98E0-D5C5DE0B289D"]) {
+            
+            NSFetchRequest *request=[[NSFetchRequest alloc]init];
+            NSEntityDescription *desc=[NSEntityDescription entityForName:@"Category" inManagedObjectContext:self.backgroundContext];
+            request.entity=desc;
+            NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",@"4349B269-0856-436E-98E0-D5C5DE0B289D"];
+            request.predicate=predicate;
+            NSError *error;
+            NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+            if (array.count)
+            {
+                transaction.category=array[0];
+            }else{
+                
+                NSFetchRequest *request=[[NSFetchRequest alloc]init];
+                NSEntityDescription *desc=[NSEntityDescription entityForName:@"Category" inManagedObjectContext:self.backgroundContext];
+                request.entity=desc;
+                NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",@"FFA1E895-9680-478F-A2F1-13EBD90EC35E"];
+                request.predicate=predicate;
+                NSError *error;
+                NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+                if (array.count)
+                {
+                    transaction.category=array[0];
+                }else{
+                    NSFetchRequest *request=[[NSFetchRequest alloc]init];
+                    NSEntityDescription *desc=[NSEntityDescription entityForName:@"Category" inManagedObjectContext:self.backgroundContext];
+                    request.entity=desc;
+                    NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",@"CA6C55B4-2B95-4921-9AE4-74E76A253426"];
+                    request.predicate=predicate;
+                    NSError *error;
+                    NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+                    if (array.count)
+                    {
+                        transaction.category=array[0];
+                    }
+                }
+                
+            }
+            
+        }else{
+            NSFetchRequest *request=[[NSFetchRequest alloc]init];
+            NSEntityDescription *desc=[NSEntityDescription entityForName:@"Category" inManagedObjectContext:self.backgroundContext];
+            request.entity=desc;
+            NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"category"]];
+            request.predicate=predicate;
+            NSError *error;
+            NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+            if (array.count)
+            {
+                transaction.category=array[0];
+            }
+        }
+    }else{
+        transaction.category = nil;
+    }
+    if (objectServer[@"expenseAccount"]!=nil)
+    {
+        NSFetchRequest *request=[[NSFetchRequest alloc]init];
+        NSEntityDescription *desc=[NSEntityDescription entityForName:@"Accounts" inManagedObjectContext:self.backgroundContext];
+        request.entity=desc;
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"expenseAccount"]];
+        request.predicate=predicate;
+        NSError *error;
+        NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+        if (array.count)
+        {
+            transaction.expenseAccount=array[0];
+        }
+    }else{
+        transaction.expenseAccount = nil;
+    }
+    if (objectServer[@"incomeAccount"]!=nil)
+    {
+        NSFetchRequest *request=[[NSFetchRequest alloc]init];
+        NSEntityDescription *desc=[NSEntityDescription entityForName:@"Accounts" inManagedObjectContext:self.backgroundContext];
+        request.entity=desc;
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"incomeAccount"]];
+        request.predicate=predicate;
+        NSError *error;
+        NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+        if (array.count)
+        {
+            transaction.incomeAccount=array[0];
+        }
+    }else{
+        transaction.incomeAccount=nil;
+    }
+    if (objectServer[@"parTransaction"]!=nil)
+    {
+        NSFetchRequest *request=[[NSFetchRequest alloc]init];
+        NSEntityDescription *desc=[NSEntityDescription entityForName:@"Transaction" inManagedObjectContext:self.backgroundContext];
+        request.entity=desc;
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"parTransaction"]];
+        request.predicate=predicate;
+        NSError *error;
+        NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+        if (array.count)
+        {
+            transaction.parTransaction=array[0];
+        }
+    }else{
+        transaction.parTransaction = nil;
+    }
+    if (objectServer[@"payee"]!=nil)
+    {
+        NSFetchRequest *request=[[NSFetchRequest alloc]init];
+        NSEntityDescription *desc=[NSEntityDescription entityForName:@"Payee" inManagedObjectContext:self.backgroundContext];
+        request.entity=desc;
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"payee"]];
+        request.predicate=predicate;
+        NSError *error;
+        NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+        if (array.count)
+        {
+            transaction.payee=array[0];
+        }
+    }else{
+        transaction.payee=nil;
+    }
+    if (objectServer[@"transactionHasBillItem"]!=nil)
+    {
+        NSFetchRequest *request=[[NSFetchRequest alloc]init];
+        NSEntityDescription *desc=[NSEntityDescription entityForName:@"EP_BillItem" inManagedObjectContext:self.backgroundContext];
+        request.entity=desc;
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid = %@",objectServer[@"transactionHasBillItem"]];
+        request.predicate=predicate;
+        NSError *error;
+        NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+        if (array.count)
+        {
+            transaction.transactionHasBillItem=array[0];
+        }
+    }else{
+        transaction.transactionHasBillItem = nil;
+    }
+    
+    if (objectServer[@"transactionHasBillRule"]!=nil)
+    {
+        NSFetchRequest *request=[[NSFetchRequest alloc]init];
+        NSEntityDescription *desc=[NSEntityDescription entityForName:@"EP_BillRule" inManagedObjectContext:self.backgroundContext];
+        request.entity=desc;
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"transactionHasBillRule"]];
+        request.predicate=predicate;
+        NSError *error;
+        NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+        if (array.count)
+        {
+            transaction.transactionHasBillRule=array[0];
+        }
+    }else{
+        transaction.transactionHasBillRule=nil;
+    }
+    
+    //childTransaction的处理
+    if (objectServer[@"parTransaction"]!=nil)
+    {
+        NSFetchRequest *request=[[NSFetchRequest alloc]init];
+        NSEntityDescription *desc=[NSEntityDescription entityForName:@"Transaction" inManagedObjectContext:self.backgroundContext];
+        request.entity=desc;
+        NSPredicate *predicate=[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"parTransaction"]];
+        request.predicate=predicate;
+        NSError *error;
+        NSArray *array=[self.backgroundContext executeFetchRequest:request error:&error];
+        if (array.count)
+        {
+            transaction.parTransaction=array[0];
+        }
+    }else{
+        transaction.parTransaction=nil;
+    }
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) ;
+    NSString *documentsPath = [paths objectAtIndex:0];
+    //图片的处理
+    if(objectServer[@"photoName"]!=nil)
+    {
+        PFFile *photoFile=objectServer[@"photoData"];
+        NSError *error;
+        NSData *photoData=[photoFile getData:&error];
+        if (error)
+        {
+            NSLog(@"图片下载错误 %@",error);
+        }
+        if (transaction.photoName!=nil)
+        {
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            NSError *error = nil;
+            NSString *oldImagepath = [NSString stringWithFormat:@"%@/%@.jpg",documentsPath, transaction.photoName];
+            [fileManager removeItemAtPath:oldImagepath error:&error];
+        }
+        transaction.photoName = objectServer[@"photoName"];
+        [photoData writeToFile:[NSString stringWithFormat:@"%@/%@.jpg", documentsPath, objectServer[@"photoName"]] atomically:YES];
+    }
     
 }
 

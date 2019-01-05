@@ -360,10 +360,8 @@
             {
                 [appDelegate succededInLogIn];
                 [[XDPurchasedManager shareManager] getPFSetting];
-
             }
         }];
-        
     }else{
         PFUser *user=[PFUser user];
         user.username=self.emailTF.text;

@@ -368,6 +368,7 @@
             {
                 [[XDPurchasedManager shareManager] getPFSetting];
                 [appDelegate succededInLogIn];
+                                
             }
         }];
         

@@ -198,7 +198,7 @@
             [self.view removeFromSuperview];
         }];
     });
-    
+    [[XDDataManager shareManager] fixStateIsZeroBug];
     
 }
 

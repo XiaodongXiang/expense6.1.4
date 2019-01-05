@@ -482,6 +482,14 @@
     if (touchIDOpen==NULL)
     {
         [_touchBack removeFromSuperview];
+        //插页广告
+        if ([PFUser currentUser]) {
+            PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+            if (!appDelegate.isPurchased) {
+                self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2201 - iPad - Interstitial - Launch"];
+                [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
+            }
+        }
     }
     if ([self.settings.passcodeStyle isEqualToString:@"touchid"])
     {
@@ -498,6 +506,15 @@
                 dispatch_sync(dispatch_get_main_queue(), ^{
                     [_touchBack removeFromSuperview];
                 });
+                
+                //插页广告
+                if ([PFUser currentUser]) {
+                    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+                    if (!appDelegate.isPurchased) {
+                        self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2201 - iPad - Interstitial - Launch"];
+                        [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
+                    }
+                }
             }
             else
             {
@@ -505,6 +522,15 @@
                 
             }
         }];
+    }else{
+        //插页广告
+        if ([PFUser currentUser]) {
+            PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+            if (!appDelegate.isPurchased) {
+                self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2201 - iPad - Interstitial - Launch"];
+                [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
+            }
+        }
     }
 
   
@@ -523,6 +549,10 @@
         [[ParseDBManager sharedManager]dataSyncWithServer];
         [[XDPurchasedManager shareManager] getPFSetting];
         
+        
+        [[XDDataManager shareManager] fixStateIsZeroBug];
+        
+        [[XDDataManager shareManager] uploadLocalTransaction];
     }
     
 }

@@ -48,6 +48,8 @@
 @dynamic incomeAccount;
 @dynamic parTransaction;
 @dynamic payee;
+@dynamic isUpload;
+
 -(NSString *)groupByDateString
 {
     [self willAccessValueForKey:@"groupByDateString"];

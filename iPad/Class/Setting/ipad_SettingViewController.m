@@ -734,12 +734,12 @@
             return 45;
   
     }
-    Setting * setting = [[XDDataManager shareManager]getSetting];
-    if ([setting.otherBool18 boolValue]) {
+//    Setting * setting = [[XDDataManager shareManager]getSetting];
+//    if ([setting.otherBool18 boolValue]) {
         if (indexPath.section == 0 && indexPath.row == 1) {
             return 0.01;
         }
-    }
+//    }
     
     
     return 45;

@@ -41,6 +41,9 @@
 -(void)puchasedInfoInSetting:(NSDate*)startDate productID:(NSString*)productID originalProID:(NSString*)originalProID;
 -(void)removeSettingPurchase;
 
+
+-(void)fixStateIsZeroBug;
+-(void)uploadLocalTransaction;
 @end
 
 @interface NSDate (customer)

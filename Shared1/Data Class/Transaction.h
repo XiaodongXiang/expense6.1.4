@@ -32,6 +32,7 @@
 @property (nonatomic, retain) NSNumber * orderIndex;
 @property (nonatomic, retain) NSString * objectId;
 @property (nonatomic, retain) NSDate * updatedTime;
+@property (nonatomic, retain) NSString *isUpload;
 @property (nonatomic, retain) EP_BillItem *transactionHasBillItem;
 @property (nonatomic, retain) EP_BillRule *transactionHasBillRule;
 @property (nonatomic, retain) BillRule *billItem;
