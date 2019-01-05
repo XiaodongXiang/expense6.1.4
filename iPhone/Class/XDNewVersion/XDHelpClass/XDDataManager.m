@@ -451,7 +451,7 @@
                 [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
                     if (object && [object[@"state"] isEqualToString:@"0"]) {
                         object[@"state"] = @"1";
-                        [object saveEventually:^(BOOL succeeded, NSError * _Nullable error) {
+                        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                             if (succeeded) {
                                 Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
                                 if (subTran) {
