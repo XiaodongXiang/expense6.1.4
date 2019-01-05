@@ -178,10 +178,10 @@
             }
             
             if ([setting.otherBool20 boolValue]) {
-                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Your invitation will be successful and you will receive one month of premium member usage time." message:nil preferredStyle:UIAlertControllerStyleAlert];
-                UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-                [alert addAction:action];
-                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
+//                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Your invitation will be successful and you will receive one month of premium member usage time." message:nil preferredStyle:UIAlertControllerStyleAlert];
+//                UIAlertAction *action = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//                [alert addAction:action];
+//                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
                 
                 setting.otherBool20 = [NSNumber numberWithBool:NO];
                 

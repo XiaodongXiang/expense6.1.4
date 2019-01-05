@@ -455,14 +455,16 @@
                             if (succeeded) {
                                 Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
                                 if (subTran) {
-                                    transaction.isUpload = @"1";
+                                    subTran.isUpload = @"1";
+                                     [self.backgroundContext save:nil];
                                 }
+                                
                             }
                         }];
                     }
                 }];
             }
-            [self.backgroundContext save:nil];
+           
 
         }];
     }

@@ -1212,7 +1212,7 @@
     NSError *error;
     
     //由上次同步时间获取之后的云端数据
-    NSPredicate *predicateServerFather=[NSPredicate predicateWithFormat:@"user=%@ and updatedAt>=%@ and parTransaction=%@",[PFUser currentUser],lastSyncTime,nil];
+    NSPredicate *predicateServerFather=[NSPredicate predicateWithFormat:@"user=%@ and updatedTime>=%@ and parTransaction=%@",[PFUser currentUser],lastSyncTime,nil];
     PFQuery *queryFather=[PFQuery queryWithClassName:@"Transaction" predicate:predicateServerFather];
     NSArray *arrayServerFather=[self downloadEveryData:queryFather with:&error];
 
@@ -1525,7 +1525,7 @@
     NSLog(@"childT");
     NSError *error;
     //由上次同步时间获取之后的云端数据
-    NSPredicate *predicateServerChild=[NSPredicate predicateWithFormat:@"user=%@ and updatedAt>=%@ and parTransaction!=%@",[PFUser currentUser],lastSyncTime,nil];
+    NSPredicate *predicateServerChild=[NSPredicate predicateWithFormat:@"user=%@ and updatedTime>=%@ and parTransaction!=%@",[PFUser currentUser],lastSyncTime,nil];
     PFQuery *queryChild=[PFQuery queryWithClassName:@"Transaction" predicate:predicateServerChild];
     NSArray *arrayServerChild=[self downloadEveryData:queryChild with:&error];
     
@@ -3931,6 +3931,7 @@
         return YES;
     }
 }
+
 -(BOOL)budgetItemSyncWithServerSince:(NSDate *)lastSyncTime
 {
     NSLog(@"budgetItem");
