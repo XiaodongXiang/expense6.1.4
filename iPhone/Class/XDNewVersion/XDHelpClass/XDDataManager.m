@@ -424,9 +424,7 @@
                     
                     
                     object[@"state"] = @"1";
-                    [object saveEventually:^(BOOL succeeded, NSError * _Nullable error) {
-                        
-                    }];
+                    [object saveEventually];
                 }
                 NSError *error;
                 [self.backgroundContext save:&error];
@@ -449,28 +447,202 @@
                 [query whereKey:@"uuid" equalTo:transaction.uuid];
 
                 [query getFirstObjectInBackgroundWithBlock:^(PFObject * _Nullable object, NSError * _Nullable error) {
-                    if (object && [object[@"state"] isEqualToString:@"0"]) {
-                        object[@"state"] = @"1";
-                        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if (object) {
+                        if ([object[@"state"] isEqualToString:@"0"]) {
+                            object[@"state"] = @"1";
+                            [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                                if (succeeded) {
+                                    Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
+                                    if (subTran) {
+                                        subTran.isUpload = @"1";
+                                        [self.backgroundContext save:nil];
+                                    }
+                                    
+                                }
+                            }];
+                        }else if ([object[@"state"] isEqualToString:@"1"]) {
+                            Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
+                            if (subTran) {
+                                subTran.isUpload = @"1";
+                                [self.backgroundContext save:nil];
+                            }
+                        }
+                        
+                    }else{
+                        
+                        PFObject *tranObject=[PFObject objectWithClassName:@"Transaction"];
+                        [self assignTransactionServer:tranObject WithLocal:transaction];
+                        //新创建的数据需要设置user
+                        tranObject[@"user"]=[PFUser currentUser];
+                        if (transaction.photoData!=nil)
+                        {
+                            NSData *imageData=UIImagePNGRepresentation(transaction.photoData);
+                            PFFile *imageFile=[PFFile fileWithName:transaction.photoName data:imageData];
+                            tranObject[@"photoData"]=imageFile;
+                        }
+                        [tranObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                             if (succeeded) {
                                 Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
                                 if (subTran) {
                                     subTran.isUpload = @"1";
-                                     [self.backgroundContext save:nil];
+                                    [[XDDataManager shareManager] saveContext];
                                 }
-                                
                             }
                         }];
+                        
                     }
                 }];
             }
-           
-
         }];
     }
 
 }
 
+-(void)assignTransactionServer:(PFObject *)objectServer WithLocal:(Transaction *)transcation
+{
+    if(transcation.amount!=nil)
+    {
+        objectServer[@"amount"]=transcation.amount;
+    }
+    if (transcation.dateTime!=nil)
+    {
+        objectServer[@"dateTime"]=transcation.dateTime;
+    }
+    if (transcation.dateTime_sync!=nil)
+    {
+        objectServer[@"dateTime_sync"]=transcation.dateTime_sync;
+    }
+    if (transcation.groupByDate!=nil)
+    {
+        objectServer[@"groupByDate"]=transcation.groupByDate;
+    }
+    if (transcation.isClear != nil)
+    {
+        objectServer[@"isClear"]=transcation.isClear;
+    }
+    
+    if (transcation.notes!=nil)
+    {
+        objectServer[@"notes"]=transcation.notes;
+    }else{
+        [objectServer removeObjectForKey:@"notes"];
+    }
+    if (transcation.orderIndex!=nil)
+    {
+        objectServer[@"orderIndex"]=transcation.orderIndex;
+    }
+    if (transcation.others!=nil)
+    {
+        objectServer[@"others"]=transcation.others;
+    }
+    if (transcation.recurringType!=nil)
+    {
+        objectServer[@"recurringType"]=transcation.recurringType;
+    }else{
+        [objectServer removeObjectForKey:@"recurringType"];
+    }
+    if (transcation.state!=nil)
+    {
+        objectServer[@"state"]=transcation.state;
+    }
+    if (transcation.transactionBool!=nil)
+    {
+        objectServer[@"transactionBool"]=transcation.transactionBool;
+    }
+    if (transcation.transactionType!=nil)
+    {
+        objectServer[@"transactionType"]=transcation.transactionType;
+    }
+    if (transcation.transactionstring!=nil)
+    {
+        objectServer[@"transactionstring"]=transcation.transactionstring;
+    }
+    if (transcation.type!=nil)
+    {
+        objectServer[@"type"]=transcation.type;
+    }
+    if (transcation.uuid!=nil)
+    {
+        objectServer[@"uuid"]=transcation.uuid;
+    }
+    if (transcation.updatedTime!=nil)
+    {
+        objectServer[@"updatedTime"]=transcation.updatedTime;
+    }
+    
+    //relations
+    
+    if (transcation.payee!=nil)
+    {
+        objectServer[@"payee"]=transcation.payee.uuid;
+    }else{
+        [objectServer removeObjectForKey:@"payee"];
+    }
+    
+    if (transcation.category!=nil)
+    {
+        objectServer[@"category"]=transcation.category.uuid;
+    }else{
+        [objectServer removeObjectForKey:@"category"];
+    }
+    
+    if (transcation.expenseAccount!=nil)
+    {
+        objectServer[@"expenseAccount"]=transcation.expenseAccount.uuid;
+    }else{
+        [objectServer removeObjectForKey:@"expenseAccount"];
+    }
+    if (transcation.incomeAccount!=nil)
+    {
+        objectServer[@"incomeAccount"]=transcation.incomeAccount.uuid;
+    }else{
+        [objectServer removeObjectForKey:@"incomeAccount"];
+    }
+    if (transcation.transactionHasBillItem!=nil)
+    {
+        objectServer[@"transactionHasBillItem"]=transcation.transactionHasBillItem.uuid;
+    }else{
+        [objectServer removeObjectForKey:@"transactionHasBillItem"];
+    }
+    if (transcation.transactionHasBillRule!=nil)
+    {
+        objectServer[@"transactionHasBillRule"]=transcation.transactionHasBillRule.uuid;
+    }else{
+        [objectServer removeObjectForKey:@"transactionHasBillRule"];
+    }
+    
+    if(transcation.photoName!=nil)
+    {
+        objectServer[@"photoName"]=transcation.photoName;
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) ;
+        NSString *documentsPath = [paths objectAtIndex:0];
+        objectServer[@"photoName"]=transcation.photoName;
+        NSData *photoData=[NSData dataWithContentsOfFile:[NSString stringWithFormat:@"%@/%@.jpg", documentsPath, transcation.photoName]];
+        if (photoData!=nil)
+        {
+            PFFile *photo=[PFFile fileWithName:[NSString stringWithFormat:@"%@.jpg",transcation.photoName] data:photoData];
+            objectServer[@"photoData"]=photo;
+        }
+        else
+        {
+            
+        }
+        
+    }else{
+        [objectServer removeObjectForKey:@"photoName"];
+        
+    }
+    
+    //childTransaction的处理
+    if (transcation.parTransaction!=nil)
+    {
+        objectServer[@"parTransaction"]=transcation.parTransaction.uuid;
+    }else{
+        [objectServer removeObjectForKey:@"parTransaction"];
+    }
+    
+}
 
 
 -(void)assignTransactionLocal:(Transaction *)transaction WithServer:(PFObject *)objectServer
