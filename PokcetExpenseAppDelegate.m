@@ -196,9 +196,9 @@
     [self.epnc setFlurryEvent_withUpgrade:NO];
     
     [[XDPurchasedManager shareManager] saveDefaultParseSetting];
-    [self createLink];
     
     if ([PFUser currentUser]) {
+        [self createLink];
         [[XDDataManager shareManager] fixStateIsZeroBug];
         
         [[XDDataManager shareManager] uploadLocalTransaction];
@@ -210,12 +210,13 @@
 -(void)createLink{
     NSString* uid = [PFUser currentUser].objectId;
     NSURL *link = [[NSURL alloc] initWithString:[NSString stringWithFormat:@"https://pocketexpenselite.page.link/EBMe/?invitedby=%@",uid]];
-    NSString *dynamicLinksDomain = @"pocketexpenselite.page.link";
-    FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domain:dynamicLinksDomain];
+    NSString *dynamicLinksDomain = @"https://pocketexpenselite.page.link";
+//    FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domain:dynamicLinksDomain];
+    FIRDynamicLinkComponents* linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domainURIPrefix:dynamicLinksDomain];
     linkBuilder.iOSParameters = [[FIRDynamicLinkIOSParameters alloc]
                                  initWithBundleID:@"com.btgs.pocketexpenselite"];
-    linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
-    
+//    linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
+//
     linkBuilder.iOSParameters.appStoreID = @"424575621";
     
 //    linkBuilder.socialMetaTagParameters = [[FIRDynamicLinkSocialMetaTagParameters alloc] init];

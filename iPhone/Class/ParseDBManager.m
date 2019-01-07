@@ -5365,6 +5365,8 @@
     transaction.type=objectServer[@"type"];
     transaction.uuid=objectServer[@"uuid"];
     transaction.updatedTime=objectServer[@"updatedTime"];
+    transaction.isUpload = @"1";
+    
     if (objectServer[@"category"]!=nil)
     {
         if ([objectServer[@"category"] isEqualToString:@"4349B269-0856-436E-98E0-D5C5DE0B289D"]) {

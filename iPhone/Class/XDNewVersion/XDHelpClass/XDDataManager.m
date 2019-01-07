@@ -455,43 +455,21 @@
                                     Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
                                     if (subTran) {
                                         subTran.isUpload = @"1";
-                                        [self.backgroundContext save:nil];
                                     }
-                                    
                                 }
                             }];
                         }else if ([object[@"state"] isEqualToString:@"1"]) {
                             Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
                             if (subTran) {
                                 subTran.isUpload = @"1";
-                                [self.backgroundContext save:nil];
                             }
                         }
-                        
-                    }else{
-                        
-                        PFObject *tranObject=[PFObject objectWithClassName:@"Transaction"];
-                        [self assignTransactionServer:tranObject WithLocal:transaction];
-                        //新创建的数据需要设置user
-                        tranObject[@"user"]=[PFUser currentUser];
-                        if (transaction.photoData!=nil)
-                        {
-                            NSData *imageData=UIImagePNGRepresentation(transaction.photoData);
-                            PFFile *imageFile=[PFFile fileWithName:transaction.photoName data:imageData];
-                            tranObject[@"photoData"]=imageFile;
-                        }
-                        [tranObject saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                            if (succeeded) {
-                                Transaction* subTran = [[self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"uuid = %@",transaction.uuid] sortDescriptors:nil]lastObject];
-                                if (subTran) {
-                                    subTran.isUpload = @"1";
-                                    [[XDDataManager shareManager] saveContext];
-                                }
-                            }
-                        }];
-                        
                     }
                 }];
+                
+                NSError *error;
+                [self.backgroundContext save:&error];
+                
             }
         }];
     }
