@@ -215,8 +215,6 @@
     FIRDynamicLinkComponents* linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domainURIPrefix:dynamicLinksDomain];
     linkBuilder.iOSParameters = [[FIRDynamicLinkIOSParameters alloc]
                                  initWithBundleID:@"com.btgs.pocketexpenselite"];
-//    linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
-//
     linkBuilder.iOSParameters.appStoreID = @"424575621";
     
 //    linkBuilder.socialMetaTagParameters = [[FIRDynamicLinkSocialMetaTagParameters alloc] init];
@@ -475,7 +473,6 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     {
         self.isPurchased = NO;
         [[XDDataManager shareManager]openWidgetInSettingWithBool14:NO];
-
     }
 
 }

@@ -39,7 +39,7 @@
 #define PURCHASE_PRICE_YEAR     @"purchasePriceYear"
 #define PURCHASE_PRICE_LIFETIME     @"purchasePriceLifetime"
 
-#define IS_FIRST_UPLOAD_SETTING     @"isFirstUploadSetting"
+#define IS_FIRST_UPLOAD_SETTING     @"isFirstUploadSettingPurchased"
 
 #define XDAPPIRATERIMPORTANTEVENT  @"appiraterShowWithImportantEvent"
 #define XDAPPIRATERCLOSERATEVIEW   @"appiraterClosedEvent"

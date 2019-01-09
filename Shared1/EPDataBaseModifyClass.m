@@ -1768,7 +1768,6 @@
     {
         [[ParseDBManager sharedManager]updateTransactionFromLocal:t];
     }
-
 }
 
 

@@ -151,6 +151,7 @@
     }
     return _transTableView;
 }
+
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
@@ -213,8 +214,6 @@
     self.selectedDate = [NSDate date];
     [self initNavStyle];
     [self initXDtransicationTableView];
-//    [self validateReceipt];
-//    self.title = [self monthFormatterWithSeletedMonth:[NSDate date]];
     self.view.backgroundColor = RGBColor(246, 246, 246);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"TransactionViewRefresh" object:nil];
@@ -231,7 +230,6 @@
     [self.titleBtn setAttributedTitle:[self monthFormatterWithSeletedMonth:[NSDate date]] forState:UIControlStateNormal];
     [self.titleBtn addTarget:self action:@selector(titleBtnClick) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView = self.titleBtn;
-    
     
     
     [self getCurrentVersion];

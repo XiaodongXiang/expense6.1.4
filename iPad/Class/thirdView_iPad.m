@@ -422,7 +422,6 @@
 {
     AppDelegate_iPad *appDelegate = (AppDelegate_iPad *)[[UIApplication sharedApplication]delegate];
     
-    
     [PFFacebookUtils logInInBackgroundWithReadPermissions:@[@"user_about_me"] block:^(PFUser *user, NSError *error)
      {
          if (error)

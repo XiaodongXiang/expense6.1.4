@@ -4563,7 +4563,6 @@
     {
         objectServer[@"isClear"]=transcation.isClear;
     }
-
     if (transcation.notes!=nil)
     {
         objectServer[@"notes"]=transcation.notes;
@@ -4667,10 +4666,7 @@
             PFFile *photo=[PFFile fileWithName:[NSString stringWithFormat:@"%@.jpg",transcation.photoName] data:photoData];
             objectServer[@"photoData"]=photo;
         }
-        else
-        {
-            
-        }
+        
 
     }else{
         [objectServer removeObjectForKey:@"photoName"];
@@ -4684,7 +4680,6 @@
     }else{
         [objectServer removeObjectForKey:@"parTransaction"];
     }
-
 }
 
 

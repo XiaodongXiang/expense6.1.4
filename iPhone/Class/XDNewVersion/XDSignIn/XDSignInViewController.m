@@ -251,9 +251,7 @@
              NSLog(@"User logged in through Facebook!");
              [appDelegate succededInLogIn];
              [[XDPurchasedManager shareManager] getPFSetting];
-             
          }
-         
      }];
     
 }

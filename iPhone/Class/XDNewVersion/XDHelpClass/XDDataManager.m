@@ -11,6 +11,7 @@
 #import "Category.h"
 #import "ParseDBManager.h"
 #import <Parse/Parse.h>
+#import "User.h"
 
 @implementation XDDataManager
 
@@ -387,6 +388,8 @@
                         localTransation.state = @"1";
                         localTransation.isUpload = @"1";
                     }
+                    NSError *error;
+                    [self.backgroundContext save:&error];
                     
                     
                     object[@"state"] = @"1";
@@ -394,8 +397,9 @@
                         
                     }];
                 }
-                NSError *error;
-                [self.backgroundContext save:&error];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUI" object:nil];
+                });
                 
             }];
             
@@ -836,6 +840,27 @@
         [photoData writeToFile:[NSString stringWithFormat:@"%@/%@.jpg", documentsPath, objectServer[@"photoName"]] atomically:YES];
     }
     
+}
+
+-(void)fixSomeUserNotSync{
+    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra fromDate:[NSDate date]];
+    comp.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+    comp.year = 2019;
+    comp.month = 1;
+    comp.day = 1;
+    NSDate* date = [[NSCalendar currentCalendar] dateFromComponents:comp];
+
+    if (![PFUser currentUser]) {
+        return;
+    }
+    User* user = [[self getObjectsFromTable:@"User"]lastObject];
+    
+    NSLog(@"user sync =  %@",user.syncTime);
+    PokcetExpenseAppDelegate * appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
+
+    if ([user.syncTime compare:date] == NSOrderedAscending && appDelegate.autoSyncOn) {
+        
+    }
 }
 
 

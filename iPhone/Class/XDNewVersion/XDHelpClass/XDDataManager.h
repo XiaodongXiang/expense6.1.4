@@ -44,6 +44,8 @@
 
 -(void)fixStateIsZeroBug;
 -(void)uploadLocalTransaction;
+
+-(void)fixSomeUserNotSync;
 @end
 
 @interface NSDate (customer)

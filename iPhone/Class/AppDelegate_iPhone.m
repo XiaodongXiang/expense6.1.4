@@ -1394,6 +1394,7 @@
     {
         //有用户使用过
         User *user=[datas objectAtIndex:0];
+        
         NSString *lastUser=user.lastUser;
         if ([lastUser isEqualToString:[[PFUser currentUser]objectId]])
         {
