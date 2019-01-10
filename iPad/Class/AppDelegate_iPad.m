@@ -278,9 +278,6 @@
             [self.managedObjectContext save:&error];
             
         }
-        
-        
-        
         [window setRootViewController:mainViewController];
     }
 

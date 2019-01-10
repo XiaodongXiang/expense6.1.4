@@ -342,8 +342,6 @@
                 [self shakeAnimationForView:self.imageView1];
                 [self shakeAnimationForView:self.imageView2];
 
-//                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat:@"%@",error.userInfo[@"error"]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                [alert show];
                 self.warmLabel.hidden = NO;
                 self.warmLabel.text=[NSString stringWithFormat:@"%@",error.userInfo[@"error"]];
                 
@@ -374,9 +372,6 @@
                 [self shakeAnimationForView:self.passwordTF];
                 [self shakeAnimationForView:self.imageView1];
                 [self shakeAnimationForView:self.imageView2];
-                
-//                UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"Error" message:[NSString stringWithFormat:@"%@",error.userInfo[@"error"]] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                [alert show];
                 
                 self.warmLabel.hidden = NO;
                 self.warmLabel.text=[NSString stringWithFormat:@"%@",error.userInfo[@"error"]];

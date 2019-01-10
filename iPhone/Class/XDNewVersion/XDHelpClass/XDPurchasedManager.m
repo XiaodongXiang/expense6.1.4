@@ -42,38 +42,26 @@
                     
                     if (setting.purchasedProductID != nil) {
                         objectServer[@"purchasedProductID"] = setting.purchasedProductID;
-                    }else{
-                        [objectServer  removeObjectForKey:@"purchasedProductID"];
                     }
                     
                     if (setting.purchasedStartDate != nil) {
                         objectServer[@"purchasedStartDate"] = setting.purchasedStartDate;
-                    }else{
-                        [objectServer removeObjectForKey:@"purchasedStartDate"];
                     }
                     
                     if (setting.purchasedEndDate != nil) {
                         objectServer[@"purchasedEndDate"] = setting.purchasedEndDate;
-                    }else{
-                        [objectServer removeObjectForKey:@"purchasedEndDate"];
                     }
                     
                     if (setting.purchasedUpdateTime != nil) {
                         objectServer[@"purchasedUpdateTime"] = setting.purchasedUpdateTime;
-                    }else{
-                        [objectServer removeObjectForKey:@"purchasedUpdateTime"];
                     }
                     
                     if (setting.purchasedIsSubscription != nil) {
                         objectServer[@"purchasedIsSubscription"]  = setting.purchasedIsSubscription;
-                    }else{
-                        [objectServer removeObjectForKey:@"purchasedIsSubscription"];
                     }
                     
                     if (setting.purchaseOriginalProductID != nil) {
                         objectServer[@"purchaseOriginalProductID"]  = setting.purchaseOriginalProductID;
-                    }else{
-                        [objectServer removeObjectForKey:@"purchaseOriginalProductID"];
                     }
                     
                     [objectServer saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {

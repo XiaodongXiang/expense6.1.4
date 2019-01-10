@@ -237,12 +237,12 @@
 
     [FIRAnalytics setScreenName:@"calendr_main_view_iphone" screenClass:@"XDOverViewViewController"];
 
-    if ([PFUser currentUser]) {
-        Setting* setting = [[XDDataManager shareManager] getSetting];
-        if ([setting.otherBool17 boolValue] == NO) {
-            [[XDPurchasedManager shareManager] savePFSetting];
-        }
-    }
+//    if ([PFUser currentUser]) {
+//        Setting* setting = [[XDDataManager shareManager] getSetting];
+//        if ([setting.otherBool17 boolValue] == NO) {
+//            [[XDPurchasedManager shareManager] savePFSetting];
+//        }
+//    }
     
 }
 

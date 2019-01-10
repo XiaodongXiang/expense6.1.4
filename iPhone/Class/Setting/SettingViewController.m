@@ -767,7 +767,17 @@
                         
                         if ([setting.otherBool18 boolValue] && [setting.otherBool16 boolValue]) {
                             self.exprieDateLbl.text = [NSString stringWithFormat:@"Expire Date :%@",expiredString];
-
+                        }
+                        
+                        
+                        NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra fromDate:[NSDate date]];
+                        comp.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+                        comp.year = 2100;
+                        comp.month = 1;
+                        comp.day = 1;
+                        NSDate* date = [[NSCalendar currentCalendar] dateFromComponents:comp];
+                        if ([date compare:setting.purchasedEndDate] == NSOrderedAscending) {
+                            self.exprieDateLbl.text = @"";
                         }
                     }
                 }

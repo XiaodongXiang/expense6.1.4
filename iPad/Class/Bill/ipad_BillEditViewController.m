@@ -903,7 +903,7 @@ static int monthCount = 0;
     else
         [self.navigationController popViewControllerAnimated:YES];
     
-    self.billViewSave();
+//    self.billViewSave();
 }
 
 -(void)changeBillPaymentPageBillFather
