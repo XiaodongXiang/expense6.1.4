@@ -653,6 +653,22 @@
             [self.navigationController pushViewController:generalViewController animated:YES];
         }
     }
+    if (indexPath.section == 2) {
+        if (indexPath.row == 0) {
+            self.iSettingPayeeViewController = [[ipad_SettingPayeeViewController alloc] initWithNibName:@"ipad_SettingPayeeViewController" bundle:nil];
+            
+            [self.navigationController pushViewController:self.iSettingPayeeViewController animated:YES];
+            
+            
+        }else if (indexPath.row == 1){
+            self.iTransactionCategoryViewController =   [[ipad_TranscationCategorySelectViewController alloc]initWithNibName:@"ipad_TranscationCategorySelectViewController" bundle:nil];
+            self.iTransactionCategoryViewController.payeeEditViewController = nil;
+            self.iTransactionCategoryViewController.transactionEditViewController = nil;
+            self.iTransactionCategoryViewController.settingViewController = self;
+            [self.navigationController pushViewController:self.iTransactionCategoryViewController animated:YES];
+            
+        }
+    }
     
     if(indexPath.section == 3 && indexPath.row == 1)
     {
