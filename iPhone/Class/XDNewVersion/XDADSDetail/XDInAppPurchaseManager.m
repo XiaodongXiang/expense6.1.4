@@ -242,6 +242,7 @@
     }else if([proID isEqualToString:kInAppPurchaseProductIdLifetime]){
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+        [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:kInAppPurchaseProductIdLifetime originalProID:originalProID];
 
         [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
         [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
@@ -429,6 +430,8 @@
     if ([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseProductIdLifetime]) {
         appDelegate.isPurchased = YES;
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
+        [[XDDataManager shareManager]puchasedInfoInSetting:transaction.transactionDate productID:kInAppPurchaseProductIdLifetime originalProID:transaction.originalTransaction.transactionIdentifier];
+
         [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
         dispatch_async(dispatch_get_main_queue(), ^{
             

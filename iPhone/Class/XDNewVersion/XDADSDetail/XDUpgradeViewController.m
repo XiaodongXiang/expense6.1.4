@@ -106,7 +106,7 @@
         }
         
         PFUser *user=[PFUser currentUser];
-        self.lifetimeNewEmail.text = user.email;
+        self.lifetimeNewEmail.text = user.email?:user.username;
         NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
         NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
@@ -114,6 +114,8 @@
         if (imageData) {
             self.lifetimeNewProfileIcon.image = image;
         }
+        self.lifetimeNewProfileIcon.layer.cornerRadius = 20;
+        self.lifetimeNewProfileIcon.layer.masksToBounds = YES;
         
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
 
@@ -244,7 +246,7 @@
             
         }
         PFUser *user=[PFUser currentUser];
-        self.lifetimeNewEmail.text = user.email;
+        self.lifetimeNewEmail.text = user.email?:user.username;
         NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
         NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
         NSData *imageData=[NSData dataWithContentsOfFile:imageFile];

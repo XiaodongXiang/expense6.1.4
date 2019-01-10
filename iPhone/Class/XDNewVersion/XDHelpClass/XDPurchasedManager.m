@@ -64,12 +64,6 @@
                         [objectServer removeObjectForKey:@"purchasedUpdateTime"];
                     }
                     
-                    if (setting.uuid != nil) {
-                        objectServer[@"settingID"]  = setting.uuid;
-                    }else{
-                        [objectServer removeObjectForKey:@"settingID"];
-                    }
-                    
                     if (setting.purchasedIsSubscription != nil) {
                         objectServer[@"purchasedIsSubscription"]  = setting.purchasedIsSubscription;
                     }else{
@@ -118,6 +112,13 @@
                     if (setting.purchaseOriginalProductID) {
                         objectServer[@"purchaseOriginalProductID"] = setting.purchaseOriginalProductID;
                     }
+                    
+                    
+                    objectServer[@"alreadyInvited"] = @"0";
+                    objectServer[@"haveOneMonthTrial"] = @"0";
+                    objectServer[@"invitedSuccessNotif"] = @"0";
+                    objectServer[@"isTryingPremium"] = @"0";
+                    
                     [objectServer setObject:[PFUser currentUser] forKey:@"parse_User"];
 
                     [objectServer saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
@@ -140,6 +141,11 @@
 
 -(void)getPFSetting{
     
+    BOOL lifttime = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG];
+    if (lifttime) {
+        return;
+    }
+    
     if (![PFUser currentUser]) {
         return;
     }
@@ -147,28 +153,59 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Setting"];
     [query whereKey:@"settingID" equalTo:[PFUser currentUser].objectId];
     [query whereKey:@"parse_User" equalTo:[PFUser currentUser]];
-    
+    if (setting.purchasedUpdateTime) {
+        [query whereKey:@"purchasedUpdateTime" greaterThan:setting.purchasedUpdateTime];
+    }
     [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
         if (!error) {
             if(objects.count > 0){
                 for (PFObject* object in objects) {
                     NSDate* updateDate = object[@"purchasedUpdateTime"];
                     if ([PFUser currentUser]) {
-                        if ([[PFUser currentUser].objectId isEqualToString:object[@"settingID"]]) {
+                        if ([[PFUser currentUser].objectId isEqualToString:object[@"settingID"]] && ![object[@"purchasedProductID"] isEqualToString:kInAppPurchaseProductIdLifetime]) {
                             if ([updateDate compare:setting.purchasedUpdateTime] == NSOrderedDescending || !setting.purchasedUpdateTime) {
                                 
-                                setting.purchasedUpdateTime = object[@"purchasedUpdateTime"];
-                                setting.purchasedProductID = object[@"purchasedProductID"];
-                                setting.purchasedStartDate = object[@"purchasedStartDate"];
-                                setting.purchasedEndDate = object[@"purchasedEndDate"];
-                                setting.purchasedIsSubscription = object[@"purchasedIsSubscription"];
-                                setting.uuid = object[@"settingID"];
-                                setting.purchaseOriginalProductID = object[@"purchaseOriginalProductID"];
-                                
-                                setting.otherBool16 = [NSNumber numberWithInt:[object[@"isTryingPremium"]boolValue]];
-                                setting.otherBool18 = [NSNumber numberWithInt:[object[@"alreadyInvited"]boolValue]];
-                                setting.otherBool19 = [NSNumber numberWithInt:[object[@"haveOneMonthTrial"]boolValue]];
-                                setting.otherBool20 = [NSNumber numberWithInt:[object[@"invitedSuccessNotif"]boolValue]];
+                                if (object[@"purchasedUpdateTime"]) {
+                                    setting.purchasedUpdateTime = object[@"purchasedUpdateTime"];
+                                }
+                                if (object[@"purchasedProductID"]) {
+                                    setting.purchasedProductID = object[@"purchasedProductID"];
+                                }
+                                if (object[@"purchasedStartDate"]) {
+                                    setting.purchasedStartDate = object[@"purchasedStartDate"];
+                                }
+                                if (object[@"purchasedEndDate"]) {
+                                    setting.purchasedEndDate = object[@"purchasedEndDate"];
+                                }
+                                if (object[@"purchasedIsSubscription"]) {
+                                    setting.purchasedIsSubscription = object[@"purchasedIsSubscription"];
+                                }
+                                if (object[@"settingID"]) {
+                                    setting.uuid = object[@"settingID"];
+                                }
+                                if (object[@"purchaseOriginalProductID"]) {
+                                    setting.purchaseOriginalProductID = object[@"purchaseOriginalProductID"];
+                                }
+                                if (object[@"isTryingPremium"]) {
+                                    setting.otherBool16 = [NSNumber numberWithInt:[object[@"isTryingPremium"]boolValue]];
+                                }else{
+                                    setting.otherBool16 = [NSNumber numberWithBool:0];
+                                }
+                                if (object[@"alreadyInvited"]) {
+                                    setting.otherBool18 = [NSNumber numberWithInt:[object[@"alreadyInvited"]boolValue]];
+                                }else{
+                                    setting.otherBool18 = [NSNumber numberWithBool:0];
+                                }
+                                if (object[@"haveOneMonthTrial"]) {
+                                    setting.otherBool19 = [NSNumber numberWithInt:[object[@"haveOneMonthTrial"]boolValue]];
+                                }else{
+                                    setting.otherBool19 = [NSNumber numberWithBool:0];
+                                }
+                                if (object[@"invitedSuccessNotif"]) {
+                                    setting.otherBool20 = [NSNumber numberWithInt:[object[@"invitedSuccessNotif"]boolValue]];
+                                }else{
+                                    setting.otherBool20 = [NSNumber numberWithBool:0];
+                                }
                                 
                                 object[@"invitedSuccessNotif"] = @"0";
                                 [object saveEventually];
@@ -184,8 +221,6 @@
                     //                [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:alert animated:YES completion:nil];
                     
                     setting.otherBool20 = [NSNumber numberWithBool:NO];
-                    
-                    
                 }
                 
                 
@@ -194,7 +229,7 @@
                 BOOL lifttime = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG];
                 if (!lifttime) {
                     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-                    if ([setting.purchasedIsSubscription boolValue]) {
+                    if ([setting.purchasedIsSubscription boolValue] && [setting.purchasedEndDate compare:[NSDate date]] == NSOrderedDescending) {
                         appDelegate.isPurchased = YES;
                         [[XDDataManager shareManager]openWidgetInSettingWithBool14:YES];
                     }else{

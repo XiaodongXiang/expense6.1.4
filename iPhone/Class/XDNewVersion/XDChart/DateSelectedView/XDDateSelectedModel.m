@@ -12,10 +12,8 @@
 
 +(NSArray *)returnDateSelectedWithType:(DateSelectedType)type completion:(void (^)(NSInteger))completion{
     Setting * setting = [[[XDDataManager shareManager] getObjectsFromTable:@"Setting"]lastObject];
-    NSArray* tranArr = [[XDDataManager shareManager]getObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"state = %@ and parTransaction = null",@"1"] sortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateTime" ascending:YES]]];
-    
-    
-    
+    NSArray* tranAllArr = [[XDDataManager shareManager]getObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"state = %@ and parTransaction = null",@"1"] sortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"dateTime" ascending:YES]]];
+    NSArray* tranArr = [tranAllArr filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"incomeAccount != %@ || expenseAccount != nil",[NSNull null],[NSNull null]]];
     
     Transaction* startTransaction = [tranArr firstObject];
     Transaction* endTransaction = [tranArr lastObject];

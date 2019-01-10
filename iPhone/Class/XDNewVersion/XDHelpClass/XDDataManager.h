@@ -44,7 +44,7 @@
 
 -(void)fixStateIsZeroBug;
 -(void)uploadLocalTransaction;
-
+-(void)deleteSomeUnUseTransaction;
 -(void)fixSomeUserNotSync;
 @end
 

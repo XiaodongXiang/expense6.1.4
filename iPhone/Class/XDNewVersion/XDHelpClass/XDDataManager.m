@@ -89,7 +89,7 @@
 //        comp.hour += 1;
         endDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
         
-    }else{
+    }else if ([productID isEqualToString:kInAppPurchaseProductIdLifetime]){
         comp.year += 100;
         endDate = [[NSCalendar currentCalendar] dateFromComponents:comp];
 
@@ -365,6 +365,35 @@
    
 }
 
+-(void)deleteSomeUnUseTransaction{
+    
+    NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra fromDate:[NSDate date]];
+    comp.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
+    comp.year = 2019;
+    comp.month = 1;
+    comp.day = 1;
+    NSDate* date = [[NSCalendar currentCalendar] dateFromComponents:comp];
+    if ([[PFUser currentUser].createdAt compare:date] == NSOrderedAscending) {
+        PokcetExpenseAppDelegate *appDelegete = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSArray* array = [self getObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"state = %@",@"1"] sortDescriptors:nil];
+        NSMutableArray* unUseArr = [NSMutableArray array];
+        
+        if (array.count > 0) {
+            for (Transaction* transcation in array) {
+                if (transcation.expenseAccount == nil && transcation.incomeAccount == nil) {
+                    [unUseArr addObject:transcation];
+                }
+            }
+            
+            if (unUseArr.count > 0) {
+                for (Transaction* tran in unUseArr) {
+                    [appDelegete.epdc deleteTransactionRel:tran];
+                }
+            }
+        }
+    }
+}
+
 -(void)allTransactionToLocal:(NSDate*)date{
     NSArray* array = [self getObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"updatedTime <= %@",date] sortDescriptors:nil];
     
@@ -384,6 +413,8 @@
                         [self assignTransactionLocal:transaction WithServer:object];
                         transaction.state = @"1";
                         transaction.isUpload = @"1";
+                        
+                        
                     }else{
                         localTransation.state = @"1";
                         localTransation.isUpload = @"1";
@@ -623,7 +654,6 @@
     }else{
         [objectServer removeObjectForKey:@"parTransaction"];
     }
-    
 }
 
 
@@ -862,6 +892,8 @@
         
     }
 }
+
+
 
 
 @end

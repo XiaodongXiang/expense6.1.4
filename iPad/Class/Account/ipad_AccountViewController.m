@@ -1465,6 +1465,7 @@
 
 -(void)addNewAccountBtnAction:(id)sender
 {
+    
     _dateRangeSelView.hidden = YES;
     _coverView.hidden=YES;
     _reconcileView.hidden = YES;

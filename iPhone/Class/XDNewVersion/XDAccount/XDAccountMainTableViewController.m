@@ -105,7 +105,6 @@
                 }else if([transactions.category.categoryType isEqualToString:@"INCOME"]){
                     amount += [transactions.amount doubleValue];
                 }
-                    
             }else{
                 if (transactions.incomeAccount == nil && transactions.expenseAccount) {
                     amount -= [transactions.amount doubleValue];
@@ -113,7 +112,7 @@
                     amount += [transactions.amount doubleValue];
                 }
             }
-           
+            
         }else if([transactions.transactionType isEqualToString:@"expense"] || ((transactions.expenseAccount != nil && transactions.incomeAccount == nil)&&[transactions.category.categoryType isEqualToString:@"EXPENSE"])){
             if (transactions.category == nil && transactions.incomeAccount && transactions.expenseAccount) {
                 if (transactions.incomeAccount == account) {
@@ -483,7 +482,11 @@
         if (appDelegate.isPurchased) {
             return self.addAccountCell;
         }else{
-            return self.unUpgradeAddCell;
+            if (self.dataMuArr.count >= 1) {
+                 return self.unUpgradeAddCell;
+            }else{
+                 return self.addAccountCell;
+            }
         }
     }else{
         cell.account = self.dataMuArr[indexPath.row];
@@ -529,9 +532,16 @@
             ac.delegate = self;
             [self presentViewController:ac animated:YES completion:nil];
         }else{
-           
-            XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
-            [self presentViewController:adsVc animated:YES completion:nil];
+            if (self.dataMuArr.count >= 1) {
+                
+                XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
+                [self presentViewController:adsVc animated:YES completion:nil];
+            }else{
+                
+                XDAddAccountViewController* ac = [[XDAddAccountViewController alloc]initWithNibName:@"XDAddAccountViewController" bundle:nil];
+                ac.delegate = self;
+                [self presentViewController:ac animated:YES completion:nil];
+            }
             
         }
     }else{

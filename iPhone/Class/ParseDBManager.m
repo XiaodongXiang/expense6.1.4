@@ -21,7 +21,6 @@
 #import "AppDelegate_iPad.h"
 
 #import "UIApplication+NetworkActivity.h"
-#define IS_FIRST_UPLOAD_SETTING     @"isFirstUploadSetting"
 
 @implementation ParseDBManager
 

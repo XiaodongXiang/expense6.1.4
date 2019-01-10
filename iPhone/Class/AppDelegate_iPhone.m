@@ -545,9 +545,8 @@
         
         
         [[XDDataManager shareManager] fixStateIsZeroBug];
-        
         [[XDDataManager shareManager] uploadLocalTransaction];
-        
+
         
         //touch ID
         LAContext *context=[LAContext new];

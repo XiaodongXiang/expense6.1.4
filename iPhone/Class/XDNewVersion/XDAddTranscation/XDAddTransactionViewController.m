@@ -320,7 +320,6 @@
 //        NSLog(@"cs == %f",cs.amount);
 //    }
 
-    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -1626,19 +1625,22 @@
 
 -(void)addAccountBtnClick{
     NSArray* array = [[XDDataManager shareManager] getObjectsFromTable:@"Accounts" predicate:[NSPredicate predicateWithFormat:@"state contains[c] %@",@"1"] sortDescriptors:nil];
-    if (array.count > 1) {
-        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-        if (appDelegate.isPurchased) {
+    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (appDelegate.isPurchased) {
+        XDAddAccountViewController* ac = [[XDAddAccountViewController alloc]initWithNibName:@"XDAddAccountViewController" bundle:nil];
+        ac.delegate = self;
+        [self presentViewController:ac animated:YES completion:nil];
+    }else{
+        if (array.count >= 1) {
+            XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
+            [self presentViewController:adsVc animated:YES completion:nil];
+        }else{
             XDAddAccountViewController* ac = [[XDAddAccountViewController alloc]initWithNibName:@"XDAddAccountViewController" bundle:nil];
             ac.delegate = self;
             [self presentViewController:ac animated:YES completion:nil];
-        }else{
-            
-            XDUpgradeViewController* adsVc = [[XDUpgradeViewController alloc]initWithNibName:@"XDUpgradeViewController" bundle:nil];
-            [self presentViewController:adsVc animated:YES completion:nil];
-            
         }
     }
+    
     
 }
 

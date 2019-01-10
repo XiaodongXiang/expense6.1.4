@@ -195,14 +195,16 @@
     
     [self.epnc setFlurryEvent_withUpgrade:NO];
     
-    [[XDPurchasedManager shareManager] saveDefaultParseSetting];
     
     if ([PFUser currentUser]) {
         [self createLink];
+        [[XDPurchasedManager shareManager] saveDefaultParseSetting];
+
         [[XDDataManager shareManager] fixStateIsZeroBug];
-        
+        [[XDDataManager shareManager] deleteSomeUnUseTransaction];
+
         [[XDDataManager shareManager] uploadLocalTransaction];
-        
+
     }
     return YES;
 }

@@ -634,7 +634,7 @@ forever</string>
                     <rect key="frame" x="0.0" y="0.0" width="375" height="154"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
-                <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head portrait1" translatesAutoresizingMaskIntoConstraints="NO" id="fET-6C-Yej">
+                <imageView autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="head portrait1" translatesAutoresizingMaskIntoConstraints="NO" id="fET-6C-Yej">
                     <rect key="frame" x="30" y="25" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="Om9-ai-QcB"/>

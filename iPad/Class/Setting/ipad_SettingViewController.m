@@ -120,7 +120,7 @@
         self.redPoint.hidden = YES;
     }
     
-    self.profileEmailLbl.text = [PFUser currentUser].email;
+    self.profileEmailLbl.text = [PFUser currentUser].email?:[PFUser currentUser].username;
     self.profileIconBtn.layer.cornerRadius = self.profileIconBtn.width/2;
     self.profileIconBtn.layer.masksToBounds = YES;
     NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
