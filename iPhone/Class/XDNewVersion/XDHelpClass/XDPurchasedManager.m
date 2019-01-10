@@ -315,34 +315,6 @@
                             [[XDDataManager shareManager] saveContext];
                             
                         }];
-                    }else{
-                        if (appDelegete.isPurchased == YES) {
-                            
-                            BOOL lifetime = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
-                            if (lifetime) {
-                                object[@"purchasedProductID"] = kInAppPurchaseProductIdLifetime;
-                            }else{
-                                if (setting.purchasedProductID) {
-                                    object[@"purchasedProductID"] = setting.purchasedProductID;
-                                }else{
-                                    object[@"purchasedProductID"] = @"defaultProductID";
-                                }
-                            }
-                        }else{
-                            object[@"purchasedProductID"] = @"defaultProductID";
-                        }
-                        
-                        [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-                            if (succeeded) {
-                                setting.otherBool17 = @YES;
-                                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:IS_FIRST_UPLOAD_SETTING];
-                                
-                            }else{
-                                setting.otherBool17 = @NO;
-                            }
-                            [[XDDataManager shareManager] saveContext];
-                            
-                        }];
                     }
                 }];
             }
