@@ -52,6 +52,14 @@
         self.redPointView.hidden = YES;
     }
     
+    
+    if ([PFUser currentUser]) {
+        
+        [[XDDataManager shareManager] fixStateIsZeroBug];
+        [[XDDataManager shareManager] deleteSomeUnUseTransaction];
+        
+        [[XDDataManager shareManager] uploadLocalTransaction];
+    }
 }
 
 -(void)isFirstEnterPOursAppVc{
