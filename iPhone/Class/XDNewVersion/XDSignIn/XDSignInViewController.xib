@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -206,7 +206,7 @@
                             </connections>
                         </button>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="2qk-lK-cbD">
-                            <rect key="frame" x="286" y="204" width="25" height="25"/>
+                            <rect key="frame" x="286.5" y="204.5" width="25" height="25"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="25" id="25c-cG-OtO"/>
                                 <constraint firstAttribute="height" constant="25" id="YuA-Wf-Zgr"/>
@@ -214,7 +214,7 @@
                             <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </activityIndicatorView>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPC-z0-wZc">
-                            <rect key="frame" x="306" y="161" width="31" height="15"/>
+                            <rect key="frame" x="306.5" y="161" width="31" height="15"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="15" id="jwt-LW-V38"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="31" id="yFk-jz-MKX"/>
@@ -279,7 +279,7 @@
         <image name="facebook" width="30" height="31"/>
         <image name="forget" width="22" height="23"/>
         <image name="password-1" width="31" height="31"/>
-        <image name="save_nurmal1" width="69" height="77"/>
-        <image name="save_press1" width="69" height="77"/>
+        <image name="save_nurmal1" width="320" height="77"/>
+        <image name="save_press1" width="69.5" height="77"/>
     </resources>
 </document>

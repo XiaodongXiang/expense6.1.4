@@ -58,27 +58,27 @@ FOUNDATION_EXPORT void FBHelperLog(NSString *format, ...) NS_FORMAT_FUNCTION(1,2
     UIApplication* application = [UIApplication sharedApplication];
     PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)application.delegate;
     
-    if ([UNUserNotificationCenter class] != nil) {
-        // iOS 10 or later
-        // For iOS 10 display notification (sent via APNS)
-        [UNUserNotificationCenter currentNotificationCenter].delegate = appDelegate;
-        UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert |
-        UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
-        [[UNUserNotificationCenter currentNotificationCenter]
-         requestAuthorizationWithOptions:authOptions
-         completionHandler:^(BOOL granted, NSError * _Nullable error) {
-             // ...
-         }];
-    } else {
-        // iOS 10 notifications aren't available; fall back to iOS 8-9 notifications.
-        UIUserNotificationType allNotificationTypes =
-        (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
-        UIUserNotificationSettings *settings =
-        [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
-        [application registerUserNotificationSettings:settings];
-    }
-    
-    [application registerForRemoteNotifications];
+//    if ([UNUserNotificationCenter class] != nil) {
+//        // iOS 10 or later
+//        // For iOS 10 display notification (sent via APNS)
+//        [UNUserNotificationCenter currentNotificationCenter].delegate = appDelegate;
+//        UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert |
+//        UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
+//        [[UNUserNotificationCenter currentNotificationCenter]
+//         requestAuthorizationWithOptions:authOptions
+//         completionHandler:^(BOOL granted, NSError * _Nullable error) {
+//             // ...
+//         }];
+//    } else {
+//        // iOS 10 notifications aren't available; fall back to iOS 8-9 notifications.
+//        UIUserNotificationType allNotificationTypes =
+//        (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+//        UIUserNotificationSettings *settings =
+//        [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+//        [application registerUserNotificationSettings:settings];
+//    }
+//    
+//    [application registerForRemoteNotifications];
     [FIRMessaging messaging].delegate = appDelegate;
     
     [[FIRInstanceID instanceID] instanceIDWithHandler:^(FIRInstanceIDResult * _Nullable result,

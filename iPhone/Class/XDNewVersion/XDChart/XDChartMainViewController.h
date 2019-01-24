@@ -9,5 +9,4 @@
 
 @interface XDChartMainViewController : UIViewController
 
--(void)initChartView;
 @end

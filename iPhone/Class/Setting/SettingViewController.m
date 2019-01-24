@@ -81,6 +81,9 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *signOutCell;
 @property (strong, nonatomic) IBOutlet UITableViewCell *sharelinkCell;
 @property (weak, nonatomic) IBOutlet UIImageView *unUpgradeImgV;
+@property (weak, nonatomic) IBOutlet UILabel *dateStyleLbl;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *topL1;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *bottomL1;
 
 @end
 
@@ -142,19 +145,19 @@
     [self.noPurchasedProfileIcon addTarget:self action:@selector(profileIconClick:) forControlEvents:UIControlEventTouchUpInside];
     
     if (IS_IPHONE_X) {
-        self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
+        self.profileImgView.image = [UIImage imageNamed:@"new_setting_setting_vip"];
         self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_2"];
 
     }else if (IS_IPHONE_6){
-        self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_8"];
+        self.profileImgView.image = [UIImage imageNamed:@"new_setting_setting_vip"];
         self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_2"];
 
     }else if (IS_IPHONE_6PLUS){
-        self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_plus"];
+        self.profileImgView.image = [UIImage imageNamed:@"new_setting_setting_vip_plus"];
         self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_plus"];
 
     }else{
-        self.profileImgView.image = [UIImage imageNamed:@"purchase_lifetime_vip_se"];
+        self.profileImgView.image = [UIImage imageNamed:@"new_setting_setting_vip_se"];
         self.unUpgradeImgV.image = [UIImage imageNamed:@"setting_ads_se"];
 
     }
@@ -757,17 +760,28 @@
                 if (appDelegate.isPurchased) {
                     if ([[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG]) {
                         self.exprieDateLbl.text = @"";
+                        self.dateStyleLbl.text = @"Lifetime";
+                        self.topL1.constant = 95;
+                        self.bottomL1.constant = 40;
                     }else{
                         Setting* setting = [[XDDataManager shareManager] getSetting];
                         NSDateFormatter* formatter = [[NSDateFormatter alloc]init];
                         [formatter setDateFormat:@"yyyy-MM-dd"];
                         NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
-                        self.exprieDateLbl.text = [NSString stringWithFormat:@"Renews :%@",expiredString];
+                        self.exprieDateLbl.text = [NSString stringWithFormat:@"Renews: %@",expiredString];
                         
                         if ([setting.otherBool18 boolValue] && [setting.otherBool16 boolValue]) {
-                            self.exprieDateLbl.text = [NSString stringWithFormat:@"Expire Date :%@",expiredString];
+                            self.exprieDateLbl.text = [NSString stringWithFormat:@"Expire Date: %@",expiredString];
                         }
-                        
+                        if ([setting.purchasedProductID isEqualToString:KInAppPurchaseProductIdMonth]) {
+                            self.dateStyleLbl.text = @"Monthly";
+                        }else if ([setting.purchasedProductID isEqualToString:KInAppPurchaseProductIdYear]){
+                            self.dateStyleLbl.text = @"Yearly";
+                        }else if ([setting.purchasedProductID isEqualToString:kInAppPurchaseProductIdLifetime]){
+                            self.dateStyleLbl.text = @"Lifetime";
+                            self.topL1.constant = 95;
+                            self.bottomL1.constant = 40;
+                        }
                         
                         NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra fromDate:[NSDate date]];
                         comp.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
@@ -968,15 +982,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            if (appDelegate.isPurchased) {
-                return 145;
-            }else{
-                return 181;
-                
-            }
+            return 181;
         }
     }
     if (indexPath.section == 0 && indexPath.row == 3) {
@@ -987,12 +995,12 @@
         }
     }
     
-//    Setting * setting = [[XDDataManager shareManager]getSetting];
-//    if ([setting.otherBool18 boolValue]) {
+    Setting * setting = [[XDDataManager shareManager]getSetting];
+    if ([setting.otherBool18 boolValue]) {
         if (indexPath.section == 0 && indexPath.row == 1) {
             return 0.01;
         }
-//    }
+    }
 
     return 51;
     

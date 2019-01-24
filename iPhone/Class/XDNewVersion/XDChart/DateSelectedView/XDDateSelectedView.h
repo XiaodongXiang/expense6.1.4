@@ -8,11 +8,7 @@
 #import <UIKit/UIKit.h>
 
 #import "XDDateSelectedModel.h"
-//@protocol XDDateSelectedDelegate <NSObject>
-//
-//-(void)returnSelectedDate:(NSDate*)date index:(NSInteger)index;
-//@end
-@interface XDDateSelectedView : UIView
+ @interface XDDateSelectedView : UIView
 
 @property(nonatomic, strong) UIScrollView* scrollView;
 

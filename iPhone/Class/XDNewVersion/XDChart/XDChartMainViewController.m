@@ -17,7 +17,7 @@
 #import "XDPieDetailViewController.h"
 #import "SettingViewController.h"
 @import Firebase;
-@interface XDChartMainViewController ()<XDTitleAccountTableViewDelegate,XDTimeSelectViewDelegate,UIScrollViewDelegate,XDChartPageViewDelegate>
+@interface XDChartMainViewController ()<XDTitleAccountTableViewDelegate,XDTimeSelectViewDelegate,UIScrollViewDelegate,XDChartPageViewDelegate,UIGestureRecognizerDelegate>
 {
     Accounts* _selectedAccount;
     UIScrollView* _chartScrollView;
@@ -51,14 +51,7 @@
 
 -(XDTimeSelectView *)timeSelectedView{
     if (!_timeSelectedView) {
-        _timeSelectedView = [[XDTimeSelectView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 30)];
-        if (IS_IPHONE_X) {
-            _timeSelectedView = [[XDTimeSelectView alloc]initWithFrame:CGRectMake(0, 88, SCREEN_WIDTH, 30)];
-        }else{
-            _timeSelectedView = [[XDTimeSelectView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 30)];
-        }
-        _timeSelectedView.alpha = 0;
-        _timeSelectedView.hidden = YES;
+        _timeSelectedView = [[XDTimeSelectView alloc]initWithFrame:CGRectMake(0, -178, SCREEN_WIDTH, 30)];
         _timeSelectedView.delegate = self;
     }
     return _timeSelectedView;
@@ -71,6 +64,7 @@
         }else{
             _dateSelectedView = [[XDDateSelectedView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, 24)];
         }
+//        _dateSelectedView.dateDelegate = self;
     }
     return _dateSelectedView;
 }
@@ -81,15 +75,16 @@
         }else{
             _backgroundView = [[UIView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT)];
         }
-        _backgroundView.backgroundColor = [UIColor colorWithRed:0/255 green:0/255 blue:0/255 alpha:1];
-        _backgroundView.alpha = 0;
-
+        _backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
+        _backgroundView.clipsToBounds = YES;
+        _backgroundView.hidden = YES;
+        
         [self.tabBarController.view addSubview:_backgroundView];
         [self.tabBarController.view bringSubviewToFront:_backgroundView];
-        [self.tabBarController.view bringSubviewToFront:self.titleAccountTableView];
-        [self.tabBarController.view bringSubviewToFront:self.timeSelectedView];
+        
         
         UITapGestureRecognizer* tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapClick)];
+        tap.delegate = self;
         [_backgroundView addGestureRecognizer:tap];
     }
     return _backgroundView;
@@ -99,17 +94,29 @@
     if (!_titleAccountTableView) {
         _titleAccountTableView = [XDTitleAccountTableView view];
         _titleAccountTableView.centerX = SCREEN_WIDTH / 2;
-        if (IS_IPHONE_X) {
-            _titleAccountTableView.y = 88;
-        }else{
-            _titleAccountTableView.y = 64;
-        }
+        _titleAccountTableView.y = -_titleAccountTableView.height;
         _titleAccountTableView.selectedDelegate = self;
-        _titleAccountTableView.alpha = 0;
-        _titleAccountTableView.hidden = YES;
+//        _titleAccountTableView.alpha = 0;
+//        _titleAccountTableView.hidden = YES;
+
 
     }
     return _titleAccountTableView;
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
+{
+//    // 输出点击的view的类名
+//    NSLog(@"%@", NSStringFromClass([touch.view class]));
+//    
+//    // 若为UITableViewCellContentView（即点击了tableViewCell），则不截获Touch事件
+    if ([NSStringFromClass([touch.view class]) isEqualToString:@"UITableViewCellContentView"]) {
+        return NO;
+    }
+    return  YES;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -162,8 +169,8 @@
     self.navigationItem.titleView = self.titleBtn;
     self.navigationController.navigationBar.clipsToBounds = YES;
     [self.view addSubview:self.dateSelectedView];
-    [self.tabBarController.view addSubview:self.titleAccountTableView];
-    [self.tabBarController.view addSubview:self.timeSelectedView];
+    [self.backgroundView addSubview:self.titleAccountTableView];
+    [self.backgroundView addSubview:self.timeSelectedView];
     
     _selectedDateType = DateSelectedMonth;
 
@@ -212,7 +219,6 @@
     [self refreshScrollView];
     [self setupChartPageView];
     [self.titleAccountTableView refreshUI];
-    
 }
 
 -(void)settingButtonPress{
@@ -277,8 +283,97 @@
         _nextPageView.date = nextDate;
         
     }
+}
+
+#pragma mark - backview animation
+-(void)showTitleAccountView{
+    self.backgroundView.hidden = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        self.titleAccountTableView.y = 0;
+    }];
+}
+
+-(void)showTimeSelectView{
+    self.backgroundView.hidden = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        self.backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0.5];
+        self.timeSelectedView.y = 0;
+    }];
+}
+
+-(void)dismissAccountTitleView{
+    self.titleBtn.selected = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        if (_timeSelectViewShow == NO) {
+            self.backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
+        }
+        self.titleAccountTableView.y = -self.titleAccountTableView.height;
+    }];
+}
+
+-(void)dismissTimeSelevtView{
+    _timeSelectViewShow = NO;
+    [UIView animateWithDuration:0.2 animations:^{
+        if (self.titleBtn.selected == NO) {
+            self.backgroundView.backgroundColor = [[UIColor blackColor] colorWithAlphaComponent:0];
+        }
+        self.timeSelectedView.y = -self.timeSelectedView.height;
+    }];
+}
+
+
+-(void)rightDrawerButton{
+    _timeSelectViewShow = !_timeSelectViewShow;
+    if (IS_IPHONE_X) {
+        self.backgroundView.y = 88;
+    }else{
+        self.backgroundView.y = 64;
+    }
+
+    if (_timeSelectViewShow) {
+        [self dismissAccountTitleView];
+        [self showTimeSelectView];
+    }else{
+        [self dismissTimeSelevtView];
+        [self performSelector:@selector(hideBackView) withObject:nil afterDelay:0.2];
+       
+    }
+}
+-(void)hideBackView{
+    self.backgroundView.hidden = YES;
+
+}
+
+
+
+-(void)titleBtnClick{
+    self.titleBtn.selected = !self.titleBtn.selected;
+    if (IS_IPHONE_X) {
+        self.backgroundView.y = 88;
+    }else{
+        self.backgroundView.y = 64;
+    }
+    if (self.titleBtn.selected) {
+        
+        [self dismissTimeSelevtView];
+        [self showTitleAccountView];
+    }else{
+        [self dismissAccountTitleView];
+        [self performSelector:@selector(hideBackView) withObject:nil afterDelay:0.2];
+    }
     
 }
+
+-(void)tapClick{
+    self.titleBtn.selected = NO;
+    _timeSelectViewShow = NO;
+    [self dismissAccountTitleView];
+    [self dismissTimeSelevtView];
+    [self performSelector:@selector(hideBackView) withObject:nil afterDelay:0.2];
+}
+
+#pragma mark -
 
 -(void)refreshScrollView{
 //    __weak __typeof__(self) weakSelf = self;
@@ -336,99 +431,7 @@
     }
 }
 
--(void)rightDrawerButton{
-    _timeSelectViewShow = !_timeSelectViewShow;
-    if (IS_IPHONE_X) {
-        self.backgroundView.y = 88;
-    }else{
-        self.backgroundView.y = 64;
-    }
 
-    if (self.titleBtn.selected) {
-        self.titleBtn.selected = NO;
-        [UIView animateWithDuration:0.2 animations:^{
-            self.titleAccountTableView.alpha = 0;
-        }completion:^(BOOL finished) {
-            self.titleAccountTableView.hidden = YES;
-        }];
-    }
-    
-    if (_timeSelectViewShow) {
-        self.backgroundView.hidden = NO;
-        self.timeSelectedView.hidden = NO;
-        [UIView animateWithDuration:0.2 animations:^{
-            self.backgroundView.alpha = 0.5;
-            self.timeSelectedView.alpha = 1;
-        }];
-    }else{
-        [UIView animateWithDuration:0.2 animations:^{
-            self.backgroundView.alpha = 0;
-            self.timeSelectedView.alpha = 0;
-            
-        }completion:^(BOOL finished) {
-            self.backgroundView.hidden = YES;
-            self.timeSelectedView.hidden = YES;
-        }];
-    }
-    
-}
-
-
--(void)titleBtnClick{
-    self.titleBtn.selected = !self.titleBtn.selected;
-    if (IS_IPHONE_X) {
-        self.backgroundView.y = 88;
-    }else{
-        self.backgroundView.y = 64;
-    }
-    if (_timeSelectViewShow) {
-        _timeSelectViewShow = NO;
-        [UIView animateWithDuration:0.2 animations:^{
-            self.timeSelectedView.alpha = 0;
-            
-        }completion:^(BOOL finished) {
-            self.timeSelectedView.hidden = YES;
-        }];
-    }
-    
-    if (self.titleBtn.selected) {
-        self.backgroundView.hidden = NO;
-        self.titleAccountTableView.hidden = NO;
-
-        [UIView animateWithDuration:0.2 animations:^{
-            self.backgroundView.alpha = 0.5;
-            self.titleAccountTableView.alpha = 1;
-        }];
-    }else{
-        [UIView animateWithDuration:0.2 animations:^{
-            self.backgroundView.alpha = 0;
-            self.titleAccountTableView.alpha = 0;
-
-        }completion:^(BOOL finished) {
-            self.backgroundView.hidden = YES;
-            self.titleAccountTableView.hidden = YES;
-        }];
-    }
-}
-
--(void)tapClick{
-    self.titleBtn.selected = NO;
-    _timeSelectViewShow = NO;
-    [UIView animateWithDuration:0.05 animations:^{
-    } completion:^(BOOL finished) {
-
-        [UIView animateWithDuration:0.2 animations:^{
-            self.backgroundView.alpha = 0;
-            self.titleAccountTableView.alpha = 0;
-            self.timeSelectedView.alpha = 0;
-        }completion:^(BOOL finished) {
-            self.titleAccountTableView.hidden = YES;
-            self.timeSelectedView.hidden  = YES;
-            self.backgroundView.hidden = YES;
-
-        }];
-    }];
-}
 
 -(void)accountRefresh{
     [self.titleAccountTableView refreshUI];

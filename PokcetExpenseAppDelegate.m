@@ -152,27 +152,29 @@
     
     [FIRMessaging messaging].delegate = self;
 
-    if ([UNUserNotificationCenter class] != nil) {
-        // iOS 10 or later
-        // For iOS 10 display notification (sent via APNS)
-        [UNUserNotificationCenter currentNotificationCenter].delegate = self;
-        UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert |
-        UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
-        [[UNUserNotificationCenter currentNotificationCenter]
-         requestAuthorizationWithOptions:authOptions
-         completionHandler:^(BOOL granted, NSError * _Nullable error) {
-             // ...
-         }];
-    } else {
-        // iOS 10 notifications aren't available; fall back to iOS 8-9 notifications.
-        UIUserNotificationType allNotificationTypes =
-        (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
-        UIUserNotificationSettings *settings =
-        [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
-        [application registerUserNotificationSettings:settings];
+    if ([PFUser currentUser]) {
+        if ([UNUserNotificationCenter class] != nil) {
+            // iOS 10 or later
+            // For iOS 10 display notification (sent via APNS)
+            [UNUserNotificationCenter currentNotificationCenter].delegate = self;
+            UNAuthorizationOptions authOptions = UNAuthorizationOptionAlert |
+            UNAuthorizationOptionSound | UNAuthorizationOptionBadge;
+            [[UNUserNotificationCenter currentNotificationCenter]
+             requestAuthorizationWithOptions:authOptions
+             completionHandler:^(BOOL granted, NSError * _Nullable error) {
+                 // ...
+             }];
+        } else {
+            // iOS 10 notifications aren't available; fall back to iOS 8-9 notifications.
+            UIUserNotificationType allNotificationTypes =
+            (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+            UIUserNotificationSettings *settings =
+            [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+            [application registerUserNotificationSettings:settings];
+        }
+        
+        [application registerForRemoteNotifications];
     }
-    
-    [application registerForRemoteNotifications];
     
     //获取网络时间和本地时间差
     [NSDate internetServerDate:^(NSDate * internetDate) {
@@ -214,10 +216,10 @@
                                  initWithBundleID:@"com.btgs.pocketexpenselite"];
     linkBuilder.iOSParameters.appStoreID = @"424575621";
     
-//    linkBuilder.socialMetaTagParameters = [[FIRDynamicLinkSocialMetaTagParameters alloc] init];
-//    linkBuilder.socialMetaTagParameters.title = @"Pocket Expense 6";
-//    linkBuilder.socialMetaTagParameters.descriptionText = @"See where your money goes";
-//    linkBuilder.socialMetaTagParameters.imageURL = [NSURL URLWithString:@"https://www.dropbox.com/s/vejageimdio2gec/test.png"];
+    linkBuilder.socialMetaTagParameters = [[FIRDynamicLinkSocialMetaTagParameters alloc] init];
+    linkBuilder.socialMetaTagParameters.title = @"Pocket Expense 6";
+    linkBuilder.socialMetaTagParameters.descriptionText = @"See where your money goes";
+    linkBuilder.socialMetaTagParameters.imageURL = [NSURL URLWithString:@"http://onemoreuserheaderimage.oss-cn-beijing.aliyuncs.com/expense.png"];
     [linkBuilder shortenWithCompletion:^(NSURL * _Nullable shortURL,
                                          NSArray<NSString *> * _Nullable warnings,
                                          NSError * _Nullable error) {
@@ -321,35 +323,42 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
     if ([userDefault boolForKey:@"ReminderNotification"])
     {
+        NSDate* reminderDate = [userDefault valueForKey:@"reminderDate"];
+        NSInteger hour = 18;
+        NSInteger minute = 0;
+        if (reminderDate) {
+            NSDateComponents * components = [[NSCalendar currentCalendar] components:NSCalendarUnitYear | NSCalendarUnitSecond | NSCalendarUnitMinute | NSCalendarUnitMonth | NSCalendarUnitHour | NSCalendarUnitDay fromDate:reminderDate];
+            hour = components.hour;
+            minute = components.minute;
+        }
+        
         NSDate *now = [NSDate date];
         unsigned int flags = NSYearCalendarUnit | NSMonthCalendarUnit | NSDayCalendarUnit | NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
         //4.dateTime
         NSDateComponents*  parts1 = [[NSCalendar currentCalendar] components:flags fromDate:now];
-        [parts1 setHour:18];
-        [parts1 setMinute:0];
+        [parts1 setHour:hour];
+        [parts1 setMinute:minute];
         [parts1 setSecond:0];
         [parts1 setDay:(parts1.day + 1)];
         NSDate *daysLater_1 = [[NSCalendar currentCalendar] dateFromComponents:parts1];
         
-        
-        
         NSDateComponents*  parts2 = [[NSCalendar currentCalendar] components:flags fromDate:now];
-        [parts2 setHour:18];
-        [parts2 setMinute:0];
+        [parts2 setHour:hour];
+        [parts2 setMinute:minute];
         [parts2 setSecond:0];
         [parts2 setDay:(parts2.day + 3)];
         NSDate *daysLater_3 = [[NSCalendar currentCalendar] dateFromComponents:parts2];
         
         NSDateComponents*  parts3 = [[NSCalendar currentCalendar] components:flags fromDate:now];
-        [parts3 setHour:18];
-        [parts3 setMinute:0];
+        [parts3 setHour:hour];
+        [parts3 setMinute:minute];
         [parts3 setSecond:0];
         [parts3 setDay:(parts3.day + 7)];
         NSDate *daysLater_7 = [[NSCalendar currentCalendar] dateFromComponents:parts3];
         
         NSDateComponents*  parts4 = [[NSCalendar currentCalendar] components:flags fromDate:now];
-        [parts4 setHour:18];
-        [parts4 setMinute:0];
+        [parts4 setHour:hour];
+        [parts4 setMinute:minute];
         [parts4 setSecond:0];
         [parts4 setDay:(parts4.day + 21)];
         NSDate *daysLater_21 = [[NSCalendar currentCalendar] dateFromComponents:parts4];
@@ -461,7 +470,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
     NSString* productID = setting.purchasedProductID;
     BOOL isPurchase = [setting.purchasedIsSubscription boolValue];
     //判断免费版是否被购买了
-    if ([defaults2 valueForKey:LITE_UNLOCK_FLAG] || (productID.length > 0 && isPurchase))
+    if ([defaults2 valueForKey:LITE_UNLOCK_FLAG] || (productID.length > 0 && isPurchase && [setting.purchasedEndDate compare:[NSDate date]] == NSOrderedDescending))
     {
         self.isPurchased = YES;
         [[XDDataManager shareManager]openWidgetInSettingWithBool14:YES];

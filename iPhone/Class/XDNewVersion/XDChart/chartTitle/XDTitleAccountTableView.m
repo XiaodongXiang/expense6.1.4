@@ -101,20 +101,16 @@
     }
     cell.accountSelected = YES;
     _indexPath = indexPath;
-//
-//
+
     
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        if ([self.selectedDelegate respondsToSelector:@selector(returnSelectedAccount:)]) {
-            if (indexPath.row != 0) {
-                Accounts* account = self.dataArr[indexPath.row-1];
-                [self.selectedDelegate returnSelectedAccount:account];
-            }else{
-                [self.selectedDelegate returnSelectedAccount:nil];
-            }
+    if ([self.selectedDelegate respondsToSelector:@selector(returnSelectedAccount:)]) {
+        if (indexPath.row != 0) {
+            Accounts* account = self.dataArr[indexPath.row-1];
+            [self.selectedDelegate returnSelectedAccount:account];
+        }else{
+            [self.selectedDelegate returnSelectedAccount:nil];
         }
-    });
+    }
 }
 
 -(void)tableView:(UITableView *)tableView willDisplayCell:(nonnull UITableViewCell *)cell forRowAtIndexPath:(nonnull NSIndexPath *)indexPath

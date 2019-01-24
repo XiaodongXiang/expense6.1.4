@@ -2567,6 +2567,10 @@
 		BEB696E1213D0FAD00CDE712 /* AFURLRequestSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696D8213D0FAD00CDE712 /* AFURLRequestSerialization.m */; };
 		BEB696E2213D0FAD00CDE712 /* AFNetworkReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DA213D0FAD00CDE712 /* AFNetworkReachabilityManager.m */; };
 		BEB696E3213D0FAD00CDE712 /* AFSecurityPolicy.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */; };
+		BEF3EAAF21F7128A008FC0C6 /* XDAllowNotifViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF3EAAD21F7128A008FC0C6 /* XDAllowNotifViewController.m */; };
+		BEF3EAB021F7128A008FC0C6 /* XDAllowNotifViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF3EAAE21F7128A008FC0C6 /* XDAllowNotifViewController.xib */; };
+		BEF3EAB421F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF3EAB221F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.m */; };
+		BEF3EAB521F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF3EAB321F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.xib */; };
 		BEF484FE21D36B7E00A78B0D /* XDShareLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF484FC21D36B7D00A78B0D /* XDShareLinkViewController.m */; };
 		BEF484FF21D36B7E00A78B0D /* XDShareLinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF484FD21D36B7D00A78B0D /* XDShareLinkViewController.xib */; };
 		BEF692EA21DD9DC90064D15B /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF692E921DD9DC90064D15B /* FBHelper.m */; };
@@ -5723,6 +5727,12 @@
 		BEB696DB213D0FAD00CDE712 /* AFSecurityPolicy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFSecurityPolicy.m; sourceTree = "<group>"; };
 		BEB696DC213D0FAD00CDE712 /* AFCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFCompatibilityMacros.h; sourceTree = "<group>"; };
 		BEB696DD213D0FAD00CDE712 /* AFHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPSessionManager.h; sourceTree = "<group>"; };
+		BEF3EAAC21F7128A008FC0C6 /* XDAllowNotifViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDAllowNotifViewController.h; sourceTree = "<group>"; };
+		BEF3EAAD21F7128A008FC0C6 /* XDAllowNotifViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDAllowNotifViewController.m; sourceTree = "<group>"; };
+		BEF3EAAE21F7128A008FC0C6 /* XDAllowNotifViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDAllowNotifViewController.xib; sourceTree = "<group>"; };
+		BEF3EAB121F87147008FC0C6 /* XDBudgetAllAmountTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDBudgetAllAmountTableViewCell.h; sourceTree = "<group>"; };
+		BEF3EAB221F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDBudgetAllAmountTableViewCell.m; sourceTree = "<group>"; };
+		BEF3EAB321F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDBudgetAllAmountTableViewCell.xib; sourceTree = "<group>"; };
 		BEF484FB21D36B7D00A78B0D /* XDShareLinkViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDShareLinkViewController.h; sourceTree = "<group>"; };
 		BEF484FC21D36B7D00A78B0D /* XDShareLinkViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDShareLinkViewController.m; sourceTree = "<group>"; };
 		BEF484FD21D36B7D00A78B0D /* XDShareLinkViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDShareLinkViewController.xib; sourceTree = "<group>"; };
@@ -7558,6 +7568,7 @@
 		4E7BA80A2063512600D9299A /* XDNewVersion */ = {
 			isa = PBXGroup;
 			children = (
+				BEF3EAAB21F71255008FC0C6 /* XDReminderNotif */,
 				BEF484F821D3461100A78B0D /* XDDeepLink */,
 				BEFD68C1216C6FA500B86A64 /* ADEngine.framework */,
 				BE00543921B8C9B600C96A91 /* XDOurApps */,
@@ -7747,6 +7758,9 @@
 			children = (
 				4E7BA84D2063512600D9299A /* XDBudgetTableView.h */,
 				4E7BA8502063512600D9299A /* XDBudgetTableView.m */,
+				BEF3EAB121F87147008FC0C6 /* XDBudgetAllAmountTableViewCell.h */,
+				BEF3EAB221F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.m */,
+				BEF3EAB321F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.xib */,
 				4E7BA8512063512600D9299A /* BudgetTableViewCell.h */,
 				4E7BA84F2063512600D9299A /* BudgetTableViewCell.m */,
 				4E7BA84E2063512600D9299A /* BudgetTableViewCell.xib */,
@@ -10767,6 +10781,16 @@
 			path = AFNetworking;
 			sourceTree = "<group>";
 		};
+		BEF3EAAB21F71255008FC0C6 /* XDReminderNotif */ = {
+			isa = PBXGroup;
+			children = (
+				BEF3EAAC21F7128A008FC0C6 /* XDAllowNotifViewController.h */,
+				BEF3EAAD21F7128A008FC0C6 /* XDAllowNotifViewController.m */,
+				BEF3EAAE21F7128A008FC0C6 /* XDAllowNotifViewController.xib */,
+			);
+			path = XDReminderNotif;
+			sourceTree = "<group>";
+		};
 		BEF484F821D3461100A78B0D /* XDDeepLink */ = {
 			isa = PBXGroup;
 			children = (
@@ -12142,6 +12166,7 @@
 				A2641B8F1A7B4F8400EA2435 /* iphone6_payeeBg_320_130@2x.png in Resources */,
 				A2211CAC1A39A83A005E135F /* btn_7_sel@3x.png in Resources */,
 				3AE1ABDF1C21057400F26F22 /* pilot_point1@3x.png in Resources */,
+				BEF3EAB521F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.xib in Resources */,
 				A256167919D3BB7F00A5A950 /* ipad_FatherCategorySelectedViewController.xib in Resources */,
 				606507011C73FE1900A7B70A /* gifts.png in Resources */,
 				3AE154CF1BEC4A5300F9CA91 /* account_iconbg_investing@3x.png in Resources */,
@@ -12384,6 +12409,7 @@
 				A256124019D3BB5C00A5A950 /* pop_bg2.png in Resources */,
 				A256170F19D3BB7F00A5A950 /* btn_upgrade_now_ipad@2x.png in Resources */,
 				3ADE68E51C3E01F200C1E18C /* btn_expense_sel@2x.png in Resources */,
+				BEF3EAB021F7128A008FC0C6 /* XDAllowNotifViewController.xib in Resources */,
 				602FA5D31C5EF26E0016A362 /* budget_form_gray@2x.png in Resources */,
 				A25611D019D3BB5C00A5A950 /* icon_check2.png in Resources */,
 				3AE154B71BEC4A5300F9CA91 /* button_arrow_right@2x.png in Resources */,
@@ -13300,6 +13326,7 @@
 				4E7BA8F32063512700D9299A /* XDTabbarViewController.m in Sources */,
 				A2C113021A35893700F7FDEE /* PlannerClass.m in Sources */,
 				4E7BA8F12063512700D9299A /* XDTabbarItem.m in Sources */,
+				BEF3EAB421F87148008FC0C6 /* XDBudgetAllAmountTableViewCell.m in Sources */,
 				3ADBDE091BFC251E00538AEF /* NetWorthTableViewCell.m in Sources */,
 				3AE211431C0828A50035F712 /* noshadowTableView.m in Sources */,
 				4E7BA8E32063512700D9299A /* XDChartView.m in Sources */,
@@ -13488,6 +13515,7 @@
 				A2AD427E191B8A4D001A9AA0 /* PokcetExpenseAppDelegate.m in Sources */,
 				3ADA5BF11BEB32F000A01870 /* budgetBar.m in Sources */,
 				A2560FB019D3BB5C00A5A950 /* EventKitDataSource_bill_iPhone.m in Sources */,
+				BEF3EAAF21F7128A008FC0C6 /* XDAllowNotifViewController.m in Sources */,
 				3AE300D91BF0307100E157E1 /* SummaryViewController_iPhone.m in Sources */,
 				3AE69FB91C4CC53A005E211B /* secondView_iPad.m in Sources */,
 				A2560FFA19D3BB5C00A5A950 /* UIViewAdditions_week.m in Sources */,

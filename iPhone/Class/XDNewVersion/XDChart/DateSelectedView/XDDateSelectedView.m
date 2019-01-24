@@ -41,11 +41,11 @@
         layer.strokeColor = RGBColor(229, 229, 229).CGColor;
 
         [self.layer addSublayer:layer];
-
         
     }
     return self;
 }
+
 
 -(void)setDateArr:(NSArray *)dateArr{
     _dateArr = dateArr;
@@ -58,7 +58,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self setupDateLabel];
     });
-
 }
 
 -(void)setupDateLabel{

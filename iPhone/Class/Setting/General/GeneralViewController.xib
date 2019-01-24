@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,14 +19,18 @@
                 <outlet property="categoryCell" destination="7Ge-jk-tuE" id="IN2-cM-YBA"/>
                 <outlet property="categoryLabel" destination="VLv-u5-GCp" id="WOc-bN-oCT"/>
                 <outlet property="categoryLabelText" destination="FJH-mt-HzM" id="AQy-JI-ZBa"/>
+                <outlet property="datePicker" destination="gGd-8P-tAm" id="U8S-7h-12w"/>
                 <outlet property="leftBtn" destination="cmD-QG-Oid" id="JQP-4r-i2x"/>
                 <outlet property="monBtn" destination="hxh-ee-xAw" id="GCX-jp-ZKj"/>
                 <outlet property="myTableView" destination="NiV-ge-KoS" id="zkT-kf-HBM"/>
                 <outlet property="notificationCell" destination="jBW-1I-h6P" id="nwy-wI-KFn"/>
                 <outlet property="notificationLabelText" destination="AgW-3U-SKx" id="4UX-DR-Zz0"/>
                 <outlet property="notificationSwitch" destination="SA9-kS-PrZ" id="fCN-wg-jNR"/>
+                <outlet property="pickCell" destination="tdb-3Q-5ce" id="KMN-q6-nb8"/>
                 <outlet property="spentBtn" destination="UIv-w6-AfC" id="Tfp-RC-Iaw"/>
                 <outlet property="sunBtn" destination="2dC-vi-NZj" id="Bnh-od-ucC"/>
+                <outlet property="timeCell" destination="U80-yy-Ywi" id="Hhh-dp-4lr"/>
+                <outlet property="timeLbl" destination="l5b-CL-h6M" id="n3h-Gd-qCy"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="weeksCell" destination="bXd-Ay-Jbj" id="2Qn-ST-dqw"/>
                 <outlet property="weeksLabelText" destination="ebc-BK-mAp" id="8dq-4h-JkT"/>
@@ -157,7 +161,7 @@
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
                     <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UIv-w6-AfC">
-                        <rect key="frame" x="247" y="7" width="58" height="29"/>
+                        <rect key="frame" x="247" y="7.5" width="58" height="29"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="29" id="nXh-Pv-d9g"/>
                             <constraint firstAttribute="width" constant="58" id="uat-Md-UVY"/>
@@ -172,7 +176,7 @@
                         </state>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cmD-QG-Oid">
-                        <rect key="frame" x="189" y="7" width="58" height="29"/>
+                        <rect key="frame" x="189" y="7.5" width="58" height="29"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="58" id="0et-Lz-auv"/>
                             <constraint firstAttribute="height" constant="29" id="qeY-an-F7T"/>
@@ -218,7 +222,7 @@
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2dC-vi-NZj">
-                        <rect key="frame" x="189" y="7" width="58" height="29"/>
+                        <rect key="frame" x="189" y="7.5" width="58" height="29"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="58" id="9pF-ob-wEJ"/>
                             <constraint firstAttribute="height" constant="29" id="p76-dA-SC0"/>
@@ -233,7 +237,7 @@
                         </state>
                     </button>
                     <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxh-ee-xAw">
-                        <rect key="frame" x="247" y="7" width="58" height="29"/>
+                        <rect key="frame" x="247" y="7.5" width="58" height="29"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="58" id="LiB-ov-9SH"/>
                             <constraint firstAttribute="height" constant="29" id="pkn-re-E3r"/>
@@ -285,7 +289,7 @@
                         <size key="shadowOffset" width="0.0" height="0.0"/>
                     </label>
                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SA9-kS-PrZ">
-                        <rect key="frame" x="254" y="6" width="51" height="31"/>
+                        <rect key="frame" x="254" y="6.5" width="51" height="31"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="31" id="5yM-9t-PdM"/>
                             <constraint firstAttribute="width" constant="49" id="8jZ-Jw-YNE"/>
@@ -300,6 +304,45 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" id="U80-yy-Ywi">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="U80-yy-Ywi" id="CC1-Af-spm">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="At 18:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l5b-CL-h6M">
+                        <rect key="frame" x="15" y="0.0" width="192" height="44"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
+                        <color key="textColor" red="0.36862745098039218" green="0.36862745098039218" blue="0.36862745098039218" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="816.79999999999995" y="175.41229385307346"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="226" id="tdb-3Q-5ce">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tdb-3Q-5ce" id="Hax-jg-ePD">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="225.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGd-8P-tAm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="226"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                        <date key="date" timeIntervalSinceReferenceDate="569757600.06386197">
+                            <!--2019-01-21 10:00:00 +0000-->
+                        </date>
+                        <connections>
+                            <action selector="pickerValueChanged:" destination="-1" eventType="valueChanged" id="3AK-ES-V1r"/>
+                        </connections>
+                    </datePicker>
+                </subviews>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="813.60000000000002" y="343.62818590704649"/>
         </tableViewCell>
     </objects>
     <resources>

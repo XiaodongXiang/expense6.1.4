@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-UI-Text-Regular.otf">
+            <string>SFUIText-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="XDAllowNotifViewController">
+            <connections>
+                <outlet property="allowBtn" destination="eOC-7N-dii" id="s7F-fx-aDK"/>
+                <outlet property="topLeading" destination="ZK1-9Q-qQk" id="cN9-JB-vzN"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="allowNoti" translatesAutoresizingMaskIntoConstraints="NO" id="1V0-4t-Mlt">
+                    <rect key="frame" x="53" y="109.5" width="269" height="308"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c04-z4-YDG">
+                    <rect key="frame" x="280" y="30" width="80" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="34" id="2tn-x4-JmL"/>
+                        <constraint firstAttribute="width" constant="80" id="aKW-gv-oj2"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                    <state key="normal" title="Later">
+                        <color key="titleColor" red="0.7843137255" green="0.7843137255" blue="0.7843137255" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="laterClick:" destination="-1" eventType="touchUpInside" id="8d0-wD-5j1"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2g9-yh-SZg">
+                    <rect key="frame" x="20" y="422.5" width="335" height="62"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="62" id="WvS-E5-MaV"/>
+                    </constraints>
+                    <string key="text">Forgetting to add transactions?Turn on
+notifications and we will remind you.</string>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eOC-7N-dii">
+                    <rect key="frame" x="20" y="524.5" width="335" height="80"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="Mlc-W9-imw"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="18"/>
+                    <state key="normal" title="Allow Notifications" backgroundImage="save_nurmal1"/>
+                    <connections>
+                        <action selector="allowClick:" destination="-1" eventType="touchUpInside" id="uyq-yd-eJi"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="1V0-4t-Mlt" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="4JE-Mr-Kcr"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="c04-z4-YDG" secondAttribute="trailing" constant="15" id="8m7-1f-trl"/>
+                <constraint firstItem="eOC-7N-dii" firstAttribute="top" secondItem="2g9-yh-SZg" secondAttribute="bottom" constant="40" id="9EG-K9-dOv"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="2g9-yh-SZg" secondAttribute="trailing" constant="20" id="Ovr-Ua-We2"/>
+                <constraint firstItem="2g9-yh-SZg" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="V9E-U3-CTQ"/>
+                <constraint firstItem="c04-z4-YDG" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" constant="10" id="ZK1-9Q-qQk"/>
+                <constraint firstItem="eOC-7N-dii" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" constant="20" id="cWw-1K-oQD"/>
+                <constraint firstItem="1V0-4t-Mlt" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-70" id="qfK-vA-Lu5"/>
+                <constraint firstItem="2g9-yh-SZg" firstAttribute="top" secondItem="1V0-4t-Mlt" secondAttribute="bottom" constant="5" id="zkH-wz-ACi"/>
+                <constraint firstItem="Q5M-cg-NOt" firstAttribute="trailing" secondItem="eOC-7N-dii" secondAttribute="trailing" constant="20" id="zrw-2I-0KL"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="53.600000000000001" y="48.125937031484263"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="allowNoti" width="269" height="308"/>
+        <image name="save_nurmal1" width="69.5" height="77"/>
+    </resources>
+</document>

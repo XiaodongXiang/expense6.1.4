@@ -58,6 +58,14 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
 
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
+}
+
+-(void)viewDidDisappear:(BOOL)animated{
+    [super viewDidDisappear:animated];
+    
+    [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleDefault;
+
 }
 
 - (void)viewDidLoad {
@@ -94,8 +102,8 @@
             lbl.font = [UIFont fontWithName:FontSFUITextMedium size:14];
         }else if(IS_IPHONE_X){
             
-            lbl.frame =CGRectMake(0, 300, SCREEN_WIDTH, 24);
-            lbl.font = [UIFont fontWithName:FontSFUITextMedium size:22];
+            lbl.frame =CGRectMake(0, 283, SCREEN_WIDTH, 24);
+            lbl.font = [UIFont fontWithName:FontSFUITextMedium size:16];
             
         }else{
             lbl.frame =CGRectMake(0, 280, SCREEN_WIDTH, 24);
@@ -387,13 +395,9 @@
                 [appDelegate succededInSignUp];
                 [[XDPurchasedManager shareManager] saveDefaultParseSetting];
                 [[XDPurchasedManager shareManager] tryOutPremium30DaysWithNewUser];
-
             }
         }];
-        
-    }
-    
-    
+    }    
 }
 
 - (IBAction)signUpBtnClick:(id)sender {
@@ -428,9 +432,7 @@
                     self.warmLabel.text=[NSString stringWithFormat:@"No user found with email %@.",self.emailTF.text];
                     [self shakeAnimationForView:self.emailTF];
                     [self shakeAnimationForView:self.imageView1];
-                }
-                else
-                {
+                }else{
                     self.warmLabel.hidden = YES;
                     NSString *alertStr = [NSString stringWithFormat:NSLocalizedString(@"VC_We have sent an email to <email address>. Please follow the directions in the email to reset password", nil),self.emailTF.text];
                     UIAlertView *alertView=[[UIAlertView alloc]initWithTitle:nil message:alertStr delegate:self cancelButtonTitle:NSLocalizedString(@"VC_OK", nil) otherButtonTitles:nil, nil];

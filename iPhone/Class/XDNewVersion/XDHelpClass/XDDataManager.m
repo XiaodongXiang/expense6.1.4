@@ -362,7 +362,6 @@
     }
     
     [self allTransactionToLocal:date];
-   
 }
 
 -(void)deleteSomeUnUseTransaction{
@@ -457,12 +456,12 @@
                         localTransation.isUpload = @"1";
                     }
                     
-                    
+                    NSError *error;
+                    [self.backgroundContext save:&error];
                     object[@"state"] = @"1";
                     [object saveEventually];
                 }
-                NSError *error;
-                [self.backgroundContext save:&error];
+              
                 
             }];
             

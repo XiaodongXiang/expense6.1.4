@@ -48,8 +48,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *upgradeTimeStyleLbl;
 @property (weak, nonatomic) IBOutlet UILabel *upgradeNewEndTimeLbl;
 @property (strong, nonatomic) IBOutlet UIView *lifetimeNewView;
-@property (weak, nonatomic) IBOutlet UIImageView *lifetimeNewProfileIcon;
+//@property (weak, nonatomic) IBOutlet UIImageView *lifetimeNewProfileIcon;
 @property (weak, nonatomic) IBOutlet UILabel *lifetimeNewEmail;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *scrollViewH;
 
 @end
 
@@ -75,7 +76,7 @@
     self.lifetimeView.frame = CGRectMake(width * 2, 0, width, self.scrollview.height);
 
     self.upgradeNewView.frame = CGRectMake(0, -1, width+1, self.scrollview.height+1);
-    self.lifetimeNewView.frame = CGRectMake(0, -5, SCREEN_WIDTH, self.scrollview.height + 5);
+    self.lifetimeNewView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 111);
     
     [FIRAnalytics logEventWithName:@"enter_shop" parameters:nil];
 
@@ -104,19 +105,19 @@
             return;
             
         }
-        
-        PFUser *user=[PFUser currentUser];
-        self.lifetimeNewEmail.text = user.email?:user.username;
-        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-        NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
-        NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
-        UIImage *image=[[UIImage alloc]initWithData:imageData];
-        if (imageData) {
-            self.lifetimeNewProfileIcon.image = image;
-        }
-        self.lifetimeNewProfileIcon.layer.cornerRadius = 20;
-        self.lifetimeNewProfileIcon.layer.masksToBounds = YES;
-        
+//        
+//        PFUser *user=[PFUser currentUser];
+//        self.lifetimeNewEmail.text = user.email?:user.username;
+//        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//        NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
+//        NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
+//        UIImage *image=[[UIImage alloc]initWithData:imageData];
+//        if (imageData) {
+//            self.lifetimeNewProfileIcon.image = image;
+//        }
+//        self.lifetimeNewProfileIcon.layer.cornerRadius = 20;
+//        self.lifetimeNewProfileIcon.layer.masksToBounds = YES;
+//        
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
 
         if (defaults2) {
@@ -143,11 +144,17 @@
             self.lifetimeNewView.hidden = NO;
 
             [self.scrollview addSubview:self.lifetimeNewView];
-
+            self.scrollViewH.constant = 111;
+            self.lifetimeNewEmail.text = @"Lifetime";
+            self.scrollview.clipsToBounds = YES;
         }else{
+            
+            self.scrollViewH.constant = 154;
+            self.scrollview.clipsToBounds = NO;
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
                 if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
+                    self.lifetimeNewEmail.text = @"Monthly";
                     self.monthBg.image = [UIImage imageNamed:@"yigoumai"];
                     self.monthPriceLbl.textColor = RGBColor(122, 163, 239);
                     self.monthTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -164,6 +171,8 @@
                     NSString* expiredString = [formatter stringFromDate:setting.purchasedEndDate];
                     self.upgradeNewEndTimeLbl.text = [NSString stringWithFormat:@"%@",expiredString];
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
+                    
+                    self.lifetimeNewEmail.text = @"Yearly";
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.yearTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.yearPriceLbl.textColor = RGBColor(122, 163, 239);
@@ -185,6 +194,8 @@
                     self.upgradeNewEndTimeLbl.text = [NSString stringWithFormat:@"%@",expiredString];
                     
                 }else if([proID isEqualToString:kInAppPurchaseProductIdLifetime]){
+                    self.scrollview.clipsToBounds = YES;
+                    self.lifetimeNewEmail.text = @"Lifetime";
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.lifetimePriceLbl.textColor = RGBColor(122, 163, 239);
@@ -207,6 +218,7 @@
 
                     [self.scrollview addSubview:self.lifetimeNewView];
 
+                    self.scrollViewH.constant = 111;
                 }
             }
         }
@@ -215,10 +227,12 @@
         self.restoreBtn.hidden = YES;
         self.restoreBtnH.constant = 0;
     }else{
+        self.scrollViewH.constant = 154;
+
         self.restoreBtn.hidden = NO;
         self.restoreBtnH.constant = 40;
         self.premiumTitle.text = @"Upgrade to Premium";
-        
+        self.scrollview.clipsToBounds = NO;
         self.monthBtn.enabled = YES;
         self.yearBtn.enabled = YES;
         self.lifetimeBtn.enabled = YES;
@@ -245,16 +259,15 @@
             return;
             
         }
-        PFUser *user=[PFUser currentUser];
-        self.lifetimeNewEmail.text = user.email?:user.username;
-        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
-        NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
-        NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
-        UIImage *image=[[UIImage alloc]initWithData:imageData];
-        if (imageData) {
-            self.lifetimeNewProfileIcon.image = image;
-        }
-        
+//        PFUser *user=[PFUser currentUser];
+//        self.lifetimeNewEmail.text = user.email?:user.username;
+//        NSString *documentsDirectory = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+//        NSString *imageFile=[documentsDirectory stringByAppendingPathComponent:@"/avatarImage.jpg"];
+//        NSData *imageData=[NSData dataWithContentsOfFile:imageFile];
+//        UIImage *image=[[UIImage alloc]initWithData:imageData];
+//        if (imageData) {
+//            self.lifetimeNewProfileIcon.image = image;
+//        }
        
         BOOL defaults2 = [[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG] ;
         
@@ -263,7 +276,11 @@
         self.lifetimeBtn.enabled = YES;
         
         if (defaults2) {
-            self.lifetimeNewView.frame = CGRectMake(0, -5, SCREEN_WIDTH, self.scrollview.height + 5);
+            self.scrollViewH.constant = 111;
+            self.lifetimeNewEmail.text = @"Lifetime";
+            self.scrollview.clipsToBounds = YES;
+            
+            self.lifetimeNewView.frame = CGRectMake(0, 0, SCREEN_WIDTH, 111);
 
             self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
             self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -287,10 +304,15 @@
             self.lifetimeNewView.hidden = NO;
 
             [self.scrollview addSubview:self.lifetimeNewView];
+            
+            NSAssert(1 != 2, @"123");
         }else{
+            self.scrollViewH.constant = 154;
             NSString* proID = setting.purchasedProductID;
             if ([setting.purchasedIsSubscription boolValue]) {
                 if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
+                    self.lifetimeNewEmail.text = @"Monthly";
+                    self.scrollview.clipsToBounds = NO;
                     self.monthBg.image = [UIImage imageNamed:@"yigoumai"];
                     self.monthPriceLbl.textColor = RGBColor(122, 163, 239);
                     self.monthTimeLbl.textColor = RGBColor(122, 163, 239);
@@ -318,6 +340,8 @@
                     
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     
+                    self.scrollview.clipsToBounds = NO;
+                    self.lifetimeNewEmail.text = @"Yearly";
                     self.yearBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.yearTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.yearPriceLbl.textColor = RGBColor(122, 163, 239);
@@ -344,6 +368,10 @@
                     self.upgradeNewEndTimeLbl.text = [NSString stringWithFormat:@"%@",expiredString];
                     
                 }else{
+                    
+                    self.scrollview.clipsToBounds = YES;
+                    self.scrollViewH.constant = 111;
+                    self.lifetimeNewEmail.text = @"Lifetime";
                     self.lifetimeBg.image = [UIImage imageNamed:@"yigoumai2"];
                     self.liteTimeLbl.textColor = RGBColor(122, 163, 239);
                     self.lifetimePriceLbl.textColor = RGBColor(122, 163, 239);
@@ -376,7 +404,9 @@
         self.restoreBtn.hidden = NO;
         self.restoreBtnH.constant = 40;
         self.premiumTitle.text = @"Upgrade to Premium";
+        self.scrollViewH.constant = 154;
 
+        self.scrollview.clipsToBounds = NO;
         self.monthBtn.enabled = YES;
         self.yearBtn.enabled = YES;
         self.lifetimeBtn.enabled = YES;

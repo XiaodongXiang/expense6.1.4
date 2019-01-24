@@ -61,6 +61,7 @@
 #import "XDUpgradeViewController.h"
 #import <objc/runtime.h>
 
+#import "XDAllowNotifViewController.h"
 
 @import Firebase;
 
@@ -226,7 +227,9 @@
     
     if ( [[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
-        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+        if ([PFUser currentUser]) {
+            [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+        }
     }
     //适配比例
     if(ScreenHeight > 480)
@@ -400,18 +403,23 @@
         
         
         self.window.rootViewController=tabbarVc;
+        
+        
     }
     else
     {
         self.window.rootViewController=[[XDSignInViewController alloc]initWithNibName:@"XDSignInViewController" bundle:nil];
+        
     }
+    
+    
     //数据修复，4.5.1交易的transfer,还有category
     [super application:application didFinishLaunchingWithOptions:launchOptions];
 
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         if ([PFUser currentUser])
         {
-            [[ParseDBManager sharedManager]dataSyncWithServer];
+            [[ParseDBManager sharedManager] dataSyncWithServer];
             [[XDPurchasedManager shareManager] getPFSetting];
 
         }
@@ -487,11 +495,17 @@
     
     //插页广告
     if ([PFUser currentUser]) {
+        
+        [[XDDataManager shareManager] fixStateIsZeroBug];
+        [[XDDataManager shareManager] deleteSomeUnUseTransaction];
+        [[XDDataManager shareManager] uploadLocalTransaction];
+        
         PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
         if (!appDelegate.isPurchased) {
             self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
             [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
         }
+        
     }
     return YES;
 }
@@ -509,7 +523,6 @@
     
     if ([function isEqualToString:@"addTransaction"])
     {
-        
         if ([PFUser currentUser]) {
             UIViewController *viewControllers = self.window.rootViewController;
             if ([viewControllers isKindOfClass:[XDTabbarViewController class]]) {
@@ -530,7 +543,6 @@
                 }];
             }
         }
-        
     }
     return false;
 }
@@ -633,11 +645,8 @@
     {
         [[ParseDBManager sharedManager]dataSyncWithServer];
         [[XDPurchasedManager shareManager] getPFSetting];
-        
-        
+
     }
-    
-   
 }
 
 
@@ -1343,18 +1352,41 @@
             [[ParseDBManager sharedManager]dataSyncWithServer];
         });
     }
-    
-    XDTabbarViewController* tabbarVc = [[XDTabbarViewController alloc]init];
-    self.window.rootViewController=tabbarVc;
+   
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
 
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            XDTabbarViewController* tabbarVc = [[XDTabbarViewController alloc]init];
+            self.window.rootViewController=tabbarVc;
+            if (settings.authorizationStatus == UNAuthorizationStatusNotDetermined) {
+                
+                XDAllowNotifViewController* allowNotif = [[XDAllowNotifViewController alloc]initWithNibName:@"XDAllowNotifViewController" bundle:nil];
+                [tabbarVc  presentViewController:allowNotif animated:NO completion:nil];
+            }
+        });
+    }];
+
+    
 }
 
 -(void)succededInLogIn
 {
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     XDTabbarViewController* tabbarVc = [[XDTabbarViewController alloc]init];
-    self.window.rootViewController=tabbarVc;
+    
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.window.rootViewController=tabbarVc;
+
+            if (settings.authorizationStatus == UNAuthorizationStatusNotDetermined) {
+                
+                XDAllowNotifViewController* allowNotif = [[XDAllowNotifViewController alloc]initWithNibName:@"XDAllowNotifViewController" bundle:nil];
+                [tabbarVc  presentViewController:allowNotif animated:NO completion:nil];
+            }
+        });
+    }];
     
     XDFirstPromptViewController* view = [[XDFirstPromptViewController alloc]initWithNibName:@"XDFirstPromptViewController" bundle:nil];
     view.view.frame = CGRectMake(0, -60, SCREEN_WIDTH, 60);

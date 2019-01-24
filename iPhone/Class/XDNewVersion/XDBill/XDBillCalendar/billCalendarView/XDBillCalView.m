@@ -43,7 +43,6 @@ static NSString* const cellID = @"monthCell";
         
         [self returnDataWithCurrentMonth:[[NSDate date]initDate]];
         _currentMonthDate = [[NSDate date]initDate];
-
     }
     return self;
 }
@@ -66,7 +65,7 @@ static NSString* const cellID = @"monthCell";
             CGRect weekdayFrame = CGRectMake(width * i, 0, width, 20);
             
             UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
-            weekdayLabel.backgroundColor = [UIColor whiteColor];
+            weekdayLabel.backgroundColor = [UIColor clearColor];
             weekdayLabel.textAlignment = NSTextAlignmentCenter;
             weekdayLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.0f];
             weekdayLabel.textColor = [UIColor colorWithRed:118.0/255.0 green:129.0/255.0 blue:148.0/255.0 alpha:1.0];
@@ -79,7 +78,7 @@ static NSString* const cellID = @"monthCell";
             CGRect weekdayFrame = CGRectMake(width * i, 0, width, 20);
             
             UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
-            weekdayLabel.backgroundColor = [UIColor whiteColor];
+            weekdayLabel.backgroundColor = [UIColor clearColor];
             weekdayLabel.textAlignment = NSTextAlignmentCenter;
             weekdayLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:11.0f];
             weekdayLabel.textColor = [UIColor colorWithRed:118.0/255.0 green:129.0/255.0 blue:148.0/255.0 alpha:1.0];

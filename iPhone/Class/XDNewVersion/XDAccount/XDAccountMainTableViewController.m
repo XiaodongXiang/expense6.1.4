@@ -207,6 +207,7 @@
 
 }
 
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:animated];
 
@@ -216,6 +217,7 @@
             
             _adBanner = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1102 - iPhone - Banner - Accounts" delegate:self];
             [_adBanner showBannerAdWithTarget:self.adBannerView rootViewcontroller:self];
+            
         }
     }else{
         self.adBannerView.hidden = YES;

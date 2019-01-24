@@ -6,17 +6,6 @@
       "scale" : "1x"
     },
     {
-      "resizing" : {
-        "mode" : "3-part-horizontal",
-        "center" : {
-          "mode" : "tile",
-          "width" : 1
-        },
-        "cap-insets" : {
-          "right" : 71,
-          "left" : 70
-        }
-      },
       "idiom" : "universal",
       "filename" : "add@2x.png",
       "scale" : "2x"

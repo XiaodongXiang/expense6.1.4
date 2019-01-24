@@ -12,7 +12,5 @@
 
 @property(nonatomic, strong)BudgetCountClass * budgetCountClass;
 
-@property(nonatomic, assign)double allBudgetAmount;
-@property(nonatomic, assign)double expenseAmount;
 
 @end

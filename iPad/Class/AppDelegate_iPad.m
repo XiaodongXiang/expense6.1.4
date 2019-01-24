@@ -415,6 +415,11 @@
     
     //插页广告
     if ([PFUser currentUser]) {
+        
+        [[XDDataManager shareManager] fixStateIsZeroBug];
+        [[XDDataManager shareManager] deleteSomeUnUseTransaction];
+        [[XDDataManager shareManager] uploadLocalTransaction];
+        
         PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
         if (!appDelegate.isPurchased) {
             self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE2201 - iPad - Interstitial - Launch"];

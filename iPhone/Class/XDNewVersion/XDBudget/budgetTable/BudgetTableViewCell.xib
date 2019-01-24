@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
@@ -27,64 +27,64 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IYp-lY-87q">
-                        <rect key="frame" x="15" y="11" width="228" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="jjn-Yu-7G9"/>
-                        </constraints>
+                        <rect key="frame" x="67" y="13" width="42" height="19.5"/>
                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="16"/>
                         <color key="textColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipL-hR-Xad">
-                        <rect key="frame" x="263" y="11" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="left" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ipL-hR-Xad">
+                        <rect key="frame" x="283" y="13" width="22" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="csP-8H-bLA"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="rzX-Nm-IMh"/>
+                            <constraint firstAttribute="height" constant="16" id="as3-wE-Ipv"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="14"/>
                         <color key="textColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nqo-q2-MaD">
-                        <rect key="frame" x="15" y="49" width="42" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="0IF-pM-DHM"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="WQs-tO-DIV"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
-                        <color key="textColor" red="0.44313725490196076" green="0.63921568627450975" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
+                        <rect key="frame" x="77" y="41.5" width="31.5" height="14.5"/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="12"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5R-y6-yab">
-                        <rect key="frame" x="263" y="49" width="42" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$700.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p5R-y6-yab">
+                        <rect key="frame" x="221" y="13" width="57" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="Nb0-cI-RCG"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="llW-rH-Q7A"/>
+                            <constraint firstAttribute="height" constant="16" id="Bl9-dh-bCb"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="SFUIText-Regular" family="SF UI Text" pointSize="16"/>
+                        <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                         <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mcz-oK-Y5j">
+                        <rect key="frame" x="15" y="17" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="BUW-66-6w8"/>
+                            <constraint firstAttribute="height" constant="40" id="WsO-Gd-rdn"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="ipL-hR-Xad" secondAttribute="trailing" constant="15" id="EDL-Rz-cga"/>
-                    <constraint firstItem="IYp-lY-87q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="ODp-1A-poc"/>
-                    <constraint firstItem="ipL-hR-Xad" firstAttribute="leading" secondItem="IYp-lY-87q" secondAttribute="trailing" constant="20" id="Ocr-GD-RV6"/>
-                    <constraint firstAttribute="trailing" secondItem="p5R-y6-yab" secondAttribute="trailing" constant="15" id="P8Q-UY-dtt"/>
-                    <constraint firstAttribute="bottom" secondItem="Nqo-q2-MaD" secondAttribute="bottom" constant="10.5" id="VKw-A6-Ey3"/>
-                    <constraint firstItem="Nqo-q2-MaD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="aTH-gu-mL3"/>
-                    <constraint firstItem="ipL-hR-Xad" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="c0t-t1-gR5"/>
-                    <constraint firstAttribute="bottom" secondItem="p5R-y6-yab" secondAttribute="bottom" constant="10.5" id="ghy-iq-6Fl"/>
-                    <constraint firstItem="IYp-lY-87q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="p55-aI-aPw"/>
+                    <constraint firstItem="IYp-lY-87q" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="7vh-Sd-gk8"/>
+                    <constraint firstItem="ipL-hR-Xad" firstAttribute="centerY" secondItem="p5R-y6-yab" secondAttribute="centerY" id="AYz-4c-ONX"/>
+                    <constraint firstAttribute="trailing" secondItem="ipL-hR-Xad" secondAttribute="trailing" constant="15" id="E8c-Fj-oFQ"/>
+                    <constraint firstItem="IYp-lY-87q" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="67" id="Ie2-xs-dQO"/>
+                    <constraint firstItem="Nqo-q2-MaD" firstAttribute="top" secondItem="IYp-lY-87q" secondAttribute="bottom" constant="9" id="NdN-MO-eJK"/>
+                    <constraint firstItem="ipL-hR-Xad" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="13" id="U6M-tC-18N"/>
+                    <constraint firstItem="Mcz-oK-Y5j" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" constant="-3.5" id="WOI-JK-icq"/>
+                    <constraint firstItem="Mcz-oK-Y5j" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="15" id="kkW-Jt-5cL"/>
+                    <constraint firstItem="ipL-hR-Xad" firstAttribute="leading" secondItem="p5R-y6-yab" secondAttribute="trailing" constant="5" id="nFV-tW-wyy"/>
+                    <constraint firstItem="Nqo-q2-MaD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="77" id="yCa-2E-Xso"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="budgetAmount" destination="ipL-hR-Xad" id="NQx-eq-2HU"/>
                 <outlet property="budgetName" destination="IYp-lY-87q" id="7oL-8O-rwc"/>
+                <outlet property="categoryIcon" destination="Mcz-oK-Y5j" id="139-2Q-3jR"/>
                 <outlet property="residueAmount" destination="p5R-y6-yab" id="CnI-uK-Szi"/>
                 <outlet property="spendAmount" destination="Nqo-q2-MaD" id="sdO-yp-zSv"/>
             </connections>
-            <point key="canvasLocation" x="-277" y="10"/>
+            <point key="canvasLocation" x="-278.39999999999998" y="9.4452773613193415"/>
         </tableViewCell>
     </objects>
 </document>

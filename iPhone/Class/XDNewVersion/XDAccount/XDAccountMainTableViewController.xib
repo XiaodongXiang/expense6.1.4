@@ -54,7 +54,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" bouncesZoom="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="i5M-Pr-FkT">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="617"/>
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="iYk-vx-o2E"/>
@@ -62,7 +62,7 @@
                     </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L0Y-zC-drF">
-                    <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                    <rect key="frame" x="0.0" y="667" width="375" height="50"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="VHE-U8-EMY"/>
@@ -75,7 +75,7 @@
                 <constraint firstItem="L0Y-zC-drF" firstAttribute="leading" secondItem="C9q-n5-s5l" secondAttribute="leading" id="BbS-sJ-NZw"/>
                 <constraint firstAttribute="trailing" secondItem="L0Y-zC-drF" secondAttribute="trailing" id="ESG-6c-p8U"/>
                 <constraint firstItem="i5M-Pr-FkT" firstAttribute="leading" secondItem="C9q-n5-s5l" secondAttribute="leading" id="hvi-3u-kpK"/>
-                <constraint firstAttribute="bottom" secondItem="L0Y-zC-drF" secondAttribute="bottom" id="roC-EG-zOg"/>
+                <constraint firstAttribute="bottom" secondItem="L0Y-zC-drF" secondAttribute="bottom" constant="-50" id="roC-EG-zOg"/>
                 <constraint firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="xk5-WT-Lmy"/>
                 <constraint firstItem="L0Y-zC-drF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="bottom" id="zzU-ut-ItE"/>
             </constraints>

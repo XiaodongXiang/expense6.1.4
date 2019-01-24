@@ -130,15 +130,6 @@
         }
     };
     
-    
-    if ([PFUser currentUser]) {
-        
-        [[XDDataManager shareManager] fixStateIsZeroBug];
-        [[XDDataManager shareManager] deleteSomeUnUseTransaction];
-        
-        [[XDDataManager shareManager] uploadLocalTransaction];
-    }
-    
 }
 
 

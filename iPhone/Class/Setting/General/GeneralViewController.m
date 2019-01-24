@@ -16,6 +16,11 @@
 #import <Parse/Parse.h>
 #import "ParseDBManager.h"
 @interface GeneralViewController ()
+@property (strong, nonatomic) IBOutlet UITableViewCell *timeCell;
+@property (weak, nonatomic) IBOutlet UILabel *timeLbl;
+@property (strong, nonatomic) IBOutlet UITableViewCell *pickCell;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (assign, nonatomic) BOOL showDatePicker;
 
 @end
 
@@ -28,6 +33,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (settings.notificationCenterSetting == UNNotificationSettingEnabled){
+                BOOL open = [[NSUserDefaults standardUserDefaults] boolForKey:@"ReminderNotification"];
+                if (open) {
+                    self.notificationSwitch.on = YES;
+                }else{
+                    self.notificationSwitch.on = NO;
+                }
+            }else{
+                self.notificationSwitch.on = NO;
+            }
+            [self.myTableView reloadData];
+        });
+    }];
+
+    
     [self initPoint];
     [self initNavStyle];
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(cancelClick) image:[UIImage imageNamed:@"Return_icon_normal"]];
@@ -35,11 +57,42 @@
     [self.navigationController.navigationBar setTitleTextAttributes:@{NSFontAttributeName:[UIFont fontWithName:FontSFUITextMedium size:17],NSForegroundColorAttributeName:RGBColor(85, 85, 85)}];
     
     self.myTableView.separatorColor = RGBColor(226, 226, 226);
+    
+    NSDate* date = [[NSUserDefaults standardUserDefaults] valueForKey:@"reminderDate"];
+    if (date) {
+        self.datePicker.date = date;
+        
+        
+        NSDateFormatter* dateFor = [[NSDateFormatter alloc]init];
+        dateFor.dateFormat = @"HH:mm";
+        NSString* dateString = [dateFor stringFromDate:date];
+        self.timeLbl.text = [NSString stringWithFormat:@"At %@",dateString];
+    }
 
+    
+}
+
+
+
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    
+    [[NSUserDefaults standardUserDefaults] setValue:self.datePicker.date forKey:@"reminderDate"];
 }
 
 -(void)cancelClick{
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)pickerValueChanged:(id)sender {
+    UIDatePicker* picker = sender;
+    NSDateFormatter* dateFor = [[NSDateFormatter alloc]init];
+    dateFor.dateFormat = @"HH:mm";
+    NSString* dateString = [dateFor stringFromDate:picker.date];
+    
+    self.timeLbl.text = [NSString stringWithFormat:@"At %@",dateString];
+    
 }
 
 
@@ -317,18 +370,56 @@
 
 -(void)notificationSwitchValueChanged:(id)sender
 {
-    NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
-    if (notificationSwitch.on)
-    {
-        [userDefault setBool:YES forKey:@"ReminderNotification"];
-        [userDefault synchronize];
-    }
-    else
-    {
-        [userDefault setBool:NO forKey:@"ReminderNotification"];
-        [userDefault synchronize];
+    [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (settings.notificationCenterSetting == UNNotificationSettingEnabled){
+                NSUserDefaults *userDefault = [NSUserDefaults standardUserDefaults];
+                if (notificationSwitch.on)
+                {
+                    [userDefault setBool:YES forKey:@"ReminderNotification"];
+                    [userDefault synchronize];
+                }
+                else
+                {
+                    [userDefault setBool:NO forKey:@"ReminderNotification"];
+                    [userDefault synchronize];
+                }
+                
+                [self.myTableView beginUpdates];
+                [self.myTableView endUpdates];
+                
+            }else{
+                self.notificationSwitch.on = NO;
+                UIAlertController* alert = [UIAlertController alertControllerWithTitle:@"Notifications Are Disabled" message:@"Please turn on alert notifications in Settings" preferredStyle:UIAlertControllerStyleAlert];
+                UIAlertAction *action = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil];
+                UIAlertAction *action1 = [UIAlertAction actionWithTitle:@"Setting" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+                    [self goToAppSystemSetting];
+                }];
+
+                [alert addAction:action];
+                [alert addAction:action1];
+                [self presentViewController:alert animated:YES completion:nil];
+            }
+            [self.myTableView reloadData];
+        });
+    }];
+    
+    
+   
+}
+
+-(void)goToAppSystemSetting {
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+    if ([application canOpenURL:url]) {
+        if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+            [application openURL:url options:@{} completionHandler:nil];
+        } else {
+            [application openURL:url];
+        }
     }
 }
+
 
 #pragma mark TableView delegate
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -339,6 +430,24 @@
     else
         return 25.f;
 }
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section == 1 && indexPath.row == 1) {
+        if (notificationSwitch.on) {
+            return 44;
+        }else{
+            return 0.01;
+        }
+    }else if (indexPath.section == 1 && indexPath.row == 2) {
+        if (self.showDatePicker) {
+            return 226;
+        }else{
+            return 0.01;
+        }
+    }
+    return 44;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -349,7 +458,8 @@
     if (section==0)
         return 3;
     else
-        return 1;
+       
+        return 3;
     
 }
 
@@ -363,9 +473,16 @@
             return categoryCell;
         else
             return weeksCell;
+    }else{
+        if (indexPath.row == 0) {
+            return notificationCell;
+        }else if(indexPath.row == 1){
+            return self.timeCell;
+        }else{
+            return self.pickCell;
+        }
     }
-    else
-        return notificationCell;
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -389,7 +506,12 @@
     }
     else
     {
-        
+        if (indexPath.row == 1) {
+            self.showDatePicker = !self.showDatePicker;
+            
+            [self.myTableView beginUpdates];
+            [self.myTableView endUpdates];
+        }
     }
 }
 

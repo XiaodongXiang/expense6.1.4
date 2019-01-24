@@ -882,7 +882,7 @@
 
 -(CGFloat)returnNoteHeight:(NSString*)note{
     
-    CGSize labelSize = [_noteStr boundingRectWithSize:CGSizeMake(self.noteLabel.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17]} context:nil].size;
+    CGSize labelSize = [_noteStr boundingRectWithSize:CGSizeMake(self.noteLabel.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16]} context:nil].size;
     
     return labelSize.height;
     

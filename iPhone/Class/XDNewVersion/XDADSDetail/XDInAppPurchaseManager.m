@@ -231,7 +231,6 @@
             [FIRAnalytics setUserPropertyString:[self stringDate:purchaseDate] forName:@"subscription_date"];
             [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%f",[purchaseDate timeIntervalSince1970]] forName:@"subscription_date_interval"];
         }
-        
         [FIRAnalytics setUserPropertyString:@"monthly" forName:@"subscription_type"];
 
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
@@ -253,7 +252,6 @@
     [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
     appDelegate.isPurchased = YES;
     dispatch_async(dispatch_get_main_queue(), ^{
-        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
        
@@ -398,7 +396,7 @@
         }
     }else{
         
-        [FIRAnalytics logEventWithName:@"cancel_other" parameters:@{@"error_code":[NSString stringWithFormat:@"%ld",transaction.error.code],@"transactionID":transaction.payment.productIdentifier,@"date":transaction.transactionDate}];
+        [FIRAnalytics logEventWithName:@"cancel_other" parameters:@{@"error_code":[NSString stringWithFormat:@"%d",transaction.error.code],@"transactionID":transaction.payment.productIdentifier,@"date":transaction.transactionDate}];
 
     }
 //    NSLog(@"交易失败2 %@",transaction.error);

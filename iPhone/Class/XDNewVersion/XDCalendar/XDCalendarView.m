@@ -27,6 +27,7 @@ typedef enum {
 @property(nonatomic,strong)XDMonthCollectionView* monthCollectionView;
 @property(nonatomic, strong)XDDayCollectionView * dayCollectionView;
 @property(nonatomic, assign)calendarModel calendarModel;
+@property(nonatomic, strong)UIView* weekView;
 
 @end
 @implementation XDCalendarView
@@ -60,6 +61,15 @@ typedef enum {
     return _dayCollectionView;
 }
 
+-(UIView *)weekView{
+    if (!_weekView) {
+        _weekView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 20)];
+        _weekView.backgroundColor = [UIColor whiteColor];
+        
+    }
+    return _weekView;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -68,12 +78,12 @@ typedef enum {
         self.calendarType = CalendarDay;
         [self addSubview:self.monthCollectionView];
         [self addSubview:self.dayCollectionView];
+        [self addSubview: self.weekView];
 //        self.dayCollectionView.hidden = YES;
 //        self.dayCollectionView.alpha = 0;
 //        _selectedDayBtnY = 0;
 
         self.clipsToBounds = YES;
-        
         
         UISwipeGestureRecognizer* swipeUpGesture = [[UISwipeGestureRecognizer alloc]initWithTarget:self action:@selector(swipe:)];
         swipeUpGesture.direction = UISwipeGestureRecognizerDirectionUp;
@@ -192,16 +202,14 @@ typedef enum {
             CGRect weekdayFrame = CGRectMake(width * i, 0, width, 20);
             
             UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
-            weekdayLabel.backgroundColor = [UIColor whiteColor];
+            weekdayLabel.backgroundColor = [UIColor clearColor];
             weekdayLabel.textAlignment = NSTextAlignmentCenter;
             weekdayLabel.font = [UIFont fontWithName:FontSFUITextRegular size:12.];
             weekdayLabel.textColor = RGBColor(200, 200, 200);
             weekdayLabel.text = [weekdayNames objectAtIndex:i];
-            weekdayLabel.layer.borderColor = [UIColor whiteColor].CGColor;
-            weekdayLabel.layer.borderWidth = 3;
             weekdayLabel.userInteractionEnabled = YES;
             weekdayLabel.clipsToBounds = YES;
-            [self addSubview:weekdayLabel];
+            [self.weekView addSubview:weekdayLabel];
         }
     }else{
         
@@ -209,16 +217,14 @@ typedef enum {
             CGRect weekdayFrame = CGRectMake(width * i, 0, width, 20);
             
             UILabel *weekdayLabel = [[UILabel alloc] initWithFrame:weekdayFrame];
-            weekdayLabel.backgroundColor = [UIColor whiteColor];
+            weekdayLabel.backgroundColor = [UIColor clearColor];
             weekdayLabel.textAlignment = NSTextAlignmentCenter;
             weekdayLabel.font = [UIFont fontWithName:FontSFUITextRegular size:12.];
             weekdayLabel.textColor = RGBColor(200, 200, 200);
             weekdayLabel.text = [muarr objectAtIndex:i];
             weekdayLabel.userInteractionEnabled = YES;
             weekdayLabel.clipsToBounds = YES;
-            weekdayLabel.layer.borderColor = [UIColor whiteColor].CGColor;
-            weekdayLabel.layer.borderWidth = 2;
-            [self addSubview:weekdayLabel];
+            [self.weekView addSubview:weekdayLabel];
         }
     }
 }

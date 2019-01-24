@@ -8,6 +8,8 @@
 #import "XDBudgetTableView.h"
 #import "BudgetTableViewCell.h"
 #import "BudgetCountClass.h"
+#import "XDBudgetAllAmountTableViewCell.h"
+
 @interface XDBudgetTableView()<UITableViewDelegate,UITableViewDataSource>
 {
     double _allAmount;
@@ -90,9 +92,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row == 0) {
-        return 104;
+        return 86;
     }
-    return 81;
+    return 79;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -103,15 +105,16 @@
         cell = [[[NSBundle mainBundle]loadNibNamed:@"BudgetTableViewCell" owner:self options:nil]lastObject];
     }
     if (indexPath.row == 0) {
-        cell.expenseAmount = _allExpense;
-        cell.allBudgetAmount = _allAmount;
-        cell.budgetCountClass = nil;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        XDBudgetAllAmountTableViewCell* amountCell = [[[NSBundle mainBundle]loadNibNamed:@"XDBudgetAllAmountTableViewCell" owner:self options:nil]lastObject];
+        amountCell.expenseAmount = _allExpense;
+        amountCell.allBudgetAmount = _allAmount;
+        amountCell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return amountCell;
     }
     if (indexPath.row >= 1) {
         BudgetCountClass* class = _budgetArray[indexPath.row-1];
         cell.budgetCountClass = class;
-        
     }
     
     return cell;

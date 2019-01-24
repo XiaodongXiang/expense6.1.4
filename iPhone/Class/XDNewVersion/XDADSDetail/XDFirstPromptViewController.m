@@ -59,7 +59,6 @@
 
 -(void)pan:(UIPanGestureRecognizer*)swipe{
    
-        
         if (swipe.state == UIGestureRecognizerStateChanged) {
             [self commitTranslation:[swipe translationInView:self.view]];
         }
@@ -106,20 +105,15 @@
     if (MAX(absX, absY) < 10)
         return;
     
-    
     if (absX > absY ) {
-        
         if (translation.x<0) {
-            
             //向左滑动
         }else{
-            
             //向右滑动
         }
         
     } else if (absY > absX) {
         if (translation.y<0) {
-            
             //向上滑动
             
             [UIView animateWithDuration:0.2 animations:^{
@@ -173,7 +167,6 @@
         self.failLbl.hidden = YES;
         self.againBtn.hidden = YES;
         
-        
         UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(pan:)];
         [self.view addGestureRecognizer:pan];
     });
@@ -212,8 +205,6 @@
         self.againBtn.hidden = NO;
         self.againBtn.userInteractionEnabled = YES;
     });
-
-
 }
 
 

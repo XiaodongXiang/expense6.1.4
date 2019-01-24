@@ -25,19 +25,26 @@
 }
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property(nonatomic, strong)NSMutableArray * dataMuArray;
-
-@property (weak, nonatomic) IBOutlet UILabel *expenseAmountL;
 @property (weak, nonatomic) IBOutlet UILabel *residueAmountL;
-@property (weak, nonatomic) IBOutlet UILabel *allAmountL;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableTopLeading;
 @property (weak, nonatomic) IBOutlet UIView *topView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *topViewLeading;
 @property (weak, nonatomic) IBOutlet UILabel *categoryLbl;
+@property(nonatomic, strong)UILabel* infoLabel;
 
 @end
 
 @implementation XDBudgetDetailViewController
 @synthesize date,type;
+
+-(UILabel *)infoLabel{
+    if (!_infoLabel) {
+        _infoLabel = [[UILabel alloc]initWithFrame:CGRectMake(20, 33, SCREEN_WIDTH - 50, 22)];
+        _infoLabel.font = [UIFont boldSystemFontOfSize:12];
+        _infoLabel.textColor = [UIColor whiteColor];
+    }
+    return _infoLabel;
+}
 
 -(void)setBudgetTemple:(BudgetTemplate *)budgetTemple{
     _budgetTemple = budgetTemple;
@@ -52,17 +59,21 @@
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    self.allAmountL.text = [NSString stringWithFormat:@"%@",[XDDataManager moneyFormatter:_allAmount]];
-    self.expenseAmountL.text = [XDDataManager moneyFormatter:_expenseAmout];
+    
+    [self drawLine];
+
+//    self.allAmountL.text = [NSString stringWithFormat:@"%@",[XDDataManager moneyFormatter:_allAmount]];
+//    self.expenseAmountL.text = [XDDataManager moneyFormatter:_expenseAmout];
+    
+
     if (_allAmount-_expenseAmout>=0) {
         self.residueAmountL.text = [NSString stringWithFormat:@"%@ left",[XDDataManager moneyFormatter:_allAmount-_expenseAmout]];
         self.residueAmountL.textColor = RGBColor(85, 85, 85);
-
     }else{
         self.residueAmountL.text = [NSString stringWithFormat:@"%@ over",[XDDataManager moneyFormatter:fabs(_allAmount-_expenseAmout)]];
         self.residueAmountL.textColor = RGBColor(240, 106, 68);
-        
     }
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated{
@@ -80,8 +91,6 @@
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(rightBtnClick) title:NSLocalizedString(@"VC_Transfer", nil) font:[UIFont fontWithName:FontSFUITextRegular size:17] titleColor:RGBColor(113, 163, 245) highlightedColor:RGBColor(113, 163, 245) titleEdgeInsets:UIEdgeInsetsMake(0, -10, 0, 0)];
     self.navigationController.interactivePopGestureRecognizer.delegate = self;
     
-    [self drawLine];
-    
     self.title = _budgetTemple.category.categoryName;
     self.categoryLbl.text = _budgetTemple.category.categoryName;
     
@@ -98,9 +107,10 @@
 }
 
 -(void)drawLine{
+  
     CAShapeLayer* layer = [CAShapeLayer layer];
-    UIBezierPath* path = [UIBezierPath bezierPathWithRect:CGRectMake(15, 33, SCREEN_WIDTH - 30, 10)];
-    layer.fillColor = RGBColor(238, 238, 238).CGColor;
+    UIBezierPath* path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(15, 33, SCREEN_WIDTH - 30, 22) cornerRadius:11];
+    layer.fillColor = RGBColor(215, 215, 215).CGColor;
     layer.path = path.CGPath;
     [self.topView.layer addSublayer:layer];
     
@@ -112,12 +122,12 @@
        width = _expenseAmout/amount * (SCREEN_WIDTH - 30);
     }
   
-    if (width > SCREEN_WIDTH - 20) {
-        width = SCREEN_WIDTH - 20;
+    if (width > SCREEN_WIDTH - 30) {
+        width = SCREEN_WIDTH - 30;
     }
     
     CAShapeLayer* layer1 = [CAShapeLayer layer];
-    UIBezierPath* path1 = [UIBezierPath bezierPathWithRect:CGRectMake(15, 33, width, 10)];
+    UIBezierPath* path1 = [UIBezierPath bezierPathWithRect:CGRectMake(15, 33, width, 22)];
     if (_allAmount-_expenseAmout>=0){
         layer1.fillColor = RGBColor(113, 163, 245).CGColor;
     }else{
@@ -125,6 +135,35 @@
     }
     layer1.path = path1.CGPath;
     [self.topView.layer addSublayer:layer1];
+    
+    CAShapeLayer* layer3 = [CAShapeLayer layer];
+    UIBezierPath* path3 = [UIBezierPath bezierPath];
+    [path3 moveToPoint:CGPointMake(26, 33)];
+    [path3 addLineToPoint:CGPointMake(15, 33)];
+    [path3 addLineToPoint:CGPointMake(15, 55)];
+    [path3 addLineToPoint:CGPointMake(26, 55)];
+    [path3 addArcWithCenter:CGPointMake(26, 44) radius:11 startAngle:M_PI/2 endAngle:M_PI/2*3 clockwise:YES];
+    [path3 closePath];
+    layer3.path = path3.CGPath;
+    layer3.fillColor = [UIColor whiteColor].CGColor;
+    [self.topView.layer addSublayer:layer3];
+
+    CAShapeLayer* layer2 = [CAShapeLayer layer];
+    UIBezierPath* path2 = [UIBezierPath bezierPath];
+    [path2 moveToPoint:CGPointMake(SCREEN_WIDTH-26, 33)];
+    [path2 addLineToPoint:CGPointMake(SCREEN_WIDTH-15, 33)];
+    [path2 addLineToPoint:CGPointMake(SCREEN_WIDTH-15, 55)];
+    [path2 addLineToPoint:CGPointMake(SCREEN_WIDTH-26, 55)];
+    [path2 addArcWithCenter:CGPointMake(SCREEN_WIDTH-26, 44) radius:11 startAngle:M_PI/2 endAngle:M_PI/2*3 clockwise:NO];
+    [path2 closePath];
+    layer2.path = path2.CGPath;
+    layer2.fillColor = [UIColor whiteColor].CGColor;
+    [self.topView.layer addSublayer:layer2];
+
+    
+    
+    self.infoLabel.text = [NSString stringWithFormat:@"%@ of %@",[XDDataManager moneyFormatter:_expenseAmout],[XDDataManager moneyFormatter:_allAmount]];
+    [self.topView addSubview:self.infoLabel];
 }
 
 -(void)rightBtnClick{
@@ -144,8 +183,8 @@
     [self getBudgetDataSoure:date type:type];
     [self.tableView reloadData];
     
-    self.allAmountL.text = [NSString stringWithFormat:@"%@",[XDDataManager moneyFormatter:_allAmount]];
-    self.expenseAmountL.text = [XDDataManager moneyFormatter:_expenseAmout];
+//    self.allAmountL.text = [NSString stringWithFormat:@"%@",[XDDataManager moneyFormatter:_allAmount]];
+//    self.expenseAmountL.text = [XDDataManager moneyFormatter:_expenseAmout];
     if (_allAmount-_expenseAmout>=0) {
         self.residueAmountL.text = [NSString stringWithFormat:@"%@ left",[XDDataManager moneyFormatter:_allAmount-_expenseAmout]];
         self.residueAmountL.textColor = RGBColor(85, 85, 85);
@@ -155,6 +194,7 @@
         self.residueAmountL.textColor = RGBColor(240, 106, 68);
         
     }
+    [self drawLine];
 }
 
 #pragma mark - XDBudgetTransferViewDelegate
@@ -178,8 +218,8 @@
         [self.tableView reloadData];
     }
     
-    self.allAmountL.text = [NSString stringWithFormat:@"%@",[XDDataManager moneyFormatter:_allAmount]];
-    self.expenseAmountL.text = [XDDataManager moneyFormatter:_expenseAmout];
+//    self.allAmountL.text = [NSString stringWithFormat:@"%@",[XDDataManager moneyFormatter:_allAmount]];
+//    self.expenseAmountL.text = [XDDataManager moneyFormatter:_expenseAmout];
     if (_allAmount-_expenseAmout>=0) {
         self.residueAmountL.text = [NSString stringWithFormat:@"%@ left",[XDDataManager moneyFormatter:_allAmount-_expenseAmout]];
         self.residueAmountL.textColor = RGBColor(85, 85, 85);

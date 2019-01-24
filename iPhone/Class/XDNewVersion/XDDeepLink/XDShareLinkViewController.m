@@ -95,7 +95,7 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     }
     
     NSURL* url = [[NSUserDefaults standardUserDefaults] URLForKey:@"shortURL"];
-    if (url.absoluteString.length > 0) {
+    if (url.absoluteString.length > 0 && url) {
         self.shareLinkCode.text = url.absoluteString;
         self.url = url;
     }else{
@@ -110,14 +110,14 @@ typedef void(^SucceessBlock)(BOOL success, NSString* text);
     FIRDynamicLinkComponents *linkBuilder = [[FIRDynamicLinkComponents alloc] initWithLink:link domain:dynamicLinksDomain];
     linkBuilder.iOSParameters = [[FIRDynamicLinkIOSParameters alloc]
                                  initWithBundleID:@"com.btgs.pocketexpenselite"];
-    linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
+//    linkBuilder.iOSParameters.minimumAppVersion = @"6.2.4";
     linkBuilder.iOSParameters.appStoreID = @"424575621";
     
     
-//    linkBuilder.socialMetaTagParameters = [[FIRDynamicLinkSocialMetaTagParameters alloc] init];
-//    linkBuilder.socialMetaTagParameters.title = @"Pocket Expense 6";
-//    linkBuilder.socialMetaTagParameters.descriptionText = @"See where your money goes.";
-//    linkBuilder.socialMetaTagParameters.imageURL = [NSURL URLWithString:@"https://images.indianexpress.com/2018/12/FEATURE-1.jpg"];
+    linkBuilder.socialMetaTagParameters = [[FIRDynamicLinkSocialMetaTagParameters alloc] init];
+    linkBuilder.socialMetaTagParameters.title = @"Pocket Expense 6";
+    linkBuilder.socialMetaTagParameters.descriptionText = @"See where your money goes.";
+    linkBuilder.socialMetaTagParameters.imageURL = [NSURL URLWithString:@"http://onemoreuserheaderimage.oss-cn-beijing.aliyuncs.com/expense.png"];
     
     [linkBuilder shortenWithCompletion:^(NSURL * _Nullable shortURL,
                                          NSArray<NSString *> * _Nullable warnings,
