@@ -157,7 +157,7 @@
     {
         _logoW.constant = 118;
         _logoH.constant = 118;
-        _logoT.constant = 101;
+        _logoT.constant = 80;
         _passcodeT.constant = 258;
         _remindeLabelT.constant = 225;
         _wrongLabelT.constant = 280;
@@ -167,13 +167,15 @@
     {
         _logoW.constant = 118;
         _logoH.constant = 118;
-        _logoT.constant = 101;
+        _logoT.constant = 80;
         _passcodeT.constant = 258;
         _remindeLabelT.constant = 225;
         _wrongLabelT.constant = 270;
 
-    }
-    else
+    }else if(IS_IPHONE_X){
+        _logoT.constant = 150;
+
+    }else
     {
         _logoW.constant = 101;
         _logoH.constant = 101;

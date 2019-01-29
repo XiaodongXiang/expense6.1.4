@@ -25,7 +25,7 @@
 }
 - (IBAction)deleteClick:(id)sender {
     if (self.password.length >= 1) {
-        [self.password deleteCharactersInRange:NSMakeRange(self.password.length, 1)];
+        [self.password deleteCharactersInRange:NSMakeRange(self.password.length-1, 1)];
         
         if ([self.xxdDelegate respondsToSelector:@selector(returnPassword:)]) {
             [self.xxdDelegate returnPassword:self.password];
@@ -35,7 +35,7 @@
 
 - (IBAction)btnClick:(id)sender {
     UIButton* btn = sender;
-    [self.password appendFormat:@"%ld",btn.tag];
+    [self.password appendFormat:@"%ld",(long)btn.tag];
     if ([self.xxdDelegate respondsToSelector:@selector(returnPassword:)]) {
         [self.xxdDelegate returnPassword:self.password];
     }
