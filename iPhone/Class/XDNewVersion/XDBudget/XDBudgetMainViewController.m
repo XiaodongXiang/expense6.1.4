@@ -182,6 +182,7 @@
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * _dateArray.count, 0);
     [self.scrollView setContentOffset:CGPointMake(SCREEN_WIDTH * _index, 0)];
     self.scrollView.bounces = NO;
+    self.scrollView.showsHorizontalScrollIndicator = NO;
     [self setupBudgetTableView];
 
     if (repeatIndex == 1) {

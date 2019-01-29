@@ -11,11 +11,16 @@
 #import "PokcetExpenseAppDelegate.h"
 #import "AppDelegate_iPhone.h"
 #import "XDPwKeyboard.h"
+#import "XDPasswordKeyboard.h"
+
+
+
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
-@interface PasscodeSettingViewController_iPhone()
+@interface PasscodeSettingViewController_iPhone()<XDPasswordKeyBboardDelegate>
 
-@property(nonatomic, strong)XDPwKeyboard* keyboard;
+//@property(nonatomic, strong)XDPwKeyboard* keyboard;
+@property(nonatomic, strong)XDPasswordKeyboard* keyboard;
 
 @end
 @implementation PasscodeSettingViewController_iPhone
@@ -31,11 +36,56 @@
 
 #pragma mark Custom Events
 
--(XDPwKeyboard *)keyboard{
+-(XDPasswordKeyboard *)keyboard{
     if (!_keyboard) {
-        _keyboard = [[[NSBundle mainBundle]loadNibNamed:@"XDPwKeyboard" owner:self options:nil]lastObject];
+        _keyboard = [[[NSBundle mainBundle] loadNibNamed:@"XDPasswordKeyboard" owner:self options:nil]lastObject];
+        _keyboard.xxdDelegate = self;
     }
     return _keyboard;
+}
+
+-(void)returnPassword:(NSString *)string{
+    
+    NSString* text = string;
+    self.lblNotification.hidden = YES;
+    self.txtPasscode.text = string;
+    //    self.txtP1.text = @"";
+    //    self.txtP2.text = @"";
+    //    self.txtP3.text = @"";
+    //    self.txtP4.text = @"";
+    self.txtP1.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP2.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP3.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP4.background = [UIImage imageNamed:@"password1.png"];
+    
+    if (text.length > 0)
+    {
+        self.txtP1.background = [UIImage imageNamed:@"password2.png"];
+        
+    }
+    if (text.length > 1)
+    {
+        self.txtP2.background = [UIImage imageNamed:@"password2.png"];
+        
+    }
+    if (text.length > 2)
+    {
+        self.txtP3.background = [UIImage imageNamed:@"password2.png"];
+        
+    }
+    if (text.length > 3)
+    {
+        self.txtP4.background = [UIImage imageNamed:@"password2.png"];
+        
+    }
+    
+    if (text.length == 4)
+    {
+        PasscodeReenterViewController_iPhone* reenterViewController = [[PasscodeReenterViewController_iPhone alloc] initWithNibName:@"PasscodeReenterViewController_iPhone" bundle:nil];
+        reenterViewController.delegate = self;
+        [self.navigationController pushViewController:reenterViewController animated:YES];
+        
+    }
 }
 
 -(void)cancelPressed:(id)sender
@@ -154,6 +204,9 @@
 -(void) viewDidLoad
 {
     [super viewDidLoad];
+    self.txtPasscode.inputView  = self.keyboard;
+    [self.txtPasscode becomeFirstResponder];
+    
     enterLabelText.text = NSLocalizedString(@"VC_Enteryourpasscode", nil);
     faildLabelText.text = NSLocalizedString(@"VC_Passcodedidnotmatch_Tryagain", nil);
 	self.navigationItem.title = NSLocalizedString(@"VC_PasscodeSetting", nil);
@@ -163,11 +216,11 @@
 //    self.txtPasscode.inputView = self.keyboard;
 }
 
--(void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:YES];
-    [self performSelector:@selector(keyboardShow) withObject:nil afterDelay:0];
-}
+//-(void)viewWillAppear:(BOOL)animated
+//{
+//    [super viewWillAppear:YES];
+//    [self performSelector:@selector(keyboardShow) withObject:nil afterDelay:0];
+//}
 -(void)keyboardShow
 {
     [self.txtPasscode becomeFirstResponder];

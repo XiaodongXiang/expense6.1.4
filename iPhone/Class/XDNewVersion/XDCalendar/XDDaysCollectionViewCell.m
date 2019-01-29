@@ -81,6 +81,9 @@
     [formatter setDateFormat:@"yyyy-MM"];
     
     for (XDDayButton* btn in self.contentView.subviews) {
+        if ([btn.date compare:_selectedDate] == NSOrderedSame && btn.selected == YES) {
+            NSLog(@"[btn.date compare:_selectedDate] == %@",btn.date);
+        }
         btn.selected = NO;
         
         if ([_selectedDate compare:btn.date] == NSOrderedSame && _selectedDate) {

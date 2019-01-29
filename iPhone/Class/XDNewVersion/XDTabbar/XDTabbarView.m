@@ -22,6 +22,8 @@
         if (IS_IPHONE_5) {
             UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, -17, 70, 66)];
             [btn setImage:[UIImage imageNamed:@"add-se"] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"add_press"] forState:UIControlStateHighlighted];
+
             btn.adjustsImageWhenHighlighted = NO;
             btn.centerX = SCREEN_WIDTH/2;
             btn.tag =2;
@@ -30,6 +32,8 @@
         }else{
             UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, -17, SCREEN_WIDTH/5, 66)];
             [btn setImage:[UIImage imageNamed:@"add-1"] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"add_press"] forState:UIControlStateHighlighted];
+
             btn.adjustsImageWhenHighlighted = NO;
             btn.centerX = SCREEN_WIDTH/2;
             btn.tag =2;
@@ -49,7 +53,7 @@
     
     for (int i = 0; i < 5; i++) {
         if (i != 2) {
-            XDTabbarItem* item = [[XDTabbarItem alloc ]initWithFrame:CGRectMake(i * width, 0, width, 49)];
+            XDTabbarItem* item = [[XDTabbarItem alloc ]initWithFrame:CGRectMake(i * width, 1, width, 49)];
             item.tag = i;
             item.imageStr = imageArr[i];
             item.selectImageStr = selectImageArr[i];
@@ -88,7 +92,7 @@
     [path moveToPoint:CGPointMake(0, 0)];
     [path addLineToPoint:CGPointMake(SCREEN_WIDTH, 0)];
     path.lineWidth = 1/[UIScreen mainScreen].scale;
-    [[UIColor lightGrayColor] set];
+    [RGBColor(218, 218, 218) set];
     [path stroke];
 }
 

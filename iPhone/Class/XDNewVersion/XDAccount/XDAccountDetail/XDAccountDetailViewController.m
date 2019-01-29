@@ -149,6 +149,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    UIView* lineView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 0.5)];
+    lineView.backgroundColor = RGBColor(218, 218, 218);
+    [self.bottomView addSubview:lineView];
+    
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(cancelClick) image:[UIImage imageNamed:@"Return_icon_normal"]];
     
     self.navigationItem.rightBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(addTransaction) image:[UIImage imageNamed:@"add_category"]];

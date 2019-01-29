@@ -56,7 +56,7 @@
         
         self.startBalanceLbl = [[UILabel alloc]initWithFrame:CGRectMake(15, 10, SCREEN_WIDTH-30, 20)];
         self.startBalanceLbl.font = [UIFont fontWithName:FontSFUITextRegular size:14];
-        self.startBalanceLbl.textColor = RGBColor(200, 200, 200);
+        self.startBalanceLbl.textColor = [UIColor lightGrayColor];
         self.startBalanceLbl.textAlignment = NSTextAlignmentRight;
         
         [self.footView addSubview:self.startBalanceLbl];
@@ -213,18 +213,11 @@
                 UILabel *headetLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 7, 150, 22)];
                 headetLabel.text = [self returnInitDate:tran.dateTime];
                 [headetLabel setFont:[UIFont fontWithName:FontSFUITextRegular size:12.0]];
-                [headetLabel setTextColor:[UIColor colorWithRed:172.f/255.f green:173.f/255.f blue:170.f/255.f alpha:1]];
+                [headetLabel setTextColor:[UIColor lightGrayColor]];
                 [headetLabel setTextAlignment:NSTextAlignmentLeft];
                 headetLabel.backgroundColor = [UIColor clearColor];
                 [headerView addSubview:headetLabel];
                 
-                //            UIView *topLine=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, EXPENSE_SCALE)];
-                //            topLine.backgroundColor=[UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
-                //            [headerView addSubview:topLine];
-                //
-                //            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, headerView.frame.size.height-EXPENSE_SCALE, SCREEN_WIDTH, EXPENSE_SCALE)];
-                //            line.backgroundColor = [UIColor colorWithRed:216/255.f green:216/255.f blue:216/255.f alpha:1];
-                //            [headerView addSubview:line];
                 return headerView;
             }
             
@@ -238,18 +231,11 @@
             UILabel *headetLabel = [[UILabel alloc]initWithFrame:CGRectMake(15, 7, 150, 22)];
             headetLabel.text = sectionInfo.name;
             [headetLabel setFont:[UIFont fontWithName:FontSFUITextRegular size:12.0]];
-            [headetLabel setTextColor:[UIColor colorWithRed:172.f/255.f green:173.f/255.f blue:170.f/255.f alpha:1]];
+            [headetLabel setTextColor:[UIColor lightGrayColor]];
             [headetLabel setTextAlignment:NSTextAlignmentLeft];
             headetLabel.backgroundColor = [UIColor clearColor];
             [headerView addSubview:headetLabel];
             
-//            UIView *topLine=[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, EXPENSE_SCALE)];
-//            topLine.backgroundColor=[UIColor colorWithRed:216/255.0 green:216/255.0 blue:216/255.0 alpha:1];
-//            [headerView addSubview:topLine];
-//
-//            UIView *line = [[UIView alloc]initWithFrame:CGRectMake(0, headerView.frame.size.height-EXPENSE_SCALE, SCREEN_WIDTH, EXPENSE_SCALE)];
-//            line.backgroundColor = [UIColor colorWithRed:216/255.f green:216/255.f blue:216/255.f alpha:1];
-//            [headerView addSubview:line];
             return headerView;
         }
     }

@@ -347,6 +347,9 @@
 
 
 -(void)fixStateIsZeroBug{
+    
+    return;//新版本应该不用再修复这个问题了
+    
     NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra fromDate:[NSDate date]];
     comp.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
     comp.year = 2019;
@@ -365,6 +368,9 @@
 }
 
 -(void)deleteSomeUnUseTransaction{
+    
+    return;//新版本应该不用再修复这个问题了
+
     
     NSDateComponents* comp = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitEra fromDate:[NSDate date]];
     comp.timeZone = [NSTimeZone timeZoneWithName:@"GMT"];
@@ -394,6 +400,7 @@
 }
 
 -(void)allTransactionToLocal:(NSDate*)date{
+    
     NSArray* array = [self getObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"updatedTime <= %@",date] sortDescriptors:nil];
     
     if (array.count <= 0) {//说明数据没了,不严谨
@@ -470,6 +477,7 @@
 }
 
 -(void)uploadLocalTransaction{
+    
     if ([PFUser currentUser]) {
         [self.backgroundContext performBlock:^{
             NSArray* array = [self backgroundGetObjectsFromTable:@"Transaction" predicate:[NSPredicate predicateWithFormat:@"state = %@ and (isUpload = %@)",@"1",[NSNull null]] sortDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"updatedTime" ascending:NO]]];
@@ -499,11 +507,10 @@
                             }
                         }
                     }
+                    
                 }];
-                
                 NSError *error;
                 [self.backgroundContext save:&error];
-                
             }
         }];
     }

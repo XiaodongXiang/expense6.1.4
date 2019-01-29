@@ -635,13 +635,13 @@ forever</string>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Premium" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHJ-Fd-maQ">
-                    <rect key="frame" x="99" y="25" width="74" height="21"/>
+                    <rect key="frame" x="99" y="30" width="74" height="21"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="17"/>
                     <color key="textColor" red="0.80000000000000004" green="0.51372549020000002" blue="0.015686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monthly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyg-DW-h2r">
-                    <rect key="frame" x="28" y="25" width="66" height="21"/>
+                    <rect key="frame" x="28" y="30" width="66" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="2Fp-xD-3jK"/>
                     </constraints>
@@ -659,7 +659,7 @@ forever</string>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_setting_king" translatesAutoresizingMaskIntoConstraints="NO" id="SPW-pU-k4a">
-                    <rect key="frame" x="178" y="25" width="21" height="21"/>
+                    <rect key="frame" x="178" y="30" width="21" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="21" id="bUM-4N-kPd"/>
                         <constraint firstAttribute="height" constant="21" id="ee1-eV-fXh"/>
@@ -670,13 +670,13 @@ forever</string>
             <constraints>
                 <constraint firstItem="rHJ-Fd-maQ" firstAttribute="leading" secondItem="tyg-DW-h2r" secondAttribute="trailing" constant="5" id="0iM-5F-NOK"/>
                 <constraint firstItem="tjH-og-3SB" firstAttribute="top" secondItem="HqQ-B1-JiK" secondAttribute="top" id="5Xf-W7-iVI"/>
-                <constraint firstItem="tyg-DW-h2r" firstAttribute="top" secondItem="HqQ-B1-JiK" secondAttribute="top" constant="25" id="9OA-Iw-Wo7"/>
+                <constraint firstItem="tyg-DW-h2r" firstAttribute="top" secondItem="HqQ-B1-JiK" secondAttribute="top" constant="30" id="9OA-Iw-Wo7"/>
                 <constraint firstItem="rHJ-Fd-maQ" firstAttribute="top" secondItem="tyg-DW-h2r" secondAttribute="top" id="Af5-uO-j7r"/>
                 <constraint firstItem="tjH-og-3SB" firstAttribute="leading" secondItem="HqQ-B1-JiK" secondAttribute="leading" id="Oc8-7Z-MVs"/>
                 <constraint firstAttribute="trailing" secondItem="tjH-og-3SB" secondAttribute="trailing" id="OfA-5b-oX4"/>
                 <constraint firstItem="Mcp-a8-nKN" firstAttribute="leading" secondItem="HqQ-B1-JiK" secondAttribute="leading" constant="28" id="UVt-8v-dqg"/>
                 <constraint firstAttribute="bottom" secondItem="tjH-og-3SB" secondAttribute="bottom" id="j2G-Pg-0kn"/>
-                <constraint firstItem="Mcp-a8-nKN" firstAttribute="top" secondItem="rHJ-Fd-maQ" secondAttribute="bottom" constant="6" id="lHL-Ib-F0t"/>
+                <constraint firstItem="Mcp-a8-nKN" firstAttribute="top" secondItem="rHJ-Fd-maQ" secondAttribute="bottom" constant="1" id="lHL-Ib-F0t"/>
                 <constraint firstItem="SPW-pU-k4a" firstAttribute="top" secondItem="tyg-DW-h2r" secondAttribute="top" id="luj-p4-DYn"/>
                 <constraint firstItem="SPW-pU-k4a" firstAttribute="leading" secondItem="rHJ-Fd-maQ" secondAttribute="trailing" constant="5" id="ypg-yC-XBz"/>
                 <constraint firstItem="tyg-DW-h2r" firstAttribute="leading" secondItem="HqQ-B1-JiK" secondAttribute="leading" constant="28" id="ziX-Ln-Z7R"/>

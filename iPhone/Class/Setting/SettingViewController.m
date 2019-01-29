@@ -761,7 +761,7 @@
                     if ([[NSUserDefaults standardUserDefaults] boolForKey:LITE_UNLOCK_FLAG]) {
                         self.exprieDateLbl.text = @"";
                         self.dateStyleLbl.text = @"Lifetime";
-                        self.topL1.constant = 95;
+                        self.topL1.constant = 100;
                         self.bottomL1.constant = 40;
                     }else{
                         Setting* setting = [[XDDataManager shareManager] getSetting];
@@ -779,7 +779,7 @@
                             self.dateStyleLbl.text = @"Yearly";
                         }else if ([setting.purchasedProductID isEqualToString:kInAppPurchaseProductIdLifetime]){
                             self.dateStyleLbl.text = @"Lifetime";
-                            self.topL1.constant = 95;
+                            self.topL1.constant = 100;
                             self.bottomL1.constant = 40;
                         }
                         

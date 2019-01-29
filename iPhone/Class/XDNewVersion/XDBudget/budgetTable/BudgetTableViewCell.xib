@@ -54,7 +54,7 @@
                         </constraints>
                         <fontDescription key="fontDescription" name="SFUIText-Medium" family="SF UI Text" pointSize="14"/>
                         <color key="textColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <nil key="highlightedColor"/>
+                        <color key="highlightedColor" red="0.33333333329999998" green="0.33333333329999998" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Mcz-oK-Y5j">
                         <rect key="frame" x="15" y="17" width="40" height="40"/>
@@ -77,6 +77,7 @@
                     <constraint firstItem="Nqo-q2-MaD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="77" id="yCa-2E-Xso"/>
                 </constraints>
             </tableViewCellContentView>
+            <inset key="separatorInset" minX="67" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="budgetAmount" destination="ipL-hR-Xad" id="NQx-eq-2HU"/>
                 <outlet property="budgetName" destination="IYp-lY-87q" id="7oL-8O-rwc"/>

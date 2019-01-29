@@ -97,9 +97,9 @@
         swipGuetureFromRight.delegate = self;
         [self.contentView addGestureRecognizer:swipGuetureFromRight];
         
-        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15, 69.5, SCREEN_WIDTH-15, 0.5)];
-        line.backgroundColor = RGBColor(238, 238, 238);
-        [self.contentView addSubview:line];
+//        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(15, 69.5, SCREEN_WIDTH-15, 0.5)];
+//        line.backgroundColor = [UIColor redColor];
+//        [self.contentView addSubview:line];
 //        UIView *line = [[UIView alloc]initWithFrame:CGRectMake(46, 60-EXPENSE_SCALE, SCREEN_WIDTH, EXPENSE_SCALE)];
 //        line.backgroundColor = [UIColor colorWithRed:204.f/255.f green:204.f/255.f blue:204.f/255.f alpha:1];
 //        [self.contentView addSubview:line];

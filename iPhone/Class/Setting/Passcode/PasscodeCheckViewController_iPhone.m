@@ -9,15 +9,17 @@
 #import "PokcetExpenseAppDelegate.h"
 #import "AppDelegate_iPhone.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "XDPasswordKeyboard.h"
 
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define ANGLE_TO_RADIAN(angle) ((angle)/180.0 * M_PI)
 
-@interface PasscodeCheckViewController_iPhone()
+@interface PasscodeCheckViewController_iPhone()<XDPasswordKeyBboardDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *passwordImg1;
 @property (weak, nonatomic) IBOutlet UIImageView *passwordImg2;
 @property (weak, nonatomic) IBOutlet UIImageView *passwordImg3;
 @property (weak, nonatomic) IBOutlet UIImageView *passwordImg4;
+@property(nonatomic, strong)XDPasswordKeyboard* keyboard;
 
 
 @end
@@ -30,11 +32,118 @@
 @synthesize passcodeBGView;
 @synthesize enterLabelText,faildLabelText;
 
+-(XDPasswordKeyboard *)keyboard{
+    if (!_keyboard) {
+        _keyboard = [[[NSBundle mainBundle] loadNibNamed:@"XDPasswordKeyboard" owner:self options:nil]lastObject];
+        _keyboard.xxdDelegate = self;
+    }
+    return _keyboard;
+}
+
+-(void)returnPassword:(NSString *)string{
+    
+    NSString* text = string;
+    self.lblNotification.hidden = YES;
+    //    self.txtP1.text = @"";
+    //    self.txtP2.text = @"";
+    //    self.txtP3.text = @"";
+    //    self.txtP4.text = @"";
+    self.txtP1.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP2.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP3.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP4.background = [UIImage imageNamed:@"password1.png"];
+    
+    self.passwordImg1.image = [UIImage imageNamed:@"password_normal.png"];
+    self.passwordImg2.image = [UIImage imageNamed:@"password_normal.png"];
+    self.passwordImg3.image = [UIImage imageNamed:@"password_normal.png"];
+    self.passwordImg4.image = [UIImage imageNamed:@"password_normal.png"];
+    
+    if (text.length > 0)
+    {
+        //        range = NSMakeRange(0, 1);
+        //        self.txtP1.text = [text substringWithRange:range];
+        self.txtP1.background = [UIImage imageNamed:@"password2.png"];
+        self.passwordImg1.image = [UIImage imageNamed:@"password_press.png"];
+    }
+    if (text.length > 1)
+    {
+        //        range = NSMakeRange(1, 1);
+        //        self.txtP2.text = [text substringWithRange:range];
+        self.txtP2.background = [UIImage imageNamed:@"password2.png"];
+        self.passwordImg2.image = [UIImage imageNamed:@"password_press.png"];
+        
+    }
+    if (text.length > 2)
+    {
+        //        range = NSMakeRange(2, 1);
+        //        self.txtP3.text = [text substringWithRange:range];
+        self.txtP3.background = [UIImage imageNamed:@"password2.png"];
+        self.passwordImg3.image = [UIImage imageNamed:@"password_press.png"];
+        
+    }
+    if (text.length > 3)
+    {
+        //        range = NSMakeRange(3, 1);
+        //        self.txtP4.text = [text substringWithRange:range];
+        self.txtP4.background = [UIImage imageNamed:@"password2.png"];
+        self.passwordImg4.image = [UIImage imageNamed:@"password_press.png"];
+        
+    }
+    
+    if (text.length == 4)
+    {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if ([text isEqualToString:setting.passcode])
+                {
+                    self.lblNotification.hidden = YES;
+                    
+                    [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
+                    
+                    [self.txtPasscode resignFirstResponder];
+                    
+                    PokcetExpenseAppDelegate *appDelegate2 = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
+                    if (!appDelegate2.isPurchased)
+                    {
+                        appDelegate2.applicationLaunchDate = [NSDate dateWithTimeIntervalSinceNow:0];
+                    }
+                    [self.view removeFromSuperview];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockSuccess" object:nil];
+                    
+                }
+                else
+                {
+                    [self.navigationController popViewControllerAnimated:YES];
+                    self.txtP1.background = [UIImage imageNamed:@"password1.png"];
+                    self.txtP2.background = [UIImage imageNamed:@"password1.png"];
+                    self.txtP3.background = [UIImage imageNamed:@"password1.png"];
+                    self.txtP4.background = [UIImage imageNamed:@"password1.png"];
+                    
+                    self.passwordImg1.image = [UIImage imageNamed:@"password_normal.png"];
+                    self.passwordImg2.image = [UIImage imageNamed:@"password_normal.png"];
+                    self.passwordImg3.image = [UIImage imageNamed:@"password_normal.png"];
+                    self.passwordImg4.image = [UIImage imageNamed:@"password_normal.png"];
+                    
+                    
+                    self.txtPasscode.text = @"";
+                    self.lblNotification.hidden = NO;
+                    
+                    AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+                    [self start];
+                }
+            });
+        });
+    }
+}
+
+
 #pragma mark - View lifecycle
 - (void)viewDidLoad 
 {
     [super viewDidLoad];
 
+    self.txtPasscode.inputView = self.keyboard;
+    
     enterLabelText.text = NSLocalizedString(@"VC_Enteryourpasscode", nil);
     faildLabelText.text = NSLocalizedString(@"VC_Passcodedidnotmatch_Tryagain", nil);
     self.faildLabelText.hidden = YES;
@@ -85,6 +194,8 @@
     self.passwordImg2.image = [UIImage imageNamed:@"password_normal.png"];
     self.passwordImg3.image = [UIImage imageNamed:@"password_normal.png"];
     self.passwordImg4.image = [UIImage imageNamed:@"password_normal.png"];
+    
+    [self.keyboard reset];
 }
 
 
@@ -142,7 +253,6 @@
 	{		
 		if ([self.txtPasscode.text isEqualToString:setting.passcode])
 		{
-            
 			self.lblNotification.hidden = YES;
  			
             [[UIApplication sharedApplication]setStatusBarStyle:UIStatusBarStyleDefault];
@@ -208,6 +318,7 @@
     [self.passwordImg3.layer addAnimation:anim forKey:@"shake"];
     [self.passwordImg4.layer addAnimation:anim forKey:@"shake"];
 
+    [self.keyboard reset];
 }
 
 //点击结束按钮
@@ -248,8 +359,9 @@
 //{
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
-    NSLog(@"touchesBegan");
-    
+//    NSLog(@"touchesBegan");
+//    [self.keyboard reset];
+
     [self.txtPasscode becomeFirstResponder];
 }
 

@@ -40,7 +40,7 @@
         [self addSubview:label];
         _label = label;
 
-        UILabel* label1 = [[UILabel alloc]initWithFrame:CGRectMake(20, self.width/2-10, self.width-40, 30)];
+        UILabel* label1 = [[UILabel alloc]initWithFrame:CGRectMake(25, self.width/2-10, self.width-50, 30)];
         label1.font = [UIFont fontWithName:FontHelveticaNeueMedium size:30];
         label1.adjustsFontSizeToFitWidth=YES;
         label1.textAlignment = NSTextAlignmentCenter;

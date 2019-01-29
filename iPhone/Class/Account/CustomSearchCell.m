@@ -61,7 +61,7 @@
         [self.contentView addSubview:_spentLabel];
         
         UIView *line = [[UIView alloc]initWithFrame:CGRectMake(53, 53-EXPENSE_SCALE, SCREEN_WIDTH, EXPENSE_SCALE)];
-        line.backgroundColor = [UIColor colorWithRed:204.f/255.f green:204.f/255.f blue:204.f/255.f alpha:1];
+        line.backgroundColor = RGBColor(238, 238, 238);
         [self.contentView addSubview:line];
         
     }

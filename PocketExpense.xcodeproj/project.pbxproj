@@ -2574,6 +2574,8 @@
 		BEF484FE21D36B7E00A78B0D /* XDShareLinkViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF484FC21D36B7D00A78B0D /* XDShareLinkViewController.m */; };
 		BEF484FF21D36B7E00A78B0D /* XDShareLinkViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF484FD21D36B7D00A78B0D /* XDShareLinkViewController.xib */; };
 		BEF692EA21DD9DC90064D15B /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF692E921DD9DC90064D15B /* FBHelper.m */; };
+		BEF745C121FFF85800B42668 /* XDPasswordKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF745C021FFF85800B42668 /* XDPasswordKeyboard.m */; };
+		BEF745C421FFF8A000B42668 /* XDPasswordKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF745C321FFF8A000B42668 /* XDPasswordKeyboard.xib */; };
 		BEF8097821D6148D007A96F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */; };
 		BEF8097B21D7533E007A96F6 /* XDPurchasedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
@@ -5739,6 +5741,9 @@
 		BEF692E821DD9DC80064D15B /* FBHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FBHelper.h; sourceTree = "<group>"; };
 		BEF692E921DD9DC90064D15B /* FBHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FBHelper.m; sourceTree = "<group>"; };
 		BEF6B24F21E08DD60086F8F4 /* PokcetExpense 13.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "PokcetExpense 13.xcdatamodel"; sourceTree = "<group>"; };
+		BEF745BF21FFF85800B42668 /* XDPasswordKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPasswordKeyboard.h; sourceTree = "<group>"; };
+		BEF745C021FFF85800B42668 /* XDPasswordKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPasswordKeyboard.m; sourceTree = "<group>"; };
+		BEF745C321FFF8A000B42668 /* XDPasswordKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDPasswordKeyboard.xib; sourceTree = "<group>"; };
 		BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEF8097921D7533E007A96F6 /* XDPurchasedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPurchasedManager.h; sourceTree = "<group>"; };
 		BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPurchasedManager.m; sourceTree = "<group>"; };
@@ -7568,6 +7573,7 @@
 		4E7BA80A2063512600D9299A /* XDNewVersion */ = {
 			isa = PBXGroup;
 			children = (
+				BEF745BE21FFF82B00B42668 /* XDKeyboard */,
 				BEF3EAAB21F71255008FC0C6 /* XDReminderNotif */,
 				BEF484F821D3461100A78B0D /* XDDeepLink */,
 				BEFD68C1216C6FA500B86A64 /* ADEngine.framework */,
@@ -7622,9 +7628,6 @@
 				4E7BA8322063512600D9299A /* XDAddTransactionViewController.h */,
 				4E7BA82D2063512600D9299A /* XDAddTransactionViewController.m */,
 				4E7BA8152063512600D9299A /* XDAddTransactionViewController.xib */,
-				4E7BA82E2063512600D9299A /* numberKeyboardView.h */,
-				4E7BA8402063512600D9299A /* numberKeyboardView.m */,
-				4E7BA8412063512600D9299A /* numberKeyboardView.xib */,
 				4E7BA8122063512600D9299A /* XDTransactionHelpClass */,
 				4E7BA8162063512600D9299A /* XDTransactionView */,
 				4E7BA82F2063512600D9299A /* XDTransactionRepeatView */,
@@ -10801,6 +10804,19 @@
 			path = XDDeepLink;
 			sourceTree = "<group>";
 		};
+		BEF745BE21FFF82B00B42668 /* XDKeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				4E7BA82E2063512600D9299A /* numberKeyboardView.h */,
+				4E7BA8402063512600D9299A /* numberKeyboardView.m */,
+				4E7BA8412063512600D9299A /* numberKeyboardView.xib */,
+				BEF745BF21FFF85800B42668 /* XDPasswordKeyboard.h */,
+				BEF745C021FFF85800B42668 /* XDPasswordKeyboard.m */,
+				BEF745C321FFF8A000B42668 /* XDPasswordKeyboard.xib */,
+			);
+			path = XDKeyboard;
+			sourceTree = "<group>";
+		};
 		BEFB249E2188044B00507A5C /* BaymaxProtectorClass */ = {
 			isa = PBXGroup;
 			children = (
@@ -12226,6 +12242,7 @@
 				A274E79B1A58E88D005E069A /* btn_charts_sel@2x.png in Resources */,
 				A256118119D3BB5C00A5A950 /* cell_head_320_22@2x.png in Resources */,
 				3AE4D8391C0EC506009BF52B /* category_bg_Debt@2x.png in Resources */,
+				BEF745C421FFF8A000B42668 /* XDPasswordKeyboard.xib in Resources */,
 				3AE69F911C4C9152005E211B /* ipad_sign_top_bg.png in Resources */,
 				3AE5E4801C22A3C80032F410 /* siderbar_calendar@2x.png in Resources */,
 				606506FB1C73FE1900A7B70A /* clothing.png in Resources */,
@@ -13168,6 +13185,7 @@
 				6076DB221C8566E300952CA7 /* ipad_LeftBillsCell.m in Sources */,
 				A2C1D5182105850B005152F4 /* XDRateView.m in Sources */,
 				A2561A6219D3BBD700A5A950 /* HTTPConnection.m in Sources */,
+				BEF745C121FFF85800B42668 /* XDPasswordKeyboard.m in Sources */,
 				4E723608206E0C7B00D9A7A3 /* XDBillCalendarViewController.m in Sources */,
 				A256100119D3BB5C00A5A950 /* ReleatedCell.m in Sources */,
 				A256168819D3BB7F00A5A950 /* ipad_OverViewCell.m in Sources */,

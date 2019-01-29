@@ -8,10 +8,14 @@
 
 #import "PasscodeReenterViewController_iPhone.h"
 #import "AppDelegate_iPhone.h"
+#import "XDPasswordKeyboard.h"
 
 #define isPad (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 
+@interface PasscodeReenterViewController_iPhone ()<XDPasswordKeyBboardDelegate>
+@property(nonatomic, strong)XDPasswordKeyboard* keyboard;
 
+@end
 @implementation PasscodeReenterViewController_iPhone
 
 @synthesize txtP1, txtP2, txtP3, txtP4;
@@ -22,6 +26,56 @@
 @synthesize faildLabelText;
 @synthesize enterLabelText;
 
+-(XDPasswordKeyboard *)keyboard{
+    if (!_keyboard) {
+        _keyboard = [[[NSBundle mainBundle] loadNibNamed:@"XDPasswordKeyboard" owner:self options:nil]lastObject];
+        _keyboard.xxdDelegate = self;
+    }
+    return _keyboard;
+}
+
+-(void)returnPassword:(NSString *)string{
+    
+    NSString* text = string;
+    
+    //    self.txtP1.text = @"";
+    //    self.txtP2.text = @"";
+    //    self.txtP3.text = @"";
+    //    self.txtP4.text = @"";
+    self.txtP1.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP2.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP3.background = [UIImage imageNamed:@"password1.png"];
+    self.txtP4.background = [UIImage imageNamed:@"password1.png"];
+    
+    if (text.length > 0)
+    {
+        self.txtP1.background = [UIImage imageNamed:@"password2.png"];
+        
+    }
+    if (text.length > 1)
+    {
+        
+        self.txtP2.background = [UIImage imageNamed:@"password2.png"];
+        
+    }
+    if (text.length > 2)
+    {
+        
+        self.txtP3.background = [UIImage imageNamed:@"password2.png"];
+        
+    }
+    if (text.length > 3)
+    {
+        
+        self.txtP4.background = [UIImage imageNamed:@"password2.png"];
+        
+    }
+    
+    if (text.length == 4)
+    {
+        [self.delegate passcodeDidReentered:text];
+    }
+}
 #pragma mark Custom Events
 -(IBAction)charEntered
 {
@@ -95,6 +149,7 @@
     [super viewDidLoad];
     [self.navigationController.navigationBar doSetNavigationBar];
 
+    self.txtPasscode.inputView = self.keyboard;
 	[self.txtPasscode becomeFirstResponder];
 
     faildLabelText.text = NSLocalizedString(@"VC_Passcodedidnotmatch_Tryagain", nil);

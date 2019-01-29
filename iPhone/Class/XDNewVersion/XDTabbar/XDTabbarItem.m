@@ -79,12 +79,12 @@
 }
 
 -(void)drawRect:(CGRect)rect{
-    UIBezierPath* path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(0, 0)];
-    [path addLineToPoint:CGPointMake(SCREEN_WIDTH, 0)];
-    path.lineWidth = 1/[UIScreen mainScreen].scale;
-    [[UIColor colorWithRed:248/255 green:248/255 blue:248/255 alpha:0.2] set];
-    [path stroke];
+//    UIBezierPath* path = [UIBezierPath bezierPath];
+//    [path moveToPoint:CGPointMake(0, 0)];
+//    [path addLineToPoint:CGPointMake(SCREEN_WIDTH, 0)];
+//    path.lineWidth = 1/[UIScreen mainScreen].scale;
+//    [[UIColor colorWithRed:248/255 green:248/255 blue:248/255 alpha:0.2] set];
+//    [path stroke];
 }
 
 @end

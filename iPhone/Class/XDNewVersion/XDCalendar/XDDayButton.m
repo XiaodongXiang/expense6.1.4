@@ -222,18 +222,11 @@
 
 -(void)drawRect:(CGRect)rect{
     if (self.select) {
-//        UIBezierPath* bezier = [UIBezierPath bezierPathWithOvalInRect:CGRectMake((self.width - (self.height - 26))/2, 3, self.height - 26, self.height - 26)];
-//
-//        [[UIColor colorWithRed:113/255. green:163/255. blue:245/255. alpha:1] set];
-//        [bezier fill];
-//        [bezier stroke];
-        
         self.dayLbl.textColor = [UIColor whiteColor];
         self.selectImageView.hidden = NO;
         
     }else{
         self.selectImageView.hidden = YES;
-        
         if ([self.date compare:[[XDCalendarClass shareCalendarClass] getCurrentDayInitDay]] == NSOrderedSame) {
             self.dayLbl.textColor = [UIColor colorWithRed:113/255. green:163/255. blue:245/255. alpha:1];
         }else{

@@ -42,6 +42,10 @@
         [RGBColor(218, 218, 218) set];
         [path fill];
         
+        if (expenseAmount == 0) {
+            return;
+        }
+        
         UIBezierPath* spath = [UIBezierPath bezierPathWithRect:CGRectMake(15, 44, width * ratio, 22)];
         [RGBColor(113, 163, 245) set];
         [spath fill];
