@@ -110,6 +110,7 @@
                     [self.view removeFromSuperview];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockSuccess" object:nil];
                     
+                    self.dissmissBlock();
                 }
                 else
                 {
@@ -179,7 +180,7 @@
     {
         _logoW.constant = 101;
         _logoH.constant = 101;
-
+        _logoT.constant = 60;
     }
 }
  

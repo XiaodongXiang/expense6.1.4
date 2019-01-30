@@ -21,7 +21,7 @@
         
         if (IS_IPHONE_5) {
             UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(0, -17, 70, 66)];
-            [btn setImage:[UIImage imageNamed:@"add-se"] forState:UIControlStateNormal];
+            [btn setImage:[UIImage imageNamed:@"add_se"] forState:UIControlStateNormal];
             [btn setImage:[UIImage imageNamed:@"add_press"] forState:UIControlStateHighlighted];
 
             btn.adjustsImageWhenHighlighted = NO;

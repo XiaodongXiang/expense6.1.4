@@ -7,7 +7,9 @@
 
  #import <UIKit/UIKit.h>
 #import "Setting+CoreDataClass.h"
- 
+
+typedef void(^dismissPasswordView)();
+
 @interface PasscodeCheckViewController_iPhone : UIViewController<UIPopoverControllerDelegate> {
 	UITextField*											txtP1;
 	UITextField*											txtP2;
@@ -24,6 +26,8 @@
     
     
  }
+
+@property(nonatomic, copy)dismissPasswordView dissmissBlock;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoW;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *logoH;

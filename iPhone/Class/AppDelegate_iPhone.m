@@ -435,6 +435,8 @@
     
     if ([PFUser currentUser]) {
         //touch ID
+        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
+
         LAContext *context=[LAContext new];
         context.localizedFallbackTitle=@"";
         if ([self.settings.passcodeStyle isEqualToString:@"touchid"])
@@ -450,6 +452,10 @@
             {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockSuccess" object:nil];
                 [_touchBack removeFromSuperview];
+                if (!appDelegate.isPurchased) {
+                    self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
+                    [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
+                }
             }
             [context evaluatePolicy:kLAPolicyDeviceOwnerAuthentication localizedReason:IS_IPHONE_X?@"Face ID":@"Touch ID" reply:^(BOOL success, NSError * _Nullable error) {
                 if (success)
@@ -457,6 +463,10 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"unlockSuccess" object:nil];
                     dispatch_sync(dispatch_get_main_queue(), ^{
                         [_touchBack removeFromSuperview];
+                        if (!appDelegate.isPurchased) {
+                            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
+                            [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
+                        }
                     });
                 }else{
                     NSLog(@"error = %@ ,, code == %d",error,error.code);
@@ -464,21 +474,26 @@
                 if(error.code == LAErrorAuthenticationFailed){
                     NSLog(@"Authentication Failed");
                     
-                    
-                    
                 }
             }];
+        }else if([self.settings.passcodeStyle isEqualToString:@"number"]){
+            
+            //密码
+            _passCodeCheckView = [[PasscodeCheckViewController_iPhone alloc] initWithNibName:@"PasscodeCheckViewController_iPhone" bundle:nil];
+            _passCodeCheckView.view.frame = CGRectMake(0, 0, SCREEN_WIDTH,[[UIScreen mainScreen]bounds].size.height);
+            [self.window addSubview:_passCodeCheckView.view];
+            hasPWDView = TRUE;
+            __weak __typeof__(self) weakSelf = self;
+            _passCodeCheckView.dissmissBlock = ^{
+                if (!appDelegate.isPurchased) {
+                    weakSelf.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
+                    [weakSelf.interstitial nowShowInterstitialAdWithTarget:weakSelf.window.rootViewController];
+                }
+            };
         }
     }
     
-    //密码
-    _passCodeCheckView = [[PasscodeCheckViewController_iPhone alloc] initWithNibName:@"PasscodeCheckViewController_iPhone" bundle:nil];
-    if([self.settings.passcodeStyle isEqualToString:@"number"])
-    {
-        _passCodeCheckView.view.frame = CGRectMake(0, 0, SCREEN_WIDTH,[[UIScreen mainScreen]bounds].size.height);
-        [self.window addSubview:_passCodeCheckView.view];
-        hasPWDView = TRUE;
-    }
+   
   
 
     
@@ -499,12 +514,6 @@
         [[XDDataManager shareManager] fixStateIsZeroBug];
         [[XDDataManager shareManager] deleteSomeUnUseTransaction];
         [[XDDataManager shareManager] uploadLocalTransaction];
-        
-        PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication] delegate];
-        if (!appDelegate.isPurchased) {
-            self.interstitial = [[ADEngineController alloc] initLoadADWithAdPint:@"PE1201 - iPhone - Interstitial - Launch"];
-            [self.interstitial nowShowInterstitialAdWithTarget:self.window.rootViewController];
-        }
         
     }
     return YES;
@@ -613,6 +622,8 @@
                     
                 }];
             });
+        }else if([self.settings.passcodeStyle isEqualToString:@"number"]){
+            
         }else{
             //插页广告
             if ([PFUser currentUser]) {
@@ -622,7 +633,6 @@
                     [self.interstitial nowShowInterstitialAdWithTarget:[self getCurrentVC]];
                 }
             }
-            
         }
     }
     
