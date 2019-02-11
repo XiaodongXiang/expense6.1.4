@@ -89,6 +89,7 @@
 
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
     
+//    [[XDReceiptManager shareManager] returnReceiptData:nil];
     
     [BayMaxProtector openProtectionsOn:BayMaxProtectionTypeAll catchErrorHandler:^(BayMaxCatchError * _Nullable error) {
         NSArray *callStacks = [error.errorInfos objectForKey:BMPErrorCallStackSymbols];
@@ -99,7 +100,6 @@
             
         }else if (error.errorType == BayMaxErrorTypeTimer){
             NSLog(@"ErrorTimerinfos:%@",error.errorInfos);
-            
             
         }else if (error.errorType == BayMaxErrorTypeKVO){
             NSLog(@"ErrorKVOinfos:%@",error.errorInfos);
@@ -115,7 +115,7 @@
     [BayMaxProtector closeProtectionsOn:BayMaxProtectionTypeTimer];
 
     
-    NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());
+//    NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());
     application.applicationIconBadgeNumber = 0;
     NSError *error = nil;
 

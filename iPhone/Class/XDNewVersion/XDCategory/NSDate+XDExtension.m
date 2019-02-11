@@ -170,14 +170,11 @@
 }
 
 +(NSDate *)GMTTime{
-//    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-//    [dateFormatter setDateFormat: @"yyyy-MM-dd HH:mm:ss"];
+    
     NSTimeZone *zone = [NSTimeZone timeZoneWithName:@"GMT"]; // 获得系统的时区
     NSTimeInterval time = [zone secondsFromGMTForDate:[NSDate date]];// 以秒为单位返回当前时间与系统格林尼治时间的差
-    
     NSDate* newDate = [[NSDate date] dateByAddingTimeInterval:time];
     
-
     return newDate;
 }
 

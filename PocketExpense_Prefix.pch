@@ -20,6 +20,7 @@
     #import "Setting+CoreDataClass.h"
     #import <ADEngine/ADEngine.h>
     #import "XDPurchasedManager.h"
+    #import "XDReceiptManager.h"
 
 
 #define FontSFUITextRegular                                 @"SFUIText-Regular"

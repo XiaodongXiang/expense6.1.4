@@ -177,26 +177,52 @@
             NSLog(@"-----交易延期—－－－－");
             break;
         case SKPaymentTransactionStatePurchased://交易完成
+//        {
+//            [self completeTransaction:transaction];
+//
+//            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                [XDReceiptManager returnReceiptData:^(XDReceiptModel * model) {
+//                    if (model) {
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//
+//                            [self returnReceiptModel:model];
+//                            [[NSUserDefaults standardUserDefaults] removeObjectForKey:tryPremiumRequestReceiptFailed];
+//                        });
+//                    }else{
+//                            [self tryPremiumThreeTimes:transaction];
+//                    }
+//                }];
+//            });
+//            NSLog(@"-----交易完成 --------");
+//
+//        }
+        {
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [XDReceiptManager returnReceiptData:^(XDReceiptModel * model) {
+                    if (model) {
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            [self returnReceiptModel:model];
+                        });
+                    }
+                }];
+            });
             
             if ([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseProductIdLifetime]) {
                 PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
                 [appDelegate hideIndicator];
-                
-                [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
 
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
                 [[XDDataManager shareManager] openWidgetInSettingWithBool14:YES];
                 appDelegate.isPurchased = YES;
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
                 });
-                
+
             }else{
                 [self completeTransaction:transaction];
             }
-            NSLog(@"-----交易完成 --------");
+        }
             break;
         case SKPaymentTransactionStateFailed://交易失败
             NSLog(@"-----交易失败 --------");
@@ -210,10 +236,46 @@
     }
 }
 
+-(void)returnReceiptModel:(XDReceiptModel*)model{
+
+#ifdef DEBUG
+    
+#else
+    
+    NSString* proID = model.productID;
+    NSDate* expireDate = model.expiredDate;
+
+    if ([proID isEqualToString:kInAppPurchaseProductIdLifetime]) {
+        
+        [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
+        [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
+       
+    }else if([proID isEqualToString:KInAppPurchaseProductIdMonth]){
+        
+        if ([expireDate compare:[NSDate GMTTime]] == NSOrderedDescending) {
+
+            [FIRAnalytics logEventWithName:@"succeed_monthly" parameters:nil];
+            [FIRAnalytics setUserPropertyString:@"monthly" forName:@"subscription_type"];
+        }
+        
+    }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
+        
+        if ([expireDate compare:[NSDate GMTTime]] == NSOrderedDescending) {
+
+            [FIRAnalytics logEventWithName:@"succeed_yearly" parameters:nil];
+            [FIRAnalytics setUserPropertyString:@"yearly" forName:@"subscription_type"];
+        }
+    }
+#endif
+
+    
+}
+
+
+
+
 
 -(void)completeTransaction:(SKPaymentTransaction*)transaction{
-//    expensePurchase* expense = [[expensePurchase alloc]init];
-//    [expense completeTransactionReceipt];
     
     PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
     [appDelegate hideIndicator];
@@ -224,9 +286,6 @@
     
     if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
         [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdMonth originalProID:originalProID];
-
-        [FIRAnalytics logEventWithName:@"succeed_monthly" parameters:nil];
-        
         if (purchaseDate) {
             [FIRAnalytics setUserPropertyString:[self stringDate:purchaseDate] forName:@"subscription_date"];
             [FIRAnalytics setUserPropertyString:[NSString stringWithFormat:@"%f",[purchaseDate timeIntervalSince1970]] forName:@"subscription_date_interval"];
@@ -235,16 +294,14 @@
 
     }else if([proID isEqualToString:KInAppPurchaseProductIdYear]){
         [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:KInAppPurchaseProductIdYear originalProID:originalProID];
-        [FIRAnalytics logEventWithName:@"succeed_yearly" parameters:nil];
         [FIRAnalytics setUserPropertyString:@"yearly" forName:@"subscription_type"];
 
     }else if([proID isEqualToString:kInAppPurchaseProductIdLifetime]){
-        
+
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:LITE_UNLOCK_FLAG];
         [[XDDataManager shareManager]puchasedInfoInSetting:purchaseDate productID:kInAppPurchaseProductIdLifetime originalProID:originalProID];
-
-        [FIRAnalytics logEventWithName:@"succeed_lifetime" parameters:nil];
         [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
+        
     }else{
         [FIRAnalytics logEventWithName:@"succeed_other" parameters:nil];
     }
@@ -254,7 +311,6 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [[NSNotificationCenter defaultCenter] postNotificationName:@"settingReloadData" object:nil];
         [[NSNotificationCenter defaultCenter] postNotificationName:@"purchaseSuccessful" object:nil];
-       
     });
 
     [[SKPaymentQueue defaultQueue] finishTransaction:transaction];
@@ -471,8 +527,8 @@
 //    
 //    [self finishSomeUnfinishTransaction];
 
-//    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
-//    [appDelegate hideIndicator];
+    PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
+    [appDelegate hideIndicator];
 }
 
 - (void)paymentQueue:(SKPaymentQueue *)queue restoreCompletedTransactionsFailedWithError:(NSError *)error{

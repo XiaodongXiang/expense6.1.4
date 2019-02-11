@@ -2551,6 +2551,7 @@
 		BE19283F2134F19200D5B3F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A2A440AC19F0FCFC00419103 /* Images.xcassets */; };
 		BE19284321353D2E00D5B3F7 /* XDUpgradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE19284121353D2E00D5B3F7 /* XDUpgradeViewController.m */; };
 		BE19284421353D2E00D5B3F7 /* XDUpgradeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE19284221353D2E00D5B3F7 /* XDUpgradeViewController.xib */; };
+		BE1E60C722017BF40046BFA6 /* XDReceiptManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1E60C622017BF40046BFA6 /* XDReceiptManager.m */; };
 		BE3CBC772136894B0093B5A9 /* XDIpad_ADSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE3CBC752136894B0093B5A9 /* XDIpad_ADSViewController.m */; };
 		BE3CBC782136894B0093B5A9 /* XDIpad_ADSViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BE3CBC762136894B0093B5A9 /* XDIpad_ADSViewController.xib */; };
 		BE3CCD14216057AF00F2EE4A /* SF-UI-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4E7BA86C2063512600D9299A /* SF-UI-Text-Regular.otf */; };
@@ -5705,6 +5706,8 @@
 		BE19284021353D2E00D5B3F7 /* XDUpgradeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDUpgradeViewController.h; sourceTree = "<group>"; };
 		BE19284121353D2E00D5B3F7 /* XDUpgradeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDUpgradeViewController.m; sourceTree = "<group>"; };
 		BE19284221353D2E00D5B3F7 /* XDUpgradeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDUpgradeViewController.xib; sourceTree = "<group>"; };
+		BE1E60C522017BF40046BFA6 /* XDReceiptManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDReceiptManager.h; sourceTree = "<group>"; };
+		BE1E60C622017BF40046BFA6 /* XDReceiptManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDReceiptManager.m; sourceTree = "<group>"; };
 		BE3CBC742136894B0093B5A9 /* XDIpad_ADSViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDIpad_ADSViewController.h; sourceTree = "<group>"; };
 		BE3CBC752136894B0093B5A9 /* XDIpad_ADSViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDIpad_ADSViewController.m; sourceTree = "<group>"; };
 		BE3CBC762136894B0093B5A9 /* XDIpad_ADSViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDIpad_ADSViewController.xib; sourceTree = "<group>"; };
@@ -7618,6 +7621,8 @@
 				4E7BA80F2063512600D9299A /* XDDataManager.m */,
 				BEF8097921D7533E007A96F6 /* XDPurchasedManager.h */,
 				BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */,
+				BE1E60C522017BF40046BFA6 /* XDReceiptManager.h */,
+				BE1E60C622017BF40046BFA6 /* XDReceiptManager.m */,
 			);
 			path = XDHelpClass;
 			sourceTree = "<group>";
@@ -13129,6 +13134,7 @@
 				A2560FFB19D3BB5C00A5A950 /* OverViewBudgetPiCharView.m in Sources */,
 				6032EA3F1C6186EA005FFC01 /* LCImagePickerViewController.m in Sources */,
 				3A5F29241BDF27A9003D9DDE /* FSMediaPicker.m in Sources */,
+				BE1E60C722017BF40046BFA6 /* XDReceiptManager.m in Sources */,
 				A256103619D3BB5C00A5A950 /* PasscodeSettingViewController_iPhone.m in Sources */,
 				3A2473151BCDFABC007C7D7F /* menuViewController.m in Sources */,
 				A25616C319D3BB7F00A5A950 /* CustomDateRangeViewController_iPad.m in Sources */,
