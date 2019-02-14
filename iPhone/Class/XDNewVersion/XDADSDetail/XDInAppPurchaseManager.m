@@ -197,15 +197,18 @@
 //
 //        }
         {
+#ifdef DEBUG
+            
+#else
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 [XDReceiptManager returnReceiptData:^(XDReceiptModel * model) {
                     if (model) {
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [self returnReceiptModel:model];
-                        });
+                        [self returnReceiptModel:model];
                     }
                 }];
             });
+#endif
+           
             
             if ([transaction.payment.productIdentifier isEqualToString:kInAppPurchaseProductIdLifetime]) {
                 PokcetExpenseAppDelegate* appDelegate = (PokcetExpenseAppDelegate*)[[UIApplication sharedApplication]delegate];
@@ -238,9 +241,6 @@
 
 -(void)returnReceiptModel:(XDReceiptModel*)model{
 
-#ifdef DEBUG
-    
-#else
     
     NSString* proID = model.productID;
     NSDate* expireDate = model.expiredDate;
@@ -266,9 +266,7 @@
             [FIRAnalytics setUserPropertyString:@"yearly" forName:@"subscription_type"];
         }
     }
-#endif
 
-    
 }
 
 

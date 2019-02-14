@@ -463,12 +463,17 @@
     
     if (integer != _index) {
         if (integer > _index) {
-
+            XDBudgetTableView* temple = _lastBudgetTableView;
+            _lastBudgetTableView.x = SCREEN_WIDTH * (integer + 1);
 
             if (integer >= _dateArray.count - 1) {
+                _index = _dateArray.count - 1;
+                
+                _lastBudgetTableView = _currentBudgetTableView;
+                _currentBudgetTableView = _nextBudgetTableView;
+                _nextBudgetTableView = temple;
                 return;
             }
-            _lastBudgetTableView.x = SCREEN_WIDTH * (integer + 1);
 
             if (_budgetType == Weekly) {
                 _lastDate = _dateArray[integer + 1][0];
@@ -477,18 +482,23 @@
             }
             _lastBudgetTableView.budgetArray = [self getBudgetDataSoure:_lastDate type:_budgetType];
             
-            XDBudgetTableView* temple = _lastBudgetTableView;
             _lastBudgetTableView = _currentBudgetTableView;
             _currentBudgetTableView = _nextBudgetTableView;
             _nextBudgetTableView = temple;
             
             
         }else if (integer < _index){
+            XDBudgetTableView* temple = _nextBudgetTableView;
+            _nextBudgetTableView.x = SCREEN_WIDTH * (integer - 1);
 
             if (integer <= 0) {
+                _index = 0;
+                
+                _nextBudgetTableView = _currentBudgetTableView;
+                _currentBudgetTableView = _lastBudgetTableView;
+                _lastBudgetTableView = temple;
                 return;
             }
-            _nextBudgetTableView.x = SCREEN_WIDTH * (integer - 1);
 
             if (_budgetType == Weekly) {
                 _nextDate = _dateArray[integer - 1][0];
@@ -497,7 +507,6 @@
             }
             _nextBudgetTableView.budgetArray = [self getBudgetDataSoure:_nextDate type:_budgetType];
             
-            XDBudgetTableView* temple = _nextBudgetTableView;
             _nextBudgetTableView = _currentBudgetTableView;
             _currentBudgetTableView = _lastBudgetTableView;
             _lastBudgetTableView = temple;

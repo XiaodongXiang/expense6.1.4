@@ -958,13 +958,12 @@
     [self flurryConfig];
   
     [[NSNotificationCenter defaultCenter]postNotificationName:@"TransactionViewRefresh" object:nil];
-
+    
     [self dismissViewControllerAnimated:YES completion:^{
         
         if ([self.delegate respondsToSelector:@selector(addTransactionCompletion)]) {
             [self.delegate addTransactionCompletion];
         }
-     
     }];
 }
 
@@ -1393,6 +1392,8 @@
         [[NSUserDefaults standardUserDefaults] setObject:@(integer + 1) forKey:XDAPPIRATERIMPORTANTEVENT];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+    
+    
 }
 
 -(void)categroyLblTap{

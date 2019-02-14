@@ -27,6 +27,8 @@ static NSInteger XCount = 4;
     CGFloat marginY;
     
     NSMutableArray* _dateMuArr;
+    
+    CGFloat _titleCenterX;
 }
 @property(nonatomic,strong)UIColor* lineColor;
 @property(nonatomic,strong)UIColor* labelColor;
@@ -240,9 +242,31 @@ static NSInteger XCount = 4;
         [_titleView addSubview:self.moneyLbl];
         [_titleView addSubview:self.dateLbl];
         
+        
         [self addSubview:_titleView];
     }
     return _titleView;
+}
+
+
+-(void)dealloc{
+    [self removeObserver:self forKeyPath:@"center"];
+}
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSKeyValueChangeKey,id> *)change context:(void *)context{
+    CGPoint point = [[change objectForKey:@"new"] CGPointValue];
+    
+    
+    if (_titleCenterX != point.x) {
+        
+//        NSLog(@"point.x == %f",point.x);
+
+        UIImpactFeedbackGenerator *feedBackGenertor = [[UIImpactFeedbackGenerator alloc] initWithStyle:UIImpactFeedbackStyleLight];
+        [feedBackGenertor impactOccurred];
+        _titleCenterX = point.x;
+        
+    }
+    
 }
 
 
@@ -263,6 +287,9 @@ static NSInteger XCount = 4;
         [_verticalLine addSubview:arrow];
         [self addSubview:_verticalLine];
         [self bringSubviewToFront:_indicatePoint];
+        
+        [_verticalLine addObserver:self forKeyPath:@"center" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+
 
     }
     return _verticalLine;
