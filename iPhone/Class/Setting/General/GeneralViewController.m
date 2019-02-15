@@ -434,13 +434,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.section == 1 && indexPath.row == 1) {
         if (notificationSwitch.on) {
-            return 44;
+            return 0.01;
         }else{
             return 0.01;
         }
     }else if (indexPath.section == 1 && indexPath.row == 2) {
         if (self.showDatePicker) {
-            return 226;
+            return 0.01;
         }else{
             return 0.01;
         }

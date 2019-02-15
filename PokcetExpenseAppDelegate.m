@@ -122,7 +122,7 @@
     [FIROptions defaultOptions].deepLinkURLScheme = @"PocketExpenseLite";
     [FIRApp configure];
     [FBHelper instance];
-//    [Appirater appLaunched]; 6.2.5暂时先取消
+    [Appirater appLaunched]; 
     
     self.isPurchased = NO;
     

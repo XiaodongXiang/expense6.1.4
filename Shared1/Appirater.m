@@ -184,7 +184,7 @@ NSString* templateReviewURL = @"https://itunes.apple.com/cn/app/pocket-expense-p
         }
         
         if (ISPAD) {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:@"- Optimize purchased user ui display.\n- Minor bug fixes." delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:@"- Invite friends and you will get a free month of Premium.\n- Optimize budget page.\n- Minor bug fixes." delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];
             alertView.tag = 101;
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [alertView show];
@@ -199,7 +199,7 @@ NSString* templateReviewURL = @"https://itunes.apple.com/cn/app/pocket-expense-p
             [userDefaults setBool:YES forKey:kAppiraterRatedCurrentVersion];//设置已经评论过了这个app
             [userDefaults setBool:NO forKey:kAppiraterDeclinedToRate];
         }else{
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:@"- Optimize purchased user ui display.\n- Minor bug fixes." delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"What's New in %@",version] message:@"- Invite friends and you will get a free month of Premium.\n- Optimize budget page.\n- Minor bug fixes." delegate:self cancelButtonTitle:nil otherButtonTitles:@"No, Thanks", @"Rate", nil];
             alertView.tag = 101;
             dispatch_async(dispatch_get_main_queue(), ^(void){
                 [alertView show];
