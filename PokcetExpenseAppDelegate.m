@@ -88,31 +88,29 @@
                              didFinishLaunchingWithOptions:launchOptions];
 
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
-    
-//    [[XDReceiptManager shareManager] returnReceiptData:nil];
-    
-    [BayMaxProtector openProtectionsOn:BayMaxProtectionTypeAll catchErrorHandler:^(BayMaxCatchError * _Nullable error) {
-        NSArray *callStacks = [error.errorInfos objectForKey:BMPErrorCallStackSymbols];
-        NSLog(@"callStacks:%@",callStacks);
-        /*unrecognizedSelector类型的错误，*/
-        if (error.errorType == BayMaxErrorTypeUnrecognizedSelector) {
-            NSLog(@"ErrorUnRecognizedSelInfos:%@",error.errorInfos);
-            
-        }else if (error.errorType == BayMaxErrorTypeTimer){
-            NSLog(@"ErrorTimerinfos:%@",error.errorInfos);
-            
-        }else if (error.errorType == BayMaxErrorTypeKVO){
-            NSLog(@"ErrorKVOinfos:%@",error.errorInfos);
-            
-        }else if (error.errorType == BayMaxErrorTypeContainers){
-            NSLog(@"ErrorContainersinfos:%@",error.errorInfos);
-            
-        }else{
-            NSLog(@"infos:%@",error.errorInfos);
-        }
-    }];
-    
-    [BayMaxProtector closeProtectionsOn:BayMaxProtectionTypeTimer];
+        
+//    [BayMaxProtector openProtectionsOn:BayMaxProtectionTypeAll catchErrorHandler:^(BayMaxCatchError * _Nullable error) {
+//        NSArray *callStacks = [error.errorInfos objectForKey:BMPErrorCallStackSymbols];
+//        NSLog(@"callStacks:%@",callStacks);
+//        /*unrecognizedSelector类型的错误，*/
+//        if (error.errorType == BayMaxErrorTypeUnrecognizedSelector) {
+//            NSLog(@"ErrorUnRecognizedSelInfos:%@",error.errorInfos);
+//
+//        }else if (error.errorType == BayMaxErrorTypeTimer){
+//            NSLog(@"ErrorTimerinfos:%@",error.errorInfos);
+//
+//        }else if (error.errorType == BayMaxErrorTypeKVO){
+//            NSLog(@"ErrorKVOinfos:%@",error.errorInfos);
+//
+//        }else if (error.errorType == BayMaxErrorTypeContainers){
+//            NSLog(@"ErrorContainersinfos:%@",error.errorInfos);
+//
+//        }else{
+//            NSLog(@"infos:%@",error.errorInfos);
+//        }
+//    }];
+//
+//    [BayMaxProtector closeProtectionsOn:BayMaxProtectionTypeTimer];
 
     
 //    NSLog(@"NSHomeDirectory == %@",NSHomeDirectory());

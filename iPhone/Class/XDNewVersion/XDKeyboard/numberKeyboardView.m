@@ -7,6 +7,13 @@
 
 #import "numberKeyboardView.h"
 
+typedef enum : NSUInteger {
+    btnWithEqual = 16,
+    btnWithUnable = 18,
+    btnWithComplete = 19,
+} btnType;
+
+
 @interface numberKeyboardView()
 @property (weak, nonatomic) IBOutlet UIButton *equalBtn;
 @property (weak, nonatomic) IBOutlet UIButton *resetBtn;
@@ -48,6 +55,7 @@
         UIView * view = [[UIView alloc]initWithFrame:CGRectMake(0, self.height+0.5, SCREEN_WIDTH, 40)];
         view.backgroundColor = [UIColor whiteColor];
         [self addSubview:view];
+        
     }
     return self;
 }
@@ -55,6 +63,8 @@
 -(void)setOldAmountString:(NSString *)oldAmountString{
     _oldAmountString = oldAmountString;
     
+    self.equalBtn.tag = 19;
+    [self.equalBtn setBackgroundImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
     if ([oldAmountString containsString:@"."]) {
         self.hasPoint = YES;
     }
@@ -109,6 +119,12 @@
                 return;
             }
             
+            if (self.lastOperator == 0) {
+                self.equalBtn.tag = 19;
+                [self.equalBtn setBackgroundImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
+
+            }
+            
             if (self.lastOperator == 16) {
                 self.amount = @"";
                 self.hasPoint = NO;
@@ -120,9 +136,9 @@
             }
             
             if (self.amount == nil && self.isMinus != YES) {
-                self.amount = [NSString stringWithFormat:@"%ld",btn.tag];
+                self.amount = [NSString stringWithFormat:@"%ld",(long)btn.tag];
             }else{
-                self.amount = [self.amount stringByAppendingString:[NSString stringWithFormat:@"%ld",btn.tag]];
+                self.amount = [self.amount stringByAppendingString:[NSString stringWithFormat:@"%ld",(long)btn.tag]];
             }
             self.amountBlock([NSString stringWithFormat:@"%@",self.amount]);
             break;
@@ -152,6 +168,8 @@
             self.lastOperator = 0;
             self.isMinus = NO;
             self.zeroStart = NO;
+            self.equalBtn.tag = 18;
+            [self.equalBtn setBackgroundImage:[UIImage imageNamed:@"duigou_press"] forState:UIControlStateNormal];
             break;
         case 12:
         {
@@ -184,6 +202,9 @@
             if (self.lastOperator != 0 && self.allAmount != 0) {
                 [self func:self.lastOperator];
                 self.lastOperator = 16;
+                
+                self.equalBtn.tag = 19;
+                [self.equalBtn setBackgroundImage:[UIImage imageNamed:@"duigou"] forState:UIControlStateNormal];
             }
         }
             break;
@@ -210,6 +231,13 @@
             
         }
             break;
+        case 18:
+            
+            break;
+        case 19:
+            self.completed();
+            
+            break;
         default:
             break;
     }
@@ -220,6 +248,8 @@
     if ([self.amount isEqualToString: @""] && (self.lastOperator == intger || self.lastOperator == 0)) {
         return;
     }
+    self.equalBtn.tag = 16;
+    [self.equalBtn setBackgroundImage:[UIImage imageNamed:@"="] forState:UIControlStateNormal];
     double num =[self.amount doubleValue];
  
     if (self.allAmount == 0) {
@@ -249,6 +279,7 @@
 
 -(void)dealloc{
     [self removeObserver:self forKeyPath:@"amount"];
+
 }
 
 @end

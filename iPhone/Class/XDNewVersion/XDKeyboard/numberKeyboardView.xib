@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -109,7 +109,7 @@
                 <button opaque="NO" tag="14" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a2E-p3-tjI">
                     <rect key="frame" x="310.5" y="0.0" width="103.5" height="60"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="26"/>
-                    <state key="normal" title="-">
+                    <state key="normal" title="−">
                         <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="-_press"/>
@@ -120,7 +120,7 @@
                 <button opaque="NO" tag="13" contentMode="center" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sY3-ee-nxI">
                     <rect key="frame" x="207" y="0.0" width="103.5" height="60"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="26"/>
-                    <state key="normal" backgroundImage="x">
+                    <state key="normal" title="×">
                         <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="-_press"/>
@@ -131,7 +131,7 @@
                 <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W32-6x-xB3">
                     <rect key="frame" x="103.5" y="0.0" width="103.5" height="60"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="26"/>
-                    <state key="normal" title="/">
+                    <state key="normal" title="÷">
                         <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="-_press"/>
@@ -142,7 +142,7 @@
                 <button opaque="NO" tag="11" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NJH-d5-hnm">
                     <rect key="frame" x="0.0" y="0.0" width="103.5" height="60"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="26"/>
-                    <state key="normal" image="c">
+                    <state key="normal" title="c">
                         <color key="titleColor" red="0.78431372549019607" green="0.78431372549019607" blue="0.78431372549019607" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <state key="highlighted" backgroundImage="-_press"/>
@@ -205,10 +205,9 @@
                         <action selector="btnClick:" destination="QQt-Mn-ZhU" eventType="touchUpInside" id="bO1-34-wXN"/>
                     </connections>
                 </button>
-                <button opaque="NO" tag="16" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcT-2l-6wn">
+                <button opaque="NO" tag="18" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HcT-2l-6wn">
                     <rect key="frame" x="310.5" y="180.5" width="103.5" height="120.5"/>
-                    <state key="normal" backgroundImage="="/>
-                    <state key="highlighted" backgroundImage="=_press"/>
+                    <state key="normal" backgroundImage="duigou_press"/>
                     <connections>
                         <action selector="btnClick:" destination="QQt-Mn-ZhU" eventType="touchUpInside" id="hYb-Lb-JzR"/>
                     </connections>
@@ -313,11 +312,8 @@
     </objects>
     <resources>
         <image name="-_press" width="93" height="57"/>
-        <image name="=" width="93" height="113"/>
-        <image name="=_press" width="93" height="113"/>
-        <image name="c" width="94" height="57"/>
         <image name="dele" width="94" height="57"/>
         <image name="di" width="375" height="278"/>
-        <image name="x" width="94" height="57"/>
+        <image name="duigou_press" width="93" height="112"/>
     </resources>
 </document>

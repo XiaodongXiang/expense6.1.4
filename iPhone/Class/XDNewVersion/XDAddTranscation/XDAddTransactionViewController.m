@@ -192,6 +192,10 @@
 
             }
         };
+        
+        _keyboard.completed = ^{
+            [weakSelf save];
+        };
     }
     return _keyboard;
 }
@@ -902,9 +906,7 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-
-
-- (IBAction)saveBtnClick:(id)sender {
+-(void)save{
     if (_selectedType != TranscationTransfer){
         
         if (!_selectedAccount) {
@@ -956,7 +958,7 @@
         [self addNewTransaction];
     }
     [self flurryConfig];
-  
+    
     [[NSNotificationCenter defaultCenter]postNotificationName:@"TransactionViewRefresh" object:nil];
     
     [self dismissViewControllerAnimated:YES completion:^{
@@ -965,6 +967,10 @@
             [self.delegate addTransactionCompletion];
         }
     }];
+}
+
+- (IBAction)saveBtnClick:(id)sender {
+    [self save];
 }
 
 -(void)flurryConfig{

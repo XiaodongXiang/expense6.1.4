@@ -7,10 +7,15 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+
 typedef void(^returnAmount)(NSString* string);
+typedef void(^completedTransaction)();
 @interface numberKeyboardView : UIView
 
 @property(nonatomic, copy)returnAmount  amountBlock;
+@property(nonatomic, copy)completedTransaction  completed;
 
 @property(nonatomic, assign)BOOL needCaculate;
 @property(nonatomic, assign)BOOL reset;
