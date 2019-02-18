@@ -97,6 +97,10 @@
             weakSelf.amountTextF.text = string;
             [weakSelf.saveBtn setImage:[UIImage imageNamed:@"done_normal"] forState:UIControlStateNormal];
         };
+        
+        _keyboard.completed = ^{
+            [weakSelf saveBtnClick:nil];
+        };
     }
     return _keyboard;
 }

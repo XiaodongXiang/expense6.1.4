@@ -33,7 +33,11 @@
     self.number.amountBlock = ^(NSString *string) {
       weakSelf.categoryMoneyTextF.text = string;
     };
-    
+    self.number.completed = ^{
+        if ([weakSelf.delegate respondsToSelector:@selector(returnSplitAmount:)]) {
+            [weakSelf.delegate returnSplitAmount:weakSelf];
+        }
+    };
   
     self.categoryMoneyTextF.inputView  = self.number;
     if (IS_IPHONE_X) {

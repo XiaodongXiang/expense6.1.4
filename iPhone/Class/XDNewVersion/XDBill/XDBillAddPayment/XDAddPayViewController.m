@@ -61,6 +61,10 @@
             //            NSLog(@"amount == %@",string);
             weakSelf.amountTF.text = string;
         };
+        
+        _keyboard.completed = ^{
+            [weakSelf saveClick:nil];
+        };
     }
     return _keyboard;
 }

@@ -194,7 +194,7 @@
         };
         
         _keyboard.completed = ^{
-            [weakSelf save];
+            [weakSelf saveBtnClick:nil];
         };
     }
     return _keyboard;
@@ -906,7 +906,9 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
--(void)save{
+
+- (IBAction)saveBtnClick:(id)sender {
+    
     if (_selectedType != TranscationTransfer){
         
         if (!_selectedAccount) {
@@ -967,10 +969,6 @@
             [self.delegate addTransactionCompletion];
         }
     }];
-}
-
-- (IBAction)saveBtnClick:(id)sender {
-    [self save];
 }
 
 -(void)flurryConfig{
@@ -1250,19 +1248,6 @@
 }
 
 -(void)addNewTransaction{
-
-//    for (int i = 0; i < 60; i++) {
-//        NSCalendarUnit unit = NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear | NSCalendarUnitWeekday |NSCalendarUnitWeekOfMonth | NSCalendarUnitWeekOfYear;
-//        NSCalendar* calendar = [NSCalendar currentCalendar];
-//        [calendar setTimeZone:[NSTimeZone timeZoneWithName:@"GMT"]];
-//
-//        NSDateComponents* startComponents = [calendar components:unit fromDate:[NSDate date]];
-//        startComponents.month = 1;
-//        startComponents.day = i;
-//        NSDate* date = [calendar dateFromComponents:startComponents];
-    
-  
-    
     
     Transaction* transaction = [[XDDataManager shareManager] insertObjectToTable:@"Transaction"];
     transaction.dateTime =  self.datePicker.date;

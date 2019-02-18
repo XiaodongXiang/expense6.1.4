@@ -35,13 +35,14 @@ typedef enum : NSUInteger {
 
 -(void)setNeedCaculate:(BOOL)needCaculate{
     if (needCaculate) {
+        self.equalBtn.tag = 16;
         [self btnClick:self.equalBtn];
     }
 }
 
 -(void)setReset:(BOOL)reset{
     if (reset) {
-        [self btnClick: self.resetBtn];
+        [self btnClick:self.resetBtn];
     }
 }
 
@@ -211,6 +212,10 @@ typedef enum : NSUInteger {
         case 17:
         {
             if (self.amount.length >= 1) {
+                if (self.amount.length == 1) {
+                    self.equalBtn.tag = 18;
+                    [self.equalBtn setBackgroundImage:[UIImage imageNamed:@"duigou_press"] forState:UIControlStateNormal];
+                }
                 if ([[self.amount substringFromIndex:self.amount.length - 1]isEqualToString:@"."]) {
                     self.hasPoint = NO;
                 }

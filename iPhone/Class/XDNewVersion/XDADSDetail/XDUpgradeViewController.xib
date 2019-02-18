@@ -379,7 +379,7 @@ forever</string>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ads free" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATN-pl-yEt">
-                        <rect key="frame" x="79" y="17.5" width="65" height="21"/>
+                        <rect key="frame" x="79" y="17.5" width="59.5" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="Bz4-Pn-pOv"/>
                         </constraints>
@@ -630,7 +630,7 @@ forever</string>
             <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_setting_setting_vip" translatesAutoresizingMaskIntoConstraints="NO" id="tjH-og-3SB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_setting_setting_vip" translatesAutoresizingMaskIntoConstraints="NO" id="tjH-og-3SB">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>

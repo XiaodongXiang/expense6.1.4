@@ -94,6 +94,10 @@
             //            NSLog(@"amount == %@",string);
             weakSelf.accountAmountTextField.text = string;
         };
+        
+        _keyboard.completed = ^{
+            [weakSelf saveBtnClick:nil];
+        };
     }
     return _keyboard;
 }

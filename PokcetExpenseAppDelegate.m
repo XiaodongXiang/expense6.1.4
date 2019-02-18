@@ -88,7 +88,8 @@
                              didFinishLaunchingWithOptions:launchOptions];
 
     [[ADEngineManage adEngineManage] downloadConfigByAppName:@"Pocket Expense"];
-        
+    
+    
 //    [BayMaxProtector openProtectionsOn:BayMaxProtectionTypeAll catchErrorHandler:^(BayMaxCatchError * _Nullable error) {
 //        NSArray *callStacks = [error.errorInfos objectForKey:BMPErrorCallStackSymbols];
 //        NSLog(@"callStacks:%@",callStacks);

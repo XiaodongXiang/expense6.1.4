@@ -78,6 +78,7 @@
         [self.view bringSubviewToFront:_emptyImageView];
 //        [self.view bringSubviewToFront:_bubbleView];
         [self.view bringSubviewToFront:_adBannerView];
+        
     }
     return _emptyImageView;
 }
@@ -220,7 +221,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTableView) name:@"refreshUI" object:nil];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(selectedDateHasData:) name:@"selectedDateHasData" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(purchaseSuccessful) name:@"purchaseSuccessful" object:nil];
 
     [self emptyImageViewShow];
     
@@ -501,7 +501,14 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.lineView.y = rect.size.height;
         self.transTableView.tableView.y =  CGRectGetMaxY(self.lineView.frame);
-        self.emptyImageView.frame = CGRectMake(0, CGRectGetMaxY(self.lineView.frame),self.view.width, self.view.height - rect.size.height);
+        
+        [self.view bringSubviewToFront:self.lineView];
+        [self.view bringSubviewToFront:self.calView];
+        if (rect.size.height == 338) {
+            self.emptyImageView.frame = CGRectMake(0, CGRectGetMaxY(self.lineView.frame)-50,self.view.width, self.view.height - rect.size.height);
+        }else{
+            self.emptyImageView.frame = CGRectMake(0, CGRectGetMaxY(self.lineView.frame),self.view.width, self.view.height - rect.size.height);
+        }
     }];
 }
 
