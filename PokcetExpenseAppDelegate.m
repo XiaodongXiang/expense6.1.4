@@ -527,6 +527,9 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
 }
 
 -(BOOL)saveLinksInfo:(FIRDynamicLink*)dynamicLink{
+    
+    
+    
     if (dynamicLink && dynamicLink.url) {
         
         NSURLComponents* queryItems = [NSURLComponents componentsWithURL:dynamicLink.url resolvingAgainstBaseURL:YES];
@@ -535,6 +538,16 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
                 NSString* emailStr = [[queryItems.query componentsSeparatedByString:@"="]lastObject];
                 if (![PFUser currentUser]) {
                     [[NSUserDefaults standardUserDefaults] setValue:emailStr forKey:@"invitedby"];
+                }
+            }else{
+                if ([[FIRAuth auth] isSignInWithEmailLink:dynamicLink.url.absoluteString]) {
+//                    [[FIRAuth auth] signInWithEmail:@"18217705518@163.com"
+//                                               link:dynamicLink.url.absoluteString
+//                                         completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+//                                             // ...
+//
+//
+//                    }];
                 }
             }
         }

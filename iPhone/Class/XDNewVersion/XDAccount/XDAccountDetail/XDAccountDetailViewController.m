@@ -185,8 +185,7 @@
     addVc.delegate = self;
     //            NSLog(@"selectedDate = %@", weakSelf.date);
     [self presentViewController:addVc animated:YES completion:nil];
-    
-    
+
 }
 
 -(void)cancelClick{

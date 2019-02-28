@@ -21,7 +21,8 @@
     #import <ADEngine/ADEngine.h>
     #import "XDPurchasedManager.h"
     #import "XDReceiptManager.h"
-
+    #import "XDFirestoreClass.h"
+    #import "NSObject+runtime.h"
 
 #define FontSFUITextRegular                                 @"SFUIText-Regular"
 #define FontSFUITextLight                                   @"SFUIText-Light"

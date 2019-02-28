@@ -22,6 +22,8 @@ pod 'FirebaseAuth'
 pod 'Firebase/Functions'
 pod 'Firebase/Database'
 pod 'GoogleAppMeasurement'
+pod 'Firebase/Firestore'
+
 
 end
 

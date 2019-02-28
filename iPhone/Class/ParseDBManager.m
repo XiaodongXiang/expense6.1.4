@@ -64,6 +64,10 @@
 #pragma mark - 数据 增删改 操作
 -(void)updateTransactionFromLocal:(Transaction *)t
 {
+    [[XDFirestoreClass shareClass] addTransactionToFirestore:t];
+
+    return;
+    
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
     t.updatedTime=[NSDate date];
     NSError *error;

@@ -384,8 +384,6 @@
     _sendFeedbackLabelText.text = NSLocalizedString(@"VC_SendFeedback", nil);
     _reviewLabelText.text = NSLocalizedString(@"VC_WriteReview", nil);
     
-    
-
   //  migrateDateLabelText.adjustsFontSizeToFitWidth = YES;
   //  [migrateDateLabelText setMinimumScaleFactor:0];
     _passcodeLabel.adjustsFontSizeToFitWidth = YES;
@@ -424,62 +422,7 @@
     
     self.syncNowLineHeight.constant=1/EXPENSE_SCALE;
     self.dropboxRestoreLineHeight.constant=1/EXPENSE_SCALE;
-//    selectedImageView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:@"setting_cell_j_320_44_sel.png"]];
-//    selectedImageView.frame = CGRectMake(0, 0, restorePurchaseCell.frame.size.width, restorePurchaseCell.frame.size.height);
-//
-//    
-//    PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
-//    
-//    [restorePurchaseCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j4_320_44.png"]]];
-//
-//    [passcodeCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j1_320_44.png"]]];
-//    [currencyCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j2_320_44.png"]]];
-//    [generalCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j2_320_44.png"]]];
-//
-//    
-//    [helpCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j3_320_45.png"]]];
-//    [payeeCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j1_320_44.png"]]];
-//    [categoryCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j3_320_45.png"]]];
-//
-//    [syncCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j1_320_44.png"]]];
-//    [exportCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j2_320_44.png"]]];
-//
-//    if (!appDelegate.isPurchased)
-//    {
-//        [backUpCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j2_320_44.png"]]];
-//    }
-//    else
-//        [backUpCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j3_320_45.png"]]];
-//
-//    [transferDataCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j3_320_45.png"]]];
-//    [appVersionCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j1_320_44.png"]]];
-//    [feedbackCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j2_320_44.png"]]];
-//    [reviewCell setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"setting_cell_j3_320_45.png"]]];
 
-
-
-    
-//    [restorePurchaseCell setSelectedBackgroundView:selectedImageView];
-//    [passcodeCell setSelectedBackgroundView:selectedImageView];
-//    [currencyCell setSelectedBackgroundView:selectedImageView];
-//    [budgetCell setSelectedBackgroundView:selectedImageView];
-//    [helpCell setSelectedBackgroundView:selectedImageView];
-//    [payeeCell setSelectedBackgroundView:selectedImageView];
-//    [categoryCell setSelectedBackgroundView:selectedImageView];
-//    [syncCell setSelectedBackgroundView:selectedImageView];
-//    [exportCell setSelectedBackgroundView:selectedImageView];
-//    [backUpCell setSelectedBackgroundView:selectedImageView];
-//    [transferDataCell setSelectedBackgroundView:selectedImageView];
-//    [appVersionCell setSelectedBackgroundView:selectedImageView];
-//    [feedbackCell setSelectedBackgroundView:selectedImageView];
-//    [reviewCell setSelectedBackgroundView:selectedImageView];
-
-    
-    
-
-    
-    
-//    [LTHPasscodeViewController sharedUser].delegate = self;
     AppDelegate_iPhone *appDelegate_iphone = (AppDelegate_iPhone *)[[UIApplication sharedApplication]delegate];
     _passcodeLabel.textColor = [appDelegate_iphone.epnc getGrayColor_156_156_156];
     _currencyLabel.textColor =[appDelegate_iphone.epnc getGrayColor_156_156_156];
@@ -524,10 +467,7 @@
 #pragma mark Btn Action
 -(void)showhHelp:(id)sender
 {
-//	HelpViewController *helpController = [[HelpViewController alloc] initWithNibName:@"HelpViewController" bundle:nil];
-// 	[self.navigationController pushViewController:helpController animated:YES];
-//	[helpController release];
-
+    
 }
 
 - (void) back:(id)sender

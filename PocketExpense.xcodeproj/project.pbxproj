@@ -2562,6 +2562,7 @@
 		BE67B802215A39D100B2BB0B /* Setting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67B800215A39D100B2BB0B /* Setting+CoreDataProperties.m */; };
 		BE67B803215B287800B2BB0B /* Setting+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67B800215A39D100B2BB0B /* Setting+CoreDataProperties.m */; };
 		BE67B804215B287B00B2BB0B /* Setting+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = BE67B7FF215A39D100B2BB0B /* Setting+CoreDataClass.m */; };
+		BE7576D8221D37C70017E6DA /* XDFirestoreClass.m in Sources */ = {isa = PBXBuildFile; fileRef = BE7576D7221D37C70017E6DA /* XDFirestoreClass.m */; };
 		BEB696DE213D0FAD00CDE712 /* AFURLResponseSerialization.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696D4213D0FAD00CDE712 /* AFURLResponseSerialization.m */; };
 		BEB696DF213D0FAD00CDE712 /* AFHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696D5213D0FAD00CDE712 /* AFHTTPSessionManager.m */; };
 		BEB696E0213D0FAD00CDE712 /* AFURLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB696D7213D0FAD00CDE712 /* AFURLSessionManager.m */; };
@@ -2579,6 +2580,7 @@
 		BEF745C421FFF8A000B42668 /* XDPasswordKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF745C321FFF8A000B42668 /* XDPasswordKeyboard.xib */; };
 		BEF8097821D6148D007A96F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */; };
 		BEF8097B21D7533E007A96F6 /* XDPurchasedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */; };
+		BEF82D522224ED480026BB61 /* NSObject+runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF82D512224ED480026BB61 /* NSObject+runtime.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
 		BEFB24AE2188044B00507A5C /* BayMaxKVODelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A02188044B00507A5C /* BayMaxKVODelegate.m */; };
 		BEFB24AF2188044B00507A5C /* BayMaxDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A32188044B00507A5C /* BayMaxDebugView.m */; };
@@ -5718,6 +5720,8 @@
 		BE67B7FE215A39D100B2BB0B /* Setting+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Setting+CoreDataClass.h"; sourceTree = "<group>"; };
 		BE67B7FF215A39D100B2BB0B /* Setting+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Setting+CoreDataClass.m"; sourceTree = "<group>"; };
 		BE67B800215A39D100B2BB0B /* Setting+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Setting+CoreDataProperties.m"; sourceTree = "<group>"; };
+		BE7576D6221D37C70017E6DA /* XDFirestoreClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDFirestoreClass.h; sourceTree = "<group>"; };
+		BE7576D7221D37C70017E6DA /* XDFirestoreClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDFirestoreClass.m; sourceTree = "<group>"; };
 		BEB696D0213D0FAD00CDE712 /* AFSecurityPolicy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFSecurityPolicy.h; sourceTree = "<group>"; };
 		BEB696D1213D0FAD00CDE712 /* AFNetworkReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkReachabilityManager.h; sourceTree = "<group>"; };
 		BEB696D2213D0FAD00CDE712 /* AFURLSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFURLSessionManager.h; sourceTree = "<group>"; };
@@ -5750,6 +5754,8 @@
 		BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEF8097921D7533E007A96F6 /* XDPurchasedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPurchasedManager.h; sourceTree = "<group>"; };
 		BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPurchasedManager.m; sourceTree = "<group>"; };
+		BEF82D502224ED480026BB61 /* NSObject+runtime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+runtime.h"; sourceTree = "<group>"; };
+		BEF82D512224ED480026BB61 /* NSObject+runtime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+runtime.m"; sourceTree = "<group>"; };
 		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
 		BEFB249F2188044B00507A5C /* BayMaxProtector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxProtector.h; sourceTree = "<group>"; };
@@ -7576,6 +7582,7 @@
 		4E7BA80A2063512600D9299A /* XDNewVersion */ = {
 			isa = PBXGroup;
 			children = (
+				BE7576D5221D37630017E6DA /* XDFirestore */,
 				BEF745BE21FFF82B00B42668 /* XDKeyboard */,
 				BEF3EAAB21F71255008FC0C6 /* XDReminderNotif */,
 				BEF484F821D3461100A78B0D /* XDDeepLink */,
@@ -8006,6 +8013,8 @@
 				4EE826862087185800D243BB /* XDNavigationViewController.m */,
 				4E9884A320AAD5A300870EE1 /* UINavigationBar+other.h */,
 				4E9884A420AAD5A300870EE1 /* UINavigationBar+other.m */,
+				BEF82D502224ED480026BB61 /* NSObject+runtime.h */,
+				BEF82D512224ED480026BB61 /* NSObject+runtime.m */,
 			);
 			path = XDCategory;
 			sourceTree = "<group>";
@@ -10768,6 +10777,15 @@
 			path = "Pocket Expense";
 			sourceTree = "<group>";
 		};
+		BE7576D5221D37630017E6DA /* XDFirestore */ = {
+			isa = PBXGroup;
+			children = (
+				BE7576D6221D37C70017E6DA /* XDFirestoreClass.h */,
+				BE7576D7221D37C70017E6DA /* XDFirestoreClass.m */,
+			);
+			path = XDFirestore;
+			sourceTree = "<group>";
+		};
 		BEB696CF213D0FAD00CDE712 /* AFNetworking */ = {
 			isa = PBXGroup;
 			children = (
@@ -13009,10 +13027,13 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
+				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -13022,10 +13043,13 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -13043,12 +13067,14 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-PocketExpense/Pods-PocketExpense-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInAppMessagingDisplay/InAppMessagingDisplayResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InAppMessagingDisplayResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -13371,6 +13397,7 @@
 				A25616AB19D3BB7F00A5A950 /* ipad_CategoryCellDetail.m in Sources */,
 				4E7BA8DC2063512700D9299A /* XDBudgetSelectTableViewController.m in Sources */,
 				A256103A19D3BB5C00A5A950 /* PayeeSettingCell.m in Sources */,
+				BE7576D8221D37C70017E6DA /* XDFirestoreClass.m in Sources */,
 				3ABE00DB1B044F5D00D18188 /* CashFlowReports.m in Sources */,
 				A2560FD819D3BB5C00A5A950 /* BudgetListTableViewCell.m in Sources */,
 				A2560FD919D3BB5C00A5A950 /* BudgetListViewController.m in Sources */,
@@ -13576,6 +13603,7 @@
 				A2561A8519D3BBD700A5A950 /* ReaderContentPage.m in Sources */,
 				A2560FEF19D3BB5C00A5A950 /* KalGridView_week.m in Sources */,
 				A2560FD119D3BB5C00A5A950 /* ReminderViewController.m in Sources */,
+				BEF82D522224ED480026BB61 /* NSObject+runtime.m in Sources */,
 				4E933B7B207B32C00083AA02 /* XDBillCalDayBtn.m in Sources */,
 				A25616F119D3BB7F00A5A950 /* ipad_SelectImageViewController.m in Sources */,
 				A276BD461A2D4A60006C6514 /* MonthCalDataView.m in Sources */,

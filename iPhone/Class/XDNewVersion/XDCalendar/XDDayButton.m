@@ -45,6 +45,7 @@
         expenseAmount = 0;
         
         NSArray* array = [[XDDataManager shareManager] getTransactionDate:date withAccount:nil];
+    
         _array = array;
     
         if (array.count > 0) {

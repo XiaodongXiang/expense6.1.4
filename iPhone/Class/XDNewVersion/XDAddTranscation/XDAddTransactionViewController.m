@@ -1266,7 +1266,7 @@
     }else{
         transaction.category = nil;
     }
-    
+
     if (_selectedType == TransactionIncome) {
         transaction.transactionType = @"income";
         transaction.incomeAccount = _selectedAccount;
@@ -1362,6 +1362,8 @@
             if ([PFUser currentUser])
             {
                 [[ParseDBManager sharedManager]updateTransactionFromLocal:splitTransaction];
+                
+
             }
         }
     }
@@ -1383,7 +1385,6 @@
         [[NSUserDefaults standardUserDefaults] setObject:@(integer + 1) forKey:XDAPPIRATERIMPORTANTEVENT];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
-    
     
 }
 

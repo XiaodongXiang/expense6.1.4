@@ -550,6 +550,8 @@
         XDAccountDetailViewController* ac = [[XDAccountDetailViewController alloc]initWithNibName:@"XDAccountDetailViewController" bundle:nil];
         ac.account = self.dataMuArr[indexPath.row];
         ac.dataArray = self.dataMuArr;
+        
+        
         [self.navigationController pushViewController:ac animated:YES];
 
     }

@@ -630,7 +630,7 @@ forever</string>
             <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_setting_setting_vip" translatesAutoresizingMaskIntoConstraints="NO" id="tjH-og-3SB">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="new_setting_setting_vip_plus" translatesAutoresizingMaskIntoConstraints="NO" id="tjH-og-3SB">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="111"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
@@ -695,7 +695,7 @@ forever</string>
         <image name="lifetime" width="121" height="164"/>
         <image name="month" width="121" height="164"/>
         <image name="new_setting_king" width="18" height="18"/>
-        <image name="new_setting_setting_vip" width="365" height="111"/>
+        <image name="new_setting_setting_vip_plus" width="404" height="111"/>
         <image name="pur-Cancel" width="44" height="44"/>
         <image name="upgrade_month" width="120" height="164"/>
         <image name="year" width="121" height="164"/>
