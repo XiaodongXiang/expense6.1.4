@@ -2578,10 +2578,12 @@
 		BEF692EA21DD9DC90064D15B /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF692E921DD9DC90064D15B /* FBHelper.m */; };
 		BEF745C121FFF85800B42668 /* XDPasswordKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF745C021FFF85800B42668 /* XDPasswordKeyboard.m */; };
 		BEF745C421FFF8A000B42668 /* XDPasswordKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF745C321FFF8A000B42668 /* XDPasswordKeyboard.xib */; };
-		BEF8097821D6148D007A96F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */; };
+		BEF8097821D6148D007A96F6 /* GoogleService-data.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF8097721D6148C007A96F6 /* GoogleService-data.plist */; };
 		BEF8097B21D7533E007A96F6 /* XDPurchasedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */; };
 		BEF82D522224ED480026BB61 /* NSObject+runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF82D512224ED480026BB61 /* NSObject+runtime.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
+		BEFA035D222E15E90027C1A3 /* GoogleService-login.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEFA035C222E15E80027C1A3 /* GoogleService-login.plist */; };
+		BEFA0360222E19750027C1A3 /* XDFireLoginClass.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFA035F222E19750027C1A3 /* XDFireLoginClass.m */; };
 		BEFB24AE2188044B00507A5C /* BayMaxKVODelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A02188044B00507A5C /* BayMaxKVODelegate.m */; };
 		BEFB24AF2188044B00507A5C /* BayMaxDebugView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A32188044B00507A5C /* BayMaxDebugView.m */; };
 		BEFB24B02188044B00507A5C /* BayMaxDegradeAssist.m in Sources */ = {isa = PBXBuildFile; fileRef = BEFB24A42188044B00507A5C /* BayMaxDegradeAssist.m */; };
@@ -5751,13 +5753,16 @@
 		BEF745BF21FFF85800B42668 /* XDPasswordKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPasswordKeyboard.h; sourceTree = "<group>"; };
 		BEF745C021FFF85800B42668 /* XDPasswordKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPasswordKeyboard.m; sourceTree = "<group>"; };
 		BEF745C321FFF8A000B42668 /* XDPasswordKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDPasswordKeyboard.xib; sourceTree = "<group>"; };
-		BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BEF8097721D6148C007A96F6 /* GoogleService-data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-data.plist"; sourceTree = "<group>"; };
 		BEF8097921D7533E007A96F6 /* XDPurchasedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPurchasedManager.h; sourceTree = "<group>"; };
 		BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPurchasedManager.m; sourceTree = "<group>"; };
 		BEF82D502224ED480026BB61 /* NSObject+runtime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+runtime.h"; sourceTree = "<group>"; };
 		BEF82D512224ED480026BB61 /* NSObject+runtime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+runtime.m"; sourceTree = "<group>"; };
 		BEF83321216AF33200E71D61 /* InAppPurchaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InAppPurchaseManager.h; sourceTree = "<group>"; };
 		BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InAppPurchaseManager.m; sourceTree = "<group>"; };
+		BEFA035C222E15E80027C1A3 /* GoogleService-login.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-login.plist"; sourceTree = "<group>"; };
+		BEFA035E222E19750027C1A3 /* XDFireLoginClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDFireLoginClass.h; sourceTree = "<group>"; };
+		BEFA035F222E19750027C1A3 /* XDFireLoginClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDFireLoginClass.m; sourceTree = "<group>"; };
 		BEFB249F2188044B00507A5C /* BayMaxProtector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxProtector.h; sourceTree = "<group>"; };
 		BEFB24A02188044B00507A5C /* BayMaxKVODelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BayMaxKVODelegate.m; sourceTree = "<group>"; };
 		BEFB24A12188044B00507A5C /* BayMaxCFunctions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BayMaxCFunctions.h; sourceTree = "<group>"; };
@@ -10091,7 +10096,8 @@
 				A2A0A0151AA03F8A00B786B5 /* Flurry-iOS-6.2.0 */,
 				A2561A2219D3BBD700A5A950 /* main.m */,
 				A2561AB219D3BDDF00A5A950 /* PocketExpense_Prefix.pch */,
-				BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */,
+				BEFA035C222E15E80027C1A3 /* GoogleService-login.plist */,
+				BEF8097721D6148C007A96F6 /* GoogleService-data.plist */,
 				A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */,
 				A20988F0191A2A2A0087EA15 /* PokcetExpense.xcdatamodeld */,
 				A25619BD19D3BBD700A5A950 /* Appirater.h */,
@@ -10782,6 +10788,8 @@
 			children = (
 				BE7576D6221D37C70017E6DA /* XDFirestoreClass.h */,
 				BE7576D7221D37C70017E6DA /* XDFirestoreClass.m */,
+				BEFA035E222E19750027C1A3 /* XDFireLoginClass.h */,
+				BEFA035F222E19750027C1A3 /* XDFireLoginClass.m */,
 			);
 			path = XDFirestore;
 			sourceTree = "<group>";
@@ -11607,7 +11615,7 @@
 				6076DACB1C84593100952CA7 /* budgetselect_click@3x.png in Resources */,
 				A256173E19D3BB7F00A5A950 /* ipad_btn_empty@2x.png in Resources */,
 				3ADBA0EE1BF9D5F700512D2C /* income_color3.png in Resources */,
-				BEF8097821D6148D007A96F6 /* GoogleService-Info.plist in Resources */,
+				BEF8097821D6148D007A96F6 /* GoogleService-data.plist in Resources */,
 				3ADA5BFD1BEB3E0100A01870 /* iphone6_budget_second_bg@2x.png in Resources */,
 				3AE154B21BEC4A5300F9CA91 /* account_iconbg_Saving@2x.png in Resources */,
 				A260ABF31A1D8B8400019D6C /* list_report_sel@3x.png in Resources */,
@@ -11625,6 +11633,7 @@
 				A27691F81A6E2A3D0089263E /* ipad_BudgetSettingViewController.xib in Resources */,
 				A256109519D3BB5C00A5A950 /* bg_320_460_settings@2x.png in Resources */,
 				A25618B319D3BB7F00A5A950 /* ipad_cell_j2_320_44.png in Resources */,
+				BEFA035D222E15E90027C1A3 /* GoogleService-login.plist in Resources */,
 				3AE3EC7F1C043DF1009362AE /* button_arrow_open@3x.png in Resources */,
 				A2561A9919D3BBD700A5A950 /* transacationDRSelConfig.plist in Resources */,
 				BE19284421353D2E00D5B3F7 /* XDUpgradeViewController.xib in Resources */,
@@ -13475,6 +13484,7 @@
 				A2D57D6E1A2C8D8C00D71942 /* DailyAmountObject.m in Sources */,
 				A25616BA19D3BB7F00A5A950 /* ipad_SearchCell.m in Sources */,
 				A2560F9C19D3BB5C00A5A950 /* AccountEditViewController.m in Sources */,
+				BEFA0360222E19750027C1A3 /* XDFireLoginClass.m in Sources */,
 				A256169419D3BB7F00A5A950 /* TranscationCategoryCount.m in Sources */,
 				A256101319D3BB5C00A5A950 /* SubCateRect.m in Sources */,
 				3AE091291C5600A3006A4EA2 /* CashFlowViewController_iPad.m in Sources */,

@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(NSMutableDictionary*)dicWithItem;
 
+-(id)isNull;
+
 @end
 
 NS_ASSUME_NONNULL_END

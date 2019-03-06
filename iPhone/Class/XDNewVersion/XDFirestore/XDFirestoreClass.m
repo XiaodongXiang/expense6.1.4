@@ -86,11 +86,11 @@
 }
 
 - (FIRFirestore *)db{
-    return [FIRFirestore firestore];
+    return [FIRFirestore firestoreForApp:[FIRApp appNamed:@"data"]];
 }
 
 -(FIRUser *)user{
-    return [FIRAuth auth].currentUser;
+    return [FIRAuth authWithApp:[FIRApp appNamed:@"data"]].currentUser;
 }
 
 #pragma mark - item transfer to dic
@@ -98,15 +98,30 @@
     
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[transaction dicWithItem]];
     if (muDic && self.user) {
-        [muDic setValue:transaction.payee.uuid forKey:@"payee"];
-        [muDic setValue:transaction.category.uuid forKey:@"category"];
-        [muDic setValue:transaction.expenseAccount.uuid forKey:@"expenseAccount"];
-        [muDic setValue:transaction.incomeAccount.uuid forKey:@"incomeAccount"];
-        [muDic setValue:transaction.transactionHasBillItem.uuid forKey:@"transactionHasBillItem"];
-        [muDic setValue:transaction.transactionHasBillRule.uuid forKey:@"transactionHasBillRule"];
-        [muDic setValue:transaction.parTransaction.uuid forKey:@"parTransaction"];
+        if (transaction.payee) {
+            [muDic setValue:transaction.payee.uuid forKey:@"payee"];
+        }
+        if (transaction.category) {
+            [muDic setValue:transaction.category.uuid forKey:@"category"];
+        }
+        if (transaction.expenseAccount) {
+            [muDic setValue:transaction.expenseAccount.uuid forKey:@"expenseAccount"];
+        }
+        if (transaction.incomeAccount) {
+            [muDic setValue:transaction.incomeAccount.uuid forKey:@"incomeAccount"];
+        }
+        if (transaction.transactionHasBillItem) {
+            [muDic setValue:transaction.transactionHasBillItem.uuid forKey:@"transactionHasBillItem"];
+        }
+        if (transaction.transactionHasBillRule) {
+            [muDic setValue:transaction.transactionHasBillRule.uuid forKey:@"transactionHasBillRule"];
+        }
+        if (transaction.parTransaction) {
+            [muDic setValue:transaction.parTransaction.uuid forKey:@"parTransaction"];
+        }
         [muDic removeObjectForKey:@"childTransactions"];
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
         //照片暂时没存
         return muDic;
     }
@@ -116,8 +131,15 @@
 -(NSMutableDictionary*)dicWithPayee:(Payee*)payee{
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[payee dicWithItem]];
     if (muDic && self.user) {
-        [muDic setValue:payee.category.uuid forKey:@"category"];
+        if (payee.category) {
+            [muDic setValue:payee.category.uuid forKey:@"category"];
+        }
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
+        [muDic removeObjectForKey:@"billItem"];
+        [muDic removeObjectForKey:@"payeeHasBillItem"];
+        [muDic removeObjectForKey:@"payeeHasBillRule"];
+        [muDic removeObjectForKey:@"transaction"];
 
         return muDic;
     }
@@ -128,8 +150,15 @@
 -(NSMutableDictionary*)dicWithAccount:(Accounts*)account{
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[account dicWithItem]];
     if (muDic && self.user) {
-        [muDic setValue:account.accountType.uuid forKey:@"accountType"];
+        if (account.accountType) {
+            [muDic setValue:account.accountType.uuid forKey:@"accountType"];
+        }
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
+        [muDic removeObjectForKey:@"expenseTransactions"];
+        [muDic removeObjectForKey:@"fromBill"];
+        [muDic removeObjectForKey:@"incomeTransactions"];
+        [muDic removeObjectForKey:@"toBill"];
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
 
         return muDic;
     }
@@ -143,6 +172,8 @@
     if (muDic && self.user) {
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
         [muDic removeObjectForKey:@"accounts"];
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
+
         return muDic;
     }
     return nil;
@@ -154,6 +185,13 @@
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[category dicWithItem]];
     if (muDic && self.user) {
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
+        [muDic removeObjectForKey:@"billItem"];
+        [muDic removeObjectForKey:@"categoryHasBillItem"];
+        [muDic removeObjectForKey:@"categoryHasBillRule"];
+        [muDic removeObjectForKey:@"payee"];
+        [muDic removeObjectForKey:@"transactions"];
+        [muDic removeObjectForKey:@"budgetTemplate"];
 
         return muDic;
     }
@@ -164,9 +202,16 @@
     
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[billRule dicWithItem]];
     if (muDic && self.user) {
-        [muDic setValue:billRule.billRuleHasCategory.uuid forKey:@"billRuleHasCategory"];
-        [muDic setValue:billRule.billRuleHasPayee.uuid forKey:@"billRuleHasPayee"];
+        if (billRule.billRuleHasCategory) {
+            [muDic setValue:billRule.billRuleHasCategory.uuid forKey:@"billRuleHasCategory"];
+        }
+        if (billRule.billRuleHasPayee) {
+            [muDic setValue:billRule.billRuleHasPayee.uuid forKey:@"billRuleHasPayee"];
+        }
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
+        [muDic removeObjectForKey:@"billRuleHasBillItem"];
+        [muDic removeObjectForKey:@"billRuleHasTransaction"];
 
         return muDic;
     }
@@ -176,11 +221,18 @@
 -(NSMutableDictionary*)dicWithBillItem:(EP_BillItem*)billItem{
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[billItem dicWithItem]];
     if (muDic && self.user) {
-        [muDic setValue:billItem.billItemHasBillRule.uuid forKey:@"billItemHasBillRule"];
-        [muDic setValue:billItem.billItemHasCategory.uuid forKey:@"billItemHasCategory"];
-        [muDic setValue:billItem.billItemHasPayee.uuid forKey:@"billItemHasPayee"];
+        if (billItem.billItemHasBillRule) {
+            [muDic setValue:billItem.billItemHasBillRule.uuid forKey:@"billItemHasBillRule"];
+        }
+        if (billItem.billItemHasCategory) {
+            [muDic setValue:billItem.billItemHasCategory.uuid forKey:@"billItemHasCategory"];
+        }
+        if (billItem.billItemHasPayee) {
+            [muDic setValue:billItem.billItemHasPayee.uuid forKey:@"billItemHasPayee"];
+        }
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
-        
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
+        [muDic removeObjectForKey:@"billItemHasTransaction"];
         return muDic;
     }
     return nil;
@@ -189,9 +241,12 @@
 -(NSMutableDictionary*)dicWithBudgetTemplate:(BudgetTemplate*)budgetTemplate{
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[budgetTemplate dicWithItem]];
     if (muDic && self.user) {
-        [muDic setValue:budgetTemplate.category.uuid forKey:@"category"];
+        if (budgetTemplate.category.uuid) {
+            [muDic setValue:budgetTemplate.category.uuid forKey:@"category"];
+        }
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
-        
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
+        [muDic removeObjectForKey:@"budgetItems"];
         return muDic;
     }
     return nil;
@@ -200,9 +255,14 @@
 -(NSMutableDictionary*)dicWithBudgetItem:(BudgetItem*)budgetItem{
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[budgetItem dicWithItem]];
     if (muDic && self.user) {
-        [muDic setValue:budgetItem.budgetTemplate.uuid forKey:@"budgetTemplate"];
+        if (budgetItem.budgetTemplate) {
+            [muDic setValue:budgetItem.budgetTemplate.uuid forKey:@"budgetTemplate"];
+        }
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
-        
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
+        [muDic removeObjectForKey:@"fromTransfer"];
+        [muDic removeObjectForKey:@"toTransfer"];
+
         return muDic;
     }
     return nil;
@@ -211,10 +271,15 @@
 -(NSMutableDictionary*)dicWithBudgetTransfer:(BudgetTransfer*)budgetTransfer{
     NSMutableDictionary* muDic = [NSMutableDictionary dictionaryWithDictionary:[budgetTransfer dicWithItem]];
     if (muDic && self.user) {
-        [muDic setValue:budgetTransfer.toBudget.uuid forKey:@"toBudget"];
-        [muDic setValue:budgetTransfer.fromBudget.uuid forKey:@"fromBudget"];
+        if (budgetTransfer.toBudget) {
+            [muDic setValue:budgetTransfer.toBudget.uuid forKey:@"toBudget"];
+        }
+        if (budgetTransfer.fromBudget) {
+            [muDic setValue:budgetTransfer.fromBudget.uuid forKey:@"fromBudget"];
+        }
         [muDic setValue:[FIRAuth auth].currentUser.uid forKey:@"user_id"];
-        
+        [muDic setValue:[FIRFieldValue fieldValueForServerTimestamp] forKey:@"updatedTime"];
+
         return muDic;
     }
     return nil;
@@ -364,9 +429,6 @@
         }
     }
     
-    
-    return;
-    
     NSArray* accountTypeArr = [[XDDataManager shareManager]getObjectsFromTable:tableAccountType];
     if (accountTypeArr.count > 0) {
         NSArray* array = [self separateArray:accountTypeArr];
@@ -382,6 +444,7 @@
             [self batchAddAccountToFirestore:array[i]];
         }
     }
+    
     
     NSArray* categoryArr = [[XDDataManager shareManager]getObjectsFromTable:tableCategory];
     if (categoryArr.count > 0) {
@@ -427,7 +490,7 @@
     if (billRuleArr.count > 0) {
         NSArray* array = [self separateArray:billRuleArr];
         for (int i = 0; i < array.count; i++) {
-            [self batchAddPayeeToFirestore:array[i]];
+            [self batchBillRuleToFirestore:array[i]];
         }
     }
     
@@ -633,14 +696,432 @@
 }
 
 #pragma mark - download data
--(void)downloadItemTable:(NSString*)tableName{
+-(void)downloadAllData{
+    
+    FIRDocumentChangeType* type = FIRDocumentChangeTypeAdded;
+
+    
+    [self downloadItemTable:tableAccountType completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+        if (!error) {
+            [self.backgroundContext performBlock:^{
+                
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalWithAccountTypeDic:document.data type:type];
+                    
+                }
+                [self.backgroundContext save:nil];
+                [self.mainContext performBlock:^{
+                    [self.mainContext save:nil];
+                }];
+            }];
+        }
+        [self downloadItemTable:tableBudgetTemplate completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    
+                    for (FIRDocumentSnapshot *document in snapshot.documents) {
+                        [self optionalBudgetTemplateDic:document.data type:type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            [self downloadItemTable:tableCategory completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+                if (!error) {
+                    [self.backgroundContext performBlock:^{
+                        
+                        for (FIRDocumentSnapshot *document in snapshot.documents) {
+                            [self optionalWithCategoryDic:document.data type:type];
+                        }
+                        [self.backgroundContext save:nil];
+                        [self.mainContext performBlock:^{
+                            [self.mainContext save:nil];
+                        }];
+                    }];
+                }
+                [self downloadItemTable:tableBudgetTemplate completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+                    if (!error) {
+                        [self.backgroundContext performBlock:^{
+                            
+                            for (FIRDocumentSnapshot *document in snapshot.documents) {
+                                [self optionalBudgetTemplateDic:document.data type:type];
+                            }
+                            [self.backgroundContext save:nil];
+                            [self.mainContext performBlock:^{
+                                [self.mainContext save:nil];
+                            }];
+                        }];
+                    }
+                    [self downloadItemTable:tableBudgetItem completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+                        if (!error) {
+                            [self.backgroundContext performBlock:^{
+                                
+                                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                                    [self optionalBudgetItemDic:document.data type:type];
+                                }
+                                [self.backgroundContext save:nil];
+                                [self.mainContext performBlock:^{
+                                    [self.mainContext save:nil];
+                                }];
+                            }];
+                        }
+                        [self downloadItemTable:tableBudgetTransfer completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+                            if (!error) {
+                                [self.backgroundContext performBlock:^{
+                                    for (FIRDocumentSnapshot *document in snapshot.documents) {
+                                        [self optionalBudgetTransferDic:document.data type:type];
+                                    }
+                                    [self.backgroundContext save:nil];
+                                    [self.mainContext performBlock:^{
+                                        [self.mainContext save:nil];
+                                    }];
+                                }];
+                            }
+                            [self downloadItemTable:tablePayee completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+                                if (!error) {
+                                    [self.backgroundContext performBlock:^{
+                                        
+                                        for (FIRDocumentSnapshot *document in snapshot.documents) {
+                                            [self optionalWithPayeeDic:document.data type:type];
+                                        }
+                                        [self.backgroundContext save:nil];
+                                        [self.mainContext performBlock:^{
+                                            [self.mainContext save:nil];
+                                        }];
+                                    }];
+                                }
+                                [self downloadItemTable:tableBillRule completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+                                    if (!error) {
+                                        [self.backgroundContext performBlock:^{
+                                            
+                                            for (FIRDocumentSnapshot *document in snapshot.documents) {
+                                                [self optionalBillRuleDic:document.data type:type];
+                                            }
+                                            [self.backgroundContext save:nil];
+                                            [self.mainContext performBlock:^{
+                                                [self.mainContext save:nil];
+                                            }];
+                                        }];
+                                    }
+                                    [self downloadItemTable:tableBillItem completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+                                        if (!error) {
+                                            [self.backgroundContext performBlock:^{
+                                                
+                                                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                                                    [self optionalBillItemDic:document.data type:type];
+                                                }
+                                                [self.backgroundContext save:nil];
+                                                [self.mainContext performBlock:^{
+                                                    [self.mainContext save:nil];
+                                                }];
+                                            }];
+                                        }
+                                        [[[[self.db collectionWithPath:tableTransaction] queryWhereField:@"user_id" isEqualTo:self.user.uid] queryWhereField:@"parTransaction" isEqualTo:[NSNull null]] getDocumentsWithCompletion:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
+                                            if (!error) {
+                                                NSLog(@"download par transaction success");
+                                                
+                                                [self.backgroundContext performBlock:^{
+                                                    
+                                                    for (FIRDocumentSnapshot *document in snapshot.documents) {
+                                                        [self optionalWithTransactionDic:document.data type:type];
+                                                    }
+                                                    
+                                                    [self.backgroundContext save:nil];
+                                                    [self.mainContext performBlock:^{
+                                                        [self.mainContext save:nil];
+                                                    }];
+                                                }];
+                                            }
+                                            
+                                            [[[[self.db collectionWithPath:tableTransaction] queryWhereField:@"user_id" isEqualTo:self.user.uid] queryWhereField:@"parTransaction" isGreaterThan:@""] getDocumentsWithCompletion:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
+                                                
+                                                if (!error) {
+                                                    NSLog(@"download child transaction success");
+                                                    
+                                                    [self.backgroundContext performBlock:^{
+                                                        
+                                                        
+                                                        for (FIRDocumentSnapshot *document in snapshot.documents) {
+                                                            [self optionalWithTransactionDic:document.data type:type];
+                                                        }
+                                                        
+                                                        [self.backgroundContext save:nil];
+                                                        [self.mainContext performBlock:^{
+                                                            [self.mainContext save:nil];
+                                                        }];
+                                                    }];
+                                                }
+                                            }];
+                                        }];
+                                    }];
+                                }];
+                            }];
+                        }];
+                    }];
+                }];
+            }];
+        }];
+    }];
+}
+-(void)downloadAllData2{
+    if (!self.user) {
+        return;
+    }
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_queue_t q = dispatch_get_global_queue(0, 0);
+    FIRDocumentChangeType* type = FIRDocumentChangeTypeAdded;
+    
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tableAccountType completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalWithAccountTypeDic:document.data type:type];
+
+                }
+                        [self.backgroundContext save:nil];
+                        [self.mainContext performBlock:^{
+                            [self.mainContext save:nil];
+                        }];
+                    }];
+            }
+            dispatch_group_leave(group);
+
+        }];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tableAccount completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalWithAccountDic:document.data type:type];
+                }
+
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            dispatch_group_leave(group);
+
+        }];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tableCategory completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalWithCategoryDic:document.data type:type];
+                }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            dispatch_group_leave(group);
+        }];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tableBudgetTemplate completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalBudgetTemplateDic:document.data type:type];
+                }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            dispatch_group_leave(group);
+
+        }];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tableBudgetItem completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalBudgetItemDic:document.data type:type];
+                }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            dispatch_group_leave(group);
+
+        }];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tableBudgetTransfer completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalBudgetTransferDic:document.data type:type];
+                }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            dispatch_group_leave(group);
+
+        }];
+
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tablePayee completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalWithPayeeDic:document.data type:type];
+                }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            dispatch_group_leave(group);
+        }];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tableBillRule completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalBillRuleDic:document.data type:type];
+                }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            dispatch_group_leave(group);
+
+        }];
+
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [self downloadItemTable:tableBillItem completion:^(FIRQuerySnapshot *snapshot,NSError * error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalBillItemDic:document.data type:type];
+                }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+            dispatch_group_leave(group);
+
+        }];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+
+        [[[[self.db collectionWithPath:tableTransaction] queryWhereField:@"user_id" isEqualTo:self.user.uid] queryWhereField:@"parTransaction" isEqualTo:[NSNull null]] getDocumentsWithCompletion:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
+            if (!error) {
+                NSLog(@"download par transaction success");
+
+                [self.backgroundContext performBlock:^{
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalWithTransactionDic:document.data type:type];
+                }
+
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+
+            dispatch_group_leave(group);
+        }];
+    });
+
+    dispatch_group_enter(group);
+    dispatch_async(q, ^{
+        [[[[self.db collectionWithPath:tableTransaction] queryWhereField:@"user_id" isEqualTo:self.user.uid] queryWhereField:@"parTransaction" isGreaterThan:@""] getDocumentsWithCompletion:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
+
+            if (!error) {
+                NSLog(@"download child transaction success");
+
+                [self.backgroundContext performBlock:^{
+                    
+
+                for (FIRDocumentSnapshot *document in snapshot.documents) {
+                    [self optionalWithTransactionDic:document.data type:type];
+                }
+
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
+                }];
+            }
+
+            dispatch_group_leave(group);
+        }];
+    });
+
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"refreshUI" object:nil];
+        
+        NSLog(@"all download");
+    });
+
+}
+
+
+-(void)downloadItemTable:(NSString*)tableName completion:(void(^)(FIRQuerySnapshot *snapshot , NSError * error))completion{
     [[[self.db collectionWithPath:tableName] queryWhereField:@"user_id" isEqualTo:self.user.uid]
      getDocumentsWithCompletion:^(FIRQuerySnapshot *snapshot, NSError *error) {
          if (error != nil) {
              NSLog(@"Error getting documents: %@", error);
          } else {
-             for (FIRDocumentSnapshot *document in snapshot.documents) {
-                 NSLog(@"%@ => %@", document.documentID, document.data);
+             if (completion) {
+                 NSLog(@"download %@ success",tableName);
+
+                 completion(snapshot,error);
              }
          }
      }];
@@ -653,21 +1134,24 @@
     if (!self.user) {
         return;
     }
+    
     dispatch_group_t group = dispatch_group_create();
     dispatch_queue_t q = dispatch_get_global_queue(0, 0);
 
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tableAccountType completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalWithAccountTypeDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tableAccountType completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalWithAccountTypeDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
@@ -675,16 +1159,18 @@
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tableAccount completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalWithAccountDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tableAccount completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalWithAccountDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
@@ -692,16 +1178,18 @@
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tableCategory completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalWithCategoryDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tableCategory completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalWithCategoryDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
@@ -709,16 +1197,18 @@
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tableBudgetTemplate completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalBudgetTemplateDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tableBudgetTemplate completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalBudgetTemplateDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
@@ -726,115 +1216,130 @@
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tableBudgetItem completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalBudgetItemDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tableBudgetItem completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalBudgetItemDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tableBudgetTransfer completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalBudgetTransferDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tableBudgetTransfer completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalBudgetTransferDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tablePayee completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalWithPayeeDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tablePayee completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalWithPayeeDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tableBillRule completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalBillRuleDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tableBillRule completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalBillRuleDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenItemTable:tableBillItem completion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalBillItemDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenItemTable:tableBillItem completion:^(FIRQuerySnapshot *snapshot, NSError *error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalBillItemDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenParentTransaction:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalWithTransactionDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenChildTransacion:^(FIRQuerySnapshot *snapshot, NSError * _Nullable error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalWithTransactionDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
     
     dispatch_group_enter(group);
     dispatch_async(q, ^{
-        [self listenChildTransacion:^(FIRQuerySnapshot *snapshot) {
-            [self.backgroundContext performBlock:^{
-                for (FIRDocumentChange *diff in snapshot.documentChanges) {
-                    [self optionalWithTransactionDic:diff.document.data type:diff.type];
-                }
-                [self.backgroundContext save:nil];
-                [self.mainContext performBlock:^{
-                    [self.mainContext save:nil];
+        [self listenParentTransaction:^(FIRQuerySnapshot *snapshot, NSError * _Nullable error) {
+            if (!error) {
+                [self.backgroundContext performBlock:^{
+                    for (FIRDocumentChange *diff in snapshot.documentChanges) {
+                        [self optionalWithTransactionDic:diff.document.data type:diff.type];
+                    }
+                    [self.backgroundContext save:nil];
+                    [self.mainContext performBlock:^{
+                        [self.mainContext save:nil];
+                    }];
                 }];
-            }];
+            }
             dispatch_group_leave(group);
         }];
     });
+    
     
     dispatch_group_notify(group, dispatch_get_main_queue(), ^{
         NSLog(@"listen completion");
@@ -842,7 +1347,7 @@
     
 }
 
--(void)listenParentTransaction:(void(^)(FIRQuerySnapshot* snapshot))completion{
+-(void)listenParentTransaction:(void(^)(FIRQuerySnapshot* snapshot, NSError * _Nullable error))completion{
     FIRCollectionReference* ref = [self.db collectionWithPath:tableTransaction];
     [[[ref queryWhereField:@"user_id" isEqualTo:self.user.uid] queryWhereField:@"parTransaction" isEqualTo:[NSNull null]] addSnapshotListener:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
         if (snapshot == nil) {
@@ -850,12 +1355,12 @@
             return;
         }
         if (completion) {
-            completion(snapshot);
+            completion(snapshot,error);
         }
     }];
 }
 
--(void)listenChildTransacion:(void(^)(FIRQuerySnapshot* snapshot))completion{
+-(void)listenChildTransacion:(void(^)(FIRQuerySnapshot* snapshot, NSError * _Nullable error))completion{
     FIRCollectionReference* ref = [self.db collectionWithPath:tableTransaction];
     [[[ref queryWhereField:@"user_id" isEqualTo:self.user.uid] queryWhereField:@"parTransaction" isGreaterThan:@""] addSnapshotListener:^(FIRQuerySnapshot * _Nullable snapshot, NSError * _Nullable error) {
         if (snapshot == nil) {
@@ -863,12 +1368,12 @@
             return;
         }
         if (completion) {
-            completion(snapshot);
+            completion(snapshot,error);
         }
     }];
 }
 
--(void)listenItemTable:(NSString*)tableName completion:(void(^)(FIRQuerySnapshot* snapshot))completion{
+-(void)listenItemTable:(NSString*)tableName completion:(void(^)(FIRQuerySnapshot* snapshot, NSError *error))completion{
     [[[self.db collectionWithPath:tableName] queryWhereField:@"user_id" isEqualTo:self.user.uid]
      addSnapshotListener:^(FIRQuerySnapshot *snapshot, NSError *error) {
          if (snapshot == nil) {
@@ -876,7 +1381,7 @@
              return;
          }
          if (completion) {
-             completion(snapshot);
+             completion(snapshot,error);
          }
      }];
 }
@@ -888,14 +1393,12 @@
         Transaction* transaction = [self backgroundInsertObjectToTable:tableTransaction];
         [self assignTransactionLocal:transaction WithDic:dic];
         
-    }
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         Transaction* transaction = [[self backgroundGetObjectsFromTable:tableTransaction predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (transaction) {
             [self assignTransactionLocal:transaction WithDic:dic];
         }
-    }
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         Transaction* transaction = [[self backgroundGetObjectsFromTable:tableTransaction predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (transaction) {
             [self.backgroundContext deleteObject:transaction];
@@ -909,14 +1412,12 @@
         Category* category = [self backgroundInsertObjectToTable:tableCategory];
         [self assignCategoryLocal:category WithServer:dic];
         
-    }
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         Category* category = [[self backgroundGetObjectsFromTable:tableCategory predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (category) {
             [self assignCategoryLocal:category WithServer:dic];
         }
-    }
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         Category* category = [[self backgroundGetObjectsFromTable:tableCategory predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (category) {
             [self.backgroundContext deleteObject:category];
@@ -931,14 +1432,12 @@
         Accounts* account = [self backgroundInsertObjectToTable:tableAccount];
         [self assignAccountLocal:account WithServer:dic];
         
-    }
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         Accounts* account  = [[self backgroundGetObjectsFromTable:tableAccount predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (account) {
             [self assignAccountLocal:account WithServer:dic];
         }
-    }
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         Accounts* account  = [[self backgroundGetObjectsFromTable:tableAccount predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (account) {
             [self.backgroundContext deleteObject:account];
@@ -953,14 +1452,12 @@
         AccountType* account = [self backgroundInsertObjectToTable:tableAccountType];
         [self assignAccountTypeLocal:account WithServer:dic];
         
-    }
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         AccountType* account  = [[self backgroundGetObjectsFromTable:tableAccountType predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (account) {
             [self assignAccountTypeLocal:account WithServer:dic];
         }
-    }
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         AccountType* account  = [[self backgroundGetObjectsFromTable:tableAccountType predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (account) {
             [self.backgroundContext deleteObject:account];
@@ -975,14 +1472,12 @@
         Payee* payee = [self backgroundInsertObjectToTable:tablePayee];
         [self assignPayeeLocal:payee WithServer:dic];
         
-    }
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         Payee* payee  = [[self backgroundGetObjectsFromTable:tablePayee predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (payee) {
             [self assignPayeeLocal:payee WithServer:dic];
         }
-    }
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         Payee* payee  = [[self backgroundGetObjectsFromTable:tablePayee predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (payee) {
             [self.backgroundContext deleteObject:payee];
@@ -996,14 +1491,12 @@
         EP_BillRule* billRule = [self backgroundInsertObjectToTable:tableBillRule];
         [self assignBillRuleLocal:billRule WithServer:dic];
         
-    }
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         EP_BillRule* billRule  = [[self backgroundGetObjectsFromTable:tableBillRule predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (billRule) {
             [self assignBillRuleLocal:billRule WithServer:dic];
         }
-    }
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         EP_BillRule* billRule  = [[self backgroundGetObjectsFromTable:tableBillRule predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (billRule) {
             [self.backgroundContext deleteObject:billRule];
@@ -1017,14 +1510,12 @@
         EP_BillItem* billItem = [self backgroundInsertObjectToTable:tableBillItem];
         [self assignBillItemLocal:billItem WithServer:dic];
         
-    }
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         EP_BillItem* billItem  = [[self backgroundGetObjectsFromTable:tableBillItem predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (billItem) {
             [self assignBillItemLocal:billItem WithServer:dic];
         }
-    }
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         EP_BillItem* billItem  = [[self backgroundGetObjectsFromTable:tableBillItem predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (billItem) {
             [self.backgroundContext deleteObject:billItem];
@@ -1037,16 +1528,12 @@
     if (type == FIRDocumentChangeTypeAdded) {
         BudgetItem* item = [self backgroundInsertObjectToTable:tableBudgetItem];
         [self assignBudgetItemLocal:item WithServer:dic];
-    }
-    
-     if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
          BudgetItem* item = [[self backgroundGetObjectsFromTable:tableBudgetItem predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
          if (item) {
              [self assignBudgetItemLocal:item WithServer:dic];
          }
-     }
-    
-    if (type == FIRDocumentChangeTypeRemoved) {
+     }else if (type == FIRDocumentChangeTypeRemoved) {
         BudgetItem* item = [[self backgroundGetObjectsFromTable:tableBudgetItem predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (item) {
             [self.backgroundContext deleteObject:item];
@@ -1059,16 +1546,12 @@
     if (type == FIRDocumentChangeTypeAdded) {
         BudgetTemplate* item = [self backgroundInsertObjectToTable:tableBudgetTemplate];
         [self assignBudgetTemplateLocal:item WithServer:dic];
-    }
-    
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         BudgetTemplate* item = [[self backgroundGetObjectsFromTable:tableBudgetTemplate predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (item) {
             [self assignBudgetTemplateLocal:item WithServer:dic];
         }
-    }
-    
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         BudgetTemplate* item = [[self backgroundGetObjectsFromTable:tableBudgetTemplate predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (item) {
             [self.backgroundContext deleteObject:item];
@@ -1081,16 +1564,12 @@
     if (type == FIRDocumentChangeTypeAdded) {
         BudgetTransfer* item = [self backgroundInsertObjectToTable:tableBudgetTransfer];
         [self assignBudgetTransfer:item WithServer:dic];
-    }
-    
-    if (type == FIRDocumentChangeTypeModified) {
+    }else if (type == FIRDocumentChangeTypeModified) {
         BudgetTransfer* item = [[self backgroundGetObjectsFromTable:tableBudgetTransfer predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (item) {
             [self assignBudgetTransfer:item WithServer:dic];
         }
-    }
-    
-    if (type == FIRDocumentChangeTypeRemoved) {
+    }else if (type == FIRDocumentChangeTypeRemoved) {
         BudgetTransfer* item = [[self backgroundGetObjectsFromTable:tableBudgetTransfer predicate:[NSPredicate predicateWithFormat:@"uuid = %@",uuid] sortDescriptors:nil]lastObject];
         if (item) {
             [self.backgroundContext deleteObject:item];
@@ -1103,24 +1582,24 @@
 
 -(void)assignTransactionLocal:(Transaction *)transaction WithDic:(NSDictionary *)objectServer
 {
-    transaction.amount=objectServer[@"amount"];
-    transaction.dateTime=objectServer[@"dateTime"];
-    transaction.dateTime_sync=objectServer[@"dateTime_Sync"];
-    transaction.groupByDate=objectServer[@"groupByDate"];
-    transaction.isClear=objectServer[@"isClear"];
-    transaction.notes=objectServer[@"notes"];
-    transaction.orderIndex=objectServer[@"orderIndex"];
-    transaction.others=objectServer[@"others"];
-    transaction.recurringType=objectServer[@"recurringType"];
-    transaction.state=objectServer[@"state"];
-    transaction.transactionBool=objectServer[@"transactionBool"];
-    transaction.transactionstring=objectServer[@"transactionstring"];
-    transaction.transactionType=objectServer[@"transactionType"];
-    transaction.type=objectServer[@"type"];
-    transaction.uuid=objectServer[@"uuid"];
-    transaction.updatedTime=objectServer[@"updatedTime"];
+    transaction.amount=[objectServer[@"amount"]isNull];
+    transaction.dateTime=[objectServer[@"dateTime"]isNull];
+    transaction.dateTime_sync=[objectServer[@"dateTime_Sync"]isNull];
+    transaction.groupByDate=[objectServer[@"groupByDate"] isNull];
+    transaction.isClear=[objectServer[@"isClear"]isNull];
+    transaction.notes=[objectServer[@"notes"]isNull];
+    transaction.orderIndex=[objectServer[@"orderIndex"]isNull];
+    transaction.others=[objectServer[@"others"]isNull];
+    transaction.recurringType=[objectServer[@"recurringType"]isNull];
+    transaction.state=[objectServer[@"state"]isNull];
+    transaction.transactionBool=[objectServer[@"transactionBool"]isNull];
+    transaction.transactionstring=[objectServer[@"transactionstring"]isNull];
+    transaction.transactionType=[objectServer[@"transactionType"]isNull];
+    transaction.type=[objectServer[@"type"]isNull];
+    transaction.uuid=[objectServer[@"uuid"]isNull];
+    transaction.updatedTime=[objectServer[@"updatedTime"]isNull];
     transaction.isUpload = @"1";
-    if (objectServer[@"category"]!=nil) {
+    if (objectServer[@"category"]!=nil && objectServer[@"category"]!=[NSNull null]) {
         if ([objectServer[@"category"] isEqualToString:@"4349B269-0856-436E-98E0-D5C5DE0B289D"]) {
             Category * category = [[self backgroundGetObjectsFromTable:tableCategory predicate:[NSPredicate predicateWithFormat:@"uuid = %@",@"4349B269-0856-436E-98E0-D5C5DE0B289D"] sortDescriptors:nil]lastObject];
             if (category) {
@@ -1131,7 +1610,7 @@
                     transaction.category = category1;
                 }else{
                     Category* category2 = [[self backgroundGetObjectsFromTable:tableCategory predicate:[NSPredicate predicateWithFormat:@"uuid == %@",@"CA6C55B4-2B95-4921-9AE4-74E76A253426"] sortDescriptors:nil]lastObject];
-                    if (category1) {
+                    if (category2) {
                         transaction.category = category2;
                     }
                 }
@@ -1146,58 +1625,70 @@
         transaction.category = nil;
     }
     
-    if (objectServer[@"expenseAccount"]!=nil){
+    if (objectServer[@"expenseAccount"]!=nil && objectServer[@"expenseAccount"]!=[NSNull null]){
         Accounts* account = [[self backgroundGetObjectsFromTable:tableAccount predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"expenseAccount"]] sortDescriptors:nil]lastObject];
         if (account) {
             transaction.expenseAccount = account;
         }else{
             transaction.expenseAccount = nil;
         }
+    }else{
+        transaction.expenseAccount = nil;
     }
     
-    if (objectServer[@"incomeAccount"]!=nil){
+    if (objectServer[@"incomeAccount"]!=nil  && objectServer[@"incomeAccount"]!=[NSNull null]){
         Accounts* account = [[self backgroundGetObjectsFromTable:tableAccount predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"incomeAccount"]] sortDescriptors:nil]lastObject];
         if (account) {
             transaction.incomeAccount = account;
         }else{
             transaction.incomeAccount = nil;
         }
+    }else{
+        transaction.incomeAccount = nil;
     }
     
-    if (objectServer[@"parTransaction"]!=nil){
+    if (objectServer[@"parTransaction"]!=nil && objectServer[@"parTransaction"]!=[NSNull null]){
         Transaction* parTransaction = [[self backgroundGetObjectsFromTable:tableTransaction predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"parTransaction"]] sortDescriptors:nil]lastObject];
         if (parTransaction) {
             transaction.parTransaction = parTransaction;
         }else{
             transaction.parTransaction = nil;
         }
+    }else{
+        transaction.parTransaction = nil;
     }
     
-    if (objectServer[@"payee"]!=nil){
+    if (objectServer[@"payee"]!=nil && objectServer[@"payee"]!=[NSNull null]){
         Payee* payee = [[self backgroundGetObjectsFromTable:tablePayee predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"payee"]] sortDescriptors:nil]lastObject];
         if (payee) {
             transaction.payee = payee;
         }else{
             transaction.payee = nil;
         }
+    }else{
+        transaction.payee = nil;
     }
     
-    if (objectServer[@"transactionHasBillItem"]!=nil){
+    if (objectServer[@"transactionHasBillItem"]!=nil && objectServer[@"transactionHasBillItem"]!=[NSNull null]){
         EP_BillItem* billItem = [[self backgroundGetObjectsFromTable:tableBillItem predicate:[NSPredicate predicateWithFormat:@"uuid = %@",objectServer[@"transactionHasBillItem"]] sortDescriptors:nil]lastObject];
         if (billItem) {
             transaction.transactionHasBillItem = billItem;
         }else{
             transaction.transactionHasBillItem = nil;
         }
+    }else{
+        transaction.transactionHasBillItem = nil;
     }
     
-    if (objectServer[@"transactionHasBillRule"]!=nil){
+    if (objectServer[@"transactionHasBillRule"]!=nil && objectServer[@"transactionHasBillRule"]!= [NSNull null]){
         EP_BillRule* billRule = [[self backgroundGetObjectsFromTable:tableBillRule predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"transactionHasBillRule"]] sortDescriptors:nil]lastObject];
         if (billRule) {
             transaction.transactionHasBillRule = billRule;
         }else{
             transaction.transactionHasBillRule = nil;
         }
+    }else{
+        transaction.transactionHasBillRule = nil;
     }
     
     //图片未作处理
@@ -1206,244 +1697,289 @@
 
 -(void)assignAccountTypeLocal:(AccountType *)accountType WithServer:(NSDictionary *)objectServer
 {
-    accountType.dateTime=objectServer[@"dateTime"];
-    accountType.iconName=objectServer[@"iconName"];
-    accountType.isDefault=objectServer[@"isDefault"];
-    accountType.ordexIndex=objectServer[@"orderIndex"];
-    accountType.others=objectServer[@"others"];
-    accountType.state=objectServer[@"state"];
-    accountType.typeName=objectServer[@"typeName"];
-    accountType.uuid=objectServer[@"uuid"];
-    accountType.updatedTime=objectServer[@"updatedTime"];
+    accountType.dateTime=[objectServer[@"dateTime"] isNull];
+    accountType.iconName=[objectServer[@"iconName"]isNull];
+    accountType.isDefault=[objectServer[@"isDefault"]isNull];
+    accountType.ordexIndex=[objectServer[@"orderIndex"]isNull];
+    accountType.others=[objectServer[@"others"]isNull];
+    accountType.state=[objectServer[@"state"]isNull];
+    accountType.typeName=[objectServer[@"typeName"]isNull];
+    accountType.uuid=[objectServer[@"uuid"]isNull];
+    accountType.updatedTime=[objectServer[@"updatedTime"]isNull];
 }
 
 -(void)assignAccountLocal:(Accounts *)account WithServer:(NSDictionary *)objectServer
 {
-    account.accName=objectServer[@"accName"];
-    account.amount=objectServer[@"amount"];
-    account.autoClear=objectServer[@"autoClear"];
-    account.checkNumber=objectServer[@"checkNumber"];
-    account.creditLimit=objectServer[@"creditLimit"];
-    account.dateTime=objectServer[@"dateTime"];
-    account.dateTime_sync=objectServer[@"dateTime_sync"];
-    account.dueDate=objectServer[@"dueDate"];
-    account.iconName=objectServer[@"objectServer"];
-    account.orderIndex=objectServer[@"orderIndex"];
-    account.others=objectServer[@"others"];
-    account.reconcile=objectServer[@"reconcile"];
-    account.runningBalance=objectServer[@"runningBalance"];
-    account.state=objectServer[@"state"];
-    account.uuid=objectServer[@"uuid"];
-    account.accountColor=objectServer[@"accountColor"];
-    account.updatedTime=objectServer[@"updatedTime"];
-    if (objectServer[@"accountType"]!=nil)
+    account.accName=[objectServer[@"accName"]isNull];
+    account.amount=[objectServer[@"amount"]isNull];
+    account.autoClear=[objectServer[@"autoClear"]isNull];
+    account.checkNumber=[objectServer[@"checkNumber"]isNull];
+    account.creditLimit=[objectServer[@"creditLimit"]isNull];
+    account.dateTime=[objectServer[@"dateTime"]isNull];
+    account.dateTime_sync=[objectServer[@"dateTime_sync"]isNull];
+    account.dueDate=[objectServer[@"dueDate"]isNull];
+    account.iconName=[objectServer[@"objectServer"]isNull];
+    account.orderIndex=[objectServer[@"orderIndex"]isNull];
+    account.others=[objectServer[@"others"]isNull];
+    account.reconcile=[objectServer[@"reconcile"]isNull];
+    account.runningBalance=[objectServer[@"runningBalance"]isNull];
+    account.state=[objectServer[@"state"]isNull];
+    account.uuid=[objectServer[@"uuid"]isNull];
+    account.accountColor=[objectServer[@"accountColor"]isNull];
+    account.updatedTime=[objectServer[@"updatedTime"]isNull];
+    if (objectServer[@"accountType"]!=nil && objectServer[@"accountType"] != [NSNull null])
     {
         AccountType* accountType = [[self backgroundGetObjectsFromTable:tableAccountType predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"accountType"]] sortDescriptors:nil]lastObject];
         if (accountType) {
             account.accountType = accountType;
         }
+    }else{
+        account.accountType = nil;
     }
 }
 
 -(void)assignCategoryLocal:(Category *)category WithServer:(NSDictionary *)objectServer
 {
-    category.categoryisExpense=objectServer[@"categoryisExpense"];
-    category.categoryisIncome=objectServer[@"categoryisIncome"];
-    category.categoryName=objectServer[@"categoryName"];
-    category.categoryString=objectServer[@"categoryString"];
-    category.categoryType=objectServer[@"categoryType"];
-    category.colorName=objectServer[@"colorName"];
-    category.dateTime=objectServer[@"dateTime"];
-    category.hasBudget=objectServer[@"hasBudget"];
-    category.iconName=objectServer[@"iconName"];
-    category.isDefault=objectServer[@"isDefault"];
-    category.isSystemRecord=objectServer[@"isSystemRecord"];
-    category.others=objectServer[@"others"];
-    category.recordIndex=objectServer[@"recordIndex"];
-    category.state=objectServer[@"state"];
-    category.uuid=objectServer[@"uuid"];
-    category.updatedTime=objectServer[@"updatedTime"];
+    category.categoryisExpense=[objectServer[@"categoryisExpense"]isNull];
+    category.categoryisIncome=[objectServer[@"categoryisIncome"]isNull];
+    category.categoryName=[objectServer[@"categoryName"]isNull];
+    category.categoryString=[objectServer[@"categoryString"]isNull];
+    category.categoryType=[objectServer[@"categoryType"]isNull];
+    category.colorName=[objectServer[@"colorName"]isNull];
+    category.dateTime=[objectServer[@"dateTime"]isNull];
+    category.hasBudget=[objectServer[@"hasBudget"]isNull];
+    category.iconName=[objectServer[@"iconName"]isNull];
+    category.isDefault=[objectServer[@"isDefault"]isNull];
+    category.isSystemRecord=[objectServer[@"isSystemRecord"]isNull];
+    category.others=[objectServer[@"others"]isNull];
+    category.recordIndex=[objectServer[@"recordIndex"]isNull];
+    category.state=[objectServer[@"state"]isNull];
+    category.uuid=[objectServer[@"uuid"]isNull];
+    category.updatedTime=[objectServer[@"updatedTime"]isNull];
     
 }
 
 -(void)assignPayeeLocal:(Payee *)payee WithServer:(NSDictionary *)objectServer
 {
-    payee.dateTime=objectServer[@"dateTime"];
-    payee.memo=objectServer[@"memo"];
-    payee.name=objectServer[@"name"];
-    payee.orderIndex=objectServer[@"orderIndex"];
-    payee.others=objectServer[@"others"];
-    payee.phone=objectServer[@"phone"];
-    payee.state=objectServer[@"state"];
-    payee.tranAmount=objectServer[@"tranAmount"];
-    payee.tranCleared=objectServer[@"tranCleared"];
-    payee.tranMemo=objectServer[@"tranMemo"];
-    payee.tranType=objectServer[@"tranType"];
-    payee.uuid=objectServer[@"uuid"];
-    payee.website=objectServer[@"website"];
-    payee.updatedTime=objectServer[@"updatedTime"];
-    if (objectServer[@"category"]!=nil)
+    payee.dateTime=[objectServer[@"dateTime"]isNull];
+    payee.memo=[objectServer[@"memo"]isNull];
+    payee.name=[objectServer[@"name"]isNull];
+    payee.orderIndex=[objectServer[@"orderIndex"]isNull];
+    payee.others=[objectServer[@"others"]isNull];
+    payee.phone=[objectServer[@"phone"]isNull];
+    payee.state=[objectServer[@"state"]isNull];
+    payee.tranAmount=[objectServer[@"tranAmount"]isNull];
+    payee.tranCleared=[objectServer[@"tranCleared"]isNull];
+    payee.tranMemo=[objectServer[@"tranMemo"]isNull];
+    payee.tranType=[objectServer[@"tranType"]isNull];
+    payee.uuid=[objectServer[@"uuid"]isNull];
+    payee.website=[objectServer[@"website"]isNull];
+    payee.updatedTime=[objectServer[@"updatedTime"]isNull];
+    if (objectServer[@"category"]!=nil && objectServer[@"category"]!=[NSNull null])
     {
         Category* category = [[self backgroundGetObjectsFromTable:tableCategory predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"category"]] sortDescriptors:nil]lastObject];
         if (category) {
             payee.category = category;
+        }else{
+            payee.category = nil;
         }
+    }else{
+        payee.category = nil;
     }
 }
 
 -(void)assignBillRuleLocal:(EP_BillRule *)billRule WithServer:(NSDictionary *)objectServer
 {
-    billRule.dateTime=objectServer[@"dateTime"];
-    billRule.ep_billAmount=objectServer[@"ep_billAmount"];
-    billRule.ep_billDueDate=objectServer[@"ep_billDueDate"];
-    billRule.ep_billEndDate=objectServer[@"ep_billEndDate"];
-    billRule.ep_billName=objectServer[@"ep_billName"];
-    billRule.ep_bool1=objectServer[@"ep_bool1"];
-    billRule.ep_bool2=objectServer[@"ep_bool2"];
-    billRule.ep_date1=objectServer[@"ep_date1"];
-    billRule.ep_date2=objectServer[@"ep_date2"];
-    billRule.ep_note=objectServer[@"ep_note"];
-    billRule.ep_recurringType=objectServer[@"ep_recurringType"];
-    billRule.ep_reminderDate=objectServer[@"ep_reminderDate"];
-    billRule.ep_reminderTime=objectServer[@"ep_reminderTime"];
-    billRule.ep_string1=objectServer[@"ep_string1"];
-    billRule.ep_string2=objectServer[@"ep_string2"];
-    billRule.state=objectServer[@"state"];
-    billRule.uuid=objectServer[@"uuid"];
-    billRule.updatedTime=objectServer[@"updatedTime"];
+    billRule.dateTime=[objectServer[@"dateTime"]isNull];
+    billRule.ep_billAmount=[objectServer[@"ep_billAmount"]isNull];
+    billRule.ep_billDueDate=[objectServer[@"ep_billDueDate"]isNull];
+    billRule.ep_billEndDate=[objectServer[@"ep_billEndDate"]isNull];
+    billRule.ep_billName=[objectServer[@"ep_billName"]isNull];
+    billRule.ep_bool1=[objectServer[@"ep_bool1"]isNull];
+    billRule.ep_bool2=[objectServer[@"ep_bool2"]isNull];
+    billRule.ep_date1=[objectServer[@"ep_date1"]isNull];
+    billRule.ep_date2=[objectServer[@"ep_date2"]isNull];
+    billRule.ep_note=[objectServer[@"ep_note"]isNull];
+    billRule.ep_recurringType=[objectServer[@"ep_recurringType"]isNull];
+    billRule.ep_reminderDate=[objectServer[@"ep_reminderDate"]isNull];
+    billRule.ep_reminderTime=[objectServer[@"ep_reminderTime"]isNull];
+    billRule.ep_string1=[objectServer[@"ep_string1"]isNull];
+    billRule.ep_string2=[objectServer[@"ep_string2"]isNull];
+    billRule.state=[objectServer[@"state"]isNull];
+    billRule.uuid=[objectServer[@"uuid"]isNull];
+    billRule.updatedTime=[objectServer[@"updatedTime"]isNull];
     //
-    if (objectServer[@"billRuleHasCategory"]!=nil)
+    if (objectServer[@"billRuleHasCategory"]!=nil && objectServer[@"billRuleHasCategory"]!=[NSNull null])
     {
         Category* category = [[self backgroundGetObjectsFromTable:tableCategory predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"billRuleHasCategory"]] sortDescriptors:nil]lastObject];
         if (category) {
             billRule.billRuleHasCategory = category;
+        }else{
+            billRule.billRuleHasCategory = nil;
         }
+    }else{
+        billRule.billRuleHasCategory = nil;
     }
-    if (objectServer[@"billRuleHasPayee"]!=nil)
+    
+    if (objectServer[@"billRuleHasPayee"]!=nil && objectServer[@"billRuleHasPayee"]!=[NSNull null])
     {
         Payee* payee = [[self backgroundGetObjectsFromTable:tablePayee predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"billRuleHasPayee"]] sortDescriptors:nil]lastObject];
         if (payee) {
             billRule.billRuleHasPayee = payee;
+        }else{
+            billRule.billRuleHasPayee = nil;
         }
+    }else{
+        billRule.billRuleHasPayee = nil;
     }
 }
 
 -(void)assignBillItemLocal:(EP_BillItem *)billItem WithServer:(NSDictionary *)objectServer
 {
-    billItem.dateTime=objectServer[@"dateTime"];
-    billItem.ep_billisDelete=objectServer[@"ep_billisDelete"];
-    billItem.ep_billItemAmount=objectServer[@"ep_billItemAmount"];
-    billItem.ep_billItemBool1=objectServer[@"ep_billItemBool1"];
-    billItem.ep_billItemBool2=objectServer[@"ep_billItemBool2"];
-    billItem.ep_billItemDate1=objectServer[@"ep_billItemDate1"];
-    billItem.ep_billItemDate2=objectServer[@"ep_billItemDate2"];
-    billItem.ep_billItemDueDate=objectServer[@"ep_billItemDueDate"];
-    billItem.ep_billItemDueDateNew=objectServer[@"ep_billItemDueDateNew"];
-    billItem.ep_billItemEndDate=objectServer[@"ep_billItemEndDate"];
-    billItem.ep_billItemName=objectServer[@"ep_billItemName"];
-    billItem.ep_billItemNote=objectServer[@"ep_billItemNote"];
-    billItem.ep_billItemRecurringType=objectServer[@"ep_billItemRecurringType"];
-    billItem.ep_billItemReminderDate=objectServer[@"ep_billItemReminderDate"];
-    billItem.ep_billItemReminderTime=objectServer[@"ep_billItemReminderTime"];
-    billItem.ep_billItemString1=objectServer[@"ep_billItemString1"];
-    billItem.ep_billItemString2=objectServer[@"ep_billItemString2"];
-    billItem.state=objectServer[@"state"];
-    billItem.uuid=objectServer[@"uuid"];
-    billItem.updatedTime=objectServer[@"updatedTime"];
-    if (objectServer[@"billItemHasBillRule"]!=nil)
+    billItem.dateTime=[objectServer[@"dateTime"] isNull];
+    billItem.ep_billisDelete=[objectServer[@"ep_billisDelete"]isNull];
+    billItem.ep_billItemAmount=[objectServer[@"ep_billItemAmount"]isNull];
+    billItem.ep_billItemBool1=[objectServer[@"ep_billItemBool1"]isNull];
+    billItem.ep_billItemBool2=[objectServer[@"ep_billItemBool2"]isNull];
+    billItem.ep_billItemDate1=[objectServer[@"ep_billItemDate1"]isNull];
+    billItem.ep_billItemDate2=[objectServer[@"ep_billItemDate2"]isNull];
+    billItem.ep_billItemDueDate=[objectServer[@"ep_billItemDueDate"]isNull];
+    billItem.ep_billItemDueDateNew=[objectServer[@"ep_billItemDueDateNew"]isNull];
+    billItem.ep_billItemEndDate=[objectServer[@"ep_billItemEndDate"]isNull];
+    billItem.ep_billItemName=[objectServer[@"ep_billItemName"]isNull];
+    billItem.ep_billItemNote=[objectServer[@"ep_billItemNote"]isNull];
+    billItem.ep_billItemRecurringType=[objectServer[@"ep_billItemRecurringType"]isNull];
+    billItem.ep_billItemReminderDate=[objectServer[@"ep_billItemReminderDate"]isNull];
+    billItem.ep_billItemReminderTime=[objectServer[@"ep_billItemReminderTime"]isNull];
+    billItem.ep_billItemString1=[objectServer[@"ep_billItemString1"]isNull];
+    billItem.ep_billItemString2=[objectServer[@"ep_billItemString2"]isNull];
+    billItem.state=[objectServer[@"state"]isNull];
+    billItem.uuid=[objectServer[@"uuid"]isNull];
+    billItem.updatedTime=[objectServer[@"updatedTime"]isNull];
+    if (objectServer[@"billItemHasBillRule"]!=nil && objectServer[@"billItemHasBillRule"]!=[NSNull null])
     {
         EP_BillRule* billRule = [[self backgroundGetObjectsFromTable:tableBillRule predicate:[NSPredicate predicateWithFormat:@"uuid = %@",objectServer[@"billItemHasBillRule"]] sortDescriptors:nil]lastObject];
         if (billRule)
         {
             billItem.billItemHasBillRule=billRule;
+        }else{
+            billItem.billItemHasBillRule = nil;
         }
+    }else{
+        billItem.billItemHasBillRule = nil;
     }
-    if (objectServer[@"billItemHasCategory"])
+    
+    if (objectServer[@"billItemHasCategory"] != nil && objectServer[@"billItemHasCategory"] != [NSNull null])
     {
         Category* category = [[self backgroundGetObjectsFromTable:tableCategory predicate:[NSPredicate predicateWithFormat:@"uuid = %@",objectServer[@"billItemHasCategory"]] sortDescriptors:nil]lastObject];
         if (category)
         {
             billItem.billItemHasCategory=category;
+        }else{
+            billItem.billItemHasCategory= nil;
         }
+    }else{
+        billItem.billItemHasCategory= nil;
     }
-    if (objectServer[@"billItemHasPayee"]!=nil)
+    
+    if (objectServer[@"billItemHasPayee"]!=nil && objectServer[@"billItemHasPayee"]!=[NSNull null])
     {
         Payee* payee = [[self backgroundGetObjectsFromTable:tablePayee predicate:[NSPredicate predicateWithFormat:@"uuid = %@",objectServer[@"billItemHasPayee"]] sortDescriptors:nil]lastObject];
         if (payee) {
             billItem.billItemHasPayee = payee;
+        }else{
+            billItem.billItemHasPayee = nil;
         }
+    }else{
+        billItem.billItemHasPayee = nil;
     }
 }
 
 -(void)assignBudgetItemLocal:(BudgetItem *)budgetItem WithServer:(NSDictionary *)objectServer
 {
-    budgetItem.amount=objectServer[@"amount"];
-    budgetItem.dateTime=objectServer[@"dateTime"];
-    budgetItem.endDate=objectServer[@"endDate"];
-    budgetItem.isCurrent=objectServer[@"isCurrent"];
-    budgetItem.isRollover=objectServer[@"isRollover"];
-    budgetItem.orderIndex=objectServer[@"orderIndex"];
-    budgetItem.rolloverAmount=objectServer[@"rolloverAmount"];
-    budgetItem.startDate=objectServer[@"startDate"];
-    budgetItem.state=objectServer[@"state"];
-    budgetItem.uuid=objectServer[@"uuid"];
-    budgetItem.updatedTime=objectServer[@"updatedTime"];
-    if (objectServer[@"budgetTemplate"]!=nil)
+    budgetItem.amount=[objectServer[@"amount"]isNull];
+    budgetItem.dateTime=[objectServer[@"dateTime"]isNull];
+    budgetItem.endDate=[objectServer[@"endDate"]isNull];
+    budgetItem.isCurrent=[objectServer[@"isCurrent"]isNull];
+    budgetItem.isRollover=[objectServer[@"isRollover"]isNull];
+    budgetItem.orderIndex=[objectServer[@"orderIndex"]isNull];
+    budgetItem.rolloverAmount=[objectServer[@"rolloverAmount"]isNull];
+    budgetItem.startDate=[objectServer[@"startDate"]isNull];
+    budgetItem.state=[objectServer[@"state"]isNull];
+    budgetItem.uuid=[objectServer[@"uuid"]isNull];
+    budgetItem.updatedTime=[objectServer[@"updatedTime"]isNull];
+    if (objectServer[@"budgetTemplate"]!=nil && objectServer[@"budgetTemplate"]!=[NSNull null])
     {
         BudgetTemplate* template = [[self backgroundGetObjectsFromTable:tableBudgetTemplate predicate:[NSPredicate predicateWithFormat:@"uuid = %@",objectServer[@"budgetTemplate"]] sortDescriptors:nil]lastObject];
         if (template)
         {
             budgetItem.budgetTemplate=template;
+        }else{
+            budgetItem.budgetTemplate=nil;
         }
+    }else{
+        budgetItem.budgetTemplate=nil;
     }
 }
 
 -(void)assignBudgetTransfer:(BudgetTransfer *)budgetTransfer WithServer:(NSDictionary *)objectServer
 {
-    budgetTransfer.amount=objectServer[@"amount"];
-    budgetTransfer.dateTime=objectServer[@"dateTime"];
-    budgetTransfer.dateTime_sync=objectServer[@"dateTimeSync"];
-    budgetTransfer.state=objectServer[@"state"];
-    budgetTransfer.uuid=objectServer[@"uuid"];
-    budgetTransfer.updatedTime=objectServer[@"updatedTime"];
-    if (objectServer[@"fromBudget"]!=nil)
+    budgetTransfer.amount=[objectServer[@"amount"]isNull];
+    budgetTransfer.dateTime=[objectServer[@"dateTime"]isNull];
+    budgetTransfer.dateTime_sync=[objectServer[@"dateTimeSync"]isNull];
+    budgetTransfer.state=[objectServer[@"state"]isNull];
+    budgetTransfer.uuid=[objectServer[@"uuid"]isNull];
+    budgetTransfer.updatedTime=[objectServer[@"updatedTime"]isNull];
+    if (objectServer[@"fromBudget"]!=nil && objectServer[@"fromBudget"]!=[NSNull null])
     {
         BudgetItem* item = [[self backgroundGetObjectsFromTable:tableBudgetItem predicate:[NSPredicate predicateWithFormat:@"uuid = %@",objectServer[@"fromBudget"]] sortDescriptors:nil]lastObject];
         if (item)
         {
             budgetTransfer.fromBudget = item;
+        }else{
+            budgetTransfer.fromBudget = nil;
         }
+    }else{
+        budgetTransfer.fromBudget = nil;
     }
-    if (objectServer[@"toBudget"]!=nil)
+    if (objectServer[@"toBudget"]!=nil && objectServer[@"toBudget"]!=[NSNull null])
     {
         BudgetItem* item = [[self backgroundGetObjectsFromTable:tableBudgetItem predicate:[NSPredicate predicateWithFormat:@"uuid = %@",objectServer[@"toBudget"]] sortDescriptors:nil]lastObject];
         if (item) {
             budgetTransfer.toBudget = item;
+        }else{
+            budgetTransfer.toBudget = nil;
         }
+    }else{
+        budgetTransfer.toBudget = nil;
     }
 }
 
 
 -(void)assignBudgetTemplateLocal:(BudgetTemplate *)budgetTemplate WithServer:(NSDictionary *)objectServer
 {
-    budgetTemplate.amount=objectServer[@"amount"];
-    budgetTemplate.cycleType=objectServer[@"cycleType"];
-    budgetTemplate.dateTime=objectServer[@"dateTime"];
-    budgetTemplate.isNew=objectServer[@"isNew"];
-    budgetTemplate.isRollover=objectServer[@"isRollover"];
-    budgetTemplate.orderIndex=objectServer[@"orderIndex"];
-    budgetTemplate.startDate=objectServer[@"startDate"];
-    budgetTemplate.startDateHasChange=objectServer[@"startDateHasChange"];
-    budgetTemplate.uuid=objectServer[@"uuid"];
-    budgetTemplate.updatedTime=objectServer[@"updatedTime"];
-    budgetTemplate.state=objectServer[@"state"];
-    if (objectServer[@"category"]!=nil)
+    budgetTemplate.amount=[objectServer[@"amount"]isNull];
+    budgetTemplate.cycleType=[objectServer[@"cycleType"]isNull];
+        budgetTemplate.dateTime=[objectServer[@"dateTime"]isNull];
+    budgetTemplate.isNew=[objectServer[@"isNew"]isNull];
+    budgetTemplate.isRollover=[objectServer[@"isRollover"]isNull];
+    budgetTemplate.orderIndex=[objectServer[@"orderIndex"]isNull];
+    budgetTemplate.startDate=[objectServer[@"startDate"]isNull];
+    budgetTemplate.startDateHasChange=[objectServer[@"startDateHasChange"]isNull];
+    budgetTemplate.uuid=[objectServer[@"uuid"]isNull];
+    budgetTemplate.updatedTime=[objectServer[@"updatedTime"]isNull];
+    budgetTemplate.state=[objectServer[@"state"]isNull];
+    if (objectServer[@"category"]!=nil && objectServer[@"category"]!=[NSNull null])
     {
         Category* category = [[self backgroundGetObjectsFromTable:tableCategory predicate:[NSPredicate predicateWithFormat:@"uuid == %@",objectServer[@"category"]] sortDescriptors:nil]lastObject];
         if (category)
         {
             budgetTemplate.category=category;
+        }else{
+            budgetTemplate.category=nil;
         }
+    }else{
+        budgetTemplate.category=nil;
     }
 }
 

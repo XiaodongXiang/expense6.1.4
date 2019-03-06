@@ -256,17 +256,21 @@
 
 -(void)sendEmail{
     
-    [[XDFirestoreClass shareClass] batchAllDataToFirestore];
-    
-    
+    [[XDFirestoreClass shareClass] downloadAllData];
+
+
     return;
-    [[FIRAuth auth] createUserWithEmail:@"zhoujiangtao@appxy.com"
-                               password:@"111111"
-                             completion:^(FIRAuthDataResult * _Nullable authResult,
-                                          NSError * _Nullable error) {
-                                 // ...
-                                 
-                             }];
+//    [[FIRAuth auth] createUserWithEmail:@"zhoujiangtao@appxy.com"
+//                               password:@"111111"
+//                             completion:^(FIRAuthDataResult * _Nullable authResult,
+//                                          NSError * _Nullable error) {
+//                                 // ...
+//
+//                             }];
+    
+    [[FIRAuth authWithApp:[FIRApp appNamed:@"data"]] signInWithEmail:@"zhoujiangtao@appxy.com" password:@"111111" completion:^(FIRAuthDataResult * _Nullable authResult, NSError * _Nullable error) {
+        NSLog(@"sign in success == %@",error);
+    }];
     
     
     return;
@@ -277,9 +281,6 @@
     // The sign-in operation has to always be completed in the app.
     actionCodeSettings.handleCodeInApp = YES;
     [actionCodeSettings setIOSBundleID:[[NSBundle mainBundle] bundleIdentifier]];
-    [actionCodeSettings setAndroidPackageName:@"com.example.android"
-                        installIfNotAvailable:NO
-                               minimumVersion:@"12"];
     
     [[FIRAuth auth] sendSignInLinkToEmail:@"18217705518@163.com"
                        actionCodeSettings:actionCodeSettings

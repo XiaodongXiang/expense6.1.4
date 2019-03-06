@@ -32,4 +32,13 @@
     return props;
 }
 
+-(id)isNull{
+    if (self == [NSNull null]) {
+        return nil;
+    }else{
+        return self;
+    }
+}
+
+
 @end

@@ -119,7 +119,14 @@
     NSError *error = nil;
 
     [FIROptions defaultOptions].deepLinkURLScheme = @"PocketExpenseLite";
-    [FIRApp configure];
+    
+    NSString *loginPath = [[NSBundle mainBundle] pathForResource:@"GoogleService-login" ofType:@"plist"];
+    FIROptions *loginOption = [[FIROptions alloc] initWithContentsOfFile:loginPath];
+    NSString *dataPath = [[NSBundle mainBundle] pathForResource:@"GoogleService-data" ofType:@"plist"];
+    FIROptions *dataOption = [[FIROptions alloc] initWithContentsOfFile:dataPath];
+    [FIRApp configureWithName:@"login" options:loginOption];
+    [FIRApp configureWithName:@"data" options:dataOption];
+    
     [FBHelper instance];
     [Appirater appLaunched]; 
     

@@ -43,7 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 -(void)batchAllDataToFirestore;
-
+-(void)downloadAllData;
 -(void)listenAllTable;
 
 @end
