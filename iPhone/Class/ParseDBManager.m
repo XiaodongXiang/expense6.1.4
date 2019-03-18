@@ -1173,7 +1173,6 @@
             });
             
         }
-        
         NSLog(@"%@",user.syncTime);
         
         appDelegate.isSyncing=NO;

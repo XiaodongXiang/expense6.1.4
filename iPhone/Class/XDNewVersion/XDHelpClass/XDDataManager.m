@@ -164,35 +164,7 @@
     [fetchRequest setSortDescriptors:sortDescriptors];
     NSError *error =nil;
     NSMutableArray* objects1 = [NSMutableArray arrayWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
-//    NSArray *objects1 = [[NSArray alloc]initWithArray:[self.managedObjectContext executeFetchRequest:fetchRequest error:&error]];
 
-//    PokcetExpenseAppDelegate *appDelegete = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication] delegate];
-
-//    for (Transaction*transactions in muArr) {
-//        if([transactions.category.categoryType isEqualToString:@"EXPENSE"]  || [transactions.childTransactions count]>0)
-//        {
-//        }
-//        //Income
-//        else if([transactions.category.categoryType isEqualToString:@"INCOME"])
-//        {
-//
-//        } else
-//        {
-//            if(transactions.expenseAccount && transactions.incomeAccount == nil){
-//
-//                [muArr removeObject:transactions];
-//
-//                transactions.state = @"0";
-//                transactions.updatedTime = transactions.dateTime_sync = [NSDate date];
-//                [self saveContext];
-//
-//                [appDelegete.epdc deleteTransactionRel:transactions];
-//
-//            }
-//        }
-//    }
-//    NSArray* objects1 = [NSArray arrayWithArray:muArr];
-    
     if (account) {
         NSPredicate * pre = [NSPredicate predicateWithFormat:@"incomeAccount.uuid = %@ or expenseAccount.uuid = %@",account.uuid,account.uuid];
         NSArray* array = [objects1 filteredArrayUsingPredicate:pre];
@@ -298,7 +270,6 @@
 }
 
 
-
 +(NSString *)moneyFormatter:(double)doubleContext{
     
     if (doubleContext == 0) {
@@ -338,8 +309,6 @@
     
     if(doubleContext < 0)
         string = [NSString stringWithFormat:@"%@",string];
-    
-    
     
     return string;
     

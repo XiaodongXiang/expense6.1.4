@@ -382,24 +382,7 @@
             
         });
         
-//        UIImage *avatarImage=[UIImage imageWithData:avatarData];
-
         XDTabbarViewController* tabbarVc = [[XDTabbarViewController alloc]init];
-
-//        _overViewController=[[OverViewWeekCalenderViewController alloc]init];
-//        _navCtrl=[[UINavigationController alloc]initWithRootViewController:_overViewController];
-//
-//        _menuVC=[[menuViewController alloc]init];
-//        _menuVC.navigationControllerArray=[NSMutableArray arrayWithObjects:_navCtrl,@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
-//        _drawerVC=[[MMDrawerController alloc]initWithCenterViewController:_navCtrl leftDrawerViewController:_menuVC];
-//
-//        [_menuVC setAvatarImage:avatarImage];
-//
-//        //drawController设置
-//        _drawerVC.showsShadow=NO;
-//        _drawerVC.maximumLeftDrawerWidth=MENU_WIDTH;
-//
-//        [_drawerVC setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
         
         
         self.window.rootViewController=tabbarVc;
@@ -1464,8 +1447,6 @@
 
         }
     }
-//    [[ADEngineManage adEngineManage] lockFunctionsShowAd];
-
     
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -1487,30 +1468,7 @@
         [avatarData writeToFile:imageFile atomically:YES];
         
     });
-    
-//    UIImage *avatarImage=[UIImage imageWithData:avatarData];
-    
-   
-    
-//    _overViewController=[[OverViewWeekCalenderViewController alloc]init];
-//    _navCtrl=[[UINavigationController alloc]initWithRootViewController:_overViewController];
-//
-//    _menuVC=[[menuViewController alloc]init];
-//    _menuVC.navigationControllerArray=[NSMutableArray arrayWithObjects:_navCtrl,@"",@"",@"",@"",@"",@"",@"",@"",@"", nil];
-//    _drawerVC=[[MMDrawerController alloc]initWithCenterViewController:_navCtrl leftDrawerViewController:_menuVC];
-//
-//    [_menuVC setAvatarImage:avatarImage];
-//
-//    //drawController设置
-//    _drawerVC.showsShadow=NO;
-//    _drawerVC.maximumLeftDrawerWidth=MENU_WIDTH;
-//    [_drawerVC setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeNone];
-//
-        
-    if (!self.isPurchased)
-    {
-//        [self showAds:nil];
-    }
+
 }
 
 

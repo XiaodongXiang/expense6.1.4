@@ -624,10 +624,7 @@
     [b addBudgetItemsObject:newBudget];
     [[XDDataManager shareManager] saveContext];
     
-    //sync
-    //    if (appDelegate_iPad.dropbox.drop_account.linked) {
-    //        [appDelegate_iPad.dropbox updateEveryBudgetItemDataFromLocal:newBudget];
-    //    }
+
     if ([PFUser currentUser])
     {
         [[ParseDBManager sharedManager]updateBudgetItemLocal:newBudget];

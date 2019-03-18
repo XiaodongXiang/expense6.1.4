@@ -244,10 +244,10 @@
 //        }
 //    }
 #ifdef DEBUG
-    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(20, 150, 80, 50)];
-    [btn addTarget:self action:@selector(sendEmail) forControlEvents:UIControlEventTouchUpInside];
-    btn.backgroundColor = [UIColor greenColor];
-    [[UIApplication sharedApplication].keyWindow addSubview:btn];
+//    UIButton* btn = [[UIButton alloc]initWithFrame:CGRectMake(20, 150, 80, 50)];
+//    [btn addTarget:self action:@selector(sendEmail) forControlEvents:UIControlEventTouchUpInside];
+//    btn.backgroundColor = [UIColor greenColor];
+//    [[UIApplication sharedApplication].keyWindow addSubview:btn];
 #else
    
 #endif
@@ -256,7 +256,7 @@
 
 -(void)sendEmail{
     
-    [[XDFirestoreClass shareClass] downloadAllData];
+    [[XDFirestoreClass shareClass] batchAllDataToFirestore];
 
 
     return;
@@ -363,9 +363,6 @@
 
 -(void)initNavStyle
 {
-    
-//    [self.navigationController.navigationBar setBackgroundImage:[UIImage new] forBarMetrics:UIBarMetricsDefault];
-//    [self.navigationController.navigationBar setShadowImage:[UIImage new]];
     [self.navigationController.navigationBar setColor: [UIColor whiteColor]];
 
     self.navigationItem.leftBarButtonItem = [UIBarButtonItem itemWithTarget:self action:@selector(settingButtonPress) image:[UIImage imageNamed:@"setting_new"]];
@@ -428,10 +425,8 @@
     [UIView animateWithDuration:0.2 animations:^{
         self.backCoverView.alpha = 0;
         self.datePickerView.y = SCREEN_HEIGHT;
-
     }completion:^(BOOL finished) {
         self.backCoverView.hidden = YES;
-
     }];
 
 }
@@ -440,7 +435,6 @@
     [self tapClick];
     PokcetExpenseAppDelegate *appDelegate = (PokcetExpenseAppDelegate *)[[UIApplication sharedApplication]delegate];
     [appDelegate.epnc setFlurryEvent_WithIdentify:@"02_TRANS_DUPL"];
-    
     [appDelegate.epdc duplicateTransaction:self.currentTransication withDate:self.datePicker.date];
 
     [self reloadTableView];
@@ -492,7 +486,7 @@
             self.datePickerView.y = SCREEN_HEIGHT - 256;
         }];
     }else if (index == 2){
-      
+
         [self reloadTableView];
     }
 }
@@ -647,18 +641,15 @@
                 if ([proID isEqualToString:KInAppPurchaseProductIdMonth]) {
                     [FIRAnalytics setUserPropertyString:@"monthly" forName:@"subscription_type"];
                     [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
-
                 }else if ([proID isEqualToString:KInAppPurchaseProductIdYear]){
                     [FIRAnalytics setUserPropertyString:@"yearly" forName:@"subscription_type"];
                     [FIRAnalytics setUserPropertyString:@"in subscribing" forName:@"subscription_status"];
-
                 }else{
                     [FIRAnalytics setUserPropertyString:@"lifetime" forName:@"subscription_type"];
                 }
             }
         }
     }else{
-        
         [FIRAnalytics setUserPropertyString:@"free" forName:@"subscription_type"];
     }
     

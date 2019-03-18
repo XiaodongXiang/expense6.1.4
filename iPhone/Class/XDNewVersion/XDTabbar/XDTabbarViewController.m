@@ -15,10 +15,10 @@
 #import "XDChartMainViewController.h"
 #import "AppDelegate_iPhone.h"
 #import <Parse/Parse.h>
+#import "XDAppriater.h"
 
 #import "XDUpgradeViewController.h"
 
-#import "XDAppriater.h"
 
 
 

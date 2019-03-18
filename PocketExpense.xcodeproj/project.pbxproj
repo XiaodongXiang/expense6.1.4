@@ -2578,7 +2578,7 @@
 		BEF692EA21DD9DC90064D15B /* FBHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF692E921DD9DC90064D15B /* FBHelper.m */; };
 		BEF745C121FFF85800B42668 /* XDPasswordKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF745C021FFF85800B42668 /* XDPasswordKeyboard.m */; };
 		BEF745C421FFF8A000B42668 /* XDPasswordKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = BEF745C321FFF8A000B42668 /* XDPasswordKeyboard.xib */; };
-		BEF8097821D6148D007A96F6 /* GoogleService-data.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF8097721D6148C007A96F6 /* GoogleService-data.plist */; };
+		BEF8097821D6148D007A96F6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */; };
 		BEF8097B21D7533E007A96F6 /* XDPurchasedManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */; };
 		BEF82D522224ED480026BB61 /* NSObject+runtime.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF82D512224ED480026BB61 /* NSObject+runtime.m */; };
 		BEF83323216AF33300E71D61 /* InAppPurchaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = BEF83322216AF33300E71D61 /* InAppPurchaseManager.m */; };
@@ -5753,7 +5753,7 @@
 		BEF745BF21FFF85800B42668 /* XDPasswordKeyboard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPasswordKeyboard.h; sourceTree = "<group>"; };
 		BEF745C021FFF85800B42668 /* XDPasswordKeyboard.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPasswordKeyboard.m; sourceTree = "<group>"; };
 		BEF745C321FFF8A000B42668 /* XDPasswordKeyboard.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = XDPasswordKeyboard.xib; sourceTree = "<group>"; };
-		BEF8097721D6148C007A96F6 /* GoogleService-data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-data.plist"; sourceTree = "<group>"; };
+		BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BEF8097921D7533E007A96F6 /* XDPurchasedManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XDPurchasedManager.h; sourceTree = "<group>"; };
 		BEF8097A21D7533E007A96F6 /* XDPurchasedManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XDPurchasedManager.m; sourceTree = "<group>"; };
 		BEF82D502224ED480026BB61 /* NSObject+runtime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+runtime.h"; sourceTree = "<group>"; };
@@ -10097,7 +10097,7 @@
 				A2561A2219D3BBD700A5A950 /* main.m */,
 				A2561AB219D3BDDF00A5A950 /* PocketExpense_Prefix.pch */,
 				BEFA035C222E15E80027C1A3 /* GoogleService-login.plist */,
-				BEF8097721D6148C007A96F6 /* GoogleService-data.plist */,
+				BEF8097721D6148C007A96F6 /* GoogleService-Info.plist */,
 				A2561AAE19D3BD8400A5A950 /* PocketExpense-Info_Lite.plist */,
 				A20988F0191A2A2A0087EA15 /* PokcetExpense.xcdatamodeld */,
 				A25619BD19D3BBD700A5A950 /* Appirater.h */,
@@ -11615,7 +11615,7 @@
 				6076DACB1C84593100952CA7 /* budgetselect_click@3x.png in Resources */,
 				A256173E19D3BB7F00A5A950 /* ipad_btn_empty@2x.png in Resources */,
 				3ADBA0EE1BF9D5F700512D2C /* income_color3.png in Resources */,
-				BEF8097821D6148D007A96F6 /* GoogleService-data.plist in Resources */,
+				BEF8097821D6148D007A96F6 /* GoogleService-Info.plist in Resources */,
 				3ADA5BFD1BEB3E0100A01870 /* iphone6_budget_second_bg@2x.png in Resources */,
 				3AE154B21BEC4A5300F9CA91 /* account_iconbg_Saving@2x.png in Resources */,
 				A260ABF31A1D8B8400019D6C /* list_report_sel@3x.png in Resources */,
